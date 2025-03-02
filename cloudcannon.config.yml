@@ -1,15 +1,15 @@
 timezone: Pacific/Auckland
 
 paths:
-  static: "public"
+  static: 'public'
   uploads: public/images
 
 collections_config:
   pages:
     path: src/content/pages
     glob:
-      - "**/*.md"
-    url: "/[full_slug]/"
+      - '**/*.md'
+    url: '/[full_slug]/'
     icon: laptop_mac
     _enabled_editors:
       - visual
@@ -27,12 +27,12 @@ collections_config:
         path: schemas/paginated.md
         remove_extra_inputs: false
     create:
-      path: "[relative_base_path]/{title|slugify}.md"
+      path: '[relative_base_path]/{title|slugify}.md'
   blog:
     path: src/content/blog
     glob:
-      - "**/*.mdx"
-    url: "/blog/[full_slug]/"
+      - '**/*.md*'
+    url: '/blog/[full_slug]/'
     icon: newspaper
     _enabled_editors:
       - content
@@ -44,9 +44,9 @@ collections_config:
     schemas:
       default:
         name: New Post
-        path: schemas/post.mdx
+        path: schemas/post.md
     create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
+      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
     _inputs:
       title:
         options:
@@ -56,14 +56,14 @@ collections_config:
         options:
           empty_type: string
           paths:
-            static: ""
+            static: ''
             uploads: src/assets/images
       thumb_image_path:
         type: image
         options:
           empty_type: string
           paths:
-            static: ""
+            static: ''
             uploads: src/assets/images
       image_alt:
         options:
@@ -73,7 +73,9 @@ collections_config:
           empty_type: string
       tags:
         type: multiselect
-        comment: To add a new tag, go to the [tags data file](cloudcannon:collections/data/tags.json)
+        comment:
+          To add a new tag, go to the [tags data
+          file](cloudcannon:collections/data/tags.json)
         options:
           values: data.tags
           empty_type: array
@@ -83,32 +85,36 @@ collections_config:
     disable_add_folder: true
     _inputs:
       icons:
-        comment: Add an icon from the list of [Font Awesome icons](https://fontawesome.com/search?o=r&m=free). Then add it to the ```src/components/utility/icon.jsx``` file, following the existing pattern.
+        comment:
+          Add an icon from the list of [Font Awesome
+          icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
+          ```src/components/utility/icon.jsx``` file, following the existing
+          pattern.
   tours:
     path: src/content/tours
     glob:
-      - "**/*.md*"
+      - '**/*.md*'
     name: Tours
     singular_name: Tour
     icon: directions_bike
     disable_url: false
-    description: ""
+    description: ''
     create:
-      path: "[relative_base_path]/{title|slugify}.md"
+      path: '[relative_base_path]/{title|slugify}.md'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: false
     add_options:
-      - name: "New Tour English"
-        icon: "language"
-        schema: "default"
-        base_path: ""
+      - name: 'New Tour English'
+        icon: 'language'
+        schema: 'default'
+        base_path: ''
         editor: visual
-      - name: "New Tour Portuguese"
-        icon: "language"
-        schema: "defaultPT"
+      - name: 'New Tour Portuguese'
+        icon: 'language'
+        schema: 'defaultPT'
         editor: visual
-        base_path: "/pt/"
+        base_path: '/pt/'
     schemas:
       default:
         path: schemas/tour.md
@@ -129,10 +135,10 @@ collections_config:
   team:
     path: src/content/team
     glob:
-      - "**/*.md*"
+      - '**/*.md*'
     icon: people
     disable_url: false
-    description: ""
+    description: ''
     _enabled_editors:
       - content
     _inputs:
@@ -152,22 +158,22 @@ collections_config:
               key: Owner
         cascade: true
     add_options:
-      - name: "New Team Member English"
-        icon: "language"
-        schema: "default"
-        base_path: ""
+      - name: 'New Team Member English'
+        icon: 'language'
+        schema: 'default'
+        base_path: ''
         editor: visual
-      - name: "New Team Member Portuguese"
-        icon: "language"
-        schema: "defaultPT"
+      - name: 'New Team Member Portuguese'
+        icon: 'language'
+        schema: 'defaultPT'
         editor: visual
-        base_path: "/pt/"
+        base_path: '/pt/'
     create:
-      path: "[relative_base_path]/{title|slugify}.md"
+      path: '[relative_base_path]/{title|slugify}.md'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
-    singular_name: "Team member"
+    singular_name: 'Team member'
     schemas:
       default:
         path: schemas/team-member.md
@@ -214,7 +220,8 @@ file_config:
       $:
         type: array
         label: Colors
-        comment: Set the colors available in the color selectors throughout the site.
+        comment:
+          Set the colors available in the color selectors throughout the site.
         options:
           structures: _structures.color
       value:
@@ -345,18 +352,18 @@ _inputs:
     comment: The path to the source file of the image to be optimized.
     options:
       paths:
-        static: ""
+        static: ''
         uploads: src/assets/images
   alt_text:
     label: Image Alt Text
     type: textarea
-    hidden: "!image_path"
+    hidden: '!image_path'
   width:
     type: number
   height:
     type: number
   background_color:
-    hidden: "border_only"
+    hidden: 'border_only'
     type: select
     options:
       values: data.colors
@@ -402,10 +409,10 @@ _inputs:
       preview:
         icon: query_stats
         text:
-          - "Search engine optimization"
+          - 'Search engine optimization'
         subtext:
           - key: page_description
-          - "Update SEO values for the page"
+          - 'Update SEO values for the page'
   layout:
     hidden: true
   date:
@@ -431,10 +438,10 @@ _inputs:
         icon: link
         text:
           - key: text
-          - "Link"
+          - 'Link'
         subtext:
           - key: link
-          - "Add a social link"
+          - 'Add a social link'
   social_icon:
     type: select
     options:
@@ -474,7 +481,7 @@ _inputs:
       robots meta tag
 
 _snippets_imports:
-  mdx: true
+  mdx: false
 
 _snippets:
   alert:
@@ -557,7 +564,7 @@ _snippets:
         options:
           empty_type: string
           paths:
-            static: ""
+            static: ''
             uploads: src/assets/images
   accordion:
     template: mdx_component
@@ -664,7 +671,7 @@ _snippets:
         options:
           paths:
             uploads: public/documents
-            static: "public"
+            static: 'public'
       file_name:
         comment: The name of the file, once downloaded.
       link_message:

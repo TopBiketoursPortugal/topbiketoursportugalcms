@@ -18,7 +18,7 @@ export default defineConfig({
     tailwind(),
     bookshop(),
     alpine(),
-    mdx(),
+    // mdx(),
     favicons(),
     icon({
       // svgoOptions: {},
