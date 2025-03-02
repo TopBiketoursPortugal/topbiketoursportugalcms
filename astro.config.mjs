@@ -91,5 +91,23 @@ export default defineConfig({
     svg: {
       mode: 'sprite'
     }
+  },
+  vite: {
+    //   css: {
+    //     transformer: "lightningcss",
+    //   },
+    // plugins: [
+    //   Unfonts({
+    //     google: {
+    //       families: ['Poppins', 'Inter Variable']
+    //     }
+    //   })
+    // ],
+    build: {
+      inlineStylesheets: 'never',
+      rollupOptions: {
+        external: ['astro:content-layer-deferred-module']
+      }
+    }
   }
 });
