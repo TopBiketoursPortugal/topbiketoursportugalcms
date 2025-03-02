@@ -34,4 +34,4 @@ _inputs:
       - reviews
       - team
       # -  bikes
-      - posts
+      # - posts
