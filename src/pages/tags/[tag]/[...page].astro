@@ -1,28 +1,31 @@
 ---
-import BlogList from "../../../components/blog/list.astro";
-import BlogPagination from "../../../components/blog/pagination";
-import Layout from "../../../layouts/Layout.astro";
-import { getCollection, getEntryBySlug } from "astro:content";
+import BlogList from '../../../components/blog/list.astro';
+import BlogPagination from '../../../components/blog/pagination';
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const tags: Record<string, any> = {};
-  const page = await getEntryBySlug("pages", "blog");
-  const posts = await getCollection("blog");
+  const page = await getEntry('pages', 'blog');
+  const posts = await getCollection('blog');
   posts.forEach(({ data }) =>
     data.tags.forEach((tag: string) => (tags[tag] = true))
   );
 
-  return Object.keys(tags).flatMap((tag) => {
-    const filteredPosts = posts.filter(({ data }) => data.tags.includes(tag));
-    return paginate(filteredPosts, {
-      params: { tag },
-      pageSize: "page_size" in page.data ? page.data.page_size : 6,
+  return Object.keys(tags)
+    .filter((t) => t && t !== '')
+    .flatMap((tag) => {
+      const filteredPosts = posts.filter(({ data }) => data.tags.includes(tag));
+      return paginate(filteredPosts, {
+        params: { tag },
+        pageSize:
+          page?.data && 'page_size' in page?.data ? page?.data.page_size : 6
+      });
     });
-  });
 }
 
-const tag = Astro.params.tag ?? "";
-const page = (await getEntryBySlug("pages", "blog")).data;
+const tag = Astro.params.tag ?? '';
+const page = (await getEntry('pages', 'blog'))!.data;
 
 page.title = tag[0].toUpperCase() + tag.slice(1);
 
@@ -33,7 +36,8 @@ const filteredPosts = pagination.data;
 <Layout title={page.title} seo={page.seo}>
   <div class="py-[96px]">
     <h1
-      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-center my-12">
+      class="my-12 text-center text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
+    >
       {page.title}
     </h1>
     <section class="blog-index mx-auto">
