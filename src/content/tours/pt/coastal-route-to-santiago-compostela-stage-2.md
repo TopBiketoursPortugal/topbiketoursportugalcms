@@ -136,13 +136,32 @@ packages:
         description: Yes (4 stars, farms or rural houses)
 afterPricing: ''
 seo:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
-  no_index: false
+  title: ''
+  description: ''
+  keywords: |-
+    Camino de Santiago Portuguese Coastal Route
+    Baiona ship Pinta
+    Vigo Arcade oysters
+    Caldas de Reis history
+    Santiago de Compostela pilgrimage
+    Camino de Santiago itinerary
+    Camino de Santiago hiking
+    Pilgrimage routes in Spain
+    Santiago de Compostela baroque cathedral
+    Galician cuisine on Camino
+    Camino de Santiago difficulty
+    Camino de Santiago route stages
+    Historical landmarks in Galicia
+    Cultural sites on Camino de Santiago
+    Baiona Camino de Santiago history
+    Camino de Santiago Vigo oysters
+    Caldas de Reis Camino route
+    Quiet Camino routes
+    Camino de Santiago Portuguese Way itinerary
+    Pilgrimage to Santiago de Compostela route stages
+  image: null
+  robots: []
+  canonical: ''
 duration: 8
 distance: 7
 tags: |-
