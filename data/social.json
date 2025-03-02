@@ -1,0 +1,45 @@
+{
+  "facebook": {
+    "trackId": "",
+    "href": "https://www.facebook.com/topwalkingtoursportugal/",
+    "icon": "ph:facebook-logo-light",
+    "alt": "Facebook",
+    "target": "_blank"
+  },
+  "instagram": {
+    "trackId": "",
+    "href": "https://www.instagram.com/topwalkingtoursportugal/",
+    "icon": "ph:instagram-logo-light",
+    "alt": "Instagram",
+    "target": "_blank"
+  },
+  "youtube": {
+    "trackId": "",
+    "href": "https://www.youtube.com/channel/UCqryPkh_snkIAqvDXFvaK7A",
+    "icon": "ph:youtube-logo-light",
+    "alt": "Youtube",
+    "target": "_blank"
+  },
+  "tripadvisor": {
+    "trackId": "",
+    "href": "https://www.tripadvisor.com/Attraction_Review-g189180-d4105907-Reviews-Top_Bike_Tours_Portugal-Porto_Porto_District_Northern_Portugal.html",
+    "icon": "fa:tripadvisor",
+    "alt": "TripAdvisor",
+    "target": "_blank"
+  },
+  "google": null,
+  "twitter": {
+    "trackId": "",
+    "href": "https://x.com/FoldnVisit",
+    "icon": "ph:x-logo-light",
+    "alt": "X",
+    "target": "_blank"
+  },
+  "whatsapp": {
+    "trackId": "",
+    "href": "https://wa.me/+351915316999",
+    "icon": "ph:whatsapp-logo-light",
+    "alt": "Whatsapp",
+    "target": "_blank"
+  }
+}

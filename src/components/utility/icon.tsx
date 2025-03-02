@@ -74,7 +74,14 @@ import {
   StarHalf,
   BookmarkSimple,
   Tag,
-  Info
+  Info,
+  UsersThree,
+  Users,
+  Airplane,
+  PersonSimpleBike,
+  MapTrifold,
+  CheckCircle,
+  XCircle
 } from '@phosphor-icons/react';
 
 export default function Icon({
@@ -87,11 +94,29 @@ export default function Icon({
   title?: string;
 }) {
   switch (icon) {
+    case 'ph:check-circle-fill':
+      <CheckCircle weight="fill" className={className} xlinkTitle={title} />;
+    case 'ph:x-circle-fill':
+      <XCircle weight="fill" className={className} xlinkTitle={title} />;
     case 'ph:map-trifold-light':
+      <MapTrifold weight="light" className={className} xlinkTitle={title} />;
     case 'ph:person-simple-bike-light':
+      <PersonSimpleBike
+        weight="light"
+        className={className}
+        xlinkTitle={title}
+      />;
+
     case 'ph:airplane-light':
+      <Airplane weight="light" className={className} xlinkTitle={title} />;
     case 'ph:user-light':
+      <Users weight="light" className={className} xlinkTitle={title} />;
+
     case 'ph:users-three-light':
+      return (
+        <UsersThree weight="light" className={className} xlinkTitle={title} />
+      );
+
     case 'ph:clock':
       return <Info weight="light" className={className} xlinkTitle={title} />;
     case 'ph:info-light':

@@ -4,7 +4,6 @@ import { getCollection } from 'astro:content';
 import TourPage from 'src/components/tours/tour-page.astro';
 export async function getStaticPaths() {
   const posts = await getCollection('tours');
-  // console.log(posts);
   return posts.map((tour) => ({
     params: {
       slug:

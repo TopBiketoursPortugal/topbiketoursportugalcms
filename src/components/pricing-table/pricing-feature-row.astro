@@ -1,0 +1,48 @@
+---
+import { cn } from 'utils/cn';
+import Tooltip from '../tooltip/tooltip.astro';
+import Icon from '../utility/icon';
+
+const {
+  feature,
+  description,
+  info,
+  included,
+  alternate = false,
+  icon = false
+} = Astro.props;
+
+const container = tv({
+  base: 'flex h-12 items-center justify-center gap-2 border-gray-300 px-2 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+  variants: {
+    alternate: {
+      true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
+      false:
+        'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+    }
+  }
+});
+
+const containerStyle = container({ alternate });
+---
+
+<div class={containerStyle}>
+  <div class="lg:hidden">{description}</div>
+  {feature}
+  {info}
+  {
+    icon ? (
+      <Tooltip class="align-top">
+        <Icon
+          slot="trigger"
+          icon={included ? 'ph:check-circle-fill' : 'ph:x-circle-fill'}
+          title={included ? 'Included in price.' : 'Not included in price.'}
+          class={cn(included ? 'text-green-600' : 'text-red-600', 'h-6 w-6')}
+        />
+        <span slot="content">
+          {included ? 'Included in price.' : 'Not included in price.'}
+        </span>
+      </Tooltip>
+    ) : null
+  }
+</div>
