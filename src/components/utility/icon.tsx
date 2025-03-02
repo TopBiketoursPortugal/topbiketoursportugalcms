@@ -70,7 +70,13 @@ import {
 
 import { Quotes, Star, StarHalf } from '@phosphor-icons/react';
 
-export default function Icon({ icon, class: className }) {
+export default function Icon({
+  icon,
+  class: className
+}: {
+  icon: string;
+  class?: string;
+}) {
   switch (icon) {
     case 'ph:quotes-fill':
       return <Quotes weight="fill" className={className} />;
@@ -80,7 +86,6 @@ export default function Icon({ icon, class: className }) {
       return <StarHalf weight="fill" className={className} />;
     case 'ph:star-light':
       return <Star weight="light" className={className} />;
-
     case 'Envelope':
       return <FontAwesomeIcon icon={faEnvelope} />;
     case 'User':

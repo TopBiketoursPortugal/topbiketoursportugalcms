@@ -27,29 +27,24 @@ seo:
   open_graph_type: article
   no_index: false
 ---
-A new post to test and show off what you can do from inside CloudCannon's content editor.
 
-<SnippetsAccordion heading="Another new accordion" text="Adding accordion content from the visual editor."/>
-
-&nbsp;
-
-<SnippetsAstroImage image_path="/src/assets/images/blog-thumb-3.jpg" image_alt="A test image"/>
+A new post to test and show off what you can do from inside CloudCannon's
+content editor.
 
 &nbsp;
 
-<SnippetsAlert background_color="#FF785A" alert_message="Test test test" color="#FEF9EF" icon="Bell"/>
-
 &nbsp;
 
-<SnippetsAccordion heading="A test accordion" text="Let's make a happy little mountain now. We don't need any guidelines or formats. All we need to do is just let it flow right out of us. Give him a friend, we forget the trees get lonely too. There we go. Volunteering your time; it pays you and your whole community fantastic dividends. Exercising the imagination, experimenting with talents, being creative; these things, to me, are truly the windows to your soul."/>
+&nbsp;
 
 &nbsp;
 
 ## A heading 2
 
-Some **bold** text Some *italic* text on a new line
+Some **bold** text Some _italic_ text on a new line
 
-Some <u>underlined</u> text in a new paragraph.Another new line with a <s>strike.</s>
+Some <u>underlined</u> text in a new paragraph.Another new line with a
+<s>strike.</s>
 
 ### A heading 3
 
@@ -72,10 +67,10 @@ Left align
    2. Wow
 3. Done
 
-* An unordered list
-* Another item
-  * A sub item though
-  * Another sub item
+- An unordered list
+- Another item
+  - A sub item though
+  - Another sub item
 
 <img src="/images/astro-logo-dark.jpg" alt="An image from the public folder" height="413" width="500" />
 
@@ -97,7 +92,8 @@ object:
 
 <SnippetsFile src="/documents/test.pdf" file_name="test-file" link_message="A test file to show how you'd have a downloadable link through your markdown"/>
 
-Some text which is normal color - <SnippetsTint tint_color="#F7B2AD">Woah a tint!</SnippetsTint> Some more text to show how inline tint is.
+Some text which is normal color - <SnippetsTint tint_color="#F7B2AD">Woah a
+tint!</SnippetsTint> Some more text to show how inline tint is.
 
 <SnippetsVideo src="/videos/test.mp4"/>
 

@@ -2,7 +2,7 @@ import { defineConfig, envField } from 'astro/config';
 import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
+// import mdx from '@astrojs/mdx';
 import alpine from '@astrojs/alpinejs';
 import playformInline from '@playform/inline';
 import sitemap from '@astrojs/sitemap';
