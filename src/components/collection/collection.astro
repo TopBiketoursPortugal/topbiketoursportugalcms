@@ -1,0 +1,29 @@
+---
+import { z } from 'astro:content';
+import type { languageSchema } from '~/schemas/language';
+
+type Props = {
+  type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';
+  display: 'slideshow' | 'list';
+  contentDisplay: 'overlay' | 'inline';
+  frame: 'none' | 'light' | 'heavy';
+  layout: 'horizontal' | 'vertical';
+  title: string;
+  language?: z.infer<typeof languageSchema>;
+};
+
+const collectionComponentImports = import.meta.glob(
+  '/src/components/collection/**/*.collection.astro',
+  {
+    eager: true
+  }
+);
+
+const { type = 'tours', ...data } = Astro.props;
+const componentName = `/src/components/collection/components/${type}.collection.astro`;
+// console.log(componentName);
+const CollectionComponent = (collectionComponentImports[componentName] as any)
+  ?.default;
+---
+
+<CollectionComponent {...data} />

@@ -1,0 +1,97 @@
+---
+import { v7 as uuidv7 } from "uuid";
+import { clsx } from "clsx";
+
+type Props = {
+  title?: string;
+  open?: boolean;
+  class?: string;
+};
+
+const {
+  title,
+  open = true,
+  class: className = "border border-gray-200",
+} = Astro.props;
+const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, "-")}`;
+---
+
+<details open={open} class={clsx("overflow-hidden", className)} id={id}>
+  <summary
+    class="w-full cursor-pointer"
+    role="button"
+    aria-controls={`${id}-content`}
+    aria-expanded="false"
+  >
+    <slot name="header">
+      <div
+        class="flex w-full items-center justify-between bg-gray-100 p-4 transition-all duration-200 ease-in-out hover:bg-gray-200"
+      >
+        <span class="font-medium">{title}</span>
+        <svg
+          class="h-5 w-5 transform transition-transform duration-300 ease-in-out"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </slot>
+  </summary>
+  <div
+    id={`${id}-content`}
+    class="origin-top transform bg-white transition-all duration-500 ease-in-out"
+    role="region"
+    aria-labelledby={`${id}-heading`}
+  >
+    <div class="p-4">
+      <slot />
+    </div>
+  </div>
+</details>
+
+<style is:global>
+  /* Chevron rotation */
+  details[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  details[open] summary svg path.vertical-line {
+    display: none;
+  }
+
+  /* Summary background and slight scale */
+  /* details[open] summary {
+    @apply bg-gray-200;
+  } */
+
+  /* Content animation */
+  details:not([open]) > div {
+    max-height: 0;
+    opacity: 0;
+    transform: scaleY(0.95);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  details[open] > div {
+    max-height: 50rem; /* Adjust as needed */
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  /* Remove default marker */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary {
+    list-style: none;
+  }
+</style>

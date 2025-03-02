@@ -1,0 +1,59 @@
+---
+import { cn } from 'utils/cn';
+import Icon from 'src/components/utility/icon';
+/** @jsxImportSource astro */
+
+type Props = {
+  rating: number;
+  class?: string;
+};
+
+function getStarDistribution(rating: number = 0, maxStars = 5) {
+  if (rating === 0) {
+    return { fullStars: 0, halfStars: false, emptyStars: maxStars };
+  }
+
+  let fullStars = Math.floor(rating);
+  const fractional = rating - fullStars;
+
+  const halfStars = fractional >= 0.25 && fractional < 0.75 ? 1 : 0;
+  if (fractional >= 0.75) {
+    fullStars++;
+  }
+
+  const emptyStars = maxStars - (fullStars + halfStars);
+
+  return { fullStars, halfStars: halfStars === 1, emptyStars };
+}
+
+const { rating = 0, class: className } = Astro.props;
+const startIconStyle = cn('text-amber-11 fill-current text-lg', className);
+const startDistribution = getStarDistribution(rating);
+// console.log(startDistribution);
+---
+
+<ul class="flex items-center gap-3">
+  {
+    startDistribution.fullStars > 0 &&
+      [...Array(startDistribution.fullStars).keys()].map(() => (
+        <li>
+          <Icon icon="ph:star-fill" class={startIconStyle} />
+        </li>
+      ))
+  }
+  {
+    startDistribution.halfStars && (
+      <li>
+        <Icon icon="ph:star-half-fill" class={startIconStyle} />
+      </li>
+    )
+  }
+  {
+    startDistribution.emptyStars > 0 &&
+      [...Array(startDistribution.emptyStars).keys()].map(() => (
+        <li>
+          <Icon icon="ph:star-light" class={startIconStyle} />
+        </li>
+      ))
+  }
+</ul>

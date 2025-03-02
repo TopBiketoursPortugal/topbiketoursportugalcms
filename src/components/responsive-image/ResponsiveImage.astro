@@ -1,0 +1,58 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageOutputFormat, ImageQualityPreset } from 'astro';
+import { getImageByPath } from 'utils/get-image';
+import { cn } from 'utils/cn';
+
+export type ResponsiveImageProps = {
+  alt?: string;
+  fetchPriority?: 'low' | 'high';
+  src: string;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  quality?: ImageQualityPreset | number;
+  formats?: ImageOutputFormat[];
+  widths?: number[];
+  paralax?: boolean;
+};
+
+type Props = ResponsiveImageProps;
+
+const {
+  alt = 'TopWalkingToursPortugal',
+  src,
+  loading = 'lazy',
+  fetchPriority = 'auto',
+  quality = 'max',
+  formats = ['avif'],
+  widths = [480, 768, 1024, 1920],
+  paralax = true,
+  class: className
+} = Astro.props;
+
+const twclass = cn([
+  'aspect-video w-full object-cover',
+  paralax ? 'paralax' : '',
+  className
+]);
+
+const imageOptimized = getImageByPath(src) satisfies Promise<{
+  default: ImageMetadata;
+}>;
+---
+
+{
+  imageOptimized && (
+    <Picture
+      alt={alt}
+      class={twclass}
+      decoding="async"
+      fetchpriority={fetchPriority}
+      formats={formats}
+      loading={loading}
+      src={imageOptimized}
+      widths={widths}
+      quality={quality}
+    />
+  )
+}

@@ -1,0 +1,23 @@
+---
+_schema: default
+id: 59d309b8-e9b3-46ac-8ba3-e1426d7fe507
+language: en
+title: Telmo Novais
+subTitle: Guide
+image:
+  src: /src/assets/images/team/temo-novais-cycling-guide-2-.jpg
+  alt: Guide Telmo Novais
+order: 1
+enabled: true
+template: Layout.astro
+---
+
+Telmo, Born in Guimarães in 1997, and have been living in Porto for 4 years. My
+academic journey led me to explore Sports Sciences. Moreover, cycling has been a
+constant in my life as long as I can remember, and biking through the city has
+allowed me to discover new places in a unique way. This connection with physical
+activity and exploration has led me to reflect on the richness of experiences
+that the world offers. However, my true passion lies in people's stories. I love
+socializing and uncovering the unique narratives that each individual carries.
+This inherent curiosity about people's lives aligns perfectly with TBT's
+mission, where the diversity of cultures and stories is celebrated.

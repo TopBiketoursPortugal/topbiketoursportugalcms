@@ -1,0 +1,25 @@
+# src/components/two-column-markdown/two-column-markdown.bookshop.yml
+spec:
+  structures:
+    - content_blocks # or any structure you are using
+  label: Accordion
+  description: Displays expandable content.
+  icon: text # Choose an appropriate icon
+  tags:
+    - UI
+
+blueprint:
+  container: "full"
+  expansionType: "plus"
+  padding: "normal"
+  items:
+    - header:
+        text: "Q1"
+      content: "A1"
+    - header:
+        text: "Q2"
+      content: "A2"
+
+preview:
+
+_inputs:

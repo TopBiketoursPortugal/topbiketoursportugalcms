@@ -1,0 +1,690 @@
+timezone: Pacific/Auckland
+
+paths:
+  static: "public"
+  uploads: public/images
+
+collections_config:
+  pages:
+    path: src/content/pages
+    glob:
+      - "**/*.md"
+    url: "/[full_slug]/"
+    icon: laptop_mac
+    _enabled_editors:
+      - visual
+    add_options:
+      - name: Add New Page
+        schema: default
+        icon: pages
+    schemas:
+      default:
+        name: New Page
+        path: schemas/page.md
+        remove_extra_inputs: false
+      paginated:
+        name: Paginated collection
+        path: schemas/paginated.md
+        remove_extra_inputs: false
+    create:
+      path: "[relative_base_path]/{title|slugify}.md"
+  blog:
+    path: src/content/blog
+    glob:
+      - "**/*.mdx"
+    url: "/blog/[full_slug]/"
+    icon: newspaper
+    _enabled_editors:
+      - content
+      - visual
+    add_options:
+      - name: Add New Post
+        schema: default
+        icon: post_add
+    schemas:
+      default:
+        name: New Post
+        path: schemas/post.mdx
+    create:
+      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
+    _inputs:
+      title:
+        options:
+          empty_type: string
+      image:
+        type: image
+        options:
+          empty_type: string
+          paths:
+            static: ""
+            uploads: src/assets/images
+      thumb_image_path:
+        type: image
+        options:
+          empty_type: string
+          paths:
+            static: ""
+            uploads: src/assets/images
+      image_alt:
+        options:
+          empty_type: string
+      author:
+        options:
+          empty_type: string
+      tags:
+        type: multiselect
+        comment: To add a new tag, go to the [tags data file](cloudcannon:collections/data/tags.json)
+        options:
+          values: data.tags
+          empty_type: array
+  data:
+    path: data
+    disable_add: true
+    disable_add_folder: true
+    _inputs:
+      icons:
+        comment: Add an icon from the list of [Font Awesome icons](https://fontawesome.com/search?o=r&m=free). Then add it to the ```src/components/utility/icon.jsx``` file, following the existing pattern.
+  tours:
+    path: src/content/tours
+    glob:
+      - "**/*.md*"
+    name: Tours
+    singular_name: Tour
+    icon: directions_bike
+    disable_url: false
+    description: ""
+    create:
+      path: "[relative_base_path]/{title|slugify}.md"
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: false
+    add_options:
+      - name: "New Tour English"
+        icon: "language"
+        schema: "default"
+        base_path: ""
+        editor: visual
+      - name: "New Tour Portuguese"
+        icon: "language"
+        schema: "defaultPT"
+        editor: visual
+        base_path: "/pt/"
+    schemas:
+      default:
+        path: schemas/tour.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+      defaultPT:
+        path: schemas/pt/tour.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+  team:
+    path: src/content/team
+    glob:
+      - "**/*.md*"
+    icon: people
+    disable_url: false
+    description: ""
+    _enabled_editors:
+      - content
+    _inputs:
+      language:
+        type: text
+        hidden: true
+      subTitle:
+        type: select
+        options:
+          allow_create: true
+          allow_empty: false
+          value_key: code
+          values:
+            - name: Guide
+              key: Guide
+            - name: Owner / Founder
+              key: Owner
+        cascade: true
+    add_options:
+      - name: "New Team Member English"
+        icon: "language"
+        schema: "default"
+        base_path: ""
+        editor: visual
+      - name: "New Team Member Portuguese"
+        icon: "language"
+        schema: "defaultPT"
+        editor: visual
+        base_path: "/pt/"
+    create:
+      path: "[relative_base_path]/{title|slugify}.md"
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    singular_name: "Team member"
+    schemas:
+      default:
+        path: schemas/team-member.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: NewTeamMember
+        icon: people
+      defaultPT:
+        path: schemas/pt/team-member.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: NovoMembro
+        icon: people
+    preview:
+      text:
+        - key: title # Displays the 'title' field (e.g., "Sérgio Marques")
+      image:
+        - key: image.src # Displays the image from 'image.src' (e.g., "/src/assets/images/team/sergio-marques.jpg")
+      subtext:
+        - key: subTitle
+data_config:
+  icons:
+    path: data/icons.json
+  colors:
+    path: data/colors.json
+  tags:
+    path: data/tags.json
+
+file_config:
+  - glob: data/colors.json
+    _structures:
+      color:
+        values:
+          - value:
+              name:
+              value:
+            preview:
+              icon: palette
+    _inputs:
+      $:
+        type: array
+        label: Colors
+        comment: Set the colors available in the color selectors throughout the site.
+        options:
+          structures: _structures.color
+      value:
+        type: color
+      name:
+        type: text
+        comment: What is seen in the color selector dropdown.
+  - glob: data/tags.json
+    _inputs:
+      $:
+        type: array
+        label: Tags
+        comment: Set the tags available in posts.
+      $[*]:
+        type: text
+
+collection_groups:
+  - heading: Pages
+    collections:
+      - pages
+      - blog
+      - tours
+      - team
+  - heading: Data
+    collections:
+      - data
+
+_editables:
+  content:
+    blockquote: true
+    bold: true
+    format: p h2 h3 h4
+    italic: true
+    strike: true
+    subscript: true
+    superscript: true
+    underline: true
+    link: true
+    bulletedlist: true
+    indent: true
+    numberedlist: true
+    outdent: true
+    code: true
+    embed: true
+    horizontalrule: true
+    image: true
+    table: true
+    undo: true
+    redo: true
+    removeformat: true
+    copyformatting: true
+    styles: /css/editor.css
+    left: align-left
+    center: align-center
+    right: align-right
+    justify: align-justify
+    image_size_attributes: true
+    snippet: true
+
+_inputs:
+  template:
+    hidden: true
+  src:
+    type: image
+    cascade: true
+  memberType:
+    type: select
+    options:
+      allow_empty: true
+      value_key: code
+      values:
+        - name: Owner / Founder
+          code: Owner
+        - name: Guide
+          code: Guide
+  language:
+    type: select
+    hidden: true
+    options:
+      value_key: code
+      values:
+        - name: English
+          code: en
+        - name: Portuguese
+          code: pt
+  id:
+    type: auto
+    instance_value: UUID
+    hidden: true
+  feature_list:
+    type: multiselect
+    options:
+      empty_type: array
+      values: collections.blog
+      # todo: change to id
+      value_key: title
+  main_feature:
+    type: select
+    options:
+      values: collections.blog
+      # todo: change to id
+      value_key: title
+  markdown_content:
+    type: markdown
+    options:
+      blockquote: true
+      bold: true
+      format: p h1 h2 h3 h4
+      italic: true
+      strike: true
+      subscript: true
+      superscript: true
+      underline: true
+      link: true
+      bulletedlist: true
+      numberedlist: true
+      table: true
+      code: true
+      embed: true
+      horizontalrule: true
+      image: true
+      undo: true
+      redo: true
+      removeformat: true
+      copyformatting: true
+  image_path:
+    type: image
+    comment: The path to the source file of the image to be optimized.
+    options:
+      paths:
+        static: ""
+        uploads: src/assets/images
+  alt_text:
+    label: Image Alt Text
+    type: textarea
+    hidden: "!image_path"
+  width:
+    type: number
+  height:
+    type: number
+  background_color:
+    hidden: "border_only"
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+  text_color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+  color:
+    type: select
+    options:
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+  icon:
+    type: select
+    options:
+      values: data.icons
+  button_icon:
+    type: select
+    options:
+      values: data.icons
+  button_link:
+    type: url
+  hover_brightness:
+    type: range
+    options:
+      min: 0
+      max: 1.5
+      step: 0.05
+  seo:
+    type: object
+    options:
+      preview:
+        icon: query_stats
+        text:
+          - "Search engine optimization"
+        subtext:
+          - key: page_description
+          - "Update SEO values for the page"
+  layout:
+    hidden: true
+  date:
+    instance_value: NOW
+  page_size:
+    type: number
+    comment: The number of collection items to list per page
+  featured_posts:
+    type: object
+    options:
+      preview:
+        icon: newspaper
+        text: Featured Posts
+  social:
+    type: object
+    options:
+      preview:
+        icon: link
+  links[*]:
+    type: object
+    options:
+      preview:
+        icon: link
+        text:
+          - key: text
+          - "Link"
+        subtext:
+          - key: link
+          - "Add a social link"
+  social_icon:
+    type: select
+    options:
+      values: data.icons
+  social[*]:
+    type: object
+    options:
+      preview:
+        icon: query_stats
+  logo:
+    type: image
+  logo_url:
+    comment: Link for the logo in the top left of the footer
+  copyright:
+    comment: Automatically prefixed with the current year
+  page_description:
+    comment: Defaults to the description set in the Site SEO data file
+  canonical_url:
+    comment: Defaults to the pages url
+  featured_image:
+    comment: Defaults to the image set in the Site SEO data file
+  open_graph_type:
+    type: select
+    options:
+      values:
+        - website
+        - article
+    comment: Defaults to the type 'website'
+  author_twitter_handle:
+    comment: Defaults to the twitter site value set in the Site SEO data file
+  twitter_site:
+    type: url
+  no_index:
+    type: checkbox
+    comment:
+      When selected this removes the page from your sitemap and adds the noindex
+      robots meta tag
+
+_snippets_imports:
+  mdx: true
+
+_snippets:
+  alert:
+    template: mdx_component
+    inline: false
+    preview:
+      icon: announcement
+      text: Alert
+      subtext:
+        - key: alert_message
+        - Update alert content and styles
+    definitions:
+      component_name: SnippetsAlert
+      named_args:
+        - editor_key: background_color
+          source_key: background_color
+          type: string
+        - editor_key: alert_message
+          source_key: alert_message
+          type: string
+        - editor_key: color
+          source_key: color
+          type: string
+        - editor_key: icon
+          source_key: icon
+          type: string
+    _inputs:
+      background_color:
+        type: select
+        options:
+          values: data.colors
+          value_key: value
+          preview:
+            text:
+              - key: name
+      icon:
+        type: select
+        options:
+          values: data.icons
+      color:
+        type: select
+        options:
+          values: data.colors
+          value_key: value
+          preview:
+            text:
+              - key: name
+      alert_message:
+        comment: This is the text displayed in the alert
+        type: textarea
+  astro_image:
+    template: mdx_component
+    inline: false
+    preview:
+      view: gallery
+      icon: image
+      text: Astro Image
+      subtext:
+        - key: image_alt
+        - Update image path and alt text
+      image:
+        - key: image_path
+      gallery:
+        image:
+          - key: image_path
+    definitions:
+      component_name: SnippetsAstroImage
+      named_args:
+        - editor_key: image_path
+          source_key: image_path
+          type: string
+        - editor_key: image_alt
+          source_key: image_alt
+          type: string
+    _inputs:
+      image_alt:
+        type: textarea
+      image_path:
+        type: image
+        options:
+          empty_type: string
+          paths:
+            static: ""
+            uploads: src/assets/images
+  accordion:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsAccordion
+      named_args:
+        - editor_key: heading
+          source_key: heading
+          type: string
+        - editor_key: text
+          source_key: text
+          type: string
+    preview:
+      icon: expand_more
+      text: Accordion
+      subtext:
+        - key: text
+        - Update accordion content.
+    _inputs:
+      heading:
+        type: textarea
+      text:
+        type: textarea
+  video:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsVideo
+      named_args:
+        - editor_key: src
+          source_key: src
+          type: string
+    preview:
+      text: Video
+      subtext: A self hosted video from our static files
+      icon: duo
+    _inputs:
+      src:
+        comment: Link to a video hosted in our own files.
+        type: file
+        options:
+          paths:
+            uploads: public/videos
+  youtube:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsYoutube
+      named_args:
+        - editor_key: video_source
+          source_key: video_source
+          type: string
+        - editor_key: width
+          source_key: width
+          type: number
+        - editor_key: height
+          source_key: height
+          type: number
+        - editor_key: title
+          source_key: title
+          type: string
+    preview:
+      icon: duo
+      text:
+        - key: title
+        - Youtube Video
+      subtext:
+        - key: video_source
+        - Update Youtube video details
+    _inputs:
+      video_source:
+        type: url
+        comment: Get an embed link from a Youtube video and paste it here.
+      width:
+        type: number
+        comment: The width of the video, measured in px.
+      height:
+        type: number
+        comment: The height of the video, measured in px.
+      title:
+        type: textarea
+  file:
+    template: mdx_component
+    inline: false
+    preview:
+      text: File
+    definitions:
+      component_name: SnippetsFile
+      named_args:
+        - editor_key: src
+          source_key: src
+          type: string
+        - editor_key: file_name
+          source_key: file_name
+          type: string
+        - editor_key: link_message
+          source_key: link_message
+          type: string
+    _inputs:
+      src:
+        type: file
+        label: File source
+        options:
+          paths:
+            uploads: public/documents
+            static: "public"
+      file_name:
+        comment: The name of the file, once downloaded.
+      link_message:
+        type: textarea
+        comment: The text for the download link
+  mdx_tint:
+    template: mdx_paired_component
+    inline: true
+    preview:
+      text: Tint
+      icon: pallet
+    definitions:
+      component_name: SnippetsTint
+      content_key: inner_text
+      named_args:
+        - editor_key: color
+          source_key: tint_color
+          type: string
+    _inputs:
+      tint_color:
+        type: color
+      inner_text:
+        comment: This text will be tinted

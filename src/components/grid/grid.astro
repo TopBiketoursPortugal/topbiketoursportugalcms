@@ -1,0 +1,31 @@
+---
+import { tv, type VariantProps } from "tailwind-variants";
+import type { Simplify } from "type-fest";
+
+const gridVariants = tv({
+  base: "grid",
+  variants: {
+    cols: {
+      1: "",
+      2: "xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2",
+      3: "xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3",
+      4: "xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-4",
+    },
+    spacing: {
+      none: "gap-0",
+      small: "gap-3",
+      medium: "gap-6",
+      large: "gap-8",
+      xlarge: "gap-9",
+      xxlarge: "gap-12",
+    },
+  },
+});
+
+type Props = Simplify<VariantProps<typeof gridVariants> & { class?: string }>;
+
+const { cols, spacing = "xxlarge", class: className } = Astro.props;
+const style = gridVariants({ cols, spacing, className });
+---
+
+<div class={style}><slot /></div>
