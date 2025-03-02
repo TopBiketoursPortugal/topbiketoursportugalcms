@@ -1,0 +1,49 @@
+---
+import PageLayout from 'src/layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import slugify from 'slugify';
+import type { SEOProps } from 'astro-seo';
+
+export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
+  const tours = await getCollection('tours');
+
+  const tags = [
+    ...new Set(tours.flatMap((tour) => tour.data.tags?.split('\n') ?? []))
+  ];
+
+  return tags
+    .filter((t) => t?.length > 0)
+    .map((tag) => ({
+      params: { tag: slugify(tag).toLocaleLowerCase() },
+      props: {
+        tag: slugify(tag).toLocaleLowerCase(),
+        tours: tours.filter((tour) => tag && tour.data.tags?.includes(tag))
+      }
+    }));
+}
+
+const { tag, tours } = Astro.props;
+
+const frontmatter = {
+  title: 'Tours - Top Bike Tours Portugal',
+  page_size: 6
+} satisfies {
+  title: string;
+  page_size?: number;
+  seo?: SEOProps;
+};
+---
+
+<PageLayout frontmatter={frontmatter}>
+  <section class="blog-index mx-auto flex flex-col justify-center">
+    {tag}
+    {JSON.stringify(tours)}
+    <!-- <BlogPagination pagination={pagination} language={Astro.currentLocale as LanguageCodes} /> -->
+  </section>
+</PageLayout>
+
+<style>
+  .blog-index {
+    max-width: var(--pageContainer);
+  }
+</style>

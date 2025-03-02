@@ -1,0 +1,29 @@
+---
+import type { JSX } from 'astro/jsx-runtime';
+import FormField from './FormField.astro';
+import { cn } from 'utils/cn';
+
+type Props = JSX.FormHTMLAttributes & { honeyPot?: boolean };
+
+const { class: className, honeyPot = true, ...props } = Astro.props;
+---
+
+<form
+  {...props}
+  class={cn('flex w-full flex-col gap-3', className)}
+  autocomplete="off"
+>
+  {
+    honeyPot ? (
+      <FormField
+        name="honeypot"
+        as="hidden"
+        type="hidden"
+        label="honeypot"
+        required
+        value=""
+      />
+    ) : null
+  }
+  <slot />
+</form>

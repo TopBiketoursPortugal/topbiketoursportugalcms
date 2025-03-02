@@ -1,0 +1,294 @@
+---
+import slugify from 'slugify';
+import { getCollection, render } from 'astro:content';
+import Layout from 'src/layouts/Layout.astro';
+import TourForm from 'src/components/tours/tour-form.astro';
+import TourPricing from 'src/components/tours/tour-pricing.astro';
+import AllFaqs from 'src/../data/faqs.json';
+import Languages from 'src/../data/languages.json';
+import { getAggregatedReviews } from 'utils/reviews';
+import Hero from '../hero/hero.astro';
+import TabItem from '../tabs/TabItem.astro';
+import Tabs from '../tabs/Tabs.astro';
+import Icon from '../utility/icon';
+import { cn } from 'utils/cn';
+import Tooltip from '../tooltip/tooltip.astro';
+import Separator from '../separator/separator.astro';
+import Rating from '../rating/rating.astro';
+import Gallery from '../gallery/gallery.astro';
+import Accordion from '../accordion';
+import AccordionItem from '../accordion/AccordionItem.astro';
+import Prose from '../prose/prose.astro';
+import { getImageByPath } from 'utils/get-image';
+import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('tours');
+  return posts.map((tour) => ({
+    params: {
+      slug:
+        tour.data.path ??
+        tour.data?.slug ??
+        slugify(tour.data.title, { lower: true })
+    },
+    props: {
+      tour
+    }
+  }));
+}
+
+const { tour } = Astro.props;
+
+// if (!tour) {
+//   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
+// }
+const { Content } = await render(tour);
+const { data } = tour;
+const { language = 'en' } = data;
+const defaultFaqs = AllFaqs[language];
+const {
+  packages = [],
+  itinerary = [],
+  faqs,
+  reviews = [],
+  relatedTours = []
+} = data;
+const { average, count } = getAggregatedReviews(reviews);
+const minPrice = Math.min(...packages.map((p) => p.price.price ?? 0));
+const minPromoPrice = Math.max(...packages.map((p) => p.price.promo ?? 0));
+const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
+  style: 'currency',
+  currency: packages[0].price.currency
+});
+const isPromotional = minPromoPrice > 0;
+---
+
+<Layout seo={tour.data.seo as any} title={tour.data.title} class="mb-8">
+  {tour.data.image && <Hero {...tour.data.image} class="max-h-72" />}
+  <div
+    class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-3 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
+  >
+    <div class="overflow-auto sm:overflow-hidden">
+      <Tabs>
+        <TabItem href="#detail" text="Detail" />
+        <TabItem href="#packages" text="Packages" />
+        <TabItem href="#photos" text="Photos" />
+        <TabItem href="#itinerary" text="Itinerary" />
+        <TabItem href="#map" text="Map" />
+        <TabItem href="#reviews" text="Reviews" />
+        <TabItem href="#faqs" text="Faqs" />
+      </Tabs>
+    </div>
+    <div
+      class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
+    >
+      <div class="relative flex items-center gap-2">
+        <Icon icon="ph:tag-light" class="h4 w-4" />
+        <span class="self-end text-sm text-gray-500">from</span>
+        <span
+          class={cn(
+            isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
+          )}>{priceFormat.format(minPrice)}</span
+        >
+        <span class="font-bold"
+          >{isPromotional && priceFormat.format(minPromoPrice)}</span
+        >
+
+        <div class="w-2 -translate-x-1">
+          <Tooltip class="align-top">
+            <Icon
+              slot="trigger"
+              icon="ph:info"
+              title="The initial price based on 1 adult with the lowest price in low season"
+            />
+            <span slot="content"
+              >The initial price based on 1 adult with the lowest price in low
+              season</span
+            >
+          </Tooltip>
+        </div>
+      </div>
+
+      <Separator />
+      <strong>Booking Form</strong>
+      <TourForm />
+    </div>
+    <section class="col-end-2 flex w-full flex-col gap-4">
+      <!-- {tour.data.image && <Hero {...tour.data.image} class="max-h-72 flex-1" />} -->
+      <h1>{tour.data.title}</h1>
+      <div class="flex gap-3">
+        <Rating rating={average} class="text-orange-500" />
+        <span class="text-neutral-700">({count} reviews)</span>
+      </div>
+      <div>
+        <ul class="center grid grid-cols-3 items-center justify-center gap-4">
+          <li class="flex items-center gap-3">
+            <Icon icon="ph:clock" class="h-5 w-5" />{tour.data.duration} days / {
+              (tour.data.duration ?? 0) - 1
+            } nights
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon name="ph:users-three-light" class="h-5 w-5" />Group : {
+              tour.data.groupSize?.min ?? 0
+            }-{tour.data.groupSize?.max ?? 0}
+            People
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon icon="ph:map-trifold-light" class="h-5 w-5" />Distance: {
+              tour.data.distance
+            } km
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon icon="ph:person-simple-bike-light" class="h-5 w-5" />
+            Difficulty : {tour.data.difficulty}
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon icon="ph:airplane-light" class="h-5 w-5" />Closest Airport:
+            Aeroporto Sá Carneiro
+          </li>
+          <li class="flex items-center gap-3">
+            <Icon icon="ph:user-light" class="h-5 w-5" />Min Age: {
+              tour.data.minAge
+            }
+          </li>
+        </ul>
+      </div>
+      <Separator />
+      <div>
+        {tour.data.content}
+      </div>
+    </section>
+    <section class="col-end-2 flex flex-col gap-4">What to expect</section>
+    <section id="packages" class="col-span-full grid grid-cols-4">
+      <h2 class="col-span-full">Packages</h2>
+
+      <div class="col-span-full">
+        <TourPricing language={language} packages={tour.data.packages} />
+      </div>
+    </section>
+    <section id="photos" class="col-span-full flex flex-col gap-4">
+      <h2>Photos</h2>
+      <Gallery images={tour.data.images ?? []} />
+    </section>
+    <section id="itinerary" class="col-span-full flex flex-col gap-4">
+      <h2>Itinerary</h2>
+      <Accordion>
+        {
+          itinerary.map(({ title, description }) => (
+            <AccordionItem title={title}>
+              <Prose markdown={description} />
+              {/* {it.location?.city},{it.location?.region},{it.location?.country} */}
+            </AccordionItem>
+          ))
+        }
+      </Accordion>
+    </section>
+    <section id="map" class="col-span-full flex flex-col gap-4">
+      <h2>Map</h2>
+      {
+        tour.data.mapUrl && (
+          <div class="w-full select-none">
+            <iframe
+              title="tour"
+              src={tour.data.mapUrl}
+              width={'100%'}
+              height={'480'}
+            />
+          </div>
+        )
+      }
+    </section>
+    <section id="faqs" class="col-span-full flex flex-col gap-4">
+      <h2>Faq</h2>
+      <Accordion>
+        {
+          (faqs?.length > 0 ? faqs : defaultFaqs).map(
+            ({ question, answer }) => (
+              <AccordionItem open class="border-none">
+                <div slot="header" class="flex w-full items-center gap-4">
+                  <div class="box-content flex border-collapse items-center justify-center border-gray-600 bg-slate-100 p-4 hover:bg-slate-400">
+                    <svg
+                      class="h-5 w-5 transition-transform duration-300 ease-in-out"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        class="vertical-line"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16"
+                      />
+                      <path
+                        class="horizontal-line"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 12h16"
+                      />
+                    </svg>
+                  </div>
+                  <span class="font-medium">{question}</span>
+                </div>
+                <Prose markdown={answer} slot="default" />
+              </AccordionItem>
+            )
+          )
+        }
+      </Accordion>
+    </section>
+    <section id="reviews" class="col-span-full flex flex-col gap-4">
+      <h2>Reviews</h2>
+      {
+        reviews.length > 0 ? (
+          <div class="grid grid-cols-1 gap-6">
+            {reviews.map(({ image, travelerType, content, author, rating }) => {
+              const imageOptimized = image
+                ? getImageByPath(image.src)
+                : defaultImage;
+              const { country, givenName, familyName } = author ?? {};
+              const name = `${givenName} ${familyName}`.trimEnd();
+              return (
+                <div class="flex flex-row items-center justify-evenly gap-4">
+                  <div class="flex grow">
+                    <Image
+                      src={imageOptimized}
+                      widths={[320, 500, 640]}
+                      sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
+                      fetchpriority="auto"
+                      decoding="async"
+                      loading="lazy"
+                      alt={name ?? country ?? 'review image'}
+                      class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
+                    />
+                  </div>
+                  <div class="grow whitespace-nowrap">{name}</div>
+                  <div>{travelerType ?? '-'}</div>
+                  <div class="text-balance flex grow flex-col whitespace-pre-line">
+                    <Rating rating={rating} />
+                    {content}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div>No reviews. For now.</div>
+        )
+      }
+    </section>
+    {
+      relatedTours.length > 0 ? (
+        <section id="related" class="col-span-full flex flex-col gap-4">
+          <h2>Related</h2>
+          {relatedTours.map((r) => (
+            <div>{r}</div>
+          ))}
+        </section>
+      ) : null
+    }
+  </div>
+</Layout>
+<Content />

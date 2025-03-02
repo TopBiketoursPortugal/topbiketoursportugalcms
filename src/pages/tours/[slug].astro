@@ -1,0 +1,24 @@
+---
+import slugify from 'slugify';
+import { getCollection } from 'astro:content';
+import TourPage from 'src/components/tours/tour-page.astro';
+export async function getStaticPaths() {
+  const posts = await getCollection('tours');
+  // console.log(posts);
+  return posts.map((tour) => ({
+    params: {
+      slug:
+        tour.data.path ??
+        tour.data?.slug ??
+        slugify(tour.data.title, { lower: true })
+    },
+    props: {
+      tour
+    }
+  }));
+}
+
+const { tour } = Astro.props;
+---
+
+<TourPage tour={tour} />

@@ -1,0 +1,13 @@
+---
+import { cn } from 'utils/cn';
+
+type Props = {
+  class?: string;
+};
+
+const { class: className } = Astro.props;
+---
+
+<div class={cn('flex border-b dark:border-gray-700', className)}>
+  <slot />
+</div>

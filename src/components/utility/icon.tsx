@@ -68,18 +68,38 @@ import {
   faGithub
 } from '@fortawesome/free-brands-svg-icons';
 
-import { Quotes, Star, StarHalf, BookmarkSimple } from '@phosphor-icons/react';
+import {
+  Quotes,
+  Star,
+  StarHalf,
+  BookmarkSimple,
+  Tag,
+  Info
+} from '@phosphor-icons/react';
 
 export default function Icon({
   icon,
-  class: className
+  class: className,
+  title
 }: {
   icon: string;
   class?: string;
+  title?: string;
 }) {
   switch (icon) {
+    case 'ph:map-trifold-light':
+    case 'ph:person-simple-bike-light':
+    case 'ph:airplane-light':
+    case 'ph:user-light':
+    case 'ph:users-three-light':
+    case 'ph:clock':
+      return <Info weight="light" className={className} xlinkTitle={title} />;
+    case 'ph:info-light':
+      return <Info weight="light" className={className} xlinkTitle={title} />;
+    case 'ph:tag-light':
+      return <Tag weight="light" className={className} />;
     case 'ph:bookmark-simple-thin':
-      return <BookmarkSimple weight="thin" className={className} />;
+      return <BookmarkSimple weight="light" className={className} />;
     case 'ph:quotes-fill':
       return <Quotes weight="fill" className={className} />;
     case 'ph:star-fill':

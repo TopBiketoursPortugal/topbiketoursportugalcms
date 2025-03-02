@@ -1,0 +1,118 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Grid from '../grid/grid.astro';
+import { getAggregatedReviews } from 'utils/reviews';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { CardContentProps } from '../card/CardContent.astro';
+import Languages from 'src/../data/languages.json';
+import { getTourPath } from 'utils/permalinks';
+import type { TourSchema } from 'src/schemas/tours';
+import CardContent from '../card/CardContent.astro';
+import CardMedia from '../card/CardMedia.astro';
+import Card from '../card/Card.astro';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Stack from '../stack/stack.astro';
+import Rating from '../rating/rating.astro';
+import Separator from '../separator/separator.astro';
+import Icon from '../utility/icon';
+import slugify from 'slugify';
+type Props = {
+  language?: LanguageCodes;
+  items: CollectionEntry<'tours'>[];
+  contentDisplay?: CardContentProps['display'];
+};
+
+const { items, contentDisplay = 'inline' } = Astro.props;
+---
+
+<Grid cols={3}>
+  {
+    items.map(({ data }) => {
+      const {
+        reviews = [],
+        image,
+        content,
+        duration,
+        tags,
+        language,
+        packages = []
+      } = data;
+      const { average } = getAggregatedReviews(reviews);
+      const minPrice = Math.min(...packages.map((p) => p.price.price ?? 0));
+      const minPromoPrice = Math.max(
+        ...packages.map((p) => p.price.promo ?? 0)
+      );
+      const priceFormat = new Intl.NumberFormat(
+        Languages[language satisfies keyof typeof Languages].locale,
+        {
+          style: 'currency',
+          currency: packages[0].price.currency
+        }
+      );
+      return (
+        <Card href={getTourPath(data as TourSchema)} frame="light" {...data}>
+          {image && <CardMedia {...image} />}
+          <CardContent
+            display={contentDisplay}
+            class="px-10 pb-8 pt-6 sm:max-xl:px-4"
+          >
+            <h3 class="font-oswald line-clamp-2 text-xl font-bold">
+              {data.title}
+            </h3>
+            <p class="line-clamp-5 text-lg/relaxed text-gray-600">
+              {getMarkdownExcerpt(content ?? '', 300)}
+            </p>
+
+            <Stack spacing="medium" layout="vertical" class="w-full">
+              {duration && (
+                <span class="text-gray-600">
+                  {duration} days / {duration - 1} nights
+                </span>
+              )}
+
+              <Stack
+                distribution="spaceBetween"
+                alignment="center"
+                class="w-full"
+              >
+                <Rating rating={average} />
+                <Stack spacing="small" alignment="trailing" layout="vertical">
+                  {minPromoPrice > 0 && (
+                    <span class="line-through">
+                      {priceFormat.format(minPrice)}
+                    </span>
+                  )}
+                  <span class="text-xl font-bold">
+                    {priceFormat.format(
+                      minPromoPrice > 0 ? minPromoPrice : minPrice
+                    )}
+                  </span>
+                </Stack>
+              </Stack>
+            </Stack>
+
+            <Separator weight="thin" color="neutral" />
+
+            {tags && (
+              <Stack spacing="small" alignment="center" class="flex-wrap">
+                <Icon
+                  icon="ph:bookmark-simple-light"
+                  class="h-5 w-5 text-gray-600"
+                />
+                {tags.split('\n').map((t) => (
+                  <LinkButton
+                    variant="link"
+                    class="z-50"
+                    href={`/tours/tags/${slugify(t)}/`}
+                  >
+                    {t}
+                  </LinkButton>
+                ))}
+              </Stack>
+            )}
+          </CardContent>
+        </Card>
+      );
+    })
+  }
+</Grid>
