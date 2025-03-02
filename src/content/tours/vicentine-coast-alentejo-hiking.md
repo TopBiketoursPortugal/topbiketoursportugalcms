@@ -279,11 +279,6 @@ afterPricing: |-
   * Solo traveler: 200 €
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
   * Extra nights: on request
-seo:
-  title: ''
-  description: ''
-  keywords: ''
-  canonical: ''
 duration: 7
 distance: 80
 tags: ''
