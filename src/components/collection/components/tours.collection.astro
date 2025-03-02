@@ -13,6 +13,7 @@ import type { languageSchema } from 'src/schemas/language';
 import { getTourPath } from 'utils/permalinks';
 import Languages from 'src/../data/languages.json';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Separator from 'src/components/separator/separator.astro';
 
 type Props = {
   type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';

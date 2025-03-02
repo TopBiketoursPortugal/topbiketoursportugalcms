@@ -68,7 +68,7 @@ import {
   faGithub
 } from '@fortawesome/free-brands-svg-icons';
 
-import { Quotes, Star, StarHalf } from '@phosphor-icons/react';
+import { Quotes, Star, StarHalf, BookmarkSimple } from '@phosphor-icons/react';
 
 export default function Icon({
   icon,
@@ -78,6 +78,8 @@ export default function Icon({
   class?: string;
 }) {
   switch (icon) {
+    case 'ph:bookmark-simple-thin':
+      return <BookmarkSimple weight="thin" className={className} />;
     case 'ph:quotes-fill':
       return <Quotes weight="fill" className={className} />;
     case 'ph:star-fill':
