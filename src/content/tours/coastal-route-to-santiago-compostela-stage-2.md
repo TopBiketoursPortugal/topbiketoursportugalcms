@@ -13,7 +13,7 @@ image:
 code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
 language: en
-type: PackageTour
+type: WalkingTour
 region: north
 itinerary:
   - title: 'Day 1: Baiona'
@@ -128,13 +128,183 @@ packages:
     price:
       bestValue: false
       currency: EUR
-      price: 1000
+      price: 1185
       promo: 0
       amount: 1435
     included:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
-afterPricing: ''
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: Yes
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: No
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: Yes
+      - title: 6 Dinners
+        description: No
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 1 pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 1.185€
+      - title: '* Regular season'
+        description: 1.285€
+      - title: '* High Season'
+        description: 1.385€
+      - title: '* Summer Season'
+        description: 1.435€
+  - title: Guided Hiking tour
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 1533
+      promo: 0
+      amount: 1435
+    included:
+      - title: Accommodations W/ Breakfast
+        description: Yes (4 stars, farms or rural houses)
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes (minimum 8 pax)
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: No
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: Yes
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: Yes
+      - title: 6 Dinners
+        description: No
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 8 pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 1.533€
+      - title: '* Regular season'
+        description: 1.633€
+      - title: '* High Season'
+        description: 1.733€
+      - title: '* Summer Season'
+        description: 1.783€
+  - title: Guided Hiking tour Plus
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 2014
+      promo: 0
+      amount: 1435
+    included:
+      - title: Accommodations W/ Breakfast
+        description: Yes (4 stars, farms or rural houses)
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: No
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: Yes
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: 6 Lunches
+      - title: 6 Dinners
+        description: Yes
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 8 Pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 2.014€
+      - title: '* Regular season'
+        description: 2.114€
+      - title: '* High Season'
+        description: 2.214€
+      - title: '* Summer Season'
+        description: 2.264€
+afterPricing: >-
+  **\*Season:**
+
+
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
 seo:
   page_description: 'teste'
   canonical_url: 'test'
@@ -154,7 +324,21 @@ difficulty: 4
 skill: 4
 minAge: 18
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1DBZVUo97FbeGLZlVxyTy07k_2RzWHVgo
-images: []
+images:
+  - src: /src/assets/images/santiago-de-compostela-cathedral.jpg
+    alt: santiago compostela cathedral
+  - src: /src/assets/images/house-with-flowers.jpg
+    alt: house with pink flowers
+  - src: /src/assets/images/the-way-of-st.-james-hike-tour.jpg
+    alt: compostela certificate
+  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
+    alt: santiago compostela city center
+  - src: /src/assets/images/vigo-bay-view.jpg
+    alt: vigo bay view
+  - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
+    alt: porto city center
+  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+    alt: POrto douro river
 reviews:
   - title: Greate experience
     rating: 5
@@ -174,4 +358,51 @@ reviews:
     datePublished: 2023-10-15
     content: |
       These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
+feature:
+  align: center
+  imageAlign: center center
+  bokunLink: ''
+  bokunId: ''
+  textcolor: white
+  subtitle: 'Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela: Stage 1'
+  image: /img/top-walking-tours-portugal.jpg
+  bokunLinkText: Book now
 ---
+
+# Coastal route to Santiago Compostela: Stage 2
+
+## Leave Atlantic ocean behind and go inland till Santiago de Compostela
+
+Your first night will be in Baiona. Don’t miss the chance to visit a replica of
+the ship Pinta, one of the ships of Christopher Columbus. Baiona was the first
+town port to receive the news of the discovery of America.
+
+Have a delight with the famous Arcade's oysters in Vigo. Know why Caldas de Reis
+holds such a royalty importance and end this tour in the Square of Obradoiro,
+where you can see the colossal baroque cathedral where the remains of the
+apostle Santiago lie.
+
+**Route description**
+
+- During this stage 2 expect some long and difficult climbs.
+- The main roads are avoided for the majority of the time and as such every kind
+  of terrain is used during this walk
+
+**Itinerary:**
+
+Day 1: Baiona
+
+Day 2: Baiona - Vigo: 25 km
+
+Day 3: Vigo - Redondela: 17 km
+
+Day 4: Redondela – Pontevedra: 21 km
+
+Day 5: Pontevedra – Caldas de reis: 25 km
+
+Day 6: Caldas de Reis – Padrón: 14 km
+
+Day 7: Padrón – Santiago de Compostela: 25 km
+
+Day 8: Departure

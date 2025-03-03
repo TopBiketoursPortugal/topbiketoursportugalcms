@@ -32,7 +32,8 @@ const locationSchema = z.object({
 const priceSchema = z.object({
   currency: z.enum(['EUR', 'USD']).default('EUR'),
   price: z.number().optional().nullable(),
-  promo: z.number().optional().nullable()
+  promo: z.number().optional().nullable(),
+  bestValue: z.boolean().optional().nullable().default(false)
 });
 
 // Schema for the itinerary items
@@ -122,7 +123,9 @@ const tourSchema = z.object({
   minAge: z.number().optional(),
   highlight: z.enum(['HotTrip', 'BestSeller', 'New']).optional(),
   content_blocks: z.array(z.any()).optional().nullable(),
-  type: z.enum(['CityTour', 'DayTour', 'PackageTour']).default('PackageTour'),
+  type: z
+    .enum(['CityTour', 'DayTour', 'PackageTour', 'WalkingTour'])
+    .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
   relatedTours: z.array(z.string()).optional().default([])

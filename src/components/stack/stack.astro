@@ -1,17 +1,17 @@
 ---
-import { stack, type StackProps } from "./stack.style";
-import { clsx } from "clsx";
+import { stack, type StackProps } from './stack.style';
+import { clsx } from 'clsx';
 
 interface Props extends StackProps {}
 
 const {
   class: className,
-  layout = "horizontal",
-  spacing = "xlarge",
-  alignment = "leading",
-  distribution = "leading",
-  as = "div",
-  ...props
+  layout = 'horizontal',
+  spacing = 'xlarge',
+  alignment = 'leading',
+  distribution = 'leading',
+  as = 'div',
+  reverse
 } = Astro.props;
 
 const Component = as;
@@ -21,11 +21,12 @@ const style = clsx(
     spacing,
     alignment,
     distribution,
+    reverse
   }),
   className
 );
 ---
 
-<Component class={style} {...props}>
+<Component class={style}>
   <slot />
 </Component>

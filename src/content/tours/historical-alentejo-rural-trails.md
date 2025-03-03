@@ -193,7 +193,7 @@ packages:
       - title: Lisbon or Porto Airport Transfers
         description: Yes
       - title: Train or Bus Tickets Back to Porto or Lisbon
-        description: .
+        description: Yes
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing

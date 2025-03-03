@@ -311,13 +311,30 @@ images:
   - src: /src/assets/images/quinta-da-pacheca.jpg
     alt: pacheca Farm
 feature:
-  align: left
-  imageAlign: center
+  align: center
+  imageAlign: center center
   bokunLink: ''
   bokunId: ''
-  textColor: ''
-  subTitle: ''
-  title: ''
-  image: ''
-  bokunLinkText: ''
+  textcolor: white
+  subtitle: Douro Valley Wine region Walking & Hiking tour
+  title: Douro Valley Wine region Walking & Hiking tour
+  image: /img/top-walking-tours-portugal.jpg
+  bokunLinkText: Book now
 ---
+
+# Douro Valley Wine region Hiking tour
+
+## A demarcated and classified wine region
+
+The region of Douro got its classification as a World Heritage Site in 2001 due
+to the effort of women and men during centuries, who worked to improve their
+lives and the lives of their children. What came out of all their hard work is
+an incomparably beautiful landscape, where a perfect harmony between nature and
+human interventionism as been establish, in the production in that which is one
+of the most known wines in the World.
+
+**Route description**
+
+- the area of Douro is hilly and this walk is no exception
+- the majority of the walk is done on dirt trails and when in tarmac roads the
+  traffic is low

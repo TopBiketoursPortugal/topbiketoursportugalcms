@@ -108,7 +108,7 @@ const schema = {
 ---
 
 <Stack class="border-solid p-6" layout="vertical">
-  <Prose markdown={heading.text} />
+  <!-- <Prose markdown={heading.text} /> -->
   <Grid cols={3}>
     {
       items.map(({ data }) => {
@@ -172,7 +172,7 @@ const schema = {
 
               <Separator weight="thin" color="neutral" />
 
-              {tags && (
+              {tags && tags !== '' && tags.length > 0 && (
                 <Stack spacing="small" alignment="center" class="flex-wrap">
                   <Icon
                     icon="ph:bookmark-simple-thin"
@@ -196,9 +196,9 @@ const schema = {
     }
   </Grid>
 </Stack>
-<script
+<!-- <script
   is:inline
   async
   type="application/ld+json"
   set:html={JSON.stringify(schema)}
-/>
+/> -->

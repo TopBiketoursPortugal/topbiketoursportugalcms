@@ -64,7 +64,8 @@ language: en
 type: PackageTour
 itinerary:
   - title: 'Day 1: Porto arrival'
-    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description:
+      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
@@ -197,42 +198,42 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: 'Yes'
+        description: Yes
       - title: Porto Airport Transfers
-        description: 'Yes'
+        description: Yes
       - title: Trains or Bus Tickets Back to Porto
-        description: 'Yes'
+        description: Yes
       - title: Van Support
-        description: 'No'
+        description: No
       - title: Roadbook + Briefing
-        description: 'Yes'
+        description: Yes
       - title: GPS With route per booking
-        description: 'Yes'
+        description: Yes
       - title: Bag and water bottle
-        description: 'Yes'
+        description: Yes
       - title: T-shirt
-        description: 'No'
+        description: No
       - title: Guide
-        description: 'No'
+        description: No
       - title: 6 light Picnics
-        description: 'Yes'
+        description: Yes
       - title: 6 Dinners
-        description: 'No'
+        description: No
       - title: Personal Accident Insurance
-        description: 'No'
+        description: No
       - title: Liability Insurance
-        description: 'No'
+        description: No
       - title: Min. Participants
         description: 1 Pax
       - title: 7 Nights / 8 Days
         description: Price per person
-      - title: '- Low season'
+      - title: '* Low season'
         description: 1.085€
-      - title: '- Regular season'
+      - title: '* Regular season'
         description: 1.185€
-      - title: '- High Season'
+      - title: '* High Season'
         description: 1.285€
-      - title: '- Summer Season'
+      - title: '* Summer Season'
         description: 1.335€
     bestValue: false
   - title: Guided Hiking tour
@@ -246,42 +247,42 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: 'Yes'
+        description: Yes
       - title: Porto Airport Transfers
-        description: 'Yes'
+        description: Yes
       - title: Trains or Bus Tickets Back to Porto
-        description: 'Yes'
+        description: Yes
       - title: Van Support
-        description: 'Yes'
+        description: Yes
       - title: Roadbook + Briefing
-        description: 'Yes'
+        description: Yes
       - title: GPS With route per booking
-        description: 'Yes'
+        description: Yes
       - title: Bag and water bottle
-        description: 'Yes'
+        description: Yes
       - title: T-shirt
-        description: 'Yes'
+        description: Yes
       - title: Guide
-        description: 'No'
+        description: No
       - title: 6 light Picnics
-        description: 'Yes'
+        description: Yes
       - title: 6 Dinners
-        description: 'No'
+        description: No
       - title: Personal Accident Insurance
-        description: 'Yes'
+        description: Yes
       - title: Liability Insurance
-        description: 'Yes'
+        description: Yes
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
         description: Price per person
-      - title: '- Low season'
+      - title: '* Low season'
         description: 1.559€
-      - title: '- Regular season'
+      - title: '* Regular season'
         description: 1.659€
-      - title: '- High Season'
+      - title: '* High Season'
         description: 1.759€
-      - title: '- Summer Season'
+      - title: '* Summer Season'
         description: 1.809€
     bestValue: false
   - title: Guided Hiking tour Plus
@@ -295,42 +296,42 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: 'Yes'
+        description: Yes
       - title: Porto Airport Transfers
-        description: 'Yes'
+        description: Yes
       - title: Trains or Bus Tickets Back to Porto
-        description: 'Yes'
+        description: Yes
       - title: Van Support
-        description: 'Yes'
+        description: Yes
       - title: Roadbook + Briefing
-        description: 'Yes'
+        description: Yes
       - title: GPS With route per booking
-        description: 'No'
+        description: No
       - title: Bag and water bottle
-        description: 'Yes'
+        description: Yes
       - title: T-shirt
-        description: 'Yes'
+        description: Yes
       - title: Guide
-        description: 'No'
+        description: No
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: 'Yes'
+        description: Yes
       - title: Personal Accident Insurance
-        description: 'Yes'
+        description: Yes
       - title: Liability Insurance
-        description: 'Yes'
+        description: Yes
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
         description: Price per person
-      - title: '- Low season'
+      - title: '* Low season'
         description: 2.213€
-      - title: '- Regular season'
+      - title: '* Regular season'
         description: 2.313€
-      - title: '- High Season'
+      - title: '* High Season'
         description: 2.413€
-      - title: '- Summer Season'
+      - title: '* Summer Season'
         description: 2.463€
     bestValue: false
     type: ''
@@ -402,19 +403,39 @@ images:
     alt: Caminha city center
   - src: /src/assets/images/suave-mar-hotel.jpg
     alt: Suave mar hotel
+feature:
+  align: center
+  imageAlign: center center
+  bokunLink: ''
+  bokunId: ''
+  textcolor: white
+  subtitle: ' Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela: Stage 1'
+  image: /img/top-walking-tours-portugal.jpg
+  bokunLinkText: Book now
 ---
+
 # Atlantic Coast of Portugal walking & Hiking tour
 
-**Visit the North of Portugal walking in the coast seeing the beautiful beaches and historical city´s**
+**Visit the North of Portugal walking in the coast seeing the beautiful beaches
+and historical city´s**
 
-The coast of the Atlantic Ocean is one the best areas to walk on and, at the same time, enjoy the beautiful beaches and the history that the northern towns have to offer. Start this tour in one of the most important cities in Europe, the city of Porto. This town is classified by UNESCO as a World Heritage Site (1996) and it is also been given the title of European Capital of Culture (2001). Along this journey you will find several picturesque villages and monuments, still preserved to this day, mixing it up with long beaches and forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied by the famous Port Wine.
+The coast of the Atlantic Ocean is one the best areas to walk on and, at the
+same time, enjoy the beautiful beaches and the history that the northern towns
+have to offer. Start this tour in one of the most important cities in Europe,
+the city of Porto. This town is classified by UNESCO as a World Heritage Site
+(1996) and it is also been given the title of European Capital of Culture
+(2001). Along this journey you will find several picturesque villages and
+monuments, still preserved to this day, mixing it up with long beaches and
+forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied by
+the famous Port Wine.
 
 **Route description:**
 
-* The first 3 days are flat on walking paths and paved streets
-* The forth day is flat with some hills
-* The last 2 days are completely flat
-* The path consists of paved streets and boardwalks for most of the time
+- The first 3 days are flat on walking paths and paved streets
+- The forth day is flat with some hills
+- The last 2 days are completely flat
+- The path consists of paved streets and boardwalks for most of the time
 
 **Itinerary:**
 

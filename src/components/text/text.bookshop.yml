@@ -1,0 +1,62 @@
+# src/components/two-column-markdown/two-column-markdown.bookshop.yml
+spec:
+  structures:
+    - content_blocks # or any structure you are using
+  label: Text Markdown
+  description: Displays content Markdown.
+  icon: text # Choose an appropriate icon
+  tags:
+    - Markdown
+    - Text
+
+blueprint:
+  text: |
+    ## Column 1
+
+    Enter your Markdown content here.
+  style:
+    container: Full
+    padding: Normal
+    align: Centered
+    tailwind:
+preview:
+
+_inputs:
+  padding:
+    options:
+      values:
+        - name: Tight
+          value: tight
+        - name: Normal
+          value: normal
+        - name: Loose
+          value: loos
+      preview:
+        icon: 'short_text'
+        text:
+          - key: style.padding
+  container:
+    options:
+      values:
+        - name: Full
+          value: full
+        - name: Contained
+          value: contained
+      preview:
+        icon: 'short_text'
+        text:
+          - key: style.container
+  align:
+    options:
+      values:
+        - name: Leading
+          value: leading
+        - name: Trailing
+          value: trailing
+        - name: Centered
+          value: centered
+      value_key: value
+      preview:
+        icon: 'short_text'
+        text:
+          - key: style.layout
