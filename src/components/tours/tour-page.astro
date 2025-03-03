@@ -23,8 +23,9 @@ import ResponsiveImage from '../responsive-image/ResponsiveImage.astro';
 import Accordion from '../accordion/accordion.astro';
 import AccordionItem from '../accordion/AccordionItem.astro';
 import { Image } from 'astro:assets';
+import type { VisuallyEditable } from 'src/types';
 
-type Props = { tour: CollectionEntry<'tours'> };
+type Props = { tour: CollectionEntry<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
 

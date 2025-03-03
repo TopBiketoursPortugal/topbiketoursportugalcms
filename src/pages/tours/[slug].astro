@@ -2,6 +2,9 @@
 import slugify from 'slugify';
 import { getCollection } from 'astro:content';
 import TourPage from 'src/components/tours/tour-page.astro';
+import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
+import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
+
 export async function getStaticPaths() {
   const posts = await getCollection('tours');
   return posts.map((tour) => ({
@@ -18,6 +21,18 @@ export async function getStaticPaths() {
 }
 
 const { tour } = Astro.props;
+
+const seo = {
+  no_index: true,
+  page_description: tour.data.description ?? tour.data.title,
+  open_graph_type: 'product',
+  author_twitter_handle: null,
+  featured_image: tour.data.image?.src ?? defaultImage.src,
+  featured_image_alt: tour.data.image?.src ?? tour.data.title,
+  canonical_url: null
+} satisfies SEOProps;
 ---
 
-<TourPage tour={tour} />
+<Layout title={tour.data.title} seo={seo}>
+  <TourPage bookshop:live tour={tour} />
+</Layout>
