@@ -1,64 +1,69 @@
 ---
-import Layout from "./Layout.astro";
-import PostSummary from "../components/blog/summary.astro";
-import { getCollection } from "astro:content";
-import type { MarkdownLayoutProps } from "astro";
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
+import Layout from './Layout.astro';
+import PostSummary from '../components/blog/summary.astro';
+import { getCollection } from 'astro:content';
+import type { MarkdownLayoutProps } from 'astro';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import type { LanguageCodes } from 'src/schemas/language';
 
-type Props =
-  | {
-      title: string;
-      date: string | Date;
-      image: string;
-      image_alt: string;
-      author: string;
-      body: string;
-    }
-  | MarkdownLayoutProps<{
-      title: string;
-      date: string | Date;
-      image: string;
-      image_alt: string;
-      author: string;
-    }>;
+function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
+  return props?.rawContent;
+}
+
+type PostProps = {
+  language: LanguageCodes;
+  title: string;
+  date: string | Date;
+  image: {
+    src: string;
+    alt: string;
+  };
+  author: string;
+};
+
+type Props = (PostProps & { body?: string }) | MarkdownLayoutProps<PostProps>;
 
 const props =
-  "frontmatter" in Astro.props ? Astro.props.frontmatter : Astro.props;
-const content =
-  "body" in Astro.props ? Astro.props.body : Astro.props.rawContent();
+  'frontmatter' in Astro.props ? Astro.props.frontmatter : Astro.props;
+const content = isMarkdown(Astro.props)
+  ? Astro.props.rawContent()
+  : Astro.props.body;
 
-const { title, date, image, image_alt, author } = props;
-const wordCount = content?.split(" ")?.length ?? 0;
+const { title, date, author } = props;
+const { src, alt } = props.image;
+const wordCount = content?.split(' ')?.length ?? 0;
 const readingTime = Math.floor(wordCount / 183);
 const dateObj = new Date(date);
 
-const posts = await getCollection("blog");
+const posts = await getCollection('blog');
 const filteredPosts = posts.filter((post) => post.data.title !== title);
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/**/*.{jpeg,jpg,png,gif}",
+  '/src/assets/**/*.{jpeg,jpg,png,gif}',
   { eager: true }
 );
 
-const imageSrc = images[image]?.default ?? image;
+const imageSrc = images[src]?.default ?? src;
 ---
 
 <Layout {...props}>
-  <main class="py-[48px] md:py-[96px] px-8">
-    <article class="max-w-screen-md mx-auto">
+  <main class="px-8 py-[48px] md:py-[96px]">
+    <article class="mx-auto max-w-screen-md">
       <Image
-        class="rounded-lg aspect-video"
+        class="aspect-video rounded-lg"
         src={imageSrc}
-        alt={image_alt}
+        alt={alt ?? 'Post'}
         loading="lazy"
       />
       <h1
-        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold py-4">
+        class="py-4 text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
+      >
         {title}
       </h1>
       <div
-        class="flex flex-col justify-between sm:gap-5 py-5 font-light text-sm">
+        class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
+      >
         <p class="post-data-list-item">
           {author}
         </p>
@@ -66,9 +71,9 @@ const imageSrc = images[image]?.default ?? image;
         <p class="post-data-list-item">
           {
             dateObj.toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
             })
           }
         </p>
@@ -83,9 +88,10 @@ const imageSrc = images[image]?.default ?? image;
       </div>
     </article>
     <section
-      class="max-w-screen-md mx-auto pt-[48px] flex flex-col items-center">
+      class="mx-auto flex max-w-screen-md flex-col items-center pt-[48px]"
+    >
       <h2 class="text-2xl">Recent Posts</h2>
-      <div class="grid sm:grid-cols-2 gap-5 mt-5">
+      <div class="mt-5 grid gap-5 sm:grid-cols-2">
         {
           filteredPosts.slice(0, 2).map((post, i) => {
             return (

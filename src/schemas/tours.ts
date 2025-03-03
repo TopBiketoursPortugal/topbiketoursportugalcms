@@ -7,7 +7,7 @@ import { seoSchema } from './seo';
 // Schema for individual image objects
 const imageSchema = z.object({
   src: z.string(),
-  alt: z.string().optional()
+  alt: z.string()
 });
 
 export const baseSchema = {

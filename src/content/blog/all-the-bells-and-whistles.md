@@ -10,10 +10,11 @@ thumb_image_path: /src/assets/images/blog-thumb-5.jpg
 thumb_image_alt: >-
   Three people collaboratively work at a laptop. One man is coding, while two
   are making suggestions.
-image: /src/assets/images/featured-image-2.jpg
-image_alt: >-
-  Children stand around a laptop smiling, while one child works with her back to
-  us on the laptop.
+image:
+  src: /src/assets/images/featured-image-2.jpg
+  alt: >-
+    Children stand around a laptop smiling, while one child works with her back
+    to us on the laptop.
 seo:
   page_description: >-
     A demo page to show off some of the markdown editing features that

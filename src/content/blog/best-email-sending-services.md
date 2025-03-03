@@ -8,13 +8,14 @@ tags:
 author: Coen Simmons
 thumb_image_path: /src/assets/images/blog-thumb-3.jpg
 thumb_image_alt: Staff meeting
-image: /src/assets/images/featured-image-5.jpg
-image_alt: Laptop, phone and coffee
+image:
+  src: /src/assets/images/featured-image-5.jpg
+  alt: Laptop, phone and coffee
 seo:
   page_description:
   canonical_url:
   featured_image: /src/assets/images/featured-image-5.jpg
-  featured_image_alt:
+  featured_image_alt: 'teste'
   author_twitter_handle:
   open_graph_type: article
   no_index: false

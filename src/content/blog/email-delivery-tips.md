@@ -6,13 +6,20 @@ tags:
 author: Gerard Hopper
 thumb_image_path: /src/assets/images/blog-thumb-1.jpg
 thumb_image_alt: Arial shot of people working
-image: /src/assets/images/featured-image-1.jpg
-image_alt: Child using a computer
+# thumb_image
+#   src: /src/assets/images/blog-thumb-1.jpg
+#   alt: Arial shot of people working
+image:
+  src: /src/assets/images/featured-image-1.jpg
+  alt: Child using a computer
 seo:
   page_description:
   canonical_url:
   featured_image: /src/assets/images/featured-image-1.jpg
-  featured_image_alt: null
+  featured_image_alt: 'fghgf'
+  # featured_image:
+  #   src: /src/assets/images/featured-image-1.jpg
+  #   alt: 'fghgf'
   author_twitter_handle:
   open_graph_type: article
   no_index: false

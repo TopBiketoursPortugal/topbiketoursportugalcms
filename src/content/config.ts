@@ -1,6 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
+import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
   schema: z.object({
@@ -10,8 +11,10 @@ const blogCollection = defineCollection({
     author: z.string(),
     thumb_image_path: z.string(),
     thumb_image_alt: z.string(),
-    image: z.string(),
-    image_alt: z.string(),
+    image: z.object({
+      src: z.string(),
+      alt: z.string()
+    }),
     seo: seoSchema
   })
 });
@@ -39,6 +42,6 @@ const pagesCollection = defineCollection({
 export const collections = {
   blog: blogCollection,
   pages: pagesCollection,
-  //tours: tourCollection,
+  tours: tourCollection,
   team: teamCollection
 };

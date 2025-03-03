@@ -1,20 +1,16 @@
 ---
-id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
+id:
 order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
 subTitle: '1'
-content: |
-  A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.
-
-  Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox advised her not to do so, because there were thousands of bad Comma wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of t
+content: '12321'
 image:
-  src: /src/assets/images/santiago-de-compostela-city-center.jpg
+  src: /src/assets/santiago-de-compostela-city-center.jpg
   alt: '312'
 code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
-language: en
+language: pt
 type: PackageTour
-region: north
 itinerary:
   - title: 'Day 1: Baiona'
     description:
@@ -125,6 +121,8 @@ itinerary:
 packages:
   - title: Self guided biking tour
     description: Our best package
+    popular: true
+    period: 2 days / 1 night
     price:
       bestValue: false
       currency: EUR
@@ -136,34 +134,16 @@ packages:
         description: Yes (4 stars, farms or rural houses)
 afterPricing: ''
 seo:
-  title: ''
-  description: ''
-  keywords: |-
-    Camino de Santiago Portuguese Coastal Route
-    Baiona ship Pinta
-    Vigo Arcade oysters
-    Caldas de Reis history
-    Santiago de Compostela pilgrimage
-    Camino de Santiago itinerary
-    Camino de Santiago hiking
-    Pilgrimage routes in Spain
-    Santiago de Compostela baroque cathedral
-    Galician cuisine on Camino
-    Camino de Santiago difficulty
-    Camino de Santiago route stages
-    Historical landmarks in Galicia
-    Cultural sites on Camino de Santiago
-    Baiona Camino de Santiago history
-    Camino de Santiago Vigo oysters
-    Caldas de Reis Camino route
-    Quiet Camino routes
-    Camino de Santiago Portuguese Way itinerary
-    Pilgrimage to Santiago de Compostela route stages
-  image: null
-  robots: []
-  canonical: ''
-duration: 8
-distance: 7
+  page_description:
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type:
+  no_index: false
+content_blocks: []
+duration: 1
+distance: 100
 tags: |-
   Moderate to hard
   Package tours
@@ -173,24 +153,7 @@ difficulty: 4
 skill: 4
 minAge: 18
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1DBZVUo97FbeGLZlVxyTy07k_2RzWHVgo
-images: []
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
+images:
+  - src: /src/assets/santiago-de-compostela-city-center.jpg
+    alt: santiago
 ---

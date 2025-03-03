@@ -1,7 +1,7 @@
 ---
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
-import Markdown from "../utility/markdown.astro";
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Markdown from '../utility/markdown.astro';
 
 interface Props {
   background_color: string;
@@ -14,8 +14,8 @@ interface Props {
     color: string;
   };
   image: {
-    image_path: string;
-    alt_text: string;
+    src: string;
+    alt: string;
   };
   buttons: [
     {
@@ -26,21 +26,23 @@ interface Props {
       background_color?: string;
       hover_brightness: number;
       text_color: string;
-    },
+    }
   ];
 }
 
 const block = Astro.props;
-const buttons = import.meta.glob("/src/components/buttons/**/*.astro", {
-  eager: true,
+
+console.log(block.image);
+
+const buttons = import.meta.glob('/src/components/buttons/**/*.astro', {
+  eager: true
 });
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  "/src/assets/**/*.{jpeg,jpg,png,gif}",
+  '/src/assets/**/*.{jpeg,jpg,png,gif}',
   { eager: true }
 );
 
-const imageSrc =
-  images[block.image.image_path]?.default ?? block.image.image_path;
+const imageSrc = images[block.image.src]?.default ?? block.image.src;
 
 const headingGradientColor = block.heading.heading_gradient_color;
 ---
@@ -55,7 +57,7 @@ const headingGradientColor = block.heading.heading_gradient_color;
       <div class="buttons">
         {
           block.buttons.map((button) => {
-            const name = button._bookshop_name.split("/").reverse()[0];
+            const name = button._bookshop_name.split('/').reverse()[0];
             const filePath = `/src/components/buttons/${name}/${name}.astro`;
             const Component = (buttons[filePath] as any)?.default;
             return <Component {...button} />;
@@ -64,12 +66,16 @@ const headingGradientColor = block.heading.heading_gradient_color;
       </div>
     </div>
     <div class="blob">
-      <Image
-        alt={block.image.alt_text}
-        widths={[320, 500, 640]}
-        sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-        src={imageSrc}
-      />
+      {
+        block.image.alt && imageSrc && (
+          <Image
+            alt={block.image.alt ?? 'TESTE'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+          />
+        )
+      }
     </div>
   </div>
 </section>
