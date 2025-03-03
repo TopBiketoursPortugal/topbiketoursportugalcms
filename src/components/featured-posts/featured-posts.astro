@@ -3,11 +3,12 @@ import { getCollection } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import slugify from 'slugify';
+import type { VisuallyEditable } from 'src/types';
 
-interface Props {
+type Props = {
   main_feature: string;
   feature_list: Array<string>;
-}
+} & VisuallyEditable;
 
 const allPosts = await getCollection('blog');
 const block = Astro.props;

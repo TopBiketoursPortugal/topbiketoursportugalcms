@@ -1,15 +1,23 @@
 ---
 /** @jsxImportSource astro */
 import Icon from '../utility/icon';
-const block = Astro.props;
+
+type Props = {
+  background_color: string;
+  color: string;
+  icon: string;
+  alert_message: string;
+};
+
+const { background_color, color, icon, alert_message: message } = Astro.props;
 ---
 
 <div
   class="my-4 flex items-center gap-4 rounded-lg px-4 py-2 shadow-md"
-  style={`background-color: ${block.background_color}; color: ${block.color};`}
+  style={`background-color: ${background_color}; color: ${color};`}
 >
   <div class="w-[1rem]">
-    <Icon icon={block.icon} />
+    <Icon icon={icon} />
   </div>
-  <p class="!mb-0">{block.alert_message}</p>
+  <p class="!mb-0">{message}</p>
 </div>

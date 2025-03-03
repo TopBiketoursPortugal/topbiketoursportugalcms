@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from '../utility/markdown.astro';
+import { cn } from 'utils/cn';
 
 interface Props {
   background_color: string;
@@ -28,6 +29,7 @@ interface Props {
       text_color: string;
     }
   ];
+  class?: string;
 }
 
 const block = Astro.props;
@@ -42,15 +44,17 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-const imageSrc = images[block.image.src]?.default ?? block.image.src;
+const imageSrc = images[block.image?.src]?.default ?? block.image?.src;
 
-const headingGradientColor = block.heading.heading_gradient_color;
+const headingGradientColor = block.heading?.heading_gradient_color ?? '#a0a2ff';
 ---
 
-<section style={`background-color: ${block.background_color};`}>
+<section
+  style={cn(`background-color: ${block.background_color};`, block.class)}
+>
   <div class="hero-container">
     <div class="content">
-      <h1 class="heading">{block.heading.heading_text}</h1>
+      <h1 class="heading">{block.heading?.heading_text}</h1>
       <div class="subheading-text" style={`color: ${block.subheading.color};`}>
         <Markdown content={block.subheading.markdown_content} />
       </div>

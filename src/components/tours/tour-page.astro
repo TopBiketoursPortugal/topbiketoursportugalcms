@@ -1,13 +1,13 @@
 ---
-import slugify from 'slugify';
-import { getCollection, render } from 'astro:content';
+/** @jsxImportSource astro */
+
+import { render, type CollectionEntry } from 'astro:content';
 import Layout from 'src/layouts/Layout.astro';
 import TourForm from 'src/components/tours/tour-form.astro';
 import TourPricing from 'src/components/tours/tour-pricing.astro';
 import AllFaqs from 'src/../data/faqs.json';
 import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
-import Hero from '../hero/hero.astro';
 import TabItem from '../tabs/TabItem.astro';
 import Tabs from '../tabs/Tabs.astro';
 import Icon from '../utility/icon';
@@ -16,26 +16,15 @@ import Tooltip from '../tooltip/tooltip.astro';
 import Separator from '../separator/separator.astro';
 import Rating from '../rating/rating.astro';
 import Gallery from '../gallery/gallery.astro';
-import Accordion from '../accordion';
-import AccordionItem from '../accordion/AccordionItem.astro';
 import Prose from '../prose/prose.astro';
 import { getImageByPath } from 'utils/get-image';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
+import ResponsiveImage from '../responsive-image/ResponsiveImage.astro';
+import Accordion from '../accordion/accordion.astro';
+import AccordionItem from '../accordion/AccordionItem.astro';
+import { Image } from 'astro:assets';
 
-export async function getStaticPaths() {
-  const posts = await getCollection('tours');
-  return posts.map((tour) => ({
-    params: {
-      slug:
-        tour.data.path ??
-        tour.data?.slug ??
-        slugify(tour.data.title, { lower: true })
-    },
-    props: {
-      tour
-    }
-  }));
-}
+type Props = { tour: CollectionEntry<'tours'> };
 
 const { tour } = Astro.props;
 
@@ -44,7 +33,7 @@ const { tour } = Astro.props;
 // }
 const { Content } = await render(tour);
 const { data } = tour;
-const { language = 'en' } = data;
+const language = (Astro.currentLocale ?? 'en') as keyof typeof AllFaqs;
 const defaultFaqs = AllFaqs[language];
 const {
   packages = [],
@@ -64,7 +53,7 @@ const isPromotional = minPromoPrice > 0;
 ---
 
 <Layout seo={tour.data.seo as any} title={tour.data.title} class="mb-8">
-  {tour.data.image && <Hero {...tour.data.image} class="max-h-72" />}
+  {tour.data.image && <ResponsiveImage {...tour.data.image} class="max-h-72" />}
   <div
     class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-3 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
   >
@@ -244,35 +233,37 @@ const isPromotional = minPromoPrice > 0;
       {
         reviews.length > 0 ? (
           <div class="grid grid-cols-1 gap-6">
-            {reviews.map(({ image, travelerType, content, author, rating }) => {
-              const imageOptimized = image
-                ? getImageByPath(image.src)
-                : defaultImage;
-              const { country, givenName, familyName } = author ?? {};
-              const name = `${givenName} ${familyName}`.trimEnd();
-              return (
-                <div class="flex flex-row items-center justify-evenly gap-4">
-                  <div class="flex grow">
-                    <Image
-                      src={imageOptimized}
-                      widths={[320, 500, 640]}
-                      sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
-                      fetchpriority="auto"
-                      decoding="async"
-                      loading="lazy"
-                      alt={name ?? country ?? 'review image'}
-                      class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
-                    />
+            {reviews.map(
+              async ({ image, travelerType, content, author, rating }) => {
+                const imageOptimized = image
+                  ? (await getImageByPath(image.src)).default
+                  : defaultImage;
+                const { country, givenName, familyName } = author ?? {};
+                const name = `${givenName} ${familyName}`.trimEnd();
+                return (
+                  <div class="flex flex-row items-center justify-evenly gap-4">
+                    <div class="flex grow">
+                      <Image
+                        src={imageOptimized}
+                        widths={[320, 500, 640]}
+                        sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
+                        fetchpriority="auto"
+                        decoding="async"
+                        loading="lazy"
+                        alt={name ?? country ?? 'review image'}
+                        class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
+                      />
+                    </div>
+                    <div class="grow whitespace-nowrap">{name}</div>
+                    <div>{travelerType ?? '-'}</div>
+                    <div class="text-balance flex grow flex-col whitespace-pre-line">
+                      <Rating rating={rating} />
+                      {content}
+                    </div>
                   </div>
-                  <div class="grow whitespace-nowrap">{name}</div>
-                  <div>{travelerType ?? '-'}</div>
-                  <div class="text-balance flex grow flex-col whitespace-pre-line">
-                    <Rating rating={rating} />
-                    {content}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              }
+            )}
           </div>
         ) : (
           <div>No reviews until now.</div>

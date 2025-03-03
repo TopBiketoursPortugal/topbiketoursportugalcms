@@ -1,88 +1,73 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faEnvelope,
-  faUser,
-  faBreadSlice,
-  faMugSaucer,
-  faEgg,
-  faUtensils,
-  faCarrot,
-  faBurger,
-  faFish,
-  faSeedling,
-  faWheatAwn,
-  faPlateWheat,
-  faPizzaSlice,
-  faPepperHot,
-  faChampagneGlasses,
-  faAppleWhole,
-  faBowlRice,
-  faCheck,
-  faCircleCheck,
-  faArrowRight,
-  faArrowLeft,
-  faArrowDown,
-  faArrowUp,
-  faCaretLeft,
-  faCaretRight,
-  faCaretDown,
-  faCaretUp,
-  faPaperPlane,
-  faCartShopping,
-  faShop,
-  faBagShopping,
-  faCreditCard,
-  faStore,
-  faShopLock,
-  faCar,
-  faCircleHalfStroke,
-  faLocationDot,
-  faLocationPin,
-  faLocationCrosshairs,
-  faGift,
-  faHouse,
-  faMagnifyingGlass,
-  faImage,
-  faPhone,
-  faBars,
-  faHeart,
-  faXmark,
-  faComment,
-  faTruckFast,
-  faFaceSmile,
-  faBell,
-  faCalendarDays,
-  faCircleInfo,
-  faFire,
-  faHand
-} from '@fortawesome/free-solid-svg-icons';
-
-import { faLemon, faBookmark } from '@fortawesome/free-regular-svg-icons';
-import {
-  faFacebook,
-  faInstagram,
-  faYoutube,
-  faGoogle,
-  faStripe,
-  faShopify,
-  faGithub
-} from '@fortawesome/free-brands-svg-icons';
-
-import {
+  Envelope,
+  User,
+  Coffee,
+  Egg,
+  ForkKnife,
+  Carrot,
+  Hamburger,
+  FishSimple,
+  Plant,
+  BowlFood,
+  Pizza,
+  Pepper,
+  Champagne,
+  Check,
+  CheckCircle,
+  ArrowRight,
+  ArrowLeft,
+  ArrowDown,
+  ArrowUp,
+  CaretLeft,
+  CaretRight,
+  CaretDown,
+  CaretUp,
+  PaperPlane,
+  ShoppingCart,
+  Storefront,
+  ShoppingBag,
+  CreditCard,
+  House,
+  MagnifyingGlass,
+  Image,
+  Phone,
+  List,
+  Heart,
+  X,
+  Chat,
+  Truck,
+  Smiley,
+  Bell,
+  Calendar,
+  Info,
+  Fire,
+  Hand,
+  BookmarkSimple,
+  FacebookLogo,
+  InstagramLogo,
+  YoutubeLogo,
+  GoogleLogo,
+  StripeLogo,
+  GithubLogo,
   Quotes,
   Star,
   StarHalf,
-  BookmarkSimple,
   Tag,
-  Info,
   UsersThree,
   Users,
   Airplane,
   PersonSimpleBike,
   MapTrifold,
-  CheckCircle,
-  XCircle
+  XCircle,
+  MapPin,
+  Circle,
+  Crosshair,
+  Gift,
+  Bread,
+  AppleLogo
 } from '@phosphor-icons/react';
+
+import { Icon as IconReact } from '@iconify/react';
 
 export default function Icon({
   icon,
@@ -95,172 +80,171 @@ export default function Icon({
 }) {
   switch (icon) {
     case 'ph:check-circle-fill':
-      <CheckCircle weight="fill" className={className} xlinkTitle={title} />;
+      return <CheckCircle weight="fill" className={className} alt={title} />;
     case 'ph:x-circle-fill':
-      <XCircle weight="fill" className={className} xlinkTitle={title} />;
+      return <XCircle weight="fill" className={className} alt={title} />;
     case 'ph:map-trifold-light':
-      <MapTrifold weight="light" className={className} xlinkTitle={title} />;
+      return <MapTrifold weight="light" className={className} alt={title} />;
     case 'ph:person-simple-bike-light':
-      <PersonSimpleBike
-        weight="light"
-        className={className}
-        xlinkTitle={title}
-      />;
-
-    case 'ph:airplane-light':
-      <Airplane weight="light" className={className} xlinkTitle={title} />;
-    case 'ph:user-light':
-      <Users weight="light" className={className} xlinkTitle={title} />;
-
-    case 'ph:users-three-light':
       return (
-        <UsersThree weight="light" className={className} xlinkTitle={title} />
+        <PersonSimpleBike weight="light" className={className} alt={title} />
       );
-
+    case 'ph:airplane-light':
+      return <Airplane weight="light" className={className} alt={title} />;
+    case 'ph:user-light':
+      return <Users weight="light" className={className} alt={title} />;
+    case 'ph:users-three-light':
+      return <UsersThree weight="light" className={className} alt={title} />;
     case 'ph:clock':
-      return <Info weight="light" className={className} xlinkTitle={title} />;
+      return <Info weight="light" className={className} alt={title} />;
     case 'ph:info-light':
-      return <Info weight="light" className={className} xlinkTitle={title} />;
+      return <Info weight="light" className={className} alt={title} />;
     case 'ph:tag-light':
-      return <Tag weight="light" className={className} />;
+      return <Tag weight="light" className={className} alt={title} />;
     case 'ph:bookmark-simple-thin':
-      return <BookmarkSimple weight="light" className={className} />;
+      return (
+        <BookmarkSimple weight="light" className={className} alt={title} />
+      );
     case 'ph:quotes-fill':
-      return <Quotes weight="fill" className={className} />;
+      return <Quotes weight="fill" className={className} alt={title} />;
     case 'ph:star-fill':
-      return <Star weight="fill" className={className} />;
+      return <Star weight="fill" className={className} alt={title} />;
     case 'ph:star-half-fill':
-      return <StarHalf weight="fill" className={className} />;
+      return <StarHalf weight="fill" className={className} alt={title} />;
     case 'ph:star-light':
-      return <Star weight="light" className={className} />;
+      return <Star weight="light" className={className} alt={title} />;
     case 'Envelope':
-      return <FontAwesomeIcon icon={faEnvelope} />;
+      return <Envelope className={className} alt={title} />;
     case 'User':
-      return <FontAwesomeIcon icon={faUser} />;
+      return <User className={className} alt={title} />;
     case 'Bread':
-      return <FontAwesomeIcon icon={faBreadSlice} />;
+      return <Bread className={className} alt={title} />;
     case 'Mug':
-      return <FontAwesomeIcon icon={faMugSaucer} />;
+      return <Coffee className={className} alt={title} />;
     case 'Egg':
-      return <FontAwesomeIcon icon={faEgg} />;
+      return <Egg className={className} alt={title} />;
     case 'Utensils':
-      return <FontAwesomeIcon icon={faUtensils} />;
+      return <ForkKnife className={className} alt={title} />;
     case 'Carrot':
-      return <FontAwesomeIcon icon={faCarrot} />;
+      return <Carrot className={className} alt={title} />;
     case 'Burger':
-      return <FontAwesomeIcon icon={faBurger} />;
+      return <Hamburger className={className} alt={title} />;
     case 'Fish':
-      return <FontAwesomeIcon icon={faFish} />;
+      return <FishSimple className={className} alt={title} />;
     case 'Seedling':
-      return <FontAwesomeIcon icon={faSeedling} />;
-    case 'WheatAwn':
-      return <FontAwesomeIcon icon={faWheatAwn} />;
+      return <Plant className={className} alt={title} />;
     case 'PlateWheat':
-      return <FontAwesomeIcon icon={faPlateWheat} />;
+      return <BowlFood className={className} alt={title} />;
     case 'PizzaSlice':
-      return <FontAwesomeIcon icon={faPizzaSlice} />;
+      return <Pizza className={className} alt={title} />;
     case 'PepperHot':
-      return <FontAwesomeIcon icon={faPepperHot} />;
+      return <Pepper className={className} alt={title} />;
     case 'ChampagneGlasses':
-      return <FontAwesomeIcon icon={faChampagneGlasses} />;
+      return <Champagne className={className} alt={title} />;
     case 'AppleWhole':
-      return <FontAwesomeIcon icon={faAppleWhole} />;
+      return <AppleLogo className={className} alt={title} />;
     case 'BowlRice':
-      return <FontAwesomeIcon icon={faBowlRice} />;
+      return <BowlFood className={className} alt={title} />;
     case 'Check':
-      return <FontAwesomeIcon icon={faCheck} />;
+      return <Check className={className} alt={title} />;
     case 'CircleCheck':
-      return <FontAwesomeIcon icon={faCircleCheck} />;
+      return <CheckCircle className={className} alt={title} />;
     case 'ArrowRight':
-      return <FontAwesomeIcon icon={faArrowRight} />;
+      return <ArrowRight className={className} alt={title} />;
     case 'ArrowLeft':
-      return <FontAwesomeIcon icon={faArrowLeft} />;
+      return <ArrowLeft className={className} alt={title} />;
     case 'ArrowDown':
-      return <FontAwesomeIcon icon={faArrowDown} />;
+      return <ArrowDown className={className} alt={title} />;
     case 'ArrowUp':
-      return <FontAwesomeIcon icon={faArrowUp} />;
+      return <ArrowUp className={className} alt={title} />;
     case 'CaretLeft':
-      return <FontAwesomeIcon icon={faCaretLeft} />;
+      return <CaretLeft className={className} alt={title} />;
     case 'CaretRight':
-      return <FontAwesomeIcon icon={faCaretRight} />;
+      return <CaretRight className={className} alt={title} />;
     case 'CaretDown':
-      return <FontAwesomeIcon icon={faCaretDown} />;
+      return <CaretDown className={className} alt={title} />;
     case 'CaretUp':
-      return <FontAwesomeIcon icon={faCaretUp} />;
+      return <CaretUp className={className} alt={title} />;
     case 'PaperPlane':
-      return <FontAwesomeIcon icon={faPaperPlane} />;
+      return <PaperPlane className={className} alt={title} />;
     case 'CartShopping':
-      return <FontAwesomeIcon icon={faCartShopping} />;
+      return <ShoppingCart className={className} alt={title} />;
     case 'Shop':
-      return <FontAwesomeIcon icon={faShop} />;
+      return <Storefront className={className} alt={title} />;
     case 'BagShopping':
-      return <FontAwesomeIcon icon={faBagShopping} />;
+      return <ShoppingBag className={className} alt={title} />;
     case 'CreditCard':
-      return <FontAwesomeIcon icon={faCreditCard} />;
+      return <CreditCard className={className} alt={title} />;
     case 'Store':
-      return <FontAwesomeIcon icon={faStore} />;
+      return <Storefront className={className} alt={title} />;
     case 'ShopLock':
-      return <FontAwesomeIcon icon={faShopLock} />;
+      return (
+        <IconReact
+          icon="fa6-solid:shop-lock"
+          className={className}
+          xlinkTitle={title}
+        />
+      ); // No exact locked shop equivalent
     case 'Car':
-      return <FontAwesomeIcon icon={faCar} />;
+      return <Truck className={className} alt={title} />; // Using Truck as closest match
     case 'CircleHalfStroke':
-      return <FontAwesomeIcon icon={faCircleHalfStroke} />;
+      return <Circle className={className} alt={title} />; // Using basic Circle
     case 'LocationDot':
-      return <FontAwesomeIcon icon={faLocationDot} />;
+      return <MapPin className={className} alt={title} />;
     case 'LocationPin':
-      return <FontAwesomeIcon icon={faLocationPin} />;
+      return <MapPin className={className} alt={title} />;
     case 'LocationCrosshairs':
-      return <FontAwesomeIcon icon={faLocationCrosshairs} />;
+      return <Crosshair className={className} alt={title} />;
     case 'Gift':
-      return <FontAwesomeIcon icon={faGift} />;
+      return <Gift className={className} alt={title} />;
     case 'House':
-      return <FontAwesomeIcon icon={faHouse} />;
+      return <House className={className} alt={title} />;
     case 'MagnifyingGlass':
-      return <FontAwesomeIcon icon={faMagnifyingGlass} />;
+      return <MagnifyingGlass className={className} alt={title} />;
     case 'Image':
-      return <FontAwesomeIcon icon={faImage} />;
+      return <Image className={className} alt={title} />;
     case 'Phone':
-      return <FontAwesomeIcon icon={faPhone} />;
+      return <Phone className={className} alt={title} />;
     case 'Bars':
-      return <FontAwesomeIcon icon={faBars} />;
+      return <List className={className} alt={title} />;
     case 'Heart':
-      return <FontAwesomeIcon icon={faHeart} />;
+      return <Heart className={className} alt={title} />;
     case 'Xmark':
-      return <FontAwesomeIcon icon={faXmark} />;
+      return <X className={className} alt={title} />;
     case 'Comment':
-      return <FontAwesomeIcon icon={faComment} />;
+      return <Chat className={className} alt={title} />;
     case 'TruckFast':
-      return <FontAwesomeIcon icon={faTruckFast} />;
+      return <Truck className={className} alt={title} />;
     case 'FaceSmile':
-      return <FontAwesomeIcon icon={faFaceSmile} />;
+      return <Smiley className={className} alt={title} />;
     case 'Bell':
-      return <FontAwesomeIcon icon={faBell} />;
+      return <Bell className={className} alt={title} />;
     case 'CalendarDays':
-      return <FontAwesomeIcon icon={faCalendarDays} />;
+      return <Calendar className={className} alt={title} />;
     case 'CircleInfo':
-      return <FontAwesomeIcon icon={faCircleInfo} />;
+      return <Info className={className} alt={title} />;
     case 'Fire':
-      return <FontAwesomeIcon icon={faFire} />;
+      return <Fire className={className} alt={title} />;
     case 'Hand':
-      return <FontAwesomeIcon icon={faHand} />;
+      return <Hand className={className} alt={title} />;
     case 'Lemon':
-      return <FontAwesomeIcon icon={faLemon} />;
+      return <IconReact icon="circum:lemon" width="1.76em" height="2em" />;
     case 'Bookmark':
-      return <FontAwesomeIcon icon={faBookmark} />;
+      return <BookmarkSimple className={className} alt={title} />;
     case 'Facebook':
-      return <FontAwesomeIcon icon={faFacebook} />;
+      return <FacebookLogo className={className} alt={title} />;
     case 'Instagram':
-      return <FontAwesomeIcon icon={faInstagram} />;
+      return <InstagramLogo className={className} alt={title} />;
     case 'Youtube':
-      return <FontAwesomeIcon icon={faYoutube} />;
+      return <YoutubeLogo className={className} alt={title} />;
     case 'Google':
-      return <FontAwesomeIcon icon={faGoogle} />;
+      return <GoogleLogo className={className} alt={title} />;
     case 'Stripe':
-      return <FontAwesomeIcon icon={faStripe} />;
+      return <StripeLogo className={className} alt={title} />;
     case 'Shopify':
-      return <FontAwesomeIcon icon={faShopify} />;
+      return <IconReact icon="logos:shopify" width="1.76em" height="2em" />;
     case 'Github':
-      return <FontAwesomeIcon icon={faGithub} />;
+      return <GithubLogo className={className} alt={title} />;
     case 'CloudCannon':
       return (
         <svg
@@ -291,5 +275,7 @@ export default function Icon({
           </g>
         </svg>
       );
+    default:
+      return null;
   }
 }

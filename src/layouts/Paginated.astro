@@ -1,11 +1,11 @@
 ---
-import FeaturedPosts from "../components/featured-posts/featured-posts.astro";
-import Layout, { type SEOProps } from "./Layout.astro";
+import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
+import Layout, { type SEOProps } from './Layout.astro';
 
 type Props = {
   frontmatter: {
     title: string;
-    featured_posts: {
+    featured_posts?: {
       main_feature: string;
       feature_list: Array<string>;
     };
@@ -15,18 +15,19 @@ type Props = {
 };
 
 if (!Astro.props.frontmatter) {
-  throw new Error("Page frontmatter must be defined");
+  throw new Error('Page frontmatter must be defined');
 }
-const props = Astro.props.frontmatter;
+const { featured_posts, ...props } = Astro.props.frontmatter;
 ---
 
 <Layout {...props}>
-  <div class="py-[48px] blog-index">
+  <div class="blog-index py-[48px]">
     <h1
-      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mt-[48px]">
+      class="mt-[48px] text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
+    >
       {props.title}
     </h1>
-    <FeaturedPosts bookshop:live {...props.featured_posts} />
+    {featured_posts && <FeaturedPosts bookshop:live {...featured_posts} />}
     <slot />
   </div>
 </Layout>

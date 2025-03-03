@@ -13,11 +13,10 @@ export function getTeamMemberPath(
   return `${getBasePath(language)}/team/${slugify(memberName)}`;
 }
 
-export function getTourPath({
-  slug,
-  title,
-  language = 'en'
-}: TourSchema): string {
+export function getTourPath(
+  { slug, title }: TourSchema,
+  language: LanguageCodes = 'en'
+): string {
   return `${getBasePath(language)}/tours/${slug ?? slugify(title)}`;
 }
 

@@ -136,12 +136,12 @@ packages:
         description: Yes (4 stars, farms or rural houses)
 afterPricing: ''
 seo:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  page_description: 'teste'
+  canonical_url: 'test'
+  featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
+  featured_image_alt: 'teste'
+  author_twitter_handle: 'lll'
+  open_graph_type: product
   no_index: false
 duration: 8
 distance: 7

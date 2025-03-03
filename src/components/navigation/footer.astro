@@ -4,20 +4,23 @@ import Icon from '../utility/icon';
 ---
 
 <footer
-  style={`background-color: ${footer.background_color}; color: ${footer.color};`}>
+  style={`background-color: ${footer.background_color}; color: ${footer?.color};`}
+>
   <div class="px-8">
     <div
-      class="footer grid grid-cols-1 sm:grid-cols-3 justify-between items-center gap-8 py-[48px]">
+      class="footer grid grid-cols-1 items-center justify-between gap-8 py-[48px] sm:grid-cols-3"
+    >
       <a
-        class="flex justify-center sm:justify-start items-center"
-        href={footer.logo_url}>
+        class="flex items-center justify-center sm:justify-start"
+        href={footer.logo_url}
+      >
         <img
           class="footer__logo-image"
           src={footer.logo}
           alt="Body of the Year Logo"
         />
       </a>
-      <ul class="flex gap-4 items-center justify-center">
+      <ul class="flex items-center justify-center gap-4">
         {
           footer.social.map((link) => {
             return (
@@ -31,7 +34,7 @@ import Icon from '../utility/icon';
         }
       </ul>
 
-      <ul class="flex flex-col text-center sm:text-end gap-4">
+      <ul class="flex flex-col gap-4 text-center sm:text-end">
         {
           footer.links.map((link) => {
             return (
@@ -44,7 +47,7 @@ import Icon from '../utility/icon';
       </ul>
     </div>
 
-    <p class="text-center py-8">
+    <p class="py-8 text-center">
       &#169; {new Date().getFullYear()}
       {footer.copyright}
     </p>

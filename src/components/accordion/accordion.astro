@@ -1,21 +1,23 @@
 ---
-import { Container, type ContainerProps } from "../container";
-import Prose from "../prose/prose.astro";
-import AccordionItem from "./AccordionItem.astro";
+import { Container, type ContainerProps } from '../container';
+import Prose from '../prose/prose.astro';
+import AccordionItem from './AccordionItem.astro';
 
-type AccordionItemProps = {
+export type AccordionItemProps = {
   header?: { text?: string };
   content?: string;
 };
 
-type Props = {
-  container: ContainerProps["size"];
-  padding: ContainerProps["padding"];
-  expansionType: "plus" | "arrow";
-  items: AccordionItemProps[];
+export type AccordionProps = {
+  container?: ContainerProps['size'];
+  padding?: ContainerProps['padding'];
+  expansionType?: 'plus' | 'arrow';
+  items?: AccordionItemProps[];
 };
 
-const { items = [], container = "full", padding = "none" } = Astro.props;
+type Props = AccordionProps;
+
+const { items = [], container = 'full', padding = 'none' } = Astro.props;
 ---
 
 <Container size={container} padding={padding}>

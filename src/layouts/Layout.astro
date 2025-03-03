@@ -22,14 +22,16 @@ export interface Props {
 }
 
 const { seo } = Astro.props;
-const baseUrl = Astro.site;
+const baseUrl = Astro.site ?? import.meta.env.BASE_URL;
 const title = Astro.props.title
   ? `${Astro.props.title} | ${site.site_title}`
   : site.site_title;
 const description = seo?.page_description ?? site.description;
 const image = seo?.featured_image ?? site.image;
 const image_alt = seo?.featured_image_alt ?? site.image_alt;
-const canonicalURL = new URL(seo?.canonical_url ?? Astro.url.pathname, baseUrl);
+const canonicalURL = seo?.canonical_url
+  ? new URL(seo?.canonical_url, baseUrl)
+  : undefined;
 ---
 
 <!doctype html>
@@ -56,11 +58,16 @@ const canonicalURL = new URL(seo?.canonical_url ?? Astro.url.pathname, baseUrl);
       noindex={seo?.no_index || false}
       title={title}
       description={description}
-      canonical={canonicalURL.toString()}
+      canonical={canonicalURL}
       openGraph={{
         basic: {
           title: Astro.props.title,
-          url: baseUrl?.toString(),
+          url:
+            baseUrl !== null &&
+            baseUrl !== undefined &&
+            baseUrl?.toString().length > 0
+              ? baseUrl?.toString()
+              : import.meta.env.BASE_URL,
           type: `${seo?.open_graph_type || 'website'}`,
           image: `${baseUrl}${image}`
         },

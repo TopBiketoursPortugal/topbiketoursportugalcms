@@ -93,7 +93,7 @@ const imageSrc = images[src]?.default ?? src;
       <h2 class="text-2xl">Recent Posts</h2>
       <div class="mt-5 grid gap-5 sm:grid-cols-2">
         {
-          filteredPosts.slice(0, 2).map((post, i) => {
+          filteredPosts.slice(0, 2).map((post) => {
             return (
               <div class="max-w-[420px]">
                 <PostSummary {...post} />

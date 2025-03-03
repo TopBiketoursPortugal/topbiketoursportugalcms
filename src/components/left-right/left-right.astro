@@ -3,7 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from '../utility/markdown.astro';
 
-interface Props {
+type Props = {
   background_color: string;
   flipped: boolean;
   heading: {
@@ -27,7 +27,7 @@ interface Props {
     hover_brightness: number;
     text_color: string;
   };
-}
+};
 
 const block = Astro.props;
 const buttons = import.meta.glob('/src/components/buttons/**/*.astro', {
@@ -57,10 +57,10 @@ const imageSrc = images[block.image.src]?.default ?? block.image.src;
           src={imageSrc}
         />
         <div class="left-right__text order-1 md:order-2">
-          <h2 class="text-4xl" style={`color: ${block.heading.color};`}>
-            {block.heading.heading_text}
+          <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
+            {block.heading?.heading_text}
           </h2>
-          <div class="mb-4" style={`color: ${block.text.color};`}>
+          <div class="mb-4" style={`color: ${block.text?.color};`}>
             <Markdown content={block.text.markdown_content} />
           </div>
           {block.button && <Button {...block.button} />}
@@ -69,16 +69,16 @@ const imageSrc = images[block.image.src]?.default ?? block.image.src;
     ) : (
       <div class="left-right__wrapper">
         <div class="left-right__text">
-          <h2 class="text-4xl" style={`color: ${block.heading.color};`}>
-            {block.heading.heading_text}
+          <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
+            {block.heading?.heading_text}
           </h2>
-          <div class="mb-4" style={`color: ${block.text.color};`}>
+          <div class="mb-4" style={`color: ${block.text?.color};`}>
             <Markdown content={block.text.markdown_content} />
           </div>
           {block.button && <Button {...block.button} />}
         </div>
         <Image
-          alt={block.image.alt_text}
+          alt={block.image.alt}
           widths={[320, 500, 640]}
           sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
           src={imageSrc}

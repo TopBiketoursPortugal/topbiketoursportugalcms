@@ -2,7 +2,7 @@ import { defineConfig, envField } from 'astro/config';
 import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
-// import mdx from '@astrojs/mdx';
+import mdx from '@astrojs/mdx';
 import alpine from '@astrojs/alpinejs';
 import playformInline from '@playform/inline';
 import sitemap from '@astrojs/sitemap';
@@ -18,7 +18,7 @@ export default defineConfig({
     tailwind(),
     bookshop(),
     alpine(),
-    // mdx(),
+    mdx(),
     favicons(),
     icon({
       // svgoOptions: {},
@@ -104,7 +104,7 @@ export default defineConfig({
     //   })
     // ],
     build: {
-      inlineStylesheets: 'never',
+      // inlineStylesheets: 'never',
       rollupOptions: {
         external: ['astro:content-layer-deferred-module']
       }

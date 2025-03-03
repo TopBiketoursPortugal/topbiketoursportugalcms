@@ -55,6 +55,7 @@
     "@bookshop/astro-engine": "3.13.1",
     "@bookshop/browser": "3.13.1",
     "@bookshop/generate": "3.13.1",
+    "@iconify/react": "^5.2.0",
     "@playform/inline": "^0.1.1",
     "@types/markdown-it": "14.1.2",
     "@vite-pwa/astro": "^0.5.0",

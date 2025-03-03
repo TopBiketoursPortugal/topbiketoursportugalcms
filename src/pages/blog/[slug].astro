@@ -1,4 +1,5 @@
 ---
+import type { LanguageCodes } from 'src/schemas/language';
 import PostLayout from '../../layouts/Post.astro';
 import { getCollection, getEntry } from 'astro:content';
 
@@ -15,8 +16,9 @@ if (!post) {
   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
 }
 const { Content } = await post.render();
+const language = Astro.currentLocale as LanguageCodes;
 ---
 
-<PostLayout {...post.data} body={post.body}>
+<PostLayout {...post.data} body={post.body} language={language}>
   <Content />
 </PostLayout>
