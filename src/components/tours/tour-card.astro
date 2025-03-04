@@ -24,11 +24,11 @@ const { tour: data, contentDisplay = 'inline' } = Astro.props;
 
 const { image, content, duration, tags, language, packages = [] } = data;
 
-const minPrice = Math.min(...packages.map((p) => p.price.price ?? 0));
-const minPromoPrice = Math.max(...packages.map((p) => p.price.promo ?? 0));
+const minPrice = Math.min(...packages.map((p) => p.price?.price ?? 0));
+const minPromoPrice = Math.max(...packages.map((p) => p.price?.promo ?? 0));
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
-  currency: packages[0].price.currency
+  currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 ---
 

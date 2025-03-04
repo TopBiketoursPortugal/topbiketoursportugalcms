@@ -11,7 +11,7 @@ type Props = { packages?: TourPackageSchema[]; language?: LanguageCodes };
 const { packages = [], language = 'en' } = Astro.props;
 
 const currency =
-  (packages.length > 0 ? packages[0].price.currency : null) ?? 'EUR';
+  (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
 
 const priceFormat = new Intl.NumberFormat(languages[language].locale, {
   style: 'currency',
@@ -36,7 +36,13 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
   <slot slot="packages">
     {
       packages.map(
-        ({ title, duration, popular, included: features = [], price }) => (
+        ({
+          title,
+          duration,
+          popular,
+          included: features = [],
+          price = { price: 0 }
+        }) => (
           <PricingColumn
             title={title}
             price={priceFormat.format(price?.price ?? 0)}
