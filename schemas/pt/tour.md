@@ -1,16 +1,28 @@
 ---
-id:
+id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
 order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
 subTitle: '1'
-content: '12321'
+content: >-
+  A wonderful serenity has taken possession of my entire soul, like these sweet
+  mornings of spring which I enjoy with my whole heart. I am alone, and feel the
+  charm of existence in this spot, which was created for the bliss of souls like
+  mine. I am so happy, my dear friend, so absorbed in the exquisite sense of
+  mere tranquil existence, that I neglect my talents.
+
+  Lorem Ipsum decided to leave for the far World of Grammar. The Big Oxmox
+  advised her not to do so, because there were thousands of bad Comma wild
+  Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.
+  She packed her seven versalia, put her initial into the belt and made herself
+  on the way. When she reached the first hills of t
 image:
-  src: /src/assets/santiago-de-compostela-city-center.jpg
+  src: /src/assets/images/santiago-de-compostela-city-center.jpg
   alt: '312'
 code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
 language: pt
-type: PackageTour
+type: WalkingTour
+region: north
 itinerary:
   - title: 'Day 1: Baiona'
     description:
@@ -146,29 +158,196 @@ itinerary:
 packages:
   - title: Self guided biking tour
     description: Our best package
-    popular: true
-    period: 2 days / 1 night
     price:
       bestValue: false
       currency: EUR
-      price: 1000
+      price: 1185
       promo: 0
       amount: 1435
     included:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
-afterPricing: 'After pricing extra field markdown'
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: Yes
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: No
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: Yes
+      - title: 6 Dinners
+        description: No
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 1 pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 1.185€
+      - title: '* Regular season'
+        description: 1.285€
+      - title: '* High Season'
+        description: 1.385€
+      - title: '* Summer Season'
+        description: 1.435€
+  - title: Guided Hiking tour
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 1533
+      promo: 0
+      amount: 1435
+    included:
+      - title: Accommodations W/ Breakfast
+        description: Yes (4 stars, farms or rural houses)
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes (minimum 8 pax)
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: No
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: Yes
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: Yes
+      - title: 6 Dinners
+        description: No
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 8 pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 1.533€
+      - title: '* Regular season'
+        description: 1.633€
+      - title: '* High Season'
+        description: 1.733€
+      - title: '* Summer Season'
+        description: 1.783€
+  - title: Guided Hiking tour Plus
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 2014
+      promo: 0
+      amount: 1435
+    included:
+      - title: Accommodations W/ Breakfast
+        description: Yes (4 stars, farms or rural houses)
+      - title: Luggage shuttling
+        description: Yes
+      - title: Porto Airport Transfers
+        description: Yes
+      - title: Train or Bus Tickets Back to Porto
+        description: Yes
+      - title: Van Support
+        description: Yes
+      - title: Roadbook + Briefing
+        description: Yes
+      - title: GPS With route per booking
+        description: No
+      - title: Bag and water bottle
+        description: Yes
+      - title: T-shirt
+        description: Yes
+      - title: Guide
+        description: No
+      - title: 6 light Picnics
+        description: 6 Lunches
+      - title: 6 Dinners
+        description: Yes
+      - title: Personal Accident Insurance
+        description: Yes
+      - title: Liability Insurance
+        description: Yes
+      - title: Min. Participants
+        description: 8 Pax
+      - title: 7 Nights / 8 Days
+        description: Price per person
+      - title: '* Low season'
+        description: 2.014€
+      - title: '* Regular season'
+        description: 2.114€
+      - title: '* High Season'
+        description: 2.214€
+      - title: '* Summer Season'
+        description: 2.264€
+afterPricing: >-
+  **\*Season:**
+
+
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
 seo:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  page_description: 'teste'
+  canonical_url: 'test'
+  featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
+  featured_image_alt: 'teste'
+  author_twitter_handle: 'lll'
+  open_graph_type: product
   no_index: false
-content_blocks: []
-duration: 1
-distance: 100
+duration: 8
+distance: 7
 tags: >-
   Moderate to hard Package tours
 minGroupSize: 2
@@ -178,6 +357,47 @@ skill: 4
 minAge: 18
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1DBZVUo97FbeGLZlVxyTy07k_2RzWHVgo
 images:
-  - src: /src/assets/santiago-de-compostela-city-center.jpg
-    alt: santiago
+  - src: /src/assets/images/santiago-de-compostela-cathedral.jpg
+    alt: santiago compostela cathedral
+  - src: /src/assets/images/house-with-flowers.jpg
+    alt: house with pink flowers
+  - src: /src/assets/images/the-way-of-st.-james-hike-tour.jpg
+    alt: compostela certificate
+  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
+    alt: santiago compostela city center
+  - src: /src/assets/images/vigo-bay-view.jpg
+    alt: vigo bay view
+  - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
+    alt: porto city center
+  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+    alt: POrto douro river
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15
+    content: |
+      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15
+    content: |
+      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
+feature:
+  align: center
+  imageAlign: center center
+  bokunLink: ''
+  bokunId: ''
+  textcolor: white
+  subtitle: 'Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela: Stage 1'
+  image: /img/top-walking-tours-portugal.jpg
+  bokunLinkText: Book now
 ---
