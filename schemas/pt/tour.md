@@ -40,18 +40,26 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 3: Vigo - Redondela: 17 km'
-    description: |-
+    description: >-
       The flat days are now left behind and the path starts to deviate from the
-            coastal side. This walk is quite more hilly than any of the other ones so
-            far. The first few kilometers are still made inside the busy and always
+            coastal side. This walk is quite more hilly than any of the other
+      ones so
+            far. The first few kilometers are still made inside the busy and
+      always
             shifting Vigo area. A constant degree of elevation is noticeable
-            throughout the majority of the first half of this walk while climbing
+            throughout the majority of the first half of this walk while
+      climbing
             Penide hill, until the highest point of this walk is reached, at 430
-            meters. After that a quick downhill follows. The final quarter of this
-            walk is inside a valley. A good portion of this walk is paved, although
-            there are plenty natural areas at the higher elevations. Some of the areas
-            that might spark your interest during the day are: The oyster nursery
-            areas near Vigo at the ocean entrance, the zoo of Vigo called Vigozoo and
+            meters. After that a quick downhill follows. The final quarter of
+      this
+            walk is inside a valley. A good portion of this walk is paved,
+      although
+            there are plenty natural areas at the higher elevations. Some of the
+      areas
+            that might spark your interest during the day are: The oyster
+      nursery
+            areas near Vigo at the ocean entrance, the zoo of Vigo called
+      Vigozoo and
             Mámoa do rei, a neolithic tumulus in the Penide hill.
     location:
       lat: '1'
@@ -60,18 +68,26 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 4: Redondela – Pontevedra: 21 km'
-    description: |-
+    description: >-
       The hills are here to stay and as such this walk is not an exception. With
-            a cumulative total of 670m of uphill and downhill, a lot of the walk is
+            a cumulative total of 670m of uphill and downhill, a lot of the walk
+      is
             through dirt or secondary paths. Encountering the main road is still
             expected, since the different paths divert from the main road and go
-            through low to no traffic areas. There are two main hills between 160 and
-            140m to cover during this walk. Some of the areas that might spark your
-            interest during the day are: Ponte de San Paio, romantic bridge from the
-            XIII century, church of Santa María de Ponte Sampaio. While in Pontevedra
-            there is a whole repertoire of places to visit, serves as an example the
-            monument to the heroes of the Sampaio bridge in Pontevedra, the convent of
-            Saint Francis of Pontevedra, the chapel of the pilgrim virgin and the
+            through low to no traffic areas. There are two main hills between
+      160 and
+            140m to cover during this walk. Some of the areas that might spark
+      your
+            interest during the day are: Ponte de San Paio, romantic bridge from
+      the
+            XIII century, church of Santa María de Ponte Sampaio. While in
+      Pontevedra
+            there is a whole repertoire of places to visit, serves as an example
+      the
+            monument to the heroes of the Sampaio bridge in Pontevedra, the
+      convent of
+            Saint Francis of Pontevedra, the chapel of the pilgrim virgin and
+      the
             Spain plaza.
 
       Hotel: [Pazo de Agrelo](http://torresagrelo.com/)
@@ -82,10 +98,19 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 5: Pontevedra – Caldas de reis: 25 km'
-    description: |-
-      From this day forward it is noticeable a clear change on the type of back roads that are taken to get to Santiago. There is a feeling of being cared for and having roads practically for pilgrims use. There is plentiful amount of dirt paths, mixed with paved secondary streets and the occasional visit to the main road. There are two main uphill areas, being the biggest right at the end of this walk in order to get to the hotel.
+    description: >-
+      From this day forward it is noticeable a clear change on the type of back
+      roads that are taken to get to Santiago. There is a feeling of being cared
+      for and having roads practically for pilgrims use. There is plentiful
+      amount of dirt paths, mixed with paved secondary streets and the
+      occasional visit to the main road. There are two main uphill areas, being
+      the biggest right at the end of this walk in order to get to the hotel.
 
-      Some of the areas that might spark your interest during the day are: The church of San Cristobal De Briallos, the thermal fountain of las Burgas in Caldas de Rei, the church of San Tomé Becket, the carballeira of Caldas de Reis, a small garden in the town, and the paths that follow along the river, those of which you will cross while getting to the hotel.
+      Some of the areas that might spark your interest during the day are: The
+      church of San Cristobal De Briallos, the thermal fountain of las Burgas in
+      Caldas de Rei, the church of San Tomé Becket, the carballeira of Caldas de
+      Reis, a small garden in the town, and the paths that follow along the
+      river, those of which you will cross while getting to the hotel.
 
       Rural hotel: [Torre do Rio](https://torredorio.es/en/)
     location:
@@ -132,7 +157,7 @@ packages:
     included:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
-afterPricing: ''
+afterPricing: 'After pricing extra field markdown'
 seo:
   page_description:
   canonical_url:
@@ -144,9 +169,8 @@ seo:
 content_blocks: []
 duration: 1
 distance: 100
-tags: |-
-  Moderate to hard
-  Package tours
+tags: >-
+  Moderate to hard Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 4

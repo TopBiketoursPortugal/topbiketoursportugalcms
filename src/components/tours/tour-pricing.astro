@@ -1,10 +1,10 @@
 ---
-import PricingTable from 'src/components/pricing-table/pricing-table.astro';
-import PricingFeatureRow from 'src/components/pricing-table/pricing-feature-row.astro';
+import PricingTable from '../pricing-table/pricing-table.astro';
+import PricingFeatureRow from '../pricing-table/pricing-feature-row.astro';
 import type { TourPackageSchema } from 'src/schemas/tours';
 import languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
-import PricingColumn from 'src/components/pricing-table/pricing-column.astro';
+import PricingColumn from '../pricing-table/pricing-column.astro';
 
 type Props = { packages?: TourPackageSchema[]; language?: LanguageCodes };
 

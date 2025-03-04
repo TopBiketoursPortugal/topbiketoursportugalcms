@@ -1,11 +1,8 @@
 ---
 /** @jsxImportSource astro */
 
-import { render, type CollectionEntry } from 'astro:content';
-import Layout from 'src/layouts/Layout.astro';
 import TourForm from 'src/components/tours/tour-form.astro';
 import TourPricing from 'src/components/tours/tour-pricing.astro';
-import AllFaqs from 'src/../data/faqs.json';
 import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
 import TabItem from '../tabs/TabItem.astro';
@@ -25,18 +22,21 @@ import AccordionItem from '../accordion/AccordionItem.astro';
 import { Image } from 'astro:assets';
 import type { VisuallyEditable } from 'src/types';
 import type { InferEntrySchema } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import TourFaqs from './tour-faqs.astro';
+import TourRelated from './tour-related.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
+console.log(tour);
 
 // if (!tour) {
 //   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
 // }
 // const { Content } = await render(tour);
 // const { data } = tour;
-const language = (Astro.currentLocale ?? 'en') as keyof typeof AllFaqs;
-const defaultFaqs = AllFaqs[language];
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const {
   packages = [],
   itinerary = [],
@@ -61,7 +61,7 @@ const isPromotional = minPromoPrice > 0;
 >
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
-      <TabItem href="#detail" text="Detail" />
+      <TabItem href="#detail" text="Detail" selected />
       <TabItem href="#packages" text="Packages" />
       <TabItem href="#photos" text="Photos" />
       <TabItem href="#itinerary" text="Itinerary" />
@@ -105,7 +105,6 @@ const isPromotional = minPromoPrice > 0;
   </div>
   <section class="col-end-2 flex w-full flex-col gap-4">
     <!-- {tour.image && <Hero {...tour.image} class="max-h-72 flex-1" />} -->
-    <h1>{tour.title}</h1>
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
       <span class="text-neutral-700">({count} reviews)</span>
@@ -142,16 +141,16 @@ const isPromotional = minPromoPrice > 0;
       </ul>
     </div>
     <Separator />
-    <div>
-      {tour.content}
-    </div>
+    <Prose markdown={tour.content ?? ''} />
+    <slot />
   </section>
-  <section class="col-end-2 flex flex-col gap-4">What to expect</section>
   <section id="packages" class="col-span-full grid grid-cols-4">
     <h2 class="col-span-full">Packages</h2>
 
     <div class="col-span-full">
       <TourPricing language={language} packages={tour.packages} />
+
+      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full" />
     </div>
   </section>
   <section id="photos" class="col-span-full flex flex-col gap-4">
@@ -165,7 +164,6 @@ const isPromotional = minPromoPrice > 0;
         itinerary.map(({ title, description }) => (
           <AccordionItem title={title}>
             <Prose markdown={description} />
-            {/* {it.location?.city},{it.location?.region},{it.location?.country} */}
           </AccordionItem>
         ))
       }
@@ -188,42 +186,7 @@ const isPromotional = minPromoPrice > 0;
   </section>
   <section id="faqs" class="col-span-full flex flex-col gap-4">
     <h2>Faq</h2>
-    <Accordion>
-      {
-        (faqs?.length > 0 ? faqs : defaultFaqs).map(({ question, answer }) => (
-          <AccordionItem open class="border-none">
-            <div slot="header" class="flex w-full items-center gap-4">
-              <div class="box-content flex border-collapse items-center justify-center border-gray-600 bg-slate-100 p-4 hover:bg-slate-400">
-                <svg
-                  class="h-5 w-5 transition-transform duration-300 ease-in-out"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    class="vertical-line"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 4v16"
-                  />
-                  <path
-                    class="horizontal-line"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4 12h16"
-                  />
-                </svg>
-              </div>
-              <span class="font-medium">{question}</span>
-            </div>
-            <Prose markdown={answer} slot="default" />
-          </AccordionItem>
-        ))
-      }
-    </Accordion>
+    <TourFaqs faqs={faqs} language={language} />
   </section>
   <section id="reviews" class="col-span-full flex flex-col gap-4">
     <h2>Reviews</h2>
@@ -271,11 +234,8 @@ const isPromotional = minPromoPrice > 0;
     relatedTours.length > 0 ? (
       <section id="related" class="col-span-full flex flex-col gap-4">
         <h2>Related</h2>
-        {relatedTours.map((r) => (
-          <div>{r}</div>
-        ))}
+        <TourRelated language={language} related={relatedTours} />
       </section>
     ) : null
   }
 </div>
-<!-- <Content /> -->

@@ -5,10 +5,24 @@ code: DOURO01
 slug: hiking-douro-valley-wine-region
 title: Douro Valley Wine region Hiking tour
 subTitle: ''
-content:
-  Hiking in the vineyards and near olive fields is the scenery to expect. Visit
-  different wine caves and little villages while you take a walk, to feel the
-  spirit of Douro Valley
+content: >-
+  # Douro Valley Wine region Hiking tour
+
+  ## A demarcated and classified wine region
+
+  The region of Douro got its classification as a World Heritage Site in 2001
+  due to the effort of women and men during centuries, who worked to improve
+  their lives and the lives of their children. What came out of all their hard
+  work is an incomparably beautiful landscape, where a perfect harmony between
+  nature and human interventionism as been establish, in the production in that
+  which is one of the most known wines in the World.
+
+  **Route description**
+
+  - the area of Douro is hilly and this walk is no exception - the majority of
+  the walk is done on dirt trails and when in tarmac roads the
+    traffic is low
+
 image:
   src: /src/assets/images/44817961982_440e783762_o.jpg
   alt: Douro Valley Wine region Hiking tour
@@ -26,8 +40,15 @@ itinerary:
       region: Oporto
       city: Oporto
   - title: 'Day 2: Walk from Pinhão - Vilarinho de São Romão: 13 km'
-    description: |-
-      A lot of the areas in the Douro region are intrinsically mountainous. As such there will be a good quantity of opportunities for appreciating wonderful views all along the way. This days walk is mainly an uphill towards Vilarinho de São Romão done primarily on asphalt roads. Starts at a height of 80m and ends at the 550m mark. Some of the areas that might spark your interest during the day are: The numerous wine farms and sightseeing points that exist throughout the way, the chapel of Santa Maria and Sabrosa’s chapel near the place where your night will be spent.
+    description: >-
+      A lot of the areas in the Douro region are intrinsically mountainous. As
+      such there will be a good quantity of opportunities for appreciating
+      wonderful views all along the way. This days walk is mainly an uphill
+      towards Vilarinho de São Romão done primarily on asphalt roads. Starts at
+      a height of 80m and ends at the 550m mark. Some of the areas that might
+      spark your interest during the day are: The numerous wine farms and
+      sightseeing points that exist throughout the way, the chapel of Santa
+      Maria and Sabrosa’s chapel near the place where your night will be spent.
 
       House: [Casa de Vilarinho de São Romão](http://www.casadevilarinho.com/)
     location:
@@ -37,10 +58,18 @@ itinerary:
       region: Douro
       city: SABROSA
   - title: 'Day 3: Vilarinho de São Romão – Alijó: 18 km'
-    description: |-
-      Continuing to cross the region this walk will finish in Alijó. The walk itself keeps the same characteristics as the previous one. The steepest of its portion last for roughly 10km while descending to cross the river of Pinhão and then ascending back up again to around the same height. The highest point during this walk is at 690m and the lowest at 240m. Some of the areas that might spark your interest during the day are: The views and shapes of the Douro Valley region, the chapel of St.ª Bárbara and the town of Alijó.
+    description: >-
+      Continuing to cross the region this walk will finish in Alijó. The walk
+      itself keeps the same characteristics as the previous one. The steepest of
+      its portion last for roughly 10km while descending to cross the river of
+      Pinhão and then ascending back up again to around the same height. The
+      highest point during this walk is at 690m and the lowest at 240m. Some of
+      the areas that might spark your interest during the day are: The views and
+      shapes of the Douro Valley region, the chapel of St.ª Bárbara and the town
+      of Alijó.
 
-      Hotel 4*: [Pousada de Alijó](https://www.pousadasofportugal.com/pousadas/alijo/)
+      Hotel 4*: [Pousada de
+      Alijó](https://www.pousadasofportugal.com/pousadas/alijo/)
     location:
       lat: ''
       lng: ''
@@ -48,10 +77,20 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 4: Alijó loop- São Mamede Ribatua: 15 km'
-    description: |-
-      The region of Douro does not stop to amaze and this walk is no exception. The natural conjunction between the human made vineyard production farms and the natural landscape is breathtaking. This walk proceeds to make a loop between Alijó and São Mamede Ribatua, and it takes you to the top of the hill of São Domingos at 700m high. This journey is primarily made in paved roads similarly to the previous ones. Some of the areas that might spark your interest during the day are: Roman bridge of São Mamede, the church of São Mamede de Ribatua, the chapel of Nossa Senhora da Lapa/Sr. do Calvário and the views and the triangulation station of São Domingos’ hill.
+    description: >-
+      The region of Douro does not stop to amaze and this walk is no exception.
+      The natural conjunction between the human made vineyard production farms
+      and the natural landscape is breathtaking. This walk proceeds to make a
+      loop between Alijó and São Mamede Ribatua, and it takes you to the top of
+      the hill of São Domingos at 700m high. This journey is primarily made in
+      paved roads similarly to the previous ones. Some of the areas that might
+      spark your interest during the day are: Roman bridge of São Mamede, the
+      church of São Mamede de Ribatua, the chapel of Nossa Senhora da Lapa/Sr.
+      do Calvário and the views and the triangulation station of São Domingos’
+      hill.
 
-      Hotel 4*: [Pousada de Alijó](https://www.pousadasofportugal.com/pousadas/alijo/)
+      Hotel 4*: [Pousada de
+      Alijó](https://www.pousadasofportugal.com/pousadas/alijo/)
     location:
       lat: ''
       lng: ''
@@ -59,8 +98,15 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 5: Alijó - Vale de Mendiz: 13 km'
-    description: |-
-      Getting away from the usual trend so far, this walk is mainly done downhill. It allows for a constant appreciation of the landscape, since by going majorly down it faces directly the hilly horizon. The path goes slightly uphill early on, only to descend roughly 300m for the big majority of the day. Once again the majority of the walk is made through paved roads. Some of the areas that might spark your interest during the day are: The beautiful views of the Douro region and the church of São João Baptista.
+    description: >-
+      Getting away from the usual trend so far, this walk is mainly done
+      downhill. It allows for a constant appreciation of the landscape, since by
+      going majorly down it faces directly the hilly horizon. The path goes
+      slightly uphill early on, only to descend roughly 300m for the big
+      majority of the day. Once again the majority of the walk is made through
+      paved roads. Some of the areas that might spark your interest during the
+      day are: The beautiful views of the Douro region and the church of São
+      João Baptista.
 
       Farm: [Quinta do Silval](http://www.quintadosilval.pt/)
     location:
@@ -70,8 +116,15 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 6: Vale de Mendiz – Pinhão: 9 km + train or boat to Régua'
-    description: |-
-      Small journey back to Pinhão in order to catch either the train or a boat to Régua. The walk is slightly uphill in the first half, followed by a fast decent towards Pinhão in the second half. It comprises a mixture of several types of terrain and once again offers several areas for taking in the insurmountable mountainous view. Some of the areas that might spark your interest during the day are: Sightseeing points, the church of São Bartolomeu and the connection to Régua either by train or boat, which offer an interesting bottom view of the area.
+    description: >-
+      Small journey back to Pinhão in order to catch either the train or a boat
+      to Régua. The walk is slightly uphill in the first half, followed by a
+      fast decent towards Pinhão in the second half. It comprises a mixture of
+      several types of terrain and once again offers several areas for taking in
+      the insurmountable mountainous view. Some of the areas that might spark
+      your interest during the day are: Sightseeing points, the church of São
+      Bartolomeu and the connection to Régua either by train or boat, which
+      offer an interesting bottom view of the area.
 
       Farm: [Quinta da Pacheca](https://quintadapacheca.com/)
     location:
@@ -81,9 +134,14 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 7: Régua – Lamego: 18 km'
-    description: |-
-      The last day in Douro Valley goes from Régua to an area near the river Varosa belonging to Lamego. This last journey is predominantly uphill, with a total cumulative height of 1110m of both uphill and downhill areas.
-      The maximum and minimum height for the day are 530m and 60m respectively. It portraits a mixture of all types of terrain, being asphalt the most frequent. Some of the areas that might spark your interest during the day are: Varosa’s Hydroelectric Power Station and Varosa’s Water Dam.
+    description: >-
+      The last day in Douro Valley goes from Régua to an area near the river
+      Varosa belonging to Lamego. This last journey is predominantly uphill,
+      with a total cumulative height of 1110m of both uphill and downhill areas.
+      The maximum and minimum height for the day are 530m and 60m respectively.
+      It portraits a mixture of all types of terrain, being asphalt the most
+      frequent. Some of the areas that might spark your interest during the day
+      are: Varosa’s Hydroelectric Power Station and Varosa’s Water Dam.
 
       Farm: [Visconde Várzea](https://www.hotelruralviscondesvarzea.com/)
     location:
@@ -257,27 +315,27 @@ packages:
         description: 1.444€
       - title: 7 Nights / 8 Days ( price per person)
         description: +200€
-afterPricing: |-
+afterPricing: >-
   ***Season:**
 
-  - LS - Low season: Nov 01 to Mar 25
-  - RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
-  - HS - High Season: Set 01 to 25 Set
-  - SS - Summer Season: Jun 26 to August 30
+  - LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
+  and Set 26 to 31 Oct - HS - High Season: Set 01 to 25 Set - SS - Summer
+  Season: Jun 26 to August 30
 
     **Observations:**
 
-  - Prices are based for 2 people sharing the same room;
-  - Prices can suffer updates due high season, holidays or weekends
-  - Beverages are not included at lunch and dinner when included in the package
-  - If in a triple room with parents Children up to 10 years old - 35% discount. Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years old - 15% discount.
-  - In the option 7 nights/ 8 days, 6 lunches are included in all packages, and 6 dinners are included only in the Guided Hiking tour Plus package
+  - Prices are based for 2 people sharing the same room; - Prices can suffer
+  updates due high season, holidays or weekends - Beverages are not included at
+  lunch and dinner when included in the package - If in a triple room with
+  parents Children up to 10 years old - 35% discount. Children from 11 to 14
+  years old - 20% discount. Children from 15 to 17 years old - 15% discount. -
+  In the option 7 nights/ 8 days, 6 lunches are included in all packages, and 6
+  dinners are included only in the Guided Hiking tour Plus package
 
     **Extras**
 
-  - Solo traveler: 200 €
-  - Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
-  - Extra nights: on request
+  - Solo traveler: 200 € - Single supplement: LS: 300€, RS: 329€, HS: 360€,
+  SS.390€ - Extra nights: on request
 seo:
   page_description:
   canonical_url:
@@ -289,12 +347,8 @@ seo:
 highlight: BestSeller
 duration: 8
 distance: 68
-tags: |-
-  Douro
-  Wine tasting
-  Olive oil
-  Culture
-  Gastronomy
+tags: >-
+  Douro Wine tasting Olive oil Culture Gastronomy
 minGroupSize: 1
 maxGroupSize: ''
 difficulty: 3
@@ -321,20 +375,3 @@ feature:
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---
-
-# Douro Valley Wine region Hiking tour
-
-## A demarcated and classified wine region
-
-The region of Douro got its classification as a World Heritage Site in 2001 due
-to the effort of women and men during centuries, who worked to improve their
-lives and the lives of their children. What came out of all their hard work is
-an incomparably beautiful landscape, where a perfect harmony between nature and
-human interventionism as been establish, in the production in that which is one
-of the most known wines in the World.
-
-**Route description**
-
-- the area of Douro is hilly and this walk is no exception
-- the majority of the walk is done on dirt trails and when in tarmac roads the
-  traffic is low

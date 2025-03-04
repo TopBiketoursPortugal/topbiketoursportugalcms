@@ -1,0 +1,88 @@
+---
+import CardMedia from '../card/CardMedia.astro';
+import { getTourPath } from 'utils/permalinks';
+import CardContent, { type CardContentProps } from '../card/CardContent.astro';
+import Card from '../card/Card.astro';
+import Languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { InferEntrySchema } from 'astro:content';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Stack from '../stack/stack.astro';
+import Rating from '../rating/rating.astro';
+import Separator from '../separator/separator.astro';
+import Icon from '../utility/icon';
+import slugify from 'slugify';
+import LinkButton from '../linkbutton/linkbutton.astro';
+
+type Props = {
+  tour: InferEntrySchema<'tours'>;
+  language: LanguageCodes;
+  contentDisplay: CardContentProps['display'];
+};
+
+const { tour: data, contentDisplay = 'inline' } = Astro.props;
+
+const { image, content, duration, tags, language, packages = [] } = data;
+
+const minPrice = Math.min(...packages.map((p) => p.price.price ?? 0));
+const minPromoPrice = Math.max(...packages.map((p) => p.price.promo ?? 0));
+const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
+  style: 'currency',
+  currency: packages[0].price.currency
+});
+---
+
+<Card href={getTourPath(data)} frame="light" {...data}>
+  {image && <CardMedia {...image} />}
+  <CardContent display={contentDisplay} class="px-10 pb-8 pt-6 sm:max-xl:px-4">
+    <h3 class="font-oswald line-clamp-2 text-xl font-bold">
+      {data.title}
+    </h3>
+    <p class="line-clamp-5 text-lg/relaxed text-gray-600">
+      {getMarkdownExcerpt(content ?? '', 300)}
+    </p>
+
+    <Stack spacing="medium" layout="vertical" class="w-full">
+      {
+        duration && (
+          <span class="text-gray-600">
+            {duration} days / {duration - 1} nights
+          </span>
+        )
+      }
+
+      <Stack distribution="spaceBetween" alignment="center" class="w-full">
+        <Rating rating={4} />
+        <Stack spacing="small" alignment="trailing" layout="vertical">
+          {
+            minPromoPrice > 0 && (
+              <span class="line-through">{priceFormat.format(minPrice)}</span>
+            )
+          }
+          <span class="text-xl font-bold">
+            {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
+          </span>
+        </Stack>
+      </Stack>
+    </Stack>
+
+    <Separator weight="thin" color="neutral" />
+
+    {
+      tags && tags !== '' && tags.length > 0 && (
+        <Stack spacing="small" alignment="center" class="flex-wrap">
+          <Icon icon="ph:bookmark-simple-thin" class="h-5 w-5 text-gray-600" />
+          {tags.split('\n').map((t) => (
+            <LinkButton
+              variant="link"
+              class="z-50"
+              href={`/tours/tags/${slugify(t)}/`}
+            >
+              {t}
+            </LinkButton>
+          ))}
+        </Stack>
+      )
+    }
+  </CardContent>
+</Card>

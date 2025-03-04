@@ -26,44 +26,46 @@ const { items = [], container = 'full', padding = 'none' } = Astro.props;
     aria-label="Accordion"
     class="accordion flex flex-col gap-2"
   >
-    {
-      items.map(({ header, content }) => (
-        <AccordionItem open class="border-none">
-          <div slot="header" class="flex w-full items-center gap-4">
-            <div class="box-content flex border-collapse items-center justify-center border-gray-600 bg-slate-100 p-4 hover:bg-slate-400">
-              <svg
-                class="h-5 w-5 transition-transform duration-300 ease-in-out"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  class="vertical-line"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16"
-                />
-                <path
-                  class="horizontal-line"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 12h16"
-                />
-              </svg>
+    <slot>
+      {
+        items.map(({ header, content }) => (
+          <AccordionItem open class="border-none">
+            <div slot="header" class="flex w-full items-center gap-4">
+              <div class="box-content flex border-collapse items-center justify-center border-gray-600 bg-slate-100 p-4 hover:bg-slate-400">
+                <svg
+                  class="h-5 w-5 transition-transform duration-300 ease-in-out"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="vertical-line"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16"
+                  />
+                  <path
+                    class="horizontal-line"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 12h16"
+                  />
+                </svg>
+              </div>
+              <span class="font-medium">{header?.text}</span>
             </div>
-            <span class="font-medium">{header?.text}</span>
-          </div>
-          <div class="pl-4">
-            <Container size="full" padding={padding}>
-              <Prose markdown={content} />
-            </Container>
-          </div>
-        </AccordionItem>
-      ))
-    }
+            <div class="pl-4">
+              <Container size="full" padding={padding}>
+                <Prose markdown={content} />
+              </Container>
+            </div>
+          </AccordionItem>
+        ))
+      }
+    </slot>
   </div>
 </Container>
 <style>

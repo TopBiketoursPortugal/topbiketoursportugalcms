@@ -7,6 +7,11 @@ subTitle: >-
   Visit the North of Portugal walking in the coast seeing the beautiful beaches
   and historical city´s
 content: >-
+  # Atlantic Coast of Portugal walking & Hiking tour
+
+  **Visit the North of Portugal walking in the coast seeing the beautiful
+  beaches and historical city´s**
+
   The coast of the Atlantic Ocean is one the best areas to walk on and, at the
   same time, enjoy the beautiful beaches and the history that the northern towns
   have to offer. Start this tour in one of the most important cities in Europe,
@@ -17,42 +22,27 @@ content: >-
   forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied
   by the famous Port Wine.
 
-
   **Route description:**
 
-
-  * The first 3 days are flat on walking paths and paved streets
-
-  * The forth day is flat with some hills
-
-  * The last 2 days are completely flat
-
-  * The path consists of paved streets and boardwalks for most of the time
-
+  - The first 3 days are flat on walking paths and paved streets - The forth day
+  is flat with some hills - The last 2 days are completely flat - The path
+  consists of paved streets and boardwalks for most of the time
 
   **Itinerary:**
 
-
-  **Day 1:**Porto arrival
-
+  **Day 1:**  Porto arrival
 
   **Day 2:** Porto transfer to Póvoa de Varzim - Apúlia: 15 km
 
-
   **Day 3:** Apúlia – Esposende: 16 km
-
 
   **Day 4:** Esposende – Castelo de Neiva: 14 km
 
-
   **Day 5:** Castelo de Neiva – Viana do Castelo: 14 km
-
 
   **Day 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
 
-
   **Day 7:** Vila Praia de Âncora - Caminha: 8 km
-
 
   **Day 8:** departure
 image:
@@ -414,43 +404,3 @@ feature:
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---
-
-# Atlantic Coast of Portugal walking & Hiking tour
-
-**Visit the North of Portugal walking in the coast seeing the beautiful beaches
-and historical city´s**
-
-The coast of the Atlantic Ocean is one the best areas to walk on and, at the
-same time, enjoy the beautiful beaches and the history that the northern towns
-have to offer. Start this tour in one of the most important cities in Europe,
-the city of Porto. This town is classified by UNESCO as a World Heritage Site
-(1996) and it is also been given the title of European Capital of Culture
-(2001). Along this journey you will find several picturesque villages and
-monuments, still preserved to this day, mixing it up with long beaches and
-forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied by
-the famous Port Wine.
-
-**Route description:**
-
-- The first 3 days are flat on walking paths and paved streets
-- The forth day is flat with some hills
-- The last 2 days are completely flat
-- The path consists of paved streets and boardwalks for most of the time
-
-**Itinerary:**
-
-\*\*Day 1:\*\*Porto arrival
-
-**Day 2:** Porto transfer to Póvoa de Varzim - Apúlia: 15 km
-
-**Day 3:** Apúlia – Esposende: 16 km
-
-**Day 4:** Esposende – Castelo de Neiva: 14 km
-
-**Day 5:** Castelo de Neiva – Viana do Castelo: 14 km
-
-**Day 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
-
-**Day 7:** Vila Praia de Âncora - Caminha: 8 km
-
-**Day 8:** departure

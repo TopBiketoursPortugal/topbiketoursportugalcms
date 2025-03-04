@@ -5,17 +5,23 @@ slug: hiking-algarve-vicentine-southeast-portugal-coast
 title: 'Vicentine West Coast in Algarve: Stage 2'
 subTitle: ''
 region: north
-content: |-
+content: >-
   # **Vicentine West Coast Algarve Walking & Hiking tour**
 
   ## **Explore Algarve’s coast line and the fisherman trail**
 
-  Algarve is and as been for a long time a popular touristic region in Portugal. Its most known attractions are the sun, the weather and the beaches. However, the not so popular west coast of Algarve, still maintains these characteristics. It is encompassed in the Vicentine Coast, a natural park which is home for a wide number of animal and plant species. The typical cliff like coast environment makes for the common breathtaking views over the Atlantic, where different birds take their chance on nesting.
+  Algarve is and as been for a long time a popular touristic region in Portugal.
+  Its most known attractions are the sun, the weather and the beaches. However,
+  the not so popular west coast of Algarve, still maintains these
+  characteristics. It is encompassed in the Vicentine Coast, a natural park
+  which is home for a wide number of animal and plant species. The typical cliff
+  like coast environment makes for the common breathtaking views over the
+  Atlantic, where different birds take their chance on nesting.
 
   **Route description**
 
-  * Mostly flat with only some short uphills.
-  * 50% of paved roads and 50% of natural and dirt easy roads.
+  * Mostly flat with only some short uphills. * 50% of paved roads and 50% of
+  natural and dirt easy roads.
 
   **Itinerary:**
 
@@ -38,8 +44,13 @@ image:
 language: en
 itinerary:
   - title: 'Day 1: Lisbon arrival and transfer to Aljezur'
-    description: |-
-      Start this journey in the city of Aljezur, a place that goes back to prehistoric times and was founded by the Arabs in the 10th century. The most famous historical site in Aljezur is its Castle. The castle was used by the Romans and the Arabs, and was latter on conquered by the Portuguese in the 12th century. This castle is one of those depicted in the middle of the Portuguese flag.
+    description: >-
+      Start this journey in the city of Aljezur, a place that goes back to
+      prehistoric times and was founded by the Arabs in the 10th century. The
+      most famous historical site in Aljezur is its Castle. The castle was used
+      by the Romans and the Arabs, and was latter on conquered by the Portuguese
+      in the 12th century. This castle is one of those depicted in the middle of
+      the Portuguese flag.
 
       Hotel 4*: [Vicentina hotel](http://www.vicentinahotel.com/)
     location:
@@ -49,8 +60,12 @@ itinerary:
       city: ''
     day: '1'
   - title: 'Day 2: Aljezur – Arrifana: 16 Km'
-    description: |-
-      This walk connects Aljezur and Arrifana. The route is of medium difficulty, mainly because it has some uphills hills with dirt and loose stones. Enjoy the variety of trees found in the area like ash, tamarind and willow trees, and take some time to admire the bays near the ocean that surrounds the village of Arrifana.
+    description: >-
+      This walk connects Aljezur and Arrifana. The route is of medium
+      difficulty, mainly because it has some uphills hills with dirt and loose
+      stones. Enjoy the variety of trees found in the area like ash, tamarind
+      and willow trees, and take some time to admire the bays near the ocean
+      that surrounds the village of Arrifana.
 
       Hotel 4*: [Herdade Monte Sol](http://www.herdademontedosol.com/)
     location:
@@ -60,8 +75,13 @@ itinerary:
       city: ''
     day: '2'
   - title: 'Day 3: Arrifana – Carrapateira: 20 km'
-    description: |-
-      With an average difficulty, this walk is composed of dirt paths and a lot of ups and downs. Today’s journey takes you along untouched natural areas in the Vicentine Coast. When reaching the village of Carrapateira, dating back to the XIIth century, the main historical monument is the Carrapateira Fort, which was built in the XVII century in order to defend the village from pirate attacks.
+    description: >-
+      With an average difficulty, this walk is composed of dirt paths and a lot
+      of ups and downs. Today’s journey takes you along untouched natural areas
+      in the Vicentine Coast. When reaching the village of Carrapateira, dating
+      back to the XIIth century, the main historical monument is the
+      Carrapateira Fort, which was built in the XVII century in order to defend
+      the village from pirate attacks.
 
       Hotel 4*: [Casa Fajara](https://www.casafajara.com/)
     location:
@@ -71,10 +91,15 @@ itinerary:
       city: ''
     day: '3'
   - title: 'Day 4: Carrapateira – Pedralva: 8 Km'
-    description: |-
-      This day’s walk is one of the easiest ones, with only 8 km of road ahead on flat dirt paths. Admire the beaches of the Vicentine Coast and, if you are a fan of bird watching, this area is for you to discover. Enjoy the rest of your day in Pedralva in the peace and privacy in that which is a protected village of Portugal.
+    description: >-
+      This day’s walk is one of the easiest ones, with only 8 km of road ahead
+      on flat dirt paths. Admire the beaches of the Vicentine Coast and, if you
+      are a fan of bird watching, this area is for you to discover. Enjoy the
+      rest of your day in Pedralva in the peace and privacy in that which is a
+      protected village of Portugal.
 
-      House: [Aldeia Pedralva](http://www.aldeiadapedralva.com/en/hotel-rooms.html)
+      House: [Aldeia
+      Pedralva](http://www.aldeiadapedralva.com/en/hotel-rooms.html)
     location:
       lat: '1'
       lng: '1'
@@ -82,8 +107,12 @@ itinerary:
       city: ''
     day: '4'
   - title: 'Day 5: Pedralva – Vila do Bispo: 12 km'
-    description: |-
-      The day takes you through a flat and easy walk where its monumental cliffs provide the high point for stunning views over the ocean. In Vila do Bispo you may visit the local church built in XVIII century, and at the end of the day you may enjoy your meal with a dish of roasted sardines or shellfish.
+    description: >-
+      The day takes you through a flat and easy walk where its monumental cliffs
+      provide the high point for stunning views over the ocean. In Vila do Bispo
+      you may visit the local church built in XVIII century, and at the end of
+      the day you may enjoy your meal with a dish of roasted sardines or
+      shellfish.
 
       Hotel 3*: [Hotel Mira Sagres](https://www.hotelmirasagres.com/)
     location:
@@ -93,10 +122,16 @@ itinerary:
       city: ''
     day: '5'
   - title: 'Day 6: Vila do Bispo – Sagres: 24 km'
-    description: |-
-      This walk might be the hardest one so far with quite a few ups and downs made in dirt paths and a substantial amount of kilometers to travel. Upon arrival into Sagres take a shortcut to Cabo de São Vicente to its Fort. This fort is consider one of the most important forts in Algarve, mainly because in the past it was a crossing zone between the Atlantic ocean and the Mediterranean sea.
+    description: >-
+      This walk might be the hardest one so far with quite a few ups and downs
+      made in dirt paths and a substantial amount of kilometers to travel. Upon
+      arrival into Sagres take a shortcut to Cabo de São Vicente to its Fort.
+      This fort is consider one of the most important forts in Algarve, mainly
+      because in the past it was a crossing zone between the Atlantic ocean and
+      the Mediterranean sea.
 
-      Hotel 4*: [Pousada Sagres](https://www.pousadas.pt/en/hotel/pousada-sagres?utm_source=google-my-business&utm_medium=organicsearch&utm_campaign=pousada-sagres)
+      Hotel 4*: [Pousada
+      Sagres](https://www.pousadas.pt/en/hotel/pousada-sagres?utm_source=google-my-business&utm_medium=organicsearch&utm_campaign=pousada-sagres)
     location:
       lat: '1'
       lng: '1'
@@ -259,26 +294,25 @@ packages:
       - title: '* Summer Season'
         description: 2.386€
     bestValue: false
-afterPricing: |-
+afterPricing: >-
   **\*Season:**
 
-  * LS - Low season: Nov 01 to Mar 25
-  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
-  * HS - High Season: Set 01 to 25 Set
-  * SS - Summer Season: Jun 26 to August 30
+  * LS - Low season: Nov 01 to Mar 25 * RS - Regular season: Mar 26 to 25 Jun
+  and Set 26 to 31 Oct * HS - High Season: Set 01 to 25 Set * SS - Summer
+  Season: Jun 26 to August 30
 
   **Observations:**
 
-  * Prices are based for 2 people sharing the same room;
-  * Prices can suffer updates due high season, holidays or weekends
-  * Beverages are not included at lunch and dinner when included in the package
-  * If in a triple room with parents Children up to 10 years old - 35% discount. Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years old - 15% discount.
+  * Prices are based for 2 people sharing the same room; * Prices can suffer
+  updates due high season, holidays or weekends * Beverages are not included at
+  lunch and dinner when included in the package * If in a triple room with
+  parents Children up to 10 years old - 35% discount. Children from 11 to 14
+  years old - 20% discount. Children from 15 to 17 years old - 15% discount.
 
   **Extras**
 
-  * Solo traveler: 200 €
-  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
-  * Extra nights: on request
+  * Solo traveler: 200 € * Single supplement: LS: 300€, RS: 329€, HS: 360€,
+  SS.390€ * Extra nights: on request
 duration: 7
 distance: 80
 tags: ''
@@ -336,36 +370,3 @@ seo:
   open_graph_type:
   no_index: false
 ---
-
-# **Vicentine West Coast Algarve Walking & Hiking tour**
-
-## **Explore Algarve’s coast line and the fisherman trail**
-
-Algarve is and as been for a long time a popular touristic region in Portugal.
-Its most known attractions are the sun, the weather and the beaches. However,
-the not so popular west coast of Algarve, still maintains these characteristics.
-It is encompassed in the Vicentine Coast, a natural park which is home for a
-wide number of animal and plant species. The typical cliff like coast
-environment makes for the common breathtaking views over the Atlantic, where
-different birds take their chance on nesting.
-
-**Route description**
-
-- Mostly flat with only some short uphills.
-- 50% of paved roads and 50% of natural and dirt easy roads.
-
-**Itinerary:**
-
-**Day 1:**Lisbon arrival and transfer to Aljezur
-
-**Day 2:** Aljezur – Arrifana: 16 Km
-
-**Day 3:**Arrifana – Carrapateira: 20 km
-
-**Day 4:** Carrapateira – Pedralva: 8 Km
-
-**Day 5:** Pedralva – Vila do Bispo: 12 km
-
-**Day 6:** Vila do Bispo – Sagres: 24 km
-
-**Day 7:**Departure

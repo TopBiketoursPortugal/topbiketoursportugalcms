@@ -9,6 +9,41 @@ image:
   src: /src/assets/images/hiking-ecovia-lima.jpg
   alt: ''
 title: Minho Hiking Holiday in the North of Portugal
+content: >-
+  # **Minho Hiking Holiday in the North of Portugal**
+
+  ## **Explore the Minho and Lima River and have a taste of “vinho Verde” and
+  “Alvarinho” Wine**
+
+  Explore Alto Minho by walking through its most prominent towns. Follow the
+  water both of rivers and sea in an easy hike towards Ponte de Lima. The region
+  of Alto Minho is one of protected nature, ancient and present pilgrim passage
+  and history connected to the birth of the country.
+
+  **Route description:**
+
+  - The majority of the tour is flat. 1st, 2nd and 4th days have between 190
+    meters and 170 meters of uphill hiking.
+  - There is a strong mix of paved roads and dirt roads.
+
+  **Itinerary:**
+
+  **Day 1:** Melgaço
+
+  **Day 2:** Melgaço-Monção: 18 km
+
+  **Day 3:** Monção – Valença: 20 km
+
+  **Day 4:** Valença – Vila Nova de Cerveira: 16 km
+
+  **Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
+
+  **Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
+
+  **Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
+  center); optional transfer and loop route (17 km)
+
+  **Day 8:** Departure
 packagetype: PackageTour
 tourtype: Walking
 meta:
@@ -398,38 +433,3 @@ feature:
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---
-
-# **Minho Hiking Holiday in the North of Portugal**
-
-## **Explore the Minho and Lima River and have a taste of “vinho Verde” and “Alvarinho” Wine**
-
-Explore Alto Minho by walking through its most prominent towns. Follow the water
-both of rivers and sea in an easy hike towards Ponte de Lima. The region of Alto
-Minho is one of protected nature, ancient and present pilgrim passage and
-history connected to the birth of the country.
-
-**Route description:**
-
-- The majority of the tour is flat. 1st, 2nd and 4th days have between 190
-  meters and 170 meters of uphill hiking.
-- There is a strong mix of paved roads and dirt roads.
-
-**Itinerary:**
-
-\
-**Day 1:** Melgaço
-
-**Day 2:** Melgaço-Monção: 18 km
-
-**Day 3:** Monção – Valença: 20 km
-
-**Day 4:** Valença – Vila Nova de Cerveira: 16 km
-
-**Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
-
-**Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
-
-**Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
-center); optional transfer and loop route (17 km)
-
-**Day 8:** Departure

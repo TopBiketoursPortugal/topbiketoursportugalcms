@@ -10,6 +10,55 @@ image:
   alt: ''
 
 title: 'Portuguese Central Camino: Stage 2'
+content: >-
+  # Portuguese Central Camino: Stage 2
+
+  ## **The old and original route to Santiago de Compostela**
+
+  The Portuguese Central Camino is perfect for those who enjoy a good hiking and
+  those who want to try a combination between Portuguese and Spanish history,
+  culture and gastronomy flavors and also the adventure of arriving to Santiago
+  and visit the catacombs.
+
+  This journey will be made between rural and urban villages and cities, majorly
+  in paved roads.
+
+  In Portugal, take your time to discover the fortress in Valença do Minho and
+  the history behind it, as you enjoy the typical gastronomy of the North and
+  the “verde” wine.
+
+  Crossing the border and entering Spain, be amazed by the viaducts and the
+  thermal baths along the way, as you reach the Sanctuary of Santiago de
+  Compostela.
+
+  **Route description:**
+
+  - On this route all kind of terrains are to be expected. The route has some
+  long
+    and difficult climbs.
+  - Paved streets in rural and urban areas; 35 % of the walk will be in the
+    forest.
+  - The main roads are avoided for the majority of the time and as such every
+  kind
+    of terrain is used during this walk
+
+  **Itinerary:**
+
+  **Day 1**: Valença do Minho
+
+  **Day 2:** Valença do Minho – Porrinõ: 20 km
+
+  **Day 3:** Porrinõ – Redondela: 23 km
+
+  **Day 4:** Redondela – Pontevedra: 21 km
+
+  **Day 5:** Pontevedra – Caldas de reis: 25 km
+
+  **Day 6:** Caldas de Reis – Padrón: 14 km
+
+  **Day 7:** Padrón – Santiago de Compostela: 25 Km
+
+  **Day 8:** Departure
 packagetype: PackageTour
 tourtype: Walking
 meta:
@@ -349,50 +398,3 @@ feature:
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---
-
-# Portuguese Central Camino: Stage 2
-
-## **The old and original route to Santiago de Compostela**
-
-The Portuguese Central Camino is perfect for those who enjoy a good hiking and
-those who want to try a combination between Portuguese and Spanish history,
-culture and gastronomy flavors and also the adventure of arriving to Santiago
-and visit the catacombs.
-
-This journey will be made between rural and urban villages and cities, majorly
-in paved roads.
-
-In Portugal, take your time to discover the fortress in Valença do Minho and the
-history behind it, as you enjoy the typical gastronomy of the North and the
-“verde” wine.
-
-Crossing the border and entering Spain, be amazed by the viaducts and the
-thermal baths along the way, as you reach the Sanctuary of Santiago de
-Compostela.
-
-**Route description:**
-
-- On this route all kind of terrains are to be expected. The route has some long
-  and difficult climbs.
-- Paved streets in rural and urban areas; 35 % of the walk will be in the
-  forest.
-- The main roads are avoided for the majority of the time and as such every kind
-  of terrain is used during this walk
-
-**Itinerary:**
-
-**Day 1**: Valença do Minho
-
-**Day 2:** Valença do Minho – Porrinõ: 20 km
-
-**Day 3:** Porrinõ – Redondela: 23 km
-
-**Day 4:** Redondela – Pontevedra: 21 km
-
-**Day 5:** Pontevedra – Caldas de reis: 25 km
-
-**Day 6:** Caldas de Reis – Padrón: 14 km
-
-**Day 7:** Padrón – Santiago de Compostela: 25 Km
-
-**Day 8:** Departure

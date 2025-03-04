@@ -3,6 +3,41 @@ id: 52ed15a4-8233-47f9-9f79-d314f2ac1dad
 templateKey: tour-gen
 order: 4
 slug: hiking-alentejo-vicentine-southeast-portugal-coast
+content: >-
+  # Vicentine West Coast in Alentejo Hiking & walking tour
+
+  ## The south of Portugal through the coastline
+
+  ### **Explore the famous Vicentine Coast and walk on the region of Alentejo**
+
+  Nature, beaches and small little towns is what it be can found throughout most
+  of this hike. The Vicentine Coast is a wild natural park which covers the
+  coast of Alentejo and Algarve. It is a preserved coast line which hosts a
+  variety of animal and plant species. It is here one of the only places where
+  you can find white storks breeding on seashore rocks or otters living in a
+  marine habitat. This hike can be done during most of the year, since the
+  weather generally never gets too hot, due to the Atlantic presence.
+
+  **Route description:**
+
+  - Mostly flat all days with only some short uphills - 50% of paved roads and
+  50% of natural and dirt roads
+
+  **Itinerary:**
+
+  **Day 1:** Lisbon arrival
+
+  **Day 2:** Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km
+
+  **Day 3**: Vila Nova de Mil Fontes – Almograve: 13 km
+
+  **Day 4:** Almograve – Zambujeira do Mar: 17 km (or 21 Km)
+
+  **Day 5**: Zambujeira do Mar – Azenhas do Mar: 14 Km
+
+  **Day 6:** Azenhas do Mar – Odeceixe: 12 km
+
+  **Day 7:** Departure
 code: VC01
 featured: true
 language: en
@@ -340,38 +375,3 @@ seo:
   open_graph_type:
   no_index: false
 ---
-
-# Vicentine West Coast in Alentejo Hiking & walking tour
-
-## The south of Portugal through the coastline
-
-### **Explore the famous Vicentine Coast and walk on the region of Alentejo**
-
-Nature, beaches and small little towns is what it be can found throughout most
-of this hike. The Vicentine Coast is a wild natural park which covers the coast
-of Alentejo and Algarve. It is a preserved coast line which hosts a variety of
-animal and plant species. It is here one of the only places where you can find
-white storks breeding on seashore rocks or otters living in a marine habitat.
-This hike can be done during most of the year, since the weather generally never
-gets too hot, due to the Atlantic presence.
-
-**Route description:**
-
-- Mostly flat all days with only some short uphills
-- 50% of paved roads and 50% of natural and dirt roads
-
-**Itinerary:**
-
-**Day 1:** Lisbon arrival
-
-**Day 2:** Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km
-
-**Day 3**: Vila Nova de Mil Fontes – Almograve: 13 km
-
-**Day 4:** Almograve – Zambujeira do Mar: 17 km (or 21 Km)
-
-**Day 5**: Zambujeira do Mar – Azenhas do Mar: 14 Km
-
-**Day 6:** Azenhas do Mar – Odeceixe: 12 km
-
-**Day 7:** Departure

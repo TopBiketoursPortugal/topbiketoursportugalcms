@@ -1,0 +1,85 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getTourPath } from 'utils/permalinks';
+
+type Props = { items: CollectionEntry<'tours'>[]; language: LanguageCodes };
+
+const { items, language } = Astro.props;
+
+// Generate the JSON-LD schema
+const schema = {
+  '@context': 'https://schema.org/',
+  '@graph': items.map(({ data: tour }) => {
+    const bestRating = 5;
+    const worstRating = 1;
+
+    return {
+      '@type': 'Product',
+      name: tour.title,
+      description: tour.description,
+      brand: {
+        '@type': 'Brand',
+        name: 'Top Bike Tours Portugal'
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: (tour.reviews ?? [])
+          .map((r) => r.rating)
+          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+        reviewCount: (tour.reviews ?? []).length,
+        bestRating,
+        worstRating
+      },
+      offers: {
+        '@type': 'Offer',
+        highPrice: Math.max(
+          ...(tour.packages?.map(
+            (p) => p.price.promo ?? p.price.price ?? 0
+          ) ?? [0])
+        ),
+        lowPrice: Math.min(
+          ...(tour.packages?.map(
+            (p) => p.price.promo ?? p.price.price ?? 0
+          ) ?? [0])
+        ),
+        offerCount: tour.packages?.length ?? 1,
+        offers: tour.packages?.map((p) => ({
+          '@type': 'Offer',
+          name: p.title,
+          url: Astro.site + getTourPath(tour, language)
+        })),
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock'
+      },
+      review: tour.reviews.map((review: any) => ({
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: review.rating,
+          bestRating,
+          worstRating
+        },
+        author: {
+          '@type': 'Person',
+          givenName: review.author?.givenName,
+          familyName: review.author?.familyName,
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: review.author?.country
+          }
+        },
+        datePublished: review.publishDate,
+        reviewBody: review.content
+      }))
+    };
+  })
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>
