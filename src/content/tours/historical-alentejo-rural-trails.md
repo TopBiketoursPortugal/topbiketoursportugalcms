@@ -1,55 +1,33 @@
 ---
+_schema: default
 id: 19cf8784-b782-48a2-a5a3-7263f1bee29f
 order: 10
 title: 'Historical Alentejo: rural trails'
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
-  # **Historical Alentejo: rural trails**
+  # **Historical Alentejo: rural trailsf**
 
-  **A hike to relax surrounded by cork trees and pastures**
 
-  Pure and simple. That is a simple way to describe Alentejo. The region seems
-  to have remained a bit outside our time and it refused entering on our chaotic
-  and frenetic way of living. A necessary relaxation and slow down of our
-  natural present posture are necessary, to fully take in what this region
-  offers. Alentejo does have one of the best Human Development Index values in
-  the country, which might portrait how good it can be for us a little time off
-  in the region.
-
+  **A hike to relax surrounded by cork trees and pastures** Pure and simple.
+  That is a simple way to describe Alentejo. The region seems to have remained a
+  bit outside our time and it refused entering on our chaotic and frenetic way
+  of living. A necessary relaxation and slow down of our natural present posture
+  are necessary, to fully take in what this region offers. Alentejo does have
+  one of the best Human Development Index values in the country, which might
+  portrait how good it can be for us a little time off in the region.
   **IMPORTANTE NOTE:** From June to September this is not a recommended tour due
   the heat. If you know what to expect from a 35º degree walking tour you may
-  consider to book it.
+  consider to book it. **Route description**
 
-  **Route description**
 
-  - The 2nd, 3rd and 4th day are hilly walks. - There is a strong mix of dirt
-  and paved roads.
-
-  **Itinerary:**
-
-  **Day 1**: Lisbon or Porto arrival and transfer to Meada
-
-  **Day 2**: Meada - Castelo de Vide: 17 km
-
-  **Day 3:** Castelo de Vide – Marvão : 18km
-
-  **Day 4:** Marvão – Ribeira de Nisa: 14 km
-
-  **Day 5:** Ribeira de Nisa - Fortios: 17 km
-
-  **Day 6:** Fortios – Flor da Rosa: 20 km
-
-  **Day 7:** Flor da Rosa – Alter do Chão: 13 km
-
-  **Day 8 :** departure
-
-  **Optional more 2 days:**
-
-  **Day 8:** Alter do Chão – Cabeça de Vide: 14 km
-
-  **Day 9:** Cabeça de Vide – Monforte: 18 km
-
-  **Day 10:** Departure
+  * The 2nd, 3rd and 4th day are hilly walks. - There is a strong mix of dirt
+  and paved roads. **Itinerary:** **Day 1**: Lisbon or Porto arrival and
+  transfer to Meada **Day 2**: Meada - Castelo de Vide: 17 km **Day 3:** Castelo
+  de Vide – Marvão : 18km **Day 4:** Marvão – Ribeira de Nisa: 14 km **Day 5:**
+  Ribeira de Nisa - Fortios: 17 km **Day 6:** Fortios – Flor da Rosa: 20 km
+  **Day 7:** Flor da Rosa – Alter do Chão: 13 km **Day 8 :** departure
+  **Optional more 2 days:** **Day 8:** Alter do Chão – Cabeça de Vide: 14 km
+  **Day 9:** Cabeça de Vide – Monforte: 18 km **Day 10:** Departure
 image:
   src: /src/assets/images/monestary-flor-da-rosa.jpg
   alt: ''
@@ -60,8 +38,7 @@ type: PackageTour
 region: north
 itinerary:
   - title: 'Day 1: Lisbon or Porto arrival and transfer to Meada'
-    description:
-      'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
+    description: 'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
     location:
       lat: '1'
       lng: '1'
@@ -223,9 +200,9 @@ itinerary:
     day: '10'
 packages:
   - title: Self Guided Hiking tour
-    description: ''
+    description: Self Guided Hiking tour
     price:
-      bestValue: false
+      bestValue: true
       currency: EUR
       price: 1175
       promo: 0
@@ -233,31 +210,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon or Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto or Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 pax
       - title: 7 Nights / 8 Days
@@ -284,31 +261,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon or Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto or Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 7 Nights / 8 Days
@@ -335,31 +312,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon or Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto or Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 7 Nights / 8 Days
@@ -409,7 +386,7 @@ duration: 8
 distance: 99
 tags: ''
 minGroupSize: 1
-maxGroupSize: ''
+maxGroupSize: 3
 difficulty: 3
 skill: 1
 minAge: 16
@@ -427,4 +404,37 @@ images:
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15T00:00:00Z
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15T00:00:00Z
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+feature:
+  align: center
+  imageAlign: center center
+  bokunLink: ''
+  bokunId: ''
+  textcolor: white
+  subtitle: 'Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela: Stage 1'
+  image: /img/top-walking-tours-portugal.jpg
+  bokunLinkText: Book now
 ---

@@ -1,4 +1,5 @@
 ---
+_schema: default
 id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
 order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
@@ -6,7 +7,9 @@ subTitle: '1'
 content: >-
   # Coastal route to Santiago Compostela: Stage 2
 
+
   ## Leave Atlantic ocean behind and go inland till Santiago de Compostela
+
 
   Your first night will be in Baiona. Don’t miss the chance to visit a replica
   of the ship Pinta, one of the ships of Christopher Columbus. Baiona was the
@@ -19,7 +22,8 @@ content: >-
 
   **Route description**
 
-  - During this stage 2 expect some long and difficult climbs. - The main roads
+
+  * During this stage 2 expect some long and difficult climbs. - The main roads
   are avoided for the majority of the time and as such every kind
     of terrain is used during this walk
 
@@ -50,9 +54,9 @@ type: WalkingTour
 region: north
 itinerary:
   - title: 'Day 1: Baiona'
-    description:
-      'Hotel 4 *: [Parador Baiona
-      Hotel](https://www.parador.es/es/paradores/parador-de-baiona?utm_source=GoogleMyBusiness&utm_medium=linkgoogle&utm_campaign=paradordebaiona&utm_term=organico&utm_content=ficha)'
+    description: >-
+      Hotel 4 *: [Parador Baiona
+      Hotel](https://www.parador.es/es/paradores/parador-de-baiona?utm_source=GoogleMyBusiness&utm_medium=linkgoogle&utm_campaign=paradordebaiona&utm_term=organico&utm_content=ficha)
     location:
       lat: '1'
       lng: '1'
@@ -60,8 +64,8 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 2: Baiona - Vigo: 25 km'
-    description:
-      'The path departs from Baiona towards Vigo. This walk feels as a densely
+    description: >-
+      The path departs from Baiona towards Vigo. This walk feels as a densely
       urbanized area, with the ever present constructions and landscape
       alteration visible along the way. A big portion of the walk is made along
       side an asphalted road, inside a protective shoulder, which is used by
@@ -69,7 +73,7 @@ itinerary:
       interest during the day are: Senda dos Lagares near Vigo, beautiful place
       near the river where the path passes by, the monument to Elduayen, the
       monument to Jules Verne, the hill fort of Vigo, the Stone Market and the
-      Co-Cathedral of Santa María.'
+      Co-Cathedral of Santa María.
     location:
       lat: '1'
       lng: '1'
@@ -77,7 +81,7 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 3: Vigo - Redondela: 17 km'
-    description: >-
+    description: |-
       The flat days are now left behind and the path starts to deviate from the
             coastal side. This walk is quite more hilly than any of the other
       ones so
@@ -105,7 +109,7 @@ itinerary:
       region: ''
       city: ''
   - title: 'Day 4: Redondela – Pontevedra: 21 km'
-    description: >-
+    description: |-
       The hills are here to stay and as such this walk is not an exception. With
             a cumulative total of 670m of uphill and downhill, a lot of the walk
       is
@@ -184,7 +188,7 @@ packages:
   - title: Self guided biking tour
     description: Our best package
     price:
-      bestValue: false
+      bestValue: true
       currency: EUR
       price: 1185
       promo: 0
@@ -193,31 +197,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 1 pax
       - title: 7 Nights / 8 Days
@@ -242,31 +246,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 7 Nights / 8 Days
@@ -291,31 +295,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -364,17 +368,16 @@ afterPricing: >-
 
   * Extra nights: on request
 seo:
-  page_description: 'teste'
-  canonical_url: 'test'
+  page_description: teste
+  canonical_url: test
   featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: 'teste'
-  author_twitter_handle: 'lll'
+  featured_image_alt: teste
+  author_twitter_handle: lll
   open_graph_type: product
   no_index: false
 duration: 8
 distance: 7
-tags: >-
-  Moderate to hard Package tours
+tags: Moderate to hard Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 4
@@ -394,7 +397,8 @@ images:
     alt: vigo bay view
   - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
     alt: porto city center
-  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  - src: >-
+      /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
     alt: POrto douro river
 reviews:
   - title: Greate experience
@@ -403,7 +407,7 @@ reviews:
       givenName: John
       familyName: Doe
       country: Portugal
-    datePublished: 2023-10-15
+    datePublished: 2023-10-15T00:00:00Z
     content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
@@ -414,7 +418,7 @@ reviews:
       givenName: John
       familyName: Doe
       country: Portugal
-    datePublished: 2023-10-15
+    datePublished: 2023-10-15T00:00:00Z
     content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
