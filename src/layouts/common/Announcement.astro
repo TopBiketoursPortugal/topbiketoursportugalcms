@@ -1,0 +1,33 @@
+---
+import SocialMenu from './SocialMenu.astro';
+import Contact from 'src/../data/contact.json';
+import Icon from 'src/components/utility/icon.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = {
+  language: LanguageCodes;
+};
+
+const { language = 'en' } = Astro.props;
+const { phone, email } = Contact[language];
+---
+
+<div
+  class="text-muted dark relative hidden justify-between gap-1 overflow-hidden text-ellipsis whitespace-nowrap bg-black px-3 py-2 text-sm dark:border-b dark:border-slate-800 dark:bg-transparent md:flex"
+>
+  <div class="flex gap-4 text-white dark:text-slate-400">
+    <a href="/" class="flex flex-row items-center justify-start gap-2">
+      <Icon icon="ph:phone-thin" />
+      <span class="whitespace-nowrap">{phone}</span>
+    </a>
+    <a
+      href={'mailto:' + email}
+      class="flex flex-row items-center justify-start gap-2"
+    >
+      <Icon icon="ph:envelope-simple-thin" /><span class="whitespace-nowrap">
+        {email}
+      </span>
+    </a>
+  </div>
+  <SocialMenu class:list="flex" />
+</div>

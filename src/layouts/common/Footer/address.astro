@@ -1,0 +1,44 @@
+---
+import type { AddressSchema } from 'src/schemas/contact';
+import { t } from 'utils/i18n';
+import { stack } from 'src/components/stack/stack.style';
+import Icon from 'src/components/utility/icon.astro';
+import Stack from 'src/components/stack/stack.astro';
+import LinkButton from 'src/components/linkbutton/linkbutton.astro';
+
+type Props = { address?: AddressSchema };
+
+const { address } = Astro.props;
+---
+
+{
+  address && (
+    <Stack layout="horizontal" spacing="small">
+      {address.street}
+      {address.number ? `, ${address.number}` : ''}
+      <br />
+      {address.postalCode}, {address.city}
+      <br />
+      {address.country}
+      <br />
+      {address.complement}
+      <br />
+      {address.map && (
+        <LinkButton
+          href={address.map}
+          rel="nofollow"
+          target="_blank"
+          role="button"
+          class={stack({
+            layout: 'horizontal',
+            spacing: 'small',
+            alignment: 'center'
+          })}
+        >
+          <Icon icon="ph:compass-fill" class="text-md" />
+          {t('Button.Directions')}
+        </LinkButton>
+      )}
+    </Stack>
+  )
+}

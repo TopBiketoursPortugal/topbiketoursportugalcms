@@ -1,0 +1,35 @@
+---
+import Icon from 'src/components/utility/icon.astro';
+---
+
+<a
+  href=""
+  role="marquee"
+  aria-hidden="true"
+  title="Got to top"
+  class="top fixed bottom-16 right-5 z-[9999] mr-2 mt-[calc(100vh+50px)] translate-y-12 rounded-full bg-black p-3 opacity-0 transition-all duration-300 hover:scale-110 dark:bg-white"
+  ><Icon
+    icon="ph:arrow-up-light"
+    class="text-white dark:text-gray-900"
+    title="Got to top"
+  /></a
+>
+<style>
+  @keyframes adjust-scroll-button {
+    to {
+      opacity: 1;
+      translate: 0;
+    }
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .top {
+      animation: adjust-scroll-button linear both;
+    }
+  }
+
+  .top {
+    animation-timeline: scroll();
+    animation-range: 0 150px;
+  }
+</style>

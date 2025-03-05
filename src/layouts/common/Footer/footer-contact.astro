@@ -1,0 +1,68 @@
+---
+import Address from './address.astro';
+import SocialMenu from '../SocialMenu.astro';
+import type { ContactSchema } from 'src/schemas/contact';
+import contacts from 'src/../data/contact.json';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+import Heading from 'src/components/typography/heading.astro';
+import Stack from 'src/components/stack/stack.astro';
+import { cleanPhoneNumberFormatting } from 'utils/clean-phone-number-formatting';
+type Props = {
+  language: LanguageCodes;
+};
+
+const { language = 'en' } = Astro.props;
+
+const contact = contacts[language] satisfies ContactSchema;
+---
+
+<Heading as="h5">{t('Footer.ContactInfoTitle')}</Heading>
+
+{contact && contact.address && <Address address={contact.address} />}
+<Stack layout="vertical" spacing="small">
+  {
+    contact?.phone && (
+      <div>
+        Tel:
+        <a href={'tel:' + cleanPhoneNumberFormatting(contact.phone)}>
+          {contact.phone}
+        </a>
+      </div>
+    )
+  }
+  {
+    contact?.cellPhone && (
+      <div>
+        Telm:
+        <a href={'tel:' + cleanPhoneNumberFormatting(contact.cellPhone)}>
+          {contact.cellPhone}
+        </a>
+      </div>
+    )
+  }
+  {
+    contact?.cellPhone && (
+      <a
+        href={'https://wa.me/' + cleanPhoneNumberFormatting(contact.cellPhone)}
+        target="_blank"
+        aria-label="Chat on WhatsApp"
+        class="flex items-center gap-1"
+      >
+        {/* <Icon name="ph:whatsapp-logo-light" class="text-md" /> */}
+        <span>whatsapp</span>
+      </a>
+    )
+  }
+  {
+    contact?.email && (
+      <div>
+        Email:
+        <a href={'mailto:' + contact.email} aria-label="Email">
+          {contact.email}
+        </a>
+      </div>
+    )
+  }
+</Stack>
+<SocialMenu language={language} />

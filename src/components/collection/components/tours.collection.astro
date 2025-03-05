@@ -17,7 +17,7 @@ type Props = {
   heading: { text: string };
 };
 
-const { heading, contentDisplay = 'inline' } = Astro.props;
+const { contentDisplay = 'inline' } = Astro.props;
 const language = (Astro.props.language ??
   Astro.currentLocale ??
   'en') as LanguageCodes;

@@ -1,0 +1,12 @@
+---
+import { GOOGLE_SITE_VERIFICATION_ID } from "astro:env/client";
+---
+
+{
+  GOOGLE_SITE_VERIFICATION_ID && (
+    <meta
+      name="google-site-verification"
+      content={GOOGLE_SITE_VERIFICATION_ID}
+    />
+  )
+}

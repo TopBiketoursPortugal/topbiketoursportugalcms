@@ -117,8 +117,8 @@ collections_config:
         comment: >-
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
-          ```src/components/utility/icon.jsx``` file, following the existing
-          pattern.
+          ```src/components/utility/icon.astro.jsx``` file, following the
+          existing pattern.
         cascade: true
     disable_add: true
     disable_add_folder: true
@@ -808,7 +808,8 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment: Set the colors available in the color selectors throughout the site.
+        comment:
+          Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color

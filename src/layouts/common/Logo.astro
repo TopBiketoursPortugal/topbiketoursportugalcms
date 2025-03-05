@@ -1,0 +1,13 @@
+---
+import SiteData from 'src/../data/site.json';
+import LogoIcon from 'src/assets/icons/logo.svg';
+type Props = {
+  class?: string;
+};
+
+const { class: className = '' } = Astro.props;
+
+const { site_title } = (SiteData as any)[Astro.currentLocale ?? 'en'];
+---
+
+<LogoIcon title={site_title} class="h-28 w-80" />

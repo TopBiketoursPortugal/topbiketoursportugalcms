@@ -1,19 +1,26 @@
 # Astro CloudCannon Starter
 
-A starting point for developers looking to build a website with Astro, using Bookshop components in CloudCannon.
+A starting point for developers looking to build a website with Astro, using
+Bookshop components in CloudCannon.
 
-Create your own copy, and start creating your own components to use in the CloudCannon CMS. Build components using .jsx or .astro files.
+Create your own copy, and start creating your own components to use in the
+CloudCannon CMS. Build components using .jsx or .astro files.
 
-To try to cut down on setup time this starter template includes some commonly used [features](#features) in CloudCannon.
+To try to cut down on setup time this starter template includes some commonly
+used [features](#features) in CloudCannon.
 
-This template is aimed at helping developers build sites quickly, rather than providing editors with a fully built editable site.
-If you are an editor looking for an already built template, have a look at [CloudCannon's templates page](https://cloudcannon.com/templates/).
+This template is aimed at helping developers build sites quickly, rather than
+providing editors with a fully built editable site. If you are an editor looking
+for an already built template, have a look at
+[CloudCannon's templates page](https://cloudcannon.com/templates/).
 
 [See a demo version of this site](https://tiny-jackal.cloudvent.net/).
 
 ## Getting Started
 
-To start using this template, go to the [GitHub repository](https://github.com/CloudCannon/astro-starter/), and click `Use this template` to make your own copy.
+To start using this template, go to the
+[GitHub repository](https://github.com/CloudCannon/astro-starter/), and click
+`Use this template` to make your own copy.
 
 ### Commands
 
@@ -37,15 +44,19 @@ All commands are run from the root of the project, from a terminal:
 
 ### Bookshop
 
-[Bookshop](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/) is a component development workflow for static websites.
+[Bookshop](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/)
+is a component development workflow for static websites.
 
-Build custom components that non-technical editors can use in a page building experience in CloudCannon.
+Build custom components that non-technical editors can use in a page building
+experience in CloudCannon.
 
-Bookshop is already set up on this project, so that you can start building components straight away.
+Bookshop is already set up on this project, so that you can start building
+components straight away.
 
 To add a new component:
 
-1. Create a new folder in `src/components` using the component name as the folder name.
+1. Create a new folder in `src/components` using the component name as the
+   folder name.
 2. Create two files in this folder
    `src/components/example-component/example-component.astro`
 
@@ -105,18 +116,25 @@ _inputs:
 
 Blog section with tags and pagination included.
 
-Documentation, blog and other text heavy sections should replicate how the blog section is implemented in this template.
+Documentation, blog and other text heavy sections should replicate how the blog
+section is implemented in this template.
 
-The blog pages in this template use MDX to allow for snippets. Snippets allow you to use HTML components throughout your markdown text.
+The blog pages in this template use MDX to allow for snippets. Snippets allow
+you to use HTML components throughout your markdown text.
 
-A common layout, with changing markdown content is favored for these kinds of text heavy pages, rather than using Bookshop components - which are defined and managed in your markdown pages frontmatter.
+A common layout, with changing markdown content is favored for these kinds of
+text heavy pages, rather than using Bookshop components - which are defined and
+managed in your markdown pages frontmatter.
 
-These text heavy pages will be edited in CloudCannon's content editor, rather than the visual editor used for building pages with Bookshop components.
+These text heavy pages will be edited in CloudCannon's content editor, rather
+than the visual editor used for building pages with Bookshop components.
 
 ### Image Optimization
 
-[Astro `<Image />`](https://docs.astro.build/en/guides/images/#image--astroassets) is used in the two placeholder components in this template.
-An Astro `<Image />` will process an image in your src/assets/images folder, and output an optimized image, like below:
+[Astro `<Image />`](https://docs.astro.build/en/guides/images/#image--astroassets)
+is used in the two placeholder components in this template. An Astro `<Image />`
+will process an image in your src/assets/images folder, and output an optimized
+image, like below:
 
 ```html
 <img
@@ -137,23 +155,33 @@ An Astro `<Image />` will process an image in your src/assets/images folder, and
   width="1600"
   height="900"
   loading="lazy"
-  decoding="async" />
+  decoding="async"
+/>
 ```
 
-This template also demonstrates how to set [`uploads` paths](https://cloudcannon.com/documentation/articles/adjusting-the-uploads-path/) on an input level, to allow for both processed and unprocessed images on one site.
+This template also demonstrates how to set
+[`uploads` paths](https://cloudcannon.com/documentation/articles/adjusting-the-uploads-path/)
+on an input level, to allow for both processed and unprocessed images on one
+site.
 
-On this template, by default, image inputs are opened at `public/images`, meaning they are unprocessed images.
+On this template, by default, image inputs are opened at `public/images`,
+meaning they are unprocessed images.
 
-Components that use the Astro ```<Image />``` component are configured so the image source input opens at src/assets/images, which are images to be processed and optimized on build.
+Components that use the Astro `<Image />` component are configured so the image
+source input opens at src/assets/images, which are images to be processed and
+optimized on build.
 
 ### SEO Controls
 
-SEO inputs come set up and configured to allow editors to control SEO on a page-by-page, and sitewide basis.
+SEO inputs come set up and configured to allow editors to control SEO on a
+page-by-page, and sitewide basis.
 
 ### Tailwind CSS
 
-Use Tailwind to add utility classes to your HTML, allowing you to style your components without leaving your HTML.
-This can be used in combination with normal CSS and SCSS styling, leaving you to add styles to your site however you want.
+Use Tailwind to add utility classes to your HTML, allowing you to style your
+components without leaving your HTML. This can be used in combination with
+normal CSS and SCSS styling, leaving you to add styles to your site however you
+want.
 
 To remove Tailwind CSS:
 
@@ -174,7 +202,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   // ...
-  integrations: [tailwind()],
+  integrations: [tailwind()]
 });
 ```
 
@@ -182,16 +210,23 @@ export default defineConfig({
 
 ### Font Awesome Icons
 
-A Font Awesome Icon free icon pack is included, without having to set up your own kit in Font Awesome.
+A Font Awesome Icon free icon pack is included, without having to set up your
+own kit in Font Awesome.
 
 To add more icons:
 
 1. Go to the [Font Awesome icon list](https://fontawesome.com/search?o=r&m=free)
 2. Pick a free icon
-3. Go to `src/components/utility/icon.jsx`
-4. Import the component from `'@fortawesome/free-solid-svg-icons'`, `'@fortawesome/free-regular-svg-icons'`, or `'@fortawesome/free-brands-svg-icons'`, depending on which kind of icon it is. Tip: After entering 'fa' into one of the destructured objects, you should see an autocomplete dropdown list to help you with the correct syntax.
+3. Go to `src/components/utility/icon.astro.jsx`
+4. Import the component from `'@fortawesome/free-solid-svg-icons'`,
+   `'@fortawesome/free-regular-svg-icons'`, or
+   `'@fortawesome/free-brands-svg-icons'`, depending on which kind of icon it
+   is. Tip: After entering 'fa' into one of the destructured objects, you should
+   see an autocomplete dropdown list to help you with the correct syntax.
 5. Add another if statement following the format the other icons use.
-6. Add the name you just used in the conditional of the if statement to `data/icons.json`, which populates the icon dropdown list used for icons in the placeholder components.
+6. Add the name you just used in the conditional of the if statement to
+   `data/icons.json`, which populates the icon dropdown list used for icons in
+   the placeholder components.
 
 To remove Font Awesome Icons:
 
@@ -207,11 +242,11 @@ To remove Font Awesome Icons:
   }
 ```
 
-2. Remove `src/components/utility/icon.jsx`
+2. Remove `src/components/utility/icon.astro.jsx`
 3. Remove any imports of the icon
 
 ```Astro
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
 ```
 
 4. Remove `icons.json`
@@ -236,29 +271,41 @@ data_config:
 
 Demonstrates using data files to:
 
-- Populate select inputs in CloudCannon. This is powerful for allowing editors to make styling changes to the page, within a set design system populated by an editable data file.
+- Populate select inputs in CloudCannon. This is powerful for allowing editors
+  to make styling changes to the page, within a set design system populated by
+  an editable data file.
 - Set sitewide values such as the overall site SEO settings.
 - Control header and footer data to allow editors control over navigation.
 
 ### Schemas
 
-Shows how to set up schemas in CloudCannon to allow for non-technical editors to create new pages, with preset frontmatter and content.
-Schemas can be define on a collection level, allowing your new blog pages to be different to your new landing pages.
-This allows for your text heavy blog/docs pages to be built and edited in the content editor, while your other pages can be built with Bookshop in the visual editor.
+Shows how to set up schemas in CloudCannon to allow for non-technical editors to
+create new pages, with preset frontmatter and content. Schemas can be define on
+a collection level, allowing your new blog pages to be different to your new
+landing pages. This allows for your text heavy blog/docs pages to be built and
+edited in the content editor, while your other pages can be built with Bookshop
+in the visual editor.
 
 ### CloudCannon Config
 
-A `cloudcannon.config.yml` file has been provided with some configuration that starts to show what can be done to configure the CMS.
+A `cloudcannon.config.yml` file has been provided with some configuration that
+starts to show what can be done to configure the CMS.
 
-The placeholder Bookshop components show how to configure your components to control inputs and previews in CloudCannon.
+The placeholder Bookshop components show how to configure your components to
+control inputs and previews in CloudCannon.
 
 ### Markdown Styles
 
-Markdown toolbar has all the options supported in the rich text editor, along with stylings to make them work.
-See the CloudCannon [Docs](https://cloudcannon.com/documentation/articles/configure-your-rich-text-editors/) for more information.
+Markdown toolbar has all the options supported in the rich text editor, along
+with stylings to make them work. See the CloudCannon
+[Docs](https://cloudcannon.com/documentation/articles/configure-your-rich-text-editors/)
+for more information.
 
 ### CSS Variables
 
-Shows how to set global CSS variables in Astro, to set commonly used values like `pagePadding`, and `pageContainer`.
+Shows how to set global CSS variables in Astro, to set commonly used values like
+`pagePadding`, and `pageContainer`.
 
-Extra work could be done to write a `node fs` script to write said values from a data file to the appropriate places in the code, which would then allow editors to control sitewide styles like page max-width and padding.
+Extra work could be done to write a `node fs` script to write said values from a
+data file to the appropriate places in the code, which would then allow editors
+to control sitewide styles like page max-width and padding.

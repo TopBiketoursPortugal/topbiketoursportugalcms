@@ -1,9 +1,20 @@
 ---
-import '../styles/main.scss';
+import '../styles/main.css';
 import site from '../../data/site.json';
-import Header from '../components/navigation/header.astro';
 import Footer from '../components/navigation/footer.astro';
 import { SEO } from 'astro-seo';
+import { ClientRouter } from 'astro:transitions';
+import Analytics from './common/Analytics.astro';
+import SiteVerification from './common/SiteVerification.astro';
+import Favicons from './common/Favicons.astro';
+import CommonMeta from './common/CommonMeta.astro';
+import Navigation from 'src/../data/navigation.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import Announcement from './common/Announcement.astro';
+import Header from './common/Header.astro';
+import ScrollTop from './common/ScrollTop.astro';
+import BasicScripts from './common/BasicScripts.astro';
+import CookieConsent from './common/CookieConsent.astro';
 
 export interface SEOProps {
   page_description: string | null;
@@ -32,27 +43,23 @@ const image_alt = seo?.featured_image_alt ?? site.image_alt;
 const canonicalURL = seo?.canonical_url
   ? new URL(seo?.canonical_url, baseUrl)
   : undefined;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
 <!doctype html>
-<html lang="en">
+<html
+  lang={language}
+  class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth 2xl:text-[20px]"
+>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <CommonMeta />
+    <Favicons />
+    <!-- <ApplyColorMode /> -->
+    <SiteVerification />
+    <Analytics />
 
-    <!-- Add fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Add editor styles -->
-    <link rel="stylesheet" href="/css/editor.css" />
+    <ClientRouter fallback="swap" />
 
     <SEO
       noindex={seo?.no_index || false}
@@ -87,11 +94,22 @@ const canonicalURL = seo?.canonical_url
     />
   </head>
   <body>
-    <Header />
+    <slot name="announcement">
+      <Announcement language={language} />
+    </slot>
+    <Header
+      {...Navigation[language].header}
+      isSticky
+      showRssFeed
+      showToggleTheme={false}
+    />
     <main>
       <slot />
     </main>
     <Footer />
+    <ScrollTop />
+    <CookieConsent />
+    <BasicScripts />
     <style is:global>
       :root {
         --pageContainer: 1280px;

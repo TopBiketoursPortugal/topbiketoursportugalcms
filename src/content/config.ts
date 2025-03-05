@@ -21,6 +21,7 @@ const blogCollection = defineCollection({
 
 const pageSchema = z.object({
   title: z.string(),
+  slug: z.string().optional().nullable(),
   content_blocks: z.array(z.any()),
   seo: seoSchema
 });

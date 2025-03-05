@@ -1,0 +1,142 @@
+---
+import FooterContact from './footer-contact.astro';
+import Text from 'src/components/typography/text.astro';
+import regions from 'src/../data/tour-regions.json';
+
+import NavigationData from 'src/../data/navigation.json';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { t } from 'utils/i18n';
+import { getCollection } from 'astro:content';
+import { getTourRegionsPath } from 'utils/permalinks';
+import Icon from 'src/components/utility/icon.astro';
+import Stack from 'src/components/stack/stack.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
+import slugify from 'slugify';
+
+function getBaseLocaleBaseUrl(
+  language: LanguageCodes | string | undefined = 'en'
+): string {
+  if (language === 'en') {
+    return '/';
+  }
+
+  return `/${language}/`;
+}
+
+type Props = {
+  language: LanguageCodes;
+};
+
+const { language } = Astro.props;
+const { footer } = NavigationData[language];
+const { links } = footer;
+const year = new Date().getFullYear();
+
+// console.log('currentLocale', Astro.currentLocale);
+
+const termsFilePathLocale = getRelativeLocaleUrl(
+  Astro.currentLocale ?? 'en',
+  'terms-and-conditions.md'
+);
+
+const privacyFilePathLocale = getRelativeLocaleUrl(
+  Astro.currentLocale ?? 'en',
+  'privacy-policy.md'
+);
+
+const pageCollection = await getCollection('pages');
+
+const termsPage = pageCollection.filter(
+  (p) => p.id === termsFilePathLocale.substring(1)
+)[0];
+const privacyPage = pageCollection.filter(
+  (p) => p.id === privacyFilePathLocale.substring(1)
+)[0];
+
+const localePrefix = getBaseLocaleBaseUrl(Astro.currentLocale);
+
+const privacyPagePath = `${localePrefix}${(privacyPage?.data as any)?.slug ?? slugify(privacyPage?.data?.title ?? '')}`;
+
+const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? slugify(termsPage?.data?.title ?? '')}`;
+---
+
+<footer
+  class="grid grid-cols-1 gap-8 bg-gray-100 px-4 py-10 text-gray-600 dark:bg-gray-900 dark:text-gray-400 sm:grid-cols-3"
+>
+  <div class="flex flex-col gap-5">
+    <!-- <Logo class="max-h-12" /> -->
+    <div class="flex justify-stretch gap-2">
+      {
+        links.map(({ text, links = [] }) => (
+          <div class="flex flex-col gap-2">
+            <h4 class="w-full text-sm font-bold">{text}</h4>
+            {links.map(({ link, text }) => (
+              <a class="text-xs" href={link.toLowerCase()}>
+                {text}
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+    <div class="flex flex-col gap-2">
+      <span class="text-sm font-bold">{t('Footer.PaymentTitle')}</span>
+      <span class="text-xs">{t('Footer.PaymentDescription')}</span>
+      <div class="flex gap-2">
+        <Icon icon="logos:mastercard" /><Icon icon="logos:visa" /><Icon
+          icon="logos:amex"
+        /><Icon icon="logos:jcb" />
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-4 self-start sm:grid-cols-3">
+    <Text class="col-span-full"
+      ><h4 class="text-sm font-bold">{t('Footer.TourRegionsTitle')}</h4></Text
+    >
+    {
+      regions.map((region) => {
+        const { src, title, name } = region[language];
+        return (
+          <div class="group relative cursor-pointer overflow-clip">
+            <ResponsiveImage
+              src={src}
+              alt={title}
+              widths={[200]}
+              paralax={false}
+              class="animate-ease-in-out-out animate-duration-200 transition-transform group-hover:scale-150"
+            />
+            <a
+              href={getTourRegionsPath(
+                name,
+                Astro.currentLocale as LanguageCodes
+              )}
+              class="absolute bottom-0 left-0 right-0 top-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold capitalize text-white opacity-0 group-hover:flex group-hover:opacity-90"
+            >
+              {name}
+            </a>
+          </div>
+        );
+      })
+    }
+  </div>
+  <Stack layout="vertical" spacing="small">
+    <FooterContact language={language} />
+  </Stack>
+</footer>
+<ul
+  class="flex w-full flex-wrap justify-center gap-1 bg-gray-50 p-3 dark:bg-gray-800 dark:text-gray-400"
+>
+  <li>
+    @Top Walking Tours Portugal {year}
+  </li>
+  <li aria-hidden="true">-</li>
+  <li>
+    <a href={termsPagePagePath} rel="nofollow">{t('TermsAndConditions')}</a>
+  </li>
+  <li aria-hidden="true">-</li>
+  <li>
+    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy')}</a>
+  </li>
+</ul>

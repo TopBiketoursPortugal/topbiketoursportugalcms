@@ -1,83 +1,28 @@
-import {
-  Envelope,
-  User,
-  Coffee,
-  Egg,
-  ForkKnife,
-  Carrot,
-  Hamburger,
-  FishSimple,
-  Plant,
-  BowlFood,
-  Pizza,
-  Pepper,
-  Champagne,
-  Check,
-  CheckCircle,
-  ArrowRight,
-  ArrowLeft,
-  ArrowDown,
-  ArrowUp,
-  CaretLeft,
-  CaretRight,
-  CaretDown,
-  CaretUp,
-  PaperPlane,
-  ShoppingCart,
-  Storefront,
-  ShoppingBag,
-  CreditCard,
-  House,
-  MagnifyingGlass,
-  Image,
-  Phone,
-  List,
-  Heart,
-  X,
-  Chat,
-  Truck,
-  Smiley,
-  Bell,
-  Calendar,
-  Info,
-  Fire,
-  Hand,
-  BookmarkSimple,
-  FacebookLogo,
-  InstagramLogo,
-  YoutubeLogo,
-  GoogleLogo,
-  StripeLogo,
-  GithubLogo,
-  Quotes,
-  Star,
-  StarHalf,
-  Tag,
-  UsersThree,
-  Users,
-  Airplane,
-  PersonSimpleBike,
-  MapTrifold,
-  XCircle,
-  MapPin,
-  Circle,
-  Crosshair,
-  Gift,
-  Bread,
-  AppleLogo
-} from '@phosphor-icons/react';
-
-import { Icon as IconReact } from '@iconify/react';
-
-export default function Icon({
-  icon,
-  class: className,
-  title
-}: {
+---
+import { Icon as AstroIcon } from 'astro-icon/components';
+import { cn } from 'utils/cn';
+type Props = {
   icon: string;
   class?: string;
   title?: string;
-}) {
+};
+
+const { icon, class: className, title } = Astro.props;
+const style = cn('w-6 h-6', className);
+---
+
+{
+  icon.startsWith('ph') ||
+  icon.startsWith('circle-flags') ||
+  icon.startsWith('logos') ||
+  icon.startsWith('fa:tripadvisor') ? (
+    <AstroIcon name={icon} class={style} title={title} />
+  ) : (
+    <div>{icon}</div>
+  )
+}
+
+<!--
   switch (icon) {
     case 'ph:caret-down-light':
       return (
@@ -286,5 +231,4 @@ export default function Icon({
       );
     default:
       return <IconReact icon={icon} className={className} xlinkTitle={title} />;
-  }
-}
+  } -->

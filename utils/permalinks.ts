@@ -1,9 +1,9 @@
 import slugify from 'slugify';
-import type { LanguageCodes } from 'src/schemas/language';
+import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 
 function getBasePath(language: LanguageCodes = 'en'): string {
-  return language === 'en' ? '' : '/' + language;
+  return language === 'en' ? '/' : `/${language}`;
 }
 
 export function getTeamMemberPath(
@@ -25,4 +25,20 @@ export function getTourRegionsPath(
   language: LanguageCodes = 'en'
 ): string {
   return `${getBasePath(language)}/tours/regions/${slugify(region)}`;
+}
+
+export function getHomePermalink(language: LanguageCodes = 'en'): string {
+  return getBasePath(language);
+}
+
+function trim(str = '', ch?: string): string {
+  let start = 0,
+    end = str.length || 0;
+  while (start < end && str[start] === ch) ++start;
+  while (end > start && str[end - 1] === ch) --end;
+  return start > 0 || end < str.length ? str.substring(start, end) : str;
+}
+
+export function trimSlash(s: string): string {
+  return trim(trim(s, '/'));
 }
