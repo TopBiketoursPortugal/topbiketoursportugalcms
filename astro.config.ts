@@ -20,16 +20,16 @@ export default defineConfig({
     alpine(),
     mdx(),
     favicons(),
-    icon({
-      // svgoOptions: {},
-      include: {
-        fa: ['*'],
-        ph: ['*'],
-        logos: ['*'],
-        'circle-flags': ['us', 'pt']
-      },
-      iconDir: 'src/assets/icons'
-    }),
+    // icon({
+    //   // svgoOptions: {},
+    //   include: {
+    //     fa: ['*'],
+    //     ph: ['*'],
+    //     logos: ['*'],
+    //     'circle-flags': ['us', 'pt']
+    //   },
+    //   iconDir: 'src/assets/icons'
+    // }),
     sitemap({
       i18n: {
         defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
