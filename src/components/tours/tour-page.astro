@@ -7,7 +7,7 @@ import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
 import TabItem from '../tabs/TabItem.astro';
 import Tabs from '../tabs/Tabs.astro';
-import Icon from '../utility/icon.astro';
+import Icon from '../utility/Icon.tsx';
 import { cn } from 'utils/cn';
 import Tooltip from '../tooltip/tooltip.astro';
 import Separator from '../separator/separator.astro';
@@ -29,7 +29,7 @@ import TourItinerary from './tour-itinerary.astro';
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
-console.log(tour);
+// console.log(tour);
 
 // if (!tour) {
 //   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
