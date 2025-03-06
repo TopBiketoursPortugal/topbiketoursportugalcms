@@ -97,7 +97,7 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        '~': path.resolve(path.dirname('./'), 'src') // Maps ~ to the src directory
+        '~': path.dirname('./') // Maps ~ to the src directory
       }
     },
     //   css: {
