@@ -9,6 +9,7 @@ import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
+import path from 'node:fs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -92,7 +93,13 @@ export default defineConfig({
       mode: 'sprite'
     }
   },
+
   vite: {
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, 'src') // Maps ~ to the src directory
+      }
+    },
     //   css: {
     //     transformer: "lightningcss",
     //   },
