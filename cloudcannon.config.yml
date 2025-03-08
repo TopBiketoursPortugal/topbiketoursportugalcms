@@ -148,10 +148,13 @@ collections_config:
       - data
     _inputs:
       tags:
-        type: multiselect
+        type: textarea
+        comment: one tag per line
         options:
-          allow_create: true
-          allow_empty: true
+          show_count: false
+          empty_type: 'null'
+          icon: tag
+        cascade: true
       id:
         type: auto
         instance_value: UUID
