@@ -1,6 +1,7 @@
 ---
 date: '2022-03-07'
 title: Email delivery tips
+language: 'en'
 tags:
   - email
 author: Gerard Hopper

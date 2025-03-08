@@ -9,13 +9,15 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const page = await getEntry('pages', 'blog');
   const posts = await getCollection('blog');
   posts.forEach(({ data }) =>
-    data.tags.forEach((tag: string) => (tags[tag] = true))
+    (data.tags ?? []).forEach((tag: string) => (tags[tag] = true))
   );
 
   return Object.keys(tags)
     .filter((t) => t && t !== '')
     .flatMap((tag) => {
-      const filteredPosts = posts.filter(({ data }) => data.tags.includes(tag));
+      const filteredPosts = posts.filter(({ data }) =>
+        data.tags?.includes(tag)
+      );
       return paginate(filteredPosts, {
         params: { tag },
         pageSize:

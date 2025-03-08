@@ -76,8 +76,8 @@ content_blocks:
         - CSS variables
       color: '#393939'
     image:
-      src: /src/assets/images/undraw-hello.svg
-      alt: An image
+      image_path: /src/assets/images/undraw-hello.svg
+      alt_text: An image
     flipped: true
     button:
       _bookshop_name: buttons/primary

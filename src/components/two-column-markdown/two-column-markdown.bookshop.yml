@@ -1,0 +1,57 @@
+# src/components/two-column-markdown/two-column-markdown.bookshop.yml
+spec:
+  structures:
+    - content_blocks # or any structure you are using
+  label: Two Column Markdown
+  description: Displays content in two columns using Markdown.
+  icon: columns # Choose an appropriate icon
+  tags:
+    - Markdown
+    - Layout
+
+blueprint:
+  column1:
+    animation: slide-in
+    type: markdown
+    label: Column 1 Content
+    content: |
+      ## Column 1
+
+      Enter your Markdown content here.
+  column2:
+    animation: slide-in
+    type: markdown
+    label: Column 2 Content
+    content: |
+      ## Column 2
+
+      Enter your Markdown content here.
+  padding:
+    type: select
+    label: Padding
+    options:
+      - value: contained
+        label: Contained
+      - value: tight
+        label: Tight
+      - value: normal
+        label: Normal
+    default: normal
+  fullwidth:
+    type: toggle
+    label: Full Width
+    default: false
+
+preview:
+  fullwidth: false
+  padding: contained
+  column1:
+    content: |
+      ## Column 1
+
+      This is some **Markdown** content for the first column.
+  column2:
+    content: |
+      ## Column 2
+
+      This is some **Markdown** content for the first column.

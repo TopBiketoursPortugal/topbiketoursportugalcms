@@ -1,13 +1,14 @@
 ---
 id:
 date:
-title: ""
+title: ''
 tags: []
+language: 'en'
 author:
-thumb_image_path: ""
-thumb_image_alt: ""
-image: ""
-image_alt: ""
+thumb_image_path: ''
+thumb_image_alt: ''
+image: ''
+image_alt: ''
 seo:
   page_description:
   canonical_url:

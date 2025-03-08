@@ -2,6 +2,7 @@
 _schema: default
 date: 2024-05-02T21:43:46Z
 title: All the bells and whistles
+language: 'en'
 tags:
   - whistles
   - bells

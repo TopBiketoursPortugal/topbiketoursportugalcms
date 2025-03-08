@@ -1,21 +1,24 @@
 ---
 import type { LanguageCodes } from 'src/schemas/language';
 import PostLayout from '../../layouts/Post.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({ params: { slug: post.slug } }));
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
 }
 
 if (!Astro.params.slug) {
   throw new Error('Post slug is undefined');
 }
-const post = await getEntry('blog', Astro.params.slug);
+const { post } = Astro.props;
 if (!post) {
   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
 }
-const { Content } = await post.render();
+const { Content } = await render(post);
 const language = Astro.currentLocale as LanguageCodes;
 ---
 

@@ -76,7 +76,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
             <LinkButton
               variant="link"
               class="z-50"
-              href={`/tours/tags/${slugify(t)}/`}
+              href={`/tours/tags/${slugify(t, { lower: true })}`}
             >
               {t}
             </LinkButton>

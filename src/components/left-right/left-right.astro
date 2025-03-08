@@ -15,8 +15,8 @@ type Props = {
     color: string;
   };
   image: {
-    src: string;
-    alt: string;
+    image_path: string;
+    alt_text: string;
   };
   button: {
     _bookshop_name: string;
@@ -42,7 +42,11 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-const imageSrc = images[block.image.src]?.default ?? block.image.src;
+const imageSrc = images[block.image.image_path]?.default;
+
+if (!imageSrc) {
+  console.error(JSON.stringify(block));
+}
 ---
 
 <div class="left-right" style={`background-color: ${block.background_color};`}>
@@ -51,7 +55,7 @@ const imageSrc = images[block.image.src]?.default ?? block.image.src;
       <div class="left-right__wrapper">
         <Image
           class="order-2 md:order-1"
-          alt={block.image.alt ?? 'Teste'}
+          alt={block.image.alt_text ?? 'Left Right Top Walking tours portugal'}
           widths={[320, 500, 640]}
           sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
           src={imageSrc}
@@ -78,7 +82,7 @@ const imageSrc = images[block.image.src]?.default ?? block.image.src;
           {block.button && <Button {...block.button} />}
         </div>
         <Image
-          alt={block.image.alt}
+          alt={block.image.alt_text ?? 'Left right Top walking tours portugal'}
           widths={[320, 500, 640]}
           sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
           src={imageSrc}

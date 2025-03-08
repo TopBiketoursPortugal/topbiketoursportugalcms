@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { languageSchema } from 'src/schemas/language';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
 import { tourCollection } from 'src/schemas/tours';
@@ -11,10 +12,22 @@ const blogCollection = defineCollection({
     author: z.string(),
     thumb_image_path: z.string(),
     thumb_image_alt: z.string(),
+    language: languageSchema,
     image: z.object({
       src: z.string(),
       alt: z.string()
     }),
+    // image: z
+    //   .object({
+    //     src: z.string(),
+    //     alt: z.string()
+    //   })
+    //   .or(
+    //     z.object({
+    //       image_path: z.string(),
+    //       alt_text: z.string()
+    //     })
+    //   ),
     seo: seoSchema
   })
 });

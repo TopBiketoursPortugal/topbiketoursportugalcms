@@ -20,7 +20,7 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
     <Image
       class="aspect-video w-full rounded-sm"
       src={imageSrc}
-      alt={thumb_image_alt ?? 'Always an alt'}
+      alt={thumb_image_alt ?? 'Top walking tours portugal'}
       loading="lazy"
     />
   </a>
@@ -30,7 +30,7 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
         <div class="flex flex-col gap-3 sm:flex-row">
           {tags.map((tag: string) => {
             return (
-              <a href={`/tags/${tag}/`}>
+              <a href={`/tags/${tag}`}>
                 <span class="rounded-sm bg-slate-200 px-1">
                   {tag.charAt(0).toUpperCase() + tag.slice(1)}
                 </span>
@@ -42,7 +42,7 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
         ''
       )
     }
-    <a href={`/blog/${slug}/`}>
+    <a href={`/blog/${slug}`}>
       <p class="text-2xl font-semibold">{title}</p>
     </a>
     <p class="font-light">

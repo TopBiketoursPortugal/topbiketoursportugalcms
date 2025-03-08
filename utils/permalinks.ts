@@ -10,21 +10,21 @@ export function getTeamMemberPath(
   memberName: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}team/${slugify(memberName)}`;
+  return `${getBasePath(language)}team/${slugify(memberName, { lower: true })}`;
 }
 
 export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/${slug ?? slugify(title)}`;
+  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true })}`;
 }
 
 export function getTourRegionsPath(
   region: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/regions/${slugify(region)}`;
+  return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true })}`;
 }
 
 function trim(str = '', ch?: string): string {

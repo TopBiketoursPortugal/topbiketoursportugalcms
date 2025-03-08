@@ -93,7 +93,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       }}
     />
   </head>
-  <body class="flex min-h-screen flex-col">
+  <body>
     <slot name="announcement">
       <Announcement language={language} />
     </slot>
@@ -103,7 +103,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       showRssFeed
       showToggleTheme={false}
     />
-    <main class="h-full flex-1">
+    <main>
       <slot />
     </main>
     <Footer language={language} />

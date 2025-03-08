@@ -1,6 +1,7 @@
 ---
 import SiteData from 'src/../data/site.json';
 import LogoIcon from 'src/assets/icons/logo.svg';
+import { cn } from 'utils/cn';
 type Props = {
   class?: string;
 };
@@ -10,4 +11,4 @@ const { class: className = '' } = Astro.props;
 const { site_title } = (SiteData as any)[Astro.currentLocale ?? 'en'];
 ---
 
-<LogoIcon title={site_title} class="h-28 w-80" />
+<LogoIcon title={site_title} class={cn('h-28 w-80', className)} />
