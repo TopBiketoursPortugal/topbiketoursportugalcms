@@ -326,6 +326,11 @@ _inputs:
               src: ''
               alt: ''
     cascade: true
+  rating:
+    type: number
+    options:
+      max: 5
+      min: 0
   src:
     type: image
     options:
