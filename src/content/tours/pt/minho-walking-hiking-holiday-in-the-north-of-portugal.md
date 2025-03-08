@@ -8,7 +8,7 @@ image:
   src: /src/assets/images/hiking-ecovia-lima.jpg
   alt: ''
 title: Minho Hiking Holiday in the North of Portugal
-language: en
+language: pt
 content: >-
   # **Minho Hiking Holiday in the North of Portugal**
 

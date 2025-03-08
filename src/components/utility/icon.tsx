@@ -59,10 +59,14 @@ import {
   faStar,
   faStarHalf,
   faRss,
-  faCompass
+  faCompass,
+  faMoon
 } from '@fortawesome/free-solid-svg-icons';
 
-import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
+import {
+  faStar as faStarOutline,
+  faSun
+} from '@fortawesome/free-regular-svg-icons';
 
 import { faLemon, faBookmark } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -266,6 +270,10 @@ export default function Icon({
       );
     case 'ph:rss-light':
       return <FontAwesomeIcon icon={faRss} className={style} title={title} />;
+    case 'ph:sun-light':
+      return <FontAwesomeIcon icon={faSun} className={style} title={title} />;
+    case 'ph:moon-light':
+      return <FontAwesomeIcon icon={faMoon} className={style} title={title} />;
     case 'ph:star-fill':
       return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
     case 'ph:star-light':

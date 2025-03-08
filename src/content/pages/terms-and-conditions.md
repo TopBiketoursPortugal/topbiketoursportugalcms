@@ -4,6 +4,7 @@ id: 374b61b1-17bb-468b-a1d2-9cb9483dd1fc
 template: ~/layouts/Page.astro
 title: Terms and conditions
 slug: terms-and-conditions
+language: en
 seo:
   page_description: Terms and conditions
   canonical_url:

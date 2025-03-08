@@ -1,15 +1,16 @@
 ---
-import PageLayout from "../layouts/Page.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import PageLayout from '../layouts/Page.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPagePath } from 'utils/permalinks';
 
 export interface Props {
-  page: CollectionEntry<"pages">;
+  page: CollectionEntry<'pages'>;
 }
 
 export async function getStaticPaths() {
-  const pages = await getCollection("pages");
+  const pages = await getCollection('pages');
   return pages.map((page) => {
-    const slug = page.slug.replace(/index$/, "");
+    const slug = getPagePath(page);
     if (slug.length === 0)
       return { params: { slug: undefined }, props: { page } };
     return { params: { slug }, props: { page } };

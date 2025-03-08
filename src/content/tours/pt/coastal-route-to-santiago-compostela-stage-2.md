@@ -3,7 +3,6 @@ _schema: default
 id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
 order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
-language: en
 subTitle: '1'
 content: >-
   # Coastal route to Santiago Compostela: Stage 2
@@ -59,6 +58,7 @@ image:
   alt: '312'
 code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
+language: en
 type: WalkingTour
 region: north
 itinerary:

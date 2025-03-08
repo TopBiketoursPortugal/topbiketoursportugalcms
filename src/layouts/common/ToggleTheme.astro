@@ -1,34 +1,93 @@
 ---
-import SiteConfig from 'src/../data/site.json';
-import Icon from 'src/components/utility/icon';
 
-const { ui: UI } = SiteConfig;
-
-export interface Props {
-  label?: string;
-  class?: string;
-  iconClass?: string;
-  iconName?: string;
-}
-
-const {
-  label = 'Toggle between Dark and Light mode',
-  class:
-    className = 'text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center',
-  iconClass = 'w-6 h-6',
-  iconName = 'ph:sun-light'
-} = Astro.props;
 ---
 
-{
-  !(UI.theme && UI.theme.endsWith(':only')) && (
-    <button
-      type="button"
-      class={className}
-      aria-label={label}
-      data-aw-toggle-color-scheme
+<div class="relative inline-block">
+  <button
+    id="theme-toggle"
+    type="button"
+    class="p-2 text-gray-600 transition-transform hover:scale-110 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 dark:text-gray-300"
+    aria-label="Toggle dark mode"
+  >
+    <span class="sr-only">Toggle dark mode</span>
+    <svg
+      class="rotate-0 transform opacity-100 transition-opacity duration-300 ease-in-out dark:rotate-90 dark:opacity-0"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
     >
-      <Icon icon={iconName} class={iconClass} />
-    </button>
-  )
-}
+      <circle cx="12" cy="12" r="5"></circle>
+      <path
+        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+      ></path>
+    </svg>
+    <svg
+      class="rotate-[-90deg] transform opacity-0 transition-opacity duration-300 ease-in-out dark:rotate-0 dark:opacity-100"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </button>
+</div>
+
+<!-- <script is:inline>
+
+  // Client-side interactivity (unchanged)
+  document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('theme-toggle');
+    const body = document.body;
+    const html = document.querySelector('html');
+
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+    const initialDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+
+    if (initialDark) {
+      html.setAttribute('data-theme', 'dark');
+      html.classList.add('dark');
+      body.setAttribute('data-theme', 'dark');
+      body.classList.add('dark');
+    }
+
+    button?.addEventListener('click', () => {
+      const isDark =
+        body.classList.contains('dark') || html.classList.contains('dark');
+
+      const theme = isDark ? 'dark' : 'light';
+      const prevTheme = isDark ? 'light' : 'dark';
+
+      html.classList.remove(prevTheme);
+      html.classList.add(theme);
+      html.setAttribute('data-theme', theme);
+
+      body.classList.remove(prevTheme);
+      body.classList.add(theme);
+      body.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+  });
+</script> -->
+
+<style>
+  /* Only keep screen reader styles as they're not available in Tailwind by default */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>

@@ -3,7 +3,7 @@ _schema: default
 id: 19cf8784-b782-48a2-a5a3-7263f1bee29f
 order: 10
 title: 'Historical Alentejo: rural trails'
-language: en
+language: pt
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
   # **Historical Alentejo: rural trailsf**

@@ -24,7 +24,7 @@ const language = (Astro.props.language ??
 const tours = await getCollection('tours');
 const items =
   tours
-    .filter((item) => item.data.language === language)
+    .filter((item) => (item.data.language ?? 'en') === language)
     .sort((a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)) ?? [];
 ---
 

@@ -3,7 +3,7 @@ id: af115fc4-1aae-4854-a97b-53a4c777d9f0
 code: VC02
 slug: hiking-algarve-vicentine-southeast-portugal-coast
 title: 'Vicentine West Coast in Algarve: Stage 2'
-language: en
+language: pt
 subTitle: ''
 region: north
 content: >-

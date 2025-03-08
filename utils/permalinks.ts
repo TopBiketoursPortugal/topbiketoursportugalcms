@@ -1,8 +1,9 @@
+import type { CollectionEntry, InferEntrySchema } from 'astro:content';
 import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 
-function getBasePath(language: LanguageCodes = 'en'): string {
+export function getBasePath(language: LanguageCodes = 'en'): string {
   return language === 'en' ? '/' : `/${language}/`;
 }
 
@@ -27,6 +28,15 @@ export function getTourRegionsPath(
   return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true })}`;
 }
 
+export function getTourTagPath(
+  tag: string,
+  language: LanguageCodes = 'en'
+): string {
+  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true })}`;
+  // console.log('tag slug:', slug);
+  return slug;
+}
+
 function trim(str = '', ch?: string): string {
   let start = 0,
     end = str.length || 0;
@@ -40,6 +50,19 @@ export function trimSlash(s: string): string {
 }
 
 export function getHomePermalink(language: LanguageCodes = 'en'): string {
-  const home = getBasePath(language);
-  return home.length > 1 ? trimSlash(home) : home;
+  return language === 'en' ? '/' : `/${language}`;
+}
+
+export function getPagePath(page: CollectionEntry<'pages'>) {
+  // console.log(`page slug ${page.slug}`);
+  // console.log(`filePath ${page.filePath}`);
+
+  if (
+    page.slug === 'index' ||
+    page.slug === 'home' ||
+    page.filePath?.endsWith('index.md')
+  ) {
+    return getHomePermalink(page.data.language);
+  }
+  return `${getBasePath(page.data.language)}${page.data.slug ?? slugify(page.data.title, { lower: true }).replace(/index$/, '')}`.toLocaleLowerCase();
 }

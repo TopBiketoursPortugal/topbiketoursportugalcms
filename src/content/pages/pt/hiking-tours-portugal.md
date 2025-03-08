@@ -1,9 +1,10 @@
 ---
 _schema: default
-id: a8607495-f8ce-4200-afdd-68f04ec13246
+id: a8607495-f8ce-4200-afdd-68f04ec13245
 template: ~/layouts/Page.astro
-title: hiking tours portugal
-language: en
+title: Passeios pedestres portugal
+language: pt
+slug: passeios-pedestres-portugal
 seo:
   page_description:
   canonical_url:
@@ -18,7 +19,7 @@ content_blocks:
     background_color: '#ffffff'
     heading:
       text: |-
-        ## Find our popular tours
+        ## A nossas tours
       color: 'text-neutral-600'
     subheading:
       markdown_content: >-

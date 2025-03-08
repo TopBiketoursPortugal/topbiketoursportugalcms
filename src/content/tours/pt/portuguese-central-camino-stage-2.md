@@ -4,12 +4,12 @@ order: 9
 slug: santiago-compostela-hiking-stage-2
 code: ST02
 featured: true
+language: pt
 image:
   src: /src/assets/images/valença-do-minho-bridge.jpg
   alt: ''
 
 title: 'Portuguese Central Camino: Stage 2'
-language: en
 content: >-
   # Portuguese Central Camino: Stage 2
 

@@ -1,7 +1,7 @@
 ---
 _schema: paginated
 title: Blog
-language: en
+language: pt
 featured_posts:
   main_feature: All the bells and whistles
   feature_list:

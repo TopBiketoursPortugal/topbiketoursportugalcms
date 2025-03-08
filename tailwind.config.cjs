@@ -15,18 +15,40 @@ module.exports = {
     },
     plugins: [
       typographyPlugin,
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('tailwindcss-animate'),
       plugin(({ addVariant }) => {
         addVariant('intersect', '&:not([no-intersect])');
       }),
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('tailwindcss-signals'),
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
       require('tailwindcss-selector-patterns'),
       require('tailwindcss-mixins'),
       require('tailwindcss-multi')
     ],
-    darkMode: 'class'
+    darkMode: ['class', '[data-theme="dark"]']
+    // darkMode: [
+    //   'class',
+    //   'selector',
+    //   [
+    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+    //     '&:is(.dark *)'
+    //   ]
+    // ]
+
+    //   [
+    //   'class',
+    //   '[data-theme="dark"]',
+    //   [
+    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+    //     '&:is(.dark *)'
+    //   ]
+    // ]
+    // darkMode: [
+    //   'variant',
+    //   [
+    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+    //     '&:is(.dark *)',
+    //     "[data-theme]='dark'"
+    //   ]
+    // ]
   }
 };

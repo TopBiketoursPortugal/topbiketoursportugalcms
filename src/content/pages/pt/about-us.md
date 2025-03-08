@@ -2,8 +2,8 @@
 _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 template: ~/layouts/Page.astro
-title: About Us
-language: en
+title: Sobre nós
+language: pt
 seo:
   page_description:
   canonical_url:

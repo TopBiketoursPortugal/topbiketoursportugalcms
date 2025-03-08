@@ -1,7 +1,7 @@
 ---
 _schema: page
 title: Home
-language: en
+language: pt
 seo:
   page_description: >-
     A starting point for developers looking to build a website with Astro, using

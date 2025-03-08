@@ -9,11 +9,14 @@ type Props = {
     page_size?: number;
     seo?: SEOProps;
   };
+  class?: string;
 };
 
-const props = Astro.props.frontmatter;
+const { frontmatter, class: className } = Astro.props;
+const { content_blocks = [] } = frontmatter;
 ---
 
-<Layout {...props}>
-  <PageHelper bookshop:live contentBlocks={props.content_blocks ?? []} />
+<Layout {...frontmatter} class={className}>
+  <slot />
+  <PageHelper bookshop:live contentBlocks={content_blocks} />
 </Layout>

@@ -3,26 +3,34 @@ import PageLayout from 'src/layouts/Page.astro';
 import { getCollection } from 'astro:content';
 import slugify from 'slugify';
 import type { SEOProps } from 'astro-seo';
+import { getPagePath, getTourTagPath } from 'utils/permalinks';
+import TourList from 'src/components/tours/tour-list.astro';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
   const tours = await getCollection('tours');
 
   const tags = [...new Set(tours.flatMap((tour) => tour.data.tags ?? []))];
-
+  // console.log('tags', tags);
   return tags
     .filter((t) => t?.length > 0)
     .map((tag) => ({
-      params: { tag: slugify(tag, { lower: true }) },
+      params: {
+        tag: slugify(tag, { lower: true })
+      },
       props: {
-        tag: slugify(tag, { lower: true }),
+        tag: tag,
         tours: tours.filter(
-          (tour) => tag && tour.data.tags?.indexOf(tag) !== -1
+          (tour) =>
+            (tour.data.language ?? 'en') === 'en' &&
+            (tour.data.tags ?? [])
+              ?.map((t) => t.toLocaleLowerCase())
+              ?.includes(tag.toLocaleLowerCase())
         )
       }
     }));
 }
 
-const { tag, tours } = Astro.props;
+const { tours, tag } = Astro.props;
 
 const frontmatter = {
   title: 'Tours - Top Bike Tours Portugal',
@@ -34,12 +42,18 @@ const frontmatter = {
 };
 ---
 
-<PageLayout frontmatter={frontmatter}>
-  <section class="blog-index mx-auto flex flex-col justify-center">
-    {tag}
-    {JSON.stringify(tours)}
-    <!-- <BlogPagination pagination={pagination} language={Astro.currentLocale as LanguageCodes} /> -->
-  </section>
+<PageLayout frontmatter={frontmatter} class="px-10">
+  <h1>Tour list tag {tag}</h1>
+  {
+    tours.length == 0 ? (
+      <div class="flex flex-col">
+        <div>No tours yet for tag `{tag}</div>
+        <div>Could try other tags</div>
+      </div>
+    ) : null
+  }
+  <TourList items={tours} language="en" />
+  <!-- <BlogPagination pagination={pagination} language={Astro.currentLocale as LanguageCodes} /> -->
 </PageLayout>
 
 <style>

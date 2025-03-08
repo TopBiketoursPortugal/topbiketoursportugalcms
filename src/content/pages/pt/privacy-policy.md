@@ -1,8 +1,8 @@
 ---
 _schema: default
 id: 493f9d67-f89c-4f32-bf40-a85124c2bf60
-title: Privacy policy
-language: en
+title: Politica privacidade
+language: pt
 seo:
   page_description: Privacy policy
   canonical_url:

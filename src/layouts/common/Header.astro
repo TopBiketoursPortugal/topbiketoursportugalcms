@@ -46,7 +46,7 @@ const {
   actions = [],
   isSticky = false,
   isDark = false,
-  showToggleTheme = false,
+  showToggleTheme = true,
   showRssFeed = false,
   position = 'center'
 } = Astro.props;
@@ -148,11 +148,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       <div class="flex w-full items-center justify-between gap-4 md:w-auto">
         <LanguageMenu />
         <div class="flex items-center">
-          {
-            showToggleTheme && (
-              <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
-            )
-          }
+          <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
           {
             showRssFeed && (
               <a
