@@ -13,9 +13,6 @@ seo:
   open_graph_type:
   no_index: false
 content_blocks:
-  - _bookshop_name: collection
-    type: tours
-    title: Our Tours
   - _bookshop_name: hero
     background_color: '#ffffff'
     heading:
@@ -95,4 +92,7 @@ content_blocks:
     feature_list:
       - Best email sending services changed
       - Email delivery tips
+  - _bookshop_name: collection
+    type: tours
+    title: Our Tours
 ---
