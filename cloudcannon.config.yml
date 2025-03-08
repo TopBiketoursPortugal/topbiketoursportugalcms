@@ -159,17 +159,16 @@ collections_config:
       default:
         path: schemas/tour.md
         reorder_inputs: true
-        hide_extra_inputs: false
-        remove_empty_inputs: false
-        remove_extra_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: false
         name: New tour
         icon: notes
       defaultPT:
         path: schemas/pt/tour.md
         reorder_inputs: true
-        hide_extra_inputs: false
-        remove_empty_inputs: false
-        remove_extra_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
         name: New tour
         icon: notes
   team:
@@ -259,8 +258,10 @@ _inputs:
     options:
       preview:
         icon: image
-        text: alt
-        image: src
+        text:
+          - key: title
+        image:
+          - key: src
       structures:
         values:
           - label: Image

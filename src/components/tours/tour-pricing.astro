@@ -36,20 +36,14 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
   <slot slot="packages">
     {
       packages.map(
-        ({
-          title,
-          duration,
-          popular,
-          included: features = [],
-          price = { price: 0 }
-        }) => (
+        ({ title, duration, popular, included = [], price = { price: 0 } }) => (
           <PricingColumn
             title={title}
             price={priceFormat.format(price?.price ?? 0)}
             period={duration}
             popular={popular}
           >
-            {(features ?? []).map((feature, featureIndex) => {
+            {(included ?? []).map((feature, featureIndex) => {
               const {
                 description,
                 included,

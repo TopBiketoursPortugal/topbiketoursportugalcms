@@ -390,16 +390,17 @@ reviews:
     datePublished: 2023-10-15
     content: |
       These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-feature:
-  align: center
-  imageAlign: center center
-  bokunLink: ''
-  bokunId: ''
-  textcolor: white
-  subtitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: ' Coastal route to Santiago Compostela: Stage 1'
-  image: /img/top-walking-tours-portugal.jpg
-  bokunLinkText: Book now
+# feature:
+#   align: center
+#   imageAlign: center center
+#   bokunLink: ''
+#   bokunId: ''
+#   textcolor: white
+#   subtitle: 'Coastal route to Santiago Compostela: Stage 1'
+#   title: ' Coastal route to Santiago Compostela: Stage 1'
+#   image:
+#     src: /img/top-walking-tours-portugal.jpg
+#   bokunLinkText: Book now
 faqs:
   - question: Q1
     answer: A1
