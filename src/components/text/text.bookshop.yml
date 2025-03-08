@@ -22,6 +22,8 @@ blueprint:
 preview:
 
 _inputs:
+  text:
+    type: markdown
   padding:
     options:
       values:
