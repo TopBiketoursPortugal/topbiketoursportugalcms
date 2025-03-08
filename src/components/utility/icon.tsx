@@ -75,168 +75,305 @@ import {
   faXTwitter,
   faWhatsapp
 } from '@fortawesome/free-brands-svg-icons';
-import type { IconNames } from '~/types';
+import type { IconNames } from 'src/types';
 import { cn } from 'utils/cn';
 
 export default function Icon({
   icon,
-  class: className
+  class: className,
+  title
 }: {
   icon: IconNames;
   class?: string;
+  title?: string;
 }) {
   const style = cn('h-6 w-6', className);
   switch (icon) {
     case 'ph:rss-light':
-      return <FontAwesomeIcon icon={faRss} className={style} />;
+      return <FontAwesomeIcon icon={faRss} className={style} title={title} />;
     case 'ph:star-fill':
-      return <FontAwesomeIcon icon={faStar} className={style} />;
+      return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
     case 'ph:star-light':
-      return <FontAwesomeIcon icon={faStarOutline} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faStarOutline} className={style} title={title} />
+      );
     case 'ph:star-half-fill':
-      return <FontAwesomeIcon icon={faStarHalf} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faStarHalf} className={style} title={title} />
+      );
     case 'Language':
-      return <FontAwesomeIcon icon={faLanguage} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faLanguage} className={style} title={title} />
+      );
     case 'Envelope':
     case 'ph:envelope-simple-thin':
-      return <FontAwesomeIcon icon={faEnvelope} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faEnvelope} className={style} title={title} />
+      );
     case 'User':
-      return <FontAwesomeIcon icon={faUser} className={style} />;
+      return <FontAwesomeIcon icon={faUser} className={style} title={title} />;
     case 'Bread':
-      return <FontAwesomeIcon icon={faBreadSlice} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faBreadSlice} className={style} title={title} />
+      );
     case 'Mug':
-      return <FontAwesomeIcon icon={faMugSaucer} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faMugSaucer} className={style} title={title} />
+      );
     case 'Egg':
-      return <FontAwesomeIcon icon={faEgg} className={style} />;
+      return <FontAwesomeIcon icon={faEgg} className={style} title={title} />;
     case 'Utensils':
-      return <FontAwesomeIcon icon={faUtensils} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faUtensils} className={style} title={title} />
+      );
     case 'Carrot':
-      return <FontAwesomeIcon icon={faCarrot} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCarrot} className={style} title={title} />
+      );
     case 'Burger':
-      return <FontAwesomeIcon icon={faBurger} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faBurger} className={style} title={title} />
+      );
     case 'Fish':
-      return <FontAwesomeIcon icon={faFish} className={style} />;
+      return <FontAwesomeIcon icon={faFish} className={style} title={title} />;
     case 'Seedling':
-      return <FontAwesomeIcon icon={faSeedling} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faSeedling} className={style} title={title} />
+      );
     case 'WheatAwn':
-      return <FontAwesomeIcon icon={faWheatAwn} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faWheatAwn} className={style} title={title} />
+      );
     case 'PlateWheat':
-      return <FontAwesomeIcon icon={faPlateWheat} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faPlateWheat} className={style} title={title} />
+      );
     case 'PizzaSlice':
-      return <FontAwesomeIcon icon={faPizzaSlice} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faPizzaSlice} className={style} title={title} />
+      );
     case 'PepperHot':
-      return <FontAwesomeIcon icon={faPepperHot} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faPepperHot} className={style} title={title} />
+      );
     case 'ChampagneGlasses':
-      return <FontAwesomeIcon icon={faChampagneGlasses} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faChampagneGlasses}
+          className={style}
+          title={title}
+        />
+      );
     case 'AppleWhole':
-      return <FontAwesomeIcon icon={faAppleWhole} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faAppleWhole} className={style} title={title} />
+      );
     case 'BowlRice':
-      return <FontAwesomeIcon icon={faBowlRice} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faBowlRice} className={style} title={title} />
+      );
     case 'Check':
-      return <FontAwesomeIcon icon={faCheck} className={style} />;
+      return <FontAwesomeIcon icon={faCheck} className={style} title={title} />;
     case 'CircleCheck':
-      return <FontAwesomeIcon icon={faCircleCheck} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCircleCheck} className={style} title={title} />
+      );
     case 'ArrowRight':
-      return <FontAwesomeIcon icon={faArrowRight} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faArrowRight} className={style} title={title} />
+      );
     case 'ArrowLeft':
-      return <FontAwesomeIcon icon={faArrowLeft} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faArrowLeft} className={style} title={title} />
+      );
     case 'ArrowDown':
-      return <FontAwesomeIcon icon={faArrowDown} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faArrowDown} className={style} title={title} />
+      );
     case 'ArrowUp':
-      return <FontAwesomeIcon icon={faArrowUp} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faArrowUp} className={style} title={title} />
+      );
     case 'CaretLeft':
-      return <FontAwesomeIcon icon={faCaretLeft} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCaretLeft} className={style} title={title} />
+      );
     case 'CaretRight':
-      return <FontAwesomeIcon icon={faCaretRight} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCaretRight} className={style} title={title} />
+      );
     case 'CaretDown':
-      return <FontAwesomeIcon icon={faCaretDown} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCaretDown} className={style} title={title} />
+      );
     case 'CaretUp':
-      return <FontAwesomeIcon icon={faCaretUp} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCaretUp} className={style} title={title} />
+      );
     case 'PaperPlane':
-      return <FontAwesomeIcon icon={faPaperPlane} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faPaperPlane} className={style} title={title} />
+      );
     case 'CartShopping':
-      return <FontAwesomeIcon icon={faCartShopping} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faCartShopping}
+          className={style}
+          title={title}
+        />
+      );
     case 'Shop':
-      return <FontAwesomeIcon icon={faShop} className={style} />;
+      return <FontAwesomeIcon icon={faShop} className={style} title={title} />;
     case 'BagShopping':
-      return <FontAwesomeIcon icon={faBagShopping} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faBagShopping} className={style} title={title} />
+      );
     case 'CreditCard':
-      return <FontAwesomeIcon icon={faCreditCard} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCreditCard} className={style} title={title} />
+      );
     case 'Store':
-      return <FontAwesomeIcon icon={faStore} className={style} />;
+      return <FontAwesomeIcon icon={faStore} className={style} title={title} />;
     case 'ShopLock':
-      return <FontAwesomeIcon icon={faShopLock} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faShopLock} className={style} title={title} />
+      );
     case 'Car':
-      return <FontAwesomeIcon icon={faCar} className={style} />;
+      return <FontAwesomeIcon icon={faCar} className={style} title={title} />;
     case 'CircleHalfStroke':
-      return <FontAwesomeIcon icon={faCircleHalfStroke} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faCircleHalfStroke}
+          className={style}
+          title={title}
+        />
+      );
     case 'LocationDot':
-      return <FontAwesomeIcon icon={faLocationDot} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faLocationDot} className={style} title={title} />
+      );
     case 'LocationPin':
-      return <FontAwesomeIcon icon={faLocationPin} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faLocationPin} className={style} title={title} />
+      );
     case 'LocationCrosshairs':
-      return <FontAwesomeIcon icon={faLocationCrosshairs} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faLocationCrosshairs}
+          className={style}
+          title={title}
+        />
+      );
     case 'Gift':
-      return <FontAwesomeIcon icon={faGift} className={style} />;
+      return <FontAwesomeIcon icon={faGift} className={style} title={title} />;
     case 'House':
-      return <FontAwesomeIcon icon={faHouse} className={style} />;
+      return <FontAwesomeIcon icon={faHouse} className={style} title={title} />;
     case 'MagnifyingGlass':
-      return <FontAwesomeIcon icon={faMagnifyingGlass} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          className={style}
+          title={title}
+        />
+      );
     case 'Image':
-      return <FontAwesomeIcon icon={faImage} className={style} />;
+      return <FontAwesomeIcon icon={faImage} className={style} title={title} />;
     case 'Phone':
     case 'ph:phone-thin':
-      return <FontAwesomeIcon icon={faPhone} className={style} />;
+      return <FontAwesomeIcon icon={faPhone} className={style} title={title} />;
     case 'Bars':
-      return <FontAwesomeIcon icon={faBars} className={style} />;
+      return <FontAwesomeIcon icon={faBars} className={style} title={title} />;
     case 'Heart':
-      return <FontAwesomeIcon icon={faHeart} className={style} />;
+      return <FontAwesomeIcon icon={faHeart} className={style} title={title} />;
     case 'Xmark':
-      return <FontAwesomeIcon icon={faXmark} className={style} />;
+      return <FontAwesomeIcon icon={faXmark} className={style} title={title} />;
     case 'Comment':
-      return <FontAwesomeIcon icon={faComment} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faComment} className={style} title={title} />
+      );
     case 'TruckFast':
-      return <FontAwesomeIcon icon={faTruckFast} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faTruckFast} className={style} title={title} />
+      );
     case 'FaceSmile':
-      return <FontAwesomeIcon icon={faFaceSmile} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faFaceSmile} className={style} title={title} />
+      );
     case 'Bell':
-      return <FontAwesomeIcon icon={faBell} className={style} />;
+      return <FontAwesomeIcon icon={faBell} className={style} title={title} />;
     case 'CalendarDays':
-      return <FontAwesomeIcon icon={faCalendarDays} className={style} />;
+      return (
+        <FontAwesomeIcon
+          icon={faCalendarDays}
+          className={style}
+          title={title}
+        />
+      );
     case 'CircleInfo':
-      return <FontAwesomeIcon icon={faCircleInfo} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faCircleInfo} className={style} title={title} />
+      );
     case 'Fire':
-      return <FontAwesomeIcon icon={faFire} className={style} />;
+      return <FontAwesomeIcon icon={faFire} className={style} title={title} />;
     case 'Hand':
-      return <FontAwesomeIcon icon={faHand} className={style} />;
+      return <FontAwesomeIcon icon={faHand} className={style} title={title} />;
     case 'Lemon':
-      return <FontAwesomeIcon icon={faLemon} className={style} />;
+      return <FontAwesomeIcon icon={faLemon} className={style} title={title} />;
     case 'Bookmark':
-      return <FontAwesomeIcon icon={faBookmark} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faBookmark} className={style} title={title} />
+      );
     case 'Facebook':
     case 'ph:facebook-logo-light':
-      return <FontAwesomeIcon icon={faFacebook} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faFacebook} className={style} title={title} />
+      );
     case 'Instagram':
     case 'ph:instagram-logo-light':
-      return <FontAwesomeIcon icon={faInstagram} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faInstagram} className={style} title={title} />
+      );
     case 'Youtube':
     case 'ph:youtube-logo-light':
-      return <FontAwesomeIcon icon={faYoutube} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faYoutube} className={style} title={title} />
+      );
     case 'Google':
-      return <FontAwesomeIcon icon={faGoogle} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faGoogle} className={style} title={title} />
+      );
     case 'ph:whatsapp-logo-light':
-      return <FontAwesomeIcon icon={faWhatsapp} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faWhatsapp} className={style} title={title} />
+      );
     case 'ph:x-logo-light':
-      return <FontAwesomeIcon icon={faXTwitter} className={style} />;
-    // case 'Tripadvisor':
-    // case 'fa:tripadvisor':
-    //   return <FontAwesomeIcon icon={faTripadvisor} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faXTwitter} className={style} title={title} />
+      );
+    case 'Tripadvisor':
+    case 'fa:tripadvisor':
+      return (
+        <svg
+          className={style}
+          viewBox="0 0 1316 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M372 569.714286q0 22.285714-15.714286 38T318.857143 623.428571q-22.285714 0-38-15.714285T265.142857 569.714286q0-21.714286 15.714286-37.428572T318.857143 516.571429q21.714286 0 37.428571 15.714285T372 569.714286z m659.428571-0.571429q0 22.285714-15.714285 38T977.714286 622.857143t-38-15.714286T924 569.142857t15.714286-37.714286 38-15.428571 38 15.428571 15.714285 37.714286z m-594.285714 0.571429q0-45.142857-32.285714-77.714286T326.857143 459.428571t-78 32.285715T216.571429 569.714286t32.285714 78T326.857143 680t78-32.285714T437.142857 569.714286z m658.857143-0.571429q0-45.714286-32.285714-78T985.714286 458.857143q-45.142857 0-77.714286 32.285714T875.428571 569.142857t32.285715 78T985.714286 679.428571t78-32.285714T1096 569.142857z m-610.285714 0.571429q0 66.285714-46.571429 112.857143T326.857143 729.142857q-66.285714 0-112.857143-46.857143T167.428571 569.714286t46.857143-112.285715T326.857143 410.857143t112.285714 46.571428T485.714286 569.714286z m659.428571-0.571429q0 65.714286-46.571428 112.285714T985.714286 728q-65.714286 0-112.285715-46.571429T826.857143 569.142857t46.571428-112.285714T985.714286 410.285714q66.285714 0 112.857143 46.571429T1145.142857 569.142857z m-550.857143 1.714286q0-109.142857-77.428571-186.571429T330.285714 306.857143q-71.428571 0-132 35.428571T102.285714 438.571429 66.857143 570.857143t35.428571 132.285714T198.285714 799.428571t132 35.428572q109.142857 0 186.571429-77.428572T594.285714 570.857143z m381.714286-327.428572q-145.142857-63.428571-317.714286-63.428571-182.285714 0-327.428571 62.857143 66.857143 0 127.428571 26T562.571429 338.857143t69.714285 104.571428T658.285714 570.857143q0-65.714286 24.857143-125.428572t67.428572-103.142857T852 272t124-28.571429z m273.714286 327.428572q0-109.142857-77.142857-186.571429T986.285714 306.857143t-186.571428 77.428571T722.285714 570.857143t77.428572 186.571428T986.285714 834.857143t186.285715-77.428572T1249.714286 570.857143z m-152-323.428572h218.857143q-25.142857 29.142857-42.857143 65.428572T1250.857143 378.285714q62.857143 86.285714 62.857143 192.571429 0 89.142857-44 164.571428t-119.428572 119.142858-164 43.714285q-76 0-142.285714-32t-112-88.571428q-26.857143 32-73.714286 102.285714-6.285714-12.571429-30.571428-47.142857T585.142857 777.142857q-45.714286 56.571429-112.285714 88.857143T330.285714 898.285714q-88.571429 0-164-43.714285T46.857143 735.428571t-44-164.571428q0-106.285714 62.857143-192.571429-5.142857-29.142857-22.857143-65.428571T0 247.428571h208.571429q85.142857-57.142857 202.857142-89.428571T658.285714 125.714286q128 0 240.571429 32t198.857143 89.714285z" />
+        </svg>
+      );
     case 'Stripe':
-      return <FontAwesomeIcon icon={faStripe} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faStripe} className={style} title={title} />
+      );
     case 'Shopify':
-      return <FontAwesomeIcon icon={faShopify} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faShopify} className={style} title={title} />
+      );
     case 'Github':
-      return <FontAwesomeIcon icon={faGithub} className={style} />;
+      return (
+        <FontAwesomeIcon icon={faGithub} className={style} title={title} />
+      );
     case 'CloudCannon':
       return (
         <svg
