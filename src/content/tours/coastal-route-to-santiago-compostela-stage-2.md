@@ -5,6 +5,7 @@ order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
 subTitle: '1'
 content: >-
+content: >-
   # Coastal route to Santiago Compostela: Stage 2
 
 
@@ -13,35 +14,44 @@ content: >-
 
   Your first night will be in Baiona. Don’t miss the chance to visit a replica
   of the ship Pinta, one of the ships of Christopher Columbus. Baiona was the
-  first town port to receive the news of the discovery of America.
+  first town port to receive the news of the discovery of America. Have a
+  delight with the famous Arcade's oysters in Vigo. Know why Caldas de Reis
+  holds such a royalty importance and end this tour in the Square of Obradoiro,
+  where you can see the colossal baroque cathedral where the remains of the
+  apostle Santiago lie.
 
-  Have a delight with the famous Arcade's oysters in Vigo. Know why Caldas de
-  Reis holds such a royalty importance and end this tour in the Square of
-  Obradoiro, where you can see the colossal baroque cathedral where the remains
-  of the apostle Santiago lie.
 
   **Route description**
 
 
   * During this stage 2 expect some long and difficult climbs. - The main roads
-  are avoided for the majority of the time and as such every kind
-    of terrain is used during this walk
+  are avoided for the majority of the time and as such every kind of terrain is
+  used during this walk
+
 
   **Itinerary:**
 
+
   Day 1: Baiona
+
 
   Day 2: Baiona - Vigo: 25 km
 
+
   Day 3: Vigo - Redondela: 17 km
+
 
   Day 4: Redondela – Pontevedra: 21 km
 
+
   Day 5: Pontevedra – Caldas de reis: 25 km
+
 
   Day 6: Caldas de Reis – Padrón: 14 km
 
+
   Day 7: Padrón – Santiago de Compostela: 25 km
+
 
   Day 8: Departure
 image:
@@ -377,7 +387,9 @@ seo:
   no_index: false
 duration: 8
 distance: 7
-tags: Moderate to hard Package tours
+tags:
+  - Moderate to hard
+  - Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 4

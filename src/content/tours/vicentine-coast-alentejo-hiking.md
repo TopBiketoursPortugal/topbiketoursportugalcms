@@ -315,7 +315,7 @@ afterPricing: >-
   SS.390€ * Extra nights: on request
 duration: 7
 distance: 80
-tags: ''
+tags: []
 minGroupSize: ''
 maxGroupSize: ''
 difficulty: 2

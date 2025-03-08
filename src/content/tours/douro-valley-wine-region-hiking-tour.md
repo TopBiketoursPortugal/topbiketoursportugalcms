@@ -347,8 +347,10 @@ seo:
 highlight: BestSeller
 duration: 8
 distance: 68
-tags: >-
-  Douro Wine tasting Olive oil Culture Gastronomy
+tags:
+  - Douro Wine tasting
+  - Olive oil
+  - Culture Gastronomy
 minGroupSize: 1
 maxGroupSize: ''
 difficulty: 3

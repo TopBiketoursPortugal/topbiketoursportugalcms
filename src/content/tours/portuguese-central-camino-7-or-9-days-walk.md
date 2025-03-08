@@ -378,7 +378,7 @@ seo:
   no_index: false
 duration: 8
 distance: 102
-tags: ''
+tags: []
 minGroupSize: ''
 maxGroupSize: ''
 difficulty: 4

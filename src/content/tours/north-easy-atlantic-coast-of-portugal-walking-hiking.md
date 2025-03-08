@@ -371,7 +371,7 @@ seo:
 content_blocks: []
 duration: 8
 distance: 84
-tags: ''
+tags: []
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 1

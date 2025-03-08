@@ -157,14 +157,14 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.images
-      tags:
-        type: textarea
-        comment: one tag per line
-        options:
-          show_count: false
-          empty_type: 'null'
-          icon: tag
-        cascade: true
+      # tags:
+      #   type:
+      #   comment: one tag per line
+      #   options:
+      #     show_count: false
+      #     empty_type: 'null'
+      #     icon: tag
+      #   cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -937,7 +937,7 @@ timezone: Europe/Lisbon
 _structures:
   faqs:
     values:
-      - label: Image
+      - label: FAQs
         value:
           question: ''
           answer: ''
@@ -949,7 +949,6 @@ _structures:
     remove_empty_inputs: true
     hide_extra_inputs: true
     remove_extra_inputs: false
-
   images:
     values:
       - label: Image

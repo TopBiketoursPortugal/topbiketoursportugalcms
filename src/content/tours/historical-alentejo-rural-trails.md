@@ -38,7 +38,8 @@ type: PackageTour
 region: north
 itinerary:
   - title: 'Day 1: Lisbon or Porto arrival and transfer to Meada'
-    description: 'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
+    description:
+      'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
     location:
       lat: '1'
       lng: '1'
@@ -384,7 +385,7 @@ seo:
   no_index: false
 duration: 8
 distance: 99
-tags: ''
+tags: []
 minGroupSize: 1
 maxGroupSize: 3
 difficulty: 3
