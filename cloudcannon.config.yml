@@ -147,6 +147,11 @@ collections_config:
       - visual
       - data
     _inputs:
+      tags:
+        type: multiselect
+        options:
+          allow_create: true
+          allow_empty: true
       id:
         type: auto
         instance_value: UUID
@@ -297,17 +302,15 @@ _inputs:
     type: object
     options:
       preview:
-        text:
-          - key: title
-        icon: Image
-        icon_color:
         image:
           - key: src
+        text:
+          - key: alt
+        icon: Image
       structures:
         style: select
         values:
-          - label: Image
-            value:
+          - value:
               src: ''
               alt: ''
     cascade: true
@@ -315,16 +318,15 @@ _inputs:
     type: image
     options:
       paths:
-      mime_type:
+        uploads: src/assets/images
       accepts_mime_types:
-      empty_type:
+        - image/png
+        - image/jpeg
+        - image/webp
+      empty_type: 'null'
       resize_style: contain
-      width:
-      height:
       expandable: false
-      allowed_sources:
-      prevent_resize_existing_files:
-      sizes:
+      prevent_resize_existing_files: true
     cascade: true
   memberType:
     type: select
