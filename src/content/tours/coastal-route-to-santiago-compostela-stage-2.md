@@ -5,7 +5,6 @@ order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
 subTitle: '1'
 content: >-
-content: >-
   # Coastal route to Santiago Compostela: Stage 2
 
 
@@ -409,8 +408,7 @@ images:
     alt: vigo bay view
   - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
     alt: porto city center
-  - src: >-
-      /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
     alt: POrto douro river
 reviews:
   - title: Greate experience
