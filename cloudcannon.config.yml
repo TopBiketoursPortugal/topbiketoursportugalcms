@@ -258,8 +258,9 @@ _inputs:
     type: object
     options:
       preview:
-        text: '{{ alt }}'
-        subtext: '{{ src }}'
+        icon: image
+        text: alt
+        image: src
       structures:
         values:
           - label: Image
