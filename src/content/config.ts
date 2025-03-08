@@ -17,17 +17,6 @@ const blogCollection = defineCollection({
       src: z.string(),
       alt: z.string()
     }),
-    // image: z
-    //   .object({
-    //     src: z.string(),
-    //     alt: z.string()
-    //   })
-    //   .or(
-    //     z.object({
-    //       image_path: z.string(),
-    //       alt_text: z.string()
-    //     })
-    //   ),
     seo: seoSchema
   })
 });

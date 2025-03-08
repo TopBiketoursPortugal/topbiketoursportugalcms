@@ -496,6 +496,7 @@ export default function Icon({
     case 'Lemon':
       return <FontAwesomeIcon icon={faLemon} className={style} title={title} />;
     case 'Bookmark':
+    case 'ph:bookmark-simple-thin':
       return (
         <FontAwesomeIcon icon={faBookmark} className={style} title={title} />
       );
