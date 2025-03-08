@@ -134,6 +134,17 @@ collections_config:
     description: ''
     _enabled_editors:
     _inputs:
+      region:
+        type: select
+        options:
+          values: data.tour_regions[*].en
+          value_key: id
+          preview:
+            text:
+              - key: name
+        comment: >-
+          To add a new region, go to the [tour_regions data
+          file](cloudcannon:collections/data/tour_regions.json)
       content:
         type: markdown
         cascade: true
@@ -829,7 +840,8 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment: Set the colors available in the color selectors throughout the site.
+        comment:
+          Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color
@@ -857,6 +869,16 @@ file_config:
       $[*]:
         type: text
         cascade: true
+  # - glob: data/tour_regions.json
+  #   _inputs:
+  #     $:
+  #       type: array
+  #       label: Tour regions
+  #       comment: Set the regions available in tours.
+  #       cascade: true
+  #     $[*]:
+  #       type: text
+  #       cascade: true
 data_config:
   icons:
     path: data/icons.json
@@ -865,7 +887,7 @@ data_config:
   tags:
     path: data/tags.json
   Tour regions:
-    path: data/tour-regions.json
+    path: data/tour_regions.json
 timezone: Europe/Lisbon
 markdown:
   engine:
