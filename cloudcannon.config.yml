@@ -137,11 +137,11 @@ collections_config:
       region:
         type: select
         options:
-          values: data.tour_regions[*].en
+          values: data.tour_regions
           value_key: id
           preview:
             text:
-              - key: name
+              - key: en.name
         comment: >-
           To add a new region, go to the [tour_regions data
           file](cloudcannon:collections/data/tour_regions.json)
