@@ -1,7 +1,6 @@
-_schema: _schema
 paths:
   uploads: src/assets/images
-  static:
+  static: ''
 collections_config:
   pages:
     path: src/content/pages
@@ -117,8 +116,8 @@ collections_config:
         comment: >-
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
-          ```src/components/utility/icon.astro.jsx``` file, following the
-          existing pattern.
+          ```~/components/utility/Icon.tsx.jsx``` file, following the existing
+          pattern.
         cascade: true
     disable_add: true
     disable_add_folder: true

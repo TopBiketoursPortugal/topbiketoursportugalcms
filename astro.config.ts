@@ -92,29 +92,29 @@ export default defineConfig({
     svg: {
       mode: 'sprite'
     }
-  },
-
-  vite: {
-    resolve: {
-      alias: {
-        '~': path.dirname('./') // Maps ~ to the src directory
-      }
-    },
-    //   css: {
-    //     transformer: "lightningcss",
-    //   },
-    // plugins: [
-    //   Unfonts({
-    //     google: {
-    //       families: ['Poppins', 'Inter Variable']
-    //     }
-    //   })
-    // ],
-    build: {
-      // inlineStylesheets: 'never',
-      rollupOptions: {
-        external: ['astro:content-layer-deferred-module']
-      }
-    }
   }
+
+  // vite: {
+  //   resolve: {
+  //     alias: {
+  //       '~': path.resolve('./src/') // Maps ~ to the src directory
+  //     }
+  //   }
+  //   //   css: {
+  //   //     transformer: "lightningcss",
+  //   //   },
+  //   // plugins: [
+  //   //   Unfonts({
+  //   //     google: {
+  //   //       families: ['Poppins', 'Inter Variable']
+  //   //     }
+  //   //   })
+  //   // ],
+  //   // build: {
+  //   //   // inlineStylesheets: 'never',
+  //   //   rollupOptions: {
+  //   //     external: ['astro:content-layer-deferred-module']
+  //   //   }
+  //   // }
+  // }
 });
