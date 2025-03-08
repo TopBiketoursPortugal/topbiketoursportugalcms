@@ -154,7 +154,7 @@ collections_config:
           place_groups_below: false
           subtype: object
           preview:
-            icon: src
+            image: src
             text: alt
       tags:
         type: textarea
