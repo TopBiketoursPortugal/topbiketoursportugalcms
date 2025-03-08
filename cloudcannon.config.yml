@@ -153,8 +153,10 @@ collections_config:
       region:
         type: select
         options:
-          values: data.tour_regions
+          allow_create: false
+          values: data.tour_regions[*]
           value_key: id
+          allow_empty: true
           preview:
             text:
               - key: en.name
