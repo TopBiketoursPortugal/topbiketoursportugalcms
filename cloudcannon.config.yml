@@ -1,3 +1,4 @@
+_schema: _schema
 paths:
   uploads: src/assets/images
   static: ''
@@ -169,6 +170,7 @@ collections_config:
         reorder_inputs: true
         hide_extra_inputs: true
         remove_empty_inputs: true
+        remove_extra_inputs: true
         name: New tour
         icon: notes
   team:
@@ -257,18 +259,20 @@ _inputs:
     type: object
     options:
       preview:
-        icon: image
         text:
           - key: title
+        icon: Image
+        icon_color:
         image:
           - key: src
       structures:
+        style: select
         values:
           - label: Image
             value:
               src: ''
               alt: ''
-
+    cascade: true
   src:
     type: image
     options:
@@ -825,8 +829,7 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment:
-          Set the colors available in the color selectors throughout the site.
+        comment: Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color
@@ -861,6 +864,8 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
+  Tour regions:
+    path: data/tour-regions.json
 timezone: Europe/Lisbon
 markdown:
   engine:
