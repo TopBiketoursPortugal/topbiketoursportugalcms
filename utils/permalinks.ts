@@ -3,32 +3,28 @@ import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 
 function getBasePath(language: LanguageCodes = 'en'): string {
-  return language === 'en' ? '/' : `/${language}`;
+  return language === 'en' ? '/' : `/${language}/`;
 }
 
 export function getTeamMemberPath(
   memberName: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}/team/${slugify(memberName)}`;
+  return `${getBasePath(language)}team/${slugify(memberName)}`;
 }
 
 export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}/tours/${slug ?? slugify(title)}`;
+  return `${getBasePath(language)}tours/${slug ?? slugify(title)}`;
 }
 
 export function getTourRegionsPath(
   region: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}/tours/regions/${slugify(region)}`;
-}
-
-export function getHomePermalink(language: LanguageCodes = 'en'): string {
-  return getBasePath(language);
+  return `${getBasePath(language)}tours/regions/${slugify(region)}`;
 }
 
 function trim(str = '', ch?: string): string {
@@ -41,4 +37,9 @@ function trim(str = '', ch?: string): string {
 
 export function trimSlash(s: string): string {
   return trim(trim(s, '/'));
+}
+
+export function getHomePermalink(language: LanguageCodes = 'en'): string {
+  const home = getBasePath(language);
+  return home.length > 1 ? trimSlash(home) : home;
 }
