@@ -903,7 +903,7 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
-  Tour regions:
+  tour_regions:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 markdown:
