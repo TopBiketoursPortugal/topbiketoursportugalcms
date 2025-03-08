@@ -158,6 +158,8 @@ collections_config:
           value_key: id
           allow_empty: true
           preview:
+            image:
+              - key: en.src
             text:
               - key: en.name
         comment: >-
