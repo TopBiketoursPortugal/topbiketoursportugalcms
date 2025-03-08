@@ -22,7 +22,7 @@ type Props = {
 
 const { tour: data, contentDisplay = 'inline' } = Astro.props;
 
-const { image, content, duration, tags, language, packages = [] } = data;
+const { image, content, duration, tags = [], language, packages = [] } = data;
 
 const minPrice = Math.min(...packages.map((p) => p.price?.price ?? 0));
 const minPromoPrice = Math.max(...packages.map((p) => p.price?.promo ?? 0));
@@ -69,10 +69,10 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     <Separator weight="thin" color="neutral" />
 
     {
-      tags && tags !== '' && tags.length > 0 && (
+      tags && tags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
           <Icon icon="ph:bookmark-simple-thin" class="h-5 w-5 text-gray-600" />
-          {tags.split('\n').map((t) => (
+          {tags.map((t) => (
             <LinkButton
               variant="link"
               class="z-50"
