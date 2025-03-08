@@ -400,4 +400,9 @@ feature:
   title: ' Coastal route to Santiago Compostela: Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 ---
