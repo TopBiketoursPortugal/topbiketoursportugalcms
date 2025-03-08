@@ -136,6 +136,9 @@ collections_config:
       content:
         type: markdown
         cascade: true
+      afterPricing:
+        type: markdown
+        cascade: true
     add_options:
       - name: New Tour English
         icon: language
@@ -251,6 +254,19 @@ _inputs:
     type: auto
     hidden: true
     cascade: true
+  image:
+    type: object
+    options:
+      preview:
+        text: '{{ alt }}'
+        subtext: '{{ src }}'
+      structures:
+        values:
+          - label: Image
+            value:
+              src: ''
+              alt: ''
+
   src:
     type: image
     options:
