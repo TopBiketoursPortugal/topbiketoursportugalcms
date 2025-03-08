@@ -21,6 +21,12 @@ collections_config:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
     schemas:
       default:
         path: schemas/page.md
@@ -49,6 +55,11 @@ collections_config:
       - content
       - visual
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       title:
         type: auto
         options:
@@ -134,6 +145,11 @@ collections_config:
     description: ''
     _enabled_editors:
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       region:
         type: select
         options:
@@ -202,6 +218,11 @@ collections_config:
     _enabled_editors:
       - content
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       language:
         type: text
         hidden: true
@@ -322,11 +343,7 @@ _inputs:
       value_key: code
     hidden: true
     cascade: true
-  id:
-    type: auto
-    instance_value: UUID
-    hidden: true
-    cascade: true
+
   feature_list:
     type: multiselect
     options:
