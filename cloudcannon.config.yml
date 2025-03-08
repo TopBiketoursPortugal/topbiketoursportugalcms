@@ -147,15 +147,16 @@ collections_config:
       - visual
       - data
     _inputs:
-      images:
-        type: object
+      faqs:
+        type: array
         options:
-          allow_label_formatting: false
-          place_groups_below: false
-          subtype: object
-          preview:
-            image: src
-            text: alt
+          empty_type: array
+          structures: _structures.faqs
+      images:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.images
       tags:
         type: textarea
         comment: one tag per line
@@ -314,6 +315,8 @@ _inputs:
     type: object
     options:
       preview:
+        gallery:
+          fit: cover
         image:
           - key: src
         text:
@@ -931,6 +934,39 @@ data_config:
   tour_regions:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
+_structures:
+  faqs:
+    values:
+      - label: Image
+        value:
+          question: ''
+          answer: ''
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+
+  images:
+    values:
+      - label: Image
+        value:
+          src: ''
+          alt: ''
+        preview:
+          icon: Image
+          image:
+            - key: src
+          text:
+            - key: alt
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
 markdown:
   engine:
   options:
