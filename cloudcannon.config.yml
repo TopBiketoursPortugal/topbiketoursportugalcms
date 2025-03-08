@@ -147,6 +147,15 @@ collections_config:
       - visual
       - data
     _inputs:
+      images:
+        type: object
+        options:
+          allow_label_formatting: false
+          place_groups_below: false
+          subtype: object
+          preview:
+            icon: src
+            text: alt
       tags:
         type: textarea
         comment: one tag per line
