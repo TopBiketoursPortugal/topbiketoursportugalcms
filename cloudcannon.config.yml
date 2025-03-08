@@ -144,6 +144,8 @@ collections_config:
     disable_url: false
     description: ''
     _enabled_editors:
+      - visual
+      - data
     _inputs:
       id:
         type: auto
