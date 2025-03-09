@@ -17,31 +17,39 @@ content_blocks:
   - _bookshop_name: hero
     background_color: '#ffffff'
     heading:
-      heading_text: Astro Bookshop Starter
-      heading_gradient_color: '#a0a2ff'
+      heading_text: Top Walking Tours Portugal
+      heading_gradient_color: '#c8d5b9'
     subheading:
       markdown_content: >-
-        A starting point for **developers looking to build a website with Astro,
-        using Bookshop components in CloudCannon**. Create your own copy, and
-        start creating your own components to use in the CloudCannon CMS.
+        Our mission is to provide you with relaxing and enjoyable cycling
+        holiday in Portugal, complemented with historical points, tasty
+        gastronomy and wonderful views.
+
+
+        The <a href="https://topbiketoursportugal.com/bike-tours-in-portugal/"
+        rel="nofollow"><strong>bike tours</strong></a> in Portugal we offer are
+        designed for recreational cyclists. For that purpose, we mostly use
+        touring bicycles. Mountain bikes are used depending on the bike tour.
+
+
+        Take a look to our <a
+        href="https://topbiketoursportugal.com/bike-tours-in-portugal/"
+        rel="nofollow">Portugal Bike tours</a>!
       color: '#393939'
     image:
-      image_path: /src/assets/images/featured-image-5.jpg
-      alt_text: An image
+      image_path: /src/assets/images/bike-tours-in-portugal.jpg
+      alt_text: Top Walking Tours Portugal
     buttons:
       - _bookshop_name: buttons/primary
-        button_text: GitHub
-        button_icon: Github
-        button_link: https://github.com/CloudCannon/astro-starter
+        button_text: About us
+        button_icon: Burger
+        button_link: /about-us
         background_color: '#034ad8'
-        hover_brightness: 0.85
+        hover_brightness: 0.9
         text_color: '#ffffff'
-      - _bookshop_name: buttons/secondary
-        button_text: CloudCannon
-        button_icon: CloudCannon
-        button_link: https://www.cloudcannon.com
-        text_color: '#034ad8'
-        hover_brightness: 0.95
+  - _bookshop_name: collection
+    type: tours
+    title: '## **Find our popular tours**'
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:
@@ -94,9 +102,9 @@ content_blocks:
       - Best email sending services changed
       - Email delivery tips
   - _bookshop_name: collection
-    type: tours
-    title: Our Tours
-  - _bookshop_name: collection
     type: reviews
-    title: What people say about us.
+    title: '## **What people say about us**'
+  - _bookshop_name: collection
+    type: team
+    title: Meat our team
 ---
