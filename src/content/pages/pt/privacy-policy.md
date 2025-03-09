@@ -1,6 +1,6 @@
 ---
 _schema: default
-id: 493f9d67-f89c-4f32-bf40-a85124c2bf60
+id: 493f9d67-f89c-4f32-bf40-a85124c2bf61
 title: Politica privacidade
 language: pt
 seo:
@@ -156,5 +156,4 @@ content_blocks:
       padding: Normal
       align: leading
 template: ~/layouts/Page.astro
-slug: privacy-policy
 ---

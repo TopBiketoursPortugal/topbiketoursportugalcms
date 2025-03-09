@@ -57,12 +57,17 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   // console.log(`page slug ${page.slug}`);
   // console.log(`filePath ${page.filePath}`);
 
+  const language = page.data.language ?? 'en';
+
   if (
     page.slug === 'index' ||
     page.slug === 'home' ||
     page.filePath?.endsWith('index.md')
   ) {
-    return getHomePermalink(page.data.language);
+    return getHomePermalink(language);
   }
-  return `${getBasePath(page.data.language)}${page.data.slug ?? slugify(page.data.title, { lower: true }).replace(/index$/, '')}`.toLocaleLowerCase();
+  const pagePath =
+    `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true }).replace(/index$/, '')}`.toLocaleLowerCase();
+  // console.log(pagePath);
+  return pagePath;
 }

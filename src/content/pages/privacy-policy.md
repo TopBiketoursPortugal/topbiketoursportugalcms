@@ -2,6 +2,7 @@
 _schema: default
 id: 493f9d67-f89c-4f32-bf40-a85124c2bf60
 title: Privacy policy
+slug: privacy-policy
 language: en
 seo:
   page_description: Privacy policy
@@ -156,5 +157,4 @@ content_blocks:
       padding: Normal
       align: leading
 template: ~/layouts/Page.astro
-slug: privacy-policy
 ---

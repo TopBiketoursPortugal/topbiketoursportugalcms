@@ -1,7 +1,8 @@
 ---
 _schema: default
-id: 374b61b1-17bb-468b-a1d2-9cb9483dd1fc
+id: 374b61b1-17bb-468b-a1d2-9cb9483dd1f1
 title: Termos e condições
+slug: termos-condicoes
 language: pt
 seo:
   page_description: Terms and conditions
@@ -123,5 +124,4 @@ content_blocks:
       padding: Normal
       align: Centered
 template: ~/layouts/Page.astro
-slug: terms-and-conditions
 ---

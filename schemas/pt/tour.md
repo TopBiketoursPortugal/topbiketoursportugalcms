@@ -19,7 +19,6 @@ image:
   src: /src/assets/images/santiago-de-compostela-city-center.jpg
   alt: '312'
 code: ST04
-slug: coastal-route-to-santiago-compostela-stage-2
 language: pt
 type: WalkingTour
 region: north

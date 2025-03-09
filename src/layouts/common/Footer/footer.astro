@@ -7,7 +7,7 @@ import NavigationData from 'src/../data/navigation.json';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { t } from 'utils/i18n';
 import { getCollection } from 'astro:content';
-import { getTourRegionsPath } from 'utils/permalinks';
+import { getPagePath, getTourRegionsPath } from 'utils/permalinks';
 import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
@@ -33,32 +33,24 @@ const { footer } = NavigationData[language];
 const { links } = footer;
 const year = new Date().getFullYear();
 
-// console.log('currentLocale', Astro.currentLocale);
-
-const termsFilePathLocale = getRelativeLocaleUrl(
-  Astro.currentLocale ?? 'en',
-  'terms-and-conditions.md'
-);
-
-const privacyFilePathLocale = getRelativeLocaleUrl(
-  Astro.currentLocale ?? 'en',
-  'privacy-policy.md'
-);
-
 const pageCollection = await getCollection('pages');
+// console.log(pageCollection);
+// console.log(pageCollection.length);
 
 const termsPage = pageCollection.filter(
-  (p) => p.id === termsFilePathLocale.substring(1)
+  (p) =>
+    p.filePath?.endsWith('terms-and-conditions.md') &&
+    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 const privacyPage = pageCollection.filter(
-  (p) => p.id === privacyFilePathLocale.substring(1)
+  (p) =>
+    p.filePath?.endsWith('privacy-policy.md') &&
+    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 
-const localePrefix = getBaseLocaleBaseUrl(Astro.currentLocale);
+const privacyPagePath = privacyPage ? getPagePath(privacyPage) : '';
 
-const privacyPagePath = `${localePrefix}${(privacyPage?.data as any)?.slug ?? slugify(privacyPage?.data?.title ?? '', { lower: true })}`;
-
-const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? slugify(termsPage?.data?.title ?? '', { lower: true })}`;
+const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 ---
 
 <footer

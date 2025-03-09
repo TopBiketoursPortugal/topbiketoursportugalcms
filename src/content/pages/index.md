@@ -96,4 +96,7 @@ content_blocks:
   - _bookshop_name: collection
     type: tours
     title: Our Tours
+  - _bookshop_name: collection
+    type: reviews
+    title: What people say about us.
 ---
