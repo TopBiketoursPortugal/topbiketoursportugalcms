@@ -60,7 +60,8 @@ import {
   faStarHalf,
   faRss,
   faCompass,
-  faMoon
+  faMoon,
+  faCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -85,14 +86,14 @@ import { cn } from 'utils/cn';
 
 export default function Icon({
   icon,
-  class: className,
+  className,
   title
 }: {
   icon: IconNames;
-  class?: string;
+  className?: string;
   title?: string;
 }) {
-  const style = cn('h-6 w-6 fill-current', className);
+  const style = cn('h-6 w-6 ' + className);
   switch (icon) {
     case 'logos:mastercard':
       return (
@@ -361,8 +362,13 @@ export default function Icon({
     case 'Check':
       return <FontAwesomeIcon icon={faCheck} className={style} title={title} />;
     case 'CircleCheck':
+    case 'ph:check-circle-fill':
       return (
         <FontAwesomeIcon icon={faCircleCheck} className={style} title={title} />
+      );
+    case 'ph:x-circle-fill':
+      return (
+        <FontAwesomeIcon icon={faCircleXmark} className={style} title={title} />
       );
     case 'ArrowRight':
       return (

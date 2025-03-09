@@ -17,7 +17,7 @@ const { enableSystem = false } = Astro.props;
   <button x-on:click="darkMode = 'light'">
     <Icon
       icon="ph:sun-light"
-      x-bind:class="{'border-2 border-red/50': darkMode === 'light'}"
+      x-bind:className="{'border-2 border-red/50': darkMode === 'light'}"
     />
 
     <span class="sr-only">light</span>
@@ -26,7 +26,7 @@ const { enableSystem = false } = Astro.props;
   <button x-on:click="darkMode = 'dark'">
     <Icon
       icon="ph:moon-light"
-      x-bind:class="{'border-2 border-red/50': darkMode === 'dark'}"
+      x-bind:className="{'border-2 border-red/50': darkMode === 'dark'}"
     />
     <span class="sr-only">dark</span>
   </button>

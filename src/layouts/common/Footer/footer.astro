@@ -4,25 +4,23 @@ import Text from 'src/components/typography/text.astro';
 import regions from 'src/../data/tour_regions.json';
 
 import NavigationData from 'src/../data/navigation.json';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { t } from 'utils/i18n';
 import { getCollection } from 'astro:content';
 import { getPagePath, getTourRegionsPath } from 'utils/permalinks';
 import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
-import slugify from 'slugify';
 import Icon from 'src/components/utility/icon';
 
-function getBaseLocaleBaseUrl(
-  language: LanguageCodes | string | undefined = 'en'
-): string {
-  if (language === 'en') {
-    return '/';
-  }
+// function getBaseLocaleBaseUrl(
+//   language: LanguageCodes | string | undefined = 'en'
+// ): string {
+//   if (language === 'en') {
+//     return '/';
+//   }
 
-  return `/${language}/`;
-}
+//   return `/${language}/`;
+// }
 
 type Props = {
   language: LanguageCodes;

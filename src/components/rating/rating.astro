@@ -37,14 +37,14 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.fullStars > 0 &&
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
-          <Icon icon="ph:star-fill" class={startIconStyle} />
+          <Icon icon="ph:star-fill" className={startIconStyle} />
         </li>
       ))
   }
   {
     startDistribution.halfStars && (
       <li>
-        <Icon icon="ph:star-half-fill" class={startIconStyle} />
+        <Icon icon="ph:star-half-fill" className={startIconStyle} />
       </li>
     )
   }
@@ -52,7 +52,7 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.emptyStars > 0 &&
       [...Array(startDistribution.emptyStars).keys()].map(() => (
         <li>
-          <Icon icon="ph:star-light" class={startIconStyle} />
+          <Icon icon="ph:star-light" className={startIconStyle} />
         </li>
       ))
   }

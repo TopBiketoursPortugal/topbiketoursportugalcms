@@ -71,7 +71,10 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     {
       tags && tags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
-          <Icon icon="ph:bookmark-simple-thin" class="text-gray-600 h-5 w-5" />
+          <Icon
+            icon="ph:bookmark-simple-thin"
+            className="text-gray-600 h-5 w-5"
+          />
           {tags.map((t) => (
             <LinkButton
               variant="link"

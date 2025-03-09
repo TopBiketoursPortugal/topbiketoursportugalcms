@@ -100,7 +100,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       {text}{' '}
                       <Icon
                         icon="ph:caret-down-light"
-                        class="hidden h-4 w-4 md:inline"
+                        className="hidden h-4 w-4 md:inline"
                       />
                     </button>
                     <ul class="dropdown-menu text-black rounded pl-4 font-medium drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
@@ -152,7 +152,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 aria-label="RSS Feed"
                 href="/feed.xml"
               >
-                <Icon icon="ph:rss-light" class="h-5 w-5" />
+                <Icon icon="ph:rss-light" className="h-5 w-5" />
               </a>
             )
           }
