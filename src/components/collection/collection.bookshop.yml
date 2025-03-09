@@ -6,10 +6,7 @@ spec:
   description: Text next to image with button
   icon: 'chrome_reader_mode'
   tags:
-    - Text
-    - Image
-    - Button
-    - Flippable
+    - Collections
 
 # Defines the structure of this component, as well as the default values
 blueprint:
@@ -25,6 +22,8 @@ preview:
 
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
+  title:
+    type: markdown
   type:
     type: select
     hidden: false
