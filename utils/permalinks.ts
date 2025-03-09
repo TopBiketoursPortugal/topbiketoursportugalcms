@@ -1,3 +1,4 @@
+import astro from 'astro:config/client';
 import type { CollectionEntry } from 'astro:content';
 import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
@@ -18,7 +19,7 @@ export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true, strict: true })}`;
+  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true, strict: true })}${astro.trailingSlash === 'always' ? '/' : ''}`;
 }
 
 export function getTourRegionsPath(

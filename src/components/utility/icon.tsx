@@ -1,4 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CloudCannon from '../../assets/icons/cloudcannon.svg';
+import JCBIcon from '../../assets/icons/jcb.svg';
+import PhStartFill from '../../assets/icons/fill/stack-fill.svg';
 import {
   faEnvelope,
   faUser,
@@ -176,104 +179,7 @@ export default function Icon({
         </svg>
       );
     case 'logos:jcb':
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="2.59em"
-          height="2em"
-          viewBox="0 0 256 198"
-          className={style}
-        >
-          <title>{title}</title>
-          <defs>
-            <linearGradient
-              id="logosJcb0"
-              x1="-57.527%"
-              x2="232.391%"
-              y1="50.124%"
-              y2="50.124%"
-            >
-              <stop offset="0%" stopColor="#007940" />
-              <stop offset="22.85%" stopColor="#00873f" />
-              <stop offset="74.33%" stopColor="#40a737" />
-              <stop offset="100%" stopColor="#5cb531" />
-            </linearGradient>
-            <linearGradient
-              id="logosJcb1"
-              x1=".183%"
-              x2="100.273%"
-              y1="49.96%"
-              y2="49.96%"
-            >
-              <stop offset="0%" stopColor="#007940" />
-              <stop offset="22.85%" stopColor="#00873f" />
-              <stop offset="74.33%" stopColor="#40a737" />
-              <stop offset="100%" stopColor="#5cb531" />
-            </linearGradient>
-            <linearGradient
-              id="logosJcb2"
-              x1="-62.802%"
-              x2="253.671%"
-              y1="49.858%"
-              y2="49.858%"
-            >
-              <stop offset="0%" stopColor="#007940" />
-              <stop offset="22.85%" stopColor="#00873f" />
-              <stop offset="74.33%" stopColor="#40a737" />
-              <stop offset="100%" stopColor="#5cb531" />
-            </linearGradient>
-            <linearGradient
-              id="logosJcb3"
-              x1=".176%"
-              x2="101.808%"
-              y1="50.006%"
-              y2="50.006%"
-            >
-              <stop offset="0%" stopColor="#1f286f" />
-              <stop offset="47.51%" stopColor="#004e94" />
-              <stop offset="82.61%" stopColor="#0066b1" />
-              <stop offset="100%" stopColor="#006fbc" />
-            </linearGradient>
-            <linearGradient
-              id="logosJcb4"
-              x1="-.576%"
-              x2="98.133%"
-              y1="49.914%"
-              y2="49.914%"
-            >
-              <stop offset="0%" stopColor="#6c2c2f" />
-              <stop offset="17.35%" stopColor="#882730" />
-              <stop offset="57.31%" stopColor="#be1833" />
-              <stop offset="85.85%" stopColor="#dc0436" />
-              <stop offset="100%" stopColor="#e60039" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="#fff"
-            d="M256 157.418c0 21.907-17.839 39.746-39.746 39.746H0V39.746C0 17.839 17.839 0 39.746 0H256z"
-          />
-          <path
-            fill="url(#logosJcb0)"
-            d="M185.584 117.046h16.43c.47 0 1.565-.156 2.035-.156c3.13-.626 5.79-3.443 5.79-7.355c0-3.755-2.66-6.572-5.79-7.354c-.47-.157-1.408-.157-2.034-.157h-16.43z"
-          />
-          <path
-            fill="url(#logosJcb1)"
-            d="M200.137 13.3c-15.648 0-28.48 12.676-28.48 28.48v29.575h40.216c.939 0 2.034 0 2.816.156c9.076.47 15.805 5.164 15.805 13.3c0 6.416-4.538 11.893-12.988 12.989v.312c9.232.626 16.274 5.79 16.274 13.77c0 8.607-7.824 14.24-18.152 14.24h-44.127v57.898h41.78c15.648 0 28.48-12.675 28.48-28.48V13.3z"
-          />
-          <path
-            fill="url(#logosJcb2)"
-            d="M207.804 86.69c0-3.756-2.66-6.26-5.79-6.73c-.312 0-1.095-.156-1.564-.156h-14.866v13.77h14.866c.47 0 1.408 0 1.565-.156c3.13-.47 5.79-2.973 5.79-6.729"
-          />
-          <path
-            fill="url(#logosJcb3)"
-            d="M42.719 13.3c-15.648 0-28.48 12.676-28.48 28.48v70.26c7.981 3.911 16.274 6.415 24.568 6.415c9.858 0 15.178-5.946 15.178-14.083V71.198h24.411v33.017c0 12.831-7.98 23.316-35.051 23.316c-16.43 0-29.262-3.6-29.262-3.6v59.932h41.78c15.648 0 28.48-12.675 28.48-28.48V13.302z"
-          />
-          <path
-            fill="url(#logosJcb4)"
-            d="M121.428 13.3c-15.648 0-28.48 12.676-28.48 28.48v37.242c7.199-6.103 19.717-10.015 39.903-9.076c10.797.47 22.376 3.443 22.376 3.443v12.049c-5.79-2.973-12.674-5.634-21.594-6.26c-15.335-1.095-24.567 6.416-24.567 19.56c0 13.301 9.232 20.812 24.567 19.56c8.92-.626 15.805-3.442 21.594-6.259v12.049s-11.423 2.973-22.376 3.443c-20.186.938-32.704-2.974-39.902-9.076v65.721h41.78c15.648 0 28.479-12.675 28.479-28.48V13.302z"
-          />
-        </svg>
-      );
+      return <JCBIcon className={style} title={title}></JCBIcon>;
     case 'ph:compass-fill':
       return (
         <FontAwesomeIcon icon={faCompass} className={style} title={title} />
@@ -285,7 +191,8 @@ export default function Icon({
     case 'ph:moon-light':
       return <FontAwesomeIcon icon={faMoon} className={style} title={title} />;
     case 'ph:star-fill':
-      return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
+      return <PhStartFill className={style} title={title}></PhStartFill>;
+    // return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
     case 'ph:star-light':
       return (
         <FontAwesomeIcon icon={faStarOutline} className={style} title={title} />
@@ -600,36 +507,7 @@ export default function Icon({
     case 'ph:clock':
       return <FontAwesomeIcon icon={faClock} className={style} title={title} />;
     case 'CloudCannon':
-      return (
-        <svg
-          version="1.0"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 87.000000 59.000000"
-        >
-          <title>{title}</title>
-          <g
-            transform="translate(0.000000,59.000000) scale(0.100000,-0.100000)"
-            fill="currentColor"
-            stroke="none"
-          >
-            <path
-              d="M183 575 c-34 -14 -63 -59 -63 -97 0 -16 -12 -30 -39 -45 -107 -61
-                  -101 -221 10 -279 22 -11 29 -21 29 -45 0 -22 10 -41 34 -65 28 -28 41 -34 78
-                  -34 24 0 53 6 63 14 16 12 23 12 39 0 25 -17 56 -1 56 29 -1 16 -15 30 -53 52
-                  -74 43 -112 108 -112 189 0 84 32 139 108 189 42 29 57 44 57 62 0 28 -34 43
-                  -55 25 -12 -10 -22 -9 -49 4 -41 19 -61 20 -103 1z"
-            />
-            <path
-              d="M582 575 c-25 -11 -38 -12 -57 -3 -19 8 -28 8 -40 -2 -25 -21 -18
-                  -49 18 -68 51 -27 111 -94 125 -139 34 -115 -10 -212 -127 -275 -34 -19 -41
-                  -48 -16 -68 12 -10 21 -10 40 -2 19 9 31 8 52 -3 35 -19 55 -19 98 -1 36 15
-                  65 59 65 98 0 16 11 29 37 43 47 25 83 86 83 140 0 54 -36 115 -83 140 -26 14
-                  -37 27 -37 43 0 39 -29 83 -65 98 -42 17 -51 17 -93 -1z"
-            />
-            <path d="M368 404 c-80 -43 -76 -179 6 -218 73 -35 149 -4 175 71 13 35 13 46 0 79 -27 72 -114 105 -181 68z" />
-          </g>
-        </svg>
-      );
+      return <CloudCannon className={style} title={title}></CloudCannon>;
     case 'circle-flags:pt':
       return (
         <svg
