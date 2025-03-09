@@ -1,0 +1,129 @@
+# pricing-table.bookshop.yml
+spec:
+  label: Pricing Table
+  description: A pricing table component for displaying tour packages
+  icon: table_chart
+  tags:
+    - pricing
+    - tours
+    - comparison
+
+structures:
+  - tour_packages
+
+blueprint:
+  packages:
+    label: Tour Packages
+    type: array
+    preview: title
+    struct: tour_packages
+    description: Add and configure tour packages to display in the pricing table
+  language:
+    label: Language
+    type: select
+    options:
+      - label: English
+        value: en
+      - label: Spanish
+        value: es
+      - label: French
+        value: fr
+      # Add more languages as needed based on languages.json
+    default: en
+    description: Select the language for currency formatting
+
+preview:
+  packages:
+    - title: 'Basic Tour'
+      duration: '3 days'
+      popular: false
+      price:
+        price: 299
+        currency: 'EUR'
+      included:
+        - title: 'Accommodation'
+          description: 'Yes'
+          included: true
+        - title: 'Meals'
+          description: 'No'
+          included: false
+    - title: 'Premium Tour'
+      duration: '5 days'
+      popular: true
+      price:
+        price: 599
+        currency: 'EUR'
+      included:
+        - title: 'Accommodation'
+          description: 'Yes'
+          included: true
+        - title: 'Meals'
+          description: 'Yes'
+          included: true
+
+_structures:
+  tour_packages:
+    label: Tour Package
+    values:
+      - label: Tour Package
+        icon: card_travel
+        fields:
+          title:
+            label: Package Title
+            type: text
+            description: The name of the tour package
+            required: true
+          duration:
+            label: Duration
+            type: text
+            description: Duration of the tour (e.g., "3 days")
+          popular:
+            label: Popular
+            type: boolean
+            default: false
+            description: Mark this package as popular/highlighted
+          price:
+            label: Price
+            type: object
+            fields:
+              price:
+                label: Amount
+                type: number
+                default: 0
+                description: Price of the package
+              currency:
+                label: Currency
+                type: select
+                options:
+                  - label: Euro (EUR)
+                    value: EUR
+                  - label: US Dollar (USD)
+                    value: USD
+                  - label: British Pound (GBP)
+                    value: GBP
+                default: EUR
+                description: Currency for the price
+          included:
+            label: Included Features
+            type: array
+            preview: title
+            description: List of features included in this package
+            values:
+              - label: Feature
+                icon: check
+                fields:
+                  title:
+                    label: Feature Title
+                    type: text
+                    description: Short title of the feature
+                  description:
+                    label: Description
+                    type: text
+                    description:
+                      Description or status (e.g., "Yes", "No", or detailed
+                      text)
+                  included:
+                    label: Included
+                    type: boolean
+                    default: true
+                    description: Is this feature included in the package?
