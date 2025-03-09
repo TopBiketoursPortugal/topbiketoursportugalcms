@@ -174,5 +174,5 @@ content_blocks:
     title: '## **What people say about us**'
   - _bookshop_name: collection
     type: team
-    title: Meat our team
+    title: Meet our team
 ---
