@@ -143,9 +143,6 @@ collections_config:
     icon: directions_bike
     disable_url: false
     description: ''
-    _enabled_editors:
-      - visual
-      - data
     _inputs:
       faqs:
         type: array
