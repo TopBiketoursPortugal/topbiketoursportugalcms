@@ -144,6 +144,18 @@ collections_config:
     disable_url: false
     description: ''
     _inputs:
+      relatedTours:
+        type: multichoice
+        options:
+          allow_empty: true
+          values: collections.tours
+          value_key: id
+          preview:
+            image:
+              - key: image.src
+            text:
+              - key: title
+
       faqs:
         type: array
         options:

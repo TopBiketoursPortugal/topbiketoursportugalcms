@@ -407,4 +407,5 @@ faqs:
     answer: A1
   - question: Q2
     answer: A1
+relatedTours: []
 ---

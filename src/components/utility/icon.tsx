@@ -61,10 +61,16 @@ import {
   faRss,
   faCompass,
   faMoon,
-  faCircleXmark
+  faCircleXmark,
+  faTag,
+  faUsers,
+  faBiking,
+  faPlaneArrival
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
+  faClock,
+  faMap,
   faStar as faStarOutline,
   faSun
 } from '@fortawesome/free-regular-svg-icons';
@@ -298,6 +304,7 @@ export default function Icon({
         <FontAwesomeIcon icon={faEnvelope} className={style} title={title} />
       );
     case 'User':
+    case 'ph:user-light':
       return <FontAwesomeIcon icon={faUser} className={style} title={title} />;
     case 'Bread':
       return (
@@ -502,6 +509,7 @@ export default function Icon({
           title={title}
         />
       );
+    case 'ph:info':
     case 'CircleInfo':
       return (
         <FontAwesomeIcon icon={faCircleInfo} className={style} title={title} />
@@ -512,6 +520,8 @@ export default function Icon({
       return <FontAwesomeIcon icon={faHand} className={style} title={title} />;
     case 'Lemon':
       return <FontAwesomeIcon icon={faLemon} className={style} title={title} />;
+    case 'ph:tag-light':
+      return <FontAwesomeIcon icon={faTag} className={style} title={title} />;
     case 'Bookmark':
     case 'ph:bookmark-simple-thin':
       return (
@@ -570,6 +580,25 @@ export default function Icon({
       return (
         <FontAwesomeIcon icon={faGithub} className={style} title={title} />
       );
+    case 'ph:airplane-light':
+      return (
+        <FontAwesomeIcon
+          icon={faPlaneArrival}
+          className={style}
+          title={title}
+        />
+      );
+    case 'ph:person-simple-bike-light':
+      return (
+        <FontAwesomeIcon icon={faBiking} className={style} title={title} />
+      );
+    case 'ph:users-three-light':
+      return <FontAwesomeIcon icon={faUsers} className={style} title={title} />;
+    case 'ph:map-trifold-light':
+      return <FontAwesomeIcon icon={faMap} className={style} title={title} />;
+
+    case 'ph:clock':
+      return <FontAwesomeIcon icon={faClock} className={style} title={title} />;
     case 'CloudCannon':
       return (
         <svg
