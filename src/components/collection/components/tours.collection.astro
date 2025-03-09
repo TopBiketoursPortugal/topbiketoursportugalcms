@@ -13,18 +13,20 @@ type Props = {
   frame: 'none' | 'light' | 'heavy';
   layout: 'horizontal' | 'vertical';
   title: string;
-  language?: LanguageCodes;
   heading: { text: string };
 };
 
 const { contentDisplay = 'inline' } = Astro.props;
-const language = (Astro.props.language ??
-  Astro.currentLocale ??
-  'en') as LanguageCodes;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const tours = await getCollection('tours');
+
+// console.log(tours);
+
+console.log(tours.filter((t) => t.data.language === 'en').length);
+
 const items =
   tours
-    .filter((item) => (item.data.language ?? 'en') === language)
+    .filter((item) => (item.data?.language ?? 'en') === language)
     .sort((a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)) ?? [];
 ---
 

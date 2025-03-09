@@ -9,7 +9,7 @@ image:
   alt: ''
 
 title: 'Portuguese Central Camino: Stage 2'
-language: en
+language: 'en'
 content: >-
   # Portuguese Central Camino: Stage 2
 

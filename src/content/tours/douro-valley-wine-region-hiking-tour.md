@@ -4,7 +4,7 @@ id: dd0b0b47-96d3-436f-83cf-e65fa5932570
 code: DOURO01
 slug: hiking-douro-valley-wine-region
 title: Douro Valley Wine region Hiking tour
-language: en
+language: 'en'
 subTitle: ''
 content: >-
   # Douro Valley Wine region Hiking tour

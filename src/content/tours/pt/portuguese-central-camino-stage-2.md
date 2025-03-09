@@ -1,10 +1,9 @@
 ---
 id: f4a9c860-0d76-49ce-8cf7-235d48512910
 order: 9
-slug: santiago-compostela-hiking-stage-2
 code: ST02
 featured: true
-language: pt
+language: 'pt'
 image:
   src: /src/assets/images/valença-do-minho-bridge.jpg
   alt: ''

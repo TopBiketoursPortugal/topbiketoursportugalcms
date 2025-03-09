@@ -3,7 +3,6 @@ import PageLayout from 'src/layouts/Page.astro';
 import { getCollection } from 'astro:content';
 import slugify from 'slugify';
 import type { SEOProps } from 'astro-seo';
-import { getPagePath, getTourTagPath } from 'utils/permalinks';
 import TourList from 'src/components/tours/tour-list.astro';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {

@@ -11,4 +11,10 @@ const { class: className = '' } = Astro.props;
 const { site_title } = (SiteData as any)[Astro.currentLocale ?? 'en'];
 ---
 
-<LogoIcon title={site_title} class={cn('h-28 w-80', className)} />
+<LogoIcon
+  title={site_title}
+  class={cn(
+    'h-28 w-80 text-black dark:text-white fill-black dark:fill-white',
+    className
+  )}
+/>

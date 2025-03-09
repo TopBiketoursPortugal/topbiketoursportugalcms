@@ -2,7 +2,7 @@
 id: bc31515a-0e52-47c9-b177-9ad9fa5c756e
 order: 2
 title: 'Coastal route to Santiago Compostela: Stage 1'
-language: en
+language: 'en'
 subTitle: ''
 content: >-
   # Portuguese Coastal route to Santiago de Compostela: Stage 1

@@ -1,14 +1,13 @@
 ---
 id: 15b16d82-2721-4496-b918-3666c8d38b32
 order: 5
-slug: minho-hiking-north-portugal
 code: NT01
 featured: false
 image:
   src: /src/assets/images/hiking-ecovia-lima.jpg
   alt: ''
 title: Minho Hiking Holiday in the North of Portugal
-language: pt
+language: 'pt'
 content: >-
   # **Minho Hiking Holiday in the North of Portugal**
 

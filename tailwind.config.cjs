@@ -12,30 +12,19 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1536px'
-    },
-    plugins: [
-      typographyPlugin,
-      require('tailwindcss-animate'),
-      plugin(({ addVariant }) => {
-        addVariant('intersect', '&:not([no-intersect])');
-      }),
-      require('tailwindcss-signals'),
-      require('tailwindcss-selector-patterns'),
-      require('tailwindcss-mixins'),
-      require('tailwindcss-multi')
-    ],
-    darkMode: [
-      'class',
-      ['selector', '[data-theme="dark"]'],
-      ['selector', '[data-mode="dark"]'],
-      [
-        'variant',
-        [
-          '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-          '&:is(.dark *)'
-        ]
-      ]
-    ]
-    // darkMode: 'class'
-  }
+    }
+  },
+  plugins: [
+    typographyPlugin,
+    require('tailwindcss-animate'),
+    plugin(({ addVariant }) => {
+      addVariant('intersect', '&:not([no-intersect])');
+    }),
+    require('tailwindcss-signals'),
+    require('tailwindcss-selector-patterns'),
+    require('tailwindcss-mixins'),
+    require('tailwindcss-multi')
+    //require('nightwind')
+  ],
+  darkMode: 'class'
 };

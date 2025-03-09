@@ -2,7 +2,7 @@
 id: bc31515a-0e52-47c9-b177-9ad9fa5c756e
 order: 2
 title: 'Coastal route to Santiago Compostela: Stage 1'
-language: pt
+language: 'pt'
 subTitle: ''
 content: >-
   # Portuguese Coastal route to Santiago de Compostela: Stage 1
@@ -60,7 +60,6 @@ image:
   src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
   alt: ''
 code: ST03
-slug: hiking-coast-santiago-compostela
 region: north
 itinerary:
   - title: 'Day 1: Porto'

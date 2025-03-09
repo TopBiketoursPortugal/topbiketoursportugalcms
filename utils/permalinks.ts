@@ -1,4 +1,4 @@
-import type { CollectionEntry, InferEntrySchema } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';

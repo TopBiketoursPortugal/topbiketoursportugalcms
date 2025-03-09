@@ -1,9 +1,8 @@
 ---
 id: f08482d1-b750-46a7-97bb-86088cc3ea39
 code: ST01
-slug: santiago-compostela-hiking-original-route-porto
 title: 'Portuguese Central Camino: Stage 1'
-language: pt
+language: 'pt'
 subTitle: ''
 content: |-
   # **Portuguese Central Camino: Stage 1**

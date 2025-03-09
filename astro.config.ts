@@ -9,7 +9,6 @@ import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
-// import path from 'path';
 
 // https://astro.build/config
 export default defineConfig({
@@ -80,11 +79,7 @@ export default defineConfig({
     defaultLocale: 'en',
     routing: {
       prefixDefaultLocale: false
-      //fallbackType: 'rewrite'
     }
-    // fallback: {
-    //   pt: 'en'
-    // }
   },
   trailingSlash: 'never',
   experimental: {
@@ -103,13 +98,7 @@ export default defineConfig({
     //   css: {
     //     transformer: "lightningcss",
     //   },
-    // plugins: [
-    //   Unfonts({
-    //     google: {
-    //       families: ['Poppins', 'Inter Variable']
-    //     }
-    //   })
-    // ],
+    // plugins: [],
     build: {
       //   // inlineStylesheets: 'never',
       rollupOptions: {

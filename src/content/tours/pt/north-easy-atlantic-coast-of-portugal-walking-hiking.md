@@ -3,7 +3,7 @@ _schema: default
 id: 2f992fdc-8556-4d20-8486-01ed317b7a77
 order: 1
 title: Atlantic Coast of Portugal walking & Hiking tour
-language: pt
+language: 'pt'
 subTitle: >-
   Visit the North of Portugal walking in the coast seeing the beautiful beaches
   and historical city´s
@@ -50,7 +50,6 @@ image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
 code: NT03
-slug: hiking-atlantic-coast-porto
 type: PackageTour
 itinerary:
   - title: 'Day 1: Porto arrival'

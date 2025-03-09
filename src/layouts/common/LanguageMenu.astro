@@ -29,12 +29,13 @@ const { localizedUrls = languages } = Astro.props;
     localizedUrls
       .filter(({ icon }) => !!icon)
       .map(({ code, displayName, icon, path }) => (
-        <a href={path} title={displayName} hreflang={code} class="group">
-          <Icon
-            title={displayName}
-            icon={icon}
-            class="bg-opacity-100 fill-black text-white text-opacity-100 opacity-100 transition-transform duration-150 group-hover:scale-125"
-          />
+        <a
+          href={path}
+          title={displayName}
+          hreflang={code}
+          class="transition-transform duration-150 hover:scale-125"
+        >
+          <Icon title={displayName} icon={icon} />
         </a>
       ))
   }

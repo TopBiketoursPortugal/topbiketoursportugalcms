@@ -5,7 +5,7 @@ export const buttonVariants = tv({
 
   variants: {
     variant: {
-      default: 'bg-primary hover:bg-primary/90 text-white',
+      default: 'bg-green-900 text-white hover:bg-green-950',
       destructive:
         'bg-destructive text-destructive-foreground hover:bg-destructive/90',
       outline:

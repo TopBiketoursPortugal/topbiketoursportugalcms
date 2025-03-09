@@ -3,7 +3,7 @@ _schema: default
 id: 19cf8784-b782-48a2-a5a3-7263f1bee29f
 order: 10
 title: 'Historical Alentejo: rural trails'
-language: pt
+language: 'pt'
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
   # **Historical Alentejo: rural trailsf**
@@ -33,7 +33,6 @@ image:
   src: /src/assets/images/monestary-flor-da-rosa.jpg
   alt: ''
 code: AL01
-slug: hiking-alentejo-castles-wine-heritage
 type: PackageTour
 region: north
 itinerary:

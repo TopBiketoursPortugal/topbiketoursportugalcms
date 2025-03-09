@@ -124,6 +124,7 @@ export default function Icon({
           viewBox="0 0 256 83"
           className={style}
         >
+          <title>{title}</title>
           <defs>
             <linearGradient
               id="logosVisa0"
@@ -132,8 +133,8 @@ export default function Icon({
               y1="-2.006%"
               y2="100%"
             >
-              <stop offset="0%" stop-color="#222357" />
-              <stop offset="100%" stop-color="#254aa5" />
+              <stop offset="0%" stopColor="#222357" />
+              <stop offset="100%" stopColor="#254aa5" />
             </linearGradient>
           </defs>
           <path
@@ -152,6 +153,7 @@ export default function Icon({
           viewBox="0 0 256 256"
           className={style}
         >
+          <title>{title}</title>
           <path
             fill="#006fcf"
             d="M256 138.548V0H0v256h256v-74.69c-.57 0 0-42.762 0-42.762"
@@ -175,6 +177,7 @@ export default function Icon({
           viewBox="0 0 256 198"
           className={style}
         >
+          <title>{title}</title>
           <defs>
             <linearGradient
               id="logosJcb0"
@@ -183,10 +186,10 @@ export default function Icon({
               y1="50.124%"
               y2="50.124%"
             >
-              <stop offset="0%" stop-color="#007940" />
-              <stop offset="22.85%" stop-color="#00873f" />
-              <stop offset="74.33%" stop-color="#40a737" />
-              <stop offset="100%" stop-color="#5cb531" />
+              <stop offset="0%" stopColor="#007940" />
+              <stop offset="22.85%" stopColor="#00873f" />
+              <stop offset="74.33%" stopColor="#40a737" />
+              <stop offset="100%" stopColor="#5cb531" />
             </linearGradient>
             <linearGradient
               id="logosJcb1"
@@ -195,10 +198,10 @@ export default function Icon({
               y1="49.96%"
               y2="49.96%"
             >
-              <stop offset="0%" stop-color="#007940" />
-              <stop offset="22.85%" stop-color="#00873f" />
-              <stop offset="74.33%" stop-color="#40a737" />
-              <stop offset="100%" stop-color="#5cb531" />
+              <stop offset="0%" stopColor="#007940" />
+              <stop offset="22.85%" stopColor="#00873f" />
+              <stop offset="74.33%" stopColor="#40a737" />
+              <stop offset="100%" stopColor="#5cb531" />
             </linearGradient>
             <linearGradient
               id="logosJcb2"
@@ -207,10 +210,10 @@ export default function Icon({
               y1="49.858%"
               y2="49.858%"
             >
-              <stop offset="0%" stop-color="#007940" />
-              <stop offset="22.85%" stop-color="#00873f" />
-              <stop offset="74.33%" stop-color="#40a737" />
-              <stop offset="100%" stop-color="#5cb531" />
+              <stop offset="0%" stopColor="#007940" />
+              <stop offset="22.85%" stopColor="#00873f" />
+              <stop offset="74.33%" stopColor="#40a737" />
+              <stop offset="100%" stopColor="#5cb531" />
             </linearGradient>
             <linearGradient
               id="logosJcb3"
@@ -219,10 +222,10 @@ export default function Icon({
               y1="50.006%"
               y2="50.006%"
             >
-              <stop offset="0%" stop-color="#1f286f" />
-              <stop offset="47.51%" stop-color="#004e94" />
-              <stop offset="82.61%" stop-color="#0066b1" />
-              <stop offset="100%" stop-color="#006fbc" />
+              <stop offset="0%" stopColor="#1f286f" />
+              <stop offset="47.51%" stopColor="#004e94" />
+              <stop offset="82.61%" stopColor="#0066b1" />
+              <stop offset="100%" stopColor="#006fbc" />
             </linearGradient>
             <linearGradient
               id="logosJcb4"
@@ -231,11 +234,11 @@ export default function Icon({
               y1="49.914%"
               y2="49.914%"
             >
-              <stop offset="0%" stop-color="#6c2c2f" />
-              <stop offset="17.35%" stop-color="#882730" />
-              <stop offset="57.31%" stop-color="#be1833" />
-              <stop offset="85.85%" stop-color="#dc0436" />
-              <stop offset="100%" stop-color="#e60039" />
+              <stop offset="0%" stopColor="#6c2c2f" />
+              <stop offset="17.35%" stopColor="#882730" />
+              <stop offset="57.31%" stopColor="#be1833" />
+              <stop offset="85.85%" stopColor="#dc0436" />
+              <stop offset="100%" stopColor="#e60039" />
             </linearGradient>
           </defs>
           <path
@@ -539,11 +542,13 @@ export default function Icon({
     case 'fa:tripadvisor':
       return (
         <svg
+          xlinkTitle={title}
           className={style}
           viewBox="0 0 1316 1024"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <title>{title}</title>
           <path d="M372 569.714286q0 22.285714-15.714286 38T318.857143 623.428571q-22.285714 0-38-15.714285T265.142857 569.714286q0-21.714286 15.714286-37.428572T318.857143 516.571429q21.714286 0 37.428571 15.714285T372 569.714286z m659.428571-0.571429q0 22.285714-15.714285 38T977.714286 622.857143t-38-15.714286T924 569.142857t15.714286-37.714286 38-15.428571 38 15.428571 15.714285 37.714286z m-594.285714 0.571429q0-45.142857-32.285714-77.714286T326.857143 459.428571t-78 32.285715T216.571429 569.714286t32.285714 78T326.857143 680t78-32.285714T437.142857 569.714286z m658.857143-0.571429q0-45.714286-32.285714-78T985.714286 458.857143q-45.142857 0-77.714286 32.285714T875.428571 569.142857t32.285715 78T985.714286 679.428571t78-32.285714T1096 569.142857z m-610.285714 0.571429q0 66.285714-46.571429 112.857143T326.857143 729.142857q-66.285714 0-112.857143-46.857143T167.428571 569.714286t46.857143-112.285715T326.857143 410.857143t112.285714 46.571428T485.714286 569.714286z m659.428571-0.571429q0 65.714286-46.571428 112.285714T985.714286 728q-65.714286 0-112.285715-46.571429T826.857143 569.142857t46.571428-112.285714T985.714286 410.285714q66.285714 0 112.857143 46.571429T1145.142857 569.142857z m-550.857143 1.714286q0-109.142857-77.428571-186.571429T330.285714 306.857143q-71.428571 0-132 35.428571T102.285714 438.571429 66.857143 570.857143t35.428571 132.285714T198.285714 799.428571t132 35.428572q109.142857 0 186.571429-77.428572T594.285714 570.857143z m381.714286-327.428572q-145.142857-63.428571-317.714286-63.428571-182.285714 0-327.428571 62.857143 66.857143 0 127.428571 26T562.571429 338.857143t69.714285 104.571428T658.285714 570.857143q0-65.714286 24.857143-125.428572t67.428572-103.142857T852 272t124-28.571429z m273.714286 327.428572q0-109.142857-77.142857-186.571429T986.285714 306.857143t-186.571428 77.428571T722.285714 570.857143t77.428572 186.571428T986.285714 834.857143t186.285715-77.428572T1249.714286 570.857143z m-152-323.428572h218.857143q-25.142857 29.142857-42.857143 65.428572T1250.857143 378.285714q62.857143 86.285714 62.857143 192.571429 0 89.142857-44 164.571428t-119.428572 119.142858-164 43.714285q-76 0-142.285714-32t-112-88.571428q-26.857143 32-73.714286 102.285714-6.285714-12.571429-30.571428-47.142857T585.142857 777.142857q-45.714286 56.571429-112.285714 88.857143T330.285714 898.285714q-88.571429 0-164-43.714285T46.857143 735.428571t-44-164.571428q0-106.285714 62.857143-192.571429-5.142857-29.142857-22.857143-65.428571T0 247.428571h208.571429q85.142857-57.142857 202.857142-89.428571T658.285714 125.714286q128 0 240.571429 32t198.857143 89.714285z" />
         </svg>
       );
@@ -566,6 +571,7 @@ export default function Icon({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 87.000000 59.000000"
         >
+          <title>{title}</title>
           <g
             transform="translate(0.000000,59.000000) scale(0.100000,-0.100000)"
             fill="currentColor"
@@ -596,6 +602,7 @@ export default function Icon({
           viewBox="0 0 512 512"
           className={style}
         >
+          <title>{title}</title>
           <mask id="a">
             <circle cx="256" cy="256" r="256" fill="#fff" />
           </mask>
@@ -621,6 +628,7 @@ export default function Icon({
           viewBox="0 0 512 512"
           className={style}
         >
+          <title>{title}</title>
           <mask id="a">
             <circle cx="256" cy="256" r="256" fill="#fff" />
           </mask>

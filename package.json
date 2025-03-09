@@ -42,6 +42,7 @@
     "alpinejs": "3.14.8",
     "astro": "5.4.2",
     "clsx": "2.1.1",
+    "nightwind": "^1.1.13",
     "punycode": "2.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

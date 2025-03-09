@@ -96,12 +96,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
     <slot name="announcement">
       <Announcement language={language} />
     </slot>
-    <Header
-      {...Navigation[language].header}
-      isSticky
-      showRssFeed
-      showToggleTheme={false}
-    />
+    <Header {...Navigation[language].header} isSticky showRssFeed />
     <main>
       <slot />
     </main>

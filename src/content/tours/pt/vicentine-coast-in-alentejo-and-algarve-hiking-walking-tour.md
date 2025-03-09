@@ -2,8 +2,7 @@
 id: 52ed15a4-8233-47f9-9f79-d314f2ac1dad
 templateKey: tour-gen
 order: 4
-slug: hiking-alentejo-vicentine-southeast-portugal-coast
-language: pt
+language: 'pt'
 content: >-
   # Vicentine West Coast in Alentejo Hiking & walking tour
 
