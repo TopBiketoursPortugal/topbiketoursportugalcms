@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CloudCannon from '../../assets/icons/cloudcannon.svg';
-import JCBIcon from '../../assets/icons/jcb.svg';
-import PhStartFill from '../../assets/icons/fill/star-fill.svg';
+// import CloudCannon from '../../assets/icons/cloudcannon.svg';
+// import JCBIcon from '../../assets/icons/jcb.svg';
+// import PhStartFill from 'src/assets/icons/logo.svg/fill/star-fill.svg';
 import {
   faEnvelope,
   faUser,
@@ -59,7 +59,7 @@ import {
   faCircleInfo,
   faFire,
   faHand,
-  // faStar,
+  faStar,
   faStarHalf,
   faRss,
   faCompass,
@@ -178,8 +178,8 @@ export default function Icon({
           />
         </svg>
       );
-    case 'logos:jcb':
-      return <JCBIcon class={style} title={title} />;
+    // case 'logos:jcb':
+    //   return <JCBIcon />;
     case 'ph:compass-fill':
       return (
         <FontAwesomeIcon icon={faCompass} className={style} title={title} />
@@ -191,8 +191,8 @@ export default function Icon({
     case 'ph:moon-light':
       return <FontAwesomeIcon icon={faMoon} className={style} title={title} />;
     case 'ph:star-fill':
-      return <PhStartFill class={style} title={title} />;
-    // return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
+      // return <PhStartFill />;
+      return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
     case 'ph:star-light':
       return (
         <FontAwesomeIcon icon={faStarOutline} className={style} title={title} />
@@ -506,8 +506,8 @@ export default function Icon({
 
     case 'ph:clock':
       return <FontAwesomeIcon icon={faClock} className={style} title={title} />;
-    case 'CloudCannon':
-      return <CloudCannon class={style} title={title} />;
+    // case 'CloudCannon':
+    //   return <CloudCannon />;
     case 'circle-flags:pt':
       return (
         <svg

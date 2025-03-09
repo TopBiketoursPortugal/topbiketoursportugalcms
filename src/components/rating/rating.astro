@@ -2,6 +2,7 @@
 /** @jsxImportSource astro */
 import { cn } from 'utils/cn';
 import Icon from '../utility/icon';
+import PhStartFill from 'src/assets/icons/fill/star-fill.svg';
 
 type Props = {
   rating: number;
@@ -37,7 +38,8 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.fullStars > 0 &&
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
-          <Icon icon="ph:star-fill" className={startIconStyle} />
+          {/* <Icon icon="ph:star-fill" className={startIconStyle} /> */}
+          <PhStartFill class={startIconStyle} mode="sprite" />
         </li>
       ))
   }
