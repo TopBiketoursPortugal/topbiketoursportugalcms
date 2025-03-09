@@ -59,7 +59,7 @@ import {
   faCircleInfo,
   faFire,
   faHand,
-  faStar,
+  // faStar,
   faStarHalf,
   faRss,
   faCompass,
@@ -179,7 +179,7 @@ export default function Icon({
         </svg>
       );
     case 'logos:jcb':
-      return <JCBIcon className={style} title={title}></JCBIcon>;
+      return <JCBIcon class={style} title={title} />;
     case 'ph:compass-fill':
       return (
         <FontAwesomeIcon icon={faCompass} className={style} title={title} />
@@ -191,7 +191,7 @@ export default function Icon({
     case 'ph:moon-light':
       return <FontAwesomeIcon icon={faMoon} className={style} title={title} />;
     case 'ph:star-fill':
-      return <PhStartFill className={style} title={title}></PhStartFill>;
+      return <PhStartFill class={style} title={title} />;
     // return <FontAwesomeIcon icon={faStar} className={style} title={title} />;
     case 'ph:star-light':
       return (
@@ -507,7 +507,7 @@ export default function Icon({
     case 'ph:clock':
       return <FontAwesomeIcon icon={faClock} className={style} title={title} />;
     case 'CloudCannon':
-      return <CloudCannon className={style} title={title}></CloudCannon>;
+      return <CloudCannon class={style} title={title} />;
     case 'circle-flags:pt':
       return (
         <svg
