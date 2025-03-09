@@ -38,46 +38,18 @@
   </button>
 </div>
 
-<!-- <script is:inline>
+<script>
+  const toggleDarkMode = () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
 
-  // Client-side interactivity (unchanged)
-  document.addEventListener('DOMContentLoaded', () => {
-    const button = document.getElementById('theme-toggle');
-    const body = document.body;
-    const html = document.querySelector('html');
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  };
 
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
-    const initialDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-
-    if (initialDark) {
-      html.setAttribute('data-theme', 'dark');
-      html.classList.add('dark');
-      body.setAttribute('data-theme', 'dark');
-      body.classList.add('dark');
-    }
-
-    button?.addEventListener('click', () => {
-      const isDark =
-        body.classList.contains('dark') || html.classList.contains('dark');
-
-      const theme = isDark ? 'dark' : 'light';
-      const prevTheme = isDark ? 'light' : 'dark';
-
-      html.classList.remove(prevTheme);
-      html.classList.add(theme);
-      html.setAttribute('data-theme', theme);
-
-      body.classList.remove(prevTheme);
-      body.classList.add(theme);
-      body.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-    });
-  });
-</script> -->
-
+  document
+    .getElementById('theme-toggle')
+    ?.addEventListener('click', toggleDarkMode);
+</script>
 <style>
   /* Only keep screen reader styles as they're not available in Tailwind by default */
   .sr-only {

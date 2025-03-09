@@ -11,19 +11,6 @@ const { ui: UI } = Site;
 
   window.basic_script = true;
 
-  const initTheme = function () {
-    const isDark =
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
-    document.documentElement.classList.toggle('dark', isDark);
-    document.documentElement.setAttribute(
-      'data-theme',
-      isDark ? 'dark' : 'light'
-    );
-  };
-  initTheme();
-
   function attachEvent(selector, event, fn) {
     const matches =
       typeof selector === 'string'
@@ -66,22 +53,22 @@ const { ui: UI } = Site;
         ?.classList.toggle('hidden');
     });
 
-    document.addEventListener('click', function (event) {
-      if (
-        event.target.id === 'theme-toggle' ||
-        event.target.parentElement.id === 'theme-toggle'
-      ) {
-        if (defaultTheme.endsWith(':only')) {
-          return;
-        }
-        document.documentElement.classList.toggle('dark');
-        const isDark = document.documentElement.classList.contains('dark');
-        document.documentElement.setAttribute(
-          'data-theme',
-          isDark ? 'dark' : 'light'
-        );
-      }
-    });
+    // document.addEventListener('click', function (event) {
+    //   if (
+    //     event.target.id === 'theme-toggle' ||
+    //     event.target.parentElement.id === 'theme-toggle'
+    //   ) {
+    //     if (defaultTheme.endsWith(':only')) {
+    //       return;
+    //     }
+    //     document.documentElement.classList.toggle('dark');
+    //     const isDark = document.documentElement.classList.contains('dark');
+    //     document.documentElement.setAttribute(
+    //       'data-theme',
+    //       isDark ? 'dark' : 'light'
+    //     );
+    //   }
+    // });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
       const network = elem.getAttribute('data-aw-social-share');

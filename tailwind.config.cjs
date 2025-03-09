@@ -24,6 +24,18 @@ module.exports = {
       require('tailwindcss-mixins'),
       require('tailwindcss-multi')
     ],
-    darkMode: ['selector', '[data-theme="dark"]']
+    darkMode: [
+      'class',
+      ['selector', '[data-theme="dark"]'],
+      ['selector', '[data-mode="dark"]'],
+      [
+        'variant',
+        [
+          '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+          '&:is(.dark *)'
+        ]
+      ]
+    ]
+    // darkMode: 'class'
   }
 };
