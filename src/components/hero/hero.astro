@@ -57,7 +57,7 @@ const { background_color, buttons = [], heading, subheading } = block;
 <section class={block.class} style={`background-color: ${background_color};`}>
   <div class="hero-container">
     <div class="content flex flex-col gap-4">
-      <h1 class="heading">{heading?.heading_text}</h1>
+      <h1 class="heading pb-3">{heading?.heading_text}</h1>
       <div class="subheading-text" style={`color: ${block.subheading.color};`}>
         <Markdown content={subheading.markdown_content} />
       </div>
