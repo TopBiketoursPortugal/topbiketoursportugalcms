@@ -24,31 +24,6 @@ module.exports = {
       require('tailwindcss-mixins'),
       require('tailwindcss-multi')
     ],
-    darkMode: ['class', '[data-theme="dark"]']
-    // darkMode: [
-    //   'class',
-    //   'selector',
-    //   [
-    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-    //     '&:is(.dark *)'
-    //   ]
-    // ]
-
-    //   [
-    //   'class',
-    //   '[data-theme="dark"]',
-    //   [
-    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-    //     '&:is(.dark *)'
-    //   ]
-    // ]
-    // darkMode: [
-    //   'variant',
-    //   [
-    //     '@media (prefers-color-scheme: dark) { &:not(.light *) }',
-    //     '&:is(.dark *)',
-    //     "[data-theme]='dark'"
-    //   ]
-    // ]
+    darkMode: ['selector', '[data-theme="dark"]']
   }
 };
