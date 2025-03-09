@@ -10,11 +10,11 @@ export async function getStaticPaths() {
 
   return RegionsData.map((region) => ({
     params: {
-      region: slugify(region.en.name!, { lower: true }),
+      region: slugify(region.en.name!, { lower: true, strict: true }),
       languge: 'en'
     },
     props: {
-      region: slugify(region.en.name!, { lower: true }),
+      region: slugify(region.en.name!, { lower: true, strict: true }),
       tours:
         tours.filter(
           (tour) =>

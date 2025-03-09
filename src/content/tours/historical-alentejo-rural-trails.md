@@ -399,9 +399,9 @@ images:
     alt: roman vestiges
   - src: /src/assets/images/portagem-hiking-trail.jpg
     alt: portagem roman bridge
-  - src: /src/assets/images/hiking-in-marvão-with-top-walking-tours-portugal.jpg
+  - src: /src/assets/images/hiking-in-marvao-with-top-walking-tours-portugal.jpg
     alt: Marvão walls
-  - src: /src/assets/images/marvão-view.jpg
+  - src: /src/assets/images/marvao-view.jpg
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view

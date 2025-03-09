@@ -11,28 +11,28 @@ export function getTeamMemberPath(
   memberName: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}team/${slugify(memberName, { lower: true })}`;
+  return `${getBasePath(language)}team/${slugify(memberName, { lower: true, strict: true })}`;
 }
 
 export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true })}`;
+  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true, strict: true })}`;
 }
 
 export function getTourRegionsPath(
   region: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true })}`;
+  return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true, strict: true })}`;
 }
 
 export function getTourTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true })}`;
+  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true })}`;
   // console.log('tag slug:', slug);
   return slug;
 }
@@ -67,7 +67,7 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
     return getHomePermalink(language);
   }
   const pagePath =
-    `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true }).replace(/index$/, '')}`.toLocaleLowerCase();
+    `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true, strict: true }).replace(/index$/, '')}`.toLocaleLowerCase();
   // console.log(pagePath);
   return pagePath;
 }

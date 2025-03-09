@@ -5,10 +5,10 @@ code: ST02
 featured: true
 language: 'pt'
 image:
-  src: /src/assets/images/valença-do-minho-bridge.jpg
+  src: /src/assets/images/valenca-do-minho-bridge.jpg
   alt: ''
 
-title: 'Portuguese Central Camino: Stage 2'
+title: 'Portuguese Central Camino Stage 2'
 content: >-
   # Portuguese Central Camino: Stage 2
 
@@ -61,7 +61,7 @@ content: >-
 packagetype: PackageTour
 tourtype: Walking
 meta:
-  title: 'Central Camino to Santiago from Porto: Stage 2'
+  title: 'Central Camino to Santiago from Porto Stage 2'
   description:
     history, cultural and gastronomy flavors and Spanish history, cultural,
     gastronomy, and also, the adventure of arriving to Santiago and visit the
@@ -392,8 +392,8 @@ feature:
   bokunLink: ''
   bokunId: ''
   textColor: white
-  subTitle: 'Central Camino to Santiago from Porto: Stage 2'
-  title: 'Central Camino to Santiago from Porto: Stage 2'
+  subTitle: 'Central Camino to Santiago from Porto Stage 2'
+  title: 'Central Camino to Santiago from Porto Stage 2'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---

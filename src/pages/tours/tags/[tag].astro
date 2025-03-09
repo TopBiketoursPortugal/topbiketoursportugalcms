@@ -14,7 +14,7 @@ export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
     .filter((t) => t?.length > 0)
     .map((tag) => ({
       params: {
-        tag: slugify(tag, { lower: true })
+        tag: slugify(tag, { lower: true, strict: true })
       },
       props: {
         tag: tag,

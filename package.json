@@ -6,7 +6,7 @@
     "//install": "pnpm exec husky init && echo pnpm lint-staged > .husky/pre-commit",
     "dev": "astro dev",
     "start": "pnpm build && static-web-server -t true --root ./dist --http2-tls-cert ./.certs/local.pem  --http2-tls-key ./.certs/local.key -g info",
-    "start:prod": "pnpm build:prod && static-web-server -t true --root ./dist --http2-tls-cert ./.certs/local.pem  --http2-tls-key ./.certs/local.key -g info",
+    "start:prod": "pnpm build:prod && static-web-server -t true --root ./dist --http2-tls-cert ./.certs/cert.pem  --http2-tls-key ./.certs/key.pem -g info",
     "build": "astro build",
     "build:prod": "astro build && pnpm dlx @divriots/jampack ./dist && pnpm dlx html-minifier --input-dir ./dist --output-dir ./dist --file-ext html --collapse-whitespace --minify-js",
     "preview": "astro preview",

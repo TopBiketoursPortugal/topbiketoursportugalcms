@@ -12,7 +12,7 @@ export async function getStaticPaths() {
       slug:
         tour.data.path ??
         tour.data?.slug ??
-        slugify(tour.data.title, { lower: true })
+        slugify(tour.data.title, { lower: true, strict: true })
     },
     props: {
       tour

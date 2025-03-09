@@ -1,7 +1,7 @@
 ---
 id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
 order: 8
-title: 'Coastal route to Santiago Compostela: Stage 2'
+title: 'Coastal route to Santiago Compostela Stage 2'
 subTitle: '1'
 content: >-
   A wonderful serenity has taken possession of my entire soul, like these sweet
@@ -395,7 +395,7 @@ feature:
   bokunId: ''
   textcolor: white
   subtitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: ' Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---

@@ -1,7 +1,7 @@
 ---
 id: af115fc4-1aae-4854-a97b-53a4c777d9f0
 code: VC02
-title: 'Vicentine West Coast in Algarve: Stage 2'
+title: 'Vicentine West Coast in Algarve Stage 2'
 language: 'pt'
 subTitle: ''
 region: north
@@ -338,7 +338,7 @@ meta:
   keywords: Vicentine Coast Alentejo Hiking, the fisherman trail walk tour
   robots: INDEX
 images:
-  - src: /src/assets/images/cabo-de-são-vicente-in-sagres.jpg
+  - src: /src/assets/images/cabo-de-sao-vicente-in-sagres.jpg
     alt: Cabo de São Vicente  in Sagres
   - src: /src/assets/images/carrapateira-sea-view.jpg
     alt: carrapateira sea view

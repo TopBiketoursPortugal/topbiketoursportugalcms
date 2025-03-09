@@ -14,7 +14,9 @@ import Stack from 'src/components/stack/stack.astro';
 export async function getStaticPaths() {
   const team = await getCollection('team');
   return team.map((teamMember) => ({
-    params: { slug: slugify(teamMember.data.title, { lower: true }) },
+    params: {
+      slug: slugify(teamMember.data.title, { lower: true, strict: true })
+    },
     props: { teamMember }
   }));
 }
@@ -53,7 +55,7 @@ const schema = {
 
       <CardContent
         display="inline"
-        class="col-span-2 bg-white dark:bg-slate-900"
+        class="bg-white col-span-2 dark:bg-slate-900"
       >
         <Stack class="gap-2 p-4" layout="vertical" distribution="center">
           <strong class="text-neutral-700 dark:text-neutral-100">

@@ -154,8 +154,10 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.images
-      # tags:
-      #   type:
+      tags:
+        type: array
+        options:
+          structures: _structures.tags
       #   comment: one tag per line
       #   options:
       #     show_count: false
@@ -932,6 +934,14 @@ data_config:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 _structures:
+  tags:
+    values:
+      - default: false
+        place_groups_below: false
+        tabbed: false
+        label: Tags
+        value: ''
+
   faqs:
     values:
       - label: FAQs

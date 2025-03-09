@@ -43,7 +43,7 @@ featured: true
 image:
   src: /src/assets/images/zambujeira-do-mar-2-.jpg
   alt: ''
-title: 'Vicentine West Coast in Alentejo: Stage 1'
+title: 'Vicentine West Coast in Alentejo Stage 1'
 packagetype: PackageTour
 tourtype: Walking
 meta:

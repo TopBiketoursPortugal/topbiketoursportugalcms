@@ -235,7 +235,7 @@ itinerary:
 images:
   - src: /src/assets/images/norte-de-portugal-03-melgaco.jpeg
     alt: melgaço
-  - src: /src/assets/images/valença-do-minho-hiking.jpg
+  - src: /src/assets/images/valenca-do-minho-hiking.jpg
     alt: Valença do minho hiking
   - src: /src/assets/images/viana-do-castelo-santa-luzia-point-view.jpg
     alt: Viana do castelo

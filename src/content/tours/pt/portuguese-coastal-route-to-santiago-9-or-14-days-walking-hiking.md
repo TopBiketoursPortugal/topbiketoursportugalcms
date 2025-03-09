@@ -1,7 +1,7 @@
 ---
 id: bc31515a-0e52-47c9-b177-9ad9fa5c756e
 order: 2
-title: 'Coastal route to Santiago Compostela: Stage 1'
+title: 'Coastal route to Santiago Compostela Stage 1'
 language: 'pt'
 subTitle: ''
 content: >-
@@ -426,7 +426,7 @@ feature:
   bokunId: ''
   textColor: white
   subTitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: 'Coastal route to Santiago Compostela: Stage 1'
+  title: 'Coastal route to Santiago Compostela Stage 1'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 distanceUnit: Km
@@ -436,7 +436,7 @@ featured: false
 packagetype: PackageTour
 tourtype: Walking
 meta:
-  title: 'Coastal route to Santiago Compostela: Stage 1'
+  title: 'Coastal route to Santiago Compostela Stage 1'
   description: Walk towards Santiago using the Portuguese coastal path.
   keywords: Portuguese Coastal route to Santiago Compostela
   robots: INDEX

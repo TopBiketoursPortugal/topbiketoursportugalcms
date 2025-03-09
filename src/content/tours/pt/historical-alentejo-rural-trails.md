@@ -2,7 +2,7 @@
 _schema: default
 id: 19cf8784-b782-48a2-a5a3-7263f1bee29f
 order: 10
-title: 'Historical Alentejo: rural trails'
+title: 'Historical Alentejo rural trails'
 language: 'pt'
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
@@ -398,9 +398,9 @@ images:
     alt: roman vestiges
   - src: /src/assets/images/portagem-hiking-trail.jpg
     alt: portagem roman bridge
-  - src: /src/assets/images/hiking-in-marvão-with-top-walking-tours-portugal.jpg
+  - src: /src/assets/images/hiking-in-marvao-with-top-walking-tours-portugal.jpg
     alt: Marvão walls
-  - src: /src/assets/images/marvão-view.jpg
+  - src: /src/assets/images/marvao-view.jpg
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view
@@ -434,7 +434,7 @@ feature:
   bokunId: ''
   textcolor: white
   subtitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: ' Coastal route to Santiago Compostela: Stage 1'
+  title: ' Coastal route to Santiago Compostela Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---

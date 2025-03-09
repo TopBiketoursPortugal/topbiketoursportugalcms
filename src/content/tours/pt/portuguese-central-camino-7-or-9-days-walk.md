@@ -1,7 +1,7 @@
 ---
 id: f08482d1-b750-46a7-97bb-86088cc3ea39
 code: ST01
-title: 'Portuguese Central Camino: Stage 1'
+title: 'Portuguese Central Camino Stage 1'
 language: 'pt'
 subTitle: ''
 content: |-
@@ -410,7 +410,7 @@ feature:
   bokunId: ''
   textColor: white
   subTitle: 'Central Camino to Santiago from Porto: Stage 1'
-  title: 'Central Camino to Santiago from Porto: Stage 1'
+  title: 'Central Camino to Santiago from Porto Stage 1'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 ---
