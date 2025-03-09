@@ -58,7 +58,7 @@ image:
   alt: '312'
 code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
-language: en
+language: pt
 type: WalkingTour
 region: north
 itinerary:
