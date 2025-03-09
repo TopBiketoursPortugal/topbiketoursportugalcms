@@ -128,7 +128,7 @@ collections_config:
         comment: >-
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
-          ```~/components/utility/Icon.tsx.jsx``` file, following the existing
+          ```~/components/utility/icon.tsx``` file, following the existing
           pattern.
         cascade: true
     disable_add: true
