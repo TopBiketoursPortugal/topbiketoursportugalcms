@@ -148,6 +148,8 @@ collections_config:
         type: multichoice
         options:
           allow_empty: true
+          empty_type: array
+
           values: collections.tours
           value_key: id
           preview:
