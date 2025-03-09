@@ -37,7 +37,10 @@ const items =
             const { image, title, subTitle } = data;
 
             return (
-              <Card href={getTeamMemberPath(data.title, language)}>
+              <Card
+                href={getTeamMemberPath(data.title, language)}
+                title={title}
+              >
                 {image && <CardMedia {...image} class="min-h-80" />}
 
                 <CardContent

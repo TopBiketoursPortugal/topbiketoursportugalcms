@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 npx @bookshop/generate@3.14.0
-# npx @divriots/jampack ./dist
+npx @divriots/jampack ./dist
 # npx html-minifier --input-dir ./dist --output-dir ./dist --file-ext html --collapse-whitespace --minify-js
