@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CloudCannon from '../../assets/icons/cloudcannon.svg';
 import JCBIcon from '../../assets/icons/jcb.svg';
-import PhStartFill from '../../assets/icons/fill/stack-fill.svg';
+import PhStartFill from '../../assets/icons/fill/star-fill.svg';
 import {
   faEnvelope,
   faUser,

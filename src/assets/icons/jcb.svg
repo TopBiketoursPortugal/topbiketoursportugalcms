@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2.59em" height="2em" viewBox="0 0 256 198" className={style}>
-    <title>{title}</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="2.59em" height="2em" viewBox="0 0 256 198">
     <defs>
         <linearGradient id="logosJcb0" x1="-57.527%" x2="232.391%" y1="50.124%" y2="50.124%">
             <stop offset="0%" stopColor="#007940" />
