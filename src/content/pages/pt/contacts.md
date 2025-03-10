@@ -1,7 +1,7 @@
 ---
 _schema: default
 id: 17e20631-ad55-4b9e-8553-c047839cda31
-template: ~/layouts/Page.astro
+template: ~/layouts/Contacts.astro
 title: Contatos
 slug: contatos
 language: pt

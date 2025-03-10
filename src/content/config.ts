@@ -24,6 +24,7 @@ const blogCollection = defineCollection({
 const pageSchema = z.object({
   title: z.string(),
   language: languageSchema,
+  template: z.string().optional().nullable(),
   slug: z.string().optional().nullable(),
   content_blocks: z.array(z.any()),
   seo: seoSchema
@@ -32,6 +33,7 @@ const pageSchema = z.object({
 const paginatedCollectionSchema = z.object({
   title: z.string(),
   slug: z.string().optional().nullable(),
+  template: z.string().optional().nullable(),
   language: languageSchema,
   page_size: z.number().positive(),
   featured_posts: z.object({

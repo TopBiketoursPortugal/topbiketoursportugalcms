@@ -10,13 +10,19 @@ type Props = {
     seo?: SEOProps;
   };
   class?: string;
+  showPageTitle?: boolean;
 };
 
-const { frontmatter, class: className } = Astro.props;
+const { frontmatter, class: className, showPageTitle } = Astro.props;
 const { content_blocks = [] } = frontmatter;
 ---
 
 <Layout {...frontmatter} class={className}>
+  {
+    showPageTitle ? (
+      <h1 class="px-6 text-4xl font-bold capitalize">{frontmatter.title}</h1>
+    ) : null
+  }
   <slot />
   <PageHelper bookshop:live contentBlocks={content_blocks} />
 </Layout>

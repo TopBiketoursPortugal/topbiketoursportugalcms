@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/Page.astro';
+import ContactLayout from '../layouts/Contacts.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPagePath } from 'utils/permalinks';
 
@@ -18,9 +19,23 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+const template = (page.data as any).template ?? '~/layouts/Page.astro';
+console.log(template);
 ---
 
-<PageLayout frontmatter={page.data} />
+{
+  template === '~/layouts/Contacts.astro' ? (
+    <ContactLayout frontmatter={page.data as any} />
+  ) : null
+}
+{
+  template === '~/layouts/Page.astro' ? (
+    <PageLayout
+      frontmatter={page.data as any}
+      showPageTitle={(page.data as any)?.showPageTitle ?? true}
+    />
+  ) : null
+}
 
 <style is:global>
   :root {

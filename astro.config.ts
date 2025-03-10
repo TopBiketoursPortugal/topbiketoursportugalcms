@@ -82,13 +82,13 @@ export default defineConfig({
     }
   },
   trailingSlash: 'never',
-  image: {
-    // Used for all Markdown images; not configurable per-image
-    // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
-    experimentalLayout: 'responsive'
-  },
+  // image: {
+  //   // Used for all Markdown images; not configurable per-image
+  //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
+  //   experimentalLayout: 'responsive'
+  // },
   experimental: {
-    responsiveImages: true,
+    // responsiveImages: true,
     svg: {
       mode: 'sprite'
     }

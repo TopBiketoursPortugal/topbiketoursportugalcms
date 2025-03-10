@@ -1,0 +1,94 @@
+---
+import ContactsData from "src/../data/contact.json"
+import Icon from "src/components/utility/icon";
+import type { ContactSchema } from "src/schemas/contact";
+import type { LanguageCodes } from "src/schemas/language";
+import { cleanPhoneNumberFormatting } from "utils/clean-phone-number-formatting";
+import { cn } from "utils/cn";
+
+type Props = {
+	language: LanguageCodes,
+	class?: string
+}
+
+const { language='en', class: className } = Astro.props;
+
+const contact = ContactsData[language] satisfies ContactSchema;
+
+const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-cols-3", className)
+
+---
+
+<div class={style}>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:phone-fill" className="pb-4 text-4xl" />
+		<h3 class="font-bold">Phone</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			Whether you prefer a quick call or a text, we're here to help you plan
+			your perfect adventure in Oporto. Don't be shy contact us.
+		</h6>
+		{
+			contact && (contact.phone || contact.cellPhone) && (
+				<div class="flex-grow"></div>
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 items-center ">
+                    {contact.cellPhone && (<a href={"tel:" + cleanPhoneNumberFormatting(contact.cellPhone)}>{contact.cellPhone}</a>)}
+                    {/* {contact.phone && (<a href={"tel:" + cleanPhoneNumberFormatting(contact.phone)}>{contact.phone}</a>)} */}
+                    {contact.cellPhone && <a
+						href={
+							"https://wa.me/" + cleanPhoneNumberFormatting(contact.cellPhone)
+						}
+                        target="_blank"
+						aria-label="Chat on WhatsApp"
+                        class="flex items-center gap-1"
+					>
+						<Icon icon="ph:whatsapp-logo-light" className="text-md" /><span>whatsapp</span>
+					</a>}
+                </div>
+			)
+		}
+	</div>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:envelope-simple-light" className="pb-4 text-4xl" />
+		<h3 class="font-bold">Email</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			Need support? Got a question? Or just want to say hi?Whether you're
+			looking for the best scenic routes, we're here to help. Drop us a line and
+			let's get started!
+		</h6>
+		{
+			contact && contact.email && (
+				<div class="flex-grow"></div>
+                <a
+					href={"mailto:" + contact.email}
+					aria-label="Email"
+				>
+					{contact.email}
+				</a>
+			)
+		}
+	</div>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:navigation-arrow-fill" className="pb-4 text-4xl" />
+		<h3 class="font-bold">Address</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			Curious about our walking and biking tours? Visit us at in Oporto! We'll
+			help you find the perfect guided or self-guided adventure. Drop by and
+			start your journey today!
+		</h6>
+
+		{
+			contact && contact.address && contact.address.map && (
+                <div class="flex-grow"></div>
+				<a
+					href={contact.address.map}
+					rel="nofollow"
+					target="_blank"
+					role="button"
+
+				>
+					View on Google maps
+				</a>
+			)
+		}
+	</div>
+</div>
