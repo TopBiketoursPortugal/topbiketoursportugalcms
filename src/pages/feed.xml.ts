@@ -1,8 +1,8 @@
 import SiteData from '../../data/site.json';
 import { getCollection } from 'astro:content';
-import rss from '@astrojs/rss';
+import rss, { type RSSFeedItem } from '@astrojs/rss';
 
-const site = SiteData[Astro.currentLocale ?? 'en'];
+const site = SiteData['en'];
 const posts = await getCollection('blog');
 
 export async function GET() {
@@ -10,11 +10,14 @@ export async function GET() {
     title: site.site_title,
     description: site.description,
     site: 'https://tiny-jackal.cloudvent.net',
-    items: posts.map((post) => ({
-      link: `/blog/${post.slug}`,
-      title: post.data.title,
-      pubDate: post.data.date
-    })),
+    items: posts.map(
+      (post) =>
+        ({
+          link: `/blog/${post.slug}`,
+          title: post.data.title,
+          pubDate: post.data.date ? new Date(post.data.date) : undefined
+        }) satisfies RSSFeedItem
+    ),
     customData: `<language>en-us</language>`
   });
 }
