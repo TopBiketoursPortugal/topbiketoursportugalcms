@@ -1,0 +1,99 @@
+# section.bookshop.yml
+
+# Metadata about this component
+spec:
+  structures:
+    - content_blocks # Can be used in content block structures
+  label: Section # Display name in CloudCannon
+  description:
+    A flexible section component with background and container styling
+  icon: view_quilt # Suggested CloudCannon icon
+  tags:
+    - Section
+    - Container
+    - Layout
+
+# Define the blueprint for component properties
+blueprint:
+  id:
+    type: string
+    label: Section ID
+    description: Optional HTML ID for anchor linking
+  isDark:
+    type: boolean
+    label: Dark Mode
+    default: false
+    description: Enable dark mode styling
+  containerClass:
+    type: string
+    label: Container Class
+    default: ''
+    description: Custom Tailwind classes for the content container
+  as:
+    type: select
+    label: HTML Tag
+    default: section
+    options:
+      - value: section
+        label: Section
+      - value: div
+        label: Div
+      - value: article
+        label: Article
+      - value: aside
+        label: Aside
+    description: HTML element type for the wrapper
+  bg:
+    type: rich-text
+    label: Custom Background
+    description:
+      Optional custom background HTML (overrides default Background component)
+    can_sync: true
+
+# Define how the component should be previewed
+preview:
+  id: sample-section
+  isDark: false
+  containerClass: ''
+  as: section
+  text: Sample Section Content # Default slot content for preview
+
+# Define inputs for the visual editor
+inputs:
+  - name: id
+    type: text
+    label: Section ID
+    comment: Optional ID for linking/scrolling
+  - name: isDark
+    type: checkbox
+    label: Enable Dark Mode
+    default: false
+  - name: containerClass
+    type: text
+    label: Container Classes
+    default: ''
+    comment: Custom Tailwind classes for content container
+  - name: as
+    type: select
+    label: Wrapper Tag
+    default: section
+    options:
+      - label: Section
+        value: section
+      - label: Div
+        value: div
+      - label: Article
+        value: article
+      - label: Aside
+        value: aside
+    comment: Choose the HTML wrapper element
+  - name: bg
+    type: rich-text
+    label: Custom Background
+    comment:
+      Custom HTML for background (leave empty for default Background component)
+  - name: _content
+    type: rich-text
+    label: Content
+    comment: Main content of the section
+    slot: default # Maps to the default slot

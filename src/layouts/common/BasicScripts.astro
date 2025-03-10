@@ -1,7 +1,8 @@
 ---
-import Site from 'src/../data/site.json';
+import SiteData from 'src/../data/site.json';
+import { languageCodes } from 'src/schemas/language';
 
-const { ui: UI } = Site;
+const { ui: UI } = SiteData;
 ---
 
 <script is:inline async defer define:vars={{ defaultTheme: UI.theme }}>

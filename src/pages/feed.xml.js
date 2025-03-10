@@ -1,7 +1,8 @@
-import site from '../../data/site.json';
+import SiteData from '../../data/site.json';
 import { getCollection } from 'astro:content';
-
 import rss from '@astrojs/rss';
+
+const site = SiteData[Astro.currentLocale ?? 'en'];
 const posts = await getCollection('blog');
 
 export async function GET() {
@@ -12,8 +13,8 @@ export async function GET() {
     items: posts.map((post) => ({
       link: `/blog/${post.slug}`,
       title: post.data.title,
-      pubDate: post.data.date,
+      pubDate: post.data.date
     })),
-    customData: `<language>en-us</language>`,
+    customData: `<language>en-us</language>`
   });
 }

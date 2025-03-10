@@ -1,0 +1,76 @@
+# features.bookshop.yml
+
+# Metadata about this component
+spec:
+  structures:
+    - content_blocks # Can be used in content block structures
+  label: Features # Display name in CloudCannon
+  description: A features section with headline and item grid
+  icon: view_list # Suggested CloudCannon icon
+  tags:
+    - Features
+    - Grid
+    - Section
+
+# Define the blueprint for component properties
+blueprint:
+  id:
+    type: string
+    label: Section ID
+    description: Optional HTML ID for anchor linking
+  isDark:
+    type: boolean
+    label: Dark Mode
+    default: false
+    description: Enable dark mode styling
+  title:
+    type: rich-text
+    label: Title
+    default: Features Headline
+    can_sync: true
+  subtitle:
+    type: rich-text
+    label: Subtitle
+    can_sync: true
+  tagline:
+    type: rich-text
+    label: Tagline
+    can_sync: true
+  items:
+    type: array
+    label: Feature Items
+    description: List of feature items to display
+    items:
+      type: object
+      properties:
+        title:
+          type: string
+          label: Item Title
+        description:
+          type: rich-text
+          label: Item Description
+        icon:
+          type: string
+          label: Icon Class
+          description: Icon class name (e.g., 'fa fa-star')
+        image:
+          type: image
+          label: Item Image
+  columns:
+    type: number
+    label: Number of Columns
+    default: 2
+    description: Number of grid columns (1-6)
+  defaultIcon:
+    type: string
+    label: Default Icon
+    description: Fallback icon class for items without specific icons
+  classes:
+    type: object
+    label: Custom Classes
+    preview: container
+    properties:
+      container:
+        type: string
+        label: Container Class
+        default: max-w-5xl
