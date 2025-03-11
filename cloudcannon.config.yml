@@ -158,7 +158,7 @@ collections_config:
         type: array
         options:
           empty_type: array
-          structures: _structures.itinerary_item
+          # structures: _structures.itinerary_item
       itinerary.title:
         type: markdown
       itinerary.description:
@@ -188,7 +188,6 @@ collections_config:
         options:
           allow_empty: true
           empty_type: array
-
           values: collections.tours
           value_key: id
           preview:
@@ -429,14 +428,14 @@ _inputs:
     options:
       empty_type: array
       values: collections.blog
-      value_key: title
+      value_key: id
     cascade: true
   main_feature:
     type: select
     options:
       allow_empty: true
       values: collections.blog
-      value_key: title
+      value_key: id
     cascade: true
   markdown_content:
     type: markdown
@@ -974,13 +973,13 @@ data_config:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 _structures:
-  itinerary_item:
-    values:
-      - label: Itinerary Item
-        value:
-          title: ''
-          description: ''
-          location: {}
+  # itinerary_item:
+  #   values:
+  #     - label: Itinerary Item
+  #       value:
+  #         title: ''
+  #         description: ''
+  #         location: {}
   tags:
     values:
       - default: false
