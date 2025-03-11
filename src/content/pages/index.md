@@ -178,10 +178,10 @@ content_blocks:
       hover_brightness: 0.85
       text_color: '#ffffff'
   - _bookshop_name: featured-posts
-    main_feature: Benefits of your first walking tour!
+    main_feature: f79aaae4-f825-4715-9b8a-10a608e5bf7d
     feature_list:
-      - Best email sending services changed
-      - Email delivery tips
+      - 4edfe3aa-1842-4627-97d1-5aa563a7e272
+      - f79aaae4-f825-4715-9b8a-10a608e5bf7d
   - _bookshop_name: collection
     type: reviews
     title: '## **What people say about us**'
