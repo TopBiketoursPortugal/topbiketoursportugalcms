@@ -178,6 +178,15 @@ collections_config:
       itinerary[*].location:
         type: object
         cascade: true
+        options:
+          allow_label_formatting: false
+          place_groups_below: false
+          subtype: object
+          empty_type: 'null'
+          preview:
+            icon: map
+            text: city
+            subtext: countryCode.englishName
       itinerary[*].location.lat:
         type: text
         cascade: true
@@ -203,7 +212,7 @@ collections_config:
         type: text
         cascade: false
       relatedTours:
-        type: multichoice
+        type: multiselect
         options:
           allow_empty: true
           empty_type: array
@@ -212,6 +221,8 @@ collections_config:
           preview:
             text:
               - key: title
+            subtext:
+              - key: language
             image:
               - key: image.src
         cascade: true
@@ -220,7 +231,12 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.faqs
+
         cascade: true
+      faqs[*].question:
+        type: markdown
+      faqs[*].answer:
+        type: markdown
       images:
         type: array
         options:
