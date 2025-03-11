@@ -7,6 +7,7 @@ import { tourCollection } from 'src/schemas/tours';
 const blogCollection = defineCollection({
   schema: z.object({
     id: z.string().uuid(),
+    slug: z.string().optional().nullable(),
     date: z.string().or(z.date()),
     title: z.string(),
     tags: z.array(z.string()).optional().nullable(),

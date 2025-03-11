@@ -1,4 +1,4 @@
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry, InferEntrySchema } from 'astro:content';
 import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
@@ -70,4 +70,9 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
     `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true, strict: true }).replace(/index$/, '')}`.toLocaleLowerCase();
   // console.log(pagePath);
   return pagePath;
+}
+
+export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
+  const language = data.language ?? 'en';
+  return `${getBasePath(language)}blog/${slugify(data.slug ?? data.title, { lower: true, strict: true })}`;
 }
