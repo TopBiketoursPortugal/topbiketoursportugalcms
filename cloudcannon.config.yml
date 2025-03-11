@@ -149,6 +149,30 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.itinerary_item
+      itinerary.title:
+        type: markdown
+      itinerary.description:
+        type: markdown
+      itinerary.location:
+        type: object
+      itinerary.location.lat:
+        type: number
+      itinerary.location.lon:
+        type: number
+      itinerary.location.countryCode:
+        type: select
+        options:
+          values: data.countries
+          value_key: alpha2
+          picker_preview:
+            text: englishName
+            subtext: alpha2
+          preview:
+            text: englishName
+      itinerary.location.city:
+        type: text
+      itinerary.location.region:
+        type: text
       relatedTours:
         type: multichoice
         options:
@@ -943,6 +967,8 @@ file_config:
   #       type: text
   #       cascade: true
 data_config:
+  countries:
+    path: data/contries.json
   icons:
     path: data/icons.json
   colors:
