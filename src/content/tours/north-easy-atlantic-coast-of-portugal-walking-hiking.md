@@ -40,6 +40,12 @@ content: >-
   **Itinerary:**
 
 
+  &nbsp;
+
+
+  &nbsp;
+
+
   Day 1:Porto arrival
 
 
@@ -62,6 +68,12 @@ content: >-
 
 
   Day 8: departure
+
+
+  &nbsp;
+
+
+  &nbsp;
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
@@ -405,7 +417,7 @@ tags:
   - easy
   - Package tours
 minGroupSize: 2
-maxGroupSize: 3
+maxGroupSize: 99
 difficulty: 1
 skill: 1
 minAge: 15
@@ -433,18 +445,18 @@ reviews:
       familyName: Doe
       country: Portugal
     datePublished: 2023-10-15T00:00:00Z
-    content: >
+    content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
       looking for a premium audio experience.
   - title: Greate experience
-    rating: 2
+    rating: 5
     author:
       givenName: John
       familyName: Doe
       country: Portugal
     datePublished: 2023-10-15T00:00:00Z
-    content: >
+    content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
       looking for a premium audio experience.
