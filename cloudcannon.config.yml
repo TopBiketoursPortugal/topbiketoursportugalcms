@@ -179,10 +179,10 @@ collections_config:
         type: object
         cascade: true
       itinerary[*].location.lat:
-        type: number
+        type: text
         cascade: true
       itinerary[*].location.lon:
-        type: number
+        type: text
         cascade: true
       itinerary[*].location.countryCode:
         type: select
@@ -201,7 +201,7 @@ collections_config:
         cascade: true
       itinerary[*].location.region:
         type: text
-        cascade: true
+        cascade: false
       relatedTours:
         type: multichoice
         options:
