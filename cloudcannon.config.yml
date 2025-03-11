@@ -666,10 +666,14 @@ _structures:
     values:
       - label: Itinerary Item
         value:
-          title:
-            type: markdown
+          title: ''
           description: ''
-          location: {}
+          location:
+            lat: '1'
+            lng: '1'
+            country: pt
+            region: ''
+            city: ''
   tags:
     values:
       - default: false
