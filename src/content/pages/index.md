@@ -177,7 +177,7 @@ content_blocks:
       hover_brightness: 0.85
       text_color: '#ffffff'
   - _bookshop_name: featured-posts
-    main_feature: All the bells and whistles
+    main_feature: Benefits of your first walking tour!
     feature_list:
       - Best email sending services changed
       - Email delivery tips

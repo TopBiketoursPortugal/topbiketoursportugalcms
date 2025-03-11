@@ -145,9 +145,10 @@ collections_config:
     description: ''
     _inputs:
       itinerary:
-        type: object
+        type: array
         options:
-          structures: _structures.itinerary
+          empty_type: array
+          structures: _structures.itinerary_item
       relatedTours:
         type: multichoice
         options:
@@ -952,34 +953,13 @@ data_config:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 _structures:
-  location:
+  itinerary_item:
     values:
-      - default: false
-        place_groups_below: false
-        tabbed: false
-        label: Location
+      - label: Itinerary Item
         value:
-          title:
-            type: markdown
-          description:
-            type: markdown
-          location:
-            structures: _structures.location
-
-  itinerary:
-    values:
-      - default: false
-        place_groups_below: false
-        tabbed: false
-        label: Itinerary
-        value:
-          title:
-            type: markdown
-          description:
-            type: markdown
-          location:
-            structures: _structures.location
-
+          title: ''
+          description: ''
+          location: {}
   tags:
     values:
       - default: false

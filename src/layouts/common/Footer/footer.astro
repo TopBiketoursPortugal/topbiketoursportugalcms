@@ -52,14 +52,14 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 ---
 
 <footer
-  class="text-gray-600 bg-gray-100 grid grid-cols-1 gap-8 p-10 dark:text-gray-400 dark:bg-gray-950 sm:grid-cols-3"
+  class="grid grid-cols-1 gap-8 bg-gray-100 p-10 text-gray-600 dark:bg-gray-950 dark:text-gray-400 sm:grid-cols-3"
 >
   <div class="flex flex-col gap-5">
     <!-- <Logo class="max-h-12" /> -->
     <div class="flex justify-evenly gap-2">
       {
         links.map(({ text, links = [] }) => (
-          <div class="flex w-full flex-col gap-2">
+          <div class="flex w-full flex-col gap-1">
             <h4 class="w-full text-xl font-bold">{text}</h4>
             {links.map(({ link, text }) => (
               <a class="text-lg" href={link.toLowerCase()}>
@@ -102,7 +102,7 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
                 name,
                 Astro.currentLocale as LanguageCodes
               )}
-              class="text-white absolute bottom-0 left-0 right-0 top-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold capitalize opacity-0 group-hover:flex group-hover:opacity-90"
+              class="absolute bottom-0 left-0 right-0 top-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold capitalize text-white opacity-0 group-hover:flex group-hover:opacity-90"
             >
               {name}
             </a>
@@ -116,7 +116,7 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   </Stack>
 </footer>
 <ul
-  class="bg-gray-50 flex w-full flex-wrap justify-center gap-1 p-3 dark:text-gray-400 dark:bg-gray-800"
+  class="flex w-full flex-wrap justify-center gap-1 bg-gray-50 p-3 dark:bg-gray-800 dark:text-gray-400"
 >
   <li>
     @Top Walking Tours Portugal {year}
