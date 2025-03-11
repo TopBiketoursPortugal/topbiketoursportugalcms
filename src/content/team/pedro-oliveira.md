@@ -3,7 +3,7 @@ _schema: default
 id: beb0f8dd-c73c-4bd0-985c-3708eb1a6d07
 language: en
 title: Pedro Oliveira
-subTitle: Guide
+memberType: Guide
 image:
   src: /src/assets/images/team/pedro_oliveira.jpg
   alt: Guide Perdo Oliveira

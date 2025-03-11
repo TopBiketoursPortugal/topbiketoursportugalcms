@@ -3,7 +3,7 @@ _schema: default
 id: c3ccffaf-b577-4aee-b207-d34c04815d05
 language: pt
 title: Pedro Oliveira
-subTitle: Guia
+memberType: Guia
 image:
   src: /src/assets/images/team/pedro_oliveira.jpg
   alt: Guia Pedro Oliveira

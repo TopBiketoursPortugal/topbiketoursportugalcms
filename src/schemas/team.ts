@@ -5,7 +5,7 @@ const teamMemberSchema = z.object({
   id: z.string().uuid(),
   language: z.enum(['en', 'pt']),
   title: z.string(),
-  subTitle: z.string().optional(),
+  memberType: z.string().optional(),
   slug: z.string().optional().nullable(),
   content: z.string().optional(),
   image: z

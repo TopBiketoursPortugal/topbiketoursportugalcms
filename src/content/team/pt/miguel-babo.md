@@ -3,7 +3,7 @@ _schema: default
 id: f5eeddde-be1a-4d31-98c1-fd213862749c
 language: pt
 title: Miguel Babo
-subTitle: Guia
+memberType: Guia
 image:
   src: /src/assets/images/team/miguel-babo-cycling-guide.jpg
   alt: Guia Miguel Babo

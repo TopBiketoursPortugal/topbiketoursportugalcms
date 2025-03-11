@@ -3,7 +3,7 @@ _schema: default
 id: 5880d393-62a7-49e8-ac77-4b3b1254979d
 language: en
 title: João Natal
-subTitle: Guide
+memberType: Guide
 image:
   src: /src/assets/images/team/joao-natal-bicycle-guide-2-1-.jpg
   alt: Guide João Natal

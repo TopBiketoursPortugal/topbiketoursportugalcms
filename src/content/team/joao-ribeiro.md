@@ -3,7 +3,7 @@ _schema: default
 id: 2034e3ed-91ce-4113-bcbd-5cc6ce869e28
 language: en
 title: João Ribeiro
-subTitle: Guide
+memberType: Guide
 image:
   src: /src/assets/images/team/joao-ribeiro-cycling-guide.jpg
   alt: Guide João Ribeiro

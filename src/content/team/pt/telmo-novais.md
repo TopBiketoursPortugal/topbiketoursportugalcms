@@ -3,7 +3,7 @@ _schema: default
 id: cf45ec3a-6726-4b97-bb14-699d80400fa7
 language: pt
 title: Telmo Novais
-subTitle: Guia
+memberType: Guia
 image:
   src: /src/assets/images/team/temo-novais-cycling-guide-2-.jpg
   alt: Guia Telmo Novais

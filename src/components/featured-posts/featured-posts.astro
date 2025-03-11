@@ -21,9 +21,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
   {
     allPosts.map((post) => {
-      const featuredPostURL = `/blog/${slugify(block.main_feature, { lower: true, strict: true })}`;
-
-      if (block.main_feature === post.data.title) {
+      if (block.main_feature === post.data.id) {
+        const featuredPostURL = `/blog/${slugify(post.data.title, { lower: true, strict: true })}`;
         const date = new Date(post.data.date);
         const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
           dateStyle: 'long',
@@ -51,7 +50,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
                 {tags.map((tag: string) => {
                   return (
                     <a href={`/tags/${tag}`}>
-                      <span class="bg-slate-200 rounded-sm px-1">
+                      <span class="rounded-sm bg-slate-200 px-1">
                         {tag.charAt(0).toUpperCase() + tag.slice(1)}
                       </span>
                     </a>
@@ -75,10 +74,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   >
     {
       block.feature_list?.map((featuredPost) => {
-        const featuredPostURL = `/blog/${slugify(featuredPost, { lower: true, strict: true })}`;
-
         return allPosts.map((post) => {
-          if (post.data.title === featuredPost) {
+          if (post.data.id === featuredPost) {
+            const featuredPostURL = `/blog/${slugify(post.data.title, { lower: true, strict: true })}`;
             const date = new Date(post.data.date);
             const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
               dateStyle: 'long',
@@ -110,7 +108,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
                       {tags.map((tag: string) => {
                         return (
                           <a href={`/tags/${tag}`}>
-                            <span class="bg-slate-200 rounded-sm px-1">
+                            <span class="rounded-sm bg-slate-200 px-1">
                               {tag.charAt(0).toUpperCase() + tag.slice(1)}
                             </span>
                           </a>

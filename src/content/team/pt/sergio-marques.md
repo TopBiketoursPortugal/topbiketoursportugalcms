@@ -3,7 +3,7 @@ _schema: default
 id: 0b75a271-9db1-4549-bd86-06c3ff8e43aa
 language: pt
 title: Sérgio Marques
-subTitle: Fundador / Proprietário
+memberType: Fundador / Proprietário
 image:
   src: /src/assets/images/team/sergio-marques.jpg
   alt: Sérgio Marques Fundador Proprietário

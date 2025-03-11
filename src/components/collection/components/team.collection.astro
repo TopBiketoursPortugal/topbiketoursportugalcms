@@ -34,7 +34,7 @@ const items =
       <Grid cols={3}>
         {
           items.map(({ data }) => {
-            const { image, title, subTitle } = data;
+            const { image, title, memberType } = data;
 
             return (
               <Card
@@ -56,9 +56,11 @@ const items =
                     <strong class="text-neutral-700 dark:text-neutral-100">
                       {title}
                     </strong>
-                    <p class="text-neutral-400 dark:text-neutral-200">
-                      {subTitle}
-                    </p>
+                    {memberType ? (
+                      <p class="text-neutral-400 dark:text-neutral-200">
+                        {memberType}
+                      </p>
+                    ) : null}
                   </Stack>
                 </CardContent>
               </Card>

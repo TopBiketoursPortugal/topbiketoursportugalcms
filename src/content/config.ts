@@ -6,6 +6,7 @@ import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
   schema: z.object({
+    id: z.string().uuid(),
     date: z.string().or(z.date()),
     title: z.string(),
     tags: z.array(z.string()).optional().nullable(),
@@ -22,6 +23,7 @@ const blogCollection = defineCollection({
 });
 
 const pageSchema = z.object({
+  id: z.string().uuid(),
   title: z.string(),
   language: languageSchema,
   template: z.string().optional().nullable(),
@@ -31,6 +33,7 @@ const pageSchema = z.object({
 });
 
 const paginatedCollectionSchema = z.object({
+  id: z.string().uuid(),
   title: z.string(),
   slug: z.string().optional().nullable(),
   template: z.string().optional().nullable(),
