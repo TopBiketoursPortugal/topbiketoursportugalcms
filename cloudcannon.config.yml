@@ -696,9 +696,7 @@ _structures:
         place_groups_below: false
         tabbed: false
         label: Tags
-        value:
-          question: ''
-          answer: ''
+        value: ''
   faqs:
     values:
       - label: FAQs
