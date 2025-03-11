@@ -1,14 +1,12 @@
 ---
 _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
-template: ~/layouts/Page.astro
 title: About Us
-language: en
 seo:
   page_description:
   canonical_url:
-  featured_image: 'src/assets/images/bike-tours-in-portugal.jpg'
-  featured_image_alt: 'about us'
+  featured_image: src/assets/images/bike-tours-in-portugal.jpg
+  featured_image_alt: about us
   author_twitter_handle:
   open_graph_type:
   no_index: false
@@ -48,10 +46,10 @@ content_blocks:
       orientation: vertical
       container: full
   - _bookshop_name: two-column-markdown
-    class: ''
-    fullwidth: true
-    padding: normal
     column1:
+      animation: slide-in
+      type: markdown
+      label: Column 1 Content
       content: >-
         ## What do we do?
 
@@ -70,6 +68,9 @@ content_blocks:
         experience, we are able to achieve client satisfaction by meeting those
         needs, goals and expectations!
     column2:
+      animation: slide-in
+      type: markdown
+      label: Column 2 Content
       content: >-
         ## How was Top Walking tours Portugal Born?
 
@@ -83,13 +84,23 @@ content_blocks:
         having to plan, and organize, everything, and thus providing the best
         possible experience, whose value is the key ingredient in the ultimate
         satisfaction of the customer.
+    padding:
+      type: select
+      label: Padding
+      options: []
+      default: normal
+    fullwidth:
+      type: toggle
+      label: Full Width
+      default: false
+    class: ''
   - _bookshop_name: collection
     type: team
+    title: Collection Title
     background_color: '#ffffff'
     heading:
-      text: |-
-        Our team
-      color: 'text-neutral-600'
+      text: Our team
+      color: text-neutral-600
     subheading:
       markdown_content: >-
         A starting point for developers looking to build a website with Astro,
@@ -97,7 +108,9 @@ content_blocks:
         start creating your own components to use in the CloudCannon CMS.
       color: '#393939'
     image:
-      image_path: /src/assets/images/featured-image-5.jpg
+      image_path: /src/assets/images/walking-hiking-portugal.jpg
       alt_text: An image
     buttons: []
+template: ~/layouts/Page.astro
+language: en
 ---
