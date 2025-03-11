@@ -150,7 +150,6 @@ collections_config:
     icon: directions_bike
     disable_url: false
     description: ''
-
     _inputs:
       type:
         type: select
@@ -164,21 +163,25 @@ collections_config:
         cascade: true
       packages[*].title:
         type: markdown
+        cascade: true
       packages[*].description:
         type: markdown
+        cascade: true
       included[*].title:
         type: markdown
+        cascade: true
       included[*].description:
         type: markdown
+        cascade: true
       reviews[*].title:
         type: markdown
+        cascade: true
       itinerary:
         type: array
         options:
           empty_type: array
-          structures: _structures.itinerary_item
+          structures: _structures.itinerary_stage
         cascade: true
-
       itinerary[*].title:
         type: markdown
         cascade: true
@@ -187,16 +190,16 @@ collections_config:
         cascade: true
       itinerary[*].location:
         type: object
-        cascade: true
         options:
           allow_label_formatting: false
           place_groups_below: false
           subtype: object
           empty_type: 'null'
           preview:
-            icon: map
             text: city
             subtext: countryCode.englishName
+            icon: map
+        cascade: true
       itinerary[*].location.lat:
         type: text
         cascade: true
@@ -241,12 +244,13 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.faqs
-
         cascade: true
       faqs[*].question:
         type: markdown
+        cascade: true
       faqs[*].answer:
         type: markdown
+        cascade: true
       images:
         type: array
         options:
@@ -688,9 +692,11 @@ _inputs:
       robots meta tag
     cascade: true
 _structures:
-  itinerary_item:
+  itinerary_stage:
+    style: select
     values:
-      - label: Itinerary Item
+      - icon: place
+        label: Itinerary stage
         value:
           title: ''
           description: ''
@@ -701,15 +707,18 @@ _structures:
             region: ''
             city: ''
   tags:
+    style: select
     values:
       - default: false
+        icon: label
+        label: Tags
         place_groups_below: false
         tabbed: false
-        label: Tags
         value: ''
   faqs:
     values:
       - label: FAQs
+        icon: question_mark
         value:
           question: ''
           answer: ''
@@ -728,11 +737,11 @@ _structures:
           src: ''
           alt: ''
         preview:
+          text:
+            - key: alt
           icon: Image
           image:
             - key: src
-          text:
-            - key: alt
     style: select
     reorder_inputs: true
     remove_empty_inputs: true
