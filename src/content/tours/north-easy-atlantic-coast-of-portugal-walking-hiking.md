@@ -84,7 +84,8 @@ type: PackageTour
 region: '1'
 itinerary:
   - title: 'Day 1: Porto arrival'
-    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description:
+      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
@@ -198,7 +199,7 @@ itinerary:
       city: ''
     day: '7'
   - title: 'Day 8: departure'
-    description:
+    description: ''
     location:
       lat: '1'
       lng: '1'
@@ -404,7 +405,7 @@ seo:
     The coast of the Atlantic Ocean is one the best areas to walk on and, at the
     same time, enjoy the beautiful beaches and the history that the northern
     towns have to offer. Start this tour in one of the most important cities in
-    Europe, the city of Porto. 
+    Europe, the city of Porto.
   canonical_url:
   featured_image:
   featured_image_alt:
