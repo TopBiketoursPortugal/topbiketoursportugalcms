@@ -19,7 +19,7 @@ if (!post) {
   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
 }
 const { Content } = await render(post);
-const language = Astro.currentLocale as LanguageCodes;
+const language = (Astro.currentLocale as LanguageCodes) ?? 'en';
 ---
 
 <PostLayout {...post.data} body={post.body} language={language}>

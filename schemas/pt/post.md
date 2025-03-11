@@ -2,13 +2,14 @@
 id:
 language: pt
 date:
-title: ""
+title: ''
 tags: []
 author:
-thumb_image_path: ""
-thumb_image_alt: ""
-image: ""
-image_alt: ""
+thumb_image_path: ''
+thumb_image_alt: ''
+image:
+  src: ''
+  alt: ''
 seo:
   page_description:
   canonical_url:

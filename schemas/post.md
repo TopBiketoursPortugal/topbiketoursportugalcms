@@ -7,8 +7,9 @@ language: 'en'
 author:
 thumb_image_path: ''
 thumb_image_alt: ''
-image: ''
-image_alt: ''
+image:
+  src: ''
+  alt: ''
 seo:
   page_description:
   canonical_url:

@@ -9,8 +9,9 @@ thumb_image_path: /src/assets/images/walking-tour-group-photo-with-porto-bridge.
 thumb_image_alt: >-
   Three people collaboratively work at a laptop. One man is coding, while two
   are making suggestions.
-image: /src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg
-image_alt: Benefits of your first walking tour
+image:
+  src: /src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg
+  alt: Benefits of your first walking tour
 seo:
   page_description: Benefits of your first walking tour
   canonical_url:

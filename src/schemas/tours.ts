@@ -39,7 +39,7 @@ const priceSchema = z.object({
 // Schema for the itinerary items
 const itinerarySchema = z.object({
   title: z.string(),
-  description: z.string().optional().nullable(),
+  description: z.string().optional(),
   location: locationSchema.optional()
 });
 
