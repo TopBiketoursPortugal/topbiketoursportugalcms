@@ -17,7 +17,7 @@ collections_config:
         icon: pages
         schema: default
     create:
-      path: '[relative_base_path]/{title|slugify}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
@@ -105,7 +105,7 @@ collections_config:
         icon: post_add
         schema: default
     create:
-      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
+      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
@@ -158,7 +158,7 @@ collections_config:
         type: array
         options:
           empty_type: array
-          # structures: _structures.itinerary_item
+          structures: _structures.itinerary_item
       itinerary.title:
         type: markdown
       itinerary.description:
@@ -254,7 +254,7 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|slugify}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: false
@@ -326,7 +326,7 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|slugify}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
@@ -973,13 +973,14 @@ data_config:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 _structures:
-  # itinerary_item:
-  #   values:
-  #     - label: Itinerary Item
-  #       value:
-  #         title: ''
-  #         description: ''
-  #         location: {}
+  itinerary_item:
+    values:
+      - label: Itinerary Item
+        value:
+          title:
+            type: markdown
+          description: ''
+          location: {}
   tags:
     values:
       - default: false
