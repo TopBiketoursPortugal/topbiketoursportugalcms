@@ -162,6 +162,14 @@ collections_config:
             - PackageTour
             - WalkingTour
         cascade: true
+      packages[*].title:
+        type: markdown
+      packages[*].description:
+        type: markdown
+      included[*].title:
+        type: markdown
+      included[*].description:
+        type: markdown
       reviews[*].title:
         type: markdown
       itinerary:
