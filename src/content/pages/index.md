@@ -37,7 +37,7 @@ content_blocks:
         rel="nofollow">Portugal Bike tours</a>!
       color: '#393939'
     image:
-      image_path: /src/assets/images/bike-tours-in-portugal.jpg
+      image_path: /src/assets/images/top-walking-tours-portugal.jpg
       alt_text: Top Walking Tours Portugal
     buttons:
       - _bookshop_name: buttons/primary
