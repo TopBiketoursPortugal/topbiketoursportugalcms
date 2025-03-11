@@ -3,15 +3,16 @@ _schema: default
 id: 2f992fdc-8556-4d20-8486-01ed317b7a77
 order: 1
 title: Atlantic Coast of Portugal walking & Hiking tour
-language: 'en'
 subTitle: >-
   Visit the North of Portugal walking in the coast seeing the beautiful beaches
   and historical city´s
 content: >-
-  # Atlantic Coast of Portugal walking & Hiking tour
+  * # Atlantic Coast of Portugal walking & Hiking tour
 
-  **Visit the North of Portugal walking in the coast seeing the beautiful
+
+  ## **Visit the North of Portugal walking in the coast seeing the beautiful
   beaches and historical city´s**
+
 
   The coast of the Atlantic Ocean is one the best areas to walk on and, at the
   same time, enjoy the beautiful beaches and the history that the northern towns
@@ -23,39 +24,55 @@ content: >-
   forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied
   by the famous Port Wine.
 
+
   **Route description:**
 
-  - The first 3 days are flat on walking paths and paved streets - The forth day
-  is flat with some hills - The last 2 days are completely flat - The path
-  consists of paved streets and boardwalks for most of the time
+
+  * The first 3 days are flat on walking paths and paved streets
+
+  * The forth day is flat with some hills
+
+  * The last 2 days are completely flat
+
+  * The path consists of paved streets and boardwalks for most of the time
+
 
   **Itinerary:**
 
-  **Day 1:**  Porto arrival
 
-  **Day 2:** Porto transfer to Póvoa de Varzim - Apúlia: 15 km
+  Day 1:Porto arrival
 
-  **Day 3:** Apúlia – Esposende: 16 km
 
-  **Day 4:** Esposende – Castelo de Neiva: 14 km
+  Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km
 
-  **Day 5:** Castelo de Neiva – Viana do Castelo: 14 km
 
-  **Day 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
+  Day 3: Apúlia – Esposende: 16 km
 
-  **Day 7:** Vila Praia de Âncora - Caminha: 8 km
 
-  **Day 8:** departure
+  Day 4: Esposende – Castelo de Neiva: 14 km
+
+
+  Day 5: Castelo de Neiva – Viana do Castelo: 14 km
+
+
+  Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km
+
+
+  Day 7: Vila Praia de Âncora - Caminha: 8 km
+
+
+  Day 8: departure
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
 code: NT03
 slug: hiking-atlantic-coast-porto
+language: en
 type: PackageTour
+region: '1'
 itinerary:
   - title: 'Day 1: Porto arrival'
-    description:
-      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
@@ -188,31 +205,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 Pax
       - title: 7 Nights / 8 Days
@@ -237,31 +254,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -286,31 +303,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -326,28 +343,28 @@ packages:
     bestValue: false
     type: ''
 afterPricing: >-
-  ***Season:**
+  \***Season:**
 
 
-  - LS - Low season: Nov 01 to Mar 25
+  * LS - Low season: Nov 01 to Mar 25
 
-  - RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
 
-  - HS - High Season: Set 01 to 25 Set
+  * HS - High Season: Set 01 to 25 Set
 
-  - SS - Summer Season: Jun 26 to August 30
+  * SS - Summer Season: Jun 26 to August 30
 
 
   **Observations:**
 
 
-  - Prices are based for 2 people sharing the same room;
+  * Prices are based for 2 people sharing the same room;
 
-  - Prices can suffer updates due high season, holidays or weekends
+  * Prices can suffer updates due high season, holidays or weekends
 
-  - Beverages are not included at lunch and dinner when included in the package
+  * Beverages are not included at lunch and dinner when included in the package
 
-  - If in a triple room with parents Children up to 10 years old - 35% discount.
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
   Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
   old - 15% discount.
 
@@ -355,11 +372,11 @@ afterPricing: >-
   **Extras**
 
 
-  - Solo traveler: 200 €
+  * Solo traveler: 200 €
 
-  - Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
-  - Extra nights: on request
+  * Extra nights: on request
 seo:
   page_description:
   canonical_url:
@@ -368,10 +385,8 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
-content_blocks: []
 duration: 8
 distance: 84
-tags: []
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 1
@@ -393,6 +408,34 @@ images:
     alt: Caminha city center
   - src: /src/assets/images/suave-mar-hotel.jpg
     alt: Suave mar hotel
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15T00:00:00Z
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: 2023-10-15T00:00:00Z
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 feature:
   align: center
   imageAlign: center center
