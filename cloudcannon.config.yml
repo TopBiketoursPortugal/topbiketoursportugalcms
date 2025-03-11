@@ -144,6 +144,10 @@ collections_config:
     disable_url: false
     description: ''
     _inputs:
+      itinerary:
+        type: object
+        options:
+          structures: _structures.itinerary
       relatedTours:
         type: multichoice
         options:
@@ -948,13 +952,43 @@ data_config:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
 _structures:
+  location:
+    values:
+      - default: false
+        place_groups_below: false
+        tabbed: false
+        label: Location
+        value:
+          title:
+            type: markdown
+          description:
+            type: markdown
+          location:
+            structures: _structures.location
+
+  itinerary:
+    values:
+      - default: false
+        place_groups_below: false
+        tabbed: false
+        label: Itinerary
+        value:
+          title:
+            type: markdown
+          description:
+            type: markdown
+          location:
+            structures: _structures.location
+
   tags:
     values:
       - default: false
         place_groups_below: false
         tabbed: false
         label: Tags
-        value: ''
+        value:
+          question: ''
+          answer: ''
 
   faqs:
     values:
