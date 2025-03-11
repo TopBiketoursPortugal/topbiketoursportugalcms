@@ -1,15 +1,12 @@
 ---
 _schema: default
 id: 17e20631-ad55-4b9e-8553-c047839cda31
-template: ~/layouts/Contacts.astro
 title: Contacts
-slug: contacts
-language: en
 seo:
-  page_description:
+  page_description: Contact us
   canonical_url:
-  featured_image: 'src/assets/images/bike-tours-in-portugal.jpg'
-  featured_image_alt: 'about us'
+  featured_image: src/assets/images/bike-tours-in-portugal.jpg
+  featured_image_alt: about us
   author_twitter_handle:
   open_graph_type:
   no_index: false
@@ -26,7 +23,11 @@ content_blocks:
         start creating your own components to use in the CloudCannon CMS.
       color: '#393939'
     image:
-      image_path: /src/assets/images/featured-image-5.jpg
+      image_path: /src/assets/images/walking-portuguese-camino-to-santiago.jpg
       alt_text: An image
+    buttons: []
+template: ~/layouts/Contacts.astro
+slug: contacts
+language: en
 content_blocks_after: []
 ---

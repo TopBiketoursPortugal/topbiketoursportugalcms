@@ -3,7 +3,7 @@ _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 title: About Us
 seo:
-  page_description:
+  page_description: About Top walking tours portugal
   canonical_url:
   featured_image: src/assets/images/bike-tours-in-portugal.jpg
   featured_image_alt: about us
@@ -111,6 +111,9 @@ content_blocks:
       image_path: /src/assets/images/walking-hiking-portugal.jpg
       alt_text: An image
     buttons: []
+  - _bookshop_name: collection
+    type: tours
+    title: Collection Title
 template: ~/layouts/Page.astro
 language: en
 ---
