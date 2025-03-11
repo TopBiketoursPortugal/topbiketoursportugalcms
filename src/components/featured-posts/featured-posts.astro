@@ -10,24 +10,29 @@ type Props = {
   feature_list: Array<string>;
 } & VisuallyEditable;
 
-const allPosts = await getCollection('blog');
 const block = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif}',
   { eager: true }
 );
+const allPosts = (await getCollection('blog')).filter(
+  (post) =>
+    block.main_feature === post.data.id ||
+    block.feature_list?.includes(post.data.id)
+);
+const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'long',
+  timeZone: 'America/Chicago'
+});
 ---
 
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
   {
-    allPosts.map((post) => {
-      if (block.main_feature === post.data.id) {
+    allPosts
+      .filter((post) => block.main_feature === post.data.id)
+      .map((post) => {
         const featuredPostURL = `/blog/${slugify(post.data.title, { lower: true, strict: true })}`;
         const date = new Date(post.data.date);
-        const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'long',
-          timeZone: 'America/Chicago'
-        });
         const formattedDate = dateTimeFormatter.format(date);
         const imageSrc =
           images[post.data.thumb_image_path]?.default ??
@@ -66,70 +71,61 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
             <p>{formattedDate}</p>
           </div>
         );
-      }
-    })
+      })
   }
   <div
     class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
   >
     {
-      block.feature_list?.map((featuredPost) => {
-        return allPosts.map((post) => {
-          if (post.data.id === featuredPost) {
-            const featuredPostURL = `/blog/${slugify(post.data.title, { lower: true, strict: true })}`;
-            const date = new Date(post.data.date);
-            const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-              dateStyle: 'long',
-              timeZone: 'America/Chicago'
-            });
-            const formattedDate = dateTimeFormatter.format(date);
-            const imageSrc =
-              images[post.data.thumb_image_path]?.default ??
-              post.data.thumb_image_path;
-            const tags = post.data.tags;
+      allPosts
+        .filter((post) => block.feature_list?.includes(post.data.id))
+        .map((post) => {
+          const featuredPostURL = `/blog/${slugify(post.data.title, { lower: true, strict: true })}`;
+          const date = new Date(post.data.date);
+          const formattedDate = dateTimeFormatter.format(date);
+          const imageSrc =
+            images[post.data.thumb_image_path]?.default ??
+            post.data.thumb_image_path;
+          const tags = post.data.tags;
 
-            return (
+          return (
+            <div>
+              <a href={featuredPostURL}>
+                <Image
+                  class="aspect-video w-full rounded-sm object-cover"
+                  alt={
+                    post.data.thumb_image_alt ??
+                    'Top walking tours portugal thumb_image_alt'
+                  }
+                  widths={[320, 500, 640]}
+                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                  src={imageSrc}
+                />
+              </a>
               <div>
+                {tags ? (
+                  <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                    {tags.map((tag: string) => {
+                      return (
+                        <a href={`/tags/${tag}`}>
+                          <span class="rounded-sm bg-slate-200 px-1">
+                            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ''
+                )}
                 <a href={featuredPostURL}>
-                  <Image
-                    class="aspect-video w-full rounded-sm object-cover"
-                    alt={
-                      post.data.thumb_image_alt ??
-                      'Top walking tours portugal thumb_image_alt'
-                    }
-                    widths={[320, 500, 640]}
-                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
-                    src={imageSrc}
-                  />
+                  <h3 class="py-1 text-2xl font-semibold">{post.data.title}</h3>
                 </a>
-                <div>
-                  {tags ? (
-                    <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                      {tags.map((tag: string) => {
-                        return (
-                          <a href={`/tags/${tag}`}>
-                            <span class="rounded-sm bg-slate-200 px-1">
-                              {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                            </span>
-                          </a>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <a href={featuredPostURL}>
-                    <h3 class="py-1 text-2xl font-semibold">
-                      {post.data.title}
-                    </h3>
-                  </a>
-                  <p>{formattedDate}</p>
-                </div>
+                <p>{formattedDate}</p>
               </div>
-            );
-          }
-        });
-      })
+            </div>
+          );
+        })
     }
   </div>
 </section>

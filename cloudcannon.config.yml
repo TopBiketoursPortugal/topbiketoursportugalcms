@@ -744,6 +744,30 @@ _structures:
     remove_empty_inputs: true
     hide_extra_inputs: true
     remove_extra_inputs: false
+  reviews:
+    values:
+      - label: Review
+        icon: message
+        value:
+          title: ''
+          rating: 5
+          author:
+            givenName: John
+            familyName: Doe
+            country: Portugal
+          datePublished: 2023-10-15T00:00:00Z
+          content: >-
+            These headphones are fantastic! The noise cancellation works
+            perfectly, and the sound quality is top-notch. Highly recommend them
+            for anyone looking for a premium audio experience.
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
   images:
     values:
       - label: Image
