@@ -186,7 +186,7 @@ itinerary:
       city: ''
     day: '7'
   - title: 'Day 8: departure'
-    description: .
+    description:
     location:
       lat: '1'
       lng: '1'
@@ -360,6 +360,8 @@ afterPricing: >-
 
   * Prices are based for 2 people sharing the same room;
 
+  * Sea view (when available) or premium rooms, price on request;
+
   * Prices can suffer updates due high season, holidays or weekends
 
   * Beverages are not included at lunch and dinner when included in the package
@@ -377,8 +379,20 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_description:
+  page_description: >-
+    The coast of the Atlantic Ocean is one the best areas to walk on and, at the
+    same time, enjoy the beautiful beaches and the history that the northern
+    towns have to offer. Start this tour in one of the most important cities in
+    Europe, the city of Porto. 
   canonical_url:
   featured_image:
   featured_image_alt:
@@ -386,7 +400,10 @@ seo:
   open_graph_type:
   no_index: false
 duration: 8
-distance: 84
+distance: 278
+tags:
+  - easy
+  - Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 1
