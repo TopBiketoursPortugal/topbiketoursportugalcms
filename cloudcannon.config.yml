@@ -7,11 +7,19 @@ collections_config:
     path: src/content/pages
     glob:
       - '**/*.md'
+    name: Pages
     icon: laptop_mac
     url: /[full_slug]/
     disable_url: false
+    description: ''
     _enabled_editors:
       - visual
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
     add_options:
       - name: Add New Page
         icon: pages
@@ -21,12 +29,6 @@ collections_config:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
-    _inputs:
-      id:
-        type: auto
-        instance_value: UUID
-        hidden: true
-        cascade: true
     schemas:
       default:
         path: schemas/page.md
@@ -48,9 +50,11 @@ collections_config:
     path: src/content/blog
     glob:
       - '**/*.md*'
+    name: Blog
     icon: newspaper
     url: /blog/[full_slug]/
     disable_url: false
+    description: ''
     _enabled_editors:
       - content
       - visual
@@ -120,8 +124,11 @@ collections_config:
         icon: notes
   data:
     path: data
-    icon: notes
+    name: Data
+    icon: drive_file_move
     disable_url: false
+    description: ''
+    _enabled_editors:
     _inputs:
       icons:
         type: auto
@@ -159,30 +166,40 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.itinerary_item
+        cascade: true
       itinerary.title:
         type: markdown
+        cascade: true
       itinerary.description:
         type: markdown
+        cascade: true
       itinerary.location:
         type: object
+        cascade: true
       itinerary.location.lat:
         type: number
+        cascade: true
       itinerary.location.lon:
         type: number
+        cascade: true
       itinerary.location.countryCode:
         type: select
         options:
+          allow_empty: true
           values: data.countries
           value_key: alpha2
+          preview:
+            text: englishName
           picker_preview:
             text: englishName
             subtext: alpha2
-          preview:
-            text: englishName
+        cascade: true
       itinerary.location.city:
         type: text
+        cascade: true
       itinerary.location.region:
         type: text
+        cascade: true
       relatedTours:
         type: multichoice
         options:
@@ -191,31 +208,28 @@ collections_config:
           values: collections.tours
           value_key: id
           preview:
-            image:
-              - key: image.src
             text:
               - key: title
-
+            image:
+              - key: image.src
+        cascade: true
       faqs:
         type: array
         options:
           empty_type: array
           structures: _structures.faqs
+        cascade: true
       images:
         type: array
         options:
           empty_type: array
           structures: _structures.images
+        cascade: true
       tags:
         type: array
         options:
           structures: _structures.tags
-      #   comment: one tag per line
-      #   options:
-      #     show_count: false
-      #     empty_type: 'null'
-      #     icon: tag
-      #   cascade: true
+        cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -225,17 +239,18 @@ collections_config:
         type: select
         options:
           allow_create: false
+          allow_empty: true
           values: data.tour_regions[*]
           value_key: id
-          allow_empty: true
           preview:
-            image:
-              - key: en.src
             text:
               - key: en.name
+            image:
+              - key: en.src
         comment: >-
           To add a new region, go to the [tour_regions data
           file](cloudcannon:collections/data/tour_regions.json)
+        cascade: true
       content:
         type: markdown
         cascade: true
@@ -279,6 +294,7 @@ collections_config:
     path: src/content/team
     glob:
       - '**/*.md*'
+    name: Team
     singular_name: Team member
     icon: people
     disable_url: false
@@ -366,13 +382,13 @@ _inputs:
     type: object
     options:
       preview:
-        gallery:
-          fit: cover
-        image:
-          - key: src
         text:
           - key: alt
         icon: Image
+        image:
+          - key: src
+        gallery:
+          fit: cover
       structures:
         style: select
         values:
@@ -383,8 +399,9 @@ _inputs:
   rating:
     type: number
     options:
-      max: 5
       min: 0
+      max: 5
+    cascade: true
   src:
     type: image
     options:
@@ -422,7 +439,6 @@ _inputs:
       value_key: code
     hidden: true
     cascade: true
-
   feature_list:
     type: multiselect
     options:
@@ -643,6 +659,55 @@ _inputs:
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
     cascade: true
+_structures:
+  itinerary_item:
+    values:
+      - label: Itinerary Item
+        value:
+          title:
+            type: markdown
+          description: ''
+          location: {}
+  tags:
+    values:
+      - default: false
+        place_groups_below: false
+        tabbed: false
+        label: Tags
+        value:
+          question: ''
+          answer: ''
+  faqs:
+    values:
+      - label: FAQs
+        value:
+          question: ''
+          answer: ''
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+  images:
+    values:
+      - label: Image
+        value:
+          src: ''
+          alt: ''
+        preview:
+          icon: Image
+          image:
+            - key: src
+          text:
+            - key: alt
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
 _editables:
   content:
     allow_custom_markup: false
@@ -950,16 +1015,6 @@ file_config:
       $[*]:
         type: text
         cascade: true
-  # - glob: data/tour_regions.json
-  #   _inputs:
-  #     $:
-  #       type: array
-  #       label: Tour regions
-  #       comment: Set the regions available in tours.
-  #       cascade: true
-  #     $[*]:
-  #       type: text
-  #       cascade: true
 data_config:
   countries:
     path: data/contries.json
@@ -972,56 +1027,6 @@ data_config:
   tour_regions:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
-_structures:
-  itinerary_item:
-    values:
-      - label: Itinerary Item
-        value:
-          title:
-            type: markdown
-          description: ''
-          location: {}
-  tags:
-    values:
-      - default: false
-        place_groups_below: false
-        tabbed: false
-        label: Tags
-        value:
-          question: ''
-          answer: ''
-
-  faqs:
-    values:
-      - label: FAQs
-        value:
-          question: ''
-          answer: ''
-        preview:
-          text:
-            - key: question
-    style: select
-    reorder_inputs: true
-    remove_empty_inputs: true
-    hide_extra_inputs: true
-    remove_extra_inputs: false
-  images:
-    values:
-      - label: Image
-        value:
-          src: ''
-          alt: ''
-        preview:
-          icon: Image
-          image:
-            - key: src
-          text:
-            - key: alt
-    style: select
-    reorder_inputs: true
-    remove_empty_inputs: true
-    hide_extra_inputs: true
-    remove_extra_inputs: false
 markdown:
   engine:
   options:
