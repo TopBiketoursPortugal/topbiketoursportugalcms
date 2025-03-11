@@ -162,6 +162,8 @@ collections_config:
             - PackageTour
             - WalkingTour
         cascade: true
+      reviews[*].title:
+        type: markdown
       itinerary:
         type: array
         options:
