@@ -150,6 +150,7 @@ collections_config:
     icon: directions_bike
     disable_url: false
     description: ''
+
     _inputs:
       type:
         type: select
@@ -167,22 +168,23 @@ collections_config:
           empty_type: array
           structures: _structures.itinerary_item
         cascade: true
-      itinerary.title:
+
+      itinerary[*].title:
         type: markdown
         cascade: true
-      itinerary.description:
+      itinerary[*].description:
         type: markdown
         cascade: true
-      itinerary.location:
+      itinerary[*].location:
         type: object
         cascade: true
-      itinerary.location.lat:
+      itinerary[*].location.lat:
         type: number
         cascade: true
-      itinerary.location.lon:
+      itinerary[*].location.lon:
         type: number
         cascade: true
-      itinerary.location.countryCode:
+      itinerary[*].location.countryCode:
         type: select
         options:
           allow_empty: true
@@ -194,10 +196,10 @@ collections_config:
             text: englishName
             subtext: alpha2
         cascade: true
-      itinerary.location.city:
+      itinerary[*].location.city:
         type: text
         cascade: true
-      itinerary.location.region:
+      itinerary[*].location.region:
         type: text
         cascade: true
       relatedTours:
