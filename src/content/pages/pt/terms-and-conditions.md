@@ -1,6 +1,6 @@
 ---
 _schema: default
-id: 374b61b1-17bb-468b-a1d2-9cb9483dd1f1
+id: 897cfdba-ee45-4ab3-9518-46e7295c67a1
 title: Termos e condições
 slug: termos-condicoes
 language: pt
@@ -59,12 +59,12 @@ content_blocks:
       All cancellations communicated to Top Walking Tours Portugal, with less
       than 30 days in advance are not entitled to any refund. 7. **Cancellation
       policy in self guided Walking tours:**
-         1. **Cancellation requested 31 days before tour start:** With the
+         4. **Cancellation requested 31 days before tour start:** With the
       exception of a cancellation fee of 15% of the total package value, the
       company will refund the entire value paid by the costumer, if the
       cancellation of the tour was notified 31 days before its start. That
       notification must be sent to Top Walking Tours Portugal, by email..
-         2. **Cancellation requested 30 days, or less, before the tour start:**
+         5. **Cancellation requested 30 days, or less, before the tour start:**
       All cancellations communicated to Top Walking Tours Portugal, Pvt. Lda,
       with less than 30 days in advance are entitled to a 30% refund. 8. Top
       Walking Tours Portugal is not responsible for refunding any amount paid

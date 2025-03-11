@@ -1,6 +1,6 @@
 ---
 template: ~/layouts/Page.astro
-id: 27e20631-ad55-4b9e-8553-c047839cda31
+id: 67def81f-5897-44df-aeef-c06c4e6e32f6
 language: pt
 title: Faqs
 draft: false

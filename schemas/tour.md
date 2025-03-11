@@ -1,5 +1,5 @@
 ---
-id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
+id:
 order: 8
 title: 'Coastal route to Santiago Compostela: Stage 2'
 subTitle: '1'

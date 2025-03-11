@@ -1,5 +1,6 @@
 ---
 _schema: page
+id: be794899-5f2b-407f-bc55-271859465a78
 title: Home
 language: en
 seo:

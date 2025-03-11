@@ -1,5 +1,6 @@
 ---
 _schema: paginated
+id: 1a721096-5416-430c-a46f-7446134e75ce
 title: Blog
 language: pt
 featured_posts:

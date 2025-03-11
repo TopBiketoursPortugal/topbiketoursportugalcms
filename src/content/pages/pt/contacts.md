@@ -1,6 +1,6 @@
 ---
 _schema: default
-id: 17e20631-ad55-4b9e-8553-c047839cda31
+id: 120f1c2f-57b5-49bf-858d-938c0773a9b4
 template: ~/layouts/Contacts.astro
 title: Contatos
 slug: contatos

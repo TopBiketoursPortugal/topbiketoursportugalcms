@@ -1,6 +1,6 @@
 ---
 _schema: default
-id: 493f9d67-f89c-4f32-bf40-a85124c2bf61
+id: 06a52988-e468-4118-b290-3f4eae5bb245
 title: Politica privacidade
 language: pt
 seo:

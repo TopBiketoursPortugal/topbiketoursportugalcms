@@ -1,6 +1,6 @@
 ---
 _schema: default
-id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
+id: 0016c707-c4c5-4af2-9a86-d737f552484e
 template: ~/layouts/Page.astro
 title: Sobre nós
 language: pt

@@ -1,5 +1,6 @@
 ---
 _schema: page
+id: 87a02870-6908-489d-93d9-96fcd29254fb
 title: Home
 language: pt
 seo:
