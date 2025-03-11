@@ -144,6 +144,16 @@ collections_config:
     disable_url: false
     description: ''
     _inputs:
+      type:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - DayTour
+            - PackageTour
+            - WalkingTour
+        cascade: true
       itinerary:
         type: array
         options:
@@ -633,21 +643,6 @@ _inputs:
     comment: >-
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
-    cascade: true
-  type:
-    type: select
-    options:
-      allow_create:
-      allow_empty: true
-      values:
-        - DayTour
-        - PackageTour
-        - WalkingTour
-      value_key:
-      preview:
-      picker_preview:
-      view:
-      picker_view:
     cascade: true
 _editables:
   content:
