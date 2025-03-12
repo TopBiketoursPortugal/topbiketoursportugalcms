@@ -477,13 +477,13 @@ _inputs:
       empty_type: array
       values: collections.blog
       value_key: id
-      preview:
-        text:
-          - key: title
-        subtext:
-          - key: language
-        image:
-          - key: image.src
+      # preview:
+      #   text:
+      #     - key: title
+      #   subtext:
+      #     - key: language
+      #   image:
+      #     - key: image.src
     cascade: true
   main_feature:
     type: select
@@ -491,13 +491,13 @@ _inputs:
       allow_empty: true
       values: collections.blog
       value_key: id
-      preview:
-        text:
-          - key: title
-        subtext:
-          - key: language
-        image:
-          - key: image.src
+      # preview:
+      #   text:
+      #     - key: title
+      #   subtext:
+      #     - key: language
+      #   image:
+      #     - key: image.src
     cascade: true
   markdown_content:
     type: markdown
