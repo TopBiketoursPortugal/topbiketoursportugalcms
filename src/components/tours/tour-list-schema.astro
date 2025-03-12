@@ -24,9 +24,14 @@ const schema = {
       },
       aggregateRating: {
         '@type': 'AggregateRating',
-        ratingValue: (tour.reviews ?? [])
-          .map((r) => r.rating)
-          .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
+        ratingValue: Math.ceil(
+          (tour.reviews ?? [])
+            .map((r) => r.rating)
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            ) / tour.reviews.length
+        ),
         reviewCount: (tour.reviews ?? []).length,
         bestRating,
         worstRating
@@ -47,7 +52,9 @@ const schema = {
         offers: tour.packages?.map((p) => ({
           '@type': 'Offer',
           name: p.title,
-          url: Astro.site + getTourPath(tour, language)
+          url: Astro.site + getTourPath(tour, language),
+          price: p.price.promo ?? p.price.price ?? 0,
+          priceCurrency: 'EUR'
         })),
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock'
@@ -62,6 +69,11 @@ const schema = {
         },
         author: {
           '@type': 'Person',
+          name: `${review.author?.givenName}${
+            review.author?.familyName !== ''
+              ? ' ' + review.author?.familyName
+              : ''
+          }`,
           givenName: review.author?.givenName,
           familyName: review.author?.familyName,
           address: {

@@ -32,7 +32,7 @@ export function getAggregatedReviews(
   );
   return {
     count: ratings.length,
-    average: total / ratings.length,
+    average: Math.ceil(total / ratings.length),
     max,
     min,
     total
