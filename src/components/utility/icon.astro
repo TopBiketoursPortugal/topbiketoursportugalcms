@@ -297,7 +297,12 @@ function getIconComponent(iconName: IconNames): any {
 }
 
 const IconComponent = getIconComponent(icon);
-// New Phosphor icon imports
 ---
 
-<IconComponent class={style} title={title} />
+{
+  IconComponent ? (
+    <IconComponent class={style} title={title} />
+  ) : (
+    <div>{icon}</div>
+  )
+}
