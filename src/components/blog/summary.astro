@@ -35,7 +35,7 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
           {tags.map((tag: string) => {
             return (
               <a href={`/tags/${tag}`}>
-                <span class="rounded-sm bg-slate-200 px-1">
+                <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
                   {tag.charAt(0).toUpperCase() + tag.slice(1)}
                 </span>
               </a>

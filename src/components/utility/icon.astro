@@ -59,6 +59,7 @@ import PhHouseLightIcon from 'src/assets/icons/ph/light/house-light.svg';
 import PhMagnifyingGlassLightIcon from 'src/assets/icons/ph/light/magnifying-glass-light.svg';
 import PhImageLightIcon from 'src/assets/icons/ph/light/image-light.svg';
 import PhPhoneLightIcon from 'src/assets/icons/ph/light/phone-light.svg';
+import PhPhoneFillIcon from 'src/assets/icons/ph/fill/phone-fill.svg';
 import PhBarsLightIcon from 'src/assets/icons/ph/light/list-light.svg';
 import PhHeartLightIcon from 'src/assets/icons/ph/light/heart-light.svg';
 import PhXMarkLightIcon from 'src/assets/icons/ph/light/x-light.svg';
@@ -84,6 +85,8 @@ import PhBikeLightIcon from 'src/assets/icons/ph/light/bicycle-light.svg';
 import PhUsersLightIcon from 'src/assets/icons/ph/light/users-three-light.svg';
 import PhMapLightIcon from 'src/assets/icons/ph/light/map-trifold-light.svg';
 import PhClockLightIcon from 'src/assets/icons/ph/light/clock-light.svg';
+import PhNavigationArrowFillIcon from 'src/assets/icons/ph/fill/navigation-arrow-fill.svg';
+import PhNavigationArrowLightIcon from 'src/assets/icons/ph/light/navigation-arrow-light.svg';
 import CircleFlagsPtIcon from 'src/assets/icons/circle-flags/pt.svg';
 import CircleFlagsUsIcon from 'src/assets/icons/circle-flags/us.svg';
 
@@ -92,10 +95,11 @@ type Props = {
   className?: string;
   class: string;
   title?: string;
+  slot?: string;
 };
 
 const { icon, className, class: className2, title } = Astro.props;
-const style = cn(className, className2, 'h-6 w-6 fill-current');
+const style = cn('h-6 w-6 fill-current', className, className2);
 
 function getIconComponent(iconName: IconNames): any {
   switch (iconName) {
@@ -142,8 +146,12 @@ function getIconComponent(iconName: IconNames): any {
     case 'ph:star-half-fill':
       return PhStarHalfFillIcon;
     case 'Envelope':
-    case 'ph:envelope-simple-thin':
+    case 'ph:envelope-simple-light':
       return PhEnvelopeSimpleLightIcon;
+    case 'ph:navigation-arrow-fill':
+      return PhNavigationArrowFillIcon;
+    case 'ph:navigation-arrow-light':
+      return PhNavigationArrowLightIcon;
     case 'User':
     case 'ph:user-light':
       return PhUserLightIcon;
@@ -227,8 +235,10 @@ function getIconComponent(iconName: IconNames): any {
     case 'Image':
       return PhImageLightIcon;
     case 'Phone':
-    case 'ph:phone-thin':
+    case 'ph:phone-light':
       return PhPhoneLightIcon;
+    case 'ph:phone-fill':
+      return PhPhoneFillIcon;
     case 'Bars':
       return PhBarsLightIcon;
     case 'Heart':
@@ -257,7 +267,7 @@ function getIconComponent(iconName: IconNames): any {
     case 'ph:tag-light':
       return PhTagLightIcon;
     case 'Bookmark':
-    case 'ph:bookmark-simple-thin':
+    case 'ph:bookmark-simple-light':
       return PhBookmarkLightIcon;
     case 'Facebook':
     case 'ph:facebook-logo-light':

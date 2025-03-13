@@ -152,7 +152,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 aria-label="RSS Feed"
                 href="/feed.xml"
               >
-                <Icon icon="ph:rss-light" className="h-5 w-5" />
+                <Icon
+                  icon="ph:rss-light"
+                  className="h-5 w-5 hover:scale-125 transition-transform duration-150"
+                />
               </a>
             )
           }

@@ -14,16 +14,22 @@ const { enableSystem = false } = Astro.props;
     dark mode
   </p>
 
-  <button x-on:click="darkMode = 'light'">
+  <button
+    x-on:click="darkMode = 'light'"
+    class="transition-transform duration-150 hover:scale-125"
+  >
     <Icon
       icon="ph:sun-light"
-      x-bind:className="{'border-2 border-red/50': darkMode === 'light'}"
+      x-bind:className="{'border-2 border-red/50 ': darkMode === 'light'}"
     />
 
     <span class="sr-only">light</span>
   </button>
 
-  <button x-on:click="darkMode = 'dark'">
+  <button
+    x-on:click="darkMode = 'dark'"
+    class="transition-transform duration-150 hover:scale-125"
+  >
     <Icon
       icon="ph:moon-light"
       x-bind:className="{'border-2 border-red/50': darkMode === 'dark'}"

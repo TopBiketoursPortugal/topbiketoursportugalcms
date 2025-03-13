@@ -10,7 +10,7 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
 
 <form
   {...props}
-  class={cn('flex w-full flex-col gap-3', className)}
+  class={cn('flex w-full flex-col gap-3 validate-form', className)}
   autocomplete="off"
 >
   {

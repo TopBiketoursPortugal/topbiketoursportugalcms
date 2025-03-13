@@ -13,7 +13,7 @@
 }
 
 /**************** mkardown ****************/
-.markdown-text h1,
+/* .markdown-text h1,
 .markdown-text h2,
 .markdown-text h3,
 .markdown-text h4 {
@@ -137,4 +137,4 @@
 .markdown-text pre {
   margin-block: 1.5rem;
   padding: 1rem;
-}
+} */
