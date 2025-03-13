@@ -95,7 +95,7 @@ type Props = {
 };
 
 const { icon, className, class: className2, title } = Astro.props;
-const style = cn(className, className2, 'h-6 w-6');
+const style = cn(className, className2, 'h-6 w-6 fill-current');
 
 function getIconComponent(iconName: IconNames): any {
   switch (iconName) {
