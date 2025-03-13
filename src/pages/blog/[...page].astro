@@ -1,9 +1,8 @@
 ---
 import type { Page } from 'astro';
 import BlogList from '../../components/blog/list.astro';
-import BlogPagination from '../../components/blog/pagination';
-import { type Props as LayoutProps } from '../../layouts/Layout.astro';
-import Layout from '../../layouts/Paginated.astro';
+import BlogPagination from '../../components/blog/pagination.astro';
+import Layout, { type PaginatedProps } from '../../layouts/Paginated.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 type Props = {
@@ -13,7 +12,6 @@ type Props = {
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const posts = await getCollection('blog');
   const page = await getEntry('pages', 'blog');
-  // Filter out what is already displayed in featured stories
   const filteredPosts = posts.filter((p) => (p.data.language ?? 'en') === 'en');
   return paginate(filteredPosts, {
     pageSize: page?.data && 'page_size' in page.data ? page.data.page_size : 6
@@ -21,7 +19,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 }
 
 const page = await getEntry('pages', 'blog');
-const frontmatter = page?.data as LayoutProps;
+const frontmatter = page?.data as PaginatedProps['frontmatter'];
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
 ---

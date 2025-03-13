@@ -66,6 +66,7 @@ difficulty: 2
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1S9_RfIAweubmKvKRdx7K9EtaIJSnrEx5
 region: north
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

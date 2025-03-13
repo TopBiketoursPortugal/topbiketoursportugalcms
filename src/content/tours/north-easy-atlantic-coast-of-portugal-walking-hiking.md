@@ -401,6 +401,7 @@ afterPricing: >-
   * Ferry (boat) in river / lake crossing is not included in price package
   (approximately 2€ to 10€ per person)
 seo:
+  page_title:
   page_description: >-
     The coast of the Atlantic Ocean is one the best areas to walk on and, at the
     same time, enjoy the beautiful beaches and the history that the northern

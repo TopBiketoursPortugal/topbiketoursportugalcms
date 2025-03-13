@@ -14,6 +14,7 @@ image:
   src: /src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg
   alt: Benefits of your first walking tour
 seo:
+  page_title: Benefits of your first walking tour
   page_description: Benefits of your first walking tour
   canonical_url:
   featured_image: /src/assets/images/featured-image-2.jpg

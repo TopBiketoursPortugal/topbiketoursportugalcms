@@ -217,7 +217,7 @@ To add more icons:
 
 1. Go to the [Font Awesome icon list](https://fontawesome.com/search?o=r&m=free)
 2. Pick a free icon
-3. Go to `src/components/utility/icon.astro.jsx`
+3. Go to `src/components/utility/icon.astro.astro`
 4. Import the component from `'@fortawesome/free-solid-svg-icons'`,
    `'@fortawesome/free-regular-svg-icons'`, or
    `'@fortawesome/free-brands-svg-icons'`, depending on which kind of icon it
@@ -242,11 +242,11 @@ To remove Font Awesome Icons:
   }
 ```
 
-2. Remove `src/components/utility/icon.astro.jsx`
-3. Remove any imports of the icon
+1. Remove `src/components/utility/icon.astro.astro`
+2. Remove any imports of the icon
 
 ```Astro
-import Icon from '../utility/icon.astro';
+import Icon from '../utility/icon.astro.astro';
 ```
 
 4. Remove `icons.json`

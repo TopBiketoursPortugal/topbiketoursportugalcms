@@ -5,6 +5,7 @@ title: Termos e condições
 slug: termos-condicoes
 language: pt
 seo:
+  page_title:
   page_description: Terms and conditions
   canonical_url:
   featured_image:

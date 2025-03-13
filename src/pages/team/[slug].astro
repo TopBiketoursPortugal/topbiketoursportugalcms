@@ -23,14 +23,14 @@ export async function getStaticPaths() {
 
 const language = 'en';
 const { teamMember } = Astro.props;
-const { title, seo, image, subTitle } = teamMember.data;
+const { title, seo, image, memberType } = teamMember.data;
 const { Content } = await render(teamMember);
 const excerpt = getMarkdownExcerpt(teamMember.body ?? '', 300);
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: title,
-  jobTitle: subTitle,
+  jobTitle: memberType,
   worksFor: {
     '@type': 'Organization',
     name: SiteData[language].site.name,
@@ -62,7 +62,7 @@ const schema = {
             {title}
           </strong>
           <p class="text-neutral-400 dark:text-neutral-200">
-            {subTitle}
+            {memberType}
           </p>
           <article>
             <Content />

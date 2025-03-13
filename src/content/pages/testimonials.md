@@ -9,6 +9,7 @@ locale_alternates:
   - language_code: pt
     link: http://google.com
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image: 'src/assets/images/bike-tours-in-portugal.jpg'

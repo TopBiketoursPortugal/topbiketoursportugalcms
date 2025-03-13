@@ -6,6 +6,7 @@ title: Passeios pedestres portugal
 language: pt
 slug: passeios-pedestres-portugal
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

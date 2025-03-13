@@ -1,5 +1,5 @@
 ---
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 ---
 
 <a
@@ -7,7 +7,7 @@ import Icon from 'src/components/utility/icon';
   role="marquee"
   aria-hidden="true"
   title="Got to top"
-  class="top text-white bg-slate-900 fixed bottom-16 right-5 z-[9999] mt-[calc(100vh+50px)] flex h-10 w-10 translate-y-12 items-center justify-center rounded-full p-3 opacity-0 transition-all duration-300 hover:scale-110"
+  class="top fixed bottom-16 right-5 z-[9999] mt-[calc(100vh+50px)] flex h-10 w-10 translate-y-12 items-center justify-center rounded-full bg-slate-900 p-3 text-white opacity-0 transition-all duration-300 hover:scale-110"
   ><Icon icon="ArrowUp" className="text-white" title="Got to top" /></a
 >
 <style>

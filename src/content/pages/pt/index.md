@@ -4,6 +4,7 @@ id: 87a02870-6908-489d-93d9-96fcd29254fb
 title: Home
 language: pt
 seo:
+  page_title:
   page_description: >-
     A starting point for developers looking to build a website with Astro, using
     Bookshop components in CloudCannon. Create your own copy, and start creating
@@ -90,10 +91,10 @@ content_blocks:
       hover_brightness: 0.85
       text_color: '#ffffff'
   - _bookshop_name: featured-posts
-    main_feature: All the bells and whistles
+    main_feature: f79aaae4-f825-4715-9b8a-10a608e5bf7d
     feature_list:
-      - Best email sending services changed
-      - Email delivery tips
+      - 4edfe3aa-1842-4627-97d1-5aa563a7e272
+      - f79aaae4-f825-4715-9b8a-10a608e5bf7d
   - _bookshop_name: collection
     type: tours
     title: Our Tours

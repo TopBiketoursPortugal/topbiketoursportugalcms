@@ -4,7 +4,7 @@ import AllFaqs from 'src/../data/faqs.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import AccordionItem from '../accordion/AccordionItem.astro';
 import Accordion from '../accordion/accordion.astro';
-import Prose from '../prose/prose.astro';
+import Prose from '../typography/prose.astro';
 
 type Props = {
   language: LanguageCodes;
@@ -21,9 +21,9 @@ const items = faqs?.length > 0 ? faqs : defaultFaqs;
 <Accordion>
   {
     items.map(({ question, answer }) => (
-      <AccordionItem open class="bg-slate-50 border-none dark:bg-neutral-900">
+      <AccordionItem open class="border-none bg-slate-50 dark:bg-neutral-900">
         <div slot="header" class="flex w-full items-center gap-4">
-          <div class="border-gray-600 box-content flex border-collapse items-center justify-center p-4 hover:bg-slate-200 dark:hover:bg-neutral-800">
+          <div class="box-content flex border-collapse items-center justify-center border-gray-600 p-4 hover:bg-slate-200 dark:hover:bg-neutral-800">
             <svg
               class="h-5 w-5 transition-transform duration-300 ease-in-out"
               fill="none"

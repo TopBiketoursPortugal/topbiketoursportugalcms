@@ -3,6 +3,7 @@ _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 title: About Us
 seo:
+  page_title:
   page_description: About Top walking tours portugal
   canonical_url:
   featured_image: src/assets/images/bike-tours-in-portugal.jpg

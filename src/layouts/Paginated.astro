@@ -2,7 +2,7 @@
 import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
 
-type Props = {
+export type PaginatedProps = {
   frontmatter: {
     title: string;
     featured_posts?: {
@@ -13,6 +13,8 @@ type Props = {
     seo?: SEOProps;
   };
 };
+
+type Props = PaginatedProps;
 
 if (!Astro.props.frontmatter) {
   throw new Error('Page frontmatter must be defined');

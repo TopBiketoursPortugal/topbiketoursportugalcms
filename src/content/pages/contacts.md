@@ -3,6 +3,7 @@ _schema: default
 id: 17e20631-ad55-4b9e-8553-c047839cda31
 title: Contacts
 seo:
+  page_title:
   page_description: Contact us
   canonical_url:
   featured_image: src/assets/images/bike-tours-in-portugal.jpg

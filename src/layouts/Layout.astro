@@ -1,6 +1,5 @@
 ---
 import '../styles/main.css';
-import SiteData from '../../data/site.json';
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 import Analytics from './common/Analytics.astro';
@@ -15,8 +14,10 @@ import ScrollTop from './common/ScrollTop.astro';
 import BasicScripts from './common/BasicScripts.astro';
 import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
+import { getPageSeo } from 'utils/seo';
 
-export interface SEOProps {
+export type SEOProps = {
+  page_title: string | null;
   page_description: string | null;
   featured_image: string | null;
   featured_image_alt: string | null;
@@ -24,27 +25,22 @@ export interface SEOProps {
   no_index: boolean | null;
   open_graph_type: string | null;
   author_twitter_handle: string | null;
-}
+};
 
-export interface Props {
-  title: string;
+export type LayoutProps = {
+  title?: string;
   seo?: SEOProps;
   class?: string;
-}
+};
+
+type Props = LayoutProps;
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const site = SiteData[language];
-const { seo } = Astro.props;
-const baseUrl = Astro.site ?? import.meta.env.BASE_URL;
-const title = Astro.props.title
-  ? `${Astro.props.title} | ${site.site_title}`
-  : site.site_title;
-const description = seo?.page_description ?? site.description;
-const image = seo?.featured_image ?? site.image.src;
-const image_alt = seo?.featured_image_alt ?? site.image.alt;
-const canonicalURL = seo?.canonical_url
-  ? new URL(seo?.canonical_url, baseUrl)
-  : undefined;
+const seoProps = getPageSeo(
+  Astro.site ?? import.meta.env.BASE_URL,
+  Astro.props as Props,
+  language
+);
 ---
 
 <!doctype html>
@@ -64,37 +60,7 @@ const canonicalURL = seo?.canonical_url
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
-    <SEO
-      noindex={seo?.no_index || false}
-      title={title}
-      description={description}
-      canonical={canonicalURL}
-      openGraph={{
-        basic: {
-          title: Astro.props.title,
-          url:
-            baseUrl !== null &&
-            baseUrl !== undefined &&
-            baseUrl?.toString().length > 0
-              ? baseUrl?.toString()
-              : import.meta.env.BASE_URL,
-          type: `${seo?.open_graph_type || 'website'}`,
-          image: `${baseUrl}${image}`
-        },
-        optional: {
-          description: description
-        },
-        image: {
-          url: `${baseUrl}${image}`,
-          alt: image_alt
-        }
-      }}
-      twitter={{
-        creator: `${seo?.author_twitter_handle || site.twitter_site}`,
-        site: `${site.twitter_site}`,
-        card: 'summary_large_image'
-      }}
-    />
+    <SEO {...seoProps} />
   </head>
   <body
     class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"

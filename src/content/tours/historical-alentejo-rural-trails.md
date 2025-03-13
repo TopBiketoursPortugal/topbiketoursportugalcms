@@ -376,6 +376,7 @@ afterPricing: >-
   SS.390€ * Single supplement 9 Nights / 10 Days: LS: 400€, RS: 429€, HS: 460€,
   SS.490€ * Extra nights: on request
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

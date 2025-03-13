@@ -366,6 +366,7 @@ feature:
   image: /src/assets/images/walking-pescadores-trail.jpg
   bokunLinkText: Book now
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

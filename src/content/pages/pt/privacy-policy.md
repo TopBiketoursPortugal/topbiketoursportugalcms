@@ -4,6 +4,7 @@ id: 06a52988-e468-4118-b290-3f4eae5bb245
 title: Politica privacidade
 language: pt
 seo:
+  page_title:
   page_description: Privacy policy
   canonical_url:
   featured_image:

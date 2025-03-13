@@ -4,6 +4,7 @@ id: be794899-5f2b-407f-bc55-271859465a78
 title: Home
 language: en
 seo:
+  page_title:
   page_description: >-
     A starting point for developers looking to build a website with Astro, using
     Bookshop components in CloudCannon. Create your own copy, and start creating
@@ -18,17 +19,13 @@ content_blocks:
   - _bookshop_name: hero
     background_color: '#ffffff'
     heading:
-      heading_text: Top Walking Tours Portugal
+      heading_text: Portugal Walking & Hiking Tours
       heading_gradient_color: '#c8d5b9'
     subheading:
       markdown_content: >-
-        # **Portugal Walking & Hiking Tours**
-
-
         ## **Hike Portugal with Top Walking tours Portugal**
 
-
-        <br>Welcome to Portugal, land of many stories and dreams. In the south
+        Welcome to Portugal, land of many stories and dreams. In the south
         western edge of continental Europe, a small yet wonderful country
         remains to be found. This... is an old country with plentiful history
         and nature to share with any passing visitor. From north to south there

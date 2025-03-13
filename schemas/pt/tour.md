@@ -338,6 +338,7 @@ afterPricing: >-
 
   * Extra nights: on request
 seo:
+  page_title:
   page_description: 'teste'
   canonical_url: 'test'
   featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg

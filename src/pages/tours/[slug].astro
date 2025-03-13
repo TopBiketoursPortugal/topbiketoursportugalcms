@@ -26,6 +26,7 @@ const { Content } = await render(tour);
 
 const seo = {
   no_index: true,
+  page_title: tour.data.title,
   page_description: tour.data.description ?? tour.data.title,
   open_graph_type: 'product',
   author_twitter_handle: null,

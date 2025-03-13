@@ -5,6 +5,7 @@ featured_posts:
   main_feature:
   feature_list:
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

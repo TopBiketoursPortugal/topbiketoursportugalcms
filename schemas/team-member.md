@@ -10,6 +10,7 @@ order: 0
 enabled: true
 template: Layout.astro
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

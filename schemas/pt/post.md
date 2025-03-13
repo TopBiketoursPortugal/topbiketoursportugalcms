@@ -11,6 +11,7 @@ image:
   src: ''
   alt: ''
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

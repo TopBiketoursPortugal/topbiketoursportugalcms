@@ -362,6 +362,7 @@ feature:
   bokunLinkText: Book now
   image: /src/assets/images/vicentina-coast-walking-trail.jpg
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

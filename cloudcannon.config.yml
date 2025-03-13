@@ -135,7 +135,7 @@ collections_config:
         comment: >-
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
-          ```~/components/utility/icon.tsx``` file, following the existing
+          ```~/components/utility/icon.astro.tsx``` file, following the existing
           pattern.
         cascade: true
     disable_add: true
@@ -670,6 +670,10 @@ _inputs:
   copyright:
     type: auto
     comment: Automatically prefixed with the current year
+    cascade: true
+  page_title:
+    type: auto
+    comment: Defaults to the description set in the Site SEO data file
     cascade: true
   page_description:
     type: auto

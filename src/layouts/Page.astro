@@ -1,26 +1,28 @@
 ---
+import Heading from 'src/components/typography/heading.astro';
 import PageHelper from '../shared/astro/page.astro';
-import Layout, { type SEOProps } from './Layout.astro';
+import Layout, { type LayoutProps } from './Layout.astro';
+import type { Except } from 'type-fest';
 
 type Props = {
   frontmatter: {
-    title: string;
     content_blocks?: any[];
     page_size?: number;
-    seo?: SEOProps;
-  };
+  } & Except<LayoutProps, 'class'>;
   class?: string;
   showPageTitle?: boolean;
 };
 
-const { frontmatter, class: className, showPageTitle } = Astro.props;
+const { frontmatter, class: className, showPageTitle = false } = Astro.props;
 const { content_blocks = [] } = frontmatter;
 ---
 
 <Layout {...frontmatter} class={className}>
   {
     showPageTitle ? (
-      <h1 class="px-6 text-4xl font-bold capitalize">{frontmatter.title}</h1>
+      <Heading as="h1" class="px-6 text-4xl font-bold capitalize">
+        {frontmatter.title}
+      </Heading>
     ) : null
   }
   <slot />

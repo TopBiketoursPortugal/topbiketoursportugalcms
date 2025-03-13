@@ -12,7 +12,7 @@ import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
 import slugify from 'slugify';
 import LinkButton from '../linkbutton/linkbutton.astro';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -38,7 +38,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     <h3 class="font-oswald line-clamp-2 text-xl font-bold">
       {data.title}
     </h3>
-    <p class="text-gray-600 line-clamp-5 text-lg/relaxed">
+    <p class="line-clamp-5 text-lg/relaxed text-gray-600">
       {getMarkdownExcerpt(content ?? '', 300)}
     </p>
 
@@ -72,7 +72,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
       tags && tags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
           <Icon
-            icon="ph:bookmark-simple-thin"
+            icon="ph:bookmark-simple-light"
             className="text-gray-600 h-5 w-5"
           />
           {tags.map((t) => (

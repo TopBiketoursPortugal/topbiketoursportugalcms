@@ -6,7 +6,7 @@ import LanguageMenu from './LanguageMenu.astro';
 import { getHomePermalink, trimSlash } from 'utils/permalinks';
 import type { HTMLAttributes } from 'astro/types';
 import type { LanguageCodes } from 'src/schemas/language';
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 
 interface Link {
   text?: string;
@@ -53,7 +53,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky },
-    'bg-slate-50 top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 transition-[opacity] ease-in-out dark:bg-slate-950'
+    'top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-[opacity] ease-in-out dark:bg-slate-950'
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -80,7 +80,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       </div>
     </div>
     <nav
-      class="text-slate-900 hidden w-full items-center overflow-y-auto overflow-x-hidden dark:text-slate-300 md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
+      class="hidden w-full items-center overflow-y-auto overflow-x-hidden text-slate-900 dark:text-slate-300 md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
       aria-label="Main navigation"
     >
       <ul
@@ -103,7 +103,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         className="hidden h-4 w-4 md:inline"
                       />
                     </button>
-                    <ul class="dropdown-menu text-black rounded pl-4 font-medium drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
+                    <ul class="dropdown-menu rounded pl-4 font-medium text-black drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a

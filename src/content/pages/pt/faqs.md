@@ -8,6 +8,7 @@ locale_alternates:
   - language_code: pt
     link: http://google.com
 seo:
+  page_title:
   page_description: >-
     A starting point for developers looking to build a website with Astro, using
     Bookshop components in CloudCannon. Create your own copy, and start creating

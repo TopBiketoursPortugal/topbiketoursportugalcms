@@ -360,6 +360,7 @@ afterPricing: >-
 
   - Extra nights: on request
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

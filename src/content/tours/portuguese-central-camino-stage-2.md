@@ -81,6 +81,7 @@ difficulty: 4
 rating: []
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1VhcZ4AWrcUlxin9KTIRDCP1QGqHRf9-T
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

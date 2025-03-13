@@ -13,6 +13,7 @@ image:
   src: /src/assets/images/6original-route-from-porto-to-santiago-de-compostela.jpg
   alt: ewq
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:
@@ -21,4 +22,5 @@ seo:
   open_graph_type: article
   no_index: false
 ---
+
 ewqeqweqw

@@ -2,6 +2,7 @@ import { z } from 'astro:schema';
 
 export const seoSchema = z
   .object({
+    page_title: z.string().optional().nullable(),
     page_description: z.string().nullable(),
     canonical_url: z.string().nullable(),
     featured_image: z.string().nullable(),
@@ -11,3 +12,5 @@ export const seoSchema = z
     no_index: z.boolean()
   })
   .optional();
+
+export type SeoSchema = z.infer<typeof seoSchema>;

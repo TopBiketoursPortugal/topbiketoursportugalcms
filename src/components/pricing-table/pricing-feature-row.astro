@@ -1,7 +1,7 @@
 ---
 import Tooltip from '../tooltip/tooltip.astro';
 import { tv } from 'tailwind-variants';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
 
 const {
   feature,
@@ -13,12 +13,12 @@ const {
 } = Astro.props;
 
 const container = tv({
-  base: 'text-gray-600 border-gray-300 flex h-12 items-center justify-center gap-2 px-2 text-center transition-all dark:text-gray-400 dark:border-gray-600',
+  base: 'flex h-12 items-center justify-center gap-2 border-gray-300 px-2 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
   variants: {
     alternate: {
-      true: 'bg-gray-100 group-hover:bg-gray-200 dark:text-white dark:bg-gray-900 dark:group-hover:bg-gray-950',
+      true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
       false:
-        'bg-gray-200 group-hover:bg-gray-300 dark:text-white dark:bg-gray-800 dark:group-hover:bg-gray-900'
+        'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
     }
   }
 });

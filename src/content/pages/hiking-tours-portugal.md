@@ -3,6 +3,7 @@ _schema: default
 id: a8607495-f8ce-4200-afdd-68f04ec13246
 title: hiking tours portugal
 seo:
+  page_title:
   page_description: >-
     Hike all around Portugal with us. In Self Guided or guided walking tours all
     the support will be guaranteed. Luggage transference, meals, four star

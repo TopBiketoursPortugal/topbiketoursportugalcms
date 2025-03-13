@@ -15,6 +15,7 @@ image:
   src: /src/assets/images/featured-image-1.jpg
   alt: Child using a computer
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image: /src/assets/images/featured-image-1.jpg

@@ -14,6 +14,7 @@ image:
   src: /src/assets/images/featured-image-5.jpg
   alt: Laptop, phone and coffee
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image: /src/assets/images/featured-image-5.jpg

@@ -368,6 +368,7 @@ packages:
     bestValue: false
 afterPricing: ''
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:

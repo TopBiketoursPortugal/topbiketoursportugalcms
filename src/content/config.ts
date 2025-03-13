@@ -30,20 +30,23 @@ const pageSchema = z.object({
   template: z.string().optional().nullable(),
   slug: z.string().optional().nullable(),
   content_blocks: z.array(z.any()),
-  seo: seoSchema
+  content_blocks_after: z.array(z.any()).optional().nullable(),
+  seo: seoSchema,
+  showPageTitle: z.boolean().optional().default(false)
 });
 
 const paginatedCollectionSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
-  slug: z.string().optional().nullable(),
-  template: z.string().optional().nullable(),
   language: languageSchema,
+  template: z.string().optional().nullable(),
+  slug: z.string().optional().nullable(),
   page_size: z.number().positive(),
   featured_posts: z.object({
-    main_feature: z.string(),
-    feature_list: z.array(z.string())
+    main_feature: z.string().uuid(),
+    feature_list: z.array(z.string().uuid())
   }),
+  showPageTitle: z.boolean().optional().default(false),
   seo: seoSchema
 });
 

@@ -5,6 +5,7 @@ title: Privacy policy
 slug: privacy-policy
 language: en
 seo:
+  page_title:
   page_description: Privacy policy
   canonical_url:
   featured_image:

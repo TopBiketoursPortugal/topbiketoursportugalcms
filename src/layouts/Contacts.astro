@@ -1,5 +1,5 @@
 ---
-import Layout from './Layout.astro';
+import Layout, { type LayoutProps } from './Layout.astro';
 import Stack from 'src/components/stack/stack.astro';
 import Text from 'src/components/typography/text.astro';
 import Heading from 'src/components/typography/heading.astro';
@@ -7,32 +7,28 @@ import Separator from 'src/components/separator/separator.astro';
 import ContactColumns from './common/contact-columns.astro';
 import ContactForm from './common/contact-form.astro';
 import PageHelper from '../shared/astro/page.astro';
+import type { Except } from 'type-fest';
 
-export interface SEOProps {
-  page_description: string | null;
-  featured_image: string | null;
-  featured_image_alt: string | null;
-  canonical_url: string | null;
-  no_index: boolean | null;
-  open_graph_type: string | null;
-  author_twitter_handle: string | null;
-}
-
-export type Props = {
-  frontmatter: {
-    title: string;
-    content_blocks?: any[];
-    content_blocks_after?: any[];
-    page_size?: number;
-    seo?: SEOProps;
-  };
+export type ContactProps = {
+  frontmatter: Except<LayoutProps, 'class'>;
+  content_blocks?: any[];
+  content_blocks_after?: any[];
+  class?: string;
+  showPageTitle?: boolean;
 };
+
+type Props = ContactProps;
+
 const language = 'en';
-const props = Astro.props.frontmatter;
+const {
+  content_blocks = [],
+  content_blocks_after = [],
+  frontmatter
+} = Astro.props;
 ---
 
-<Layout {...props}>
-  <PageHelper bookshop:live contentBlocks={props.content_blocks ?? []} />
+<Layout {...frontmatter}>
+  <PageHelper bookshop:live contentBlocks={content_blocks ?? []} />
   <ContactColumns language={language} class="container mx-auto" />
   <Stack
     as="section"
@@ -59,5 +55,5 @@ const props = Astro.props.frontmatter;
     src="https://maps.google.com/maps?q=Top%20bike%20tours%20portugal&t=&z=17&ie=UTF8&iwloc=&output=embed"
     allowfullscreen></iframe>
   <slot />
-  <!-- <PageHelper bookshop:live contentBlocks={props.content_blocks_after ?? []} /> -->
+  <PageHelper bookshop:live contentBlocks={content_blocks_after ?? []} />
 </Layout>

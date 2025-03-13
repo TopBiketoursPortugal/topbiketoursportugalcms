@@ -1,7 +1,9 @@
 ---
 id:
 title:
+showPageTitle: true
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:
@@ -9,5 +11,6 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
+  metas: []
 content_blocks: []
 ---

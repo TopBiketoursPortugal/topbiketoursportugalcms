@@ -1,5 +1,5 @@
 ---
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 
 type Props = {
   enableSystem?: boolean;
@@ -39,7 +39,7 @@ const { enableSystem = false } = Astro.props;
           x-cloak
           x-show="! window.matchMedia('(prefers-color-scheme: dark)').matches"
           x-bind:class="{'border-2 border-red/50': darkMode === 'system'}"
-          class="text-gray-700 bg-gray-100 h-7 w-7 cursor-pointer rounded-full p-1 transition hover:bg-gray-200"
+          class="h-7 w-7 cursor-pointer rounded-full bg-gray-100 p-1 text-gray-700 transition hover:bg-gray-200"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -61,7 +61,7 @@ const { enableSystem = false } = Astro.props;
           xmlns="http://www.w3.org/2000/svg"
           x-show="window.matchMedia('(prefers-color-scheme: dark)').matches"
           x-bind:class="{'border-2 border-red/50': darkMode === 'system'}"
-          class="text-gray-100 bg-gray-700 hidden h-7 w-7 cursor-pointer rounded-full p-1 transition dark:hover:bg-gray-600"
+          class="hidden h-7 w-7 cursor-pointer rounded-full bg-gray-700 p-1 text-gray-100 transition dark:hover:bg-gray-600"
           x-cloak
           fill="none"
           viewBox="0 0 24 24"

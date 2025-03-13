@@ -5,6 +5,7 @@ template: ~/layouts/Page.astro
 title: Sobre nós
 language: pt
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image: 'src/assets/images/bike-tours-in-portugal.jpg'

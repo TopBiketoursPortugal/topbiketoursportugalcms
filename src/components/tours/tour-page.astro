@@ -12,7 +12,7 @@ import Tooltip from '../tooltip/tooltip.astro';
 import Separator from '../separator/separator.astro';
 import Rating from '../rating/rating.astro';
 import Gallery from '../gallery/gallery.astro';
-import Prose from '../prose/prose.astro';
+import Prose from '../typography/prose.astro';
 import { getImageByPath } from 'utils/get-image';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import ResponsiveImage from '../responsive-image/ResponsiveImage.astro';
@@ -24,7 +24,7 @@ import TourFaqs from './tour-faqs.astro';
 import TourRelated from './tour-related.astro';
 import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -71,11 +71,11 @@ const isPromotional = minPromoPrice > 0;
     </Tabs>
   </div>
   <div
-    class="bg-white z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg p-4 shadow-lg dark:bg-gray-800"
+    class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
     <div class="relative flex items-center gap-2">
       <Icon icon="ph:tag-light" className="h4 w-4" />
-      <span class="text-gray-500 self-end text-sm"
+      <span class="self-end text-sm text-gray-500"
         >{t('Tour.Form.FromPrice')}</span
       >
       <span

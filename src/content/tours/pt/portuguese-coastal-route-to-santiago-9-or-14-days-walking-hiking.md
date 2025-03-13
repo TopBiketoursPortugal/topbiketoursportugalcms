@@ -394,6 +394,7 @@ afterPricing: >-
   329€, HS: 360€, SS.390€ - Single supplement 8 Nights / 9 days : LS: 340€, RS:
   369€, HS: 400€, SS.430€ - Extra nights: on request
 seo:
+  page_title:
   page_description:
   canonical_url:
   featured_image:
