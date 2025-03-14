@@ -2,7 +2,9 @@
 import type { JSX } from 'astro/jsx-runtime';
 import FormField from './FormField.astro';
 import { cn } from 'utils/cn';
+// import { GOOGLE_PUBLIC_CAPTCHA } from 'astro:env/client';
 
+// const googleScript = `https://www.google.com/recaptcha/enterprise.js?render=${GOOGLE_PUBLIC_CAPTCHA}`;
 type Props = JSX.FormHTMLAttributes & { honeyPot?: boolean };
 
 const { class: className, honeyPot = true, ...props } = Astro.props;

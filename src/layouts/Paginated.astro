@@ -23,6 +23,8 @@ const { featured_posts, ...props } = Astro.props.frontmatter;
 ---
 
 <Layout {...props}>
+  <slot name="head" slot="head" />
+
   <div class="blog-index py-[48px]">
     <h1
       class="mt-[48px] text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"

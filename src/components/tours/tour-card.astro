@@ -32,7 +32,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 });
 ---
 
-<Card href={getTourPath(data)} frame="light" {...data}>
+<Card href={getTourPath(data, language)} frame="light" {...data}>
   {image && <CardMedia {...image} />}
   <CardContent display={contentDisplay} class="px-10 pb-8 pt-6 sm:max-xl:px-4">
     <h3 class="font-oswald line-clamp-2 text-xl font-bold">
@@ -79,7 +79,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
             <LinkButton
               variant="link"
               class="z-50"
-              href={`/tours/tags/${slugify(t, { lower: true, strict: true })}`}
+              href={`/tours/tags/${slugify(t, { lower: true, strict: true, trim: true })}`}
             >
               {t}
             </LinkButton>

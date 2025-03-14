@@ -6,7 +6,9 @@ import Layout from 'src/layouts/Layout.astro';
 import RegionsData from 'src/../data/tour_regions.json';
 import TourList from 'src/components/tours/tour-list.astro';
 export async function getStaticPaths() {
-  const tours = await getCollection('tours');
+  const tours = (await getCollection('tours')).filter(
+    (t) => t.data.language === 'pt'
+  );
 
   return RegionsData.map((region) => ({
     params: {

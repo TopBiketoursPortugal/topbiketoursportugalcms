@@ -15,6 +15,7 @@ import BasicScripts from './common/BasicScripts.astro';
 import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
+import type { HrefLang } from 'src/types/hreflang';
 
 export type SEOProps = {
   page_title: string | null;
@@ -31,6 +32,7 @@ export type LayoutProps = {
   title?: string;
   seo?: SEOProps;
   class?: string;
+  hrefLangs?: readonly HrefLang[];
 };
 
 type Props = LayoutProps;
@@ -41,6 +43,7 @@ const seoProps = getPageSeo(
   Astro.props as Props,
   language
 );
+console.log('hrefLangs layout', Astro.props.hrefLangs);
 ---
 
 <!doctype html>
@@ -61,6 +64,7 @@ const seoProps = getPageSeo(
     <Analytics />
     <ClientRouter fallback="swap" />
     <SEO {...seoProps} />
+    <slot name="head" />
   </head>
   <body
     class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
@@ -69,7 +73,12 @@ const seoProps = getPageSeo(
     <slot name="announcement">
       <Announcement language={language} />
     </slot>
-    <Header {...Navigation[language].header} isSticky showRssFeed />
+    <Header
+      {...Navigation[language].header}
+      isSticky
+      showRssFeed
+      hrefLangs={Astro.props.hrefLangs}
+    />
     <main class="h-full flex-1">
       <slot />
     </main>

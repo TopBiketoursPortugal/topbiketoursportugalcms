@@ -14,7 +14,7 @@ providing editors with a fully built editable site. If you are an editor looking
 for an already built template, have a look at
 [CloudCannon's templates page](https://cloudcannon.com/templates/).
 
-[See a demo version of this site](https://tiny-jackal.cloudvent.net/).
+[See a demo version of this site](https://topwalkingtoursportugal.com/).
 
 ## Getting Started
 

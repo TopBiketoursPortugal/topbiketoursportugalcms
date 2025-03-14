@@ -369,4 +369,5 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
+relatedTours: []
 ---

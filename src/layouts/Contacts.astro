@@ -28,6 +28,8 @@ const {
 ---
 
 <Layout {...frontmatter}>
+  <slot name="head" slot="head" />
+
   <PageHelper bookshop:live contentBlocks={content_blocks ?? []} />
   <ContactColumns language={language} class="container mx-auto" />
   <Stack

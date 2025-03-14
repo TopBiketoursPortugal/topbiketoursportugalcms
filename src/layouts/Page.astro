@@ -13,11 +13,14 @@ type Props = {
   showPageTitle?: boolean;
 };
 
+function getLanguagesAlternates() {}
+
 const { frontmatter, class: className, showPageTitle = false } = Astro.props;
 const { content_blocks = [] } = frontmatter;
 ---
 
 <Layout {...frontmatter} class={className}>
+  <slot name="head" slot="head" />
   {
     showPageTitle ? (
       <Heading as="h1" class="px-6 text-4xl font-bold capitalize">

@@ -432,4 +432,5 @@ feature:
   title: Minho walking & Hiking Holiday in the North of Portugal
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
+relatedTours: []
 ---

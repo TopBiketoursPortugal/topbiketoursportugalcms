@@ -2,57 +2,58 @@
 _schema: default
 id: 2f992fdc-8556-4d20-8486-01ed317b7a77
 order: 1
-title: Atlantic Coast of Portugal walking & Hiking tour
+title: Passeio a Pé e Caminhada na Costa Atlântica de Portugal
 language: 'pt'
 subTitle: >-
-  Visit the North of Portugal walking in the coast seeing the beautiful beaches
-  and historical city´s
+  Visite o Norte de Portugal caminhando pela costa, vendo as belas praias e
+  cidades históricas
 content: >-
-  # Atlantic Coast of Portugal walking & Hiking tour
+  # Passeio a Pé e Caminhada na Costa Atlântica de Portugal
 
-  **Visit the North of Portugal walking in the coast seeing the beautiful
-  beaches and historical city´s**
+  **Visite o Norte de Portugal caminhando pela costa, vendo as belas praias e
+  cidades históricas**
 
-  The coast of the Atlantic Ocean is one the best areas to walk on and, at the
-  same time, enjoy the beautiful beaches and the history that the northern towns
-  have to offer. Start this tour in one of the most important cities in Europe,
-  the city of Porto. This town is classified by UNESCO as a World Heritage Site
-  (1996) and it is also been given the title of European Capital of Culture
-  (2001). Along this journey you will find several picturesque villages and
-  monuments, still preserved to this day, mixing it up with long beaches and
-  forests. Enjoy your meals and try the famous Codfish or Seabass, accompanied
-  by the famous Port Wine.
+  A costa do Oceano Atlântico é uma das melhores áreas para caminhar e, ao mesmo
+  tempo, desfrutar das belas praias e da história que as cidades do norte têm
+  para oferecer. Comece este tour numa das cidades mais importantes da Europa, a
+  cidade do Porto. Esta cidade é classificada pela UNESCO como Património
+  Mundial (1996) e também recebeu o título de Capital Europeia da Cultura
+  (2001). Ao longo desta jornada, encontrará várias aldeias pitorescas e
+  monumentos, ainda preservados até hoje, misturados com longas praias e
+  florestas. Desfrute das suas refeições e experimente o famoso Bacalhau ou
+  Robalo, acompanhados pelo famoso Vinho do Porto.
 
-  **Route description:**
+  **Descrição do percurso:**
 
-  - The first 3 days are flat on walking paths and paved streets - The forth day
-  is flat with some hills - The last 2 days are completely flat - The path
-  consists of paved streets and boardwalks for most of the time
+  - Os primeiros 3 dias são planos, com caminhos pedestres e ruas pavimentadas -
+  O quarto dia é plano com algumas colinas - Os últimos 2 dias são completamente
+  planos - O percurso consiste em ruas pavimentadas e passadiços na maior parte
+  do tempo
 
-  **Itinerary:**
+  **Itinerário:**
 
-  **Day 1:**  Porto arrival
+  **Dia 1:** Chegada ao Porto
 
-  **Day 2:** Porto transfer to Póvoa de Varzim - Apúlia: 15 km
+  **Dia 2:** Transfer do Porto para Póvoa de Varzim - Apúlia: 15 km
 
-  **Day 3:** Apúlia – Esposende: 16 km
+  **Dia 3:** Apúlia – Esposende: 16 km
 
-  **Day 4:** Esposende – Castelo de Neiva: 14 km
+  **Dia 4:** Esposende – Castelo de Neiva: 14 km
 
-  **Day 5:** Castelo de Neiva – Viana do Castelo: 14 km
+  **Dia 5:** Castelo de Neiva – Viana do Castelo: 14 km
 
-  **Day 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
+  **Dia 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
 
-  **Day 7:** Vila Praia de Âncora - Caminha: 8 km
+  **Dia 7:** Vila Praia de Âncora - Caminha: 8 km
 
-  **Day 8:** departure
+  **Dia 8:** Partida
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
 code: NT03
 type: PackageTour
 itinerary:
-  - title: 'Day 1: Porto arrival'
+  - title: 'Dia 1: Chegada ao Porto'
     description:
       'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
@@ -61,14 +62,14 @@ itinerary:
       region: ''
       city: ''
     day: '1'
-  - title: 'Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km'
+  - title: 'Dia 2: Transfer do Porto para Póvoa de Varzim - Apúlia: 15 km'
     description: >-
-      The first day starts in the city of Póvoa de Varzim and goes near the
-      coast following the Caminho de Santiago Português da Costa. This day is
-      flat, mixing coastal boardwalks with dirt terrains. Prepare to see
-      beautiful beaches and also farming fields. Upon reaching the village of
-      Apúlia, enjoy some of the delicious food that this town has to offer, like
-      fresh sardines or octopus rice.
+      O primeiro dia começa na cidade de Póvoa de Varzim e segue perto da costa,
+      acompanhando o Caminho de Santiago Português da Costa. Este dia é plano,
+      misturando passadiços costeiros com terrenos de terra. Prepare-se para ver
+      belas praias e também campos agrícolas. Ao chegar à aldeia de Apúlia,
+      desfrute de algumas das deliciosas iguarias que esta vila tem para
+      oferecer, como sardinhas frescas ou arroz de polvo.
 
 
       Hotel 4*: [Apúlia Praia Hotel](http://apuliapraia-hotel.com/en/home/)
@@ -78,15 +79,14 @@ itinerary:
       region: ''
       city: ''
     day: '2'
-  - title: 'Day 3: Apúlia – Esposende: 16 km'
+  - title: 'Dia 3: Apúlia – Esposende: 16 km'
     description: >-
-      The second day of this walk tour, continues on flat terrain with paved
-      roads. Take the opportunity to visit the Parish Church of Fão, a place of
-      devotion for most pilgrims. Upon reaching Esposende and before going to
-      the hotel, there is another place to take a look at, the Castro de São
-      Lourenço. By climbing the mountain of Castro Lourenço you can see a
-      fortified settlement, in which were found traces that go back to the
-      century IV BC.
+      O segundo dia desta caminhada continua em terreno plano com estradas
+      pavimentadas. Aproveite para visitar a Igreja Paroquial de Fão, um local
+      de devoção para a maioria dos peregrinos. Ao chegar a Esposende e antes de
+      ir para o hotel, há outro local para visitar, o Castro de São Lourenço.
+      Subindo a montanha do Castro Lourenço, pode ver um povoado fortificado,
+      onde foram encontrados vestígios que remontam ao século IV a.C.
 
 
       Hotel 3*: [Suave Mar](https://www.suavemar.com/)
@@ -96,32 +96,31 @@ itinerary:
       region: ''
       city: ''
     day: '3'
-  - title: 'Day 4: Esposende – Castelo de Neiva: 14 km'
+  - title: 'Dia 4: Esposende – Castelo de Neiva: 14 km'
     description: >-
-      On this route of 14 km the walking tour starts near the coast line, with
-      paved roads and enjoying the beautiful beaches that the north of Portugal
-      has to offer. The final destination is Castelo de Neiva. This is a city
-      that dates back to the Iron Age, being later on, in the I and II centuries
-      BC, Romanized. It is a must to visit the local Church that is very
-      important to all the pilgrims that go to Santiago.
+      Neste percurso de 14 km, a caminhada começa perto da linha costeira, com
+      estradas pavimentadas e desfrutando das belas praias que o norte de
+      Portugal tem para oferecer. O destino final é Castelo de Neiva. Esta é uma
+      cidade que remonta à Idade do Ferro, sendo posteriormente romanizada nos
+      séculos I e II a.C. É obrigatório visitar a Igreja local, que é muito
+      importante para todos os peregrinos que vão a Santiago.
 
 
-      Farm: [Quinta do Monteverde](http://www.quintamonteverde.com/)
+      Quinta: [Quinta do Monteverde](http://www.quintamonteverde.com/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '4'
-  - title: 'Day 5: Castelo de Neiva – Viana do Castelo: 14 km'
+  - title: 'Dia 5: Castelo de Neiva – Viana do Castelo: 14 km'
     description: >-
-      Leaving Castelo de Neiva in order to get to Viana do Castelo, you will
-      find a route with several ups and downs until your final destination.
-      Prepare to admire the surroundings with a lot of natural landscape.
-      Halfway you might notice the chapel of Senhora do Castro. In the same area
-      there is a sightseeing viewpoint that captures the beautiful mountainous
-      landscape. While in Viana do Castelo you can visit the Cathedral and the
-      Santa Lúzia Sanctuary.
+      Saindo de Castelo de Neiva em direção a Viana do Castelo, encontrará um
+      percurso com várias subidas e descidas até ao destino final. Prepare-se
+      para admirar os arredores com muita paisagem natural. A meio caminho,
+      poderá notar a capela da Senhora do Castro. Na mesma área, há um miradouro
+      que capta a bela paisagem montanhosa. Enquanto estiver em Viana do
+      Castelo, pode visitar a Sé Catedral e o Santuário de Santa Lúzia.
 
 
       Hotel 4*: [Melo Alvim](https://hotelmeloalvim.com/)
@@ -131,15 +130,15 @@ itinerary:
       region: ''
       city: ''
     day: '5'
-  - title: 'Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km'
+  - title: 'Dia 6: Viana do Castelo – Vila Praia de Âncora: 19 km'
     description: >-
-      Nearly nineteen kilometers separate Viana and Vila Praia de Âncora. The
-      walk itself is flat, done mainly on dirt paths and cobblestone roads. It
-      conveys a naturalistic feeling, being most of the walk done in a not so
-      urbanized coast, like in the previous one. Some of the areas that might
-      spark your interest during the day are the several forts and windmills you
-      will find along the way, the lighthouse of Montedor and the Dolmen of
-      Barrosa in Vila Praia de Âncora.
+      Quase dezanove quilómetros separam Viana e Vila Praia de Âncora. A
+      caminhada é plana, feita principalmente em caminhos de terra e estradas de
+      paralelepípedos. Transmite uma sensação naturalista, sendo a maior parte
+      da caminhada feita numa costa menos urbanizada, ao contrário da anterior.
+      Algumas das áreas que podem despertar o seu interesse durante o dia são os
+      vários fortes e moinhos de vento que encontrará pelo caminho, o farol de
+      Montedor e o Dólmen da Barrosa em Vila Praia de Âncora.
 
 
       Hotel 4*: [Hotel Meira](http://www.hotelmeira.com/)
@@ -149,15 +148,15 @@ itinerary:
       region: ''
       city: ''
     day: '6'
-  - title: 'Day 7: Vila Praia de Âncora - Caminha: 8 km'
+  - title: 'Dia 7: Vila Praia de Âncora - Caminha: 8 km'
     description: >-
-      Continuing along the coast and keeping the same type of low land terrain,
-      the walk today gets to the heart of the river that divides Portugal and
-      Spain in their northernmost frontier. This is an easy walk, short in
-      distance and elevation. Spain can already be seen in the previous walk,
-      however today, it is clearly visible in a mountain which looks most like a
-      volcano. Once in Caminha, try the Portuguese fishes, with sardines or
-      roasted codfish.
+      Continuando ao longo da costa e mantendo o mesmo tipo de terreno de baixa
+      altitude, a caminhada de hoje chega ao coração do rio que divide Portugal
+      e Espanha na sua fronteira mais a norte. Esta é uma caminhada fácil, curta
+      em distância e elevação. Espanha já pode ser vista na caminhada anterior,
+      no entanto, hoje, é claramente visível numa montanha que mais parece um
+      vulcão. Uma vez em Caminha, experimente os peixes portugueses, com
+      sardinhas ou bacalhau assado.
 
 
       Hotel 4*: [Portas do Sol](https://www.hotelportadosol.com/)
@@ -167,7 +166,7 @@ itinerary:
       region: ''
       city: ''
     day: '7'
-  - title: 'Day 8: departure'
+  - title: 'Dia 8: Partida'
     description: .
     location:
       lat: '1'
@@ -176,7 +175,7 @@ itinerary:
       city: ''
     day: '8'
 packages:
-  - title: Self Guided Hiking tour
+  - title: Passeio de Caminhada Autoguiado
     description: .
     price:
       bestValue: false
@@ -184,48 +183,48 @@ packages:
       price: 1085
       promo: 0
     included:
-      - title: Accommodations W/ Breakfast
-        description: Yes (4 stars, farms or rural houses)
-      - title: Luggage shuttling
-        description: Yes
-      - title: Porto Airport Transfers
-        description: Yes
-      - title: Trains or Bus Tickets Back to Porto
-        description: Yes
-      - title: Van Support
-        description: No
+      - title: Alojamento com Pequeno-Almoço
+        description: Sim (4 estrelas, quintas ou casas rurais)
+      - title: Transporte de bagagem
+        description: Sim
+      - title: Transferes do Aeroporto do Porto
+        description: Sim
+      - title: Bilhetes de Comboio ou Autocarro de Volta ao Porto
+        description: Sim
+      - title: Apoio de Van
+        description: Não
       - title: Roadbook + Briefing
-        description: Yes
-      - title: GPS With route per booking
-        description: Yes
-      - title: Bag and water bottle
-        description: Yes
+        description: Sim
+      - title: GPS com rota por reserva
+        description: Sim
+      - title: Mochila e garrafa de água
+        description: Sim
       - title: T-shirt
-        description: No
-      - title: Guide
-        description: No
-      - title: 6 light Picnics
-        description: Yes
-      - title: 6 Dinners
-        description: No
-      - title: Personal Accident Insurance
-        description: No
-      - title: Liability Insurance
-        description: No
-      - title: Min. Participants
+        description: Não
+      - title: Guia
+        description: Não
+      - title: 6 Picnic leves
+        description: Sim
+      - title: 6 Jantares
+        description: Não
+      - title: Seguro de Acidentes Pessoais
+        description: Não
+      - title: Seguro de Responsabilidade Civil
+        description: Não
+      - title: N.º Mín. de Participantes
         description: 1 Pax
-      - title: 7 Nights / 8 Days
-        description: Price per person
-      - title: '* Low season'
+      - title: 7 Noites / 8 Dias
+        description: Preço por pessoa
+      - title: '* Época Baixa'
         description: 1.085€
-      - title: '* Regular season'
+      - title: '* Época Regular'
         description: 1.185€
-      - title: '* High Season'
+      - title: '* Época Alta'
         description: 1.285€
-      - title: '* Summer Season'
+      - title: '* Época de Verão'
         description: 1.335€
     bestValue: false
-  - title: Guided Hiking tour
+  - title: Passeio de Caminhada Guiado
     description: ''
     price:
       bestValue: false
@@ -233,48 +232,48 @@ packages:
       price: 1559
       promo: 0
     included:
-      - title: Accommodations W/ Breakfast
-        description: Yes (4 stars, farms or rural houses)
-      - title: Luggage shuttling
-        description: Yes
-      - title: Porto Airport Transfers
-        description: Yes
-      - title: Trains or Bus Tickets Back to Porto
-        description: Yes
-      - title: Van Support
-        description: Yes
+      - title: Alojamento com Pequeno-Almoço
+        description: Sim (4 estrelas, quintas ou casas rurais)
+      - title: Transporte de bagagem
+        description: Sim
+      - title: Transferes do Aeroporto do Porto
+        description: Sim
+      - title: Bilhetes de Comboio ou Autocarro de Volta ao Porto
+        description: Sim
+      - title: Apoio de Van
+        description: Sim
       - title: Roadbook + Briefing
-        description: Yes
-      - title: GPS With route per booking
-        description: Yes
-      - title: Bag and water bottle
-        description: Yes
+        description: Sim
+      - title: GPS com rota por reserva
+        description: Sim
+      - title: Mochila e garrafa de água
+        description: Sim
       - title: T-shirt
-        description: Yes
-      - title: Guide
-        description: No
-      - title: 6 light Picnics
-        description: Yes
-      - title: 6 Dinners
-        description: No
-      - title: Personal Accident Insurance
-        description: Yes
-      - title: Liability Insurance
-        description: Yes
-      - title: Min. Participants
+        description: Sim
+      - title: Guia
+        description: Não
+      - title: 6 Picnic leves
+        description: Sim
+      - title: 6 Jantares
+        description: Não
+      - title: Seguro de Acidentes Pessoais
+        description: Sim
+      - title: Seguro de Responsabilidade Civil
+        description: Sim
+      - title: N.º Mín. de Participantes
         description: 8 Pax
-      - title: 7 Nights / 8 Days
-        description: Price per person
-      - title: '* Low season'
+      - title: 7 Noites / 8 Dias
+        description: Preço por pessoa
+      - title: '* Época Baixa'
         description: 1.559€
-      - title: '* Regular season'
+      - title: '* Época Regular'
         description: 1.659€
-      - title: '* High Season'
+      - title: '* Época Alta'
         description: 1.759€
-      - title: '* Summer Season'
+      - title: '* Época de Verão'
         description: 1.809€
     bestValue: false
-  - title: Guided Hiking tour Plus
+  - title: Passeio de Caminhada Guiado Plus
     description: .
     price:
       bestValue: false
@@ -282,83 +281,84 @@ packages:
       price: 2213
       promo: 0
     included:
-      - title: Accommodations W/ Breakfast
-        description: Yes (4 stars, farms or rural houses)
-      - title: Luggage shuttling
-        description: Yes
-      - title: Porto Airport Transfers
-        description: Yes
-      - title: Trains or Bus Tickets Back to Porto
-        description: Yes
-      - title: Van Support
-        description: Yes
+      - title: Alojamento com Pequeno-Almoço
+        description: Sim (4 estrelas, quintas ou casas rurais)
+      - title: Transporte de bagagem
+        description: Sim
+      - title: Transferes do Aeroporto do Porto
+        description: Sim
+      - title: Bilhetes de Comboio ou Autocarro de Volta ao Porto
+        description: Sim
+      - title: Apoio de Van
+        description: Sim
       - title: Roadbook + Briefing
-        description: Yes
-      - title: GPS With route per booking
-        description: No
-      - title: Bag and water bottle
-        description: Yes
+        description: Sim
+      - title: GPS com rota por reserva
+        description: Não
+      - title: Mochila e garrafa de água
+        description: Sim
       - title: T-shirt
-        description: Yes
-      - title: Guide
-        description: No
-      - title: 6 light Picnics
-        description: 6 Lunches
-      - title: 6 Dinners
-        description: Yes
-      - title: Personal Accident Insurance
-        description: Yes
-      - title: Liability Insurance
-        description: Yes
-      - title: Min. Participants
+        description: Sim
+      - title: Guia
+        description: Não
+      - title: 6 Picnic leves
+        description: 6 Almoços
+      - title: 6 Jantares
+        description: Sim
+      - title: Seguro de Acidentes Pessoais
+        description: Sim
+      - title: Seguro de Responsabilidade Civil
+        description: Sim
+      - title: N.º Mín. de Participantes
         description: 8 Pax
-      - title: 7 Nights / 8 Days
-        description: Price per person
-      - title: '* Low season'
+      - title: 7 Noites / 8 Dias
+        description: Preço por pessoa
+      - title: '* Época Baixa'
         description: 2.213€
-      - title: '* Regular season'
+      - title: '* Época Regular'
         description: 2.313€
-      - title: '* High Season'
+      - title: '* Época Alta'
         description: 2.413€
-      - title: '* Summer Season'
+      - title: '* Época de Verão'
         description: 2.463€
     bestValue: false
     type: ''
 afterPricing: >-
-  ***Season:**
+  ***Épocas:**
 
 
-  - LS - Low season: Nov 01 to Mar 25
+  - EB - Época Baixa: 01 Nov a 25 Mar
 
-  - RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+  - ER - Época Regular: 26 Mar a 25 Jun e 26 Set a 31 Out
 
-  - HS - High Season: Set 01 to 25 Set
+  - EA - Época Alta: 01 Set a 25 Set
 
-  - SS - Summer Season: Jun 26 to August 30
-
-
-  **Observations:**
+  - EV - Época de Verão: 26 Jun a 30 Ago
 
 
-  - Prices are based for 2 people sharing the same room;
+  **Observações:**
 
-  - Prices can suffer updates due high season, holidays or weekends
 
-  - Beverages are not included at lunch and dinner when included in the package
+  - Os preços são baseados para 2 pessoas a partilhar o mesmo quarto;
 
-  - If in a triple room with parents Children up to 10 years old - 35% discount.
-  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
-  old - 15% discount.
+  - Os preços podem sofrer atualizações devido à época alta, feriados ou fins de
+  semana
+
+  - Bebidas não estão incluídas no almoço e jantar quando incluídos no pacote
+
+  - Se em quarto triplo com os pais, crianças até 10 anos - 35% de desconto.
+  Crianças dos 11 aos 14 anos - 20% de desconto. Crianças dos 15 aos 17 anos -
+  15% de desconto.
 
 
   **Extras**
 
 
-  - Solo traveler: 200 €
+  - Viajante individual: 200 €
 
-  - Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+  - Suplemento individual: EB: 300€, ER: 329€, EA: 360€, EV: 390€
 
-  - Extra nights: on request
+  - Noites extra: sob consulta
 seo:
   page_title:
   page_description:
@@ -381,26 +381,27 @@ mapUrl: https://www.google.com/maps/d/u/1/embed?mid=16-bzE5gMB0iijbjajdK-CJ1Kvq2
 images:
   - src: >-
       /src/assets/images/the-way-of-st.-james-bike-tour-fold-n-visit-cycling-holidays-1753.jpg
-    alt: Path walk
+    alt: Caminho a pé
   - src: >-
       /src/assets/images/the-way-of-st.-james-bike-tour-fold-n-visit-cycling-holidays-1826.jpg
-    alt: sea hiking view
+    alt: Vista da caminhada à beira-mar
   - src: /src/assets/images/vila-praia-de-ancora.jpg
-    alt: vila praia de ancora
+    alt: Vila Praia de Âncora
   - src: /src/assets/images/apulia-beac.jpg
-    alt: Apulia Beach
+    alt: Praia de Apúlia
   - src: /src/assets/images/caminha-city-center-2-.jpg
-    alt: Caminha city center
+    alt: Centro da cidade de Caminha
   - src: /src/assets/images/suave-mar-hotel.jpg
-    alt: Suave mar hotel
+    alt: Hotel Suave Mar
 feature:
   align: center
   imageAlign: center center
   bokunLink: ''
   bokunId: ''
   textcolor: white
-  subtitle: ' Coastal route to Santiago Compostela: Stage 1'
-  title: ' Coastal route to Santiago Compostela Stage 1'
+  subtitle: ' Rota Costeira para Santiago de Compostela: Etapa 1'
+  title: ' Rota Costeira para Santiago de Compostela Etapa 1'
   image: /img/top-walking-tours-portugal.jpg
-  bokunLinkText: Book now
+  bokunLinkText: Reserve agora
+relatedTours: []
 ---

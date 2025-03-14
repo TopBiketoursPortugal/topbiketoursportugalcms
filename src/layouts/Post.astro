@@ -39,6 +39,7 @@ const imageSrc = images[src]?.default ?? src;
 ---
 
 <Layout {...props}>
+  <slot name="head" slot="head" />
   <main class="px-8 py-[48px] md:py-[96px]">
     <article class="mx-auto max-w-screen-md">
       <Image

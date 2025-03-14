@@ -377,4 +377,5 @@ feature:
   title: Douro Valley Wine region Walking & Hiking tour
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
+relatedTours: []
 ---

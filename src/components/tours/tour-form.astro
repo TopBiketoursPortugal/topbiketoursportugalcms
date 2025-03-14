@@ -3,12 +3,6 @@ import Form from '../form/Form.astro';
 import FormField from '../form/FormField.astro';
 ---
 
-<script is:inline src="https://www.google.com/recaptcha/api.js"></script>
-<!-- <script is:inline>
-  function onSubmit(token) {
-    document.getElementById('tour-form').submit();
-  }
-</script> -->
 <Form action="https://formspree.io/xzbalqpw" method="post" id="tour-form">
   <FormField
     as="input"
@@ -102,11 +96,9 @@ import FormField from '../form/FormField.astro';
   <!-- Submit Button -->
   <div>
     <button
-      data-sitekey="reCAPTCHA_site_key"
-      data-callback="onSubmit"
-      data-action="submit"
+      slot="submit"
       type="submit"
-      class="g-recaptcha w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      class="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
     >
       Submit Enquiry
     </button>

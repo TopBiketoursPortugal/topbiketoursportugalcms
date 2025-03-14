@@ -397,4 +397,5 @@ feature:
   title: 'Central Camino to Santiago from Porto Stage 2'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
+relatedTours: []
 ---

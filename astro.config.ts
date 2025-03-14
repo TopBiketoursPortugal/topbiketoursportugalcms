@@ -12,7 +12,7 @@ import favicons from 'astro-favicons';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tiny-jackal.cloudvent.net/',
+  site: 'https://topwalkingtoursportugal.com',
   integrations: [
     react(),
     tailwind(),
@@ -66,10 +66,15 @@ export default defineConfig({
         access: 'public',
         optional: true
       }),
-      SIRE_URL: envField.string({
+      GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',
         access: 'public',
-        default: 'http://localhost'
+        optional: true
+      }),
+      SITE_URL: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'https://topwalkingtoursportugal.com'
       })
       // API_SECRET: envField.string({ context: "server", access: "secret" }),
     }

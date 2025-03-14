@@ -15,7 +15,11 @@ export async function getStaticPaths() {
   const team = await getCollection('team');
   return team.map((teamMember) => ({
     params: {
-      slug: slugify(teamMember.data.title, { lower: true, strict: true })
+      slug: slugify(teamMember.data.title, {
+        lower: true,
+        strict: true,
+        trim: true
+      })
     },
     props: { teamMember }
   }));

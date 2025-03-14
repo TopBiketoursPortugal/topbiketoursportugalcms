@@ -7,6 +7,7 @@ import { getHomePermalink, trimSlash } from 'utils/permalinks';
 import type { HTMLAttributes } from 'astro/types';
 import type { LanguageCodes } from 'src/schemas/language';
 import Icon from 'src/components/utility/icon.astro';
+import type { HrefLang } from 'src/types/hreflang';
 
 interface Link {
   text?: string;
@@ -36,6 +37,7 @@ export interface Props {
   isFullWidth?: boolean;
   showRssFeed?: boolean;
   position?: string;
+  hrefLangs?: readonly HrefLang[];
 }
 
 const {
@@ -44,8 +46,10 @@ const {
   actions = [],
   isSticky = false,
   showRssFeed = false,
-  position = 'center'
+  position = 'center',
+  hrefLangs
 } = Astro.props;
+console.log('hrefLangs header', hrefLangs);
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 ---
@@ -142,7 +146,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       ]}
     >
       <div class="flex w-full items-center justify-between gap-4 md:w-auto">
-        <LanguageMenu />
+        <LanguageMenu
+          localizedUrls={hrefLangs?.map((l) => ({
+            code: l.hreflang,
+            path: l.href
+          }))}
+        />
         <div class="flex items-center">
           <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
           {

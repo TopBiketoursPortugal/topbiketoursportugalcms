@@ -53,6 +53,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
+console.log('related', relatedTours);
 ---
 
 {tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}

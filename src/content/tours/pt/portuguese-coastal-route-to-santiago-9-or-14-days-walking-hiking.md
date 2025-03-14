@@ -19,13 +19,13 @@ content: >-
   forest.
 
   You may also consider our [Easy route North of Atlantic
-  Coast](http://localhost/hiking-atlantic-coast-porto).
+  Coast](http://topwalkingtoursportugal.com/hiking-atlantic-coast-porto).
 
   This hike is divided in two different stages. Stage 1 which goes through
   Portuguese territory and [stage
-  2](http://localhost/hiking-coast-santiago-compostela-stage-2) which takes you
-  through Spain to Santiago de Compostela. For a complete experience you might
-  think to book the 2 stages,
+  2](http://topwalkingtoursportugal.com/hiking-coast-santiago-compostela-stage-2)
+  which takes you through Spain to Santiago de Compostela. For a complete
+  experience you might think to book the 2 stages,
 
   **Route description**
 
@@ -441,4 +441,5 @@ meta:
   description: Walk towards Santiago using the Portuguese coastal path.
   keywords: Portuguese Coastal route to Santiago Compostela
   robots: INDEX
+relatedTours: []
 ---

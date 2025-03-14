@@ -6,7 +6,9 @@ import type { SEOProps } from 'astro-seo';
 import TourList from 'src/components/tours/tour-list.astro';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
-  const tours = await getCollection('tours');
+  const tours = (await getCollection('tours')).filter(
+    (t) => t.data.language === 'pt'
+  );
 
   const tags = [...new Set(tours.flatMap((tour) => tour.data.tags ?? []))];
   // console.log('tags', tags);

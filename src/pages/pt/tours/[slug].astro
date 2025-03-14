@@ -7,7 +7,10 @@ import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import { getTourLanguagesAlternates } from 'utils/permalinks';
 
 export async function getStaticPaths() {
-  const tours = await getCollection('tours');
+  const tours = (await getCollection('tours')).filter(
+    (t) => t.data.language === 'pt'
+  );
+
   return tours.map((tour) => ({
     params: {
       slug:
@@ -36,7 +39,7 @@ const seo = {
   canonical_url: null
 } satisfies SEOProps;
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
-console.log('hrefs tour page', hrefs);
+console.log('hrefs tour page pt', hrefs);
 ---
 
 <Layout title={tour.data.title} seo={seo} hrefLangs={hrefs}>

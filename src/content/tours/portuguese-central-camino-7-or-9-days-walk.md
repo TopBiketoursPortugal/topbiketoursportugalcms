@@ -22,7 +22,7 @@ content: |-
 
   This hike is divided in two different stages. Stage 1 which goes through
   Portuguese territory and [stage
-  2](http://localhost/tours/santiago-compostela-hiking-stage-2/) which takes you
+  2](https://topwalkingtoursportugal.com/tours/santiago-compostela-hiking-stage-2) which takes you
   through Spain to Santiago de Compostela. For a complete experience you might
   think to book the 2 stages,
 
@@ -415,4 +415,5 @@ feature:
   title: 'Central Camino to Santiago from Porto: Stage 1'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
+relatedTours: []
 ---

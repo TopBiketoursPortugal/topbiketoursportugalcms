@@ -134,7 +134,7 @@ const tourSchema = z.object({
     .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
-  relatedTours: z.array(z.string()).optional().default([])
+  relatedTours: z.array(z.string().uuid()).optional().default([])
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;
