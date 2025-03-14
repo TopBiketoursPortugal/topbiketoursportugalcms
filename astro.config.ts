@@ -9,11 +9,19 @@ import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
+import sentry from '@sentry/astro';
+import spotlightjs from '@spotlightjs/astro';
+import astroMetaTags from 'astro-meta-tags';
+import { shield } from '@kindspells/astro-shield';
+import playformCompress from '@playform/compress';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://topwalkingtoursportugal.com',
   integrations: [
+    sentry(),
+    spotlightjs(),
+    astroMetaTags(),
     react(),
     tailwind(),
     bookshop(),
@@ -49,7 +57,9 @@ export default defineConfig({
         enabled: true
       }
     }),
-    playformInline()
+    shield({}),
+    playformInline(),
+    playformCompress()
   ],
   prefetch: {
     prefetchAll: true

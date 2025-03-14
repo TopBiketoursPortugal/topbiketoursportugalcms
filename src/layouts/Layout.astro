@@ -16,6 +16,9 @@ import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
 import type { HrefLang } from 'src/types/hreflang';
+import { Breadcrumbs } from 'astro-breadcrumbs';
+
+import 'astro-breadcrumbs/breadcrumbs.css';
 
 export type SEOProps = {
   page_title: string | null;
@@ -80,6 +83,7 @@ console.log('hrefLangs layout', Astro.props.hrefLangs);
       hrefLangs={Astro.props.hrefLangs}
     />
     <main class="h-full flex-1">
+      <Breadcrumbs />
       <slot />
     </main>
     <Footer language={language} />
