@@ -1,5 +1,5 @@
 import { defineConfig, envField } from 'astro/config';
-// import react from '@astrojs/react';
+import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -23,7 +23,7 @@ export default defineConfig({
     // sentry(),
     // spotlightjs(),
     astroMetaTags(),
-    // react(),
+    react(),
     tailwind(),
     bookshop(),
     alpine(),
