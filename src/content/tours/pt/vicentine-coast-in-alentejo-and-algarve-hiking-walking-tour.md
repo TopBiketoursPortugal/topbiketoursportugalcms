@@ -45,7 +45,7 @@ image:
   alt: ''
 title: 'Vicentine West Coast in Alentejo Stage 1'
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: Vicentine Coast in Alentejo  Hiking & walking tour
   description:

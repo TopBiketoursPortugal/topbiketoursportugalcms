@@ -435,7 +435,7 @@ durationUnit: Days | 6 Nights
 templateKey: tour-gen
 featured: false
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: 'Coastal route to Santiago Compostela Stage 1'
   description: Walk towards Santiago using the Portuguese coastal path.

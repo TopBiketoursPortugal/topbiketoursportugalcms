@@ -128,7 +128,13 @@ const isPromotional = minPromoPrice > 0;
           }: {tour.distance} km
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+          {
+            tour.tourtype !== 'PackageTour' ? (
+              <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
+            ) : (
+              <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+            )
+          }
           {t('Tour.Info.Difficulty.Label')} : {tour.difficulty}
         </li>
         <li class="flex items-center gap-3">

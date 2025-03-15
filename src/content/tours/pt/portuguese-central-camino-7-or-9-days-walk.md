@@ -391,7 +391,7 @@ order: 8
 templateKey: tour-gen
 featured: true
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: 'Central Camino to Santiago from Porto: Stage 1'
   description:

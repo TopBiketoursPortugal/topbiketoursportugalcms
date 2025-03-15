@@ -59,7 +59,7 @@ content: >-
 
   **Day 8:** Departure
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: 'Central Camino to Santiago from Porto Stage 2'
   description:

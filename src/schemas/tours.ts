@@ -129,7 +129,7 @@ const tourSchema = z.object({
   minAge: z.number().optional(),
   highlight: z.enum(['HotTrip', 'BestSeller', 'New']).optional(),
   content_blocks: z.array(z.any()).optional().nullable(),
-  type: z
+  tourtype: z
     .enum(['CityTour', 'DayTour', 'PackageTour', 'WalkingTour'])
     .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),

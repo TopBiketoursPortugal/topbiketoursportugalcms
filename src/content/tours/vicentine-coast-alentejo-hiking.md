@@ -328,7 +328,7 @@ order: 6
 templateKey: tour-gen
 featured: false
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: Vicentine Coast Alentejo Hiking
   description:

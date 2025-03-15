@@ -45,7 +45,7 @@ content: >-
 
   **Day 8:** Departure
 packagetype: PackageTour
-tourtype: Walking
+tourtype: WalkingTour
 meta:
   title: Minho Hiking Holiday in the North of Portugal
   description:
