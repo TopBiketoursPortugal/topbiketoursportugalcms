@@ -38,6 +38,9 @@ importers:
       '@iconify-json/ph':
         specifier: 1.2.2
         version: 1.2.2
+      '@jop-software/astro-cookieconsent':
+        specifier: ^3.0.1
+        version: 3.0.1(vanilla-cookieconsent@3.1.0)
       '@playform/compress':
         specifier: ^0.1.7
         version: 0.1.7(@types/node@22.13.8)(jiti@2.4.2)(rollup@2.79.2)(sass@1.85.1)(typescript@5.8.2)(yaml@2.7.0)
@@ -1718,6 +1721,11 @@ packages:
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
+
+  '@jop-software/astro-cookieconsent@3.0.1':
+    resolution: {integrity: sha512-UXo6aMR9/kEEmUIZoRTRJXDf/ADju9qQ0qNRWM1twdf0vRCh2s/ucHqaYOcs57Q2PcKmcq+Sc+0Tq0gSUgVDzA==}
+    peerDependencies:
+      vanilla-cookieconsent: ^3.0.0
 
   '@jridgewell/gen-mapping@0.3.8':
     resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
@@ -7917,6 +7925,10 @@ snapshots:
       strip-ansi-cjs: strip-ansi@6.0.1
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
+
+  '@jop-software/astro-cookieconsent@3.0.1(vanilla-cookieconsent@3.1.0)':
+    dependencies:
+      vanilla-cookieconsent: 3.1.0
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:

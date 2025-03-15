@@ -31,6 +31,7 @@
     "@iconify-json/fa": "1.2.1",
     "@iconify-json/logos": "1.2.4",
     "@iconify-json/ph": "1.2.2",
+    "@jop-software/astro-cookieconsent": "^3.0.1",
     "@playform/compress": "^0.1.7",
     "@types/alpinejs": "3.13.11",
     "@types/react": "18.2.21",
