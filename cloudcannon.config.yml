@@ -155,13 +155,13 @@ collections_config:
     disable_file_actions: true
   tours:
     path: src/content/tours
+    url: /tours/[title|deburr|slugify|lowercase]
     glob:
       - '**/*.md*'
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /tours/[title|deburr|slugify|lowercase]
-    disable_url: true
+    disable_url: false
     description: ''
     _enabled_editors:
     _inputs:
