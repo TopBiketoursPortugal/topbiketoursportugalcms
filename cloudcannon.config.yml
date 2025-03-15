@@ -27,8 +27,8 @@ collections_config:
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
     disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
         path: schemas/page.md
@@ -37,7 +37,16 @@ collections_config:
         remove_empty_inputs: false
         remove_extra_inputs: false
         name: New Page
-        icon: notes
+        icon: web_asset
+        _enabled_editors:
+        create:
+          path: '[relative_base_path]/{title|deburr|slugify|lower}.md'
+          extra_data:
+          publish_to:
+          _inputs:
+          _select_data:
+          _structures:
+        new_preview_url: '[relative_base_path]/{title|deburr|slugify|lower}'
       paginated:
         path: schemas/paginated.md
         reorder_inputs: true
@@ -45,7 +54,10 @@ collections_config:
         remove_empty_inputs: false
         remove_extra_inputs: false
         name: Paginated collection
-        icon: notes
+        icon: pages
+        _enabled_editors:
+        create:
+        new_preview_url:
   blog:
     path: src/content/blog
     glob:
@@ -111,8 +123,8 @@ collections_config:
     create:
       path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.md'
     disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
         path: schemas/post.md
@@ -140,7 +152,7 @@ collections_config:
         cascade: true
     disable_add: true
     disable_add_folder: true
-    disable_file_actions: false
+    disable_file_actions: true
   tours:
     path: src/content/tours
     glob:
