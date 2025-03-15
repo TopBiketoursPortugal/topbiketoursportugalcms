@@ -1,6 +1,10 @@
 ---
 import Form from 'src/components/form/Form.astro';
 import FormField from 'src/components/form/FormField.astro';
+import Prose from 'src/components/typography/prose.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
 <Form
@@ -13,13 +17,13 @@ import FormField from 'src/components/form/FormField.astro';
     name="email"
     as="input"
     type="email"
-    label="Email address"
+    label={t('Contact.Form.Email.Label', language)}
     required
   />
   <FormField
     name="your-enquiry"
     as="textarea"
-    label="Your Enquiry"
+    label={t('Contact.Form.Enquiry.Label', language)}
     class="col-span-full"
     required
   />
@@ -28,18 +32,22 @@ import FormField from 'src/components/form/FormField.astro';
     name="found"
     as="input"
     type="text"
-    label="Where did you find us?"
+    label={t('Contact.Form.Found.Label', language)}
   />
   <FormField
     name="package"
     as="select"
-    label="Tour type"
-    options={['-', 'Guided', 'Unguided']}
+    label={t('Contact.Form.TourType', language)}
+    options={[
+      '-',
+      t('Contact.Form.TourType.OptionGuided', language),
+      t('Contact.Form.TourType.OptionUnguided', language)
+    ]}
   />
   <FormField
     name="person"
     as="select"
-    label="Group size"
+    label={t('Contact.Form.Group.Label', language)}
     options={['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
   />
 
@@ -53,15 +61,15 @@ import FormField from 'src/components/form/FormField.astro';
       class="peer h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
     />
     <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-200">
-      I accept the
+      {t('Contact.Form.Terms.Text', language)}
       <label
         for="terms-toggle"
         class="cursor-pointer text-blue-600 hover:underline dark:text-blue-400"
       >
-        terms and conditions
+        {t('Contact.Form.Terms.LinkText', language)}
       </label>
       <span aria-hidden="true">*</span>
-      <span class="sr-only">(required)</span>
+      <span class="sr-only"> {t('Contact.Form.Terms.Required', language)}</span>
     </label>
   </div>
   <!-- Submit Button -->
@@ -73,7 +81,7 @@ import FormField from 'src/components/form/FormField.astro';
       type="submit"
       class="g-recaptcha w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
     >
-      Submit Enquiry
+      {t('Contact.Form.Submit.Text', language)}
     </button>
   </div>
 </Form>
@@ -90,7 +98,7 @@ import FormField from 'src/components/form/FormField.astro';
   >
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-        Terms and Conditions
+        {t('Contact.Form.Terms.Modal.Title', language)}
       </h2>
       <label
         for="terms-toggle"
@@ -103,26 +111,16 @@ import FormField from 'src/components/form/FormField.astro';
     <div
       class="peer-check:flex space-y-4 text-gray-700 peer-checked:opacity-100 dark:text-gray-200"
     >
-      <p>By submitting this form, you agree to the following terms:</p>
-      <ul class="list-disc space-y-2 pl-5">
-        <li>All bookings are subject to availability</li>
-        <li>Payment must be completed 48 hours before tour date</li>
-        <li>Cancellations within 24 hours are non-refundable</li>
-        <li>We reserve the right to modify tour schedules</li>
-        <li>
-          Personal information will be handled according to our privacy policy
-        </li>
-      </ul>
-      <p>For full terms, please contact our support team.</p>
-    </div>
+      <Prose markdown={t('Contact.Form.Terms.Modal.Body', language)} />
 
-    <div class="mt-6 flex justify-end">
-      <label
-        for="terms-toggle"
-        class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-      >
-        Close
-      </label>
+      <div class="mt-6 flex justify-end">
+        <label
+          for="terms-toggle"
+          class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        >
+          {t('Contact.Form.Terms.Modal.Close', language)}
+        </label>
+      </div>
     </div>
   </div>
 </div>
