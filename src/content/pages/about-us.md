@@ -2,15 +2,19 @@
 _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 title: About Us
+showPageTitle: true
 seo:
   page_title:
   page_description: About Top walking tours portugal
   canonical_url:
-  featured_image: src/assets/images/bike-tours-in-portugal.jpg
+  featured_image: >-
+    /src/assets/images/the-way-of-st.-james-bike-tour-fold-n-visit-cycling-holidays-4323.jpg
   featured_image_alt: about us
   author_twitter_handle:
-  open_graph_type:
+  open_graph_type: article
   no_index: false
+  metas: []
+  keywords: About us,Top walking tours portugal
 content_blocks:
   - _bookshop_name: left-right
     background_color: '#ffffff'

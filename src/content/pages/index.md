@@ -23,10 +23,11 @@ content_blocks:
     background_color: '#ffffff'
     heading:
       heading_text: Portugal Walking & Hiking Tours
-      heading_gradient_color: '#c8d5b9'
+      heading_gradient_color: '#a0a2ff'
     subheading:
       markdown_content: >-
         ## **Hike Portugal with Top Walking tours Portugal**
+
 
         Welcome to Portugal, land of many stories and dreams. In the south
         western edge of continental Europe, a small yet wonderful country
@@ -48,18 +49,18 @@ content_blocks:
         enjoyable experience. The act of walking though, is up to you. Feel free
         to analyze our offers and to contact us in case of any doubt. We wish
         you the best of walks.
-      color: '#393939'
+      color: '#475569'
     image:
       image_path: /src/assets/images/top-walking-tours-portugal.jpg
       alt_text: Top Walking Tours Portugal
     buttons:
       - _bookshop_name: buttons/primary
         button_text: About us
-        button_icon: Burger
+        button_icon:
         button_link: /about-us
         background_color: '#034ad8'
-        hover_brightness: 0.9
-        text_color: '#ffffff'
+        hover_brightness: 0.25
+        text_color: '#f2f2f2'
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:

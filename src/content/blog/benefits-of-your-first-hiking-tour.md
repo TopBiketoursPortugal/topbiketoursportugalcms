@@ -1,31 +1,29 @@
 ---
 _schema: default
 id: 52623f7a-1e2e-4de6-ae38-9ee15cf45ca5
-language: en
-slug: benefits-of-your-first-hiking-tour
 date: 2022-03-11T00:00:00Z
-title: 'Benefits of your first walking tour!'
+title: Benefits of your first walking tour!
 tags:
   - technology
   - email
+language: en
 author: Coen Simmons
-thumb_image_path: /src/assets/images/blog-thumb-3.jpg
+thumb_image_path: /src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg
 thumb_image_alt: Staff meeting
 image:
   src: /src/assets/images/featured-image-5.jpg
   alt: Laptop, phone and coffee
 seo:
   page_title:
-  page_description: 'teste'
-  canonical_url: 'test'
+  page_description: teste
+  canonical_url: test
   featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: 'teste'
-  author_twitter_handle: 'lll'
+  featured_image_alt: teste
+  author_twitter_handle: lll
   open_graph_type: article
   no_index: false
   keywords:
 ---
-
 # **Benefits of your first walking tour!**
 
 You don´t use to walk and you haven´t think about the idea of a hiking tour
@@ -34,12 +32,13 @@ hike all day, wearing lycra and sweating….but hiking tours aren´t like that
 (note: some are). You should consider do a walking trip and there are some
 reasons for that:
 
-- A walk will help you sleep better when you get back to your bed and with this
+* A walk will help you sleep better when you get back to your bed and with this
   adventure experience you can develop a positive addiction 😊, make new friends
   and have a happy week! In a hiking tour it is possible to visit a place free
   from stressful traffic and driving. That is possible because our guides know
   the area so you will benefit from their experience. No rush, no schedules to
   arrange. Your luggage will be collected every day, your accommodations are
   booked. Just wake up in the morning, have breakfast, and enjoy the day!
+
 
 <img src="/src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg" height="1083" width="1444" />

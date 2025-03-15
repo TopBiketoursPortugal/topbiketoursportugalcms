@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url: /[full_slug]/
+    url: '[relative_base_path]/{title|deburr|slugify|lowercase}'
     disable_url: false
     description: ''
     _enabled_editors:
@@ -52,7 +52,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /blog/[full_slug]/
+    url: '[relative_base_path]/{title|deburr|slugify|lowercase}'
     disable_url: false
     description: ''
     _enabled_editors:
@@ -148,8 +148,10 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
+    url: '[relative_base_path]/{title|deburr|slugify|lowercase}'
     disable_url: false
     description: ''
+    _enabled_editors:
     _inputs:
       type:
         type: select
@@ -304,7 +306,7 @@ collections_config:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: true
-    disable_file_actions: false
+    disable_file_actions: true
     schemas:
       default:
         path: schemas/tour.md
@@ -329,6 +331,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
+    url: /team/[full_slug]/
     disable_url: false
     description: ''
     preview:
@@ -477,13 +480,6 @@ _inputs:
       empty_type: array
       values: collections.blog
       value_key: id
-      # preview:
-      #   text:
-      #     - key: title
-      #   subtext:
-      #     - key: language
-      #   image:
-      #     - key: image.src
     cascade: true
   main_feature:
     type: select
@@ -491,13 +487,6 @@ _inputs:
       allow_empty: true
       values: collections.blog
       value_key: id
-      # preview:
-      #   text:
-      #     - key: title
-      #   subtext:
-      #     - key: language
-      #   image:
-      #     - key: image.src
     cascade: true
   markdown_content:
     type: markdown
@@ -1067,8 +1056,7 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment:
-          Set the colors available in the color selectors throughout the site.
+        comment: Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color
