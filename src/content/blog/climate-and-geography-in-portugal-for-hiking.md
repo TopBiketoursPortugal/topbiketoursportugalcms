@@ -1,30 +1,28 @@
 ---
 _schema: default
-date: 2022-03-07T00:00:00Z
 id: 3fa275e6-2637-4a8b-afa3-ec96b8400e0c
-title: 'Climate and Geography for hiking in Portugal'
+date: 2022-03-07T00:00:00Z
+title: Climate and Geography for hiking in Portugal
 tags:
   - ''
+language: en
 author: Coen Simmons
-thumb_image_path: /src/assets/images/blog-thumb-3.jpg
+thumb_image_path: /src/assets/images/odeceixe-beach.jpg
 thumb_image_alt: Staff meeting
 image:
   src: /src/assets/images/featured-image-5.jpg
   alt: Laptop, phone and coffee
-language: en
-slug: /climate-and-geography-in-portugal-for-hiking
 seo:
   page_title:
-  page_description: 'teste'
-  canonical_url: 'test'
+  page_description: teste
+  canonical_url: test
   featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: 'teste'
-  author_twitter_handle: 'lll'
+  featured_image_alt: teste
+  author_twitter_handle: lll
   open_graph_type: article
   no_index: false
   keywords:
 ---
-
 # **Climate and Geography for hiking in Portugal**
 
 “The sun is out 300 days per year with few raining days” and it is perfect for
@@ -43,17 +41,20 @@ The winter in **Porto** and inland are colder than the rest of Portugal, but the
 climate is still mid if compare with the rest of Europe. It can snow but is
 rare. It is easy to find snow in Serra da Estrela in the winter.
 
+
 <img src="/src/assets/images/average-temperature-portugal-porto.png" height="232" width="702" />
 
 In Lisbon and **Central Portugal** temperatures can go to 30 degrees easily in
 the summer, but with the coast fresh breeze it cools down near the coastal
 places.
 
+
 <img src="/src/assets/images/average-temperature-portugal-lisbon.png" height="232" width="702" />
 
 The summer in the southern Portugal and Algarve is very hot and dry, and it is
 very pleasant even in the winter times. Is probably the sunniest region in all
 Europe.
+
 
 <img src="/src/assets/images/average-temperature-portugal-vila-nova-de-milfontes.png" height="232" width="702" />
 
