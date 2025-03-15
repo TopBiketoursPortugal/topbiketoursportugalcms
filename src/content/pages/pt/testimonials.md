@@ -5,9 +5,6 @@ language: pt
 title: testemunhos
 draft: false
 showPageTitle: true
-locale_alternates:
-  - language_code: en
-    link: http://google.com
 seo:
   page_title: 'Testemunhos da Top Bike Tours Portugal: Experiências de Clientes'
   page_description:
