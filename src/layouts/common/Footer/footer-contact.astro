@@ -18,7 +18,7 @@ const contact = contacts[language] satisfies ContactSchema;
 ---
 
 <Text as="strong" class="col-span-full" size="xlarge" weight="bold"
-  >{t('Footer.ContactInfoTitle')}</Text
+  >{t('Footer.ContactInfoTitle', language)}</Text
 >
 
 {contact && contact.address && <Address address={contact.address} />}

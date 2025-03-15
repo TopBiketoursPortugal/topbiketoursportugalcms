@@ -8,6 +8,11 @@ type Props = {
 const { class: className } = Astro.props;
 ---
 
-<div class={cn('flex border-b dark:border-gray-700', className)}>
+<div
+  class={cn(
+    'flex border-b dark:border-gray-700 items-center h-full flex-grow',
+    className
+  )}
+>
   <slot />
 </div>

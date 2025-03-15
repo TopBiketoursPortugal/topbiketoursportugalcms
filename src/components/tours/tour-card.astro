@@ -57,8 +57,8 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
         duration && (
           <span class="flex gap-2 text-gray-600">
             <Icon icon="ph:clock-countdown-light" /> {duration}{' '}
-            {t('Tour.Info.Duration.Unit.Days')} / {duration - 1}{' '}
-            {t('Tour.Info.Duration.Unit.Nights')}
+            {t('Tour.Info.Duration.Unit.Days', language)} / {duration - 1}{' '}
+            {t('Tour.Info.Duration.Unit.Nights', language)}
           </span>
         )
       }
@@ -70,7 +70,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
             ) : (
               <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
             )}
-            {t('Tour.Info.Difficulty.Label')} : {difficulty}/5
+            {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
           </span>
         )
       }
@@ -79,7 +79,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
           <div class="flex items-center gap-2">
             <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
             <span>
-              {t('Tour.Info.Distance.Label')}: {distance} km
+              {t('Tour.Info.Distance.Label', language)}: {distance} km
             </span>
           </div>
         ) : null

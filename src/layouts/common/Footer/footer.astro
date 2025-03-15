@@ -69,8 +69,9 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
       }
     </div>
     <div class="flex flex-col gap-2">
-      <span class="text-sm font-bold">{t('Footer.PaymentTitle')}</span>
-      <span class="text-xs">{t('Footer.PaymentDescription')}</span>
+      <span class="text-sm font-bold">{t('Footer.PaymentTitle', language)}</span
+      >
+      <span class="text-xs">{t('Footer.PaymentDescription', language)}</span>
       <div class="flex gap-2">
         <Icon icon="logos:mastercard" /><Icon icon="logos:visa" /><Icon
           icon="logos:amex"
@@ -81,7 +82,7 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 
   <div class="grid grid-cols-4 gap-4 self-start sm:grid-cols-3">
     <Text as="strong" class="col-span-full" size="xlarge" weight="bold"
-      >{t('Footer.TourRegionsTitle')}</Text
+      >{t('Footer.TourRegionsTitle', language)}</Text
     >
     {
       regions.map((region) => {
@@ -121,10 +122,12 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={termsPagePagePath} rel="nofollow">{t('TermsAndConditions')}</a>
+    <a href={termsPagePagePath} rel="nofollow"
+      >{t('TermsAndConditions', language)}</a
+    >
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy')}</a>
+    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy', language)}</a>
   </li>
 </ul>
