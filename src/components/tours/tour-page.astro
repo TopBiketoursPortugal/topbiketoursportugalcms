@@ -25,16 +25,12 @@ import TourRelated from './tour-related.astro';
 import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
 import Icon from '../utility/icon.astro';
+import Heading from '../typography/heading.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
 
-// if (!tour) {
-//   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
-// }
-// const { Content } = await render(tour);
-// const { data } = tour;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const {
   packages = [],
@@ -56,7 +52,7 @@ const isPromotional = minPromoPrice > 0;
 
 {tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}
 <div
-  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-3 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
+  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
@@ -69,7 +65,7 @@ const isPromotional = minPromoPrice > 0;
       <TabItem href="#faqs" text={t('Tour.Tab.Faqs')} />
     </Tabs>
   </div>
-  <div
+  <section
     class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
     <div class="relative flex items-center gap-2">
@@ -100,8 +96,8 @@ const isPromotional = minPromoPrice > 0;
     <Separator />
     <strong>{t('Tour.Form.Title')}</strong>
     <TourForm />
-  </div>
-  <section class="col-end-2 flex w-full flex-col gap-4">
+  </section>
+  <section class="col-end-2 mb-8 flex w-full flex-col gap-4">
     <!-- {tour.image && <Hero {...tour.image} class="max-h-72 flex-1" />} -->
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
@@ -153,25 +149,27 @@ const isPromotional = minPromoPrice > 0;
     <Prose markdown={tour.content ?? ''} />
     <slot />
   </section>
-  <section id="packages" class="col-span-full grid grid-cols-4">
-    <h2 class="col-span-full">{t('Tour.Section.Packages.Title')}</h2>
+  <section id="packages" class="col-span-full mb-8 grid grid-cols-4 gap-10">
+    <Heading as="h2" class="mb-6">
+      {t('Tour.Section.Packages.Title')}
+    </Heading>
 
     <div class="col-span-full">
       <TourPricing language={language} packages={tour.packages} />
 
-      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full" />
+      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full mt-8" />
     </div>
   </section>
-  <section id="photos" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Photos.Title')}</h2>
+  <section id="photos" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Photos.Title')}</Heading>
     <Gallery images={tour.images ?? []} />
   </section>
-  <section id="itinerary" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Itineratry.Title')}</h2>
+  <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Itineratry.Title')}</Heading>
     <TourItinerary itinerary={itinerary} />
   </section>
-  <section id="map" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Map.Title')}</h2>
+  <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Map.Title')}</Heading>
 
     {
       tour.mapUrl && (
@@ -186,15 +184,15 @@ const isPromotional = minPromoPrice > 0;
       )
     }
   </section>
-  <section id="faqs" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Faq.Title')}</h2>
+  <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Faq.Title')}</Heading>
     <TourFaqs faqs={faqs} language={language} />
   </section>
-  <section id="reviews" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Reviews.Title')}</h2>
+  <section id="reviews" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Reviews.Title')}</Heading>
     {
       reviews.length > 0 ? (
-        <div class="grid grid-cols-1 gap-6">
+        <div class="grid grid-cols-1 gap-12">
           {reviews.map(
             async ({ image, travelerType, content, author, rating }) => {
               const imageOptimized = image
@@ -203,7 +201,7 @@ const isPromotional = minPromoPrice > 0;
               const { country, givenName, familyName } = author ?? {};
               const name = `${givenName} ${familyName}`.trimEnd();
               return (
-                <div class="flex flex-row items-center justify-evenly gap-4">
+                <div class="flex flex-row items-center justify-evenly gap-6">
                   <div class="flex grow">
                     <Image
                       src={imageOptimized}
@@ -218,7 +216,7 @@ const isPromotional = minPromoPrice > 0;
                   </div>
                   <div class="grow whitespace-nowrap">{name}</div>
                   <div>{travelerType ?? '-'}</div>
-                  <div class="text-balance flex grow flex-col whitespace-pre-line">
+                  <div class="text-balance flex grow flex-col gap-4 whitespace-pre-line">
                     <Rating rating={rating} />
                     {content}
                   </div>
@@ -234,8 +232,10 @@ const isPromotional = minPromoPrice > 0;
   </section>
   {
     relatedTours.length > 0 ? (
-      <section id="related" class="col-span-full flex flex-col gap-4">
-        <h2>Related</h2>
+      <section id="related" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.RelatedTours.Title')}
+        </Heading>
         <TourRelated language={language} related={relatedTours} />
       </section>
     ) : null

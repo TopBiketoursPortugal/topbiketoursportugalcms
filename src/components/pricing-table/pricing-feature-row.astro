@@ -2,6 +2,7 @@
 import Tooltip from '../tooltip/tooltip.astro';
 import { tv } from 'tailwind-variants';
 import Icon from '../utility/icon.astro';
+import { cn } from 'utils/cn';
 
 const {
   feature,
@@ -9,24 +10,35 @@ const {
   info,
   included,
   alternate = false,
-  icon = false
+  icon = false,
+  class: className = '',
+  distribute
 } = Astro.props;
 
 const container = tv({
-  base: 'flex h-12 items-center justify-center gap-2 border-gray-300 px-2 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+  base: 'flex h-20 items-center gap-2 border-gray-300 px-4 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
   variants: {
     alternate: {
       true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
       false:
         'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+    },
+    distribute: {
+      leading: 'justify-start',
+      trailing: 'justify-end',
+      center: 'justify-center'
     }
+  },
+  defaultVariants: {
+    alternate: true,
+    distribute: 'center'
   }
 });
 
-const containerStyle = container({ alternate });
+const containerStyle = cn(container({ alternate, distribute }), className);
 ---
 
-<div class={containerStyle}>
+<div class={containerStyle} data-type="container">
   <div class="lg:hidden">{description}</div>
   {feature}
   {info}

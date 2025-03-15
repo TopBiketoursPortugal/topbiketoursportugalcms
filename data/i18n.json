@@ -7,7 +7,6 @@
     "Footer.PaymentTitle": "Pay Safely With Us",
     "Footer.PaymentDescription": "The payment is encrypted and transmitted securely with an SSL protocol.",
     "Button.Directions": "Directions",
-
     "Tour.Section.Itineratry.Title": "Itinerary",
     "Tour.Section.Map.Title": "Map",
     "Tour.Section.Faq.Title": "Faq",
@@ -44,7 +43,8 @@
     "Tour.Info.Difficulty.Label": "Difficulty",
     "Tour.Info.Duration.Unit.Nights": "Nights",
     "Tour.Info.Duration.Unit.Days": "Days",
-    "Tour.Info.Reviews.Unit": "review(s)"
+    "Tour.Info.Reviews.Unit": "review(s)",
+    "Tour.Section.RelatedTours.Title": "Related tours"
   },
   "pt": {
     "TermsAndConditions": "Terms And Conditions",
@@ -90,6 +90,7 @@
     "Tour.Info.Difficulty.Label": "Difficulty",
     "Tour.Info.Duration.Unit.Nights": "Nights",
     "Tour.Info.Duration.Unit.Days": "Days",
-    "Tour.Info.Reviews.Unit": "review(s)"
+    "Tour.Info.Reviews.Unit": "review(s)",
+    "Tour.Section.RelatedTours.Title": "Related tours"
   }
 }
