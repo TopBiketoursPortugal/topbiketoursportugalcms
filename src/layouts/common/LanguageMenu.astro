@@ -11,15 +11,18 @@ export type LanguageMenuItem = {
 };
 
 type Props = { localizedUrls?: ReadonlyArray<LanguageMenuItem> };
-const languages = Object.values(Languages).map(
-  ({ code, isDefault, display, icon }) =>
-    ({
-      code: code as LanguageCodes,
-      display,
-      icon,
-      path: isDefault ? '/' : `/${code}`
-    }) satisfies LanguageMenuItem
-);
+const currenLanguage = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const languages = Object.values(Languages)
+  .filter((l) => l.code !== currenLanguage)
+  .map(
+    ({ code, isDefault, display, icon }) =>
+      ({
+        code: code as LanguageCodes,
+        display,
+        icon,
+        path: isDefault ? '/' : `/${code}`
+      }) satisfies LanguageMenuItem
+  );
 
 let { localizedUrls = [] } = Astro.props;
 

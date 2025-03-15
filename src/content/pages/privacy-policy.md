@@ -25,9 +25,9 @@ content_blocks:
       Top Bike Tours Portugal, Unipessoal, Lda, referred to herein as "Top
       Walking Tours Portugal", respects your privacy and is committed to
       protecting the personal information you share with us. By using
-      www.mucho-hero.cloudvent.net, you agree to the terms of our Privacy
-      Policy. We reserve the right to add, remove, or modify these terms at any
-      time and encourage you to periodically check this page for changes.
+      topwalkingtoursportugal.com, you agree to the terms of our Privacy Policy.
+      We reserve the right to add, remove, or modify these terms at any time and
+      encourage you to periodically check this page for changes.
 
 
       &nbsp;
@@ -60,8 +60,8 @@ content_blocks:
 
       Top Walking Tours Portugal automatically tracks certain information while
       you use our website, including (but not limited to) the URL you visited
-      before www.mucho-hero.cloudvent.net, the URL you visit after
-      www.mucho-hero.cloudvent.net, and your IP address. We may also record data
+      before topwalkingtoursportugal.com, the URL you visit after
+      topwalkingtoursportugal.com, and your IP address. We may also record data
       about which pages you visit on our site and how long you spend on each
       page.We may collect aggregate and usage information to generate market
       research reports. Demographic data such as age, gender, and interests
@@ -99,7 +99,7 @@ content_blocks:
 
 
       Our website contains links to other websites outside of our domain, and
-      therefore www.mucho-hero.cloudvent.net cannot claim responsibility for the
+      therefore topwalkingtoursportugal.com cannot claim responsibility for the
       privacy practices of such external sites. We encourage our users to be
       aware when they are leaving our site and to read the privacy statements of
       other websites collecting personal or credit card information — including
@@ -145,14 +145,14 @@ content_blocks:
       &nbsp;
 
 
-      www.mucho-hero.cloudvent.net is protected by security technology called
-      SSL encryption to prevent the loss, misuse, and alteration of the
-      information under our control. While no internet data transmission is ever
-      completely secure, all credit card payments submitted via
-      www.mucho-hero.cloudvent.net are automatically encrypted. If your
-      preferred web browser does not support SSL encryption, you will receive
-      instant notification. Top Walking Tours Portugal does not use credit cards
-      for any purpose other than intended payment.
+      topwalkingtoursportugal.com is protected by security technology called SSL
+      encryption to prevent the loss, misuse, and alteration of the information
+      under our control. While no internet data transmission is ever completely
+      secure, all credit card payments submitted via topwalkingtoursportugal.com
+      are automatically encrypted. If your preferred web browser does not
+      support SSL encryption, you will receive instant notification. Top Walking
+      Tours Portugal does not use credit cards for any purpose other than
+      intended payment.
     style:
       container: Contained
       padding: Normal

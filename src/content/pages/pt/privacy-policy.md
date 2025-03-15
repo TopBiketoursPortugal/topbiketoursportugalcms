@@ -1,11 +1,13 @@
 ---
 _schema: default
 id: 06a52988-e468-4118-b290-3f4eae5bb245
-title: Politica privacidade
+title: Política de Privacidade
 language: pt
 seo:
-  page_title:
-  page_description: Privacy policy
+  page_title: Política de Privacidade da Top Bike Tours Portugal
+  page_description:
+    Saiba como a Top Bike Tours Portugal protege os seus dados pessoais e as
+    práticas de privacidade no uso do nosso site.
   canonical_url:
   featured_image:
   featured_image_alt:
@@ -15,143 +17,149 @@ seo:
 content_blocks:
   - _bookshop_name: text
     text: >-
-      # **Privacy Policy**
+      # **Política de Privacidade**
 
 
-      &nbsp;
+       
 
 
-      Top Bike Tours Portugal, Unipessoal, Lda, referred to herein as "Top
-      Walking Tours Portugal", respects your privacy and is committed to
-      protecting the personal information you share with us. By using
-      www.mucho-hero.cloudvent.net, you agree to the terms of our Privacy
-      Policy. We reserve the right to add, remove, or modify these terms at any
-      time and encourage you to periodically check this page for changes.
+      A Top Bike Tours Portugal, Unipessoal, Lda, aqui referida como "Top
+      Walking Tours Portugal", respeita a sua privacidade e está empenhada em
+      proteger as informações pessoais que partilha connosco. Ao utilizar
+      topwalkingtoursportugal.com, concorda com os termos da nossa Política de
+      Privacidade. Reservamo-nos o direito de adicionar, remover ou modificar
+      estes termos a qualquer momento e encorajamos a consulta periódica desta
+      página para verificar alterações.
 
 
-      &nbsp;
+       
 
 
-      **Personal Information**
+      **Informações Pessoais**
 
 
-      &nbsp;
+       
 
 
-      We define "personal information" as any information used to identify,
-      contact, or locate the person to whom such information pertains, including
-      but not limited to name, e-mail address, mailing address, phone number, or
-      other contact information.When you browse this website and have not
-      registered for any online service from Top Walking Tours Portugal, you
-      browse anonymously. We do not collect personal information as you browse.
-      Personal information is collected when you request any website service or
-      purchase trips or related services on this site.
+      Definimos "informações pessoais" como qualquer informação usada para
+      identificar, contactar ou localizar a pessoa a quem essas informações
+      pertencem, incluindo, mas não limitado a, nome, endereço de e-mail,
+      morada, número de telefone ou outras informações de contacto. Quando
+      navega neste site e não está registado para qualquer serviço online da Top
+      Walking Tours Portugal, navega de forma anónima. Não recolhemos
+      informações pessoais enquanto navega. As informações pessoais são
+      recolhidas quando solicita algum serviço do site ou compra viagens ou
+      serviços relacionados neste site.
 
 
-      &nbsp;
+       
 
 
-      **Aggregate and Usage Information**
+      **Informações Agregadas e de Utilização**
 
 
-      &nbsp;
+       
 
 
-      Top Walking Tours Portugal automatically tracks certain information while
-      you use our website, including (but not limited to) the URL you visited
-      before www.mucho-hero.cloudvent.net, the URL you visit after
-      www.mucho-hero.cloudvent.net, and your IP address. We may also record data
-      about which pages you visit on our site and how long you spend on each
-      page.We may collect aggregate and usage information to generate market
-      research reports. Demographic data such as age, gender, and interests
-      provided by Google are collected and used to analyze our website visitors
-      through Google Analytics Demographics and Interest Reporting. Google
-      Remarketing ads are advertised to website users who have visited specific
-      pages on the website.
+      A Top Walking Tours Portugal rastreia automaticamente certas informações
+      enquanto utiliza o nosso site, incluindo (mas não limitado a) o URL que
+      visitou antes de topwalkingtoursportugal.com, o URL que visita após
+      topwalkingtoursportugal.com e o seu endereço IP. Podemos também registar
+      dados sobre quais páginas visita no nosso site e quanto tempo passa em
+      cada página. Podemos recolher informações agregadas e de utilização para
+      gerar relatórios de pesquisa de mercado. Dados demográficos, como idade,
+      género e interesses fornecidos pelo Google, são recolhidos e usados para
+      analisar os visitantes do nosso site através do Google Analytics
+      Demographics and Interest Reporting. Anúncios de remarketing do Google são
+      exibidos a utilizadores do site que visitaram páginas específicas do
+      mesmo.
 
 
-      &nbsp;
+       
 
 
       **Cookies**
 
 
-      &nbsp;
+       
 
 
-      The Top Walking Tours Portugal website uses "cookies" small data files
-      placed on your hard drive while you browse our website. Cookies are used
-      to store your preferences and sign-in information or allow us to provide
-      you with targeted ads that may interest you and analyze the way our site
-      is working to help us improve. Our cookies cannot retrieve information
-      from your device other than what you choose to enter, such as sign-up
-      information to receive our newsletter or enter a contest.
+      O site da Top Walking Tours Portugal utiliza "cookies", pequenos ficheiros
+      de dados colocados no seu disco rígido enquanto navega no nosso site. Os
+      cookies são usados para armazenar as suas preferências e informações de
+      início de sessão ou para nos permitir fornecer anúncios direcionados que
+      possam interessar-lhe e analisar o funcionamento do nosso site para o
+      melhorar. Os nossos cookies não conseguem recuperar informações do seu
+      dispositivo além do que optar por introduzir, como informações de registo
+      para receber a nossa newsletter ou participar num concurso.
 
 
-      &nbsp;
+       
 
 
-      **Links to Other Sites**
+      **Ligações a Outros Sites**
 
 
-      &nbsp;
+       
 
 
-      Our website contains links to other websites outside of our domain, and
-      therefore www.mucho-hero.cloudvent.net cannot claim responsibility for the
-      privacy practices of such external sites. We encourage our users to be
-      aware when they are leaving our site and to read the privacy statements of
-      other websites collecting personal or credit card information — including
-      affiliated sites that may post or bear the Top Walking Tours Portugal
-      logo.
+      O nosso site contém ligações a outros sites fora do nosso domínio, pelo
+      que topwalkingtoursportugal.com não pode assumir responsabilidade pelas
+      práticas de privacidade desses sites externos. Encorajamos os nossos
+      utilizadores a estarem atentos quando saem do nosso site e a lerem as
+      declarações de privacidade de outros sites que recolhem informações
+      pessoais ou de cartão de crédito — incluindo sites afiliados que possam
+      exibir ou ostentar o logótipo da Top Walking Tours Portugal.
 
 
-      &nbsp;
+       
 
 
-      **Privacy Commitment**
+      **Compromisso com a Privacidade**
 
 
-      &nbsp;
+       
 
 
-      Top Walking Tours Portugal respects and values your privacy. We will not
-      disclose your personal information to any external party without your
-      informed consent unless required by law to do so.
+      A Top Walking Tours Portugal respeita e valoriza a sua privacidade. Não
+      divulgaremos as suas informações pessoais a terceiros sem o seu
+      consentimento informado, salvo se tal for exigido por lei.
 
 
-      &nbsp;
+       
 
 
-      **Right to Review Your Information**
+      **Direito de Revisão das Suas Informações**
 
 
-      &nbsp;
+       
 
 
-      Top Walking Tours Portugal customers may, at any time, request further
-      information about the way Top Walking Tours Portugal manages your personal
-      information. To request removal from our contact lists or amend your
-      personal information, you may contact us.
+      Os clientes da Top Walking Tours Portugal podem, a qualquer momento,
+      solicitar mais informações sobre a forma como a Top Walking Tours Portugal
+      gere as suas informações pessoais. Para solicitar a remoção das nossas
+      listas de contactos ou alterar as suas informações pessoais, pode
+      contactar-nos.
 
 
-      &nbsp;
+       
 
 
-      **Security**
+      **Segurança**
 
 
-      &nbsp;
+       
 
 
-      www.mucho-hero.cloudvent.net is protected by security technology called
-      SSL encryption to prevent the loss, misuse, and alteration of the
-      information under our control. While no internet data transmission is ever
-      completely secure, all credit card payments submitted via
-      www.mucho-hero.cloudvent.net are automatically encrypted. If your
-      preferred web browser does not support SSL encryption, you will receive
-      instant notification. Top Walking Tours Portugal does not use credit cards
-      for any purpose other than intended payment.
+      O site topwalkingtoursportugal.com está protegido por tecnologia de
+      segurança chamada encriptação SSL para prevenir a perda, uso indevido e
+      alteração das informações sob o nosso controlo. Embora nenhuma transmissão
+      de dados na Internet seja totalmente segura, todos os pagamentos com
+      cartão de crédito submetidos via topwalkingtoursportugal.com são
+      automaticamente encriptados. Se o seu navegador preferido não suportar
+      encriptação SSL, receberá uma notificação imediata. A Top Walking Tours
+      Portugal não utiliza cartões de crédito para nenhum fim além do pagamento
+      pretendido.
     style:
       container: Contained
       padding: Normal

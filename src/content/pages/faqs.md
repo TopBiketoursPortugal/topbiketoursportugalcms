@@ -2,7 +2,7 @@
 template: ~/layouts/Page.astro
 id: 27e20631-ad55-4b9e-8553-c047839cda31
 language: en
-title: Faqs
+title: Perguntas frequentes
 draft: false
 locale_alternates:
   - language_code: pt

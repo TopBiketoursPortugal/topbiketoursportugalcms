@@ -1,12 +1,14 @@
 ---
 _schema: default
 id: 897cfdba-ee45-4ab3-9518-46e7295c67a1
-title: Termos e condições
+title: Termos e Condições
 slug: termos-condicoes
 language: pt
 seo:
-  page_title:
-  page_description: Terms and conditions
+  page_title: Termos e Condições da Top Bike Tours Portugal
+  page_description:
+    Conheça os termos e condições para reservas, cancelamentos, segurança e
+    responsabilidades nos passeios da Top Bike Tours Portugal.
   canonical_url:
   featured_image:
   featured_image_alt:
@@ -16,110 +18,113 @@ seo:
 content_blocks:
   - _bookshop_name: text
     text: >-
-      # **Terms and Conditions:**
+      # **Termos e Condições:**
 
 
-      Top Bike tours Portugal, Unip, Lda referred to here in as "Top Walking
-      Tours Portugal" ” as the headquarters in Rua do Alferes Malheiro 139,
-      4000-057 Porto, Portugal with VAT number 510 560 890, is licenced to be a
-      tour operator ( nº 7/2014) and tourism agency (nº 7008)
+      A Top Bike Tours Portugal, Unipessoal, Lda, aqui referida como "Top
+      Walking Tours Portugal", tem a sua sede na Rua do Alferes Malheiro 139,
+      4000-057 Porto, Portugal, com o número de contribuinte 510 560 890, e está
+      licenciada como operador turístico (n.º 7/2014) e agência de turismo (n.º
+      7008).
 
 
-      **Reservation and cancellation Policy:**
+      **Política de Reserva e Cancelamento:**
 
 
-      1. Contact us to confirm if the Walking tour you intend to partake is
-      available.
+      1. Contacte-nos para confirmar se o passeio pedestre que pretende realizar
+      está disponível.
 
-      2. Signal: After receiving a notification from Top Walking Tours Portugal,
-      Pvt. Lda to know that your tour is confirmed, you will need to forward a
-      35% payment signal. Payment can be done via paypal or by bank transfer.
+      2. Sinal: Após receber uma notificação da Top Walking Tours Portugal,
+      Unipessoal, Lda, confirmando o seu passeio, deverá enviar um sinal de 35%
+      do pagamento. O pagamento pode ser efetuado via PayPal ou por
+      transferência bancária.
 
-      3. The rest 65% of the payment must be made up to 60 days before the start
-      of your Walking tour.
+      3. Os restantes 65% do pagamento devem ser liquidados até 60 dias antes do
+      início do seu passeio pedestre.
 
-      4. If we do not receive the final payment before the mentioned deadline in
-      paragraph 3, we will consider your Walking tour cancelled. The signal
-      you’ve payed, will not be refunded.
+      4. Se não recebermos o pagamento final antes do prazo mencionado no ponto
+      3, consideraremos o seu passeio pedestre cancelado. O sinal pago não será
+      reembolsado.
 
-      5. Outdoor activities are subject to weather conditions. In the
-      eventuality of the company foreseeing the weather as a risk for the
-      customer's safety, the company reserves the right to change the
-      itineraries.
+      5. As atividades ao ar livre estão sujeitas às condições meteorológicas.
+      Caso a empresa preveja que o tempo representa um risco para a segurança
+      dos clientes, reserva-se o direito de alterar os itinerários.
 
-      6. **Cancellation policy in guided Walking tours:**
-         1. **Cancellation requested 60 days before tour start :** With the
-      exception of a cancellation fee of 20% of the total package value, the
-      company will refund the entire value paid by the costumer, if the
-      cancellation of the tour was notified 60 days before its start. That
-      notification must be sent to Top Walking Tours Portugal by email.
-         2. **Cancellation requested between 31 to 59 days:** 40% of the total
-      amount will be refunded, if the company is notified at least 31 days
-      before the start of the tour (info@topwalkingtoursportugal).
-         3. **Cancellation requested 30 days, or less, before the tour start:**
-      All cancellations communicated to Top Walking Tours Portugal, with less
-      than 30 days in advance are not entitled to any refund. 7. **Cancellation
-      policy in self guided Walking tours:**
-         4. **Cancellation requested 31 days before tour start:** With the
-      exception of a cancellation fee of 15% of the total package value, the
-      company will refund the entire value paid by the costumer, if the
-      cancellation of the tour was notified 31 days before its start. That
-      notification must be sent to Top Walking Tours Portugal, by email..
-         5. **Cancellation requested 30 days, or less, before the tour start:**
-      All cancellations communicated to Top Walking Tours Portugal, Pvt. Lda,
-      with less than 30 days in advance are entitled to a 30% refund. 8. Top
-      Walking Tours Portugal is not responsible for refunding any amount paid
-      for services that weren’t used by you.
-
-
-      **Safety:**
+      6. **Política de cancelamento em passeios pedestres guiados:**
+         1. **Cancelamento solicitado 60 dias antes do início do passeio:** Com
+      exceção de uma taxa de cancelamento de 20% do valor total do pacote, a
+      empresa reembolsará o valor total pago pelo cliente, se o cancelamento do
+      passeio for notificado 60 dias antes do seu início. Essa notificação deve
+      ser enviada por e-mail para a Top Walking Tours Portugal.
+         2. **Cancelamento solicitado entre 31 e 59 dias:** 40% do montante
+      total será reembolsado, se a empresa for notificada com pelo menos 31 dias
+      de antecedência do início do passeio (info@topwalkingtoursportugal).
+         3. **Cancelamento solicitado 30 dias ou menos antes do início do
+      passeio:** Todos os cancelamentos comunicados à Top Walking Tours Portugal
+      com menos de 30 dias de antecedência não têm direito a qualquer reembolso.
+      7. **Política de cancelamento em passeios pedestres autoguiados:**
+         4. **Cancelamento solicitado 31 dias antes do início do passeio:** Com
+      exceção de uma taxa de cancelamento de 15% do valor total do pacote, a
+      empresa reembolsará o valor total pago pelo cliente, se o cancelamento do
+      passeio for notificado 31 dias antes do seu início. Essa notificação deve
+      ser enviada por e-mail para a Top Walking Tours Portugal.
+         5. **Cancelamento solicitado 30 dias ou menos antes do início do
+      passeio:** Todos os cancelamentos comunicados à Top Walking Tours
+      Portugal, Unipessoal, Lda, com menos de 30 dias de antecedência têm
+      direito a um reembolso de 30%.
+      8. A Top Walking Tours Portugal não é responsável por reembolsar qualquer
+      montante pago por serviços que não tenham sido utilizados por si.
 
 
-      Participants should always follow the instructions of the guide and
-      respect his decisions. The guide knows the route and the country better
-      than anyone else and his priority is the SAFETY of everyone. Our aim is
-      that all participants have fun, however everyone must be aware that their
-      behavior in particular can not prevent the safety and fun of the whole
-      group.
+      **Segurança:**
 
 
-      **Insurance:**
+      Os participantes devem seguir sempre as instruções do guia e respeitar as
+      suas decisões. O guia conhece o percurso e o país melhor do que ninguém e
+      a sua prioridade é a SEGURANÇA de todos. O nosso objetivo é que todos os
+      participantes se divirtam, mas cada um deve estar ciente de que o seu
+      comportamento individual não pode comprometer a segurança e a diversão de
+      todo o grupo.
 
 
-      Top Walking Tours Portugal holds insurance in accordance with Portuguese
-      law in effect for this type of activity. All participants in our guided
-      activities are covered by Personal Accident insurance (Policy No.
-      85.00023213 Mútua dos Pescadores) worth 3.500,00 euros for medical
-      expenses, and 20.000,00 euros in case of death or permanent disability
-      insurance and Liability Policy No. 85.00023213 Mútua dos Pescadores )
-      worth 50.000,00 euros.
+      **Seguros:**
 
 
-      We recommend all participants to ensure their Travel Insurance has
-      adequate coverage for Cancellation and Refund, Luggage, Medical Expenses
-      and Repatriation, Death and Permanent Disability.
+      A Top Walking Tours Portugal possui seguros de acordo com a legislação
+      portuguesa em vigor para este tipo de atividade. Todos os participantes
+      nas nossas atividades guiadas estão cobertos por um seguro de Acidentes
+      Pessoais (Apólice n.º 85.00023213 Mútua dos Pescadores) no valor de
+      3.500,00 euros para despesas médicas e 20.000,00 euros em caso de morte ou
+      invalidez permanente, e por uma Apólice de Responsabilidade Civil (n.º
+      85.00023213 Mútua dos Pescadores) no valor de 50.000,00 euros.
 
 
-      **Responsability**
+      Recomendamos que todos os participantes garantam que o seu Seguro de
+      Viagem tenha cobertura adequada para Cancelamento e Reembolso, Bagagem,
+      Despesas Médicas e Repatriamento, Morte e Invalidez Permanente.
 
 
-      Cycling is an adventure and it involves some risks. Participating in a
-      Walking tour implies awareness and acceptance of this risk by the
-      participant. By having a tour with Top Walking Tours Portugal you are
-      accepting all conditions contained in the terms described above. When we
-      accept your booking, we accept to fulfill our obligations to you and other
-      information that you provide. During the tour clients are responsible for
-      the bicycle they rented. You can’t leave the bicycle alone and you must
-      make proper use of it. If the bike is stolen or if any parts become
-      damaged by misuse, the customer will have to pay their losses.
+      **Responsabilidade:**
 
 
-      **Pictures:**
+      Andar de bicicleta é uma aventura e envolve alguns riscos. Participar num
+      passeio pedestre implica a consciência e aceitação desses riscos por parte
+      do participante. Ao contratar um passeio com a Top Walking Tours Portugal,
+      está a aceitar todas as condições descritas nos termos acima. Quando
+      aceitamos a sua reserva, comprometemo-nos a cumprir as nossas obrigações
+      para consigo e com as informações que nos fornecer. Durante o passeio, os
+      clientes são responsáveis pela bicicleta que alugaram. Não pode deixar a
+      bicicleta sozinha e deve fazer um uso adequado dela. Se a bicicleta for
+      roubada ou se alguma peça ficar danificada por mau uso, o cliente terá de
+      pagar as perdas.
 
 
-      Top Walking Tours Portugal holds the right to use photos taken during
-      activities for promotional purposes only and the marketing of our
-      itineraries.
+      **Fotografias:**
+
+
+      A Top Walking Tours Portugal reserva-se o direito de usar fotografias
+      tiradas durante as atividades apenas para fins promocionais e para a
+      comercialização dos nossos itinerários.
     style:
       container: Full
       padding: Normal

@@ -17,6 +17,7 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
+  keywords:
 content_blocks:
   - _bookshop_name: left-right
     background_color: '#ffffff'
