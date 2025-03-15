@@ -160,7 +160,7 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /tours/[title|deburr|slugify|lowercase|trim]
+    url: /tours/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -343,7 +343,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /team/{title|deburr|slugify|lowercase}
+    url: /team/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     preview:

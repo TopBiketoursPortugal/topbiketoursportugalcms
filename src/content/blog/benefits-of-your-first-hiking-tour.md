@@ -26,19 +26,8 @@ seo:
 ---
 # **Benefits of your first walking tour!**
 
-You don´t use to walk and you haven´t think about the idea of a hiking tour
-experience? Maybe you have the wrong idea that this is for avid walkers that
-hike all day, wearing lycra and sweating….but hiking tours aren´t like that
-(note: some are). You should consider do a walking trip and there are some
-reasons for that:
+You don´t use to walk and you haven´t think about the idea of a hiking tour experience? Maybe you have the wrong idea that this is for avid walkers that hike all day, wearing lycra and sweating….but hiking tours aren´t like that (note: some are). You should consider do a walking trip and there are some reasons for that:
 
-* A walk will help you sleep better when you get back to your bed and with this
-  adventure experience you can develop a positive addiction 😊, make new friends
-  and have a happy week! In a hiking tour it is possible to visit a place free
-  from stressful traffic and driving. That is possible because our guides know
-  the area so you will benefit from their experience. No rush, no schedules to
-  arrange. Your luggage will be collected every day, your accommodations are
-  booked. Just wake up in the morning, have breakfast, and enjoy the day!
-
+* A walk will help you sleep better when you get back to your bed and with this adventure experience you can develop a positive addiction 😊, make new friends and have a happy week! In a hiking tour it is possible to visit a place free from stressful traffic and driving. That is possible because our guides know the area so you will benefit from their experience. No rush, no schedules to arrange. Your luggage will be collected every day, your accommodations are booked. Just wake up in the morning, have breakfast, and enjoy the day!
 
 <img src="/src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg" height="1083" width="1444" />
