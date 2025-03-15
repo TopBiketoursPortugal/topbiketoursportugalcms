@@ -9,18 +9,19 @@ import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
-import sentry from '@sentry/astro';
-import spotlightjs from '@spotlightjs/astro';
+// import sentry from '@sentry/astro';
+// import spotlightjs from '@spotlightjs/astro';
 import astroMetaTags from 'astro-meta-tags';
 import { shield } from '@kindspells/astro-shield';
-import playformCompress from '@playform/compress';
+// import playformCompress from '@playform/compress';
+// import min from 'astro-min';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://topwalkingtoursportugal.com',
   integrations: [
-    sentry(),
-    spotlightjs(),
+    // sentry(),
+    // spotlightjs(),
     astroMetaTags(),
     react(),
     tailwind(),
@@ -30,12 +31,12 @@ export default defineConfig({
     favicons(),
     icon({
       // svgoOptions: {},
-      include: {
-        fa: ['*'],
-        ph: ['*'],
-        logos: ['*'],
-        'circle-flags': ['us', 'pt']
-      },
+      // include: {
+      //   fa: ['*'],
+      //   ph: ['*'],
+      //   logos: ['*'],
+      //   'circle-flags': ['us', 'pt']
+      // },
       iconDir: 'src/assets/icons'
     }),
     sitemap({
@@ -58,8 +59,9 @@ export default defineConfig({
       }
     }),
     shield({}),
-    playformInline(),
-    playformCompress()
+    playformInline()
+    // min()
+    // playformCompress()
   ],
   prefetch: {
     prefetchAll: true
