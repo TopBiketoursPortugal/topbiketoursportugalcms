@@ -1,14 +1,13 @@
 ---
+import { undefined } from 'astro:schema';
 import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
+import type { FeaturedPost } from 'src/content/config';
 
 export type PaginatedProps = {
   frontmatter: {
     title: string;
-    featured_posts?: {
-      main_feature: string;
-      feature_list: Array<string>;
-    };
+    featured_posts: FeaturedPost;
     page_size?: number;
     seo?: SEOProps;
   };
@@ -31,7 +30,11 @@ const { featured_posts, ...props } = Astro.props.frontmatter;
     >
       {props.title}
     </h1>
-    {featured_posts && <FeaturedPosts bookshop:live {...featured_posts} />}
+    {
+      featured_posts !== null && featured_posts !== undefined ? (
+        <FeaturedPosts bookshop:live {...featured_posts} />
+      ) : null
+    }
     <slot />
   </div>
 </Layout>

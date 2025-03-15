@@ -35,6 +35,13 @@ const pageSchema = z.object({
   showPageTitle: z.boolean().optional().default(false)
 });
 
+const featuredPostSchema = z.object({
+  main_feature: z.string().uuid().optional().nullable(),
+  feature_list: z.array(z.string().uuid()).optional().nullable()
+});
+
+export type FeaturedPost = z.infer<typeof featuredPostSchema>;
+
 const paginatedCollectionSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
@@ -42,10 +49,7 @@ const paginatedCollectionSchema = z.object({
   template: z.string().optional().nullable(),
   slug: z.string().optional().nullable(),
   page_size: z.number().positive(),
-  featured_posts: z.object({
-    main_feature: z.string().uuid(),
-    feature_list: z.array(z.string().uuid())
-  }),
+  featured_posts: featuredPostSchema,
   showPageTitle: z.boolean().optional().default(false),
   seo: seoSchema
 });

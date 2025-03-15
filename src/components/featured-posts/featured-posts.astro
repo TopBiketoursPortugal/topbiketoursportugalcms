@@ -5,11 +5,9 @@ import { Image } from 'astro:assets';
 import type { VisuallyEditable } from 'src/types';
 import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
+import type { FeaturedPost } from 'src/content/config';
 
-type Props = {
-  main_feature: string;
-  feature_list: readonly string[];
-} & VisuallyEditable;
+type Props = FeaturedPost & VisuallyEditable;
 
 const block = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(

@@ -4,7 +4,7 @@ id: 9bfbffdf-f0bc-4936-92be-a6ea949ba8b7
 title: Blog
 featured_posts:
   main_feature:
-  feature_list: []
+  feature_list:
 seo:
   page_title:
   page_description: Blog Page
