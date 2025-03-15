@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url:
+    url: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}'
     disable_url: false
     description: ''
     _enabled_editors:
@@ -64,7 +64,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url:
+    url: /blog/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -155,12 +155,12 @@ collections_config:
     disable_file_actions: true
   tours:
     path: src/content/tours
-    url: /tours/[title|deburr|slugify|lowercase|trim]
     glob:
       - '**/*.md*'
     name: Tours
     singular_name: Tour
     icon: directions_bike
+    url: /tours/[title|deburr|slugify|lowercase|trim]
     disable_url: false
     description: ''
     _enabled_editors:
