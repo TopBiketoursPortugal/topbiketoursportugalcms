@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url: '[relative_base_path]/{title|deburr|slugify|lowercase}'
+    url: /{title|deburr|slugify|lowercase}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -52,7 +52,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: '[relative_base_path]/{title|deburr|slugify|lowercase}'
+    url: /blog/{title|deburr|slugify|lowercase}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -331,7 +331,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /team/[full_slug]/
+    url: /team/{title|deburr|slugify|lowercase}
     disable_url: false
     description: ''
     preview:
