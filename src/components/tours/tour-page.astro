@@ -57,9 +57,9 @@ const isPromotional = minPromoPrice > 0;
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details')} selected />
+      <TabItem href="#itinerary" text={t('Tour.Tab.Itineratry')} />
       <TabItem href="#packages" text={t('Tour.Tab.Packages')} />
       <TabItem href="#photos" text={t('Tour.Tab.Photos')} />
-      <TabItem href="#itinerary" text={t('Tour.Tab.Itineratry')} />
       <TabItem href="#map" text={t('Tour.Tab.Map')} />
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews')} />
       <TabItem href="#faqs" text={t('Tour.Tab.Faqs')} />
@@ -149,6 +149,10 @@ const isPromotional = minPromoPrice > 0;
     <Prose markdown={tour.content ?? ''} />
     <slot />
   </section>
+  <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6">{t('Tour.Section.Itineratry.Title')}</Heading>
+    <TourItinerary itinerary={itinerary} />
+  </section>
   <section id="packages" class="col-span-full mb-8 grid grid-cols-4 gap-10">
     <Heading as="h2" class="mb-6">
       {t('Tour.Section.Packages.Title')}
@@ -164,10 +168,7 @@ const isPromotional = minPromoPrice > 0;
     <Heading as="h2" class="mb-6">{t('Tour.Section.Photos.Title')}</Heading>
     <Gallery images={tour.images ?? []} />
   </section>
-  <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
-    <Heading as="h2" class="mb-6">{t('Tour.Section.Itineratry.Title')}</Heading>
-    <TourItinerary itinerary={itinerary} />
-  </section>
+
   <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
     <Heading as="h2" class="mb-6">{t('Tour.Section.Map.Title')}</Heading>
 

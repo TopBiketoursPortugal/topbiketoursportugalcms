@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 const container = tv({
-  base: 'flex h-20 items-center gap-2 border-gray-300 px-4 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+  base: 'flex h-20 items-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
   variants: {
     alternate: {
       true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
@@ -24,9 +24,9 @@ const container = tv({
         'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
     },
     distribute: {
-      leading: 'justify-start',
-      trailing: 'justify-end',
-      center: 'justify-center'
+      leading: 'justify-start text-left',
+      trailing: 'justify-end text-right',
+      center: 'justify-center text-center'
     }
   },
   defaultVariants: {
@@ -50,14 +50,14 @@ const containerStyle = cn(container({ alternate, distribute }), className);
             slot="trigger"
             icon="ph:check-circle-fill"
             title="Included in price."
-            className="text-green-600 h-6 w-6 fill-green-600"
+            className="text-green-600 h-8 w-8 fill-green-600"
           />
         ) : (
           <Icon
             slot="trigger"
             icon="ph:x-circle-fill"
             title="Not included in price."
-            className="text-red-600 fill-red-600"
+            className="text-red-600 fill-red-600  h-8 w-8"
           />
         )}
 
