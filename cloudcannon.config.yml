@@ -155,7 +155,7 @@ collections_config:
     disable_file_actions: true
   tours:
     path: src/content/tours
-    url: /tours/[title|deburr|slugify|lowercase]
+    url: /tours/[title|deburr|slugify|lowercase|trim]
     glob:
       - '**/*.md*'
     name: Tours
