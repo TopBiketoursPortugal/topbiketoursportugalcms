@@ -11,7 +11,6 @@ export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
   );
 
   const tags = [...new Set(tours.flatMap((tour) => tour.data.tags ?? []))];
-  // console.log('tags', tags);
   return tags
     .filter((t) => t?.length > 0)
     .map((tag) => ({

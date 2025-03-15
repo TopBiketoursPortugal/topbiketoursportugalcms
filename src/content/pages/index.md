@@ -4,11 +4,14 @@ id: be794899-5f2b-407f-bc55-271859465a78
 title: Home
 language: en
 seo:
-  page_title:
+  page_title: Walking Tours Portugal | Hiking Tours portugal |TopWalkingtours
   page_description: >-
-    A starting point for developers looking to build a website with Astro, using
-    Bookshop components in CloudCannon. Create your own copy, and start creating
-    your own components to use in the CloudCannon CMS.
+    Walking tours in Portugal: For those who want a true walking & hiking
+    holiday in portugal with no worry´s about transfer´s, accommodations, food,
+    places to visit in Portugal and other highlights
+  keywords: |-
+    Hiking tours portugal,walking tours portugal,portugal hike vacations,walking
+    holidays
   canonical_url:
   featured_image:
   featured_image_alt:

@@ -11,7 +11,6 @@ export type LanguageMenuItem = {
 };
 
 type Props = { localizedUrls?: ReadonlyArray<LanguageMenuItem> };
-console.log(Object.values(Languages));
 const languages = Object.values(Languages).map(
   ({ code, isDefault, display, icon }) =>
     ({
@@ -33,7 +32,6 @@ if (localizedUrls?.length === 0) {
     icon: l.icon ?? Languages[l.code].icon
   }));
 }
-console.log('localizedUrls', localizedUrls);
 ---
 
 <div class="flex flex-row gap-4 text-2xl">

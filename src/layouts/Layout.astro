@@ -29,6 +29,7 @@ export type SEOProps = {
   no_index: boolean | null;
   open_graph_type: string | null;
   author_twitter_handle: string | null;
+  keywords?: string;
 };
 
 export type LayoutProps = {
@@ -41,12 +42,13 @@ export type LayoutProps = {
 type Props = LayoutProps;
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { seo } = Astro.props;
+const { keywords } = seo;
 const seoProps = getPageSeo(
   Astro.site ?? import.meta.env.BASE_URL,
-  Astro.props as Props,
+  Astro.props,
   language
 );
-console.log('hrefLangs layout', Astro.props.hrefLangs);
 ---
 
 <!doctype html>
@@ -66,6 +68,8 @@ console.log('hrefLangs layout', Astro.props.hrefLangs);
     <SiteVerification />
     <Analytics />
     <ClientRouter fallback="swap" />
+    <meta name="title" content={seoProps.title} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
     <SEO {...seoProps} />
     <slot name="head" />
   </head>

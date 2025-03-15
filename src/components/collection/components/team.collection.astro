@@ -18,7 +18,6 @@ type Props = {
   title: string;
   language?: z.infer<typeof languageSchema>;
 };
-// console.log('team', JSON.stringify(Astro.props));
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const collectionItems = await getCollection('team');

@@ -29,7 +29,6 @@ import Icon from '../utility/icon.astro';
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
-// console.log(tour);
 
 // if (!tour) {
 //   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
@@ -53,7 +52,6 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
-console.log('related', relatedTours);
 ---
 
 {tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}

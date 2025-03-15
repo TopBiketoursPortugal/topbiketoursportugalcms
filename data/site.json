@@ -1,6 +1,7 @@
 {
   "ui": {
-    "theme": "system"
+    "theme": "system",
+    "theme_color": "#296a3f"
   },
   "en": {
     "site_title": "Top Walking Tours Portugal",

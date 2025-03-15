@@ -1,5 +1,5 @@
 import { defineConfig, envField } from 'astro/config';
-import react from '@astrojs/react';
+// import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
@@ -13,7 +13,7 @@ import favicons from 'astro-favicons';
 // import spotlightjs from '@spotlightjs/astro';
 import astroMetaTags from 'astro-meta-tags';
 import { shield } from '@kindspells/astro-shield';
-// import playformCompress from '@playform/compress';
+import playformCompress from '@playform/compress';
 // import min from 'astro-min';
 
 // https://astro.build/config
@@ -23,7 +23,7 @@ export default defineConfig({
     // sentry(),
     // spotlightjs(),
     astroMetaTags(),
-    react(),
+    // react(),
     tailwind(),
     bookshop(),
     alpine(),
@@ -52,16 +52,16 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,avif,webp}']
+        globPatterns: ['**/*.{js,css,html,ico,png,avif,webp}']
       },
       devOptions: {
         enabled: true
       }
     }),
     shield({}),
-    playformInline()
+    playformInline(),
     // min()
-    // playformCompress()
+    playformCompress()
   ],
   prefetch: {
     prefetchAll: true
@@ -98,7 +98,7 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  trailingSlash: 'never',
+  trailingSlash: 'ignore',
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop

@@ -39,7 +39,6 @@ const seo = {
   canonical_url: null
 } satisfies SEOProps;
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
-console.log('hrefs tour page pt', hrefs);
 ---
 
 <Layout title={tour.data.title} seo={seo} hrefLangs={hrefs}>

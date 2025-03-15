@@ -32,8 +32,6 @@ const { links } = footer;
 const year = new Date().getFullYear();
 
 const pageCollection = await getCollection('pages');
-// console.log(pageCollection);
-// console.log(pageCollection.length);
 
 const termsPage = pageCollection.filter(
   (p) =>

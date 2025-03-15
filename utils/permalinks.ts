@@ -78,9 +78,6 @@ export function getHomePermalink(language: LanguageCodes = 'en'): string {
 }
 
 export function getPagePath(page: CollectionEntry<'pages'>) {
-  // console.log(`page slug ${page.slug}`);
-  // console.log(`filePath ${page.filePath}`);
-
   const language = page.data.language ?? 'en';
 
   if (
@@ -92,7 +89,6 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   }
   const pagePath =
     `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}`.toLocaleLowerCase();
-  // console.log(pagePath);
   return pagePath;
 }
 

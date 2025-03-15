@@ -6,9 +6,9 @@ language: pt
 seo:
   page_title:
   page_description: >-
-    A starting point for developers looking to build a website with Astro, using
-    Bookshop components in CloudCannon. Create your own copy, and start creating
-    your own components to use in the CloudCannon CMS.
+    Walking tours in Portugal: For those who want a true walking & hiking
+    holiday in portugal with no worry´s about transfer´s, accommodations, food,
+    places to visit in Portugal and other highlights
   canonical_url:
   featured_image:
   featured_image_alt:

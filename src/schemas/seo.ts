@@ -3,6 +3,7 @@ import { z } from 'astro:schema';
 export const seoSchema = z
   .object({
     page_title: z.string().optional().nullable(),
+    keywords: z.string().optional().nullable(),
     page_description: z.string().nullable(),
     canonical_url: z.string().nullable(),
     featured_image: z.string().nullable(),
