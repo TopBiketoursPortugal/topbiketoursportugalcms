@@ -160,8 +160,8 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url:
-    disable_url: false
+    url: /tours/[title|deburr|slugify|lowercase]
+    disable_url: true
     description: ''
     _enabled_editors:
     _inputs:
