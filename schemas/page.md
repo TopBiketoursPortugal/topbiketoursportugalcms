@@ -12,5 +12,6 @@ seo:
   open_graph_type:
   no_index: false
   metas: []
+  keywords:
 content_blocks: []
 ---

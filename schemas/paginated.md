@@ -13,5 +13,6 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
+  keywords:
 page_size: 6
 ---

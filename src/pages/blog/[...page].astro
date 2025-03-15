@@ -2,7 +2,9 @@
 import type { Page } from 'astro';
 import BlogList from '../../components/blog/list.astro';
 import BlogPagination from '../../components/blog/pagination.astro';
-import Layout, { type PaginatedProps } from '../../layouts/Paginated.astro';
+import PaginatedLayout, {
+  type PaginatedProps
+} from '../../layouts/Paginated.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 
 type Props = {
@@ -24,12 +26,12 @@ const pagination = Astro.props.page;
 const { data: posts } = pagination;
 ---
 
-<Layout frontmatter={frontmatter}>
+<PaginatedLayout frontmatter={frontmatter}>
   <section class="blog-index mx-auto flex flex-col justify-center">
     <BlogList posts={posts} />
     <BlogPagination pagination={pagination} />
   </section>
-</Layout>
+</PaginatedLayout>
 
 <style>
   .blog-index {

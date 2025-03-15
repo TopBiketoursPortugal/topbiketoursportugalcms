@@ -1,0 +1,122 @@
+---
+_schema: default
+id: c4c4f407-e347-4535-81ef-f71e52da7c45
+language: pt
+date: 2022-03-11T00:00:00Z
+title: 'Clean & Safe: Requisitos a cumprir'
+tags:
+  - tecnologia
+  - correio eletrónico
+author: Coen Simmons
+thumb_image_path: /src/assets/images/blog-thumb-3.jpg
+thumb_image_alt: Reunião de equipa
+image:
+  src: /src/assets/images/featured-image-5.jpg
+  alt: Portátil, telemóvel e café
+seo:
+  page_title:
+    'Clean & Safe: Requisitos a Cumprir para Passeios Seguros em Portugal'
+  page_description:
+    Conheça os requisitos Clean & Safe para garantir a segurança e higiene em
+    passeios e atividades em Portugal durante a pandemia de Covid-19.
+  canonical_url: 'test'
+  featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
+  featured_image_alt: Centro da cidade de Santiago de Compostela
+  author_twitter_handle: 'lll'
+  open_graph_type: article
+  no_index: false
+  keywords:
+    Clean & Safe, segurança Covid-19, passeios em Portugal, protocolo de
+    higiene, turismo seguro
+---
+
+> O sol brilha 300 dias por ano, com poucos dias de chuva, sendo perfeito para
+> caminhantes. A costa de Portugal tem quase 1800 km, incluindo as ilhas da
+> Madeira e dos Açores.
+
+Em geral, Portugal oferece verões quentes e solarengos, invernos suaves, e o
+outono e a primavera são normalmente quentes, embora com algum vento e chuva.
+
+O inverno em Portugal geralmente começa no final de novembro e dura até
+fevereiro. Março, abril e outubro são normalmente muito suaves, e o período de
+verão é longo e agradável, de maio a setembro.
+
+Os verões no Norte são agradáveis e quentes sem se tornarem excessivamente
+abafados. O inverno no **Porto** e no interior é mais frio do que no resto de
+Portugal, mas o clima ainda é ameno se comparado com o resto da Europa. Pode
+nevar, mas é raro. É fácil encontrar neve na Serra da Estrela no inverno.
+
+<img src="/src/assets/images/clean-safe-walking-tours-in-portugal.jpg" alt="Clean e Safe" title="Clean e Safe" height="500" width="500" />
+
+## **Formação interna e estabelecimento de procedimentos para todo o pessoal:**
+
+O nosso pessoal foi informado e/ou treinado especificamente sobre os seguintes
+assuntos:
+
+- Protocolo interno relativo à pandemia de Coronavírus Covid-19.
+- Como seguir as medidas básicas de precaução e controlo de infeção relativas
+  aos procedimentos do Coronavírus Covid-19, conforme segue:
+- Higiene das mãos: Lavar frequentemente as mãos com água e sabão, durante pelo
+  menos 40 segundos, ou usar desinfetante para as mãos com pelo menos 70º de
+  álcool, cobrindo todas as superfícies de ambas as mãos e esfregando-as até
+  secarem.
+- Etiqueta respiratória: Tossir ou espirrar para o antebraço fletido ou usar um
+  lenço de papel, que deve ser imediatamente colocado no lixo; Higiene das mãos
+  após tossir, espirrar ou assoar o nariz; evitar tocar nos olhos, nariz e boca
+  com as mãos.
+- Conduta social: Alterar a frequência e as formas de contacto entre o pessoal e
+  entre o pessoal e os clientes, evitando (sempre que possível) contacto
+  próximo, apertos de mão, beijos, espaços de trabalho partilhados, reuniões
+  presenciais e partilha de comida, utensílios, copos e toalhas.
+- Como realizar a automonitorização diária para avaliar febre (medir a
+  temperatura corporal duas vezes por dia e registar o valor e o horário dos
+  resultados), verificando qualquer tosse ou dificuldade em respirar.
+- Como seguir as orientações da "Direção-Geral da Saúde" para a higienização de
+  todas as superfícies e lavagem da roupa usada nos nossos estabelecimentos.
+
+## **Informação a todos os clientes:**
+
+Todos os clientes são informados sobre as seguintes informações:
+
+- Como manter as precauções básicas e o controlo de infeção relativas ao surto
+  de Coronavírus.
+- Qual é o protocolo interno relativo à epidemia de Coronavírus Covid-19.
+
+## **O estabelecimento dispõe de:**
+
+- Equipamento de proteção individual em número suficiente para todo o pessoal
+  envolvido nas atividades.
+- Equipamento de proteção individual para os clientes (capacidade máxima dos
+  grupos).
+
+## **O protocolo interno de limpeza e higienização assegura:**
+
+- Lavagem a altas temperaturas de todas as roupas e outros acessórios usados nas
+  atividades (toalhas, equipamento de ciclismo), para todo o pessoal e clientes
+  (cerca de 60ºC).
+- Fornecimento de higienização das mãos à base de álcool, sempre que
+  justificado, aos participantes em todas as atividades.
+- Higienização ou desinfeção de todo o equipamento utilizado, após cada
+  atividade, de acordo com as regras aplicáveis a cada tipo de equipamento.
+- Higienização ou desinfeção de todos os transportes utilizados, após cada
+  atividade, e de acordo com as regras aplicáveis a cada tipo de equipamento de
+  transporte.
+
+## **A organização do serviço garante:**
+
+- Manutenção do distanciamento social entre os participantes em todas as
+  atividades, conforme as recomendações da "Direção-Geral da Saúde".
+- Ocupação máxima dos transportes usados nas atividades, de acordo com as
+  recomendações da "Direção-Geral da Saúde".
+- A distribuição de informação relativa às atividades, preferencialmente através
+  de plataformas digitais/online.
+- O cumprimento dos protocolos internos de higienização e segurança pelos
+  parceiros envolvidos nas atividades.
+- Que um membro responsável do pessoal está preparado para implementar os
+  procedimentos em caso de suspeita de infeção (acompanhar o cliente com
+  sintomas ao espaço de isolamento, prestar-lhe a assistência necessária e
+  contactar o Serviço Nacional de Saúde).
+- O armazenamento de todos os resíduos produzidos pelo cliente suspeito de estar
+  infetado num saco de plástico que, após selado, deve ser colocado à parte e
+  enviado a um operador licenciado para gerir resíduos hospitalares com risco
+  biológico.

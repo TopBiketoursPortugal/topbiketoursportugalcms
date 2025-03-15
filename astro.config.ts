@@ -4,16 +4,16 @@ import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import alpine from '@astrojs/alpinejs';
-import playformInline from '@playform/inline';
+// import playformInline from '@playform/inline';
 import sitemap from '@astrojs/sitemap';
-import AstroPWA from '@vite-pwa/astro';
+// import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
 import astroMetaTags from 'astro-meta-tags';
-import { shield } from '@kindspells/astro-shield';
-import playformCompress from '@playform/compress';
+// import { shield } from '@kindspells/astro-shield';
+// import playformCompress from '@playform/compress';
 // import min from 'astro-min';
 
 // https://astro.build/config
@@ -47,21 +47,21 @@ export default defineConfig({
           pt: 'pt-PT'
         }
       }
-    }),
-    AstroPWA({
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,avif,webp}']
-      },
-      devOptions: {
-        enabled: true
-      }
-    }),
-    shield({}),
-    playformInline(),
+    })
+    // AstroPWA({
+    //   registerType: 'autoUpdate',
+    //   injectRegister: 'auto',
+    //   workbox: {
+    //     globPatterns: ['**/*.{js,css,html,ico,png,avif,webp}']
+    //   },
+    //   devOptions: {
+    //     enabled: true
+    //   }
+    // })
+    // shield({}),
+    // playformInline(),
     // min()
-    playformCompress()
+    // playformCompress()
   ],
   prefetch: {
     prefetchAll: true

@@ -1,6 +1,6 @@
 ---
 import CardMedia from '../card/CardMedia.astro';
-import { getTourPath } from 'utils/permalinks';
+import { getTourPath, getTourTagPath } from 'utils/permalinks';
 import CardContent, { type CardContentProps } from '../card/CardContent.astro';
 import Card from '../card/Card.astro';
 import Languages from 'src/../data/languages.json';
@@ -10,7 +10,6 @@ import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
-import slugify from 'slugify';
 import LinkButton from '../linkbutton/linkbutton.astro';
 import Icon from '../utility/icon.astro';
 
@@ -79,7 +78,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
             <LinkButton
               variant="link"
               class="z-50"
-              href={`/tours/tags/${slugify(t, { lower: true, strict: true, trim: true })}`}
+              href={getTourTagPath(t, language)}
             >
               {t}
             </LinkButton>

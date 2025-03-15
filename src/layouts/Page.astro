@@ -3,6 +3,7 @@ import Heading from 'src/components/typography/heading.astro';
 import PageHelper from '../shared/astro/page.astro';
 import Layout, { type LayoutProps } from './Layout.astro';
 import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
 
 type Props = {
   frontmatter: {
@@ -11,16 +12,26 @@ type Props = {
   } & Except<LayoutProps, 'class'>;
   class?: string;
   showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
 };
 
-function getLanguagesAlternates() {}
-
-const { frontmatter, class: className, showPageTitle = false } = Astro.props;
+const {
+  frontmatter,
+  class: className,
+  showPageTitle = false,
+  hrefs = []
+} = Astro.props;
 const { content_blocks = [] } = frontmatter;
 ---
 
-<Layout {...frontmatter} class={className}>
-  <slot name="head" slot="head" />
+<Layout {...frontmatter} class={className} hrefLangs={hrefs}>
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link rel="alternate" href={href} hreflang={hreflang} />
+      ))
+    }
+  </slot>
   {
     showPageTitle ? (
       <Heading as="h1" class="px-6 text-4xl font-bold capitalize">

@@ -6,12 +6,13 @@ import type { MarkdownLayoutProps } from 'astro';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import type { InferEntrySchema } from 'astro:content';
+import type { HrefLang } from 'src/types/hreflang';
 
 function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
   return props?.rawContent;
 }
 
-type PostProps = InferEntrySchema<'blog'>;
+type PostProps = InferEntrySchema<'blog'> & { hrefs?: ReadonlyArray<HrefLang> };
 
 type Props = (PostProps & { body?: string }) | MarkdownLayoutProps<PostProps>;
 
@@ -21,14 +22,17 @@ const content = isMarkdown(Astro.props)
   ? Astro.props.rawContent()
   : Astro.props.body;
 
-const { title, date, author } = props;
+const { title, date, author, hrefs = [] } = props;
 const { src, alt } = props.image;
 const wordCount = content?.split(' ')?.length ?? 0;
 const readingTime = Math.floor(wordCount / 183);
 const dateObj = new Date(date);
+const language = Astro.currentLocale ?? 'en';
 
 const posts = await getCollection('blog');
-const filteredPosts = posts.filter((post) => post.data.title !== title);
+const filteredPosts = posts.filter(
+  (post) => post.data.language === language && post.data.title !== title
+);
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif}',
@@ -39,7 +43,13 @@ const imageSrc = images[src]?.default ?? src;
 ---
 
 <Layout {...props}>
-  <slot name="head" slot="head" />
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link rel="alternate" href={href} hreflang={hreflang} />
+      ))
+    }
+  </slot>
   <main class="px-8 py-[48px] md:py-[96px]">
     <article class="mx-auto max-w-screen-md">
       <Image

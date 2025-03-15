@@ -10,10 +10,9 @@ export async function getStaticPaths() {
     .filter((p) => (p.data.language ?? 'en') === 'en')
     .map((post) => ({
       params: {
-        slug: slugify(post.data.slug ?? post.data.title, {
-          lower: true,
-          strict: true
-        })
+        slug:
+          post.data.slug ??
+          slugify(post.data.title, { lower: true, strict: true, trim: true })
       },
       props: { post }
     }));

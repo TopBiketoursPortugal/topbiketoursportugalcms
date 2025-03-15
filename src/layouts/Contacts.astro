@@ -8,6 +8,7 @@ import ContactColumns from './common/contact-columns.astro';
 import ContactForm from './common/contact-form.astro';
 import PageHelper from '../shared/astro/page.astro';
 import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
 
 export type ContactProps = {
   frontmatter: Except<LayoutProps, 'class'>;
@@ -15,6 +16,7 @@ export type ContactProps = {
   content_blocks_after?: any[];
   class?: string;
   showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
 };
 
 type Props = ContactProps;
@@ -23,12 +25,19 @@ const language = 'en';
 const {
   content_blocks = [],
   content_blocks_after = [],
-  frontmatter
+  frontmatter,
+  hrefs = []
 } = Astro.props;
 ---
 
-<Layout {...frontmatter}>
-  <slot name="head" slot="head" />
+<Layout {...frontmatter} hrefLangs={hrefs}>
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link rel="alternate" href={href} hreflang={hreflang} />
+      ))
+    }
+  </slot>
 
   <PageHelper bookshop:live contentBlocks={content_blocks ?? []} />
   <ContactColumns language={language} class="container mx-auto" />

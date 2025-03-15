@@ -346,6 +346,7 @@ seo:
   author_twitter_handle: 'lll'
   open_graph_type: product
   no_index: false
+  keywords:
 duration: 8
 distance: 7
 tags: []

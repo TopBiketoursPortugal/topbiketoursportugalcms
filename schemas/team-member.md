@@ -18,6 +18,7 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
+  keywords:
 ---
 
 Is the Founder of Top Bike tours Portugal and was born in Portugal in 1981. He
