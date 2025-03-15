@@ -9,17 +9,27 @@ spec:
     - UI
 
 blueprint:
-  container: "full"
-  expansionType: "plus"
-  padding: "normal"
+  container: 'full'
+  expansionType: 'plus'
+  padding: 'normal'
   items:
     - header:
-        text: "Q1"
-      content: "A1"
+        text: 'Q1'
+      content: 'A1'
     - header:
-        text: "Q2"
-      content: "A2"
+        text: 'Q2'
+      content: 'A2'
 
 preview:
 
 _inputs:
+  container:
+    hidden: true
+  expansionType:
+    hidden: true
+  padding:
+    hidden: true
+  header.text:
+    type: markdown
+  content:
+    type: markdown
