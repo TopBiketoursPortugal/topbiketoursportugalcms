@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}'
+    url: /[relative_base_path]/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -64,7 +64,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /blog/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -160,7 +160,7 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /tours/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -343,7 +343,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /team/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/{title|deburr|slugify|lowercase|trim}
     disable_url: false
     description: ''
     preview:
