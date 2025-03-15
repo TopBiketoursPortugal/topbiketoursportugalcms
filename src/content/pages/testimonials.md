@@ -5,9 +5,6 @@ language: en
 title: testimonials
 draft: false
 showPageTitle: true
-locale_alternates:
-  - language_code: pt
-    link: http://google.com
 seo:
   page_title:
   page_description:

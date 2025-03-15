@@ -4,9 +4,6 @@ id: 27e20631-ad55-4b9e-8553-c047839cda31
 language: en
 title: Perguntas frequentes
 draft: false
-locale_alternates:
-  - language_code: pt
-    link: http://google.com
 seo:
   page_title:
   page_description: >-

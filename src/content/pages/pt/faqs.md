@@ -4,9 +4,6 @@ id: 67def81f-5897-44df-aeef-c06c4e6e32f6
 language: pt
 title: Faqs
 draft: false
-locale_alternates:
-  - language_code: pt
-    link: http://google.com
 seo:
   page_title:
   page_description: >-
