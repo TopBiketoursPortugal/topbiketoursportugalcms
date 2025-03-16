@@ -14,8 +14,7 @@ export async function getStaticPaths() {
         lower: true,
         strict: true,
         trim: true
-      }),
-      languge: 'en'
+      })
     },
     props: {
       region: slugify(region.en.name!, {
@@ -23,11 +22,7 @@ export async function getStaticPaths() {
         strict: true,
         trim: true
       }),
-      tours:
-        tours.filter(
-          (tour) =>
-            tour.data.region?.toLowerCase() === region.en.name.toLowerCase()
-        ) ?? []
+      tours: tours.filter((tour) => tour.data.region === region.id) ?? []
     }
   }));
 }

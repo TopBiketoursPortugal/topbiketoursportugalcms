@@ -111,7 +111,7 @@ const tourSchema = z.object({
   order: z.number().optional(),
   description: z.string().optional(),
   afterPricing: z.string().optional().nullable(),
-  region: z.string().optional(),
+  region: z.number().optional(),
   path: z.string().optional().nullable(),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
