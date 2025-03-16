@@ -4,7 +4,7 @@ date:
 title: ''
 tags: []
 language: 'en'
-author:
+author: Admin
 thumb_image_path: ''
 thumb_image_alt: ''
 image:

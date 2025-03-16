@@ -6,7 +6,7 @@ collections_config:
   pages:
     path: src/content/pages
     glob:
-      - '**/*.md'
+      - '**/*.md*'
     name: Pages
     icon: laptop_mac
     url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}"
@@ -826,7 +826,7 @@ _editables:
     underline: true
     undo: true
 _snippets_imports:
-  mdx: false
+  mdx: true
 _snippets:
   alert:
     template: mdx_component

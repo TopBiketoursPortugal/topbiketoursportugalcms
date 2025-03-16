@@ -4,7 +4,7 @@ language: pt
 date:
 title: ''
 tags: []
-author:
+author: Admin
 thumb_image_path: ''
 thumb_image_alt: ''
 image:
