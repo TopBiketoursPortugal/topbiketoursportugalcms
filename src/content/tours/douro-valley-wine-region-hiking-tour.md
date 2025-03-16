@@ -1,15 +1,14 @@
 ---
-order: 3
+_schema: default
 id: dd0b0b47-96d3-436f-83cf-e65fa5932570
-code: DOURO01
-slug: hiking-douro-valley-wine-region
+order: 3
 title: Douro Valley Wine region Hiking tour
-language: 'en'
-subTitle: ''
 content: >-
   # Douro Valley Wine region Hiking tour
 
+
   ## A demarcated and classified wine region
+
 
   The region of Douro got its classification as a World Heritage Site in 2001
   due to the effort of women and men during centuries, who worked to improve
@@ -20,19 +19,21 @@ content: >-
 
   **Route description**
 
-  - the area of Douro is hilly and this walk is no exception - the majority of
+
+  * the area of Douro is hilly and this walk is no exception - the majority of
   the walk is done on dirt trails and when in tarmac roads the
     traffic is low
-
 image:
   src: /src/assets/images/44817961982_440e783762_o.jpg
   alt: Douro Valley Wine region Hiking tour
+code: DOURO01
+slug: hiking-douro-valley-wine-region
+language: en
 type: PackageTour
 region: north
 itinerary:
   - title: 'Day 1: Arrival Porto'
-    description:
-      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: ''
       lng: ''
@@ -172,31 +173,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 6 Nights / 7 Days
@@ -224,31 +225,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
         description: 5 lunches
       - title: 5 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -276,31 +277,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 pax
       - title: 6 Nights / 7 Days
@@ -316,15 +317,16 @@ packages:
       - title: 7 Nights / 8 Days ( price per person)
         description: +200€
 afterPricing: >-
-  ***Season:**
+  \***Season:**
 
-  - LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
+
+  * LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
   and Set 26 to 31 Oct - HS - High Season: Set 01 to 25 Set - SS - Summer
   Season: Jun 26 to August 30
 
     **Observations:**
 
-  - Prices are based for 2 people sharing the same room; - Prices can suffer
+  * Prices are based for 2 people sharing the same room; - Prices can suffer
   updates due high season, holidays or weekends - Beverages are not included at
   lunch and dinner when included in the package - If in a triple room with
   parents Children up to 10 years old - 35% discount. Children from 11 to 14
@@ -334,7 +336,7 @@ afterPricing: >-
 
     **Extras**
 
-  - Solo traveler: 200 € - Single supplement: LS: 300€, RS: 329€, HS: 360€,
+  * Solo traveler: 200 € - Single supplement: LS: 300€, RS: 329€, HS: 360€,
   SS.390€ - Extra nights: on request
 seo:
   page_title:
@@ -345,7 +347,6 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
-highlight: BestSeller
 duration: 8
 distance: 68
 tags:
@@ -353,7 +354,7 @@ tags:
   - Olive oil
   - Culture Gastronomy
 minGroupSize: 1
-maxGroupSize: ''
+maxGroupSize: 3
 difficulty: 3
 skill: 1
 minAge: 16
@@ -367,6 +368,12 @@ images:
     alt: Quinta da Pacheca wine tasting
   - src: /src/assets/images/quinta-da-pacheca.jpg
     alt: pacheca Farm
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
+highlight: BestSeller
 feature:
   align: center
   imageAlign: center center
@@ -377,5 +384,4 @@ feature:
   title: Douro Valley Wine region Walking & Hiking tour
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---

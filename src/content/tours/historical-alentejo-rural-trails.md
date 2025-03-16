@@ -3,7 +3,6 @@ _schema: default
 id: 19cf8784-b782-48a2-a5a3-7263f1bee29f
 order: 10
 title: 'Historical Alentejo: rural trails'
-language: 'en'
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
   # **Historical Alentejo: rural trailsf**
@@ -34,12 +33,12 @@ image:
   alt: ''
 code: AL01
 slug: hiking-alentejo-castles-wine-heritage
+language: en
 type: PackageTour
 region: north
 itinerary:
   - title: 'Day 1: Lisbon or Porto arrival and transfer to Meada'
-    description:
-      'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
+    description: 'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
     location:
       lat: '1'
       lng: '1'
@@ -356,25 +355,22 @@ packages:
 afterPricing: >-
   **\*Season:**
 
-  * LS - Low season: Nov 01 to Mar 25 * RS - Regular season: Mar 26 to 25 Jun
-  and Set 26 to 31 Oct * HS - High Season: Set 01 to 25 Set * SS - Summer
+
+  * LS - Low season: Nov 01 to Mar 25 \* RS - Regular season: Mar 26 to 25 Jun
+  and Set 26 to 31 Oct \* HS - High Season: Set 01 to 25 Set \* SS - Summer
   Season: Jun 26 to August 30
-
-  **Observations:**
-
-  * Prices are based for 2 people sharing the same room; * Prices can suffer
-  updates due high season, holidays or weekends * Beverages are not included at
-  lunch and dinner when included in the package * If in a triple room with
+    **Observations:**
+  * Prices are based for 2 people sharing the same room; \* Prices can suffer
+  updates due high season, holidays or weekends \* Beverages are not included at
+  lunch and dinner when included in the package \* If in a triple room with
   parents Children up to 10 years old - 35% discount. Children from 11 to 14
-  years old - 20% discount. Children from 15 to 17 years old - 15% discount. *
+  years old - 20% discount. Children from 15 to 17 years old - 15% discount. \*
   In the option 9 nights/ 10 days, 9 light lunches are included in all packages,
   and 9 dinners are included only in the Guided Hiking tour Plus package
-
-  **Extras**
-
-  * Solo traveler: 200 € * Single supplement: LS: 300€, RS: 329€, HS: 360€,
-  SS.390€ * Single supplement 9 Nights / 10 Days: LS: 400€, RS: 429€, HS: 460€,
-  SS.490€ * Extra nights: on request
+    **Extras**
+  * Solo traveler: 200 € \* Single supplement: LS: 300€, RS: 329€, HS: 360€,
+  SS.390€ \* Single supplement 9 Nights / 10 Days: LS: 400€, RS: 429€, HS: 460€,
+  SS.490€ \* Extra nights: on request
 seo:
   page_title:
   page_description:
@@ -386,7 +382,6 @@ seo:
   no_index: false
 duration: 8
 distance: 99
-tags: []
 minGroupSize: 1
 maxGroupSize: 3
 difficulty: 3
@@ -406,29 +401,11 @@ images:
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 feature:
   align: center
   imageAlign: center center
@@ -439,5 +416,4 @@ feature:
   title: ' Coastal route to Santiago Compostela: Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---

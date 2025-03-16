@@ -1,15 +1,14 @@
 ---
+_schema: default
 id: af115fc4-1aae-4854-a97b-53a4c777d9f0
-code: VC02
-slug: hiking-algarve-vicentine-southeast-portugal-coast
+order: 6
 title: 'Vicentine West Coast in Algarve: Stage 2'
-language: 'en'
-subTitle: ''
-region: north
 content: >-
   # **Vicentine West Coast Algarve Walking & Hiking tour**
 
+
   ## **Explore Algarve’s coast line and the fisherman trail**
+
 
   Algarve is and as been for a long time a popular touristic region in Portugal.
   Its most known attractions are the sun, the weather and the beaches. However,
@@ -21,27 +20,25 @@ content: >-
 
   **Route description**
 
-  * Mostly flat with only some short uphills. * 50% of paved roads and 50% of
+
+  * Mostly flat with only some short uphills. \* 50% of paved roads and 50% of
   natural and dirt easy roads.
-
-  **Itinerary:**
-
-  **Day 1:**Lisbon arrival and transfer to Aljezur
-
-  **Day 2:** Aljezur – Arrifana: 16 Km
-
-  **Day 3:**Arrifana – Carrapateira: 20 km
-
-  **Day 4:** Carrapateira – Pedralva: 8 Km
-
-  **Day 5:** Pedralva – Vila do Bispo: 12 km
-
-  **Day 6:** Vila do Bispo – Sagres: 24 km
-
-  **Day 7:**Departure
+    **Itinerary:**
+    \*\*Day 1:\*\*Lisbon arrival and transfer to Aljezur
+    **Day 2:** Aljezur – Arrifana: 16 Km
+    \*\*Day 3:\*\*Arrifana – Carrapateira: 20 km
+    **Day 4:** Carrapateira – Pedralva: 8 Km
+    **Day 5:** Pedralva – Vila do Bispo: 12 km
+    **Day 6:** Vila do Bispo – Sagres: 24 km
+    \*\*Day 7:\*\*Departure
 image:
   src: /src/assets/images/vicentina-coast-walking-trail.jpg
   alt: ''
+code: VC02
+slug: hiking-algarve-vicentine-southeast-portugal-coast
+language: en
+type: WalkingTour
+region: north
 itinerary:
   - title: 'Day 1: Lisbon arrival and transfer to Aljezur'
     description: >-
@@ -158,31 +155,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: Yes
+        description: 'Yes'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 pax
       - title: 6 Nights / 7 Days
@@ -207,31 +204,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 6 Nights / 7 Days
@@ -256,31 +253,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
         description: 5 Lunches
       - title: 5 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -297,47 +294,36 @@ packages:
 afterPricing: >-
   **\*Season:**
 
-  * LS - Low season: Nov 01 to Mar 25 * RS - Regular season: Mar 26 to 25 Jun
-  and Set 26 to 31 Oct * HS - High Season: Set 01 to 25 Set * SS - Summer
+
+  * LS - Low season: Nov 01 to Mar 25 \* RS - Regular season: Mar 26 to 25 Jun
+  and Set 26 to 31 Oct \* HS - High Season: Set 01 to 25 Set \* SS - Summer
   Season: Jun 26 to August 30
-
-  **Observations:**
-
-  * Prices are based for 2 people sharing the same room; * Prices can suffer
-  updates due high season, holidays or weekends * Beverages are not included at
-  lunch and dinner when included in the package * If in a triple room with
+    **Observations:**
+  * Prices are based for 2 people sharing the same room; \* Prices can suffer
+  updates due high season, holidays or weekends \* Beverages are not included at
+  lunch and dinner when included in the package \* If in a triple room with
   parents Children up to 10 years old - 35% discount. Children from 11 to 14
   years old - 20% discount. Children from 15 to 17 years old - 15% discount.
-
-  **Extras**
-
-  * Solo traveler: 200 € * Single supplement: LS: 300€, RS: 329€, HS: 360€,
-  SS.390€ * Extra nights: on request
+    **Extras**
+  * Solo traveler: 200 € \* Single supplement: LS: 300€, RS: 329€, HS: 360€,
+  SS.390€ \* Extra nights: on request
+seo:
+  page_title:
+  page_description:
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type:
+  no_index: false
 duration: 7
 distance: 80
-tags: []
-minGroupSize: ''
-maxGroupSize: ''
+minGroupSize: 2
+maxGroupSize: 3
 difficulty: 2
 skill: 2
 minAge: 16
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1Fn3MFhSOVGw9GHGcEU6DVwcYQ8xmBdPp
-durationUnit: Days | 6 Nights
-distanceUnit: km
-order: 6
-templateKey: tour-gen
-featured: false
-packagetype: PackageTour
-tourtype: WalkingTour
-meta:
-  title: Vicentine Coast Alentejo Hiking
-  description:
-    Hike Algarve’s south west coast line and the fisherman trail. known
-    attractions of this walking tour are the sun, the weather and the beaches.
-    The hiking is In the popular vicentine coast route near the Atlantic sea
-    where the cliffs are an highlight
-  keywords: Vicentine Coast Alentejo Hiking, the fisherman trail walk tour
-  robots: INDEX
 images:
   - src: /src/assets/images/cabo-de-sao-vicente-in-sagres.jpg
     alt: Cabo de São Vicente  in Sagres
@@ -351,6 +337,26 @@ images:
     alt: sagres boat
   - src: /src/assets/images/sagres-trail.jpg
     alt: sagres trail
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
+durationUnit: Days | 6 Nights
+distanceUnit: km
+templateKey: tour-gen
+featured: false
+packagetype: PackageTour
+tourtype: WalkingTour
+meta:
+  title: Vicentine Coast Alentejo Hiking
+  description: >-
+    Hike Algarve’s south west coast line and the fisherman trail. known
+    attractions of this walking tour are the sun, the weather and the beaches.
+    The hiking is In the popular vicentine coast route near the Atlantic sea
+    where the cliffs are an highlight
+  keywords: Vicentine Coast Alentejo Hiking, the fisherman trail walk tour
+  robots: INDEX
 feature:
   align: center
   imageAlign: center center
@@ -361,14 +367,4 @@ feature:
   title: Vicentine Coast Alentejo Hiking
   bokunLinkText: Book now
   image: /src/assets/images/vicentina-coast-walking-trail.jpg
-seo:
-  page_title:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
-  no_index: false
-relatedTours: []
 ---
