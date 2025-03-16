@@ -42,17 +42,24 @@ content: >-
 
   Day 1: Porto arrival
 
+
   Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km
+
 
   Day 3: Apúlia – Esposende: 16 km
 
+
   Day 4: Esposende – Castelo de Neiva: 14 km
+
 
   Day 5: Castelo de Neiva – Viana do Castelo: 14 km
 
+
   Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km
 
+
   Day 7: Vila Praia de Âncora - Caminha: 8 km
+
 
   Day 8: departure
 image:
@@ -390,7 +397,7 @@ seo:
   canonical_url:
   featured_image:
   featured_image_alt:
-  author_twitter_handle:
+  author_twitter_handle: FoldnVisit
   open_graph_type:
   no_index: false
 duration: 8
