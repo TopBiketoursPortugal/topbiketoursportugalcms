@@ -15,7 +15,7 @@ export type PaginatedProps = {
 type Props = PaginatedProps;
 
 if (!Astro.props.frontmatter) {
-  console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
+  // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
   throw new Error('Page frontmatter must be defined missing');
 }
 const { ...props } = Astro.props.frontmatter;

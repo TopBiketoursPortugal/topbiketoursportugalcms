@@ -24,7 +24,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
   });
 }
 
-console.log(await getCollection('pages'));
+// console.log(await getCollection('pages'));
 
 const page = (await getCollection('pages')).filter(
   (p) => p.data.language === 'pt' && p.data.slug === 'blog'
