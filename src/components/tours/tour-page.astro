@@ -211,7 +211,11 @@ const isPromotional = minPromoPrice > 0;
               const imageOptimized = image
                 ? (await getImageByPath(image.src)).default
                 : defaultImage;
-              const { country, givenName, familyName } = author ?? {};
+              const {
+                country = '',
+                givenName = '',
+                familyName = ''
+              } = author ?? {};
               const name = `${givenName} ${familyName}`.trimEnd();
               return (
                 <div class="flex flex-row items-center justify-evenly gap-6">

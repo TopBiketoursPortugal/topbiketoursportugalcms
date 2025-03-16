@@ -70,12 +70,12 @@ const schema = {
         author: {
           '@type': 'Person',
           name: `${review.author?.givenName}${
-            review.author?.familyName !== ''
+            (review.author?.familyName ?? '' !== '')
               ? ' ' + review.author?.familyName
               : ''
           }`,
           givenName: review.author?.givenName,
-          familyName: review.author?.familyName,
+          familyName: review.author?.familyName ?? '',
           address: {
             '@type': 'PostalAddress',
             addressCountry: review.author?.country

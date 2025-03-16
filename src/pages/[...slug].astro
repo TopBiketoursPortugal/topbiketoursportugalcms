@@ -3,6 +3,7 @@ import PageLayout from '../layouts/Page.astro';
 import ContactLayout from '../layouts/Contacts.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageLanguagesAlternates, getPagePath } from 'utils/permalinks';
+import { render } from 'astro:content';
 
 export interface Props {
   page: CollectionEntry<'pages'>;
@@ -10,6 +11,7 @@ export interface Props {
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
+  console.log(pages.map((p) => p.filePath));
   return pages.map((page) => {
     const slug = getPagePath(page);
     if (slug.length === 0)
