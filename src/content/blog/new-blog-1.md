@@ -3,7 +3,9 @@ _schema: default
 id: 2763d373-c23d-49cd-a104-7350e3f03ab6
 date: 2025-03-16T18:45:05Z
 title: 'Tours of the Douro Valley: where wine culture meets natural beauty'
-tags: []
+tags:
+  - Douro Valley
+  - Wine region
 language: en
 author: Admin
 thumb_image_path: >-
