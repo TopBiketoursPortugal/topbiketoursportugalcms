@@ -14,46 +14,45 @@ content: >-
   The Portuguese Central Camino is perfect for those who enjoy a good hiking and
   those who want to try a combination between Portuguese and Spanish history,
   culture and gastronomy flavors and also the adventure of arriving to Santiago
-  and visit the catacombs.
+  and visit the catacombs. This journey will be made between rural and urban
+  villages and cities, majorly in paved roads. In Portugal, take your time to
+  discover the fortress in Valença do Minho and the history behind it, as you
+  enjoy the typical gastronomy of the North and the “verde” wine. Crossing the
+  border and entering Spain, be amazed by the viaducts and the thermal baths
+  along the way, as you reach the Sanctuary of Santiago de Compostela.
 
-  This journey will be made between rural and urban villages and cities, majorly
-  in paved roads.
-
-  In Portugal, take your time to discover the fortress in Valença do Minho and
-  the history behind it, as you enjoy the typical gastronomy of the North and
-  the “verde” wine.
-
-  Crossing the border and entering Spain, be amazed by the viaducts and the
-  thermal baths along the way, as you reach the Sanctuary of Santiago de
-  Compostela.
 
   **Route description:**
 
 
   * On this route all kind of terrains are to be expected. The route has some
-  long
-    and difficult climbs.
+  long and difficult climbs.
+
   * Paved streets in rural and urban areas; 35 % of the walk will be in the
-    forest.
+  forest.
+
   * The main roads are avoided for the majority of the time and as such every
-  kind
-    of terrain is used during this walk
+  kind of terrain is used during this walk
 
-  **Itinerary:** **Day 1**: Valença do Minho
 
-  **Day 2:** Valença do Minho – Porrinõ: 20 km
+  **Itinerary:**
 
-  **Day 3:** Porrinõ – Redondela: 23 km
 
-  **Day 4:** Redondela – Pontevedra: 21 km
+  * **Day 1**: Valença do Minho
 
-  **Day 5:** Pontevedra – Caldas de reis: 25 km
+  * **Day 2:** Valença do Minho – Porrinõ: 20 km
 
-  **Day 6:** Caldas de Reis – Padrón: 14 km
+  * **Day 3:** Porrinõ – Redondela: 23 km
 
-  **Day 7:** Padrón – Santiago de Compostela: 25 Km
+  * **Day 4:** Redondela – Pontevedra: 21 km
 
-  **Day 8:** Departure
+  * **Day 5:** Pontevedra – Caldas de reis: 25 km
+
+  * **Day 6:** Caldas de Reis – Padrón: 14 km
+
+  * **Day 7:** Padrón – Santiago de Compostela: 25 Km
+
+  * **Day 8:** Departure
 image:
   src: /src/assets/images/valenca-do-minho-bridge.jpg
   alt: ''
@@ -354,7 +353,7 @@ packages:
       price: 1972
       promo: 0
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
   * LS - Low season: Nov 01 to Mar 25
@@ -370,6 +369,8 @@ afterPricing: >-
 
 
   * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
 
   * Prices can suffer updates due high season, holidays or weekends
 
@@ -388,15 +389,29 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: 'Central Camino to Santiago from Porto: Stage 2'
+  page_description: >-
+    history, cultural and gastronomy flavors and Spanish history, cultural,
+    gastronomy, and also, the adventure of arriving to Santiago and visit the
+    catacombs.
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/valenca-do-minho-bridge.jpg
+  featured_image_alt: 'Central Camino to Santiago from Porto: Stage 2'
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: >-
+    hike camino to santiago de compostela, WALKING THE CAMINO FROM PORTO
+    PORTUGAL
 duration: 8
 distance: 128
 tags:
@@ -415,6 +430,29 @@ images:
     alt: Santiago de Compostela city center
   - src: /src/assets/images/the-way-of-st.-james-hike-tour-waterfall.jpg
     alt: water fall
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

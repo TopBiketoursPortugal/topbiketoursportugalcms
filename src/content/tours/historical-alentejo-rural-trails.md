@@ -5,29 +5,62 @@ order: 10
 title: 'Historical Alentejo: rural trails'
 subTitle: A hike to relax surrounded by cork trees and pastures
 content: >-
-  # **Historical Alentejo: rural trailsf**
+  # **Historical Alentejo: rural trails**
 
 
-  **A hike to relax surrounded by cork trees and pastures** Pure and simple.
-  That is a simple way to describe Alentejo. The region seems to have remained a
-  bit outside our time and it refused entering on our chaotic and frenetic way
-  of living. A necessary relaxation and slow down of our natural present posture
-  are necessary, to fully take in what this region offers. Alentejo does have
-  one of the best Human Development Index values in the country, which might
-  portrait how good it can be for us a little time off in the region.
+  ## **A hike to relax surrounded by cork trees and pastures**
+
+
+  Pure and simple. That is a simple way to describe Alentejo. The region seems
+  to have remained a bit outside our time and it refused entering on our chaotic
+  and frenetic way of living. A necessary relaxation and slow down of our
+  natural present posture are necessary, to fully take in what this region
+  offers. Alentejo does have one of the best Human Development Index values in
+  the country, which might portrait how good it can be for us a little time off
+  in the region.
+
+
   **IMPORTANTE NOTE:** From June to September this is not a recommended tour due
   the heat. If you know what to expect from a 35º degree walking tour you may
-  consider to book it. **Route description**
+  consider to book it.
 
 
-  * The 2nd, 3rd and 4th day are hilly walks. - There is a strong mix of dirt
-  and paved roads. **Itinerary:** **Day 1**: Lisbon or Porto arrival and
-  transfer to Meada **Day 2**: Meada - Castelo de Vide: 17 km **Day 3:** Castelo
-  de Vide – Marvão : 18km **Day 4:** Marvão – Ribeira de Nisa: 14 km **Day 5:**
-  Ribeira de Nisa - Fortios: 17 km **Day 6:** Fortios – Flor da Rosa: 20 km
-  **Day 7:** Flor da Rosa – Alter do Chão: 13 km **Day 8 :** departure
-  **Optional more 2 days:** **Day 8:** Alter do Chão – Cabeça de Vide: 14 km
-  **Day 9:** Cabeça de Vide – Monforte: 18 km **Day 10:** Departure
+  **Route description**
+
+
+  * The 2nd, 3rd and 4th day are hilly walks.
+
+  * There is a strong mix of dirt and paved roads.
+
+
+  **Itinerary:**
+
+
+  * **Day 1**: Lisbon or Porto arrival and transfer to Meada
+
+  * **Day 2**: Meada - Castelo de Vide: 17 km
+
+  * **Day 3:** Castelo de Vide – Marvão : 18km
+
+  * **Day 4:** Marvão – Ribeira de Nisa: 14 km
+
+  * **Day 5:** Ribeira de Nisa - Fortios: 17 km
+
+  * **Day 6:** Fortios – Flor da Rosa: 20 km
+
+  * **Day 7:** Flor da Rosa – Alter do Chão: 13 km
+
+  * **Day 8 :** departure
+
+
+  **Optional more 2 days:**
+
+
+  * **Day 8:** Alter do Chão – Cabeça de Vide: 14 km
+
+  * **Day 9:** Cabeça de Vide – Monforte: 18 km
+
+  * **Day 10:** Departure
 image:
   src: /src/assets/images/monestary-flor-da-rosa.jpg
   alt: ''
@@ -353,33 +386,63 @@ packages:
         description: +1.118€
     bestValue: false
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
-  * LS - Low season: Nov 01 to Mar 25 \* RS - Regular season: Mar 26 to 25 Jun
-  and Set 26 to 31 Oct \* HS - High Season: Set 01 to 25 Set \* SS - Summer
-  Season: Jun 26 to August 30
-    **Observations:**
-  * Prices are based for 2 people sharing the same room; \* Prices can suffer
-  updates due high season, holidays or weekends \* Beverages are not included at
-  lunch and dinner when included in the package \* If in a triple room with
-  parents Children up to 10 years old - 35% discount. Children from 11 to 14
-  years old - 20% discount. Children from 15 to 17 years old - 15% discount. \*
-  In the option 9 nights/ 10 days, 9 light lunches are included in all packages,
-  and 9 dinners are included only in the Guided Hiking tour Plus package
-    **Extras**
-  * Solo traveler: 200 € \* Single supplement: LS: 300€, RS: 329€, HS: 360€,
-  SS.390€ \* Single supplement 9 Nights / 10 Days: LS: 400€, RS: 429€, HS: 460€,
-  SS.490€ \* Extra nights: on request
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: 'Historical Alentejo: rural trails'
+  page_description: >-
+    A walk in the rural areas of Alentejo in Portugal. Visit te biggest Menhir
+    from a megalithic time. If you like a hike in a remote place with few people
+    and quietness this is a walking tour for you.
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/23984632791_9d46150918_o.jpg
+  featured_image_alt: 'Historical Alentejo: rural trails'
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: hike in alentejo, walking tour in alentejo
 duration: 8
 distance: 99
 tags:
@@ -404,6 +467,29 @@ images:
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

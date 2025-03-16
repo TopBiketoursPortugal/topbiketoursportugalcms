@@ -13,38 +13,51 @@ content: >-
 
   Walk towards Santiago using the Portuguese coastal path. Cross sunny and
   seaside areas such as Póvoa, Esposende, Vila Praia de Âncora, Caminha and
-  Baiona.
-
-  Be in mind this is the original route to Santiago de Compostela “near” the
-  Coast. It is possible to adapt the hiking route for a easier terrain. A big
-  part of the pilgrims already walk near the sea, avowing some mountains and
-  forest.
-
-  You may also consider our [Easy route North of Atlantic
-  Coast](https://topwalkingtoursportugal.com/hiking-atlantic-coast-porto).
-
-  This hike is divided in two different stages. Stage 1 which goes through
-  Portuguese territory and [stage
+  Baiona. Be in mind this is the original route to Santiago de Compostela “near”
+  the Coast. It is possible to adapt the hiking route for a easier terrain. A
+  big part of the pilgrims already walk near the sea, avowing some mountains and
+  forest. You may also consider our [Easy route North of Atlantic
+  Coast](https://topwalkingtoursportugal.com/hiking-atlantic-coast-porto). This
+  hike is divided in two different stages. Stage 1 which goes through Portuguese
+  territory and [stage
   2](https://topwalkingtoursportugal.com/hiking-coast-santiago-compostela-stage-2)
   which takes you through Spain to Santiago de Compostela. For a complete
-  experience you might think to book the 2 stages,
-
-  **Route description**
+  experience you might think to book the 2 stages, **Route description**
 
 
-  * All days are mostly flat with very few and minor hills - The main roads are
-  avoided for the majority of the time and as such every kind of terrain is used
-  during this walk
-    **Itinerary 6 Nights / 7 days:** **Day 1:** Porto
-    **Day 2**: Transfer to Praia da memória – Póvoa: 20 km
-    **Day 3:** Póvoa – Esposende: 25 km
-    **Day 4**: Esposende – Viana do Castelo: 26 km
-    **Day 5:** Viana do Castelo – Vila Praia de Âncora: 19 km
-    **Day 6:** Vila Praia de Âncora – Caminha: 9 km
-    **Day** 7: Departure
-    **Extra 2 days route, 140 Km:** **Day 7:** Caminha – Oia: 23 km
-    **Day 8**: Oia – Baiona: 18 km
-    **Day 9**: Departure
+  * All days are mostly flat with very few and minor hills
+
+  * The main roads are avoided for the majority of the time and as such every
+  kind of terrain is used during this walk
+
+    &nbsp;
+
+  **Itinerary 6 Nights / 7 days:**
+
+
+  * **Day 1:** Porto
+
+  * **Day 2**: Transfer to Praia da memória – Póvoa: 20 km
+
+  * **Day 3:** Póvoa – Esposende: 25 km
+
+  * **Day 4**: Esposende – Viana do Castelo: 26 km
+
+  * **Day 5:** Viana do Castelo – Vila Praia de Âncora: 19 km
+
+  * **Day 6:** Vila Praia de Âncora – Caminha: 9 km
+
+  * **Day** 7: Departure
+
+
+  **Extra 2 days route, 140 Km:**
+
+
+  * **Day 7:** Caminha – Oia: 23 km
+
+  * **Day 8**: Oia – Baiona: 18 km
+
+  * **Day 9**: Departure
 image:
   src: >-
     /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
@@ -53,7 +66,7 @@ code: ST03
 slug: hiking-coast-santiago-compostela
 language: en
 type: WalkingTour
-region: north
+region: '1'
 itinerary:
   - title: 'Day 1: Porto'
     description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
@@ -364,33 +377,61 @@ packages:
         description: +758€
     bestValue: false
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
-  * LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
-  and Set 26 to 31 Oct - HS - High Season: Set 01 to 25 Set - SS - Summer
-  Season: Jun 26 to August 30
-    **Observations:**
-  * Prices are based for 2 people sharing the same room; - Prices can suffer
-  updates due high season, holidays or weekends - Beverages are not included at
-  lunch and dinner when included in the package - If in a triple room with
-  parents Children up to 10 years old - 35% discount. Children from 11 to 14
-  years old - 20% discount. Children from 15 to 17 years old - 15% discount. -
-  In the option 8 nights/ 9 days, 8 lunches are included in all packages, and 8
-  dinners are included only in the Guided Hiking tour Plus package
-    **Extras**
-  * Solo traveler: 200 € - Single supplement 6 Nights / 7 days: LS: 300€, RS:
-  329€, HS: 360€, SS.390€ - Single supplement 8 Nights / 9 days : LS: 340€, RS:
-  369€, HS: 400€, SS.430€ - Extra nights: on request
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: ' Coastal route to Santiago Compostela: Stage 1'
+  page_description: 'Walk towards Santiago using the Portuguese coastal path. '
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: >-
+    /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  featured_image_alt: ' Coastal route to Santiago Compostela: Stage 1'
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: Portuguese Coastal route to Santiago Compostela
 duration: 7
 distance: 99
 tags:

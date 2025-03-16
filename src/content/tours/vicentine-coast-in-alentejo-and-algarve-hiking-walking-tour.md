@@ -22,18 +22,31 @@ content: >-
   marine habitat. This hike can be done during most of the year, since the
   weather generally never gets too hot, due to the Atlantic presence.
 
-  **Route description:**
+
+  **Route description**
 
 
-  * Mostly flat all days with only some short uphills - 50% of paved roads and
-  50% of natural and dirt roads
-    **Itinerary:** **Day 1:** Lisbon arrival
-    **Day 2:** Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km
-    **Day 3**: Vila Nova de Mil Fontes – Almograve: 13 km
-    **Day 4:** Almograve – Zambujeira do Mar: 17 km (or 21 Km)
-    **Day 5**: Zambujeira do Mar – Azenhas do Mar: 14 Km
-    **Day 6:** Azenhas do Mar – Odeceixe: 12 km
-    **Day 7:** Departure
+  * Mostly flat with only some short uphills.
+
+  * 50% of paved roads and 50% of natural and dirt easy roads.
+
+
+  **Itinerary:**
+
+
+  * **Day 1:**Lisbon arrival and transfer to Aljezur
+
+  * **Day 2:** Aljezur – Arrifana: 16 Km
+
+  * **Day 3:**Arrifana – Carrapateira: 20 km
+
+  * **Day 4:** Carrapateira – Pedralva: 8 Km
+
+  * **Day 5:** Pedralva – Vila do Bispo: 12 km
+
+  * **Day 6:** Vila do Bispo – Sagres: 24 km
+
+  * **Day 7:**Departure
 image:
   src: /src/assets/images/zambujeira-do-mar-2-.jpg
   alt: ''
@@ -282,7 +295,7 @@ packages:
       price: 2087
       promo: 0
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
   * LS - Low season: Nov 01 to Mar 25
@@ -298,6 +311,8 @@ afterPricing: >-
 
 
   * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
 
   * Prices can suffer updates due high season, holidays or weekends
 
@@ -316,15 +331,28 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: Vicentine Coast Alentejo Hiking
+  page_description: >-
+    Hike Algarve’s south west coast line and the fisherman trail. known
+    attractions of this walking tour are the sun, the weather and the beaches.
+    The hiking is In the popular vicentine coast route near the Atlantic sea
+    where the cliffs are an highlight
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/vicentina-coast-walking-trail.jpg
+  featured_image_alt: Vicentine Coast Alentejo Hiking
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: Vicentine Coast Alentejo Hiking, the fisherman trail walk tour
 duration: 7
 distance: 75
 tags:
@@ -351,6 +379,29 @@ images:
     alt: Porto Covo
   - src: /src/assets/images/odeceixe-beach.jpg
     alt: Odeceixe beach
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
