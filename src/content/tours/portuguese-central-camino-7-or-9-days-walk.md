@@ -1,61 +1,89 @@
 ---
+_schema: default
 id: f08482d1-b750-46a7-97bb-86088cc3ea39
-code: ST01
-slug: santiago-compostela-hiking-original-route-porto
+order: 8
 title: 'Portuguese Central Camino: Stage 1'
-language: 'en'
-subTitle: ''
-content: |-
+subTitle: '1'
+content: >-
   # **Portuguese Central Camino: Stage 1**
+
 
   **The old and original route to Santiago de Compostela from Porto**
 
+
   For a very long time pilgrims have explored different routes in order to make
+
   their way to Santiago de Compostela. The Caminho Central Português is
+
   certainly one of the oldest in Europe and it is becoming increasingly famous
+
   for outsiders, who wish to set foot on the ancient paths by which pilgrims had
+
   been crossing the landscape. Enjoy the gastronomy, the sights and different
+
   towns along the way, knowing that the city of Santiago will be waiting for you
+
   as well as it has been waiting and will continue to wait for all the pilgrims
+
   that decide to take on the adventure of accepting the challenges and
+
   spirituality of this crossing.
 
+
   This hike is divided in two different stages. Stage 1 which goes through
+
   Portuguese territory and [stage
-  2](https://topwalkingtoursportugal.com/tours/santiago-compostela-hiking-stage-2) which takes you
+
+  2](https://topwalkingtoursportugal.com/tours/santiago-compostela-hiking-stage-2)
+  which takes you
+
   through Spain to Santiago de Compostela. For a complete experience you might
+
   think to book the 2 stages,
 
 
   **Route description:**
 
-  - On this route all kind of terrains are to be expected. Route with long and
+
+  * On this route all kind of terrains are to be expected. Route with long and
     difficult climbs
-  - Paved streets in rural and urban areas; 35 % of the walk will be in the
-  forest - The main roads are avoided for the majority of the time and as such
-  every kind
+  * Paved streets in rural and urban areas; 35 % of the walk will be in the
+    forest - The main roads are avoided for the majority of the time and as such
+    every kind
     of terrain is used during this walk
 
   **Itinerary:**
 
+
   **Day 1:** Porto
+
 
   **Day 2:** Porto to Vilar do Pinheiro tranfer – Arcos: 18 km
 
+
   **Day 3:** Arcos – Barcelos: 15 km
+
 
   **Day 4:** Barcelos – Balugães: 16 km
 
+
   **Day 5:** Balugães – Ponte de Lima: 18 km
+
 
   **Day 6:** Ponte de Lima – Cossourado: 22 km
 
+
   **Day 7:** Cossourado – Valença do Minho: 13 km
+
 
   **Day 8:** Departure
 image:
   src: /src/assets/images/the-way-of-st.-james-original-hike-tour.jpg
   alt: ''
+code: ST01
+slug: santiago-compostela-hiking-original-route-porto
+language: en
+type: WalkingTour
 region: north
 itinerary:
   - title: 'Day 1: Porto'
@@ -85,11 +113,11 @@ itinerary:
       The beginning of this journey will connect two villages of Vila do Conde
       city. Starting in Vilar do Pinheiro, a 18km walk awaits. The highest point
       at 108m and the lowest at 16m, the pathway will be made in national and
-      pavement roads or asphalt roads surrounded by corn fields or
-      florets.  Some of the areas that might spark your interest during the day
-      are: church of Santa Maria de Vilar do Pinheiro, a 18th century temple and
-      the bridge of São Miguel dos Arcos, an roman bridge with three-arch built
-      in the XIII century that cross the Ave river. In this region it’s almost
+      pavement roads or asphalt roads surrounded by corn fields or florets. 
+      Some of the areas that might spark your interest during the day are:
+      church of Santa Maria de Vilar do Pinheiro, a 18th century temple and the
+      bridge of São Miguel dos Arcos, an roman bridge with three-arch built in
+      the XIII century that cross the Ave river. In this region it’s almost
       mandatory to try the northern gastronomy.
 
       Rural Farm: [Quinta São Miguel de
@@ -212,7 +240,7 @@ itinerary:
       city: ''
     day: '7'
   - title: 'Day 8: Departure'
-    description: '.'
+    description: .
     location:
       lat: '1'
       lng: '1'
@@ -231,31 +259,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 pax
       - title: 7 Nights / 8 Days
@@ -270,7 +298,7 @@ packages:
         description: 1.220€
     bestValue: false
   - title: Guided Hiking tour
-    description: '.'
+    description: .
     price:
       bestValue: false
       currency: EUR
@@ -280,31 +308,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -319,7 +347,7 @@ packages:
         description: 1.568€
     bestValue: false
   - title: Guided Hiking tour Plus
-    description: '.'
+    description: .
     price:
       bestValue: false
       currency: EUR
@@ -329,31 +357,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -367,7 +395,41 @@ packages:
       - title: '* Summer Season'
         description: 2.049€
     bestValue: false
-afterPricing: ''
+afterPricing: >-
+  **\*Season:**
+
+
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
 seo:
   page_title:
   page_description:
@@ -379,32 +441,38 @@ seo:
   no_index: false
 duration: 8
 distance: 102
-tags: []
-minGroupSize: ''
-maxGroupSize: ''
+tags:
+  - Moderate to hard
+  - Package tours
+minGroupSize: 2
+maxGroupSize: 3
 difficulty: 4
 skill: 4
 minAge: 16
 mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1oVmYPIE-0FEOv07T8BxVmpvmL7d58N6F
+images:
+  - src: /src/assets/images/route-camino-santiago-walk.jpg
+    alt: route picture
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 durationUnit: Days | 7 Nights
 distanceUnit: Km
-order: 8
 templateKey: tour-gen
 featured: true
 packagetype: PackageTour
 tourtype: WalkingTour
 meta:
   title: 'Central Camino to Santiago from Porto: Stage 1'
-  description:
+  description: >-
     The Portuguese Central Camino is perfect for those who enjoy a good hiking
     and those who want to try a combination between the Portugal and Spain
-  keywords:
+  keywords: >-
     hike camino to santiago de compostela, WALKING THE CAMINO FROM PORTO
     PORTUGAL
   robots: INDEX
-images:
-  - src: /src/assets/images/route-camino-santiago-walk.jpg
-    alt: route picture
 feature:
   align: center
   imageAlign: center center
@@ -415,5 +483,4 @@ feature:
   title: 'Central Camino to Santiago from Porto: Stage 1'
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---

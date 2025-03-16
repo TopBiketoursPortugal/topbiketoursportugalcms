@@ -25,98 +25,66 @@ content_blocks:
       # **Portugal Walking & Hiking Tours**
 
 
-      ## **Hike Portugal with Top Walking tours Portugal**
-
-
-      Welcome to Portugal, land of many stories and dreams. In the south western
-      edge of continental Europe, a small yet wonderful country remains to be
-      found. This... is an old country with plentiful history and nature to
-      share with any passing visitor. From north to south there are magnificent
-      places to take a walk on. Both on the coast or inland and through
-      historical or natural areas, you will be able to walk the country at your
-      own pace. The climate is perfect for walkers all year round. Since there
-      is a strong climatic variation between the different regions in this land.
-      Prepare your legs and feet to walk and discover the regions which make
-      this country famous. From the national park of Gerês in the North up to
-      the Algarve in the southern corner of the country, there is a wide range
-      of different landscapes and culture to be apart of. Choose a walk among
-      the historical castles of Alentejo for example, or venture yourself
-      through the wine bastion of Portugal in Douro, or simply depart on a
-      spiritual journey to Santiago de Compostela, whatever you choose, you wont
-      regret it. We are here to make sure that you are provided for and that you
-      have a comfortable and enjoyable experience. The act of walking though, is
-      up to you. Feel free to analyze our offers and to contact us in case of
-      any doubt. We wish you the best of walks.
-
-
       <SnippetsAstroImage
       image_path="/src/assets/images/top-walking-hiking-portugal.jpg"
       image_alt="Portugal Walking & Hiking Tours"/>
     style:
       container: Contained
-      padding: Normal
+      padding: Tight
       align: Centered
       tailwind:
+  - _bookshop_name: hero
+    background_color: '#ffffff'
+    heading:
+      heading_text:
+      heading_gradient_color: '#a0a2ff'
+    subheading:
+      markdown_content: >-
+        ## **Hike Portugal with Top Walking tours Portugal**
+
+
+        Welcome to Portugal, land of many stories and dreams. In the south
+        western edge of continental Europe, a small yet wonderful country
+        remains to be found. This... is an old country with plentiful history
+        and nature to share with any passing visitor. From north to south there
+        are magnificent places to take a walk on. Both on the coast or inland
+        and through historical or natural areas, you will be able to walk the
+        country at your own pace. The climate is perfect for walkers all year
+        round. Since there is a strong climatic variation between the different
+        regions in this land. Prepare your legs and feet to walk and discover
+        the regions which make this country famous. From the national park of
+        Gerês in the North up to the Algarve in the southern corner of the
+        country, there is a wide range of different landscapes and culture to be
+        apart of. Choose a walk among the historical castles of Alentejo for
+        example, or venture yourself through the wine bastion of Portugal in
+        Douro, or simply depart on a spiritual journey to Santiago de
+        Compostela, whatever you choose, you wont regret it. We are here to make
+        sure that you are provided for and that you have a comfortable and
+        enjoyable experience. The act of walking though, is up to you. Feel free
+        to analyze our offers and to contact us in case of any doubt. We wish
+        you the best of walks.
+      color: '#393939'
+    image:
+      image_path: /src/assets/images/top-walking-tours-portugal.jpg
+      alt_text: Walking tours portugal
+    buttons: []
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:
-      heading_text: Top Bike Tours Portugal is prepared for all kind of cyclists
+      heading_text: Walking & Hiking tours in Portugal
       color: '#393939'
     text:
       markdown_content: >-
-        Doesn´t matter if you are an inexperienced or experienced rider, if you
-        enjoy a touring bicycle, mountain bicycle, road bike or electric bike.
-        What matters most is that you enjoy, with your friends or family, the
-        good sensations a bike tour as to offer. Our team is here to ensure that
-        you have a relaxed and fantastic bicycle tour holiday.
-
-
-        If your looking for a guided bike tour in Portugal check our <a
-        href="https://topbiketoursportugal.com/guided-bike-tours-calendar-portugal/"
-        rel="nofollow"><strong>Calendar</strong></a> webpage to see all the
-        departure.
-
-
-        ## **It is easy to book with us!**
-
-
-        Contact us thru our contact form or just email us. Request information
-        about the cycling tour packages available in our <a
-        href="https://www.topbiketoursportugal.com/"
-        rel="nofollow"><strong>Portugal Bike Tours</strong></a> webpage. We will
-        reply in less than 24 hours and send an oficial proposal with all the
-        details. After your confirmation, accommodations will be reserved and a
-        deposit will be requested.
+        In our walking & hiking holidays tours, don´t expect any car transfer
+        between routes. We believe that a true walking & hiking tour vacation
+        week without any mechanical help is the best way to enjoy nature. Be
+        with yourself and cherish the moment you are in.
       color: '#393939'
     image:
-      image_path: /src/assets/images/vicentina-coast-walking-trail.jpg
+      image_path: /src/assets/images/top-walking-hiking-portugal.jpg
       alt_text: 'Top bike '
     flipped: true
     button:
-  - _bookshop_name: two-column-markdown
-    column1: >-
-      Contact us thru our contact form or just email us. Request information
-      about the cycling tour packages available in our Portugal Bike Tours
-      webpage. We will reply in less than 24 hours and send an oficial proposal
-      with all the details. After your confirmation, accommodations will be
-      reserved and a deposit will be requested.
-    column2: >-
-      Doesn´t matter if you are an inexperienced or experienced rider, if you
-      enjoy a touring bicycle, mountain bicycle, road bike or electric bike.
-      What matters most is that you enjoy, with your friends or family, the good
-      sensations a bike tour as to offer. Our team is here to ensure that you
-      have a relaxed and fantastic bicycle tour holiday.  If your looking for a
-      guided bike tour in Portugal check our Calendar webpage to see all the
-      departure.
-    padding:
-      type: select
-      label: Padding
-      options: []
-      default: normal
-    fullwidth:
-      type: toggle
-      label: Full Width
-      default: false
   - _bookshop_name: collection
     type: tours
     title: |-
@@ -125,104 +93,12 @@ content_blocks:
       ## **WALKING HOLIDAYS PORTUGAL**
 
       ### **Popular hiking tours in Portugal**
-  - _bookshop_name: left-right
-    background_color: '#ffffff'
-    heading:
-      heading_text: Keep what you need. Delete the rest.
-      color: '#393939'
-    text:
-      markdown_content: >-
-        To help save you time, some features are set up in this template, like:
-
-        -
-        [Bookshop](https://cloudcannon.com/documentation/guides/bookshop-astro-guide/)
-
-        - Blog with pagination, tags and
-        [snippets](https://docs.astro.build/en/guides/markdown-content/#using-components-in-mdx)
-
-        - [Image
-        optimization](https://docs.astro.build/en/guides/images/#image--astroassets)
-
-        - SEO Controls
-
-        - Responsive header and footer
-
-        - [Font Awesome Icons](https://fontawesome.com/search?o=r&m=free)
-
-        - Schemas for adding new pages
-
-        - Editable color pallete
-
-        - Markdown styles
-
-        - CloudCannon configuration
-
-        - CSS variables
-      color: '#393939'
-    image:
-      image_path: /src/assets/images/undraw-hello.svg
-      alt_text: An image
-    flipped: true
-    button:
-      _bookshop_name: buttons/primary
-      button_text: GitHub
-      button_icon: Github
-      button_link: https://github.com/CloudCannon/astro-starter
-      background_color: '#034ad8'
-      hover_brightness: 0.85
-      text_color: '#ffffff'
-  - _bookshop_name: featured-posts
-    main_feature: f79aaae4-f825-4715-9b8a-10a608e5bf7d
-    feature_list:
-      - 4edfe3aa-1842-4627-97d1-5aa563a7e272
-      - f79aaae4-f825-4715-9b8a-10a608e5bf7d
   - _bookshop_name: collection
     type: reviews
     title: '## **What people say about us**'
-  - _bookshop_name: collection
-    type: team
-    title: Meet our team
   - _bookshop_name: featured-posts
     main_feature: 52623f7a-1e2e-4de6-ae38-9ee15cf45ca5
     feature_list:
       - 3fa275e6-2637-4a8b-afa3-ec96b8400e0c
       - 029189f2-4703-422e-bdc1-f68cafc0a622
-  - _bookshop_name: left-right
-    background_color: '#ffffff'
-    heading:
-      heading_text: Keep what you need. Delete the rest.
-      color: '#393939'
-    text:
-      markdown_content: >-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      color: '#393939'
-    image:
-      image_path: /src/assets/images/undraw-hello.svg
-      alt_text: An image
-    flipped: true
-    button:
-  - _bookshop_name: two-column-markdown
-    column1: |
-      ## Column 1
-
-      Enter your Markdown content here.
-    column2: |
-      ## Column 2
-
-      Enter your Markdown content here.
-    padding:
-      type: select
-      label: Padding
-      options: []
-      default: normal
-    fullwidth:
-      type: toggle
-      label: Full Width
-      default: false
 ---

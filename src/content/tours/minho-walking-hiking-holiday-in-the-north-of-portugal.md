@@ -1,19 +1,16 @@
 ---
+_schema: default
 id: 15b16d82-2721-4496-b918-3666c8d38b32
 order: 5
-slug: minho-hiking-north-portugal
-code: NT01
-featured: false
-image:
-  src: /src/assets/images/hiking-ecovia-lima.jpg
-  alt: ''
 title: Minho Hiking Holiday in the North of Portugal
-language: 'en'
+subTitle: '1'
 content: >-
   # **Minho Hiking Holiday in the North of Portugal**
 
+
   ## **Explore the Minho and Lima River and have a taste of “vinho Verde” and
   “Alvarinho” Wine**
+
 
   Explore Alto Minho by walking through its most prominent towns. Follow the
   water both of rivers and sea in an easy hike towards Ponte de Lima. The region
@@ -22,58 +19,26 @@ content: >-
 
   **Route description:**
 
-  - The majority of the tour is flat. 1st, 2nd and 4th days have between 190
+
+  * The majority of the tour is flat. 1st, 2nd and 4th days have between 190
     meters and 170 meters of uphill hiking.
-  - There is a strong mix of paved roads and dirt roads.
-
-  **Itinerary:**
-
-  **Day 1:** Melgaço
-
-  **Day 2:** Melgaço-Monção: 18 km
-
-  **Day 3:** Monção – Valença: 20 km
-
-  **Day 4:** Valença – Vila Nova de Cerveira: 16 km
-
-  **Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
-
-  **Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
-
-  **Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
-  center); optional transfer and loop route (17 km)
-
-  **Day 8:** Departure
-packagetype: PackageTour
-tourtype: WalkingTour
-meta:
-  title: Minho Hiking Holiday in the North of Portugal
-  description:
-    Walking between rio Minho, Rio Minho and the Atlantic ocean will be a great
-    hiking holiday. To join the great scenery the vinho verde and the local
-    gastronomy will full fill your day´s.
-  keywords:
-    minho walking tour portugal,hiking north portugal, hiking minho river
-    portugal, hike rio lima
-  robots: INDEX
-minAge: 16
-skill: 1
-distance: 115
-distanceUnit: km
-duration: 8
-durationUnit: Days | 7 Nights
-difficulty: 2
-mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1S9_RfIAweubmKvKRdx7K9EtaIJSnrEx5
+  * There is a strong mix of paved roads and dirt roads.
+    **Itinerary:** **Day 1:** Melgaço
+    **Day 2:** Melgaço-Monção: 18 km
+    **Day 3:** Monção – Valença: 20 km
+    **Day 4:** Valença – Vila Nova de Cerveira: 16 km
+    **Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
+    **Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
+    **Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City center); optional transfer and loop route (17 km)
+    **Day 8:** Departure
+image:
+  src: /src/assets/images/hiking-ecovia-lima.jpg
+  alt: ''
+code: NT01
+slug: minho-hiking-north-portugal
+language: en
+type: WalkingTour
 region: north
-seo:
-  page_title:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
-  no_index: false
 itinerary:
   - day: '1'
     title: 'Day 1: Melgaço'
@@ -147,9 +112,9 @@ itinerary:
       surrounding nature.  The path is really easy with a public pedestrian
       walkway and it´s flat all the way to Vila Nova de Cerveira.  Here, if you
       like fishing take some time to visit the Aquamuseum to see more than 40
-      diferent species that live in the Minho river, or visit the
-      National  Museum of Architecture too see the grave tresure from Quinta de
-      Água Branca.
+      diferent species that live in the Minho river, or visit the National 
+      Museum of Architecture too see the grave tresure from Quinta de Água
+      Branca.
 
 
       Hotel 4*: [Inatel
@@ -177,9 +142,9 @@ itinerary:
     title: 'Day 6: Vila Praia de Âncora – Viana do Castelo: 20 Km'
     description: >-
       In this day, the walk continues to follow the Santiago Coast Camino, like
-      the previous day this path is flat with some cobblestone and dirt
-      roads.  During the day you will find some Forts and windmills, the Fort
-      that stands out it´s the Dog´s Fort dated in 1702 by the king D. Pedro II
+      the previous day this path is flat with some cobblestone and dirt roads. 
+      During the day you will find some Forts and windmills, the Fort that
+      stands out it´s the Dog´s Fort dated in 1702 by the king D. Pedro II
       mainly used to defend the coast from the pirates.  Arriving to the final
       destination of this tour, you can visit the Santa Lúzia Sanctuary, the
       historical center and the foundation of Gil Eanes (it’s a Portuguese
@@ -222,9 +187,9 @@ itinerary:
 
 
       House: [Casa da Lage](https://www.casa-da-lage.com/)
-    title:
-      'Day 7: Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
-      center); optional transfer and loop root (17km)'
+    title: >-
+      Day 7: Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
+      center); optional transfer and loop root (17km)
     location:
       lat: '1'
       lng: '1'
@@ -233,17 +198,6 @@ itinerary:
     location:
       lat: '1'
       lng: '1'
-images:
-  - src: /src/assets/images/norte-de-portugal-03-melgaco.jpeg
-    alt: melgaço
-  - src: /src/assets/images/valenca-do-minho-hiking.jpg
-    alt: Valença do minho hiking
-  - src: /src/assets/images/viana-do-castelo-santa-luzia-point-view.jpg
-    alt: Viana do castelo
-  - src: /src/assets/images/cerveira-vilage.jpg
-    alt: vina nova de cerveira village
-  - src: /src/assets/images/walking-minho-river.jpg
-    alt: ecovia o minho walk terrain view
 packages:
   - bestValue: false
     title: Self Guided Hiking tour
@@ -251,31 +205,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: yes
+        description: 'yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: t-shirt
         description: '-'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: '1'
       - title: 7 Nights / 8 Days
@@ -300,31 +254,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: yes
+        description: 'yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: t-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 7 Nights / 8 Days
@@ -347,31 +301,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Trains or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: t-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 pax
       - title: 7 Nights / 8 Days
@@ -423,6 +377,57 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+seo:
+  page_title:
+  page_description:
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type:
+  no_index: false
+duration: 8
+distance: 115
+tags:
+  - Moderate to hard
+  - Package tours
+minGroupSize: 2
+maxGroupSize: 3
+difficulty: 2
+skill: 1
+minAge: 16
+mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1S9_RfIAweubmKvKRdx7K9EtaIJSnrEx5
+images:
+  - src: /src/assets/images/norte-de-portugal-03-melgaco.jpeg
+    alt: melgaço
+  - src: /src/assets/images/valenca-do-minho-hiking.jpg
+    alt: Valença do minho hiking
+  - src: /src/assets/images/viana-do-castelo-santa-luzia-point-view.jpg
+    alt: Viana do castelo
+  - src: /src/assets/images/cerveira-vilage.jpg
+    alt: vina nova de cerveira village
+  - src: /src/assets/images/walking-minho-river.jpg
+    alt: ecovia o minho walk terrain view
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
+featured: false
+packagetype: PackageTour
+tourtype: WalkingTour
+meta:
+  title: Minho Hiking Holiday in the North of Portugal
+  description: >-
+    Walking between rio Minho, Rio Minho and the Atlantic ocean will be a great
+    hiking holiday. To join the great scenery the vinho verde and the local
+    gastronomy will full fill your day´s.
+  keywords: >-
+    minho walking tour portugal,hiking north portugal, hiking minho river
+    portugal, hike rio lima
+  robots: INDEX
+distanceUnit: km
+durationUnit: Days | 7 Nights
 feature:
   align: center
   imageAlign: center center
@@ -433,5 +438,4 @@ feature:
   title: Minho walking & Hiking Holiday in the North of Portugal
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---
