@@ -412,6 +412,20 @@ images:
   - src: >-
       /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
     alt: POrto douro river
+reviews:
+  - title: '**Fantastic walking tour**'
+    rating: 5
+    author:
+      givenName: Paper
+      familyName:
+      country: Gemany
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >-
+      We had a nice walking tour with Henry! Our guide was a local, super
+      friendly and knowledgable about the city! Highly recommend the tour.<br>It
+      was perfect to get an excellent overview of the city! Henry also gave us
+      some insider tips for the rest of our stay in Porto.<br>Next time we will
+      do a tour in summer without rain ;)!
 faqs:
   - question: Q1
     answer: A1

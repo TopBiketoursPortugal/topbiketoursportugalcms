@@ -96,43 +96,9 @@ content_blocks:
   - _bookshop_name: collection
     type: reviews
     title: '## **What people say about us**'
-  - _bookshop_name: collection
-    type: team
-    title: Meet our team
   - _bookshop_name: featured-posts
     main_feature: 52623f7a-1e2e-4de6-ae38-9ee15cf45ca5
     feature_list:
       - 3fa275e6-2637-4a8b-afa3-ec96b8400e0c
       - 029189f2-4703-422e-bdc1-f68cafc0a622
-  - _bookshop_name: left-right
-    background_color: '#ffffff'
-    heading:
-      heading_text: Keep what you need. Delete the rest.
-      color: '#393939'
-    text:
-      markdown_content: >-
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      color: '#393939'
-    image:
-      image_path: /src/assets/images/undraw-hello.svg
-      alt_text: An image
-    flipped: true
-    button:
-  - _bookshop_name: two-column-markdown
-    column1: |
-      ## Column 1
-
-      Enter your Markdown content here.
-    column2: |
-      ## Column 2
-
-      Enter your Markdown content here.
-    padding: normal
-    fullwidth: true
 ---

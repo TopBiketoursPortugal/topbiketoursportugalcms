@@ -382,6 +382,9 @@ seo:
   no_index: false
 duration: 8
 distance: 99
+tags:
+  - Moderate to hard
+  - Package tours
 minGroupSize: 1
 maxGroupSize: 3
 difficulty: 3

@@ -3,6 +3,7 @@ _schema: default
 id: f08482d1-b750-46a7-97bb-86088cc3ea39
 order: 8
 title: 'Portuguese Central Camino: Stage 1'
+subTitle: '1'
 content: >-
   # **Portuguese Central Camino: Stage 1**
 
@@ -394,6 +395,41 @@ packages:
       - title: '* Summer Season'
         description: 2.049€
     bestValue: false
+afterPricing: >-
+  **\*Season:**
+
+
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
 seo:
   page_title:
   page_description:
@@ -405,6 +441,9 @@ seo:
   no_index: false
 duration: 8
 distance: 102
+tags:
+  - Moderate to hard
+  - Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 4
@@ -414,18 +453,6 @@ mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1oVmYPIE-0FEOv07T8BxVmpvmL7d
 images:
   - src: /src/assets/images/route-camino-santiago-walk.jpg
     alt: route picture
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

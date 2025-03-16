@@ -3,6 +3,7 @@ _schema: default
 id: dd0b0b47-96d3-436f-83cf-e65fa5932570
 order: 3
 title: Douro Valley Wine region Hiking tour
+subTitle: '1'
 content: >-
   # Douro Valley Wine region Hiking tour
 
@@ -368,6 +369,33 @@ images:
     alt: Quinta da Pacheca wine tasting
   - src: /src/assets/images/quinta-da-pacheca.jpg
     alt: pacheca Farm
+reviews:
+  - title: '**Enjoyable and informative morning**'
+    rating: 5
+    author:
+      givenName: Jules
+      familyName:
+      country: Netherlands
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >-
+      It was very easy to find the starting point for this tour. Get off the
+      Porto Metro stop at Trindade, cross the road and 2 minutes walk and your
+      there at the bike shop. There was only my husband and I on the tour, so it
+      was very personal, and it was like going for walk with a friend. I
+      apologise if I have got the guide's name incorrect, I think was
+      Tiago!!<br>Any way he was very interesting and told us lots of interesting
+      details, that we would not have realised by walking round on our own. He
+      explained shops of special interest to us, explaining the Portuguese
+      traditions. His knowledge was excellent.<br><br>Part way though the tour
+      we stopped at a coffee shop, (this is an extra cost, which you pay your
+      own bill). We had coffees and warm Pasteis de Natas with cinnamon. You
+      cannot have enough of these warm pastries.<br>During the tour we were
+      asked if we were ok walking, which we were, otherwise he would have
+      offered us a rest stop earlier on than the coffee shop/toilet
+      break.<br><br>The tour lasted just over 3 hours, and ended down by the
+      riverside. Which is an ideal spot to have lunch, or continue over the
+      bridge and explore Vila Nova de Gaia.<br><br>This was a very enjoyable
+      morning, and time well spent in Porto. Good value for money
 faqs:
   - question: Q1
     answer: A1

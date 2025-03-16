@@ -3,6 +3,7 @@ _schema: default
 id: af115fc4-1aae-4854-a97b-53a4c777d9f0
 order: 6
 title: 'Vicentine West Coast in Algarve: Stage 2'
+subTitle: '1'
 content: >-
   # **Vicentine West Coast Algarve Walking & Hiking tour**
 
@@ -318,6 +319,9 @@ seo:
   no_index: false
 duration: 7
 distance: 80
+tags:
+  - Moderate to hard
+  - Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 2
