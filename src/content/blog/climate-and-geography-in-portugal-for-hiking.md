@@ -6,22 +6,27 @@ title: Climate and Geography for hiking in Portugal
 tags:
   - ''
 language: en
-author: Coen Simmons
+author: Admin
 thumb_image_path: /src/assets/images/odeceixe-beach.jpg
 thumb_image_alt: Staff meeting
 image:
   src: /src/assets/images/featured-image-5.jpg
   alt: Laptop, phone and coffee
 seo:
-  page_title:
-  page_description: teste
-  canonical_url: test
-  featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: teste
-  author_twitter_handle: lll
+  page_title: Climate and Geography for Hiking in Portugal - Best Seasons and Regions
+  page_description: >-
+    Explore Portugal's climate and geography for hiking. From sunny Algarve
+    beaches to the snowy Serra da Estrela, discover the best times and places to
+    hike.
+  canonical_url:
+  featured_image: /src/assets/images/odeceixe-beach.jpg
+  featured_image_alt: Scenic view of Portugal's hiking landscapes
+  author_twitter_handle: foldnvisit
   open_graph_type: article
   no_index: false
-  keywords:
+  keywords: >-
+    hiking in Portugal, Portugal climate, Portugal geography, best time to hike
+    Portugal, Algarve hiking, Serra da Estrela, Vicentine Coast
 ---
 # **Climate and Geography for hiking in Portugal**
 

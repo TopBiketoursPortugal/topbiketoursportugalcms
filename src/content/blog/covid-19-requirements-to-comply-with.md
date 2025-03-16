@@ -7,22 +7,26 @@ tags:
   - technology
   - email
 language: en
-author: Coen Simmons
+author: Admin
 thumb_image_path: /src/assets/images/clean-safe-walking-tours-in-portugal.jpg
 thumb_image_alt: Clean and sage
 image:
   src: /src/assets/images/featured-image-5.jpg
   alt: Laptop, phone and coffee
 seo:
-  page_title:
-  page_description: teste
-  canonical_url: test
-  featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: teste
-  author_twitter_handle: lll
+  page_title: 'Clean & Safe: Requirements for Walking Tours in Portugal'
+  page_description: >-
+    Learn about Clean & Safe protocols for walking tours in Portugal, ensuring
+    staff training, client safety, and sanitation standards.
+  canonical_url:
+  featured_image: /src/assets/images/clean-safe-walking-tours-in-portugal.jpg
+  featured_image_alt: Clean and Safe walking tours in Portugal
+  author_twitter_handle: foldnvisit
   open_graph_type: article
   no_index: false
-  keywords:
+  keywords: >-
+    Clean and Safe Portugal, walking tours Portugal, COVID-19 safety Portugal,
+    Portugal tourism safety, safe travel Portugal, hiking Portugal protocols
 ---
 > The sun is out 300 days per year with few raining days and it is perfect for
 

@@ -3,6 +3,7 @@ _schema: default
 id: bc31515a-0e52-47c9-b177-9ad9fa5c756e
 order: 2
 title: 'Coastal route to Santiago Compostela: Stage 1'
+subTitle: '1'
 content: >-
   # Portuguese Coastal route to Santiago de Compostela: Stage 1
 
@@ -392,6 +393,9 @@ seo:
   no_index: false
 duration: 7
 distance: 99
+tags:
+  - Moderate to hard
+  - Package tours
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 3
@@ -413,7 +417,7 @@ reviews:
     rating: 5
     author:
       givenName: Cruiser04634057063
-      familyName: Cruiser04634057063
+      familyName:
       country: USA
     datePublished: '2023-10-15T00:00:00Z'
     content: >-
