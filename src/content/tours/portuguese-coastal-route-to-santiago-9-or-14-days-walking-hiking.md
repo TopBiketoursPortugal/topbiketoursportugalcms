@@ -457,8 +457,8 @@ reviews:
   - title: '**Portuguese Camino Walk**'
     rating: 5
     author:
-      givenName: Cruiser04634057063
-      familyName:
+      givenName: Cruiser
+      familyName: '04634057063'
       country: USA
     datePublished: '2023-10-15T00:00:00Z'
     content: >-

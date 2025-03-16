@@ -2,12 +2,12 @@
   {
     "id": 1,
     "pt": {
-      "name": "Norte",
+      "name": "Porto/Norte",
       "title": "Best tours in North of Portugal",
       "src": "/src/assets/images/norte.jpg"
     },
     "en": {
-      "name": "North",
+      "name": "Porto/North",
       "title": "Best tours in North of Portugal",
       "src": "/src/assets/images/norte.jpg"
     }
@@ -56,13 +56,11 @@
     "pt": {
       "name": "Algarve",
       "title": "Best tours in South of Portugal",
-
       "src": "/src/assets/images/sul.jpg"
     },
     "en": {
       "name": "Algarve",
       "title": "Best tours in South of Portugal",
-
       "src": "/src/assets/images/sul.jpg"
     }
   },
@@ -71,13 +69,11 @@
     "pt": {
       "name": "Santiago compostela",
       "title": "Best tours in South of Portugal",
-
       "src": "/src/assets/images/sul.jpg"
     },
     "en": {
       "name": "Santiago compostela",
       "title": "Best tours in South of Portugal",
-
       "src": "/src/assets/images/sul.jpg"
     }
   }
