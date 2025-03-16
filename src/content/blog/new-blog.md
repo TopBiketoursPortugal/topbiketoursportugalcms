@@ -6,11 +6,11 @@ title: Tours from Porto to Santiago de Compostela in Portugal
 tags: []
 language: en
 author: Admin
-thumb_image_path: ''
-thumb_image_alt: ''
+thumb_image_path: /src/assets/images/a-unique-experience-with-hiking-tours-1.jpeg
+thumb_image_alt: unique experience with hiking tours
 image:
-  src: ''
-  alt: ''
+  src: /src/assets/images/a-unique-experience-with-hiking-tours.jpeg
+  alt: unique experience with hiking tours
 seo:
   page_title: ' Tours from Porto to Santiago de Compostela in Portugal'
   page_description: >-
