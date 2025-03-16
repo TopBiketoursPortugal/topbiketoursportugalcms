@@ -13,13 +13,7 @@
     "alt": "Instagram",
     "target": "_blank"
   },
-  "youtube": {
-    "trackId": "",
-    "href": "https://www.youtube.com/channel/UCqryPkh_snkIAqvDXFvaK7A",
-    "icon": "ph:youtube-logo-light",
-    "alt": "Youtube",
-    "target": "_blank"
-  },
+  "youtube": null,
   "tripadvisor": {
     "trackId": "",
     "href": "https://www.tripadvisor.com/Attraction_Review-g189180-d4105907-Reviews-Top_Bike_Tours_Portugal-Porto_Porto_District_Northern_Portugal.html",

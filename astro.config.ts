@@ -22,7 +22,7 @@ export default defineConfig({
   integrations: [
     // sentry(),
     // spotlightjs(),
-    astroMetaTags(),
+    // astroMetaTags(),
     react(),
     tailwind(),
     bookshop(),
@@ -43,8 +43,8 @@ export default defineConfig({
       i18n: {
         defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
         locales: {
-          en: 'en-US', // The `defaultLocale` value must present in `locales` keys
-          pt: 'pt-PT'
+          en: 'en', // The `defaultLocale` value must present in `locales` keys
+          pt: 'pt'
         }
       }
     })

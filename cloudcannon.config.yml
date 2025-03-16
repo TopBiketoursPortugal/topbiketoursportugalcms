@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url: /{title|deburr|slugify|lowercase|trim}
+    url: /{title|deburr|slugify|lowercase|trim|if!=home}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -1101,6 +1101,7 @@ file_config:
 data_config:
   countries:
     path: data/contries.json
+
   icons:
     path: data/icons.json
   colors:

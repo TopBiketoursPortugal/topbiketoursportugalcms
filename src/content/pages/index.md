@@ -223,7 +223,11 @@ content_blocks:
     title: Meet our team
   - _bookshop_name: featured-posts
     main_feature: 52623f7a-1e2e-4de6-ae38-9ee15cf45ca5
-    feature_list: []
+    feature_list:
+      [
+        3fa275e6-2637-4a8b-afa3-ec96b8400e0c,
+        029189f2-4703-422e-bdc1-f68cafc0a622
+      ]
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:
@@ -270,30 +274,4 @@ content_blocks:
       type: toggle
       label: Full Width
       default: false
-  - _bookshop_name: widget-wrapper
-    id:
-      type: string
-      label: Section ID
-      description: Optional HTML ID for anchor linking
-    isDark:
-      type: boolean
-      label: Dark Mode
-      default: false
-      description: Enable dark mode styling
-    containerClass:
-      type: string
-      label: Container Class
-      default: ''
-      description: Custom Tailwind classes for the content container
-    as:
-      type: select
-      label: HTML Tag
-      default: section
-      options: []
-      description: HTML element type for the wrapper
-    bg:
-      type: rich-text
-      label: Custom Background
-      description: Optional custom background HTML (overrides default Background component)
-      can_sync: true
 ---

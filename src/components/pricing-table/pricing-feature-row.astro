@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 const container = tv({
-  base: 'flex h-20 items-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+  base: 'xs:flex-col flex h-20 items-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
   variants: {
     alternate: {
       true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
@@ -39,7 +39,7 @@ const containerStyle = cn(container({ alternate, distribute }), className);
 ---
 
 <div class={containerStyle} data-type="container">
-  <div class="lg:hidden">{description}</div>
+  <div class="flex-col">{description}</div>
   {feature}
   {info}
   {

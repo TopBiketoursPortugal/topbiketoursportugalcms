@@ -3,7 +3,7 @@
 # Metadata about this component
 spec:
   structures:
-    - content_blocks # Can be used in content block structures
+    - layout # Can be used in content block structures
   label: Section # Display name in CloudCannon
   description:
     A flexible section component with background and container styling

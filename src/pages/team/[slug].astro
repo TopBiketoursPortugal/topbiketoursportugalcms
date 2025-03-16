@@ -38,7 +38,7 @@ const schema = {
   worksFor: {
     '@type': 'Organization',
     name: SiteData[language].site.name,
-    url: SiteData[language].site.url
+    url: Astro.site ?? SiteData[language].site.url
   },
   description: excerpt,
   address: {

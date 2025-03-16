@@ -44,7 +44,7 @@ blueprint:
 
 preview:
   fullwidth: false
-  padding: contained
+  padding: normal
   column1:
     content: |
       ## Column 1
@@ -55,3 +55,17 @@ preview:
       ## Column 2
 
       This is some **Markdown** content for the first column.
+
+_inputs:
+  column1:
+    type: markdown
+  column2:
+    type: markdown
+  fullwidth:
+    type: boolean
+  padding:
+    type: select
+    options:
+      - contained
+      - tight
+      - normal
