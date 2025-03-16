@@ -7,7 +7,7 @@ tags:
   - technology
   - email
 language: en
-author: ''
+author: Admin
 thumb_image_path: /src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg
 thumb_image_alt: Staff meeting
 image:
@@ -34,5 +34,4 @@ You don´t use to walk and you haven´t think about the idea of a hiking tour ex
 
 * A walk will help you sleep better when you get back to your bed and with this adventure experience you can develop a positive addiction 😊, make new friends and have a happy week! In a hiking tour it is possible to visit a place free from stressful traffic and driving. That is possible because our guides know the area so you will benefit from their experience. No rush, no schedules to arrange. Your luggage will be collected every day, your accommodations are booked. Just wake up in the morning, have breakfast, and enjoy the day!
 
-
-<img src="/src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg" height="1083" width="1444" />
+<SnippetsAstroImage image_path="/src/assets/images/walking-tour-group-photo-with-porto-bridge.jpg" image_alt="staff meeting hikers"/>
