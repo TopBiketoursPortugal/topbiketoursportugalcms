@@ -387,29 +387,6 @@ images:
     alt: sagres boat
   - src: /src/assets/images/sagres-trail.jpg
     alt: sagres trail
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

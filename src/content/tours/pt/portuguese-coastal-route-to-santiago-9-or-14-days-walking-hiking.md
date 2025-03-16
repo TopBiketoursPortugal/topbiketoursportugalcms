@@ -1,13 +1,14 @@
 ---
+_schema: default
 id: bc31515a-0e52-47c9-b177-9ad9fa5c756e
 order: 2
-title: 'Coastal route to Santiago Compostela Stage 1'
-language: 'pt'
-subTitle: ''
+title: Coastal route to Santiago Compostela Stage 1
 content: >-
   # Portuguese Coastal route to Santiago de Compostela: Stage 1
 
+
   ## **Follow the Atlantic breeze towards Santiago**
+
 
   Walk towards Santiago using the Portuguese coastal path. Cross sunny and
   seaside areas such as Póvoa, Esposende, Vila Praia de Âncora, Caminha and
@@ -29,42 +30,32 @@ content: >-
 
   **Route description**
 
-  - All days are mostly flat with very few and minor hills - The main roads are
+
+  * All days are mostly flat with very few and minor hills - The main roads are
   avoided for the majority of the time and as such every kind of terrain is used
   during this walk
-
-  **Itinerary 6 Nights / 7 days:**
-
-  **Day 1:** Porto
-
-  **Day 2**: Transfer to Praia da memória – Póvoa: 20 km
-
-  **Day 3:** Póvoa – Esposende: 25 km
-
-  **Day 4**: Esposende – Viana do Castelo: 26 km
-
-  **Day 5:** Viana do Castelo – Vila Praia de Âncora: 19 km
-
-  **Day 6:** Vila Praia de Âncora – Caminha: 9 km
-
-  **Day** 7: Departure
-
-  **Extra 2 days route, 140 Km:**
-
-  **Day 7:** Caminha – Oia: 23 km
-
-  **Day 8**: Oia – Baiona: 18 km
-
-  **Day 9**: Departure
+    **Itinerary 6 Nights / 7 days:** **Day 1:** Porto
+    **Day 2**: Transfer to Praia da memória – Póvoa: 20 km
+    **Day 3:** Póvoa – Esposende: 25 km
+    **Day 4**: Esposende – Viana do Castelo: 26 km
+    **Day 5:** Viana do Castelo – Vila Praia de Âncora: 19 km
+    **Day 6:** Vila Praia de Âncora – Caminha: 9 km
+    **Day** 7: Departure
+    **Extra 2 days route, 140 Km:** **Day 7:** Caminha – Oia: 23 km
+    **Day 8**: Oia – Baiona: 18 km
+    **Day 9**: Departure
 image:
-  src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  src: >-
+    /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
   alt: ''
 code: ST03
+slug: coastal-route-to-santiago-compostela-stage-2
+language: pt
+type: WalkingTour
 region: north
 itinerary:
   - title: 'Day 1: Porto'
-    description:
-      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
@@ -229,31 +220,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4,/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: yes
+        description: 'yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 Pax
       - title: 6 Nights / 7 Days
@@ -280,31 +271,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4,/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -331,31 +322,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4,/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
         description: 5 Lunches
       - title: 5 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -374,23 +365,20 @@ packages:
 afterPricing: >-
   **\*Season:**
 
-  - LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
+
+  * LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
   and Set 26 to 31 Oct - HS - High Season: Set 01 to 25 Set - SS - Summer
   Season: Jun 26 to August 30
-
-  **Observations:**
-
-  - Prices are based for 2 people sharing the same room; - Prices can suffer
+    **Observations:**
+  * Prices are based for 2 people sharing the same room; - Prices can suffer
   updates due high season, holidays or weekends - Beverages are not included at
   lunch and dinner when included in the package - If in a triple room with
   parents Children up to 10 years old - 35% discount. Children from 11 to 14
   years old - 20% discount. Children from 15 to 17 years old - 15% discount. -
   In the option 8 nights/ 9 days, 8 lunches are included in all packages, and 8
   dinners are included only in the Guided Hiking tour Plus package
-
-  **Extras**
-
-  - Solo traveler: 200 € - Single supplement 6 Nights / 7 days: LS: 300€, RS:
+    **Extras**
+  * Solo traveler: 200 € - Single supplement 6 Nights / 7 days: LS: 300€, RS:
   329€, HS: 360€, SS.390€ - Single supplement 8 Nights / 9 days : LS: 340€, RS:
   369€, HS: 400€, SS.430€ - Extra nights: on request
 seo:
@@ -404,9 +392,8 @@ seo:
   no_index: false
 duration: 7
 distance: 99
-tags: []
-minGroupSize: ''
-maxGroupSize: ''
+minGroupSize: 2
+maxGroupSize: 3
 difficulty: 3
 skill: 3
 minAge: 16
@@ -418,8 +405,14 @@ images:
     alt: house with pink flowers
   - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
     alt: porto city center
-  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  - src: >-
+      /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
     alt: POrto douro river
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 feature:
   align: center
   imageAlign: center center
@@ -427,7 +420,7 @@ feature:
   bokunId: ''
   textColor: white
   subTitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: 'Coastal route to Santiago Compostela Stage 1'
+  title: Coastal route to Santiago Compostela Stage 1
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
 distanceUnit: Km
@@ -437,9 +430,8 @@ featured: false
 packagetype: PackageTour
 tourtype: WalkingTour
 meta:
-  title: 'Coastal route to Santiago Compostela Stage 1'
+  title: Coastal route to Santiago Compostela Stage 1
   description: Walk towards Santiago using the Portuguese coastal path.
   keywords: Portuguese Coastal route to Santiago Compostela
   robots: INDEX
-relatedTours: []
 ---

@@ -430,29 +430,6 @@ images:
     alt: Santiago de Compostela city center
   - src: /src/assets/images/the-way-of-st.-james-hike-tour-waterfall.jpg
     alt: water fall
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
