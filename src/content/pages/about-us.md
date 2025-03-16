@@ -2,16 +2,15 @@
 _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 title: About Us
-slug: about-us
 showPageTitle: true
 seo:
-  page_title:
+  page_title: About us
   page_description: About Top walking tours portugal
   canonical_url:
   featured_image: >-
     /src/assets/images/the-way-of-st.-james-bike-tour-fold-n-visit-cycling-holidays-4323.jpg
   featured_image_alt: about us
-  author_twitter_handle:
+  author_twitter_handle: foldnvisit
   open_graph_type: article
   no_index: false
   metas: []
@@ -42,8 +41,8 @@ content_blocks:
         history in Tripadvisor reviews.
       color: '#393939'
     image:
-      image_path: /src/assets/images/bike-tours-in-portugal.jpg
-      alt_text: An image
+      image_path: /src/assets/images/walking-hiking-portugal.jpg
+      alt_text: hiking in portugal with a group
     flipped: false
     button:
     style:
@@ -82,19 +81,12 @@ content_blocks:
       and organize, everything, and thus providing the best possible experience,
       whose value is the key ingredient in the ultimate satisfaction of the
       customer.
-    padding:
-      type: select
-      label: Padding
-      options: []
-      default: normal
-    fullwidth:
-      type: toggle
-      label: Full Width
-      default: false
+    padding: normal
+    fullwidth: true
     class: ''
   - _bookshop_name: collection
     type: team
-    title: Collection Title
+    title: '## Our Team'
     background_color: '#ffffff'
     heading:
       text: Our team
@@ -109,9 +101,7 @@ content_blocks:
       image_path: /src/assets/images/walking-hiking-portugal.jpg
       alt_text: An image
     buttons: []
-  - _bookshop_name: collection
-    type: tours
-    title: Collection Title
+slug: about-us
 template: ~/layouts/Page.astro
 language: en
 ---
