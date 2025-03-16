@@ -17,20 +17,35 @@ content: >-
   of Alto Minho is one of protected nature, ancient and present pilgrim passage
   and history connected to the birth of the country.
 
+
   **Route description:**
 
 
   * The majority of the tour is flat. 1st, 2nd and 4th days have between 190
-    meters and 170 meters of uphill hiking.
+  meters and 170 meters of uphill hiking.
+
   * There is a strong mix of paved roads and dirt roads.
-    **Itinerary:** **Day 1:** Melgaço
-    **Day 2:** Melgaço-Monção: 18 km
-    **Day 3:** Monção – Valença: 20 km
-    **Day 4:** Valença – Vila Nova de Cerveira: 16 km
-    **Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
-    **Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
-    **Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City center); optional transfer and loop route (17 km)
-    **Day 8:** Departure
+
+
+  **Itinerary:**
+
+
+  * **Day 1:** Melgaço
+
+  * **Day 2:** Melgaço-Monção: 18 km
+
+  * **Day 3:** Monção – Valença: 20 km
+
+  * **Day 4:** Valença – Vila Nova de Cerveira: 16 km
+
+  * **Day 5**: Vila Nova de Cerveira – Vila Praia de Âncora: 24 km
+
+  * **Day 6:** Vila Praia de Âncora – Viana do Castelo: 20 Km
+
+  * **Day 7:** Viana do Castelo – Ponte de Lima: 20 km or (26 km to the City
+  center); optional transfer and loop route (17 km)
+
+  * **Day 8:** Departure
 image:
   src: /src/assets/images/hiking-ecovia-lima.jpg
   alt: ''
@@ -343,7 +358,7 @@ packages:
       price: 2270
       promo: 0
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
   * LS - Low season: Nov 01 to Mar 25
@@ -359,6 +374,8 @@ afterPricing: >-
 
 
   * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
 
   * Prices can suffer updates due high season, holidays or weekends
 
@@ -377,15 +394,29 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: Minho Hiking Holiday in the North of Portugal
+  page_description: >-
+    Walking between rio Minho, Rio Minho and the Atlantic ocean will be a great
+    hiking holiday. To join the great scenery the vinho verde and the local
+    gastronomy will full fill your day´s.
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/hiking-ecovia-lima.jpg
+  featured_image_alt: Minho Hiking Holiday in the North of Portugal
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: >-
+    minho walking tour portugal,hiking north portugal, hiking minho river
+    portugal, hike rio lima
 duration: 8
 distance: 115
 tags:
@@ -408,6 +439,29 @@ images:
     alt: vina nova de cerveira village
   - src: /src/assets/images/walking-minho-river.jpg
     alt: ecovia o minho walk terrain view
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

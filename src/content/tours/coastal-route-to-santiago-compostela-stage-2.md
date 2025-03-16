@@ -31,28 +31,21 @@ content: >-
   **Itinerary:**
 
 
-  Day 1: Baiona
+  * **Day 1:** Baiona
 
+  * **Day 2:** Baiona - Vigo: 25 km
 
-  Day 2: Baiona - Vigo: 25 km
+  * **Day 3:** Vigo - Redondela: 17 km
 
+  * **Day 4:** Redondela – Pontevedra: 21 km
 
-  Day 3: Vigo - Redondela: 17 km
+  * **Day 5:** Pontevedra – Caldas de reis: 25 km
 
+  * **Day 6:** Caldas de Reis – Padrón: 14 km
 
-  Day 4: Redondela – Pontevedra: 21 km
+  * **Day 7:** Padrón – Santiago de Compostela: 25 km
 
-
-  Day 5: Pontevedra – Caldas de reis: 25 km
-
-
-  Day 6: Caldas de Reis – Padrón: 14 km
-
-
-  Day 7: Padrón – Santiago de Compostela: 25 km
-
-
-  Day 8: Departure
+  * **Day 8:** Departure
 image:
   src: /src/assets/images/santiago-de-compostela-city-center.jpg
   alt: '312'
@@ -342,7 +335,7 @@ packages:
       - title: '* Summer Season'
         description: 2.264€
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
   * LS - Low season: Nov 01 to Mar 25
@@ -358,6 +351,8 @@ afterPricing: >-
 
 
   * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
 
   * Prices can suffer updates due high season, holidays or weekends
 
@@ -376,15 +371,27 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description: teste
+  page_title: ' Coastal route to Santiago Compostela: Stage 2'
+  page_description: >-
+    Cross sunny and seaside areas such as Póvoa, Esposende, Vila Praia de
+    âncora, Caminha and Bayona. Have a delight with the famous Arcade's oysters
+    in VIgo. 
   canonical_url: test
   featured_image: /src/assets/images/santiago-de-compostela-city-center.jpg
-  featured_image_alt: teste
-  author_twitter_handle: lll
+  featured_image_alt: Portuguese Coastal route to Santiago Compostela
+  author_twitter_handle: foldnvisit
   open_graph_type: product
   no_index: false
+  keywords: Portuguese Coastal route to Santiago Compostela
 duration: 8
 distance: 7
 tags:

@@ -381,18 +381,19 @@ afterPricing: >-
   * Ferry (boat) in river / lake crossing is not included in price package
   (approximately 2€ to 10€ per person)
 seo:
-  page_title:
+  page_title: 'Hiking Atlantic Coast of Portugal '
   page_description: >-
     The coast of the Atlantic Ocean is one the best areas to walk on and, at the
     same time, enjoy the beautiful beaches and the history that the northern
     towns have to offer. Start this tour in one of the most important cities in
     Europe, the city of Porto.
   canonical_url:
-  featured_image:
-  featured_image_alt:
+  featured_image: /src/assets/images/apulia-beac.jpg
+  featured_image_alt: 'Hiking Atlantic Coast of Portugal '
   author_twitter_handle: FoldnVisit
-  open_graph_type:
+  open_graph_type: product
   no_index: false
+  keywords: portugal Atlantic hike, walking Atlantic sea
 duration: 8
 distance: 278
 tags:
@@ -419,6 +420,29 @@ images:
     alt: Caminha city center
   - src: /src/assets/images/suave-mar-hotel.jpg
     alt: Suave mar hotel
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

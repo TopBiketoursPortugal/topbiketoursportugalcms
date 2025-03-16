@@ -18,12 +18,36 @@ content: >-
   nature and human interventionism as been establish, in the production in that
   which is one of the most known wines in the World.
 
+
   **Route description**
 
 
-  * the area of Douro is hilly and this walk is no exception - the majority of
-  the walk is done on dirt trails and when in tarmac roads the
-    traffic is low
+  * the area of Douro is hilly and this walk is no exception
+
+  * the majority of the walk is done on dirt trails and when in tarmac roads the
+  traffic is low
+
+
+  **Itinerary :**
+
+
+  * **Day 1**: Arrival Porto
+
+  * **Day 2:** Walk from Pinhão - Vilarinho de São Romão: 13 km
+
+  * **Day 3:** Vilarinho de São Romão – Alijó: 18 km
+
+  * **Day 4:** Alijó loop- São Mamede Ribatua: 15 km
+
+  * **Day 5:** Alijó - Vale de Mendiz: 13 km
+
+  * **Day 6:** Vale de Mendiz – Pinhão: 9 km +boat cruise to Pocinho
+
+  * **Day 7:** Departure<br><br>**Optional extra day route: 86 Km:**<br>
+
+  * **Day 8:** Régua – Lamego: 18 km
+
+  * **Day 9:** Departure
 image:
   src: /src/assets/images/44817961982_440e783762_o.jpg
   alt: Douro Valley Wine region Hiking tour
@@ -318,35 +342,61 @@ packages:
       - title: 7 Nights / 8 Days ( price per person)
         description: +200€
 afterPricing: >-
-  \***Season:**
+  **Season:**
 
 
-  * LS - Low season: Nov 01 to Mar 25 - RS - Regular season: Mar 26 to 25 Jun
-  and Set 26 to 31 Oct - HS - High Season: Set 01 to 25 Set - SS - Summer
-  Season: Jun 26 to August 30
+  * LS - Low season: Nov 01 to Mar 25
 
-    **Observations:**
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
 
-  * Prices are based for 2 people sharing the same room; - Prices can suffer
-  updates due high season, holidays or weekends - Beverages are not included at
-  lunch and dinner when included in the package - If in a triple room with
-  parents Children up to 10 years old - 35% discount. Children from 11 to 14
-  years old - 20% discount. Children from 15 to 17 years old - 15% discount. -
-  In the option 7 nights/ 8 days, 6 lunches are included in all packages, and 6
-  dinners are included only in the Guided Hiking tour Plus package
+  * HS - High Season: Set 01 to 25 Set
 
-    **Extras**
+  * SS - Summer Season: Jun 26 to August 30
 
-  * Solo traveler: 200 € - Single supplement: LS: 300€, RS: 329€, HS: 360€,
-  SS.390€ - Extra nights: on request
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: Douro Valley Wine region Hiking tour
+  page_description: >-
+    Hiking in the vineyards and near olive fields is the scenery to expect.
+    Visit different wine caves and little villages while you take a walk, to
+    feel the spirit of Douro Valley
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/44817961982_440e783762_o.jpg
+  featured_image_alt: Douro Valley Wine region Hiking tour
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
 duration: 8
 distance: 68

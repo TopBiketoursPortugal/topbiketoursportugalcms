@@ -8,75 +8,56 @@ content: >-
   # **Portuguese Central Camino: Stage 1**
 
 
-  **The old and original route to Santiago de Compostela from Porto**
+  ## **The old and original route to Santiago de Compostela from Porto**
 
 
   For a very long time pilgrims have explored different routes in order to make
-
   their way to Santiago de Compostela. The Caminho Central Português is
-
   certainly one of the oldest in Europe and it is becoming increasingly famous
-
   for outsiders, who wish to set foot on the ancient paths by which pilgrims had
-
   been crossing the landscape. Enjoy the gastronomy, the sights and different
-
   towns along the way, knowing that the city of Santiago will be waiting for you
-
   as well as it has been waiting and will continue to wait for all the pilgrims
-
   that decide to take on the adventure of accepting the challenges and
-
   spirituality of this crossing.
 
 
   This hike is divided in two different stages. Stage 1 which goes through
-
   Portuguese territory and [stage
-
   2](https://topwalkingtoursportugal.com/tours/santiago-compostela-hiking-stage-2)
-  which takes you
-
-  through Spain to Santiago de Compostela. For a complete experience you might
-
-  think to book the 2 stages,
+  which takes you through Spain to Santiago de Compostela. For a complete
+  experience you might think to book the 2 stages,
 
 
   **Route description:**
 
 
   * On this route all kind of terrains are to be expected. Route with long and
-    difficult climbs
+  difficult climbs
+
   * Paved streets in rural and urban areas; 35 % of the walk will be in the
-    forest - The main roads are avoided for the majority of the time and as such
-    every kind
-    of terrain is used during this walk
+  forest - The main roads are avoided for the majority of the time and as such
+  every kind of terrain is used during this walk
+
 
   **Itinerary:**
 
 
-  **Day 1:** Porto
+  * **Day 1:** Porto
 
+  * **Day 2:** Porto to Vilar do Pinheiro tranfer – Arcos: 18 km
 
-  **Day 2:** Porto to Vilar do Pinheiro tranfer – Arcos: 18 km
+  * **Day 3:** Arcos – Barcelos: 15 km
 
+  * **Day 4:** Barcelos – Balugães: 16 km
 
-  **Day 3:** Arcos – Barcelos: 15 km
+  * **Day 5:** Balugães – Ponte de Lima: 18 km
 
+  * **Day 6:** Ponte de Lima – Cossourado: 22 km
 
-  **Day 4:** Barcelos – Balugães: 16 km
+  * **Day 7:** Cossourado – Valença do Minho: 13 km
 
-
-  **Day 5:** Balugães – Ponte de Lima: 18 km
-
-
-  **Day 6:** Ponte de Lima – Cossourado: 22 km
-
-
-  **Day 7:** Cossourado – Valença do Minho: 13 km
-
-
-  **Day 8:** Departure
+  * **Day 8:** Departure
 image:
   src: /src/assets/images/the-way-of-st.-james-original-hike-tour.jpg
   alt: ''
@@ -396,7 +377,7 @@ packages:
         description: 2.049€
     bestValue: false
 afterPricing: >-
-  **\*Season:**
+  **Season:**
 
 
   * LS - Low season: Nov 01 to Mar 25
@@ -412,6 +393,8 @@ afterPricing: >-
 
 
   * Prices are based for 2 people sharing the same room;
+
+  * Sea view (when available) or premium rooms, price on request;
 
   * Prices can suffer updates due high season, holidays or weekends
 
@@ -430,15 +413,28 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+
+  * Private group price on request
+
+  * City taxes is not included in the price package (approximately 2€ per person
+  per night - payable on site - in Lisbon city tax is 4€ per person per night)
+
+  * Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
 seo:
-  page_title:
-  page_description:
+  page_title: 'Central Camino to Santiago from Porto: Stage 1'
+  page_description: >-
+    The Portuguese Central Camino is perfect for those who enjoy a good hiking
+    and those who want to try a combination between the Portugal and Spain
   canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
+  featured_image: /src/assets/images/the-way-of-st.-james-original-hike-tour.jpg
+  featured_image_alt: 'Central Camino to Santiago from Porto: Stage 1'
+  author_twitter_handle: foldnvisit
+  open_graph_type: product
   no_index: false
+  keywords: >-
+    hike camino to santiago de compostela, WALKING THE CAMINO FROM PORTO
+    PORTUGAL
 duration: 8
 distance: 102
 tags:
@@ -453,6 +449,29 @@ mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1oVmYPIE-0FEOv07T8BxVmpvmL7d
 images:
   - src: /src/assets/images/route-camino-santiago-walk.jpg
     alt: route picture
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
