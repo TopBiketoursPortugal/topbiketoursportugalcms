@@ -10,9 +10,11 @@ export async function getStaticPaths() {
   );
   return posts.map((post) => ({
     params: {
-      slug:
-        post.data.slug ??
-        slugify(post.data.title, { lower: true, strict: true, trim: true })
+      slug: slugify(post.data.slug ?? post.data.title, {
+        lower: true,
+        strict: true,
+        trim: true
+      })
     },
     props: { post }
   }));

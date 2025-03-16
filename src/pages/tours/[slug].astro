@@ -10,10 +10,11 @@ export async function getStaticPaths() {
   const tours = await getCollection('tours');
   return tours.map((tour) => ({
     params: {
-      slug:
-        tour.data.path ??
-        tour.data?.slug ??
-        slugify(tour.data.title, { lower: true, strict: true, trim: true })
+      slug: slugify(tour.data.path ?? tour.data?.slug ?? tour.data.title, {
+        lower: true,
+        strict: true,
+        trim: true
+      })
     },
     props: {
       tour

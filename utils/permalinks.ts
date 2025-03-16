@@ -19,7 +19,7 @@ export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/${slug ?? slugify(title, { lower: true, strict: true, trim: true })}`;
+  return `${getBasePath(language)}tours/${slugify(slug ?? title, { lower: true, strict: true, trim: true })}`;
 }
 
 export async function getTourLanguagesAlternates(
@@ -36,7 +36,7 @@ export async function getTourLanguagesAlternates(
     ) ?? [];
 
   return alternateTours.map(({ data: alternateTour }) => ({
-    href: `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${alternateTour.slug ?? slugify(alternateTour.title, { lower: true, strict: true, trim: true })}`,
+    href: `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.slug ?? alternateTour.title, { lower: true, strict: true, trim: true })}`,
     hreflang: alternateTour.language
   }));
 }
@@ -93,7 +93,7 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
     return getHomePermalink(language);
   }
   const pagePath =
-    `${getBasePath(language)}${page.data.slug ?? slugify(page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}`.toLocaleLowerCase();
+    `${getBasePath(language)}${slugify(page.data.slug ?? page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}`.toLocaleLowerCase();
   return pagePath;
 }
 
@@ -129,7 +129,7 @@ export async function getPageLanguagesAlternates(
       };
     }
     return {
-      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${alternate.slug ?? slugify(alternate.title, { lower: true, strict: true, trim: true })}`,
+      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}`,
       hreflang: alternate.language
     };
   });
@@ -151,7 +151,7 @@ export async function getPostLanguagesAlternates(
   return alternatePosts.map((alternatePost) => {
     const { data: alternate } = alternatePost;
     return {
-      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${alternate.slug ?? slugify(alternate.title, { lower: true, strict: true, trim: true })}`,
+      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}`,
       hreflang: alternate.language
     };
   });
