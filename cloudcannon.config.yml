@@ -1115,8 +1115,8 @@ timezone: Europe/Lisbon
 markdown:
   engine:
   options:
-    xhtml: false
-    breaks: false
+    xhtml: true
+    breaks: true
     linkify: false
     typographer: false
     quotes:
