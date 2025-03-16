@@ -695,6 +695,7 @@ _inputs:
       values:
         - website
         - article
+        - product
     comment: Defaults to the type 'website'
     cascade: true
   author_twitter_handle:
@@ -1068,7 +1069,8 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment: Set the colors available in the color selectors throughout the site.
+        comment:
+          Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color
