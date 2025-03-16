@@ -2,6 +2,7 @@ import SiteData from '../../data/site.json';
 import { getCollection } from 'astro:content';
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import { SITE_URL } from 'astro:env/client';
+import { getBlogPermalink } from 'utils/permalinks';
 const site = SiteData['en'];
 const posts = await getCollection('blog');
 
@@ -13,7 +14,7 @@ export async function GET() {
     items: posts.map(
       (post) =>
         ({
-          link: `/blog/${post.slug}`,
+          link: getBlogPermalink(post),
           title: post.data.title,
           pubDate: post.data.date ? new Date(post.data.date) : undefined
         }) satisfies RSSFeedItem

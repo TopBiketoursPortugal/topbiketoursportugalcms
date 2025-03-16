@@ -3,7 +3,6 @@ import PageLayout from '../layouts/Page.astro';
 import ContactLayout from '../layouts/Contacts.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageLanguagesAlternates, getPagePath } from 'utils/permalinks';
-import { render } from 'astro:content';
 
 export interface Props {
   page: CollectionEntry<'pages'>;

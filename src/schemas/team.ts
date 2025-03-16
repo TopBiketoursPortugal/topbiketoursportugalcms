@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { seoSchema } from './seo';
+import { glob } from 'astro/loaders';
 
 const teamMemberSchema = z.object({
   id: z.string().uuid(),
@@ -23,5 +24,6 @@ const teamMemberSchema = z.object({
 export type TeamMemberSchema = z.infer<typeof teamMemberSchema>;
 
 export const teamCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/team' }),
   schema: teamMemberSchema
 });

@@ -1,3 +1,4 @@
+import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { languageSchema } from 'src/schemas/language';
 import { seoSchema } from 'src/schemas/seo';
@@ -5,6 +6,7 @@ import { teamCollection } from 'src/schemas/team';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     id: z.string().uuid(),
     slug: z.string().optional().nullable(),
@@ -55,6 +57,7 @@ const paginatedCollectionSchema = z.object({
 });
 
 const pagesCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
   schema: z.union([paginatedCollectionSchema, pageSchema])
 });
 

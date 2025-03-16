@@ -1,10 +1,10 @@
 ---
 import { getCollection, z } from 'astro:content';
-import ReviewItem from './Reviews/ReviewItem.astro';
-import ReviewListSchema from './Reviews/ReviewListSchema.astro';
 import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes, languageSchema } from 'src/schemas/language';
 import Grid from 'src/components/grid/grid.astro';
+import ReviewListSchema from './review-list-schema.astro';
+import ReviewItem from './review-item.astro';
 
 type Props = {
   type: 'reviews';

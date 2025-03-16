@@ -11,7 +11,7 @@ type Props = {
 };
 
 const collectionComponentImports = import.meta.glob(
-  '/src/components/collection/**/*.collection.astro',
+  '/src/components/collection/**/*-collection.astro',
   {
     eager: true
   }
@@ -19,12 +19,9 @@ const collectionComponentImports = import.meta.glob(
 
 const { type = 'tours', ...data } = Astro.props;
 
-const componentName = `/src/components/collection/components/${type}.collection.astro`;
+const componentName = `/src/components/collection/components/${type}-collection.astro`;
 const CollectionComponent = (collectionComponentImports[componentName] as any)
   ?.default;
 ---
 
-<div class="flex flex-col gap-10 p-16">
-  {data.title ? <Prose markdown={data.title} class="px-6" /> : null}
-  <CollectionComponent {...data} />
-</div>
+<div class="flex flex-col gap-10 p-16"></div>

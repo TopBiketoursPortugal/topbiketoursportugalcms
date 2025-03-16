@@ -39,8 +39,6 @@ export type LayoutProps = {
   hrefLangs?: ReadonlyArray<HrefLang>;
 };
 
-type Props = LayoutProps;
-
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { seo } = Astro.props;
 const { keywords } = seo ?? { keywords: '' };

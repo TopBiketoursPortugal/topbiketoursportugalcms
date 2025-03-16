@@ -84,11 +84,9 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   const language = page.data.language ?? 'en';
 
   if (
-    // page.data.slug === '/' ||
-    // page.data.slug === '' ||
-    page.slug === '' ||
-    page.slug === 'index' ||
-    page.slug === 'home' ||
+    page.data.slug === '' ||
+    page.data.slug === 'index' ||
+    page.data.slug === 'home' ||
     page.filePath?.endsWith('index.md') ||
     page.filePath?.endsWith('index.mdx')
   ) {
@@ -120,9 +118,10 @@ export async function getPageLanguagesAlternates(
   return alternatePages.map((page) => {
     const { data: alternate } = page;
     if (
-      page.slug === 'index' ||
-      page.slug === 'home' ||
-      page.filePath?.endsWith('index.md')
+      page.data.slug === 'index' ||
+      page.data.slug === 'home' ||
+      page.filePath?.endsWith('index.md') ||
+      page.filePath?.endsWith('index.mdx')
     ) {
       return {
         href: getHomePermalink(page.data.language),

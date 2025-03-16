@@ -25,13 +25,13 @@ collections_config:
         icon: pages
         schema: default
     create:
-      path: '[relative_base_path]/{title|deburr|slugify|lower}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/page.md
+        path: schemas/page.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -40,7 +40,7 @@ collections_config:
         icon: web_asset
         _enabled_editors:
         create:
-          path: '[relative_base_path]/{title|deburr|slugify|lower}.md'
+          path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
           extra_data:
           publish_to:
           _inputs:
@@ -48,7 +48,7 @@ collections_config:
           _structures:
         new_preview_url: '[relative_base_path]/{title|deburr|slugify|lower}'
       paginated:
-        path: schemas/paginated.md
+        path: schemas/paginated.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -121,13 +121,13 @@ collections_config:
         icon: post_add
         schema: default
     create:
-      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.md'
+      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/post.md
+        path: schemas/post.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -315,14 +315,14 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
 
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/tour.md
+        path: schemas/tour.mdx
         reorder_inputs: true
         hide_extra_inputs: true
         remove_empty_inputs: true
@@ -330,7 +330,7 @@ collections_config:
         name: New tour
         icon: notes
       defaultPT:
-        path: schemas/pt/tour.md
+        path: schemas/pt/tour.mdx
         reorder_inputs: true
         hide_extra_inputs: true
         remove_empty_inputs: true
@@ -390,13 +390,13 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/team-member.md
+        path: schemas/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -404,7 +404,7 @@ collections_config:
         name: NewTeamMember
         icon: people
       defaultPT:
-        path: schemas/pt/team-member.md
+        path: schemas/pt/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false

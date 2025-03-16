@@ -32,7 +32,6 @@ const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-
 				<div class="flex-grow"></div>
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 items-center ">
                     {contact.cellPhone && (<a href={"tel:" + cleanPhoneNumberFormatting(contact.cellPhone)}>{contact.cellPhone}</a>)}
-                    {/* {contact.phone && (<a href={"tel:" + cleanPhoneNumberFormatting(contact.phone)}>{contact.phone}</a>)} */}
                     {contact.cellPhone && <a
 						href={
 							"https://wa.me/" + cleanPhoneNumberFormatting(contact.cellPhone)
