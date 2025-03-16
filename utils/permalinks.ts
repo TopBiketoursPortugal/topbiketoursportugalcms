@@ -84,10 +84,13 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   const language = page.data.language ?? 'en';
 
   if (
-    page.slug === '/' ||
+    // page.data.slug === '/' ||
+    // page.data.slug === '' ||
+    page.slug === '' ||
     page.slug === 'index' ||
     page.slug === 'home' ||
-    page.filePath?.endsWith('index.md')
+    page.filePath?.endsWith('index.md') ||
+    page.filePath?.endsWith('index.mdx')
   ) {
     return getHomePermalink(language);
   }
