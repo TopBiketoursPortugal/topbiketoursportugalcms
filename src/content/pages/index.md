@@ -306,7 +306,7 @@ content_blocks:
       color: '#393939'
     image:
       image_path: /src/assets/images/top-walking-tours-portugal.jpg
-      alt_text: An image
+      alt_text: walking & hiking tours portugal
     flipped: true
     button:
       _bookshop_name: buttons/primary
