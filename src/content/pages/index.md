@@ -57,48 +57,6 @@ content_blocks:
       padding: Normal
       align: Centered
       tailwind:
-  - _bookshop_name: hero
-    background_color: '#ffffff'
-    heading:
-      heading_text: Portugal Walking & Hiking Tours
-      heading_gradient_color: '#a0a2ff'
-    subheading:
-      markdown_content: >-
-        ## **Hike Portugal with Top Walking tours Portugal**
-
-
-        Welcome to Portugal, land of many stories and dreams. In the south
-        western edge of continental Europe, a small yet wonderful country
-        remains to be found. This... is an old country with plentiful history
-        and nature to share with any passing visitor. From north to south there
-        are magnificent places to take a walk on. Both on the coast or inland
-        and through historical or natural areas, you will be able to walk the
-        country at your own pace. The climate is perfect for walkers all year
-        round. Since there is a strong climatic variation between the different
-        regions in this land. Prepare your legs and feet to walk and discover
-        the regions which make this country famous. From the national park of
-        Gerês in the North up to the Algarve in the southern corner of the
-        country, there is a wide range of different landscapes and culture to be
-        apart of. Choose a walk among the historical castles of Alentejo for
-        example, or venture yourself through the wine bastion of Portugal in
-        Douro, or simply depart on a spiritual journey to Santiago de
-        Compostela, whatever you choose, you wont regret it. We are here to make
-        sure that you are provided for and that you have a comfortable and
-        enjoyable experience. The act of walking though, is up to you. Feel free
-        to analyze our offers and to contact us in case of any doubt. We wish
-        you the best of walks.
-      color: '#475569'
-    image:
-      image_path: /src/assets/images/top-walking-tours-portugal.jpg
-      alt_text: Top Walking Tours Portugal
-    buttons:
-      - _bookshop_name: buttons/primary
-        button_text: About us
-        button_icon:
-        button_link: /about-us
-        background_color: '#034ad8'
-        hover_brightness: 0.25
-        text_color: '#f2f2f2'
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:
@@ -169,7 +127,12 @@ content_blocks:
       default: false
   - _bookshop_name: collection
     type: tours
-    title: '## **Find our popular tours**'
+    title: |-
+      ## **NORTH TO SOUTH**
+
+      ## **WALKING HOLIDAYS PORTUGAL**
+
+      ### **Popular hiking tours in Portugal**
   - _bookshop_name: left-right
     background_color: '#ffffff'
     heading:
