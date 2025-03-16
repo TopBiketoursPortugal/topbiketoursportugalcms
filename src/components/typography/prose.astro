@@ -9,7 +9,7 @@ type Props = {
 };
 const md = markdownit({ html: true });
 const { class: className, markdown } = Astro.props;
-const content = (markdown ? md.render(markdown) : markdown) ?? '';
+const content = (markdown ? md.render(markdown ?? '') : markdown) ?? '';
 ---
 
 <Stack

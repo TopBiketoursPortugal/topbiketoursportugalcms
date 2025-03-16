@@ -131,28 +131,20 @@ content_blocks:
     flipped: true
     button:
   - _bookshop_name: two-column-markdown
-    column1:
-      animation: slide-in
-      type: markdown
-      label: It is easy to book with us!
-      content: >-
-        Contact us thru our contact form or just email us. Request information
-        about the cycling tour packages available in our Portugal Bike Tours
-        webpage. We will reply in less than 24 hours and send an oficial
-        proposal with all the details. After your confirmation, accommodations
-        will be reserved and a deposit will be requested.
-    column2:
-      animation: slide-in
-      type: markdown
-      label: Top Bike Tours Portugal is prepared for all kind of cyclists
-      content: >-
-        Doesn´t matter if you are an inexperienced or experienced rider, if you
-        enjoy a touring bicycle, mountain bicycle, road bike or electric bike.
-        What matters most is that you enjoy, with your friends or family, the
-        good sensations a bike tour as to offer. Our team is here to ensure that
-        you have a relaxed and fantastic bicycle tour holiday.  If your looking
-        for a guided bike tour in Portugal check our Calendar webpage to see all
-        the departure.
+    column1: >-
+      Contact us thru our contact form or just email us. Request information
+      about the cycling tour packages available in our Portugal Bike Tours
+      webpage. We will reply in less than 24 hours and send an oficial proposal
+      with all the details. After your confirmation, accommodations will be
+      reserved and a deposit will be requested.
+    column2: >-
+      Doesn´t matter if you are an inexperienced or experienced rider, if you
+      enjoy a touring bicycle, mountain bicycle, road bike or electric bike.
+      What matters most is that you enjoy, with your friends or family, the good
+      sensations a bike tour as to offer. Our team is here to ensure that you
+      have a relaxed and fantastic bicycle tour holiday.  If your looking for a
+      guided bike tour in Portugal check our Calendar webpage to see all the
+      departure.
     padding:
       type: select
       label: Padding
@@ -248,22 +240,14 @@ content_blocks:
     flipped: true
     button:
   - _bookshop_name: two-column-markdown
-    column1:
-      animation: slide-in
-      type: markdown
-      label: Column 1 Content
-      content: |
-        ## Column 1
+    column1: |
+      ## Column 1
 
-        Enter your Markdown content here.
-    column2:
-      animation: slide-in
-      type: markdown
-      label: Column 2 Content
-      content: |
-        ## Column 2
+      Enter your Markdown content here.
+    column2: |
+      ## Column 2
 
-        Enter your Markdown content here.
+      Enter your Markdown content here.
     padding:
       type: select
       label: Padding
