@@ -10,8 +10,7 @@ collections_config:
     name: Pages
     icon: laptop_mac
     url:
-      "/{{slug|default: title|deburr|slugify|lowercase|trim|replace: 'home',
-      ''}}"
+      "/{slug|default: title|deburr|slugify|lowercase|trim|replace: 'home',''}"
     disable_url: false
     description: ''
     _enabled_editors:
