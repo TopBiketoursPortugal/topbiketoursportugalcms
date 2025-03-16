@@ -3,12 +3,12 @@ _schema: default
 id: 2f992fdc-8556-4d20-8486-01ed317b7a77
 order: 1
 title: Passeio a Pé e Caminhada na Costa Atlântica de Portugal
-language: 'pt'
 subTitle: >-
   Visite o Norte de Portugal caminhando pela costa, vendo as belas praias e
   cidades históricas
 content: >-
   # Passeio a Pé e Caminhada na Costa Atlântica de Portugal
+
 
   **Visite o Norte de Portugal caminhando pela costa, vendo as belas praias e
   cidades históricas**
@@ -25,37 +25,30 @@ content: >-
 
   **Descrição do percurso:**
 
-  - Os primeiros 3 dias são planos, com caminhos pedestres e ruas pavimentadas -
+
+  * Os primeiros 3 dias são planos, com caminhos pedestres e ruas pavimentadas -
   O quarto dia é plano com algumas colinas - Os últimos 2 dias são completamente
   planos - O percurso consiste em ruas pavimentadas e passadiços na maior parte
   do tempo
-
-  **Itinerário:**
-
-  **Dia 1:** Chegada ao Porto
-
-  **Dia 2:** Transfer do Porto para Póvoa de Varzim - Apúlia: 15 km
-
-  **Dia 3:** Apúlia – Esposende: 16 km
-
-  **Dia 4:** Esposende – Castelo de Neiva: 14 km
-
-  **Dia 5:** Castelo de Neiva – Viana do Castelo: 14 km
-
-  **Dia 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
-
-  **Dia 7:** Vila Praia de Âncora - Caminha: 8 km
-
-  **Dia 8:** Partida
+    **Itinerário:** **Dia 1:** Chegada ao Porto
+    **Dia 2:** Transfer do Porto para Póvoa de Varzim - Apúlia: 15 km
+    **Dia 3:** Apúlia – Esposende: 16 km
+    **Dia 4:** Esposende – Castelo de Neiva: 14 km
+    **Dia 5:** Castelo de Neiva – Viana do Castelo: 14 km
+    **Dia 6:** Viana do Castelo – Vila Praia de Âncora: 19 km
+    **Dia 7:** Vila Praia de Âncora - Caminha: 8 km
+    **Dia 8:** Partida
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
 code: NT03
+slug: coastal-route-to-santiago-compostela-stage-2
+language: pt
 type: PackageTour
+region: north
 itinerary:
   - title: 'Dia 1: Chegada ao Porto'
-    description:
-      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+    description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
@@ -324,29 +317,29 @@ packages:
     bestValue: false
     type: ''
 afterPricing: >-
-  ***Épocas:**
+  \***Épocas:**
 
 
-  - EB - Época Baixa: 01 Nov a 25 Mar
+  * EB - Época Baixa: 01 Nov a 25 Mar
 
-  - ER - Época Regular: 26 Mar a 25 Jun e 26 Set a 31 Out
+  * ER - Época Regular: 26 Mar a 25 Jun e 26 Set a 31 Out
 
-  - EA - Época Alta: 01 Set a 25 Set
+  * EA - Época Alta: 01 Set a 25 Set
 
-  - EV - Época de Verão: 26 Jun a 30 Ago
+  * EV - Época de Verão: 26 Jun a 30 Ago
 
 
   **Observações:**
 
 
-  - Os preços são baseados para 2 pessoas a partilhar o mesmo quarto;
+  * Os preços são baseados para 2 pessoas a partilhar o mesmo quarto;
 
-  - Os preços podem sofrer atualizações devido à época alta, feriados ou fins de
+  * Os preços podem sofrer atualizações devido à época alta, feriados ou fins de
   semana
 
-  - Bebidas não estão incluídas no almoço e jantar quando incluídos no pacote
+  * Bebidas não estão incluídas no almoço e jantar quando incluídos no pacote
 
-  - Se em quarto triplo com os pais, crianças até 10 anos - 35% de desconto.
+  * Se em quarto triplo com os pais, crianças até 10 anos - 35% de desconto.
   Crianças dos 11 aos 14 anos - 20% de desconto. Crianças dos 15 aos 17 anos -
   15% de desconto.
 
@@ -354,11 +347,11 @@ afterPricing: >-
   **Extras**
 
 
-  - Viajante individual: 200 €
+  * Viajante individual: 200 €
 
-  - Suplemento individual: EB: 300€, ER: 329€, EA: 360€, EV: 390€
+  * Suplemento individual: EB: 300€, ER: 329€, EA: 360€, EV: 390€
 
-  - Noites extra: sob consulta
+  * Noites extra: sob consulta
 seo:
   page_title:
   page_description:
@@ -368,10 +361,8 @@ seo:
   author_twitter_handle:
   open_graph_type:
   no_index: false
-content_blocks: []
 duration: 8
 distance: 84
-tags: []
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 1
@@ -393,6 +384,11 @@ images:
     alt: Centro da cidade de Caminha
   - src: /src/assets/images/suave-mar-hotel.jpg
     alt: Hotel Suave Mar
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 feature:
   align: center
   imageAlign: center center
@@ -403,5 +399,4 @@ feature:
   title: ' Rota Costeira para Santiago de Compostela Etapa 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Reserve agora
-relatedTours: []
 ---

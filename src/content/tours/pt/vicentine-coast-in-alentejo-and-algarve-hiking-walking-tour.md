@@ -1,14 +1,18 @@
 ---
+_schema: default
 id: 52ed15a4-8233-47f9-9f79-d314f2ac1dad
-templateKey: tour-gen
 order: 4
-language: 'pt'
+title: Vicentine West Coast in Alentejo Stage 1
+subTitle: '1'
 content: >-
   # Vicentine West Coast in Alentejo Hiking & walking tour
 
+
   ## The south of Portugal through the coastline
 
+
   ### **Explore the famous Vicentine Coast and walk on the region of Alentejo**
+
 
   Nature, beaches and small little towns is what it be can found throughout most
   of this hike. The Vicentine Coast is a wild natural park which covers the
@@ -20,51 +24,23 @@ content: >-
 
   **Route description:**
 
-  - Mostly flat all days with only some short uphills - 50% of paved roads and
+
+  * Mostly flat all days with only some short uphills - 50% of paved roads and
   50% of natural and dirt roads
-
-  **Itinerary:**
-
-  **Day 1:** Lisbon arrival
-
-  **Day 2:** Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km
-
-  **Day 3**: Vila Nova de Mil Fontes – Almograve: 13 km
-
-  **Day 4:** Almograve – Zambujeira do Mar: 17 km (or 21 Km)
-
-  **Day 5**: Zambujeira do Mar – Azenhas do Mar: 14 Km
-
-  **Day 6:** Azenhas do Mar – Odeceixe: 12 km
-
-  **Day 7:** Departure
-code: VC01
-featured: true
+    **Itinerary:** **Day 1:** Lisbon arrival
+    **Day 2:** Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km
+    **Day 3**: Vila Nova de Mil Fontes – Almograve: 13 km
+    **Day 4:** Almograve – Zambujeira do Mar: 17 km (or 21 Km)
+    **Day 5**: Zambujeira do Mar – Azenhas do Mar: 14 Km
+    **Day 6:** Azenhas do Mar – Odeceixe: 12 km
+    **Day 7:** Departure
 image:
   src: /src/assets/images/zambujeira-do-mar-2-.jpg
   alt: ''
-title: 'Vicentine West Coast in Alentejo Stage 1'
-packagetype: PackageTour
-tourtype: WalkingTour
-meta:
-  title: Vicentine Coast in Alentejo  Hiking & walking tour
-  description:
-    An amazing walking tour through one of the best coastlines of Europe. This
-    wild Natural Park in the southwest of Alentejo includes wild beaches
-    surrounded by imposing cliffs, cork oak groves, traditional fishing villages
-  keywords:
-    vicentine coast walking, hiking vicentine coast portugal,algarve hiking
-    tour, alentejo hiking tour
-  robots: INDEX
-groupSizeMin: -2
-minAge: 16
-skill: 1
-distance: 75
-distanceUnit: Km
-duration: 7
-durationUnit: Days | 6 Nights
-difficulty: 2
-mapUrl: https://www.google.com/maps/d/u/1/embed?mid=184TvaT93Kjqoqa8vB9azJStV1nzAj-Vu
+code: VC01
+slug: coastal-route-to-santiago-compostela-stage-2
+language: pt
+type: WalkingTour
 region: north
 itinerary:
   - day: '1'
@@ -72,9 +48,9 @@ itinerary:
     location:
       lat: '1'
       lng: '1'
-    description:
-      'Hotel 4*: [Turim
-      Europa](https://www.turim-hotels.com/hoteis/Turim-Europa-Hotel)'
+    description: >-
+      Hotel 4*: [Turim
+      Europa](https://www.turim-hotels.com/hoteis/Turim-Europa-Hotel)
   - title: 'Day 2: Trasnfer to Porto Covo – Vila Nova de Mil Fontes: 19 km'
     day: '2'
     description: >-
@@ -161,21 +137,6 @@ itinerary:
     location:
       lat: '1'
       lng: '1'
-images:
-  - src: /src/assets/images/agriculture.jpg
-    alt: Agriculture
-  - src: /src/assets/images/zambujeira-city-center.jpg
-    alt: Zambujeira city center
-  - src: /src/assets/images/animals-view.jpg
-    alt: aninals view
-  - src: /src/assets/images/ocean-view.jpg
-    alt: Atlantic ocean view
-  - src: /src/assets/images/near-the-cliffs.jpg
-    alt: near the cliffs
-  - src: /src/assets/images/porto-covo.jpg
-    alt: Porto Covo
-  - src: /src/assets/images/odeceixe-beach.jpg
-    alt: Odeceixe beach
 packages:
   - bestValue: false
     title: Self Guided Hiking tour
@@ -183,31 +144,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: No
+        description: 'No'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 pax
       - title: 6 Nights / 7 Days
@@ -232,31 +193,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 5 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -279,31 +240,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4/3 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Lisbon Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Lisbon
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 5 light Picnics
         description: 5 Lunches
       - title: 5 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 6 Nights / 7 Days
@@ -355,6 +316,63 @@ afterPricing: >-
   * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
 
   * Extra nights: on request
+seo:
+  page_title:
+  page_description:
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type:
+  no_index: false
+duration: 7
+distance: 75
+tags:
+  - Moderate to hard
+  - Package tours
+minGroupSize: 2
+maxGroupSize: 3
+difficulty: 2
+skill: 1
+minAge: 16
+mapUrl: https://www.google.com/maps/d/u/1/embed?mid=184TvaT93Kjqoqa8vB9azJStV1nzAj-Vu
+images:
+  - src: /src/assets/images/agriculture.jpg
+    alt: Agriculture
+  - src: /src/assets/images/zambujeira-city-center.jpg
+    alt: Zambujeira city center
+  - src: /src/assets/images/animals-view.jpg
+    alt: aninals view
+  - src: /src/assets/images/ocean-view.jpg
+    alt: Atlantic ocean view
+  - src: /src/assets/images/near-the-cliffs.jpg
+    alt: near the cliffs
+  - src: /src/assets/images/porto-covo.jpg
+    alt: Porto Covo
+  - src: /src/assets/images/odeceixe-beach.jpg
+    alt: Odeceixe beach
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
+templateKey: tour-gen
+featured: true
+packagetype: PackageTour
+tourtype: WalkingTour
+meta:
+  title: Vicentine Coast in Alentejo  Hiking & walking tour
+  description: >-
+    An amazing walking tour through one of the best coastlines of Europe. This
+    wild Natural Park in the southwest of Alentejo includes wild beaches
+    surrounded by imposing cliffs, cork oak groves, traditional fishing villages
+  keywords: >-
+    vicentine coast walking, hiking vicentine coast portugal,algarve hiking
+    tour, alentejo hiking tour
+  robots: INDEX
+groupSizeMin: -2
+distanceUnit: Km
+durationUnit: Days | 6 Nights
 feature:
   align: center
   imageAlign: center center
@@ -365,14 +383,4 @@ feature:
   title: Vicentine Coast in Alentejo and Algarve Hiking & walking tour
   image: /src/assets/images/walking-pescadores-trail.jpg
   bokunLinkText: Book now
-seo:
-  page_title:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
-  no_index: false
-relatedTours: []
 ---

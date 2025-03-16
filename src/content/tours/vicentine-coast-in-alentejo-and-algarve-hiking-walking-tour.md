@@ -34,11 +34,11 @@ content: >-
   **Itinerary:**
 
 
-  * **Day 1:**Lisbon arrival and transfer to Aljezur
+  * \*\*Day 1:\*\*Lisbon arrival and transfer to Aljezur
 
   * **Day 2:** Aljezur – Arrifana: 16 Km
 
-  * **Day 3:**Arrifana – Carrapateira: 20 km
+  * \*\*Day 3:\*\*Arrifana – Carrapateira: 20 km
 
   * **Day 4:** Carrapateira – Pedralva: 8 Km
 
@@ -46,7 +46,7 @@ content: >-
 
   * **Day 6:** Vila do Bispo – Sagres: 24 km
 
-  * **Day 7:**Departure
+  * \*\*Day 7:\*\*Departure
 image:
   src: /src/assets/images/zambujeira-do-mar-2-.jpg
   alt: ''
@@ -379,29 +379,6 @@ images:
     alt: Porto Covo
   - src: /src/assets/images/odeceixe-beach.jpg
     alt: Odeceixe beach
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: '2023-10-15T00:00:00Z'
-    content: >
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1

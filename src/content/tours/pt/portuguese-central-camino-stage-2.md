@@ -1,18 +1,15 @@
 ---
+_schema: default
 id: f4a9c860-0d76-49ce-8cf7-235d48512910
 order: 9
-code: ST02
-featured: true
-language: 'pt'
-image:
-  src: /src/assets/images/valenca-do-minho-bridge.jpg
-  alt: ''
-
-title: 'Portuguese Central Camino Stage 2'
+title: Portuguese Central Camino Stage 2
+subTitle: '1'
 content: >-
   # Portuguese Central Camino: Stage 2
 
+
   ## **The old and original route to Santiago de Compostela**
+
 
   The Portuguese Central Camino is perfect for those who enjoy a good hiking and
   those who want to try a combination between Portuguese and Spanish history,
@@ -32,18 +29,17 @@ content: >-
 
   **Route description:**
 
-  - On this route all kind of terrains are to be expected. The route has some
+
+  * On this route all kind of terrains are to be expected. The route has some
   long
     and difficult climbs.
-  - Paved streets in rural and urban areas; 35 % of the walk will be in the
+  * Paved streets in rural and urban areas; 35 % of the walk will be in the
     forest.
-  - The main roads are avoided for the majority of the time and as such every
+  * The main roads are avoided for the majority of the time and as such every
   kind
     of terrain is used during this walk
 
-  **Itinerary:**
-
-  **Day 1**: Valença do Minho
+  **Itinerary:** **Day 1**: Valença do Minho
 
   **Day 2:** Valença do Minho – Porrinõ: 20 km
 
@@ -58,43 +54,20 @@ content: >-
   **Day 7:** Padrón – Santiago de Compostela: 25 Km
 
   **Day 8:** Departure
-packagetype: PackageTour
-tourtype: WalkingTour
-meta:
-  title: 'Central Camino to Santiago from Porto Stage 2'
-  description:
-    history, cultural and gastronomy flavors and Spanish history, cultural,
-    gastronomy, and also, the adventure of arriving to Santiago and visit the
-    catacombs.
-  keywords:
-    hike camino to santiago de compostela, WALKING THE CAMINO FROM PORTO
-    PORTUGAL
-  robots: INDEX
-minAge: 16
-skill: 4
-distance: 128
-distanceUnit: Km
-duration: 8
-durationUnit: Days | 7 Nights
-difficulty: 4
-rating: []
-mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1VhcZ4AWrcUlxin9KTIRDCP1QGqHRf9-T
-seo:
-  page_title:
-  page_description:
-  canonical_url:
-  featured_image:
-  featured_image_alt:
-  author_twitter_handle:
-  open_graph_type:
-  no_index: false
+image:
+  src: /src/assets/images/valenca-do-minho-bridge.jpg
+  alt: ''
+code: ST02
+slug: coastal-route-to-santiago-compostela-stage-2
+language: pt
+type: WalkingTour
 region: north
 itinerary:
   - day: '1'
     title: 'Day 1: Valença do Minho'
-    description:
-      'Hotel 4*: [Pousadas de
-      Valença](https://www.pousadas.pt/pt/hotel/pousada-de-valenca)'
+    description: >-
+      Hotel 4*: [Pousadas de
+      Valença](https://www.pousadas.pt/pt/hotel/pousada-de-valenca)
     location:
       lat: '1'
       lng: '1'
@@ -238,13 +211,6 @@ itinerary:
     location:
       lat: '1'
       lng: '1'
-images:
-  - src: /src/assets/images/caldas-de-reis-accommodations.jpg
-    alt: Caldas de reis accommodations
-  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
-    alt: Santiago de Compostela city center
-  - src: /src/assets/images/the-way-of-st.-james-hike-tour-waterfall.jpg
-    alt: water fall
 packages:
   - bestValue: false
     title: Self Guided bike Tour
@@ -252,31 +218,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: No
+        description: 'No'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: Yes
+        description: 'Yes'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: Yes
+        description: 'Yes'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: No
+        description: 'No'
       - title: Personal Accident Insurance
-        description: No
+        description: 'No'
       - title: Liability Insurance
-        description: No
+        description: 'No'
       - title: Min. Participants
         description: 1 Pax
       - title: 7 Nights / 8 Days
@@ -299,31 +265,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
         description: Yes (minimum 8 pax)
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
-        description: Yes
+        description: 'Yes'
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: ' 8 Pax'
       - title: 7 Nights / 8 Days
@@ -346,31 +312,31 @@ packages:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
-        description: Yes
+        description: 'Yes'
       - title: Porto Airport Transfers
-        description: Yes
+        description: 'Yes'
       - title: Train or Bus Tickets Back to Porto
-        description: Yes
+        description: 'Yes'
       - title: Van Support
-        description: Yes
+        description: 'Yes'
       - title: Roadbook + Briefing
-        description: Yes
+        description: 'Yes'
       - title: GPS With route per booking
-        description: No
+        description: 'No'
       - title: Bag and water bottle
-        description: Yes
+        description: 'Yes'
       - title: T-shirt
-        description: Yes
+        description: 'Yes'
       - title: Guide
-        description: No
+        description: 'No'
       - title: 6 light Picnics
         description: 6 Lunches
       - title: 6 Dinners
-        description: Yes
+        description: 'Yes'
       - title: Personal Accident Insurance
-        description: Yes
+        description: 'Yes'
       - title: Liability Insurance
-        description: Yes
+        description: 'Yes'
       - title: Min. Participants
         description: 8 Pax
       - title: 7 Nights / 8 Days
@@ -387,15 +353,96 @@ packages:
       currency: EUR
       price: 1972
       promo: 0
+afterPricing: >-
+  **\*Season:**
+
+
+  * LS - Low season: Nov 01 to Mar 25
+
+  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
+
+  * HS - High Season: Set 01 to 25 Set
+
+  * SS - Summer Season: Jun 26 to August 30
+
+
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same room;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included at lunch and dinner when included in the package
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Solo traveler: 200 €
+
+  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
+
+  * Extra nights: on request
+seo:
+  page_title:
+  page_description:
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type:
+  no_index: false
+duration: 8
+distance: 128
+tags:
+  - Moderate to hard
+  - Package tours
+minGroupSize: 2
+maxGroupSize: 3
+difficulty: 4
+skill: 4
+minAge: 16
+mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1VhcZ4AWrcUlxin9KTIRDCP1QGqHRf9-T
+images:
+  - src: /src/assets/images/caldas-de-reis-accommodations.jpg
+    alt: Caldas de reis accommodations
+  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
+    alt: Santiago de Compostela city center
+  - src: /src/assets/images/the-way-of-st.-james-hike-tour-waterfall.jpg
+    alt: water fall
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
+featured: true
+packagetype: PackageTour
+tourtype: WalkingTour
+meta:
+  title: Central Camino to Santiago from Porto Stage 2
+  description: >-
+    history, cultural and gastronomy flavors and Spanish history, cultural,
+    gastronomy, and also, the adventure of arriving to Santiago and visit the
+    catacombs.
+  keywords: >-
+    hike camino to santiago de compostela, WALKING THE CAMINO FROM PORTO
+    PORTUGAL
+  robots: INDEX
+distanceUnit: Km
+durationUnit: Days | 7 Nights
 feature:
   align: center
   imageAlign: center center
   bokunLink: ''
   bokunId: ''
   textColor: white
-  subTitle: 'Central Camino to Santiago from Porto Stage 2'
-  title: 'Central Camino to Santiago from Porto Stage 2'
+  subTitle: Central Camino to Santiago from Porto Stage 2
+  title: Central Camino to Santiago from Porto Stage 2
   image: /src/assets/images/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---

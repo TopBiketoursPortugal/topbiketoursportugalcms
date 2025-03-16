@@ -2,7 +2,7 @@
 _schema: default
 id: 7d1a47a7-10f3-4abc-b156-5908f5551b70
 order: 8
-title: 'Coastal route to Santiago Compostela Stage 2'
+title: Coastal route to Santiago Compostela Stage 2
 subTitle: '1'
 content: >-
   # Coastal route to Santiago Compostela: Stage 2
@@ -57,7 +57,8 @@ image:
   src: /src/assets/images/santiago-de-compostela-city-center.jpg
   alt: '312'
 code: ST04
-language: 'pt'
+slug: coastal-route-to-santiago-compostela-stage-2
+language: pt
 type: WalkingTour
 region: north
 itinerary:
@@ -408,31 +409,14 @@ images:
     alt: vigo bay view
   - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
     alt: porto city center
-  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
+  - src: >-
+      /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
     alt: POrto douro river
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
-    content: >-
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
-    content: >-
-      These headphones are fantastic! The noise cancellation works perfectly,
-      and the sound quality is top-notch. Highly recommend them for anyone
-      looking for a premium audio experience.
+faqs:
+  - question: Q1
+    answer: A1
+  - question: Q2
+    answer: A1
 feature:
   align: center
   imageAlign: center center
@@ -443,5 +427,4 @@ feature:
   title: ' Coastal route to Santiago Compostela Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours: []
 ---
