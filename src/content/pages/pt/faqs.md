@@ -3,6 +3,7 @@ template: ~/layouts/Page.astro
 id: 67def81f-5897-44df-aeef-c06c4e6e32f6
 language: pt
 title: Faqs
+slug: faqs
 draft: false
 seo:
   page_title:

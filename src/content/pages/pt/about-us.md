@@ -3,6 +3,7 @@ _schema: default
 id: 0016c707-c4c5-4af2-9a86-d737f552484e
 template: ~/layouts/Page.astro
 title: Sobre nós
+slug: sobre-nos
 language: pt
 seo:
   page_title:

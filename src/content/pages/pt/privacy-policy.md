@@ -2,6 +2,7 @@
 _schema: default
 id: 06a52988-e468-4118-b290-3f4eae5bb245
 title: Política de Privacidade
+slug: politica-de-privacidade
 language: pt
 seo:
   page_title: Política de Privacidade da Top Bike Tours Portugal

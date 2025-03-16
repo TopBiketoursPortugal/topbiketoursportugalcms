@@ -3,6 +3,7 @@ template: ~/layouts/Page.astro
 id: dab25155-cf15-463e-8ca7-51bf3d34e274
 language: pt
 title: testemunhos
+slug: testemunhos
 draft: false
 showPageTitle: true
 seo:
