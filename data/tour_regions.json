@@ -68,12 +68,12 @@
     "id": 6,
     "pt": {
       "name": "Santiago compostela",
-      "title": "Best tours in South of Portugal",
-      "src": "/src/assets/images/sul.jpg"
+      "title": "Santiago compostela",
+      "src": "/src/assets/images/santiago-de-compostela-city-center.jpg"
     },
     "en": {
       "name": "Santiago compostela",
-      "title": "Best tours in South of Portugal",
+      "title": "Santiago compostela",
       "src": "/src/assets/images/sul.jpg"
     }
   }
