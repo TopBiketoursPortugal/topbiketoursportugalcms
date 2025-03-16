@@ -2,6 +2,7 @@
 _schema: default
 id: a8607495-f8ce-4200-afdd-68f04ec13246
 title: Hiking tours portugal
+slug: hiking-tours-portugal
 showPageTitle: true
 seo:
   page_title:
