@@ -32,9 +32,9 @@ seo:
 
 # **Benefits of your first walking tour!**
 
-You don´t use to walk and you haven´t think about the idea of a hiking tour
+You don't use to walk and you haven't think about the idea of a hiking tour
 experience? Maybe you have the wrong idea that this is for avid walkers that
-hike all day, wearing lycra and sweating….but hiking tours aren´t like that
+hike all day, wearing lycra and sweating….but hiking tours aren't like that
 (note: some are). You should consider do a walking trip and there are some
 reasons for that:
 
