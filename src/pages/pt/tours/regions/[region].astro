@@ -27,8 +27,7 @@ export async function getStaticPaths() {
       }),
       tours:
         tours.filter(
-          (tour) =>
-            tour.data.region?.toLowerCase() === region.en.name.toLowerCase()
+          (tour) => parseInt(tour.data.region + '', 10) === region.id
         ) ?? []
     }
   }));

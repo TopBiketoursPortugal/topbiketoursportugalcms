@@ -22,7 +22,10 @@ export async function getStaticPaths() {
         strict: true,
         trim: true
       }),
-      tours: tours.filter((tour) => tour.data.region === region.id) ?? []
+      tours:
+        tours.filter(
+          (tour) => parseInt(tour.data.region + '', 10) === region.id
+        ) ?? []
     }
   }));
 }
