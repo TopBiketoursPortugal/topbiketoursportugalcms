@@ -9,8 +9,10 @@ subTitle: >-
 content: >-
   # Atlantic Coast of Portugal walking & Hiking tour
 
+
   ## Visit the North of Portugal walking in the coast seeing the beautiful
   beaches and historical city´s
+
 
   The coast of the Atlantic Ocean is one the best areas to walk on and, at the
   same time, enjoy the beautiful beaches and the history that the northern towns
@@ -24,6 +26,7 @@ content: >-
 
 
   ### **Route description:**
+
 
   * The first 3 days are flat on walking paths and paved streets
 
@@ -52,7 +55,6 @@ content: >-
   Day 7: Vila Praia de Âncora - Caminha: 8 km
 
   Day 8: departure
-
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
@@ -62,16 +64,15 @@ language: en
 type: PackageTour
 region: '1'
 itinerary:
-  - title: 'Day 1: Porto arrival'
-    description:
-      'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
+  - title: '**Day 1: Porto arrival**'
+    description: 'Hotel 4\*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '1'
-  - title: 'Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km'
+  - title: '**Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km**'
     description: >-
       The first day starts in the city of Póvoa de Varzim and goes near the
       coast following the Caminho de Santiago Português da Costa. This day is
@@ -81,14 +82,14 @@ itinerary:
       fresh sardines or octopus rice.
 
 
-      Hotel 4*: [Apúlia Praia Hotel](http://apuliapraia-hotel.com/en/home/)
+      Hotel 4\*: [Apúlia Praia Hotel](http://apuliapraia-hotel.com/en/home/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '2'
-  - title: 'Day 3: Apúlia – Esposende: 16 km'
+  - title: '**Day 3: Apúlia – Esposende: 16 km**'
     description: >-
       The second day of this walk tour, continues on flat terrain with paved
       roads. Take the opportunity to visit the Parish Church of Fão, a place of
@@ -99,14 +100,14 @@ itinerary:
       century IV BC.
 
 
-      Hotel 3*: [Suave Mar](https://www.suavemar.com/)
+      Hotel 3\*: [Suave Mar](https://www.suavemar.com/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '3'
-  - title: 'Day 4: Esposende – Castelo de Neiva: 14 km'
+  - title: '**Day 4: Esposende – Castelo de Neiva: 14 km**'
     description: >-
       On this route of 14 km the walking tour starts near the coast line, with
       paved roads and enjoying the beautiful beaches that the north of Portugal
@@ -123,7 +124,7 @@ itinerary:
       region: ''
       city: ''
     day: '4'
-  - title: 'Day 5: Castelo de Neiva – Viana do Castelo: 14 km'
+  - title: '**Day 5: Castelo de Neiva – Viana do Castelo: 14 km**'
     description: >-
       Leaving Castelo de Neiva in order to get to Viana do Castelo, you will
       find a route with several ups and downs until your final destination.
@@ -134,14 +135,14 @@ itinerary:
       Santa Lúzia Sanctuary.
 
 
-      Hotel 4*: [Melo Alvim](https://hotelmeloalvim.com/)
+      Hotel 4\*: [Melo Alvim](https://hotelmeloalvim.com/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '5'
-  - title: 'Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km'
+  - title: '**Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km**'
     description: >-
       Nearly nineteen kilometers separate Viana and Vila Praia de Âncora. The
       walk itself is flat, done mainly on dirt paths and cobblestone roads. It
@@ -152,14 +153,14 @@ itinerary:
       Barrosa in Vila Praia de Âncora.
 
 
-      Hotel 4*: [Hotel Meira](http://www.hotelmeira.com/)
+      Hotel 4\*: [Hotel Meira](http://www.hotelmeira.com/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '6'
-  - title: 'Day 7: Vila Praia de Âncora - Caminha: 8 km'
+  - title: '**Day 7: Vila Praia de Âncora - Caminha: 8 km**'
     description: >-
       Continuing along the coast and keeping the same type of low land terrain,
       the walk today gets to the heart of the river that divides Portugal and
@@ -170,14 +171,14 @@ itinerary:
       roasted codfish.
 
 
-      Hotel 4*: [Portas do Sol](https://www.hotelportadosol.com/)
+      Hotel 4\*: [Portas do Sol](https://www.hotelportadosol.com/)
     location:
       lat: '1'
       lng: '1'
       region: ''
       city: ''
     day: '7'
-  - title: 'Day 8: departure'
+  - title: '**Day 8: departure**'
     description: ''
     location:
       lat: '1'
@@ -335,8 +336,6 @@ packages:
     bestValue: false
     type: ''
 afterPricing: >-
-
-
   **Season:**
 
 
@@ -427,7 +426,7 @@ reviews:
       givenName: John
       familyName: Doe
       country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
+    datePublished: '2023-10-15T00:00:00Z'
     content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
@@ -438,7 +437,7 @@ reviews:
       givenName: John
       familyName: Doe
       country: Portugal
-    datePublished: 2023-10-15T00:00:00Z
+    datePublished: '2023-10-15T00:00:00Z'
     content: >-
       These headphones are fantastic! The noise cancellation works perfectly,
       and the sound quality is top-notch. Highly recommend them for anyone
@@ -448,6 +447,8 @@ faqs:
     answer: A1
   - question: Q2
     answer: A1
+relatedTours:
+  - af115fc4-1aae-4854-a97b-53a4c777d9f0
 feature:
   align: center
   imageAlign: center center
@@ -458,6 +459,4 @@ feature:
   title: ' Coastal route to Santiago Compostela: Stage 1'
   image: /img/top-walking-tours-portugal.jpg
   bokunLinkText: Book now
-relatedTours:
-  - af115fc4-1aae-4854-a97b-53a4c777d9f0
 ---
