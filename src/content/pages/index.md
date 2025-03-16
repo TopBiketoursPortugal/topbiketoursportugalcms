@@ -47,6 +47,11 @@ content_blocks:
       have a comfortable and enjoyable experience. The act of walking though, is
       up to you. Feel free to analyze our offers and to contact us in case of
       any doubt. We wish you the best of walks.
+
+
+      <SnippetsAstroImage
+      image_path="/src/assets/images/top-walking-hiking-portugal.jpg"
+      image_alt="Portugal Walking & Hiking Tours"/>
     style:
       container: Contained
       padding: Normal
