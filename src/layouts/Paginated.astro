@@ -14,9 +14,9 @@ export type PaginatedProps = {
 
 type Props = PaginatedProps;
 
-if (!Astro.props.frontmatter) {
-  throw new Error('Page frontmatter must be defined');
-}
+// if (!Astro.props.frontmatter) {
+//   throw new Error('Page frontmatter must be defined');
+// }
 const { featured_posts, ...props } = Astro.props.frontmatter;
 ---
 

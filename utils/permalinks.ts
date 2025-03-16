@@ -84,7 +84,7 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   const language = page.data.language ?? 'en';
 
   if (
-    page.data.slug === '' ||
+    // page.data.slug === '' ||
     page.data.slug === 'index' ||
     page.data.slug === 'home' ||
     page.filePath?.endsWith('index.md') ||

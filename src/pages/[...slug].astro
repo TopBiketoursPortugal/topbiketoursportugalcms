@@ -10,7 +10,6 @@ export interface Props {
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
-  console.log(pages.map((p) => p.filePath));
   return pages.map((page) => {
     const slug = getPagePath(page);
     if (slug.length === 0)
