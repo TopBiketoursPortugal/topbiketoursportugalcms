@@ -19,7 +19,7 @@ const collectionComponentImports = import.meta.glob(
 
 const { type = 'tours', ...data } = Astro.props;
 
-const componentName = `/src/components/collection/components/${type}-collection.astro`;
+const componentName = `/src/components/collection/${type}-collection.astro`;
 const CollectionComponent = (collectionComponentImports[componentName] as any)
   ?.default;
 ---
