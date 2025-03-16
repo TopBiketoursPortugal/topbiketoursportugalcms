@@ -5,6 +5,7 @@ import Rating from 'src/components/rating/rating.astro';
 import { getImageByPath } from 'utils/get-image';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import Icon from 'src/components/utility/icon.astro';
+import Prose from '../typography/prose.astro';
 
 type Props = {
   name?: string;
@@ -38,7 +39,7 @@ const imageOptimized = photo
   <p class="text-xl font-semibold">{name}-{country}</p>
   <span class="inline text-neutral-600 dark:text-neutral-300">
     <Icon icon="ph:quotes-fill" />
-    {content}
+    <Prose markdown={content} />
+    <Rating rating={rating} />
   </span>
-  <Rating rating={rating} />
 </div>
