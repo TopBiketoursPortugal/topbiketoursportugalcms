@@ -2,6 +2,7 @@
 _schema: default
 id: 17e20631-ad55-4b9e-8553-c047839cda31
 title: Contacts
+slug: contacts
 showPageTitle: true
 seo:
   page_title:
@@ -15,7 +16,6 @@ seo:
   metas: []
 content_blocks: []
 template: ~/layouts/Contacts.astro
-slug: contacts
 language: en
 content_blocks_after: []
 ---

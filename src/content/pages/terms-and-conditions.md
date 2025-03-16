@@ -2,6 +2,7 @@
 _schema: default
 id: 374b61b1-17bb-468b-a1d2-9cb9483dd1fc
 title: Terms and conditions
+slug: terms-and-conditions
 seo:
   page_title:
   page_description: Terms and conditions

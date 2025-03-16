@@ -221,7 +221,7 @@ collections_config:
       itinerary[*].location.lon:
         type: text
         cascade: true
-      itinerary[*].location.countryCode:
+      itinerary[*].location.country:
         type: select
         options:
           allow_empty: true
@@ -238,7 +238,7 @@ collections_config:
         cascade: true
       itinerary[*].location.region:
         type: text
-        cascade: false
+        cascade: true
       relatedTours:
         type: multiselect
         options:

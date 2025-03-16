@@ -2,6 +2,7 @@
 _schema: default
 id: b39b71a5-9aa2-443b-9631-9e95f6dbdd9b
 title: About Us
+slug: about-us
 showPageTitle: true
 seo:
   page_title:

@@ -3,6 +3,7 @@ template: ~/layouts/Page.astro
 id: 43f0a571-f876-4b52-b4bc-6058b01a09c7
 language: en
 title: testimonials
+slug: testimonials
 draft: false
 showPageTitle: true
 seo:

@@ -2,6 +2,7 @@
 _schema: paginated
 id: 9bfbffdf-f0bc-4936-92be-a6ea949ba8b7
 title: Blog
+slug: blog
 featured_posts:
   main_feature:
   feature_list:
