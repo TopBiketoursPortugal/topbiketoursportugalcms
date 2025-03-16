@@ -25,7 +25,7 @@ collections_config:
         icon: pages
         schema: default
     create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
+      path: '[relative_base_path]/{slug}.md'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
