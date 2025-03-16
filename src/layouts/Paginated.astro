@@ -17,7 +17,7 @@ type Props = PaginatedProps;
 // if (!Astro.props.frontmatter) {
 //   throw new Error('Page frontmatter must be defined');
 // }
-const { featured_posts, ...props } = Astro.props.frontmatter;
+const { ...props } = Astro.props.frontmatter;
 ---
 
 <Layout {...props}>
@@ -30,8 +30,12 @@ const { featured_posts, ...props } = Astro.props.frontmatter;
       {props.title}
     </h1>
     {
-      featured_posts !== null && featured_posts !== undefined ? (
-        <FeaturedPosts bookshop:live {...featured_posts} />
+      Astro.props.frontmatter?.featured_posts !== null &&
+      Astro.props.frontmatter.featured_posts !== undefined ? (
+        <FeaturedPosts
+          bookshop:live
+          {...Astro.props.frontmatter.featured_posts}
+        />
       ) : null
     }
     <slot />

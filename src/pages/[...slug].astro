@@ -9,13 +9,19 @@ export interface Props {
 }
 
 export async function getStaticPaths() {
-  const pages = await getCollection('pages');
-  return pages.map((page) => {
+  const pagesCollection = await getCollection('pages');
+  var pages = pagesCollection.map((page) => {
     const slug = getPagePath(page);
     if (slug.length === 0)
       return { params: { slug: undefined }, props: { page } };
     return { params: { slug }, props: { page } };
   });
+
+  console.log(
+    pages.map((p) => ({ slug: p.params.slug, title: p.props.page.data.title }))
+  );
+
+  return pages;
 }
 
 const { page } = Astro.props;
