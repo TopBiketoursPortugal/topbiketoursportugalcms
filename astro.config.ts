@@ -11,7 +11,7 @@ import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
-import astroMetaTags from 'astro-meta-tags';
+// import astroMetaTags from 'astro-meta-tags';
 // import { shield } from '@kindspells/astro-shield';
 // import playformCompress from '@playform/compress';
 // import min from 'astro-min';
@@ -27,7 +27,6 @@ export default defineConfig({
     tailwind(),
     bookshop(),
     alpine(),
-    mdx(),
     favicons(),
     icon({
       // svgoOptions: {},
@@ -47,7 +46,9 @@ export default defineConfig({
           pt: 'pt'
         }
       }
-    })
+    }),
+    mdx()
+
     // AstroPWA({
     //   registerType: 'autoUpdate',
     //   injectRegister: 'auto',
