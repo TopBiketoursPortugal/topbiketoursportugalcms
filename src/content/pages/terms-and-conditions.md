@@ -131,6 +131,5 @@ content_blocks:
       padding: Normal
       align: Centered
 template: ~/layouts/Page.astro
-slug: terms-and-conditions
 language: en
 ---
