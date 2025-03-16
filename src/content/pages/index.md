@@ -19,6 +19,38 @@ seo:
   open_graph_type:
   no_index: false
 content_blocks:
+  - _bookshop_name: text
+    text: >-
+      # **Portugal Walking & Hiking Tours**
+
+
+      ## **Hike Portugal with Top Walking tours Portugal**
+
+
+      Welcome to Portugal, land of many stories and dreams. In the south western
+      edge of continental Europe, a small yet wonderful country remains to be
+      found. This... is an old country with plentiful history and nature to
+      share with any passing visitor. From north to south there are magnificent
+      places to take a walk on. Both on the coast or inland and through
+      historical or natural areas, you will be able to walk the country at your
+      own pace. The climate is perfect for walkers all year round. Since there
+      is a strong climatic variation between the different regions in this land.
+      Prepare your legs and feet to walk and discover the regions which make
+      this country famous. From the national park of Gerês in the North up to
+      the Algarve in the southern corner of the country, there is a wide range
+      of different landscapes and culture to be apart of. Choose a walk among
+      the historical castles of Alentejo for example, or venture yourself
+      through the wine bastion of Portugal in Douro, or simply depart on a
+      spiritual journey to Santiago de Compostela, whatever you choose, you wont
+      regret it. We are here to make sure that you are provided for and that you
+      have a comfortable and enjoyable experience. The act of walking though, is
+      up to you. Feel free to analyze our offers and to contact us in case of
+      any doubt. We wish you the best of walks.
+    style:
+      container: Full
+      padding: Normal
+      align: Centered
+      tailwind:
   - _bookshop_name: hero
     background_color: '#ffffff'
     heading:
@@ -189,36 +221,79 @@ content_blocks:
   - _bookshop_name: collection
     type: team
     title: Meet our team
-  - _bookshop_name: text
-    text: >-
-      # **Portugal Walking & Hiking Tours**
+  - _bookshop_name: featured-posts
+    main_feature: 52623f7a-1e2e-4de6-ae38-9ee15cf45ca5
+    feature_list: []
+  - _bookshop_name: left-right
+    background_color: '#ffffff'
+    heading:
+      heading_text: Keep what you need. Delete the rest.
+      color: '#393939'
+    text:
+      markdown_content: >-
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      color: '#393939'
+    image:
+      image_path: /src/assets/images/undraw-hello.svg
+      alt_text: An image
+    flipped: true
+    button:
+  - _bookshop_name: two-column-markdown
+    column1:
+      animation: slide-in
+      type: markdown
+      label: Column 1 Content
+      content: |
+        ## Column 1
 
+        Enter your Markdown content here.
+    column2:
+      animation: slide-in
+      type: markdown
+      label: Column 2 Content
+      content: |
+        ## Column 2
 
-      ## **Hike Portugal with Top Walking tours Portugal**
-
-
-      Welcome to Portugal, land of many stories and dreams. In the south western
-      edge of continental Europe, a small yet wonderful country remains to be
-      found. This... is an old country with plentiful history and nature to
-      share with any passing visitor. From north to south there are magnificent
-      places to take a walk on. Both on the coast or inland and through
-      historical or natural areas, you will be able to walk the country at your
-      own pace. The climate is perfect for walkers all year round. Since there
-      is a strong climatic variation between the different regions in this land.
-      Prepare your legs and feet to walk and discover the regions which make
-      this country famous. From the national park of Gerês in the North up to
-      the Algarve in the southern corner of the country, there is a wide range
-      of different landscapes and culture to be apart of. Choose a walk among
-      the historical castles of Alentejo for example, or venture yourself
-      through the wine bastion of Portugal in Douro, or simply depart on a
-      spiritual journey to Santiago de Compostela, whatever you choose, you wont
-      regret it. We are here to make sure that you are provided for and that you
-      have a comfortable and enjoyable experience. The act of walking though, is
-      up to you. Feel free to analyze our offers and to contact us in case of
-      any doubt. We wish you the best of walks.
-    style:
-      container: Full
-      padding: Normal
-      align: Centered
-      tailwind:
+        Enter your Markdown content here.
+    padding:
+      type: select
+      label: Padding
+      options: []
+      default: normal
+    fullwidth:
+      type: toggle
+      label: Full Width
+      default: false
+  - _bookshop_name: widget-wrapper
+    id:
+      type: string
+      label: Section ID
+      description: Optional HTML ID for anchor linking
+    isDark:
+      type: boolean
+      label: Dark Mode
+      default: false
+      description: Enable dark mode styling
+    containerClass:
+      type: string
+      label: Container Class
+      default: ''
+      description: Custom Tailwind classes for the content container
+    as:
+      type: select
+      label: HTML Tag
+      default: section
+      options: []
+      description: HTML element type for the wrapper
+    bg:
+      type: rich-text
+      label: Custom Background
+      description: Optional custom background HTML (overrides default Background component)
+      can_sync: true
 ---

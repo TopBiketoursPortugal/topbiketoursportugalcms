@@ -40,35 +40,28 @@ content: >-
   ### **Itinerary:**
 
 
-  Day 1: Porto arrival
+  * Day 1: Porto arrival
 
+  * Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km
 
-  Day 2: Porto transfer to Póvoa de Varzim - Apúlia: 15 km
+  * Day 3: Apúlia – Esposende: 16 km
 
+  * Day 4: Esposende – Castelo de Neiva: 14 km
 
-  Day 3: Apúlia – Esposende: 16 km
+  * Day 5: Castelo de Neiva – Viana do Castelo: 14 km
 
+  * Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km
 
-  Day 4: Esposende – Castelo de Neiva: 14 km
+  * Day 7: Vila Praia de Âncora - Caminha: 8 km
 
-
-  Day 5: Castelo de Neiva – Viana do Castelo: 14 km
-
-
-  Day 6: Viana do Castelo – Vila Praia de Âncora: 19 km
-
-
-  Day 7: Vila Praia de Âncora - Caminha: 8 km
-
-
-  Day 8: departure
+  * Day 8: departure
 image:
   src: /src/assets/images/apulia-beac.jpg
   alt: ''
 code: NT03
 slug: hiking-atlantic-coast-porto
 language: en
-type: PackageTour
+type: WalkingTour
 region: '1'
 itinerary:
   - title: '**Day 1: Porto arrival**'
