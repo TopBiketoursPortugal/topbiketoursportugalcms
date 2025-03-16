@@ -101,7 +101,7 @@ const faqsSchema = z.object({
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
-  slug: z.string().optional(),
+  slug: z.string().optional().nullable(),
   language: languageSchema, // Assuming `languageField` is a string, adjust as necessary
   id: z.string().uuid(),
   title: z.string(),
