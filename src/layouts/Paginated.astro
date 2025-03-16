@@ -14,9 +14,10 @@ export type PaginatedProps = {
 
 type Props = PaginatedProps;
 
-// if (!Astro.props.frontmatter) {
-//   throw new Error('Page frontmatter must be defined');
-// }
+if (!Astro.props.frontmatter) {
+  console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
+  throw new Error('Page frontmatter must be defined missing');
+}
 const { ...props } = Astro.props.frontmatter;
 ---
 
@@ -31,7 +32,7 @@ const { ...props } = Astro.props.frontmatter;
     </h1>
     {
       Astro.props.frontmatter?.featured_posts !== null &&
-      Astro.props.frontmatter.featured_posts !== undefined ? (
+      Astro.props.frontmatter?.featured_posts !== undefined ? (
         <FeaturedPosts
           bookshop:live
           {...Astro.props.frontmatter.featured_posts}
