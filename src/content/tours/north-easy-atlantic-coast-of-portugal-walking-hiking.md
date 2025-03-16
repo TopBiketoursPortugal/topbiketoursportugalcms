@@ -420,13 +420,34 @@ images:
     alt: Caminha city center
   - src: /src/assets/images/suave-mar-hotel.jpg
     alt: Suave mar hotel
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
   - question: Q2
     answer: A1
-relatedTours:
-  - af115fc4-1aae-4854-a97b-53a4c777d9f0
 feature:
   align: center
   imageAlign: center center

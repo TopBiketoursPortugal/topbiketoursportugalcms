@@ -68,7 +68,7 @@ code: AL01
 slug: hiking-alentejo-castles-wine-heritage
 language: en
 type: PackageTour
-region: north
+region: '4'
 itinerary:
   - title: 'Day 1: Lisbon or Porto arrival and transfer to Meada'
     description: 'Farm: [Herdade Santo Isidro](https://www.facebook.com/casadesamento/)'
@@ -467,11 +467,37 @@ images:
     alt: marvao view
   - src: /src/assets/images/flowers-view.jpg
     alt: flowers view
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
   - question: Q2
     answer: A1
+relatedTours:
+  - dd0b0b47-96d3-436f-83cf-e65fa5932570
+  - 52ed15a4-8233-47f9-9f79-d314f2ac1dad
 feature:
   align: center
   imageAlign: center center

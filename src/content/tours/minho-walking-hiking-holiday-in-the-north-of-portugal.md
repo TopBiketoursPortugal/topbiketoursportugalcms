@@ -53,7 +53,7 @@ code: NT01
 slug: minho-hiking-north-portugal
 language: en
 type: WalkingTour
-region: north
+region: '1'
 itinerary:
   - day: '1'
     title: 'Day 1: Melgaço'
@@ -439,11 +439,37 @@ images:
     alt: vina nova de cerveira village
   - src: /src/assets/images/walking-minho-river.jpg
     alt: ecovia o minho walk terrain view
+reviews:
+  - title: Greate experience
+    rating: 5
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
+  - title: Greate experience
+    rating: 2
+    author:
+      givenName: John
+      familyName: Doe
+      country: Portugal
+    datePublished: '2023-10-15T00:00:00Z'
+    content: >
+      These headphones are fantastic! The noise cancellation works perfectly,
+      and the sound quality is top-notch. Highly recommend them for anyone
+      looking for a premium audio experience.
 faqs:
   - question: Q1
     answer: A1
   - question: Q2
     answer: A1
+relatedTours:
+  - dd0b0b47-96d3-436f-83cf-e65fa5932570
+  - f08482d1-b750-46a7-97bb-86088cc3ea39
 featured: false
 packagetype: PackageTour
 tourtype: WalkingTour

@@ -53,7 +53,7 @@ code: ST04
 slug: coastal-route-to-santiago-compostela-stage-2
 language: en
 type: WalkingTour
-region: north
+region: '6'
 itinerary:
   - title: 'Day 1: Baiona'
     description: >-
@@ -438,9 +438,6 @@ faqs:
     answer: A1
   - question: Q2
     answer: A1
-relatedTours:
-  - f08482d1-b750-46a7-97bb-86088cc3ea39
-  - bc31515a-0e52-47c9-b177-9ad9fa5c756e
 feature:
   align: center
   imageAlign: center center

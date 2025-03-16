@@ -55,7 +55,7 @@ code: DOURO01
 slug: hiking-douro-valley-wine-region
 language: en
 type: PackageTour
-region: north
+region: '2'
 itinerary:
   - title: 'Day 1: Arrival Porto'
     description: 'Hotel 4*: [Trindade Hotel](https://www.portotrindadehotel.com/)'
@@ -451,6 +451,9 @@ faqs:
     answer: A1
   - question: Q2
     answer: A1
+relatedTours:
+  - 19cf8784-b782-48a2-a5a3-7263f1bee29f
+  - 15b16d82-2721-4496-b918-3666c8d38b32
 highlight: BestSeller
 feature:
   align: center
