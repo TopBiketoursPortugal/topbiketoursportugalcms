@@ -44,7 +44,7 @@ const {
   tailwind
 } = Astro.props;
 const md = markdownit({ html: true });
-const textHTML = md.render(text);
+const textHTML = md.render(text ?? '');
 const style = cn(textVariants({ padding, container, align }), tailwind);
 ---
 
