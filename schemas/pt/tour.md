@@ -355,50 +355,9 @@ maxGroupSize: 3
 difficulty: 4
 skill: 4
 minAge: 18
-mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1DBZVUo97FbeGLZlVxyTy07k_2RzWHVgo
-images:
-  - src: /src/assets/images/santiago-de-compostela-cathedral.jpg
-    alt: santiago compostela cathedral
-  - src: /src/assets/images/house-with-flowers.jpg
-    alt: house with pink flowers
-  - src: /src/assets/images/the-way-of-st.-james-hike-tour.jpg
-    alt: compostela certificate
-  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
-    alt: santiago compostela city center
-  - src: /src/assets/images/vigo-bay-view.jpg
-    alt: vigo bay view
-  - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
-    alt: porto city center
-  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
-    alt: POrto douro river
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-feature:
-  align: center
-  imageAlign: center center
-  bokunLink: ''
-  bokunId: ''
-  textcolor: white
-  subtitle: 'Coastal route to Santiago Compostela: Stage 1'
-  title: ' Coastal route to Santiago Compostela Stage 1'
-  image: /img/top-walking-tours-portugal.jpg
-  bokunLinkText: Book now
+mapUrl:
+images: []
+reviews: []
+faqs: []
 relatedTours: []
 ---

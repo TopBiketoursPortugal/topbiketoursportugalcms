@@ -259,9 +259,9 @@ packages:
     price:
       bestValue: false
       currency: EUR
-      price: 2014
+      price: 999
       promo: 0
-      amount: 1435
+      amount: 9999
     included:
       - title: Accommodations W/ Breakfast
         description: Yes (4 stars, farms or rural houses)
@@ -306,38 +306,6 @@ packages:
 afterPricing: >-
   **\*Season:**
 
-
-  * LS - Low season: Nov 01 to Mar 25
-
-  * RS - Regular season: Mar 26 to 25 Jun and Set 26 to 31 Oct
-
-  * HS - High Season: Set 01 to 25 Set
-
-  * SS - Summer Season: Jun 26 to August 30
-
-
-  **Observations:**
-
-
-  * Prices are based for 2 people sharing the same room;
-
-  * Prices can suffer updates due high season, holidays or weekends
-
-  * Beverages are not included at lunch and dinner when included in the package
-
-  * If in a triple room with parents Children up to 10 years old - 35% discount.
-  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
-  old - 15% discount.
-
-
-  **Extras**
-
-
-  * Solo traveler: 200 €
-
-  * Single supplement: LS: 300€, RS: 329€, HS: 360€, SS.390€
-
-  * Extra nights: on request
 seo:
   page_title: teste
   page_description: 'teste'
@@ -350,64 +318,15 @@ seo:
   keywords:
 duration: 8
 distance: 7
-tags:
-  - Moderate to hard
-  - Package tours
+tags: []
 minGroupSize: 2
 maxGroupSize: 3
 difficulty: 4
 skill: 4
 minAge: 18
-mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1DBZVUo97FbeGLZlVxyTy07k_2RzWHVgo
-images:
-  - src: /src/assets/images/santiago-de-compostela-cathedral.jpg
-    alt: santiago compostela cathedral
-  - src: /src/assets/images/house-with-flowers.jpg
-    alt: house with pink flowers
-  - src: /src/assets/images/the-way-of-st.-james-hike-tour.jpg
-    alt: compostela certificate
-  - src: /src/assets/images/santiago-de-compostela-city-center.jpg
-    alt: santiago compostela city center
-  - src: /src/assets/images/vigo-bay-view.jpg
-    alt: vigo bay view
-  - src: /src/assets/images/top-walking-tours-portugal-porto-hiking-holidays.jpg
-    alt: porto city center
-  - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
-    alt: POrto douro river
-reviews:
-  - title: Greate experience
-    rating: 5
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-  - title: Greate experience
-    rating: 2
-    author:
-      givenName: John
-      familyName: Doe
-      country: Portugal
-    datePublished: 2023-10-15
-    content: |
-      These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-# feature:
-#   align: center
-#   imageAlign: center center
-#   bokunLink: ''
-#   bokunId: ''
-#   textcolor: white
-#   subtitle: 'Coastal route to Santiago Compostela: Stage 1'
-#   title: ' Coastal route to Santiago Compostela: Stage 1'
-#   image:
-#     src: /img/top-walking-tours-portugal.jpg
-#   bokunLinkText: Book now
-faqs:
-  - question: Q1
-    answer: A1
-  - question: Q2
-    answer: A1
+mapUrl:
+images: []
+reviews: []
+faqs: []
 relatedTours: []
 ---
