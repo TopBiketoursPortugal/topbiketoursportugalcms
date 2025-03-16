@@ -9,8 +9,7 @@ collections_config:
       - '**/*.md'
     name: Pages
     icon: laptop_mac
-    url:
-      "/{slug|default: title|deburr|slugify|lowercase|trim|replace: 'home',''}"
+    url: "[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}"
     disable_url: false
     description: ''
     _enabled_editors:
@@ -317,6 +316,7 @@ collections_config:
         schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.md'
+
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true

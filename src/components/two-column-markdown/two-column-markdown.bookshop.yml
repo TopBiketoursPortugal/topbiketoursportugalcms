@@ -10,51 +10,28 @@ spec:
     - Layout
 
 blueprint:
-  column1:
-    animation: slide-in
-    type: markdown
-    label: Column 1 Content
-    content: |
-      ## Column 1
+  column1: |
+    ## Column 1
 
-      Enter your Markdown content here.
-  column2:
-    animation: slide-in
-    type: markdown
-    label: Column 2 Content
-    content: |
-      ## Column 2
+    Enter your Markdown content here.
+  column2: |
+    ## Column 2
 
-      Enter your Markdown content here.
-  padding:
-    type: select
-    label: Padding
-    options:
-      - value: contained
-        label: Contained
-      - value: tight
-        label: Tight
-      - value: normal
-        label: Normal
-    default: normal
-  fullwidth:
-    type: toggle
-    label: Full Width
-    default: false
+    Enter your Markdown content here.
+  padding: 'normal'
+  fullwidth: true
 
-preview:
-  fullwidth: false
-  padding: normal
-  column1:
-    content: |
-      ## Column 1
+# preview:
+#   fullwidth: false
+#   padding: normal
+#   column1: |
+#     ## Column 1
 
-      This is some **Markdown** content for the first column.
-  column2:
-    content: |
-      ## Column 2
+#     This is some **Markdown** content for the first column.
+#   column2: |
+#     ## Column 2
 
-      This is some **Markdown** content for the first column.
+#     This is some **Markdown** content for the first column.
 
 _inputs:
   column1:
