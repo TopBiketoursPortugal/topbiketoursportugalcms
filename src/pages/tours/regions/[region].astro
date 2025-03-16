@@ -17,11 +17,7 @@ export async function getStaticPaths() {
       })
     },
     props: {
-      region: slugify(region.en.name!, {
-        lower: true,
-        strict: true,
-        trim: true
-      }),
+      regionData: region,
       tours:
         tours.filter(
           (tour) => parseInt(tour.data.region + '', 10) === region.id
@@ -29,7 +25,7 @@ export async function getStaticPaths() {
     }
   }));
 }
-const { region, tours } = Astro.props;
+const { tours, regionData } = Astro.props;
 
 const frontmatter = {
   title: 'Tours - Top Bike Tours Portugal',
@@ -45,16 +41,16 @@ const frontmatter = {
 <Layout
   class="mb-16 px-8"
   {...frontmatter}
-  title={`Tour list region ${region}`}
+  title={`Tour list region ${regionData.en.name}`}
 >
-  <h1>Tour list region {region}</h1>
+  <h1>Tour list region {regionData.en.name}</h1>
   {
     tours.length == 0 ? (
       <div class="flex flex-col">
-        <div>No tours yet for region {region}</div>
+        <div>No tours yet for region {regionData.en.name}</div>
         <div>Could try other region</div>
         <div>
-          {RegionsData.filter((r) => r.en.name !== region).map((r) => (
+          {RegionsData.filter((r) => r.id !== regionData.id).map((r) => (
             <div>{r.en.name}</div>
           ))}
         </div>
