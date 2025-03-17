@@ -49,23 +49,23 @@ export default defineConfig({
       }
     }),
     mdx(),
-    webmanifest({
-      /**
-       * required
-       **/
-      name: 'Top Walking Tours Portugal',
+    // webmanifest({
+    //   /**
+    //    * required
+    //    **/
+    //   name: 'Top Walking Tours Portugal',
 
-      /**
-       * optional
-       **/
-      icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
-      short_name: 'TWTP',
-      description: 'Top walking tours portugal',
-      start_url: '/',
-      theme_color: '#296a3f',
-      background_color: '#fff',
-      display: 'standalone'
-    }),
+    //   /**
+    //    * optional
+    //    **/
+    //   icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
+    //   short_name: 'TWTP',
+    //   description: 'Top walking tours portugal',
+    //   start_url: '/',
+    //   theme_color: '#296a3f',
+    //   background_color: '#fff',
+    //   display: 'standalone'
+    // }),
     AstroPWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
