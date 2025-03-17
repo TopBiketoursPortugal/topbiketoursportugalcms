@@ -57,18 +57,18 @@ export default defineConfig({
       devOptions: {
         enabled: true
       }
-    }),
-    // shield({}),
-    playformInline(),
-    // min()
-    playformCompress({
-      CSS: true,
-      HTML: false,
-      Image: false,
-      JavaScript: false,
-      SVG: true,
-      Logger: 0
     })
+    // shield({}),
+    // playformInline()
+    // min()
+    // playformCompress({
+    //   CSS: true,
+    //   HTML: false,
+    //   Image: false,
+    //   JavaScript: false,
+    //   SVG: true,
+    //   Logger: 0
+    // })
   ],
   prefetch: {
     prefetchAll: true
