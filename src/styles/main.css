@@ -141,7 +141,7 @@
 body {
   --primary: #296a3f;
 }
-.pagination {
+/* .pagination {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,4 +185,4 @@ body {
   color: var(--primary);
   font-weight: 500;
   margin-right: 1rem;
-}
+} */
