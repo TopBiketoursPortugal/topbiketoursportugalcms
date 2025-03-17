@@ -1,0 +1,165 @@
+{
+  "routes": [
+    {
+      "from": "/documentation/(.*)",
+      "to": "/docs/$1",
+      "status": 301
+    },
+    {
+      "from": "/about-us-biking-travel/",
+      "to": "/about-us",
+      "status": 301
+    },
+    {
+      "from": "/blog/benefits-of-your-first-hiking-tour/",
+      "to": "/blog/benefits-of-your-first-walking-tour",
+      "status": 301
+    },
+    {
+      "from": "/blog/news/",
+      "to": "/blog/tags/news",
+      "status": 301
+    },
+    {
+      "from": "/blog/updates/",
+      "to": "/blog/tags/updates",
+      "status": 301
+    },
+    {
+      "from": "/climate-and-geography-in-portugal-for-hiking/",
+      "to": "/blog/climate-and-geography-for-hiking-in-portugal",
+      "status": 301
+    },
+    {
+      "from": "/covid-19-requirements-to-comply-with",
+      "to": "/blog/clean-and-safe-requirements-to-comply-with",
+      "status": 301
+    },
+    {
+      "from": "/covid-19-requirements-to-comply-with/covid-19-requirements-to-comply-with/",
+      "to": "/blog/clean-and-safe-requirements-to-comply-with",
+      "status": 301
+    },
+    {
+      "from": "/hiking-alentejo-castles-wine-heritage",
+      "to": "/tours/hiking-alentejo-castles-wine-heritage",
+      "status": 301
+    },
+    {
+      "from": "/hiking-alentejo-castles-wine-heritage/hiking-alentejo-castles-wine-heritage/",
+      "to": "/tours/hiking-alentejo-castles-wine-heritage",
+      "status": 301
+    },
+    {
+      "from": "/hiking-alentejo-vicentine-southeast-portugal-coast",
+      "to": "/tours/hiking-algarve-vicentine-southeast-portugal-coast",
+      "status": 301
+    },
+    {
+      "from": "/hiking-alentejo-vicentine-southeast-portugal-coast/hiking-alentejo-vicentine-southeast-portugal-coast/",
+      "to": "/tours/hiking-algarve-vicentine-southeast-portugal-coast",
+      "status": 301
+    },
+    {
+      "from": "/hiking-algarve-vicentine-southeast-portugal-coast",
+      "to": "/tours/hiking-algarve-vicentine-southeast-portugal-coast",
+      "status": 301
+    },
+    {
+      "from": "/hiking-algarve-vicentine-southeast-portugal-coast/hiking-algarve-vicentine-southeast-portugal-coast/",
+      "to": "/tours/hiking-algarve-vicentine-southeast-portugal-coast",
+      "status": 301
+    },
+    {
+      "from": "/hiking-atlantic-coast-porto",
+      "to": "/tours/hiking-atlantic-coast-porto",
+      "status": 301
+    },
+    {
+      "from": "/hiking-coast-santiago-compostela",
+      "to": "/tours/hiking-coast-santiago-compostela",
+      "status": 301
+    },
+    {
+      "from": "/hiking-coast-santiago-compostela-stage-2",
+      "to": "/tours/hiking-coast-santiago-compostela-stage-2",
+      "status": 301
+    },
+    {
+      "from": "/hiking-coast-santiago-compostela-stage-2/hiking-coast-santiago-compostela-stage-2/",
+      "to": "/tours/hiking-coast-santiago-compostela-stage-2",
+      "status": 301
+    },
+    {
+      "from": "/hiking-coast-santiago-compostela/hiking-coast-santiago-compostela/",
+      "to": "/tours/hiking-coast-santiago-compostela",
+      "status": 301
+    },
+    {
+      "from": "/hiking-douro-valley-wine-region",
+      "to": "/tours/hiking-douro-valley-wine-region",
+      "status": 301
+    },
+    {
+      "from": "/hiking-douro-valley-wine-region/hiking-douro-valley-wine-region/",
+      "to": "/tours/hiking-douro-valley-wine-region",
+      "status": 301
+    },
+    {
+      "from": "/minho-hiking-north-portugal",
+      "to": "/tours//minho-hiking-north-portugal",
+      "status": 301
+    },
+    {
+      "from": "/minho-hiking-north-portugal/minho-hiking-north-portugal/",
+      "to": "/tours//minho-hiking-north-portugal",
+      "status": 301
+    },
+    {
+      "from": "/passeios-pedestres-portugal/",
+      "to": "/pt/passeios-pedestres-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/contactos/",
+      "to": "/pt/contatos",
+      "status": 301
+    },
+    {
+      "from": "/santiago-Compostela-hiking-original-route-porto",
+      "to": "/tours/santiago-Compostela-hiking-original-route-porto",
+      "status": 301
+    },
+    {
+      "from": "/santiago-Compostela-hiking-original-route-porto/santiago-compostela-hiking-original-route-porto/",
+      "to": "/tours/santiago-Compostela-hiking-original-route-porto",
+      "status": 301
+    },
+    {
+      "from": "/santiago-Compostela-hiking-stage-2",
+      "to": "/tours/santiago-Compostela-hiking-stage-2",
+      "status": 301
+    },
+    {
+      "from": "/santiago-Compostela-hiking-stage-2/santiago-compostela-hiking-stage-2/",
+      "to": "/tours/santiago-Compostela-hiking-stage-2",
+      "status": 301
+    },
+    {
+      "from": "/tags/",
+      "to": "/",
+      "status": 301
+    },
+    {
+      "from": "/tags//",
+      "to": "/",
+      "status": 301
+    },
+
+    {
+      "from": "(/.+)/",
+      "to": "$1",
+      "status": 301
+    }
+  ]
+}

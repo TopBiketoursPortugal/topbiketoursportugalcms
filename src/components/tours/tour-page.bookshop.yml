@@ -395,25 +395,7 @@ blueprint:
       alt: porto city center
     - src: /src/assets/images/top-bike-tours-portugal-coast-hiking-santiago-compostela.jpg
       alt: POrto douro river
-  reviews:
-    - title: Greate experience
-      rating: 5
-      author:
-        givenName: John
-        familyName: Doe
-        country: Portugal
-      datePublished: 2023-10-15
-      content: |
-        These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
-    - title: Greate experience
-      rating: 2
-      author:
-        givenName: John
-        familyName: Doe
-        country: Portugal
-      datePublished: 2023-10-15
-      content: |
-        These headphones are fantastic! The noise cancellation works perfectly, and the sound quality is top-notch. Highly recommend them for anyone looking for a premium audio experience.
+  reviews: []
   feature:
     align: center
     imageAlign: center center
