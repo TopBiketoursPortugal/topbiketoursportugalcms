@@ -15,18 +15,37 @@ const {
   distribute
 } = Astro.props;
 
-const container = tv({
-  base: 'xs:flex-col flex h-20 items-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+const containerVariants = tv({
+  base: '',
+  slots: {
+    container:
+      'flex h-24 flex-col items-center justify-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+    feature: ''
+  },
   variants: {
     alternate: {
-      true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
-      false:
-        'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+      true: {
+        container:
+          'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950'
+      },
+      false: {
+        container:
+          'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+      }
     },
     distribute: {
-      leading: 'justify-start text-left',
-      trailing: 'justify-end text-right',
-      center: 'justify-center text-center'
+      leading: {
+        feature: 'flex h-full w-full items-center justify-center text-center',
+        container: 'justify-start'
+      },
+      trailing: {
+        feature: 'flex h-full w-full items-center justify-end text-right',
+        container: 'justify-end'
+      },
+      center: {
+        feature: 'flex h-full w-full items-center justify-center text-center',
+        container: 'justify-center'
+      }
     }
   },
   defaultVariants: {
@@ -35,13 +54,17 @@ const container = tv({
   }
 });
 
-const containerStyle = cn(container({ alternate, distribute }), className);
+const { container, feature: featureStyle } = containerVariants({
+  alternate,
+  distribute
+});
+const containerStyle = cn(container(), className);
 ---
 
 <div class={containerStyle} data-type="container">
-  <div class="flex-col">{description}</div>
-  {feature}
-  {info}
+  <div class="flex-col lg:hidden">{description}</div>
+  {feature && <div class={featureStyle()}>{feature}</div>}
+  {info && <div class="w-full items-center justify-center">{info}</div>}
   {
     icon ? (
       <Tooltip class="align-top">
