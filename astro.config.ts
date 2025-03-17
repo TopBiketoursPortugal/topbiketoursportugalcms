@@ -15,6 +15,7 @@ import { shield } from '@kindspells/astro-shield';
 import playformInline from '@playform/inline';
 import playformCompress from '@playform/compress';
 // import min from 'astro-min';
+import webmanifest from 'astro-webmanifest';
 
 // https://astro.build/config
 export default defineConfig({
@@ -48,6 +49,23 @@ export default defineConfig({
       }
     }),
     mdx(),
+    webmanifest({
+      /**
+       * required
+       **/
+      name: 'Top Walking Tours Portugal',
+
+      /**
+       * optional
+       **/
+      icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
+      short_name: 'TWTP',
+      description: 'Top walking tours portugal',
+      start_url: '/',
+      theme_color: '#296a3f',
+      background_color: '#fff',
+      display: 'standalone'
+    }),
     AstroPWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
