@@ -148,7 +148,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <LanguageMenu
           localizedUrls={hrefLangs?.map((l) => ({
             code: l.hreflang,
-            path: l.href
+            path: `${Astro.site ?? 'https://topwalkingtoursportugal.com'}${l.href}`
           }))}
         />
         <div class="flex items-center">

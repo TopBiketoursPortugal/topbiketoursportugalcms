@@ -8,7 +8,7 @@
     "start": "pnpm build && static-web-server -t true --root ./dist --http2-tls-cert ./.certs/local.pem  --http2-tls-key ./.certs/local.key -g info",
     "start:prod": "pnpm build:prod && static-web-server -t true --root ./dist --http2-tls-cert ./.certs/cert.pem  --http2-tls-key ./.certs/key.pem -g info",
     "build": "astro build",
-    "build:prod": "astro build",
+    "build:prod": "astro build && pnpm dlx @divriots/jampack ./dist",
     "build:prod:extra": "astro build && pnpm dlx @divriots/jampack ./dist",
     "preview": "astro preview",
     "astro": "astro",
