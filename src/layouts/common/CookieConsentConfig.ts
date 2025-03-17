@@ -133,8 +133,7 @@ export const config: CookieConsentConfig = {
             },
             {
               title: 'More information',
-              description:
-                'For any queries in relation to the policy on cookies and your choices, please <a href="https://www.example.com/contacts">contact us</a>.'
+              description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topwalkingtoursportugal.com/privacy-policy/">contact us</a>.`
             }
           ]
         }
