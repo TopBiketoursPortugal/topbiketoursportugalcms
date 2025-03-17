@@ -9,7 +9,7 @@ type Props = {
 };
 
 const { language = 'en' } = Astro.props;
-const { phone, email } = Contact[language];
+const { cellPhone, email } = Contact[language];
 ---
 
 <div
@@ -18,7 +18,7 @@ const { phone, email } = Contact[language];
   <div class="flex gap-4 text-white dark:text-slate-400">
     <a href="/" class="flex flex-row items-center justify-start gap-2">
       <Icon icon="ph:phone-light" />
-      <span class="whitespace-nowrap">{phone}</span>
+      <span class="whitespace-nowrap">{cellPhone}</span>
     </a>
     <a
       href={'mailto:' + email}
