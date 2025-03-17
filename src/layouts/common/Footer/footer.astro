@@ -35,12 +35,12 @@ const pageCollection = await getCollection('pages');
 
 const termsPage = pageCollection.filter(
   (p) =>
-    p.filePath?.endsWith('terms-and-conditions.md') &&
+    p.filePath?.endsWith('terms-and-conditions.mdx') &&
     (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 const privacyPage = pageCollection.filter(
   (p) =>
-    p.filePath?.endsWith('privacy-policy.md') &&
+    p.filePath?.endsWith('privacy-policy.mdx') &&
     (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 
