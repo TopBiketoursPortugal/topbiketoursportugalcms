@@ -43,7 +43,11 @@ const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
   <slot slot="head">
     {
       hrefs.map(({ href, hreflang }) => (
-        <link rel="alternate" href={href} hreflang={hreflang} />
+        <link
+          rel="alternate"
+          href={`${Astro.site ?? 'https://topwalkingtoursportugal.com'}${href}`}
+          hreflang={hreflang}
+        />
       ))
     }
   </slot>
