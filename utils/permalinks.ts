@@ -105,7 +105,7 @@ export function getBlogPagePath(
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): string {
   const pagePath = pageNum === 1 ? '/blog' : `/blog/${pageNum}`;
-  return `${getBasePath(language)}${pagePath}${trailingSlash}`;
+  return `${site}/${getBasePath(language)}${pagePath}${trailingSlash}`;
 }
 
 export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {

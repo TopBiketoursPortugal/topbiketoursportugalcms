@@ -130,8 +130,6 @@ export default defineConfig({
       '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
     '/hiking-alentejo-castles-wine-heritage':
       '/tours//hiking-alentejo-castles-wine-heritage/',
-    '/hiking-alentejo-vicentine-southeast-portugal-coast':
-      '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
     '/hiking-atlantic-coast-porto': '/tours/hiking-atlantic-coast-porto/',
     '/hiking-coast-santiago-compostela-stage-2':
       '/tours//hiking-coast-santiago-compostela-stage-2/'

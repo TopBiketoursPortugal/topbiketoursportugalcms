@@ -5,7 +5,6 @@ import Icon from 'src/components/utility/icon.astro';
 //   language: "en" | "pt";
 // }
 
-const { language } = Astro.props;
 const network = social as Record<string, any>;
 const keys = Object.keys(network);
 const socialNetworks = keys.map((k) => network[k]).filter((n) => n !== null);

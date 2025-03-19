@@ -5,7 +5,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 
 export type LanguageMenuItem = {
   code: LanguageCodes;
-  locale: string;
+  locale?: string;
   path: string;
   display?: string;
   icon?: string;
