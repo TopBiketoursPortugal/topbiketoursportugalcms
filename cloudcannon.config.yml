@@ -9,7 +9,7 @@ collections_config:
       - '**/*.md*'
     name: Pages
     icon: laptop_mac
-    url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}"
+    url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''|match:''|replace:'',''|'/'}"
     disable_url: false
     description: ''
     _enabled_editors:
@@ -46,7 +46,7 @@ collections_config:
           _inputs:
           _select_data:
           _structures:
-        new_preview_url: '[relative_base_path]/{title|deburr|slugify|lower}'
+        new_preview_url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
       paginated:
         path: schemas/paginated.mdx
         reorder_inputs: true
@@ -64,7 +64,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -160,7 +160,7 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -344,7 +344,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}
+    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
