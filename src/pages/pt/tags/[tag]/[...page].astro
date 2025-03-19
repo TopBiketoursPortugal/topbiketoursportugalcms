@@ -8,18 +8,15 @@ import { trailingSlash } from 'utils/permalinks';
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const page = await getEntry('pages', 'blog');
-  const posts = await getCollection('blog');
+  const posts = (await getCollection('blog')).filter(
+    (p) => p.data.language === 'pt'
+  );
   const tags = new Set(
-    posts
-      .filter((p) => (p.data.language || 'en') === 'pt')
-      .flatMap((p) => p.data.tags ?? [])
-      .filter((t) => t && t !== '')
+    posts.flatMap((p) => p.data.tags ?? []).filter((t) => t && t !== '')
   );
 
   return [...tags].flatMap((tag) => {
-    const filteredPosts = posts.filter(
-      ({ data }) => (data.language ?? 'en') === 'pt' && data.tags?.includes(tag)
-    );
+    const filteredPosts = posts.filter(({ data }) => data.tags?.includes(tag));
     return paginate(filteredPosts, {
       params: {
         tag:
