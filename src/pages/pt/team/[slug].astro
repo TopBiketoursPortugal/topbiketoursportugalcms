@@ -15,7 +15,7 @@ import { trailingSlash } from 'utils/permalinks';
 export async function getStaticPaths() {
   const team = await getCollection('team');
   return team
-    .filter((t) => (t.data.language ?? 'en') === 'en')
+    .filter((t) => t.data.language === 'pt')
     .map((teamMember) => ({
       params: {
         slug:
