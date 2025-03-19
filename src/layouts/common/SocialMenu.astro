@@ -16,7 +16,6 @@ const socialNetworks = keys.map((k) => network[k]).filter((n) => n !== null);
     socialNetworks.map((network) => {
       return (
         <a
-          hreflang={language}
           href={network.href}
           title={network.alt}
           rel="nofollow"

@@ -5,6 +5,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 
 export type LanguageMenuItem = {
   code: LanguageCodes;
+  locale: string;
   path: string;
   display?: string;
   icon?: string;
@@ -20,7 +21,8 @@ const languages = Object.values(Languages)
         code: code as LanguageCodes,
         display,
         icon,
-        path: isDefault ? '/' : `/${code}`
+        path: isDefault ? '/' : `/${code}`,
+        locale: Languages[code as LanguageCodes].locale
       }) satisfies LanguageMenuItem
   );
 
@@ -32,18 +34,19 @@ if (localizedUrls?.length === 0) {
   localizedUrls = localizedUrls.map((l) => ({
     ...l,
     display: l.display ?? Languages[l.code].display,
-    icon: l.icon ?? Languages[l.code].icon
+    icon: l.icon ?? Languages[l.code].icon,
+    locale: Languages[l.code].locale
   }));
 }
 ---
 
 <div class="flex flex-row gap-4 text-2xl">
   {
-    localizedUrls.map(({ code, icon, display, path }) => (
+    localizedUrls.map(({ locale, icon, display, path }) => (
       <a
         href={path}
         title={display}
-        hreflang={code}
+        hreflang={locale}
         class="transition-transform duration-150 hover:scale-125"
       >
         <Icon title={display} icon={icon!} />
