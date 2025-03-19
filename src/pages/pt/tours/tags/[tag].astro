@@ -36,7 +36,7 @@ export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
 const { tours, tag } = Astro.props;
 
 const frontmatter = {
-  title: 'Tours - Top Bike Tours Portugal',
+  title: `Tours ${tag}  - Top Bike Tours Portugal`,
   page_size: 6
 } satisfies {
   title: string;
