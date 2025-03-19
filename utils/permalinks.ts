@@ -4,6 +4,8 @@ import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 import type { HrefLang } from 'src/types/hreflang';
 
+export const trailingSlash = '/';
+
 export function getBasePath(language: LanguageCodes = 'en'): string {
   return language === 'en' ? '/' : `/${language}/`;
 }
@@ -12,14 +14,14 @@ export function getTeamMemberPath(
   memberName: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}team/${slugify(memberName, { lower: true, strict: true, trim: true })}`;
+  return `${getBasePath(language)}team/${slugify(memberName, { lower: true, strict: true, trim: true })}${trailingSlash}`;
 }
 
 export function getTourPath(
   { slug, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/${slugify(slug ?? title, { lower: true, strict: true, trim: true })}`;
+  return `${getBasePath(language)}tours/${slugify(slug ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
 }
 
 export async function getTourLanguagesAlternates(
@@ -36,7 +38,7 @@ export async function getTourLanguagesAlternates(
     ) ?? [];
 
   return alternateTours.map(({ data: alternateTour }) => ({
-    href: `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.slug ?? alternateTour.title, { lower: true, strict: true, trim: true })}`,
+    href: `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.slug ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`,
     hreflang: alternateTour.language
   }));
 }
@@ -45,14 +47,14 @@ export function getTourRegionsPath(
   region: string,
   language: LanguageCodes = 'en'
 ): string {
-  return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true, strict: true, trim: true })}`;
+  return `${getBasePath(language)}tours/regions/${slugify(region, { lower: true, strict: true, trim: true })}${trailingSlash}`;
 }
 
 export function getTourTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}`;
+  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return slug;
 }
 
@@ -60,7 +62,7 @@ export function getBlogTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const slug = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}`;
+  const slug = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return slug;
 }
 
@@ -77,7 +79,7 @@ export function trimSlash(s: string): string {
 }
 
 export function getHomePermalink(language: LanguageCodes = 'en'): string {
-  return language === 'en' ? '/' : `/${language}`;
+  return language === 'en' ? '/' : `/${language}${trailingSlash}`;
 }
 
 export function getPagePath(page: CollectionEntry<'pages'>) {
@@ -93,13 +95,21 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
     return getHomePermalink(language);
   }
   const pagePath =
-    `${getBasePath(language)}${slugify(page.data.slug ?? page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}`.toLocaleLowerCase();
+    `${getBasePath(language)}${slugify(page.data.slug ?? page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}${trailingSlash}`.toLocaleLowerCase();
   return pagePath;
+}
+
+export function getBlogPagePath(
+  pageNum: number,
+  language: LanguageCodes = 'en'
+): string {
+  const pagePath = pageNum === 1 ? '/blog' : `/blog/${pageNum}`;
+  return `${getBasePath(language)}${pagePath}${trailingSlash}`;
 }
 
 export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
   const language = data.language ?? 'en';
-  return `${getBasePath(language)}blog/${slugify(data.slug ?? data.title, { lower: true, strict: true, trim: true })}`;
+  return `${getBasePath(language)}blog/${slugify(data.slug ?? data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
 }
 
 export async function getPageLanguagesAlternates(
@@ -129,7 +139,7 @@ export async function getPageLanguagesAlternates(
       };
     }
     return {
-      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}`,
+      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`,
       hreflang: alternate.language
     };
   });
@@ -151,7 +161,7 @@ export async function getPostLanguagesAlternates(
   return alternatePosts.map((alternatePost) => {
     const { data: alternate } = alternatePost;
     return {
-      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}`,
+      href: `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`,
       hreflang: alternate.language
     };
   });

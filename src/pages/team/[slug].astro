@@ -10,16 +10,18 @@ import Grid from 'src/components/grid/grid.astro';
 import CardMedia from 'src/components/card/CardMedia.astro';
 import CardContent from 'src/components/card/CardContent.astro';
 import Stack from 'src/components/stack/stack.astro';
+import { trailingSlash } from 'utils/permalinks';
 
 export async function getStaticPaths() {
   const team = await getCollection('team');
   return team.map((teamMember) => ({
     params: {
-      slug: slugify(teamMember.data.title, {
-        lower: true,
-        strict: true,
-        trim: true
-      })
+      slug:
+        slugify(teamMember.data.title, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
     },
     props: { teamMember }
   }));
@@ -33,21 +35,21 @@ const excerpt = getMarkdownExcerpt(teamMember.body ?? '', 300);
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: title,
-  jobTitle: memberType,
-  worksFor: {
+  'name': title,
+  'jobTitle': memberType,
+  'worksFor': {
     '@type': 'Organization',
-    name: SiteData[language].site.name,
-    url: Astro.site ?? SiteData[language].site.url
+    'name': SiteData[language].site.name,
+    'url': Astro.site ?? SiteData[language].site.url
   },
-  description: excerpt,
-  address: {
+  'description': excerpt,
+  'address': {
     '@type': 'PostalAddress',
-    addressLocality: ContactsData[language].address.state,
-    addressRegion: ContactsData[language].address.city,
-    postalCode: ContactsData[language].address.postalCode,
-    streetAddress: ContactsData[language].address.street,
-    addressCountry: ContactsData[language].address.country
+    'addressLocality': ContactsData[language].address.state,
+    'addressRegion': ContactsData[language].address.city,
+    'postalCode': ContactsData[language].address.postalCode,
+    'streetAddress': ContactsData[language].address.street,
+    'addressCountry': ContactsData[language].address.country
   }
 };
 ---

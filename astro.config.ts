@@ -11,11 +11,11 @@ import favicons from 'astro-favicons';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
 // import astroMetaTags from 'astro-meta-tags';
-import { shield } from '@kindspells/astro-shield';
-import playformInline from '@playform/inline';
-import playformCompress from '@playform/compress';
+// import { shield } from '@kindspells/astro-shield';
+// import playformInline from '@playform/inline';
+// import playformCompress from '@playform/compress';
 // import min from 'astro-min';
-import webmanifest from 'astro-webmanifest';
+// import webmanifest from 'astro-webmanifest';
 
 // https://astro.build/config
 export default defineConfig({
@@ -123,7 +123,7 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
@@ -135,7 +135,9 @@ export default defineConfig({
       mode: 'sprite'
     }
   },
-
+  // redirects: {
+  //   '/[...slug]': '/[...slug]/'
+  // },
   vite: {
     // resolve: {
     //   alias: {

@@ -5,7 +5,7 @@ import BlogPagination from '../../../components/blog/pagination.astro';
 import PaginatedLayout, {
   type PaginatedProps
 } from '../../../layouts/Paginated.astro';
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;

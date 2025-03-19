@@ -4,6 +4,7 @@ import BlogList from '../../../../components/blog/list.astro';
 import BlogPagination from '../../../../components/blog/pagination.astro';
 import Layout from '../../../../layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { trailingSlash } from 'utils/permalinks';
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const page = await getEntry('pages', 'blog');
@@ -21,7 +22,9 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
     );
     return paginate(filteredPosts, {
       params: {
-        tag: slugify(tag, { lower: true, strict: true, trim: true })
+        tag:
+          slugify(tag, { lower: true, strict: true, trim: true }) +
+          trailingSlash
       },
 
       pageSize:

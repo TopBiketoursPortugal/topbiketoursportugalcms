@@ -5,6 +5,7 @@ import type { SEOProps } from 'astro-seo';
 import Layout from 'src/layouts/Layout.astro';
 import RegionsData from 'src/../data/tour_regions.json';
 import TourList from 'src/components/tours/tour-list.astro';
+import { trailingSlash } from 'utils/permalinks';
 export async function getStaticPaths() {
   const tours = (await getCollection('tours')).filter(
     (t) => t.data.language === 'pt'
@@ -12,11 +13,12 @@ export async function getStaticPaths() {
 
   return RegionsData.map((region) => ({
     params: {
-      region: slugify(region.en.name!, {
-        lower: true,
-        strict: true,
-        trim: true
-      })
+      region:
+        slugify(region.en.name!, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
     },
     props: {
       region: slugify(region.pt.name!, {

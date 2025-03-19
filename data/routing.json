@@ -102,12 +102,12 @@
     },
     {
       "from": "/minho-hiking-north-portugal",
-      "to": "/tours//minho-hiking-north-portugal/",
+      "to": "/tours/minho-hiking-north-portugal/",
       "status": 301
     },
     {
       "from": "/minho-hiking-north-portugal/minho-hiking-north-portugal/",
-      "to": "/tours//minho-hiking-north-portugal/",
+      "to": "/tours/minho-hiking-north-portugal/",
       "status": 301
     },
     {
@@ -118,6 +118,11 @@
     {
       "from": "/pt/contactos/",
       "to": "/pt/contatos/",
+      "status": 301
+    },
+    {
+      "from": "/santiago-Compostela-hiking-original-route-porto/",
+      "to": "/tours/santiago-Compostela-hiking-original-route-porto/",
       "status": 301
     },
     {

@@ -1,4 +1,7 @@
 ---
+import type { LanguageCodes } from 'src/schemas/language';
+import { getBlogPagePath } from 'utils/permalinks';
+
 export interface Pagination {
   currentPage: number;
   lastPage: number;
@@ -18,6 +21,8 @@ const {
   lastPage,
   url: { next, prev }
 } = pagination;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 
 // Generate page links array
 const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
@@ -59,7 +64,7 @@ const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
               class={`page-link btn btn-secondary ${
                 pageNum === currentPage ? 'active' : ''
               }`}
-              href={pageNum === 1 ? '/blog' : `/blog/${pageNum}`}
+              href={getBlogPagePath(pageNum, language)}
             >
               {pageNum}
             </a>

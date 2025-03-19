@@ -13,13 +13,13 @@ export async function getStaticPaths() {
   var pages = pagesCollection.map((page) => {
     const slug = getPagePath(page);
     if (slug.length === 0)
-      return { params: { slug: undefined }, props: { page } };
+      throw new Error('Slug is missing for page' + page?.data?.title);
     return { params: { slug }, props: { page } };
   });
 
-  // console.log(
-  //   pages.map((p) => ({ slug: p.params.slug, title: p.props.page.data.title }))
-  // );
+  console.log(
+    pages.map((p) => ({ slug: p.params.slug, title: p.props.page.data.title }))
+  );
 
   return pages;
 }

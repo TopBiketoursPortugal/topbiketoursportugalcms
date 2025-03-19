@@ -12,21 +12,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
 import Icon from 'src/components/utility/icon.astro';
 
-// function getBaseLocaleBaseUrl(
-//   language: LanguageCodes | string | undefined = 'en'
-// ): string {
-//   if (language === 'en') {
-//     return '/';
-//   }
-
-//   return `/${language}/`;
-// }
-
-type Props = {
-  language: LanguageCodes;
-};
-
-const { language } = Astro.props;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
 const { links } = footer;
 const year = new Date().getFullYear();
