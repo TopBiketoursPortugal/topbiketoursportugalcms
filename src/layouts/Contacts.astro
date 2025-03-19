@@ -9,6 +9,7 @@ import ContactForm from './common/contact-form.astro';
 import PageHelper from '../shared/astro/page.astro';
 import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
+import LanguageData from 'src/../data/languages.json';
 
 export type ContactProps = {
   frontmatter: Except<LayoutProps, 'class'>;
@@ -36,8 +37,8 @@ const {
       hrefs.map(({ href, hreflang }) => (
         <link
           rel="alternate"
-          href={`${Astro.site ?? 'https://topwalkingtoursportugal.com'}${href}`}
-          hreflang={hreflang}
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
         />
       ))
     }

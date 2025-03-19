@@ -4,6 +4,7 @@ import PageHelper from '../shared/astro/page.astro';
 import Layout, { type LayoutProps } from './Layout.astro';
 import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
+import LanguageData from 'src/../data/languages.json';
 
 type Props = {
   frontmatter: {
@@ -33,7 +34,11 @@ const { content_blocks = [] } = frontmatter;
   <slot name="head" slot="head">
     {
       hrefs.map(({ href, hreflang }) => (
-        <link rel="alternate" href={href} hreflang={hreflang} />
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
       ))
     }
   </slot>

@@ -7,6 +7,7 @@ import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import type { InferEntrySchema } from 'astro:content';
 import type { HrefLang } from 'src/types/hreflang';
+import LanguageData from 'src/../data/languages.json';
 
 function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
   return props?.rawContent;
@@ -46,7 +47,11 @@ const imageSrc = images[src]?.default ?? src;
   <slot name="head" slot="head">
     {
       hrefs.map(({ href, hreflang }) => (
-        <link rel="alternate" href={href} hreflang={hreflang} />
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
       ))
     }
   </slot>
