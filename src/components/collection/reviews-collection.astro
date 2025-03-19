@@ -23,7 +23,7 @@ const tours = (await getCollection('tours')).filter(
 const items = tours.flatMap((t) => t.data.reviews ?? []) ?? [];
 ---
 
-<Stack class="border-solid p-6" layout="vertical">
+<Stack class="border-solid sm:p-6" layout="vertical">
   <Grid cols={3}>
     {
       items.map((review) => {
