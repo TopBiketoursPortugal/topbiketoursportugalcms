@@ -22,13 +22,12 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
 >
   <summary
     class="w-full cursor-pointer"
-    role="button"
     aria-controls={`${id}-content`}
     aria-expanded="false"
   >
     <slot name="header">
       <div
-        class="bg-gray-100 flex w-full items-center justify-between p-4 transition-all duration-200 ease-in-out hover:bg-gray-200 dark:bg-neutral-900"
+        class="flex w-full items-center justify-between bg-gray-100 p-4 transition-all duration-200 ease-in-out hover:bg-gray-200 dark:bg-neutral-900"
       >
         <span class="font-medium">{title}</span>
         <svg
@@ -49,7 +48,7 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
   </summary>
   <div
     id={`${id}-content`}
-    class="bg-white origin-top transform transition-all duration-500 ease-in-out dark:bg-black"
+    class="origin-top transform bg-white transition-all duration-500 ease-in-out dark:bg-black"
     role="region"
     aria-labelledby={`${id}-heading`}
   >
