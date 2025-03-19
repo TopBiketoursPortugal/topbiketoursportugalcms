@@ -49,6 +49,11 @@
   status = 301
 
 [[redirects]]
+  from = "/hiking-alentejo-vicentine-southeast-portugal-coast/"
+ to = "/tours/hiking-algarve-vicentine-southeast-portugal-coast/"
+  status = 301
+
+[[redirects]]
   from = "/hiking-alentejo-vicentine-southeast-portugal-coast/hiking-alentejo-vicentine-southeast-portugal-coast/"
  to = "/tours/hiking-algarve-vicentine-southeast-portugal-coast/"
   status = 301

@@ -422,6 +422,10 @@ collection_groups:
     collections:
       - data
 _inputs:
+  slug:
+    type: text
+    label: Url
+    comment: Set this only with lower case and '-'
   template:
     type: auto
     hidden: true

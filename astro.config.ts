@@ -120,6 +120,22 @@ export default defineConfig({
     //   Logger: 0
     // })
   ],
+  redirects: {
+    '/hiking-alentejo-vicentine-southeast-portugal-coast/':
+      '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
+    '/passeios-pedestres-portugal/': '/pt/passeios-pedestres-portugal/',
+    '/hiking-douro-valley-wine-region':
+      '/tours/hiking-douro-valley-wine-region/',
+    '/hiking-algarve-vicentine-southeast-portugal-coast':
+      '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
+    '/hiking-alentejo-castles-wine-heritage':
+      '/tours//hiking-alentejo-castles-wine-heritage/',
+    '/hiking-alentejo-vicentine-southeast-portugal-coast':
+      '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
+    '/hiking-atlantic-coast-porto': '/tours/hiking-atlantic-coast-porto/',
+    '/hiking-coast-santiago-compostela-stage-2':
+      '/tours//hiking-coast-santiago-compostela-stage-2/'
+  },
   prefetch: {
     prefetchAll: true
   },

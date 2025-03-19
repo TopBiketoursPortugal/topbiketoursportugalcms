@@ -24,7 +24,8 @@ export function getPageSeo(
     : undefined;
 
   return {
-    noindex: seo?.no_index || false,
+    // noindex: seo?.no_index || false,
+    noindex: false,
     title,
     description,
     canonical: canonicalURL,
