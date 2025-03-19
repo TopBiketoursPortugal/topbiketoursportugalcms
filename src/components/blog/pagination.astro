@@ -64,7 +64,7 @@ const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
               class={`page-link btn btn-secondary ${
                 pageNum === currentPage ? 'active' : ''
               }`}
-              href={getBlogPagePath(pageNum, language)}
+              href={getBlogPagePath(pageNum, language, Astro.site)}
             >
               {pageNum}
             </a>

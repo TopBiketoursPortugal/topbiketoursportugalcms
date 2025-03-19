@@ -35,17 +35,16 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
         <div class="flex flex-col gap-3 sm:flex-row">
           {tags.map((tag: string) => {
             return (
-              <a href={getBlogTagPath(tag, language)}>
-                <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                  {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                </span>
+              <a
+                href={getBlogTagPath(tag, language)}
+                class="rounded-sm bg-slate-200 px-2 py-1 first-letter:capitalize dark:bg-slate-800"
+              >
+                {tag}
               </a>
             );
           })}
         </div>
-      ) : (
-        ''
-      )
+      ) : null
     }
     <a href={getBlogPermalink(Astro.props)}>
       <p class="text-2xl font-semibold">{title}</p>

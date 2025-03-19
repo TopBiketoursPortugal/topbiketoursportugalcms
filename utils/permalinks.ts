@@ -101,7 +101,8 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
 
 export function getBlogPagePath(
   pageNum: number,
-  language: LanguageCodes = 'en'
+  language: LanguageCodes = 'en',
+  site: URL = new URL('https://topwalkingtoursportual.com')
 ): string {
   const pagePath = pageNum === 1 ? '/blog' : `/blog/${pageNum}`;
   return `${getBasePath(language)}${pagePath}${trailingSlash}`;
