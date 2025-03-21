@@ -10,7 +10,6 @@
     "Contact.Feature.Address.LinkText": "View on Google maps",
     "Contact.Form.Title": "Leave us your info",
     "Contact.Form.Subtitle": "and we will get back to you.",
-
     "Contact.Form.Email.Label": "Email address",
     "Contact.Form.Enquiry.Label": "Your Enquiry",
     "Contact.Form.Found.Label": "Where did you find us?",
@@ -78,7 +77,7 @@
     "Tour.Section.Faq.Title": "Faq",
     "Tour.Section.Itinerary.Title": "Itinerary",
     "Tour.Section.Map.Title": "Map",
-    "Tour.Section.Packages.Title": "Packages",
+    "Tour.Section.Packages.Title": "Price",
     "Tour.Section.Photos.Title": "Photos",
     "Tour.Section.RelatedTours.Title": "Related tours",
     "Tour.Section.Reviews.Empty": "No reviews until now.",
@@ -102,7 +101,6 @@
     "Contact.Feature.Address.LinkText": "Ver no Google Maps",
     "Contact.Form.Title": "Deixe-nos os seus dados",
     "Contact.Form.Subtitle": "e entraremos em contacto consigo.",
-
     "Contact.Form.Email.Label": "Endereço de Correio Electrónico",
     "Contact.Form.Enquiry.Label": "O seu pedido",
     "Contact.Form.Found.Label": "Onde nos encontrou?",
@@ -170,7 +168,7 @@
     "Tour.Section.Faq.Title": "Perguntas Frequentes",
     "Tour.Section.Itinerary.Title": "Itinerário",
     "Tour.Section.Map.Title": "Mapa",
-    "Tour.Section.Packages.Title": "Pacotes",
+    "Tour.Section.Packages.Title": "Preços",
     "Tour.Section.Photos.Title": "Fotografias",
     "Tour.Section.RelatedTours.Title": "Viagens Relacionadas",
     "Tour.Section.Reviews.Empty": "Nenhuma avaliação até ao momento.",
