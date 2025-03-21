@@ -8,6 +8,8 @@ import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
+import RouteData from './data/routing.json';
+import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
 // import astroMetaTags from 'astro-meta-tags';
@@ -16,6 +18,21 @@ import favicons from 'astro-favicons';
 // import playformCompress from '@playform/compress';
 // import min from 'astro-min';
 // import webmanifest from 'astro-webmanifest';
+
+function convertJson(inputJson: {
+  routes: { from: string; destination: string; status: ValidRedirectStatus }[];
+}): Record<string, RedirectConfig> {
+  const result = new Map<string, RedirectConfig>();
+
+  inputJson.routes.forEach((route) => {
+    result.set(route.from, {
+      destination: route.destination,
+      status: route.status
+    });
+  });
+
+  return Object.fromEntries(result);
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -120,36 +137,45 @@ export default defineConfig({
     //   Logger: 0
     // })
   ],
-  redirects: {
-    '/hiking-alentejo-vicentine-southeast-portugal-coast/': {
-      destination: '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
-      status: 301
-    },
-    '/passeios-pedestres-portugal/': {
-      destination: '/pt/passeios-pedestres-portugal/',
-      status: 301
-    },
-    '/hiking-douro-valley-wine-region': {
-      destination: '/tours/hiking-douro-valley-wine-region/',
-      status: 301
-    },
-    '/hiking-algarve-vicentine-southeast-portugal-coast': {
-      destination: '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
-      status: 301
-    },
-    '/hiking-alentejo-castles-wine-heritage': {
-      destination: '/tours/hiking-alentejo-castles-wine-heritage/',
-      status: 301
-    },
-    '/hiking-atlantic-coast-porto': {
-      destination: '/tours/hiking-atlantic-coast-porto/',
-      status: 301
-    },
-    '/hiking-coast-santiago-compostela-stage-2': {
-      destination: '/tours/hiking-coast-santiago-compostela-stage-2/',
-      status: 301
+  redirects: convertJson(
+    RouteData as {
+      routes: {
+        from: string;
+        destination: string;
+        status: ValidRedirectStatus;
+      }[];
     }
-  },
+  ),
+  // redirects: {
+  //   '/hiking-alentejo-vicentine-southeast-portugal-coast/': {
+  //     destination: '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
+  //     status: 301
+  //   },
+  //   '/passeios-pedestres-portugal/': {
+  //     destination: '/pt/passeios-pedestres-portugal/',
+  //     status: 301
+  //   },
+  //   '/hiking-douro-valley-wine-region': {
+  //     destination: '/tours/hiking-douro-valley-wine-region/',
+  //     status: 301
+  //   },
+  //   '/hiking-algarve-vicentine-southeast-portugal-coast': {
+  //     destination: '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
+  //     status: 301
+  //   },
+  //   '/hiking-alentejo-castles-wine-heritage': {
+  //     destination: '/tours/hiking-alentejo-castles-wine-heritage/',
+  //     status: 301
+  //   },
+  //   '/hiking-atlantic-coast-porto': {
+  //     destination: '/tours/hiking-atlantic-coast-porto/',
+  //     status: 301
+  //   },
+  //   '/hiking-coast-santiago-compostela-stage-2': {
+  //     destination: '/tours/hiking-coast-santiago-compostela-stage-2/',
+  //     status: 301
+  //   }
+  // },
   prefetch: {
     prefetchAll: true
   },
