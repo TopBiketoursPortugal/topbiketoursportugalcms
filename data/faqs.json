@@ -1,20 +1,96 @@
 {
   "en": [
     {
-      "question": "I'm a solo traveller, is there a single supplement?",
-      "answer": "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite."
+      "question": "How do you ensure customer welfare during the tours?",
+      "answer": "We provide special attention to the welfare of our customers by maintaining an appropriate pace during guided tours, allowing you to enjoy the scenery and the way of life of the Portuguese."
     },
     {
-      "question": "Which currency is most widely accepted on this tour?",
-      "answer": "– Austria \n\n– Euro (EUR) \n\n– France \n\n– Euro (EUR) \n\n– Germany – Euro (EUR) \n\n– Italy\n – Euro (EUR) \n\n– Netherlands – Euro (EUR) \n\n– Switzerland \n\n– Swiss franc (CHF) \n\n– United Kingdom \n\n– Pound sterling (£)"
+      "question": "What is the daily schedule like on your tours?",
+      "answer": "Each day's ride ends in the afternoon, giving you time to relax before the next gastronomic experience, where you can taste regional flavors. We aim to provide an exceptional adventure with a little extra spice."
     },
     {
-      "question": "Should I book pre/post tour accommodation?",
-      "answer": "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.\nIt is a paradisematic country, in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however."
+      "question": "What types of walking tours do you offer in Portugal?",
+      "answer": "We offer the following types of walking tours:   Self-Guided Tour   Guided Tours   Guided Tour Plus "
     },
     {
-      "question": "What is cancellation policy?",
-      "answer": "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite."
+      "question": "What is included in the Self-Guided Tour?",
+      "answer": "The Self-Guided Tour includes:   airport transfers   Hotel bookings with breakfast included   GPS with route   Light picnics   Daily luggage transfer to the next hotel   Transfer from the destination back to the start point "
+    },
+    {
+      "question": "What is included in the Guided Tours? ",
+      "answer": "The Guided Tours include:   includes everything described in the self –Guided tours   Guide and support van for the walking tour   Water, snacks, and transport for any dropouts   Organized lunches and dinners for the group "
+    },
+    {
+      "question": "What additional benefits are included in the Guided Tour Plus? ",
+      "answer": "The Guided Tour Plus includes everything described in the Guided Tours, plus daily lunches and dinners featuring typical dishes of the Portuguese regions. "
+    },
+    {
+      "question": "How do you classify the routes?",
+      "answer": "Our route classifications are as follows:   Easy (1/5): Mostly flat terrain with daily distances up to 15 km.   Easy to Moderate (2/5): Mostly flat terrain with daily distances between 15 km and 25 km, with short climbs up to 20% of the route. Suitable for inexperienced hikers with some fitness preparation.   Moderate (3/5): Terrain can be dirt roads or trails, mostly flat with daily distances between 15 km and 25 km, with some climbs up to 40% of the route. Suitable for walkers with fitness preparation.   Moderate to Hard (4/5): Terrain can be dirt roads or trails, with daily distances between 15 km and 25 km and moderate climbs up to 60% of the route. Suitable for hikers with fitness preparation who want to challenge themselves.   Hard (5/5): Terrain can be dirt roads or trails, with daily distances between 15 km and 30 km and strong climbs up to 60% of the route. Suitable for experienced hikers. "
+    },
+    {
+      "question": "In which languages are guided tours available?",
+      "answer": "Guided tours are available in Portuguese, and English."
+    },
+    {
+      "question": "Is insurance included in the tours?",
+      "answer": "Liability insurance and personal accident insurance are included only in guided tours.   We recommend all participants to ensure their Travel Insurance has adequate coverage for Cancellation and Refund, Luggage, Medical Expenses and Repatriation, Death and Permanent Disability. "
+    },
+    {
+      "question": "What should I pack for each hiking holiday? ",
+      "answer": "To ensure you're well-prepared for a hiking experience, we recommend the following gear and clothing. Note that we provide a cycling jersey and bib shorts for all our guests.   General Clothing:   Bathing suit and sandals   Walking shoes/sandals   Evening and casual wear   Walking Gear:   Walking sticks (available upon request)   Different pairs of walking socks   Walking backpack (available upon request)   Walking shoes "
+    },
+    {
+      "question": "How do I book a tour with Top Walking Tours Portugal? ",
+      "answer": "Booking a tour with Top Wlaking Tours Portugal is simple and straightforward. Start by visiting our website and browsing through our diverse range of tour packages. Once you've selected the perfect tour for you, reach out to us directly via our contact form or email. Our team is ready to provide you with all the information you need and assist you in finalizing your booking. "
+    },
+    {
+      "question": "How long is a proposal valid? ",
+      "answer": "The proposal is valid for 30 days. "
+    },
+    {
+      "question": "Are city taxes included in the tour price? ",
+      "answer": "No, city taxes are not included and are payable on site. The approximate cost is €1 or €2 per person per night. In Lisbon, the city tax is €4 per person per night, and in Porto, it is €3 per person per night. "
+    },
+    {
+      "question": "Is the proposal a confirmed booking? ",
+      "answer": "No, with a proposal, nothing is confirmed until accommodations are reserved and a deposit is requested. "
+    },
+    {
+      "question": "Are transfers included if I book extra nights at the beginning of the tour? ",
+      "answer": "Yes, transfers are included for extra nights booked at the beginning of the tour, as long as the nights are booked through us. "
+    },
+    {
+      "question": "Are transfers included if I book extra nights at the end of the tour? ",
+      "answer": "No, transfers are not included for extra nights booked at the end of the tour.  "
+    },
+    {
+      "question": "How many bags are included in the luggage transfer? ",
+      "answer": "Each person is entitled to one bag for luggage transfer. If you need to transfer additional bags, an extra charge of approximately €100 per bag will apply, depending on the specific bicycle tour you choose. "
+    },
+    {
+      "question": "What happens after I confirm the proposal? ",
+      "answer": "After confirming the proposal, accommodations will be reserved. Once all accommodations are reserved, the tour will be confirmed, and a deposit will be requested. "
+    },
+    {
+      "question": "Are unused services refundable? ",
+      "answer": "No, services not used are not refunded. "
+    },
+    {
+      "question": "How will I be picked up at Porto airport? ",
+      "answer": "Someone will be at Porto airport with a card displaying the \"Top Bike Tours Portugal\" logo and/or your name. "
+    },
+    {
+      "question": "How will I be picked up at Lisbon airport? ",
+      "answer": "For tours starting in Figueira da Foz, Lisbon, or Évora, look for meeting point 3 at Lisbon airport. There will be a card with your name for your transfer. "
+    },
+    {
+      "question": "Can I postpone a tour? What is your flexibility? ",
+      "answer": "Yes, you can postpone a tour with Top Walking Tours Portugal. We offer flexibility in our booking policies, allowing you to postpone your walking tour free of charge up to 30 days before the start date, no questions asked. This provides you with the convenience to adjust your plans if needed. Click our full cancellation policy. "
+    },
+    {
+      "question": "What payment methods do you accept? ",
+      "answer": "At Top Walking Tours Portugal, we offer a variety of payment methods to ensure a convenient and secure booking experience for our customers. We accept the following payment methods:   Bank Transfers: Direct bank transfers are accepted, and no fees will be charged.   Flywire: We are pleased to offer Flywire as a payment option, providing secure and convenient international payments. Please note that a 2% fee applies for this option. The payment link will be provided once Top Walking Tours Portugal confirms your tour. "
     }
   ],
   "pt": [
