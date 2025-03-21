@@ -48,6 +48,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
+const enableFaqs = false;
 ---
 
 {tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}
@@ -62,7 +63,11 @@ const isPromotional = minPromoPrice > 0;
       <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
       <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
-      <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
+      {
+        enableFaqs ? (
+          <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
+        ) : null
+      }
     </Tabs>
   </div>
   <section
@@ -193,12 +198,16 @@ const isPromotional = minPromoPrice > 0;
       )
     }
   </section>
-  <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
-    <Heading as="h2" class="mb-6"
-      >{t('Tour.Section.Faq.Title', language)}</Heading
-    >
-    <TourFaqs faqs={faqs} language={language} />
-  </section>
+  {
+    enableFaqs ? (
+      <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Faq.Title', language)}
+        </Heading>
+        <TourFaqs faqs={faqs} language={language} />
+      </section>
+    ) : null
+  }
   <section id="reviews" class="col-span-full mb-8 flex flex-col gap-4">
     <Heading as="h2" class="mb-6"
       >{t('Tour.Section.Reviews.Title', language)}</Heading
