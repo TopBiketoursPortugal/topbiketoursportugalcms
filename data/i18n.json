@@ -1,6 +1,16 @@
 {
   "en": {
     "Button.Directions": "Directions",
+    "Contact.Feature.Phone.Label": "Phone",
+    "Contact.Feature.Phone.Description": "Whether you prefer a quick call or a text, we're here to help you plan your perfect adventure in Oporto. Don't be shy contact us.",
+    "Contact.Feature.Email.Label": "Email",
+    "Contact.Feature.Email.Description": "Need support? Got a question? Or just want to say hi?Whether you're looking for the best scenic routes, we're here to help. Drop us a line and let's get started!",
+    "Contact.Feature.Address.Label": "Address",
+    "Contact.Feature.Address.Description": "Curious about our walking and biking tours? Visit us at in Oporto! We'll help you find the perfect guided or self-guided adventure. Drop by and start your journey today!",
+    "Contact.Feature.Address.LinkText": "View on Google maps",
+    "Contact.Form.Title": "Leave us your info",
+    "Contact.Form.Subtitle": "and we will get back to you.",
+
     "Contact.Form.Email.Label": "Email address",
     "Contact.Form.Enquiry.Label": "Your Enquiry",
     "Contact.Form.Found.Label": "Where did you find us?",
@@ -83,6 +93,16 @@
   },
   "pt": {
     "Button.Directions": "Direções",
+    "Contact.Feature.Phone.Label": "Telefone",
+    "Contact.Feature.Phone.Description": "Seja uma chamada rápida ou uma mensagem, estamos aqui para ajudá-lo a planear a sua aventura perfeita no Porto. Não seja tímido, contacte-nos.",
+    "Contact.Feature.Email.Label": "Email",
+    "Contact.Feature.Email.Description": "Precisa de ajuda? Tem uma pergunta? Ou apenas quer dizer olá? Se procura as melhores rotas panorâmicas, estamos aqui para ajudar. Envie-nos uma mensagem e vamos começar!",
+    "Contact.Feature.Address.Label": "Morada",
+    "Contact.Feature.Address.Description": "Curioso sobre os nossos passeios a pé e de bicicleta? Visite-nos no Porto! Ajudamo-lo a encontrar a aventura guiada ou autoguiada perfeita. Passe por cá e inicie a sua jornada hoje mesmo!",
+    "Contact.Feature.Address.LinkText": "Ver no Google Maps",
+    "Contact.Form.Title": "Deixe-nos os seus dados",
+    "Contact.Form.Subtitle": "e entraremos em contacto consigo.",
+
     "Contact.Form.Email.Label": "Endereço de Correio Electrónico",
     "Contact.Form.Enquiry.Label": "O seu pedido",
     "Contact.Form.Found.Label": "Onde nos encontrou?",

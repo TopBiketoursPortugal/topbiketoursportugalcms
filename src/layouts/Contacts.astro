@@ -10,6 +10,8 @@ import PageHelper from '../shared/astro/page.astro';
 import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
 import LanguageData from 'src/../data/languages.json';
+import Translations from 'src/../data/i18n.json';
+import { t } from 'utils/i18n';
 
 export type ContactProps = {
   frontmatter: Except<LayoutProps, 'class'>;
@@ -53,10 +55,11 @@ const {
     class="bg-slate-50 px-8 py-20"
   >
     <Stack layout="vertical" spacing="small" class="items-center self-center">
-      <Heading as="h1" class="text-center font-bold">Leave us your info</Heading
+      <Heading as="h1" class="text-center font-bold"
+        >{t('Contact.Form.Title', language)}</Heading
       >
       <Text intent="neutral" class="text-center"
-        >and we will get back to you.</Text
+        >{t('Contact.Form.Subtitle', language)}</Text
       >
     </Stack>
     <Separator class="max-w-14 container mx-auto" weight="heavy" />
