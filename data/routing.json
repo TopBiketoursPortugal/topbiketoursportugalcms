@@ -154,6 +154,11 @@
       "from": "/tags//",
       "destination": "/tags/",
       "status": 301
+    },
+    {
+      "from": "",
+      "destination": "",
+      "status": 0
     }
   ]
 }
