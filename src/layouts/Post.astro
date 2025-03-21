@@ -8,6 +8,7 @@ import { Image } from 'astro:assets';
 import type { InferEntrySchema } from 'astro:content';
 import type { HrefLang } from 'src/types/hreflang';
 import LanguageData from 'src/../data/languages.json';
+import Prose from 'src/components/typography/prose.astro';
 
 function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
   return props?.rawContent;
@@ -90,9 +91,9 @@ const imageSrc = images[src]?.default ?? src;
           <p>{readingTime}<span> minutes</span></p>
         </div>
       </div>
-      <div class="markdown-text" data-cms-edit="content">
+      <Prose class="markdown-text" data-cms-edit="content">
         <slot />
-      </div>
+      </Prose>
     </article>
     <section
       class="mx-auto flex max-w-screen-md flex-col items-center pt-[48px]"
