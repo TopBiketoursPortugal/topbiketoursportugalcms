@@ -10,6 +10,7 @@ import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
+import rehypeExternalLinks from 'rehype-external-links';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
 // import astroMetaTags from 'astro-meta-tags';
@@ -65,7 +66,9 @@ export default defineConfig({
         }
       }
     }),
-    mdx(),
+    mdx({
+      rehypePlugins: [rehypeExternalLinks]
+    }),
     // webmanifest({
     //   /**
     //    * required
@@ -137,6 +140,9 @@ export default defineConfig({
     //   Logger: 0
     // })
   ],
+  markdown: {
+    rehypePlugins: [rehypeExternalLinks]
+  },
   redirects: convertJson(
     RouteData as {
       routes: {

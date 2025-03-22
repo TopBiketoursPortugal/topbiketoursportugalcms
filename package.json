@@ -83,6 +83,7 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-astro-organize-imports": "0.4.11",
     "prettier-plugin-tailwindcss": "0.6.11",
+    "rehype-external-links": "^3.0.0",
     "slugify": "1.6.6",
     "svg-sprite": "2.0.4",
     "svgo": "3.3.2",
