@@ -24,7 +24,7 @@ const locationSchema = z.object({
   lat: z.string().optional(),
   lng: z.string().optional(),
   country: z.enum(['pt', 'es']).optional().default('pt'),
-  region: z.string().optional(),
+  region: z.string().optional().default(''),
   city: z.string().optional()
 });
 
@@ -111,7 +111,7 @@ const tourSchema = z.object({
   order: z.number().optional(),
   description: z.string().optional(),
   afterPricing: z.string().optional().nullable(),
-  region: z.number().optional(),
+  region: z.string().optional().default(''),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),
