@@ -154,6 +154,166 @@
       "from": "/tags//",
       "destination": "/tags/",
       "status": 301
+    },
+    {
+      "from": "/pt/tours/coastal-route-to-santiago-compostela-stage-2/",
+      "destination": "/pt/tours/rota-costeira-santiago-de-compostela-etapa-2/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/portuguese-central-camino-stage-1/",
+      "destination": "/pt/tours/caminho-central-santiago-compoatela-porto-etapa-1/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/portuguese-central-camino-stage-2/",
+      "destination": "/pt/tours/caminho-central-porto-etapa-2/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/portuguese-central-camino-stage-2/",
+      "destination": "/pt/tours/caminho-central-porto-etapa-2/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/douro-valley-wine-region-hiking-tour/",
+      "destination": "/pt/tours/caminhada-na-regiao-vinicola-do-vale-do-douro/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/historical-alentejo-rural-trails/",
+      "destination": "/pt/tours/alentejo-historico-trilhos-rurais/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/minho-hiking-holiday-in-the-north-of-portugal/",
+      "destination": "/pt/tours/caminhada-no-minho-norte-de-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/vicentine-west-coast-in-algarve-stage-2/",
+      "destination": "/pt/tours/caminhada-na-costa-vicentina-alentejo-etapa-2/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/vicentine-west-coast-in-alentejo-stage-1/",
+      "destination": "/pt/tours/caminhada-na-costa-vicentina-alentejana-etapa-1/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/coastal-route-to-santiago-compostela-stage-1/",
+      "destination": "/pt/tours/caminho-da-costa-ate-santiago-compostela-etapa-1/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/caminho-central-santiago-compoatela-porto-etapa-1/",
+      "destination": "/pt/tours/caminho-central-santiago-compostela-porto-etapa-1/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/douro-valley-wine-region-hiking-tour",
+      "destination": "/pt/tours/caminhada-na-regiao-vinicola-do-vale-do-douro/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/minho-hiking-holiday-in-the-north-of-portugal",
+      "destination": "/pt/tours/caminhada-no-minho-norte-de-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/5-reasons-to-walk-after-50-or-top-walking-tours/",
+      "destination": "/pt/blog/5-razoes-para-caminhar-depois-dos-50/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/unmissable-itineraries-places-to-visit-in-portugal/",
+      "destination": "/pt/blog/itinerarios-imperdiveis-lugares-para-visitar/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/safety-tips-for-hiking-on-isolated-trails/",
+      "destination": "/pt/blog/dicas-de-seguranca-caminhadas-trilhos-isolados/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/the-7-best-outdoor-activities-to-do-in-summer/",
+      "destination": "/pt/blog/7-melhores-atividades-ao-ar-livre-para-fazer-no-verao/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/8-benefits-of-hiking/",
+      "destination": "/pt/blog/8-beneficios-das-caminhadas/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/discovering-rural-tourism-in-the-alentejo-a-guide-to-unforgettable-experiences/",
+      "destination": "/pt/blog/descobrindo-o-turismo-rural-no-alentejo/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/creative-summer-date-ideas-top-walking-tours/",
+      "destination": "/pt/blog/ideias-criativas-para-encontros-de-verao/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/explore-portos-walking-routes-top-walking-tours/",
+      "destination": "/pt/blog/explore-os-percursos-pedestres-do-porto/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/7-incredible-cities-to-visit-in-portugal/",
+      "destination": "/pt/blog/7-cidades-incriveis-para-visitar-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/walking-vs-cycling-discover-the-pros-and-cons/",
+      "destination": "/pt/blog/caminhar-ou-pedalar-descubra-os-pros-e-contras/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/porto-vacation-discover-the-best-restaurants-and-flavors/",
+      "destination": "/pt/blog/ferias-no-porto-descubra-os-melhores-restaurantes-e-sabores/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/tours-from-porto-to-santiago-de-compostela-in-portugal/",
+      "destination": "/pt/blog/porto-a-santiag-de-compostela-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/discover-the-hidden-treasures-of-this-enchanting-country/",
+      "destination": "/pt/blog/descubra-os-tesouros-escondidos-deste-pais-encantador/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/the-best-family-tours-in-lisbon/",
+      "destination": "/pt/blog/as-melhores-excursoes-familiares-em-lisboa/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/guia-das-melhores-excursoes-em-portugal-experiencias-unicas-na-natureza-cultura-e-gastronomia/",
+      "destination": "/pt/blog/guia-das-melhores-excursoes-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/guide-to-the-best-tours-in-portugal-unique-experiences-in-nature-culture-and-gastronomy/",
+      "destination": "/pt/blog/guia-das-melhores-excursoes-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/5-reasons-to-visit-the-costa-vicentina-top-walking-tours/",
+      "destination": "/pt/blog/5-razoes-para-visitar-a-costa-vicentina/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/porto-a-santiag-de-compostela-em-portugal/",
+      "destination": "/pt/blog/porto-a-santiago-de-compostela-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/what-is-hiking-a-complete-beginners-guide/",
+      "destination": "/pt/blog/o-que-e-caminhada-um-guia-completo-para-iniciantes/",
+      "status": 301
     }
   ]
 }
