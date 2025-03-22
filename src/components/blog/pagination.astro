@@ -1,6 +1,9 @@
 ---
 import type { LanguageCodes } from 'src/schemas/language';
 import { getBlogPagePath } from 'utils/permalinks';
+import Icon from '../utility/icon.astro';
+import { tv } from 'tailwind-variants';
+import { cn } from 'utils/cn';
 
 export interface Pagination {
   currentPage: number;
@@ -26,44 +29,68 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 
 // Generate page links array
 const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
+
+const pager = tv({
+  base: '',
+  variants: {
+    disabled: {
+      true: {
+        link: 'pointer-events-none',
+        item: ''
+      },
+      false: { link: '' }
+    },
+    active: {
+      true: {
+        link: 'z-3 border-gray-400/20 text-blue-600 dark:border-gray-500/30 dark:text-blue-500'
+      },
+      false: { link: '' }
+    }
+  },
+  slots: {
+    container: 'flex list-none',
+    item: 'flex border border-r-0 border-solid border-gray-400/20 bg-white hover:border-gray-600/20 dark:border-gray-500/30 dark:bg-gray-900 dark:hover:border-gray-400/30',
+    link: 'flex h-8 w-8 min-w-full items-center justify-center text-xs text-gray-700 transition-all duration-200 ease-in-out hover:text-blue-600 focus:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500 dark:focus:text-blue-500',
+    icon: 'h-4 w-4'
+  },
+  compoundVariants: [
+    {
+      disabled: true,
+      className: {
+        item: 'border-gray-400/20 bg-slate-200 text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600',
+        link: 'border-gray-400/20 bg-slate-200 text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600'
+      }
+    }
+  ],
+  defaultVariants: {
+    disabled: false,
+    selected: false // Note: 'selected' isn't used in variants; did you mean 'active'?
+  }
+});
+const { link, container, item, icon } = pager();
 ---
 
 {
   lastPage !== 1 && (
-    <nav class="blog-pagination">
-      <ul class="pagination">
-        {prev && (
-          <li class="page-item">
-            <a class="page-link btn btn-secondary" href={prev}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20.657"
-                height="11.314"
-                viewBox="0 0 20.657 11.314"
-                style={{ transform: 'scale(-1, 1)' }}
-              >
-                <g data-name="Group 12">
-                  <path d="M0 4.657h18v2H0z" data-name="Rectangle 2400" />
-                  <path
-                    d="M13.586 9.9l5.6568542-5.6568542 1.4142136 1.4142135-5.6568542 5.6568543z"
-                    data-name="Rectangle 2401"
-                  />
-                  <path
-                    d="M15 0l5.6568542 5.6568542-1.4142135 1.4142136-5.6568543-5.6568542z"
-                    data-name="Rectangle 2402"
-                  />
-                </g>
-              </svg>
-            </a>
-          </li>
-        )}
+    <nav class="blog-pagination" aria-label="pagination">
+      <ul class={cn('pagination', container())}>
+        <li class={cn('page-item rounded-bl-md rounded-tl-md', item())}>
+          <a
+            class={cn(
+              link({ disabled: currentPage === 1 }),
+              'page-link rounded-bl-md rounded-tl-md'
+            )}
+            href={prev}
+            aria-disabled={currentPage === 1}
+          >
+            <Icon icon="ArrowLeft" className={icon()} />
+          </a>
+        </li>
 
         {pageLinks.map((pageNum) => (
-          <li class="page-item">
+          <li class={cn('page-item', item())}>
             <a
-              class={`page-link btn btn-secondary ${
-                pageNum === currentPage ? 'active' : ''
-              }`}
+              class={cn('page-link', link({ active: pageNum === currentPage }))}
               href={getBlogPagePath(pageNum, language, Astro.site)}
             >
               {pageNum}
@@ -71,30 +98,20 @@ const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
           </li>
         ))}
 
-        {next && (
-          <li class="page-item">
-            <a class="page-link btn btn-secondary" href={next}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20.657"
-                height="11.314"
-                viewBox="0 0 20.657 11.314"
-              >
-                <g data-name="Group 12">
-                  <path d="M0 4.657h18v2H0z" data-name="Rectangle 2400" />
-                  <path
-                    d="M13.586 9.9l5.6568542-5.6568542 1.4142136 1.4142135-5.6568542 5.6568543z"
-                    data-name="Rectangle 2401"
-                  />
-                  <path
-                    d="M15 0l5.6568542 5.6568542-1.4142135 1.4142136-5.6568543-5.6568542z"
-                    data-name="Rectangle 2402"
-                  />
-                </g>
-              </svg>
-            </a>
-          </li>
-        )}
+        <li
+          class={cn(item(), 'page-item border-r-1 rounded-br-md rounded-tr-md')}
+        >
+          <a
+            class={cn(
+              link({ disabled: pageLinks.length - 1 === currentPage }),
+              'page-link border-r-1 rounded-br-md rounded-tr-md'
+            )}
+            href={next}
+            aria-disabled={pageLinks.length - 1 === currentPage}
+          >
+            <Icon icon="ArrowRight" className={icon()} />
+          </a>
+        </li>
       </ul>
     </nav>
   )
