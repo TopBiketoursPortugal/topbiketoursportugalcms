@@ -314,6 +314,26 @@
       "from": "/pt/blog/what-is-hiking-a-complete-beginners-guide/",
       "destination": "/pt/blog/o-que-e-caminhada-um-guia-completo-para-iniciantes/",
       "status": 301
+    },
+    {
+      "from": "/tours/coastal-route-to-santiago-compostela-stage-2",
+      "destination": "/tours/hiking-coast-santiago-compostela-stage-2/",
+      "status": 301
+    },
+    {
+      "from": "/tours/coastal-route-to-santiago-compostela-stage-2/",
+      "destination": "/tours/hiking-coast-santiago-compostela-stage-2/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/beyond-the-beaches-discovering-the-hidden-treasures-of-benagil-cave-and-ponta-da-piedade/",
+      "destination": "/pt/blog/para-alem-das-praias-descobrindo-os-tesouros-escondidos/",
+      "status": 301
+    },
+    {
+      "from": "/blog/benefits-of-your-first-walking-tour/",
+      "destination": "/blog/benefits-of-your-first-hiking-tour",
+      "status": 301
     }
   ]
 }
