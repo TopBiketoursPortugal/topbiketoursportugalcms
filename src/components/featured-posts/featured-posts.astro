@@ -29,7 +29,10 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
   {
     allPosts
-      .filter((post) => block.main_feature === post.data.id)
+      .filter(
+        (post) =>
+          block.main_feature === post.data.id && post.data.language === language
+      )
       .map((post) => {
         const featuredPostURL = getBlogPermalink(post);
         const date = new Date(post.data.date);
@@ -78,7 +81,11 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
   >
     {
       allPosts
-        .filter((post) => block.feature_list?.includes(post.data.id))
+        .filter(
+          (post) =>
+            block.feature_list?.includes(post.data.id) &&
+            post.data.language === language
+        )
         .map((post) => {
           const featuredPostURL = getBlogPermalink(post);
           const date = new Date(post.data.date);

@@ -16,12 +16,13 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif}',
   { eager: true }
 );
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const allTours = (await getCollection('tours')).filter(
   (tour) =>
-    block.main_feature === tour.data.id ||
-    block.feature_list?.includes(tour.data.id)
+    (block.main_feature === tour.data.id ||
+      block.feature_list?.includes(tour.data.id)) &&
+    tour.data.language === language
 );
-const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
