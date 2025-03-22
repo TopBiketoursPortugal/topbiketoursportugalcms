@@ -7,7 +7,7 @@ const teamMemberSchema = z.object({
   language: z.enum(['en', 'pt']),
   title: z.string(),
   memberType: z.string().optional(),
-  slug: z.string().optional().nullable(),
+  path: z.string().optional().nullable(),
   content: z.string().optional(),
   image: z
     .object({

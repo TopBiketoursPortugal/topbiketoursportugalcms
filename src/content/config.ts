@@ -9,7 +9,7 @@ const blogCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
     id: z.string().uuid(),
-    slug: z.string().optional().nullable(),
+    path: z.string().optional().nullable(),
     date: z.string().or(z.date()),
     title: z.string(),
     tags: z.array(z.string()).optional().nullable(),
@@ -30,7 +30,7 @@ const pageSchema = z.object({
   title: z.string(),
   language: languageSchema,
   template: z.string().optional().nullable(),
-  slug: z.string().optional().nullable(),
+  path: z.string().optional().nullable(),
   content_blocks: z.array(z.any()),
   content_blocks_after: z.array(z.any()).optional().nullable(),
   seo: seoSchema,
@@ -49,7 +49,7 @@ const paginatedCollectionSchema = z.object({
   title: z.string(),
   language: languageSchema,
   template: z.string().optional().nullable(),
-  slug: z.string().optional().nullable(),
+  path: z.string().optional().nullable(),
   page_size: z.number().positive(),
   featured_posts: featuredPostSchema,
   showPageTitle: z.boolean().optional().default(false),
@@ -57,7 +57,10 @@ const paginatedCollectionSchema = z.object({
 });
 
 const pagesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/pages' }),
+  loader: glob({
+    pattern: ['./*.{md,mdx}', './pt/*.{md,mdx}'],
+    base: './src/content/pages'
+  }),
   schema: z.union([paginatedCollectionSchema, pageSchema])
 });
 

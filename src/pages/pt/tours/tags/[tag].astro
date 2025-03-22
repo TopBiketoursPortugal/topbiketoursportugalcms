@@ -11,11 +11,14 @@ export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
     (t) => t.data.language === 'pt'
   );
 
-  const tags = [...new Set(tours.flatMap((tour) => tour.data.tags ?? []))];
+  const tags = [
+    ...new Set<string>(tours.flatMap((tour) => tour.data.tags ?? []))
+  ];
   return tags
     .filter((t) => t?.length > 0)
     .map((tag) => ({
       params: {
+        // language: 'pt',
         tag:
           slugify(tag, { lower: true, strict: true, trim: true }) +
           trailingSlash

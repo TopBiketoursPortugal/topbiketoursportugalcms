@@ -11,7 +11,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const posts = (await getCollection('blog')).filter(
     (p) => p.data.language === 'pt'
   );
-  const tags = new Set(
+  const tags = new Set<string>(
     posts.flatMap((p) => p.data.tags ?? []).filter((t) => t && t !== '')
   );
 
@@ -19,6 +19,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
     const filteredPosts = posts.filter(({ data }) => data.tags?.includes(tag));
     return paginate(filteredPosts, {
       params: {
+        // language: 'pt',
         tag:
           slugify(tag, { lower: true, strict: true, trim: true }) +
           trailingSlash

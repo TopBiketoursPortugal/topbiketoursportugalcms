@@ -50,7 +50,7 @@ export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
 }
 
 export interface Taxonomy {
-  slug: string;
+  path: string;
   title: string;
 }
 
@@ -97,8 +97,8 @@ export interface Post {
   /** A unique ID number that identifies a post. */
   id: string;
 
-  /** A post’s unique slug – part of the post’s URL based on its name, i.e. a post called “My Sample Page” has a slug “my-sample-page”. */
-  slug: string;
+  /** A post’s unique path – part of the post’s URL based on its name, i.e. a post called “My Sample Page” has a path “my-sample-page”. */
+  path: string;
 
   /**  */
   permalink: string;

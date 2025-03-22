@@ -15,10 +15,10 @@ import { trailingSlash } from 'utils/permalinks';
 export async function getStaticPaths() {
   const team = await getCollection('team');
   return team
-    .filter((t) => t.data.language === 'pt')
+    .filter((t) => (t.data.language ?? 'en') === 'en')
     .map((teamMember) => ({
       params: {
-        slug:
+        path:
           slugify(teamMember.data.title, {
             lower: true,
             strict: true,

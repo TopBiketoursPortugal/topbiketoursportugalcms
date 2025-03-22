@@ -22,9 +22,10 @@ if (!Astro.props.frontmatter) {
   throw new Error('Page frontmatter must be defined missing');
 }
 const { frontmatter: props, hrefs = [] } = Astro.props;
+//console.log(hrefs);
 ---
 
-<Layout {...props}>
+<Layout {...props} hrefLangs={hrefs}>
   <slot name="head" slot="head">
     {
       hrefs.map(({ href, hreflang }) => (

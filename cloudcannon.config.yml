@@ -9,11 +9,14 @@ collections_config:
       - '**/*.md*'
     name: Pages
     icon: laptop_mac
-    url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''|match:''|replace:'',''|'/'}"
+    # /home, /pt/home
+    url: "/[relative_base_path]{path|default:title|prepend:'/'|deburr|slugify|lowercase|trim|strip|replace:'/home',|append:'/'|replace:'//','/'}"
     disable_url: false
     description: ''
     _enabled_editors:
       - visual
+      - data
+      - content
     _inputs:
       id:
         type: auto
@@ -46,7 +49,7 @@ collections_config:
           _inputs:
           _select_data:
           _structures:
-        new_preview_url: "/[relative_base_path]/{slug|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
+        new_preview_url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
       paginated:
         path: schemas/paginated.mdx
         reorder_inputs: true
@@ -422,7 +425,7 @@ collection_groups:
     collections:
       - data
 _inputs:
-  slug:
+  path:
     type: text
     label: Url
     comment: Set this only with lower case and '-'
@@ -1106,7 +1109,6 @@ file_config:
 data_config:
   countries:
     path: data/contries.json
-
   icons:
     path: data/icons.json
   colors:

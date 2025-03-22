@@ -101,7 +101,7 @@ const faqsSchema = z.object({
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
-  slug: z.string().optional().nullable(),
+  path: z.string().optional().nullable(),
   language: languageSchema, // Assuming `languageField` is a string, adjust as necessary
   id: z.string().uuid(),
   title: z.string(),
@@ -112,7 +112,6 @@ const tourSchema = z.object({
   description: z.string().optional(),
   afterPricing: z.string().optional().nullable(),
   region: z.number().optional(),
-  path: z.string().optional().nullable(),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),

@@ -14,8 +14,9 @@ export async function getStaticPaths() {
 
   return tours.map((tour) => ({
     params: {
-      slug:
-        slugify(tour.data.path ?? tour.data?.slug ?? tour.data.title, {
+      // language: 'pt',
+      path:
+        slugify(tour.data.path ?? tour.data?.path ?? tour.data.title, {
           lower: true,
           strict: true,
           trim: true

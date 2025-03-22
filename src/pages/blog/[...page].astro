@@ -5,30 +5,40 @@ import BlogPagination from '../../components/blog/pagination.astro';
 import PaginatedLayout, {
   type PaginatedProps
 } from '../../layouts/Paginated.astro';
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
-import { getPageLanguagesAlternates } from 'utils/permalinks';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
 };
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const language = 'en';
   const posts = await getCollection('blog');
-  const page = await getEntry('pages', 'blog');
-  const filteredPosts = posts.filter((p) => (p.data.language ?? 'en') === 'en');
+
+  const page = await getBlogIndexPage(language);
+
+  // Filter out what is already displayed in featured stories
+  const filteredPosts = posts.filter((p) => p.data.language === language);
   return paginate(filteredPosts, {
     pageSize: page?.data && 'page_size' in page.data ? page.data.page_size : 6
   });
 }
 
-const page = await getEntry('pages', 'blog');
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const page = await getBlogIndexPage(language);
 const frontmatter = page?.data as PaginatedProps['frontmatter'];
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
-const hrefs = await getPageLanguagesAlternates(
-  page as CollectionEntry<'pages'>,
-  Astro.site
-);
+const { page: pageNumberStr } = Astro.params;
+const pageNumber = parseInt(pageNumberStr ?? 1, 10);
+const hrefs = (
+  page ? await getPageLanguagesAlternates(page, Astro.site) : []
+).map((p) => ({
+  ...p,
+  href: p.href + (pageNumber === 1 ? '' : pageNumber + '/')
+}));
 ---
 
 <PaginatedLayout frontmatter={frontmatter} hrefs={hrefs}>

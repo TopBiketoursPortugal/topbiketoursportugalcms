@@ -55,7 +55,7 @@ const { items = [], container = 'full', padding = 'none' } = Astro.props;
                   />
                 </svg>
               </div>
-              <span class="font-medium">{header?.text}</span>
+              <Prose markdown={header?.text} />
             </div>
             <div class="pl-4">
               <Container size="full" padding={padding}>

@@ -26,11 +26,11 @@ export function getTeamMemberPath(
 }
 
 export function getTourPath(
-  { slug, title }: TourSchema,
+  { path, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
   return sanitizeUrl(
-    `${getBasePath(language)}tours/${slugify(slug ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}tours/${slugify(path ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
@@ -47,16 +47,16 @@ export function getTourTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const slug = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
-  return sanitizeUrl(slug);
+  const path = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  return sanitizeUrl(path);
 }
 
 export function getBlogTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const slug = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
-  return sanitizeUrl(slug);
+  const path = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  return sanitizeUrl(path);
 }
 
 function trim(str = '', ch?: string): string {
@@ -79,16 +79,16 @@ export function getPagePath(page: CollectionEntry<'pages'>) {
   const language = page.data.language ?? 'en';
 
   if (
-    // page.data.slug === '' ||
-    page.data.slug === 'index' ||
-    page.data.slug === 'home' ||
+    // page.data.path === '' ||
+    page.data.path === 'index' ||
+    page.data.path === 'home' ||
     page.filePath?.endsWith('index.md') ||
     page.filePath?.endsWith('index.mdx')
   ) {
     return getHomePermalink(language);
   }
   const pagePath =
-    `${getBasePath(language)}${slugify(page.data.slug ?? page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}${trailingSlash}`.toLocaleLowerCase();
+    `${getBasePath(language)}${slugify(page.data.path ?? page.data.title, { lower: true, strict: true, trim: true }).replace(/index$/, '')}${trailingSlash}`.toLocaleLowerCase();
   return sanitizeUrl(pagePath);
 }
 
@@ -106,7 +106,7 @@ export function getBlogPagePath(
 export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
   const language = data.language ?? 'en';
   return sanitizeUrl(
-    `${getBasePath(language)}blog/${slugify(data.slug ?? data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}blog/${slugify(data.path ?? data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
@@ -117,7 +117,6 @@ export async function getPageLanguagesAlternates(
   const pages = await getCollection('pages');
   const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
 
-  console.log(alternateEntryName, pageEntry.filePath);
   var alternatePages =
     pages.filter(
       (t) =>
@@ -128,8 +127,8 @@ export async function getPageLanguagesAlternates(
   return alternatePages.map((page) => {
     const { data: alternate } = page;
     if (
-      page.data.slug === 'index' ||
-      page.data.slug === 'home' ||
+      page.data.path === 'index' ||
+      page.data.path === 'home' ||
       page.filePath?.endsWith('index.md') ||
       page.filePath?.endsWith('index.mdx')
     ) {
@@ -142,7 +141,7 @@ export async function getPageLanguagesAlternates(
     }
     return {
       href: sanitizeUrl(
-        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${slugify(alternate.path?.split('/').at(-1) ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
       ),
       hreflang: alternate.language
     };
@@ -166,7 +165,7 @@ export async function getPostLanguagesAlternates(
     const { data: alternate } = alternatePost;
     return {
       href: sanitizeUrl(
-        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.slug ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
       ),
       hreflang: alternate.language
     };
@@ -188,8 +187,18 @@ export async function getTourLanguagesAlternates(
 
   return alternateTours.map(({ data: alternateTour }) => ({
     href: sanitizeUrl(
-      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.slug ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.path ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
     ),
     hreflang: alternateTour.language
   }));
+}
+
+export async function getBlogIndexPage(language: LanguageCodes) {
+  const blogIndexes = await getCollection('pages', (p) => {
+    return (
+      (p.filePath ?? '').endsWith('blog.mdx') && p.data.language === language
+    );
+  });
+
+  return blogIndexes[0];
 }

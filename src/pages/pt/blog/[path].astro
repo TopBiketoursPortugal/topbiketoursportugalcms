@@ -11,8 +11,9 @@ export async function getStaticPaths() {
   );
   return posts.map((post) => ({
     params: {
-      slug:
-        slugify(post.data.slug ?? post.data.title, {
+      // language: 'pt',
+      path:
+        slugify(post.data.path ?? post.data.title, {
           lower: true,
           strict: true,
           trim: true
@@ -22,12 +23,12 @@ export async function getStaticPaths() {
   }));
 }
 
-if (!Astro.params.slug) {
-  throw new Error('Post slug is undefined');
+if (!Astro.params.path) {
+  throw new Error('Post path is undefined');
 }
 const { post } = Astro.props;
 if (!post) {
-  throw new Error('Failed to get post with slug: ' + Astro.params.slug);
+  throw new Error('Failed to get post with path: ' + Astro.params.path);
 }
 const { Content } = await render(post);
 const language = (Astro.currentLocale as LanguageCodes) ?? 'en';

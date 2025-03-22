@@ -11,14 +11,14 @@ export interface Props {
 export async function getStaticPaths() {
   const pagesCollection = await getCollection('pages');
   var pages = pagesCollection.map((page) => {
-    const slug = getPagePath(page);
-    if (slug.length === 0)
-      throw new Error('Slug is missing for page' + page?.data?.title);
-    return { params: { slug }, props: { page } };
+    const path = getPagePath(page);
+    if (path.length === 0)
+      throw new Error('Path is missing for page' + page?.data?.title);
+    return { params: { path }, props: { page } };
   });
 
   // console.log(
-  //   pages.map((p) => ({ slug: p.params.slug, title: p.props.page.data.title }))
+  //   pages.map((p) => ({ path: p.params.path, title: p.props.page.data.title }))
   // );
 
   return pages;

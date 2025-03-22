@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 
   return RegionsData.map((region) => ({
     params: {
+      // language: 'pt',
       region:
         slugify(region.pt.name!, {
           lower: true,

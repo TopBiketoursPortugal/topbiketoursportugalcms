@@ -224,7 +224,7 @@ export default defineConfig({
     }
   },
   // redirects: {
-  //   '/[...slug]': '/[...slug]/'
+  //   '/[...path]': '/[...path]/'
   // },
   vite: {
     // resolve: {
