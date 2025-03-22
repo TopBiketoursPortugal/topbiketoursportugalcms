@@ -9,19 +9,21 @@ import LanguageData from 'src/../data/languages.json';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
-  return tours.map((tour) => ({
-    params: {
-      path:
-        slugify(tour.data.path ?? tour.data.title, {
-          lower: true,
-          strict: true,
-          trim: true
-        }) + trailingSlash
-    },
-    props: {
-      tour
-    }
-  }));
+  return tours
+    .filter((t) => t.data.language === 'en')
+    .map((tour) => ({
+      params: {
+        path:
+          slugify(tour.data.path ?? tour.data.title, {
+            lower: true,
+            strict: true,
+            trim: true
+          }) + trailingSlash
+      },
+      props: {
+        tour
+      }
+    }));
 }
 
 const { tour } = Astro.props;
