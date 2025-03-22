@@ -67,13 +67,13 @@
   {
     "id": 6,
     "pt": {
-      "name": "Santiago compostela",
-      "title": "Santiago compostela",
+      "name": "Santiago Compostela",
+      "title": "Santiago Compostela",
       "src": "/src/assets/images/santiago-de-compostela-city-center.jpg"
     },
     "en": {
-      "name": "Santiago compostela",
-      "title": "Santiago compostela",
+      "name": "Santiago Compostela",
+      "title": "Santiago Compostela",
       "src": "/src/assets/images/santiago-de-compostela-city-center.jpg"
     }
   }
