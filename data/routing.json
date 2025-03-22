@@ -5,11 +5,7 @@
       "destination": "/about-us/",
       "status": 301
     },
-    {
-      "from": "/blog/benefits-of-your-first-hiking-tour/",
-      "destination": "/blog/benefits-of-your-first-walking-tour/",
-      "status": 301
-    },
+
     {
       "from": "/blog/news/",
       "destination": "/blog/tags/news/",
@@ -331,8 +327,8 @@
       "status": 301
     },
     {
-      "from": "/blog/benefits-of-your-first-walking-tour/",
-      "destination": "/blog/benefits-of-your-first-hiking-tour",
+      "from": "/blog/benefits-of-your-first-walking-tour",
+      "destination": "/blog/benefits-of-your-first-hiking-tour/",
       "status": 301
     }
   ]
