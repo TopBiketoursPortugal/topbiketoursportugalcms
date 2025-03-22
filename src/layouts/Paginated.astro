@@ -1,7 +1,9 @@
 ---
+import type { HrefLang } from 'src/types/hreflang';
 import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
 import type { FeaturedPost } from 'src/content/config';
+import LanguageData from 'src/../data/languages.json';
 
 export type PaginatedProps = {
   frontmatter: {
@@ -10,6 +12,7 @@ export type PaginatedProps = {
     page_size?: number;
     seo?: SEOProps;
   };
+  hrefs?: ReadonlyArray<HrefLang>;
 };
 
 type Props = PaginatedProps;
@@ -18,11 +21,21 @@ if (!Astro.props.frontmatter) {
   // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
   throw new Error('Page frontmatter must be defined missing');
 }
-const { ...props } = Astro.props.frontmatter;
+const { frontmatter: props, hrefs = [] } = Astro.props;
 ---
 
 <Layout {...props}>
-  <slot name="head" slot="head" />
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
 
   <div class="blog-index py-[48px]">
     <h1

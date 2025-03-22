@@ -6,6 +6,7 @@ import PaginatedLayout, {
   type PaginatedProps
 } from '../../layouts/Paginated.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getPageLanguagesAlternates } from 'utils/permalinks';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
@@ -24,9 +25,13 @@ const page = await getEntry('pages', 'blog');
 const frontmatter = page?.data as PaginatedProps['frontmatter'];
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
+const hrefs = await getPageLanguagesAlternates(
+  page as CollectionEntry<'pages'>,
+  Astro.site
+);
 ---
 
-<PaginatedLayout frontmatter={frontmatter}>
+<PaginatedLayout frontmatter={frontmatter} hrefs={hrefs}>
   <section class="blog-index mx-auto flex flex-col justify-center">
     <BlogList posts={posts} />
     <BlogPagination pagination={pagination} />

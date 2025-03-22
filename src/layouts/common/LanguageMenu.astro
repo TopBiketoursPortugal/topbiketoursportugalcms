@@ -1,7 +1,9 @@
 ---
+import { pathHasLocale } from 'astro:i18n';
 import Languages from 'src/../data/languages.json';
 import Icon from 'src/components/utility/icon.astro';
 import type { LanguageCodes } from 'src/schemas/language';
+import { getHomePermalink } from 'utils/permalinks';
 
 export type LanguageMenuItem = {
   code: LanguageCodes;
@@ -16,12 +18,12 @@ const currenLanguage = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const languages = Object.values(Languages)
   .filter((l) => l.code !== currenLanguage)
   .map(
-    ({ code, isDefault, display, icon }) =>
+    ({ code, display, icon }) =>
       ({
         code: code as LanguageCodes,
         display,
         icon,
-        path: isDefault ? '/' : `/${code}/`,
+        path: getHomePermalink(code as LanguageCodes),
         locale: Languages[code as LanguageCodes].locale
       }) satisfies LanguageMenuItem
   );
@@ -38,6 +40,8 @@ if (localizedUrls?.length === 0) {
     locale: Languages[l.code].locale
   }));
 }
+
+// console.log(localizedUrls);
 ---
 
 <div class="flex flex-row gap-4 text-2xl">
