@@ -21,7 +21,7 @@ const languages = Object.values(Languages)
         code: code as LanguageCodes,
         display,
         icon,
-        path: isDefault ? '/' : `/${code}`,
+        path: isDefault ? '/' : `/${code}/`,
         locale: Languages[code as LanguageCodes].locale
       }) satisfies LanguageMenuItem
   );

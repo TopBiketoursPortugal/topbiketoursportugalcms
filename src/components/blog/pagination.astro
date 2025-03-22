@@ -48,7 +48,7 @@ const pager = tv({
     }
   },
   slots: {
-    container: 'flex list-none',
+    container: 'flex list-none pt-8',
     item: 'flex border border-r-0 border-solid border-gray-400/20 bg-white hover:border-gray-600/20 dark:border-gray-500/30 dark:bg-gray-900 dark:hover:border-gray-400/30',
     link: 'flex h-8 w-8 min-w-full items-center justify-center text-xs text-gray-700 transition-all duration-200 ease-in-out hover:text-blue-600 focus:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500 dark:focus:text-blue-500',
     icon: 'h-4 w-4'
@@ -57,8 +57,8 @@ const pager = tv({
     {
       disabled: true,
       className: {
-        item: 'border-gray-400/20 bg-slate-200 text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600',
-        link: 'border-gray-400/20 bg-slate-200 text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600'
+        item: 'border-gray-400/20 bg-slate-200 text-gray-400 hover:border-gray-400/20 hover:text-gray-400 focus:text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600',
+        link: 'border-gray-400/20 bg-slate-200 text-gray-400 hover:border-gray-400/20 hover:text-gray-400 focus:text-gray-400 dark:border-gray-500/30 dark:bg-gray-800 dark:text-gray-600'
       }
     }
   ],
