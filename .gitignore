@@ -26,3 +26,5 @@ cert.key
 ca.crt
 ca.key
 cert.crt
+dev-dist/sw.js
+dev-dist/workbox-86c9b217.js

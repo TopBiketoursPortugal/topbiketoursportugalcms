@@ -28,7 +28,11 @@ const items = tours.flatMap((t) => t.data.reviews ?? []) ?? [];
       items.map((review) => {
         return (
           <ReviewItem
-            name={review.author?.givenName + ' ' + review.author?.familyName}
+            name={`${review.author?.givenName}${
+              review.author?.familyName && review.author?.familyName.length > 0
+                ? ' ' + review.author?.familyName
+                : ''
+            }`}
             country={review.author?.country}
             content={review.content}
             rating={review.rating}

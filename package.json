@@ -39,6 +39,7 @@
     "@types/alpinejs": "3.13.11",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "alpinejs": "3.14.9",
     "astro": "5.5.4",
     "astro-breadcrumbs": "3.3.1",
@@ -97,6 +98,7 @@
     "tailwindcss-selector-patterns": "0.0.16",
     "tailwindcss-signals": "0.0.25",
     "type-fest": "4.37.0",
+    "vite-plugin-pwa": "^0.21.2",
     "workbox-window": "7.3.0"
   },
   "lint-staged": {},

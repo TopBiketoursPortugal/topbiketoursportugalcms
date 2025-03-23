@@ -15,8 +15,8 @@ import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
 import type { HrefLang } from 'src/types/hreflang';
-import { pwaAssetsHead } from 'virtual:pwa-assets/head';
-import { pwaInfo } from 'virtual:pwa-info';
+// import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+// import { pwaInfo } from 'virtual:pwa-info';
 // import { Breadcrumbs } from 'astro-breadcrumbs';
 
 // import 'astro-breadcrumbs/breadcrumbs.css';
@@ -69,14 +69,14 @@ const seoProps = getPageSeo(
     <meta name="title" content={seoProps.title} />
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     <SEO {...seoProps} />
-    <script src="/src/pwa.ts"></script>
+    <!-- <script src="/src/pwa.ts"></script>
     {
       pwaAssetsHead.themeColor && (
         <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
       )
     }
     {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
-    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />} -->
     <script src="/src/pwa.ts"></script>
     <slot name="head" />
   </head>
@@ -103,7 +103,7 @@ const seoProps = getPageSeo(
       <CookieConsent />
       <script is:inline>
         // Restore the `show--consent` class if it was present before the page swap
-        document.addEventListener('astro:before-preparation', (event) => {
+        document.addEventListener('astro:before-preparation', () => {
           const htmlClassName = window.document.documentElement.className;
           const consentClassPresent = htmlClassName.includes('show--consent')
             ? true
