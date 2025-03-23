@@ -29,8 +29,6 @@ const countryCode = CountryData.filter(
     c.alpha3.toLocaleLowerCase() === country?.toLocaleLowerCase()
 )[0]?.alpha2;
 
-console.log(CountryData.map((c) => c.alpha2));
-
 const countryFlagIcon = countryCode
   ? `circle-flags:${countryCode.toLowerCase()}`
   : 'ph:user-circle-light';
