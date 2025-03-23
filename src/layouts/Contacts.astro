@@ -1,119 +1,77 @@
 ---
-import site from '../../data/site.json';
-import { SEO } from 'astro-seo';
-import { ClientRouter } from 'astro:transitions';
-import Analytics from './common/Analytics.astro';
-import SiteVerification from './common/SiteVerification.astro';
-import Favicons from './common/Favicons.astro';
-import CommonMeta from './common/CommonMeta.astro';
-import Navigation from 'src/../data/navigation.json';
-import type { LanguageCodes } from 'src/schemas/language';
-import Announcement from './common/Announcement.astro';
-import Header from './common/Header.astro';
-import ScrollTop from './common/ScrollTop.astro';
-import BasicScripts from './common/BasicScripts.astro';
-import CookieConsent from './common/CookieConsent.astro';
-import Footer from './common/Footer';
+import Layout, { type LayoutProps } from './Layout.astro';
+import Stack from 'src/components/stack/stack.astro';
+import Text from 'src/components/typography/text.astro';
+import Heading from 'src/components/typography/heading.astro';
+import Separator from 'src/components/separator/separator.astro';
+import ContactColumns from './common/contact-columns.astro';
+import ContactForm from './common/contact-form.astro';
+import PageHelper from '../shared/astro/page.astro';
+import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
+import LanguageData from 'src/../data/languages.json';
+import { t } from 'utils/i18n';
 
-export interface SEOProps {
-  page_description: string | null;
-  featured_image: string | null;
-  featured_image_alt: string | null;
-  canonical_url: string | null;
-  no_index: boolean | null;
-  open_graph_type: string | null;
-  author_twitter_handle: string | null;
-}
-
-export interface Props {
-  title: string;
-  seo?: SEOProps;
+export type ContactProps = {
+  frontmatter: Except<LayoutProps, 'class'>;
+  content_blocks?: any[];
+  content_blocks_after?: any[];
   class?: string;
-}
+  showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
+};
 
-const { seo } = Astro.props;
-const baseUrl = Astro.site ?? import.meta.env.BASE_URL;
-const title = Astro.props.title
-  ? `${Astro.props.title} | ${site.site_title}`
-  : site.site_title;
-const description = seo?.page_description ?? site.description;
-const image = seo?.featured_image ?? site.image;
-const image_alt = seo?.featured_image_alt ?? site.image_alt;
-const canonicalURL = seo?.canonical_url
-  ? new URL(seo?.canonical_url, baseUrl)
-  : undefined;
+type Props = ContactProps;
 
-const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const language = 'en';
+const {
+  content_blocks = [],
+  content_blocks_after = [],
+  frontmatter,
+  hrefs = []
+} = Astro.props;
 ---
 
-<!doctype html>
-<html
-  lang={language}
-  class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth 2xl:text-[20px]"
->
-  <head>
-    <CommonMeta />
-    <Favicons />
-    <!-- <ApplyColorMode /> -->
-    <SiteVerification />
-    <Analytics />
+<Layout {...frontmatter} hrefLangs={hrefs}>
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
 
-    <ClientRouter fallback="swap" />
-
-    <SEO
-      noindex={seo?.no_index || false}
-      title={title}
-      description={description}
-      canonical={canonicalURL}
-      openGraph={{
-        basic: {
-          title: Astro.props.title,
-          url:
-            baseUrl !== null &&
-            baseUrl !== undefined &&
-            baseUrl?.toString().length > 0
-              ? baseUrl?.toString()
-              : import.meta.env.BASE_URL,
-          type: `${seo?.open_graph_type || 'website'}`,
-          image: `${baseUrl}${image}`
-        },
-        optional: {
-          description: description
-        },
-        image: {
-          url: `${baseUrl}${image}`,
-          alt: image_alt
-        }
-      }}
-      twitter={{
-        creator: `${seo?.author_twitter_handle || site.twitter_site}`,
-        site: `${site.twitter_site}`,
-        card: 'summary_large_image'
-      }}
-    />
-  </head>
-  <body>
-    <slot name="announcement">
-      <Announcement language={language} />
-    </slot>
-    <Header
-      {...Navigation[language].header}
-      isSticky
-      showRssFeed
-      showToggleTheme={false}
-    />
-    <main>
-      <slot />
-    </main>
-    <Footer language={language} />
-    <ScrollTop />
-    <CookieConsent />
-    <BasicScripts />
-    <style is:global>
-      :root {
-        --pageContainer: 1280px;
-        --pagePadding: 2rem;
-      }
-    </style>
-  </body>
-</html>
+  <PageHelper bookshop:live contentBlocks={content_blocks ?? []} />
+  <ContactColumns class="container mx-auto" />
+  <Stack
+    as="section"
+    layout="vertical"
+    spacing="medium"
+    class="bg-slate-50 px-8 py-20"
+  >
+    <Stack layout="vertical" spacing="small" class="items-center self-center">
+      <Heading as="h1" class="text-center font-bold"
+        >{t('Contact.Form.Title', language)}</Heading
+      >
+      <Text intent="neutral" class="text-center"
+        >{t('Contact.Form.Subtitle', language)}</Text
+      >
+    </Stack>
+    <Separator class="max-w-14 container mx-auto" weight="heavy" />
+    <Stack class="mx-auto max-w-3xl justify-center">
+      <ContactForm />
+    </Stack>
+  </Stack>
+  <iframe
+    title="Google Maps directions to Top Bike Tours Portugal"
+    class="m-w-screen h-96 w-full border-none"
+    id="gmap_canvas"
+    src="https://maps.google.com/maps?q=Top%20bike%20tours%20portugal&t=&z=17&ie=UTF8&iwloc=&output=embed"
+    allowfullscreen></iframe>
+  <slot />
+  <PageHelper bookshop:live contentBlocks={content_blocks_after ?? []} />
+</Layout>

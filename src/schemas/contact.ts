@@ -16,8 +16,8 @@ const addressSchema = z.object({
 // Define the schema for the overall structure
 export const contactSchema = z.object({
   address: addressSchema.optional().nullable(),
-  phone: z.string().optional(),
-  cellPhone: z.string().optional(),
+  phone: z.string().optional().nullable(),
+  cellPhone: z.string().optional().nullable(),
 
   // phone: z.string().regex(phoneRegex, "Invalid Number!").optional(),
   // cellPhone: z.string().regex(phoneRegex, "Invalid Number!").optional(),

@@ -1,34 +1,28 @@
 ---
 import social from 'src/../data/social.json';
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 // interface Props {
 //   language: "en" | "pt";
 // }
 
-const { language } = Astro.props;
 const network = social as Record<string, any>;
 const keys = Object.keys(network);
 const socialNetworks = keys.map((k) => network[k]).filter((n) => n !== null);
 ---
 
-<div class="flex flex-row gap-4 text-white">
+<div class="flex flex-row gap-4">
   {
     socialNetworks.map((network) => {
       return (
         <a
-          hreflang={language}
           href={network.href}
           title={network.alt}
-          rel="nofollow"
+          rel="nofollow noopener noreferrer"
           target="_blank"
-          class="min-w-6 group flex items-center justify-center text-lg"
+          class="min-w-6 group flex items-center justify-center text-lg transition-transform duration-150 hover:scale-125"
         >
           {network && network.icon && (
-            <Icon
-              title={network.alt}
-              icon={network.icon}
-              class="transition-transform duration-75 ease-in-out group-hover:scale-150"
-            />
+            <Icon title={network.alt} icon={network.icon} />
           )}
         </a>
       );

@@ -13,7 +13,7 @@
     "name": "Portuguese",
     "display": "Português",
     "isDefault": false,
-    "locale": "en-PT",
+    "locale": "pt-PT",
     "textDirection": "ltr",
     "icon": "circle-flags:pt"
   }

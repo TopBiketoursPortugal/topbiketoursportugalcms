@@ -7,6 +7,7 @@ export default {
   semi: true,
   printWidth: 80,
   singleQuote: true,
+  quoteProps: 'consistent',
   proseWrap: 'always',
   plugins: [
     'prettier-plugin-astro',

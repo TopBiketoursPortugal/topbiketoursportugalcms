@@ -1,0 +1,55 @@
+---
+import { cn } from 'utils/cn';
+
+export type HeadlineProps = {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  classes?: Record<'container' | 'title' | 'subtitle', string>;
+};
+
+type Props = HeadlineProps;
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  classes = {
+    container: 'max-w-3xl',
+    title: 'text-3xl md:text-4xl ',
+    subtitle: 'text-xl'
+  }
+} = Astro.props;
+
+const {
+  container: containerClass,
+  title: titleClass,
+  subtitle: subtitleClass
+} = classes;
+---
+
+{
+  (title || subtitle || tagline) && (
+    <div class={cn('mb-8 text-center md:mx-auto md:mb-12', containerClass)}>
+      {tagline && (
+        <p
+          class="text-secondary text-base font-bold uppercase tracking-wide dark:text-blue-200"
+          set:html={tagline}
+        />
+      )}
+      {title && (
+        <h2
+          class={cn(
+            'leading-tighter text-heading font-heading text-3xl font-bold tracking-tighter',
+            titleClass
+          )}
+          set:html={title}
+        />
+      )}
+
+      {subtitle && (
+        <p class={cn('text-muted mt-4', subtitleClass)} set:html={subtitle} />
+      )}
+    </div>
+  )
+}

@@ -1,5 +1,5 @@
 ---
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 
 interface Props {
   button_text: string;
@@ -15,7 +15,11 @@ const hover_brightness = block.hover_brightness;
 ---
 
 <button style={`background-color: ${block.background_color};`} class="button">
-  <a style={`color: ${block.text_color}`} href={block.button_link}>
+  <a
+    style={`color: ${block.text_color}`}
+    href={block.button_link}
+    class="flex gap-2"
+  >
     {
       block.button_icon ? (
         <span class="button__icon">
@@ -23,7 +27,7 @@ const hover_brightness = block.hover_brightness;
         </span>
       ) : null
     }
-    {block.button_text}
+    <span>{block.button_text}</span>
   </a>
 </button>
 
@@ -45,9 +49,5 @@ const hover_brightness = block.hover_brightness;
   }
   .button a:hover {
     backdrop-filter: brightness(var(--hover_brightness));
-  }
-
-  .button__icon {
-    width: 1rem;
   }
 </style>

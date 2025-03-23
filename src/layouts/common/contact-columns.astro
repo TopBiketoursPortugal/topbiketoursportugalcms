@@ -1,0 +1,90 @@
+---
+import ContactsData from "src/../data/contact.json"
+import Icon from "src/components/utility/icon.astro";
+import type { ContactSchema } from "src/schemas/contact";
+import type { LanguageCodes } from "src/schemas/language";
+import { cleanPhoneNumberFormatting } from "utils/clean-phone-number-formatting";
+import { cn } from "utils/cn";
+import { t } from "utils/i18n";
+
+type Props = {
+	class?: string
+}
+
+const language=(Astro.currentLocale??"en") as LanguageCodes;
+
+const {  class: className } = Astro.props;
+
+const contact = ContactsData[language] satisfies ContactSchema;
+
+const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-cols-3", className)
+
+---
+
+<div class={style}>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:phone-light" class="pb-4 w-12 h-12" />
+		<h3 class="font-bold">{t('Contact.Feature.Phone.Label', language)}</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			{t('Contact.Feature.Phone.Description', language)}
+		</h6>
+		{
+			contact && (contact.phone || contact.cellPhone) && (
+				<div class="flex-grow"></div>
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 items-center ">
+                    {contact.cellPhone && (<a href={"tel:" + cleanPhoneNumberFormatting(contact.cellPhone)}>{contact.cellPhone}</a>)}
+                    {contact.cellPhone && <a
+						href={
+							"https://wa.me/" + cleanPhoneNumberFormatting(contact.cellPhone)
+						}
+                        target="_blank"
+						aria-label="Chat on WhatsApp"
+                        class="flex items-center gap-1"
+					>
+						<Icon icon="ph:whatsapp-logo-light" className="text-md" /><span>whatsapp</span>
+					</a>}
+                </div>
+			)
+		}
+	</div>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:envelope-simple-light" className="pb-4  w-12 h-12" />
+		<h3 class="font-bold">{t('Contact.Feature.Email.Label', language)}</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			{t('Contact.Feature.Email.Description', language)}
+		</h6>
+		{
+			contact && contact.email && (
+				<div class="flex-grow"></div>
+                <a
+					href={"mailto:" + contact.email}
+					aria-label="Email"
+				>
+					{contact.email}
+				</a>
+			)
+		}
+	</div>
+	<div class="flex flex-col items-center gap-6">
+		<Icon icon="ph:navigation-arrow-light" className="pb-4  w-12 h-12" />
+		<h3 class="font-bold">{t('Contact.Feature.Address.Label', language)}</h3>
+		<h6 class="text-pretty text-slate-600 text-center">
+			{t('Contact.Feature.Address.Description', language)}
+		</h6>
+
+		{
+			contact && contact.address && contact.address.map && (
+                <div class="flex-grow"></div>
+				<a
+					href={contact.address.map}
+					rel="nofollow"
+					target="_blank"
+					role="button"
+
+				>
+					{t('Contact.Feature.Address.LinkText', language)}
+				</a>
+			)
+		}
+	</div>
+</div>

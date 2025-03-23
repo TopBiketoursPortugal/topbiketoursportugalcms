@@ -24,7 +24,7 @@ const locationSchema = z.object({
   lat: z.string().optional(),
   lng: z.string().optional(),
   country: z.enum(['pt', 'es']).optional().default('pt'),
-  region: z.string().optional(),
+  region: z.string().optional().default(''),
   city: z.string().optional()
 });
 
@@ -71,7 +71,7 @@ const groupSizeSchema = z.object({
 const reviewSchema = z.object({
   author: z
     .object({
-      familyName: z.string().optional(),
+      familyName: z.string().optional().nullable(),
       givenName: z.string(),
       country: z.string()
     })
@@ -101,7 +101,7 @@ const faqsSchema = z.object({
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
-  slug: z.string().optional(),
+  path: z.string().optional().nullable(),
   language: languageSchema, // Assuming `languageField` is a string, adjust as necessary
   id: z.string().uuid(),
   title: z.string(),
@@ -111,8 +111,7 @@ const tourSchema = z.object({
   order: z.number().optional(),
   description: z.string().optional(),
   afterPricing: z.string().optional().nullable(),
-  region: z.string().optional(),
-  path: z.string().optional().nullable(),
+  region: z.string().optional().default(''),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),
@@ -129,12 +128,12 @@ const tourSchema = z.object({
   minAge: z.number().optional(),
   highlight: z.enum(['HotTrip', 'BestSeller', 'New']).optional(),
   content_blocks: z.array(z.any()).optional().nullable(),
-  type: z
+  tourtype: z
     .enum(['CityTour', 'DayTour', 'PackageTour', 'WalkingTour'])
     .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
-  relatedTours: z.array(z.string()).optional().default([])
+  relatedTours: z.array(z.string().uuid()).optional().default([])
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;

@@ -19,3 +19,11 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+.jampack
+.certs
+cert.key
+ca.crt
+ca.key
+cert.crt
+dev-dist

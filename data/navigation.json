@@ -10,51 +10,51 @@
         {
           "text": "Hiking tours",
           "page": "",
-          "href": "/hiking-tours-portugal"
+          "href": "/hiking-tours-portugal/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "href": "/bike-tours-in-portugal",
+          "href": "/bike-tours-in-portugal/",
           "enabled": false
         },
         {
           "text": "Day tours",
           "page": "",
-          "href": "/bike-tours-porto-portugal",
+          "href": "/bike-tours-porto-portugal/",
           "enabled": false
         },
         {
           "text": "Calendar",
           "page": "",
-          "href": "/guided-bike-tours-calendar-portugal",
+          "href": "/guided-bike-tours-calendar-portugal/",
           "enabled": false
         },
         {
           "text": "Bikes",
           "page": "",
-          "href": "/rent-bike-porto-portugal",
+          "href": "/rent-bike-porto-portugal/",
           "enabled": false
         },
         {
           "text": "Blog",
           "page": "",
-          "href": "/blog"
+          "href": "/blog/"
         },
         {
           "text": "Contacts",
           "page": "",
-          "href": "/contacts"
+          "href": "/contacts/"
         },
         {
           "text": "About us",
           "page": "",
-          "href": "/about-us"
+          "href": "/about-us/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "href": "/widgets",
+          "href": "/widgets/",
           "enabled": false
         }
       ]
@@ -70,15 +70,15 @@
             },
             {
               "text": "Hiking tours",
-              "link": "/hiking-tours-portugal"
+              "link": "/hiking-tours-portugal/"
             },
             {
               "text": "Blog",
-              "link": "/blog"
+              "link": "/blog/"
             },
             {
               "text": "Testimonials",
-              "link": "/testimonials"
+              "link": "/testimonials/"
             }
           ]
         },
@@ -87,23 +87,23 @@
           "links": [
             {
               "text": "About us",
-              "link": "/about-us"
+              "link": "/about-us/"
             },
             {
               "text": "Contacts",
-              "link": "/contacts"
+              "link": "/contacts/"
             },
             {
               "text": "Faqs",
-              "link": "/faqs"
+              "link": "/faqs/"
             },
             {
               "text": "Terms & Conditions",
-              "link": "/terms-and-Conditions"
+              "link": "/terms-and-Conditions/"
             },
             {
               "text": "Privacy Policy",
-              "link": "/privacy-policy"
+              "link": "/privacy-policy/"
             }
           ]
         }
@@ -116,56 +116,56 @@
         {
           "text": "Home",
           "page": "",
-          "href": "/pt"
+          "href": "/pt/"
         },
         {
-          "text": "Passeios pedestres portugal",
+          "text": "Caminhadas",
           "page": "",
-          "href": "/pt/passeios-pedestres-portugal"
+          "href": "/pt/passeios-pedestres-portugal/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "href": "/pt/bike-tours-in-portugal",
+          "href": "/pt/bike-tours-in-portugal/",
           "enabled": false
         },
         {
           "text": "Day tours",
           "page": "",
-          "href": "/pt/bike-tours-porto-portugal",
+          "href": "/pt/bike-tours-porto-portugal/",
           "enabled": false
         },
         {
           "text": "Calendar",
           "page": "",
-          "href": "/pt/guided-bike-tours-calendar-portugal",
+          "href": "/pt/guided-bike-tours-calendar-portugal/",
           "enabled": false
         },
         {
           "text": "Bikes",
           "page": "",
-          "href": "/pt/rent-bike-porto-portugal",
+          "href": "/pt/rent-bike-porto-portugal/",
           "enabled": false
         },
         {
           "text": "Blog",
           "page": "",
-          "href": "/pt/blog"
+          "href": "/pt/blog/"
         },
         {
           "text": "Contatos",
           "page": "",
-          "href": "/pt/contatos"
+          "href": "/pt/contatos/"
         },
         {
           "text": "Sobre nós",
           "page": "",
-          "href": "/pt/sobre-nos"
+          "href": "/pt/sobre-nos/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "href": "/pt/widgets",
+          "href": "/pt/widgets/",
           "enabled": false
         }
       ]
@@ -177,19 +177,19 @@
           "links": [
             {
               "text": "Início",
-              "link": "/pt"
+              "link": "/pt/"
             },
             {
-              "text": "Passeios pedestres",
-              "link": "/pt/passeios-pedestres-portugal"
+              "text": "Caminhadas",
+              "link": "/pt/passeios-pedestres-portugal/"
             },
             {
               "text": "Blog",
-              "link": "/pt/blog"
+              "link": "/pt/blog/"
             },
             {
               "text": "Testemunhos",
-              "link": "/pt/testemunhos"
+              "link": "/pt/testemunhos/"
             }
           ]
         },
@@ -198,23 +198,23 @@
           "links": [
             {
               "text": "Sobre nós",
-              "link": "/pt/sobre-nos"
+              "link": "/pt/sobre-nos/"
             },
             {
               "text": "Contatos",
-              "link": "/pt/contatos"
+              "link": "/pt/contatos/"
             },
             {
               "text": "Perguntas frequentes",
-              "link": "/pt/perguntas-frequentes"
+              "link": "/pt/perguntas-frequentes/"
             },
             {
               "text": "Termos e Condições",
-              "link": "/pt/termos-condicoes"
+              "link": "/pt/termos-condicoes/"
             },
             {
               "text": "Política de Privacidade",
-              "link": "/pt/politica-de-privacidade"
+              "link": "/pt/politica-de-privacidade/"
             }
           ]
         }

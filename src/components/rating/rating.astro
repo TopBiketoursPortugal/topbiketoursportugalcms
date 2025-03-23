@@ -1,7 +1,9 @@
 ---
 /** @jsxImportSource astro */
 import { cn } from 'utils/cn';
-import Icon from '../utility/icon';
+import PhStarFill from 'src/assets/icons/ph/fill/star-fill.svg';
+import PhStarHalfFill from 'src/assets/icons/ph/fill/star-half-fill.svg';
+import PhStarLight from 'src/assets/icons/ph/light/star-light.svg';
 
 type Props = {
   rating: number;
@@ -27,9 +29,11 @@ function getStarDistribution(rating: number = 0, maxStars = 5) {
 }
 
 const { rating = 0, class: className } = Astro.props;
-const startIconStyle = cn('text-amber-11 fill-current text-lg', className);
+const startIconStyle = cn(
+  'text-amber-11 fill-current text-lg w-6 h-6',
+  className
+);
 const startDistribution = getStarDistribution(rating);
-// console.log(startDistribution);
 ---
 
 <ul class="flex items-center gap-3">
@@ -37,14 +41,22 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.fullStars > 0 &&
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
-          <Icon icon="ph:star-fill" class={startIconStyle} />
+          <PhStarFill
+            title="Star rating"
+            class={startIconStyle}
+            mode="sprite"
+          />
         </li>
       ))
   }
   {
     startDistribution.halfStars && (
       <li>
-        <Icon icon="ph:star-half-fill" class={startIconStyle} />
+        <PhStarHalfFill
+          title="Half Star rating"
+          class={startIconStyle}
+          mode="sprite"
+        />
       </li>
     )
   }
@@ -52,7 +64,11 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.emptyStars > 0 &&
       [...Array(startDistribution.emptyStars).keys()].map(() => (
         <li>
-          <Icon icon="ph:star-light" class={startIconStyle} />
+          <PhStarLight
+            title="Half Star rating"
+            class={startIconStyle}
+            mode="sprite"
+          />
         </li>
       ))
   }

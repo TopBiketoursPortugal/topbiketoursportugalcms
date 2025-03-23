@@ -6,51 +6,70 @@ collections_config:
   pages:
     path: src/content/pages
     glob:
-      - '**/*.md'
+      - '**/*.md*'
+    name: Pages
     icon: laptop_mac
-    url: /[full_slug]/
+    # /home, /pt/home
+    url: "/[relative_base_path]{path|default:title|prepend:'/'|deburr|slugify|lowercase|trim|strip|replace:'/home',|append:'/'|replace:'//','/'}"
     disable_url: false
+    description: ''
     _enabled_editors:
       - visual
-    add_options:
-      - name: Add New Page
-        icon: pages
-        schema: default
-    create:
-      path: '[relative_base_path]/{title|slugify}.md'
-    disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
+      - data
+      - content
     _inputs:
       id:
         type: auto
         instance_value: UUID
         hidden: true
         cascade: true
+    add_options:
+      - name: Add New Page
+        icon: pages
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
-        path: schemas/page.md
+        path: schemas/page.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
         name: New Page
-        icon: notes
+        icon: web_asset
+        _enabled_editors:
+        create:
+          path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
+          extra_data:
+          publish_to:
+          _inputs:
+          _select_data:
+          _structures:
+        new_preview_url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
       paginated:
-        path: schemas/paginated.md
+        path: schemas/paginated.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
         name: Paginated collection
-        icon: notes
+        icon: pages
+        _enabled_editors:
+        create:
+        new_preview_url:
   blog:
     path: src/content/blog
     glob:
       - '**/*.md*'
+    name: Blog
     icon: newspaper
-    url: /blog/[full_slug]/
+    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
+    description: ''
     _enabled_editors:
       - content
       - visual
@@ -105,13 +124,13 @@ collections_config:
         icon: post_add
         schema: default
     create:
-      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
+      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.mdx'
     disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
-        path: schemas/post.md
+        path: schemas/post.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -120,20 +139,23 @@ collections_config:
         icon: notes
   data:
     path: data
-    icon: notes
+    name: Data
+    icon: drive_file_move
     disable_url: false
+    description: ''
+    _enabled_editors:
     _inputs:
       icons:
         type: auto
         comment: >-
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
-          ```~/components/utility/Icon.tsx.jsx``` file, following the existing
+          ```~/components/utility/icon.astro.tsx``` file, following the existing
           pattern.
         cascade: true
     disable_add: true
     disable_add_folder: true
-    disable_file_actions: false
+    disable_file_actions: true
   tours:
     path: src/content/tours
     glob:
@@ -141,30 +163,122 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
+    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
-      - visual
-      - data
     _inputs:
+      type:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - DayTour
+            - PackageTour
+            - WalkingTour
+        cascade: true
+      packages[*].title:
+        type: markdown
+        cascade: true
+      packages[*].description:
+        type: markdown
+        cascade: true
+      included[*].title:
+        type: markdown
+        cascade: true
+      included[*].description:
+        type: markdown
+        cascade: true
+      reviews[*].title:
+        type: markdown
+        cascade: true
+      itinerary:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.itinerary_stage
+        cascade: true
+      itinerary[*].title:
+        type: markdown
+        cascade: true
+      itinerary[*].description:
+        type: markdown
+        cascade: true
+      itinerary[*].location:
+        type: object
+        options:
+          allow_label_formatting: false
+          place_groups_below: false
+          subtype: object
+          empty_type: 'null'
+          preview:
+            text: city
+            subtext: countryCode.englishName
+            icon: map
+        cascade: true
+      itinerary[*].location.lat:
+        type: text
+        cascade: true
+      itinerary[*].location.lon:
+        type: text
+        cascade: true
+      itinerary[*].location.country:
+        type: select
+        options:
+          allow_empty: true
+          values: data.countries
+          value_key: alpha2
+          preview:
+            text: englishName
+          picker_preview:
+            text: englishName
+            subtext: alpha2
+        cascade: true
+      itinerary[*].location.city:
+        type: text
+        cascade: true
+      itinerary[*].location.region:
+        type: text
+        cascade: true
+      relatedTours:
+        type: multiselect
+        options:
+          allow_empty: true
+          empty_type: array
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+        cascade: true
       faqs:
         type: array
         options:
           empty_type: array
           structures: _structures.faqs
+        cascade: true
+      faqs[*].question:
+        type: markdown
+        cascade: true
+      faqs[*].answer:
+        type: markdown
+        cascade: true
       images:
         type: array
         options:
           empty_type: array
           structures: _structures.images
-      # tags:
-      #   type:
-      #   comment: one tag per line
-      #   options:
-      #     show_count: false
-      #     empty_type: 'null'
-      #     icon: tag
-      #   cascade: true
+        cascade: true
+      tags:
+        type: array
+        options:
+          structures: _structures.tags
+        cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -174,17 +288,18 @@ collections_config:
         type: select
         options:
           allow_create: false
+          allow_empty: true
           values: data.tour_regions[*]
           value_key: id
-          allow_empty: true
           preview:
-            image:
-              - key: en.src
             text:
               - key: en.name
+            image:
+              - key: en.src
         comment: >-
           To add a new region, go to the [tour_regions data
           file](cloudcannon:collections/data/tour_regions.json)
+        cascade: true
       content:
         type: markdown
         cascade: true
@@ -203,13 +318,14 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|slugify}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+
     disable_add: false
     disable_add_folder: true
-    disable_file_actions: false
+    disable_file_actions: true
     schemas:
       default:
-        path: schemas/tour.md
+        path: schemas/tour.mdx
         reorder_inputs: true
         hide_extra_inputs: true
         remove_empty_inputs: true
@@ -217,7 +333,7 @@ collections_config:
         name: New tour
         icon: notes
       defaultPT:
-        path: schemas/pt/tour.md
+        path: schemas/pt/tour.mdx
         reorder_inputs: true
         hide_extra_inputs: true
         remove_empty_inputs: true
@@ -228,8 +344,10 @@ collections_config:
     path: src/content/team
     glob:
       - '**/*.md*'
+    name: Team
     singular_name: Team member
     icon: people
+    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -275,13 +393,13 @@ collections_config:
         base_path: /pt/
         schema: defaultPT
     create:
-      path: '[relative_base_path]/{title|slugify}.md'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/team-member.md
+        path: schemas/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -289,7 +407,7 @@ collections_config:
         name: NewTeamMember
         icon: people
       defaultPT:
-        path: schemas/pt/team-member.md
+        path: schemas/pt/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -307,6 +425,10 @@ collection_groups:
     collections:
       - data
 _inputs:
+  path:
+    type: text
+    label: Url
+    comment: Set this only with lower case and '-'
   template:
     type: auto
     hidden: true
@@ -315,13 +437,13 @@ _inputs:
     type: object
     options:
       preview:
-        gallery:
-          fit: cover
-        image:
-          - key: src
         text:
           - key: alt
         icon: Image
+        image:
+          - key: src
+        gallery:
+          fit: cover
       structures:
         style: select
         values:
@@ -332,8 +454,9 @@ _inputs:
   rating:
     type: number
     options:
-      max: 5
       min: 0
+      max: 5
+    cascade: true
   src:
     type: image
     options:
@@ -371,20 +494,19 @@ _inputs:
       value_key: code
     hidden: true
     cascade: true
-
   feature_list:
     type: multiselect
     options:
       empty_type: array
       values: collections.blog
-      value_key: title
+      value_key: id
     cascade: true
   main_feature:
     type: select
     options:
       allow_empty: true
       values: collections.blog
-      value_key: title
+      value_key: id
     cascade: true
   markdown_content:
     type: markdown
@@ -558,6 +680,10 @@ _inputs:
     type: auto
     comment: Automatically prefixed with the current year
     cascade: true
+  page_title:
+    type: auto
+    comment: Defaults to the description set in the Site SEO data file
+    cascade: true
   page_description:
     type: auto
     comment: Defaults to the description set in the Site SEO data file
@@ -577,6 +703,7 @@ _inputs:
       values:
         - website
         - article
+        - product
     comment: Defaults to the type 'website'
     cascade: true
   author_twitter_handle:
@@ -592,21 +719,86 @@ _inputs:
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
     cascade: true
-  type:
-    type: select
-    options:
-      allow_create:
-      allow_empty: true
-      values:
-        - DayTour
-        - PackageTour
-        - WalkingTour
-      value_key:
-      preview:
-      picker_preview:
-      view:
-      picker_view:
-    cascade: true
+_structures:
+  itinerary_stage:
+    style: select
+    values:
+      - icon: place
+        label: Itinerary stage
+        value:
+          title: ''
+          description: ''
+          location:
+            lat: '1'
+            lng: '1'
+            country: pt
+            region: ''
+            city: ''
+  tags:
+    style: select
+    values:
+      - default: false
+        icon: label
+        label: Tags
+        place_groups_below: false
+        tabbed: false
+        value: ''
+  faqs:
+    values:
+      - label: FAQs
+        icon: question_mark
+        value:
+          question: ''
+          answer: ''
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+  reviews:
+    values:
+      - label: Review
+        icon: message
+        value:
+          title: ''
+          rating: 5
+          author:
+            givenName: John
+            familyName: Doe
+            country: Portugal
+          datePublished: 2023-10-15T00:00:00Z
+          content: >-
+            These headphones are fantastic! The noise cancellation works
+            perfectly, and the sound quality is top-notch. Highly recommend them
+            for anyone looking for a premium audio experience.
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+  images:
+    values:
+      - label: Image
+        value:
+          src: ''
+          alt: ''
+        preview:
+          text:
+            - key: alt
+          icon: Image
+          image:
+            - key: src
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
 _editables:
   content:
     allow_custom_markup: false
@@ -641,7 +833,7 @@ _editables:
     underline: true
     undo: true
 _snippets_imports:
-  mdx: false
+  mdx: true
 _snippets:
   alert:
     template: mdx_component
@@ -914,17 +1106,9 @@ file_config:
       $[*]:
         type: text
         cascade: true
-  # - glob: data/tour_regions.json
-  #   _inputs:
-  #     $:
-  #       type: array
-  #       label: Tour regions
-  #       comment: Set the regions available in tours.
-  #       cascade: true
-  #     $[*]:
-  #       type: text
-  #       cascade: true
 data_config:
+  countries:
+    path: data/contries.json
   icons:
     path: data/icons.json
   colors:
@@ -934,43 +1118,11 @@ data_config:
   tour_regions:
     path: data/tour_regions.json
 timezone: Europe/Lisbon
-_structures:
-  faqs:
-    values:
-      - label: FAQs
-        value:
-          question: ''
-          answer: ''
-        preview:
-          text:
-            - key: question
-    style: select
-    reorder_inputs: true
-    remove_empty_inputs: true
-    hide_extra_inputs: true
-    remove_extra_inputs: false
-  images:
-    values:
-      - label: Image
-        value:
-          src: ''
-          alt: ''
-        preview:
-          icon: Image
-          image:
-            - key: src
-          text:
-            - key: alt
-    style: select
-    reorder_inputs: true
-    remove_empty_inputs: true
-    hide_extra_inputs: true
-    remove_extra_inputs: false
 markdown:
   engine:
   options:
-    xhtml: false
-    breaks: false
+    xhtml: true
+    breaks: true
     linkify: false
     typographer: false
     quotes:

@@ -1,9 +1,7 @@
 ---
 import '../styles/main.css';
-import site from '../../data/site.json';
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
-import Analytics from './common/Analytics.astro';
 import SiteVerification from './common/SiteVerification.astro';
 import Favicons from './common/Favicons.astro';
 import CommonMeta from './common/CommonMeta.astro';
@@ -15,8 +13,16 @@ import ScrollTop from './common/ScrollTop.astro';
 import BasicScripts from './common/BasicScripts.astro';
 import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
+import { getPageSeo } from 'utils/seo';
+import type { HrefLang } from 'src/types/hreflang';
+// import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+// import { pwaInfo } from 'virtual:pwa-info';
+// import { Breadcrumbs } from 'astro-breadcrumbs';
 
-export interface SEOProps {
+// import 'astro-breadcrumbs/breadcrumbs.css';
+
+export type SEOProps = {
+  page_title: string | null;
   page_description: string | null;
   featured_image: string | null;
   featured_image_alt: string | null;
@@ -24,74 +30,58 @@ export interface SEOProps {
   no_index: boolean | null;
   open_graph_type: string | null;
   author_twitter_handle: string | null;
-}
+  keywords?: string;
+};
 
-export interface Props {
-  title: string;
+export type LayoutProps = {
+  title?: string;
   seo?: SEOProps;
   class?: string;
-}
-
-const { seo } = Astro.props;
-const baseUrl = Astro.site ?? import.meta.env.BASE_URL;
-const title = Astro.props.title
-  ? `${Astro.props.title} | ${site.site_title}`
-  : site.site_title;
-const description = seo?.page_description ?? site.description;
-const image = seo?.featured_image ?? site.image;
-const image_alt = seo?.featured_image_alt ?? site.image_alt;
-const canonicalURL = seo?.canonical_url
-  ? new URL(seo?.canonical_url, baseUrl)
-  : undefined;
+  hrefLangs?: ReadonlyArray<HrefLang>;
+};
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { seo } = Astro.props;
+const { keywords } = seo ?? { keywords: '' };
+const seoProps = getPageSeo(
+  Astro.site ?? import.meta.env.BASE_URL,
+  Astro.props,
+  language
+);
 ---
 
 <!doctype html>
 <html
   lang={language}
+  dir="ltr"
   class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth"
+  x-data="{
+      darkMode: localStorage.getItem('darkMode')
+      || localStorage.setItem('darkMode', 'system')}"
+  x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
+  x-bind:class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
 >
   <head>
     <CommonMeta />
     <Favicons />
     <SiteVerification />
-    <Analytics />
     <ClientRouter fallback="swap" />
-    <SEO
-      noindex={seo?.no_index || false}
-      title={title}
-      description={description}
-      canonical={canonicalURL}
-      openGraph={{
-        basic: {
-          title: Astro.props.title,
-          url:
-            baseUrl !== null &&
-            baseUrl !== undefined &&
-            baseUrl?.toString().length > 0
-              ? baseUrl?.toString()
-              : import.meta.env.BASE_URL,
-          type: `${seo?.open_graph_type || 'website'}`,
-          image: `${baseUrl}${image}`
-        },
-        optional: {
-          description: description
-        },
-        image: {
-          url: `${baseUrl}${image}`,
-          alt: image_alt
-        }
-      }}
-      twitter={{
-        creator: `${seo?.author_twitter_handle || site.twitter_site}`,
-        site: `${site.twitter_site}`,
-        card: 'summary_large_image'
-      }}
-    />
+    <meta name="title" content={seoProps.title} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <SEO {...seoProps} />
+    <!-- <script src="/src/pwa.ts"></script>
+    {
+      pwaAssetsHead.themeColor && (
+        <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+      )
+    }
+    {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />} -->
+    <script src="/src/pwa.ts"></script>
+    <slot name="head" />
   </head>
   <body
-    class="bg-page text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-950 dark:text-white"
+    class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
   >
     <BasicScripts />
     <slot name="announcement">
@@ -101,14 +91,32 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       {...Navigation[language].header}
       isSticky
       showRssFeed
-      showToggleTheme={false}
+      hrefLangs={Astro.props.hrefLangs}
     />
     <main class="h-full flex-1">
+      <!-- <Breadcrumbs /> -->
       <slot />
     </main>
     <Footer language={language} />
     <ScrollTop />
-    <CookieConsent />
+    <div transition:persist="find-me-on-the-other-side" id="cc-container">
+      <CookieConsent />
+      <script is:inline>
+        // Restore the `show--consent` class if it was present before the page swap
+        document.addEventListener('astro:before-preparation', () => {
+          const htmlClassName = window.document.documentElement.className;
+          const consentClassPresent = htmlClassName.includes('show--consent')
+            ? true
+            : false;
+          window._showConsentClass = consentClassPresent;
+        });
+
+        document.addEventListener('astro:before-swap', (event) => {
+          const showConsent = window._showConsentClass ? ` show--consent` : '';
+          event.newDocument.documentElement.className += showConsent;
+        });
+      </script>
+    </div>
     <style is:global>
       :root {
         --pageContainer: 1280px;

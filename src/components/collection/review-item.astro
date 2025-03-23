@@ -1,0 +1,82 @@
+---
+/** @jsxImportSource astro */
+import { Image } from 'astro:assets';
+import Rating from 'src/components/rating/rating.astro';
+import { getImageByPath } from 'utils/get-image';
+import Icon from 'src/components/utility/icon.astro';
+import Prose from '../typography/prose.astro';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import CountryData from 'src/../data/countries.json';
+
+type Props = {
+  name?: string;
+  country?: string;
+  content: string;
+  rating: number;
+  photo?: string;
+};
+
+const { name, country, content, rating, photo } = Astro.props;
+const imageOptimized = photo
+  ? (getImageByPath(photo) satisfies Promise<{
+      default: ImageMetadata;
+    }>)
+  : null;
+
+const countryCode = CountryData.filter(
+  (c) =>
+    c.englishName.toLocaleLowerCase() === country?.toLocaleLowerCase() ||
+    c.alpha3.toLocaleLowerCase() === country?.toLocaleLowerCase()
+)[0]?.alpha2;
+
+const countryFlagIcon = countryCode
+  ? `circle-flags:${countryCode.toLowerCase()}`
+  : 'ph:user-circle-light';
+---
+
+<div class="max-w-56 flex flex-col gap-6">
+  <div class="flex justify-center">
+    {
+      imageOptimized ? (
+        <Image
+          src={imageOptimized}
+          widths={[320, 500, 640]}
+          sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
+          fetchpriority="auto"
+          decoding="async"
+          loading="lazy"
+          alt={name ?? country ?? 'Review Top waling tours portugal'}
+          class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
+        />
+      ) : (
+        <Icon icon={countryFlagIcon} className="h-12 w-12 mb-6" />
+      )
+    }
+  </div>
+  <p class="text-xl font-semibold">{name} - {country}</p>
+  <span class="inline text-neutral-600 dark:text-neutral-300">
+    <Icon icon="ph:quotes-fill" />
+    <Prose markdown={content} class="truncate-text" />
+  </span>
+  <Rating rating={rating} />
+</div>
+
+<style is:global>
+  .truncate-text p {
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Limits text to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.5; /* Consistent line height for predictability */
+    max-height: calc(1.5em * 5);
+    transition: all 0.8s cubic-bezier(0.33, 0.11, 0.14, 1);
+  }
+  .truncate-text:hover p {
+    max-height: 100vh; /* Use viewport height for smooth animation */
+    transition-timing-function: cubic-bezier(0.33, 0.11, 0.14, 1.4);
+    overflow: clip;
+    text-overflow: unset;
+    -webkit-line-clamp: unset;
+  }
+</style>

@@ -8,8 +8,8 @@ type Props = astroHTML.JSX.AnchorHTMLAttributes & {
 
 const { href, text, selected } = Astro.props;
 const syle = cn(
-  'flex-1 px-6 py-4 text-center text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-900',
-  selected ? 'bg-gray-100 dark:hover:bg-gray-800' : ''
+  'flex-1 px-6 py-4 text-center text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800',
+  selected ? 'bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-800' : ''
 );
 ---
 

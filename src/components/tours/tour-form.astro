@@ -1,79 +1,83 @@
 ---
+import type { LanguageCodes } from 'src/schemas/language';
 import Form from '../form/Form.astro';
 import FormField from '../form/FormField.astro';
+import { t } from 'utils/i18n';
+import Prose from '../typography/prose.astro';
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
-<script is:inline src="https://www.google.com/recaptcha/api.js"></script>
-<!-- <script is:inline>
-  function onSubmit(token) {
-    document.getElementById('tour-form').submit();
-  }
-</script> -->
 <Form action="https://formspree.io/xzbalqpw" method="post" id="tour-form">
   <FormField
     as="input"
     name="name"
     required
-    placeholder="Your full name"
-    label="Name"
+    placeholder={t('Tour.Form.Name.Placeholder', language)}
+    label={t('Tour.Form.Name.Label', language)}
   />
   <FormField
     as="input"
     name="email"
     type="email"
     required
-    placeholder="your@email.com"
-    label="Email Address"
+    placeholder={t('Tour.Form.EmailAddress.Placeholder', language)}
+    label={t('Tour.Form.EmailAddress.Label', language)}
   />
   <FormField
     as="input"
     name="phone"
     required
     type="phone"
-    placeholder="Your phone number with international code"
-    label="Phone"
+    placeholder={t('Tour.Form.Phone.Placeholder', language)}
+    label={t('Tour.Form.Phone.Label', language)}
   />
   <FormField
     as="input"
     type="date"
     name="tour-date"
     required
-    label="Tour Date"
+    label={t('Tour.Form.TourDate.Label', language)}
   />
-  <FormField as="textarea" name="enquiry" required label="Your Enquiry" />
+  <FormField
+    as="textarea"
+    name="your-enquiry"
+    required
+    label={t('Tour.Form.YourEnquiry', language)}
+  />
   <FormField
     as="textarea"
     rows="2"
-    name="enquiry"
-    label="Where did you find us?"
-    placeholder="Optional - how you heard about us"
+    name="found"
+    label={t('Tour.Form.Found.Label', language)}
+    placeholder={t('Tour.Form.Found.Placeholder', language)}
   />
 
   <FormField
     as="select"
-    options={['Guided', 'Unguided']}
+    options={[
+      t('Tour.Form.TourType.OptionGuided', language),
+      t('Tour.Form.TourType.OptionUnguided', language)
+    ]}
     name="tour-type"
-    label="Select tour type"
-    placeholder="Optional - how you heard about us"
+    label={t('Tour.Form.TourType.Label', language)}
+    placeholder={t('Tour.Form.TourType.Placeholder', language)}
   />
 
   <FormField
     as="input"
-    name="phone"
+    name="person"
     type="number"
     min="1"
     max="10"
-    label=" Number of Persons"
+    label={t('Tour.Form.NumberPersons', language)}
   />
 
   <FormField
     as="input"
     name="country"
     type="text"
-    min="1"
-    max="10"
-    label="Country"
-    placeholder="Your country"
+    label={t('Tour.Form.Country.Label', language)}
+    placeholder={t('Tour.Form.Country.Placeholder', language)}
   />
 
   <!-- Terms Checkbox with Modal Trigger -->
@@ -87,28 +91,26 @@ import FormField from '../form/FormField.astro';
       class="peer h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
     />
     <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-200">
-      I accept the
+      {t('Tour.Form.Terms.Text', language)}
       <label
         for="terms-toggle"
         class="cursor-pointer text-blue-600 hover:underline dark:text-blue-400"
       >
-        terms and conditions
+        {t('Tour.Form.Terms.LinkText', language)}
       </label>
       <span aria-hidden="true">*</span>
-      <span class="sr-only">(required)</span>
+      <span class="sr-only">{t('Tour.Form.Terms.Required', language)}</span>
     </label>
   </div>
 
   <!-- Submit Button -->
   <div>
     <button
-      data-sitekey="reCAPTCHA_site_key"
-      data-callback="onSubmit"
-      data-action="submit"
+      slot="submit"
       type="submit"
-      class="g-recaptcha w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      class="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
     >
-      Submit Enquiry
+      {t('Tour.Form.Submit.Text', language)}
     </button>
   </div>
 </Form>
@@ -125,7 +127,7 @@ import FormField from '../form/FormField.astro';
   >
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-xl font-bold text-gray-900 dark:text-white">
-        Terms and Conditions
+        {t('Tour.Form.Terms.Modal.Title', language)}
       </h2>
       <label
         for="terms-toggle"
@@ -138,17 +140,7 @@ import FormField from '../form/FormField.astro';
     <div
       class="peer-check:flex space-y-4 text-gray-700 peer-checked:opacity-100 dark:text-gray-200"
     >
-      <p>By submitting this form, you agree to the following terms:</p>
-      <ul class="list-disc space-y-2 pl-5">
-        <li>All bookings are subject to availability</li>
-        <li>Payment must be completed 48 hours before tour date</li>
-        <li>Cancellations within 24 hours are non-refundable</li>
-        <li>We reserve the right to modify tour schedules</li>
-        <li>
-          Personal information will be handled according to our privacy policy
-        </li>
-      </ul>
-      <p>For full terms, please contact our support team.</p>
+      <Prose markdown={t('Tour.Form.Terms.Modal.Body', language)} />
     </div>
 
     <div class="mt-6 flex justify-end">
@@ -156,7 +148,7 @@ import FormField from '../form/FormField.astro';
         for="terms-toggle"
         class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
       >
-        Close
+        {t('Tour.Form.Terms.Modal.Close', language)}
       </label>
     </div>
   </div>

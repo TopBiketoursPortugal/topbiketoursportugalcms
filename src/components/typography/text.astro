@@ -5,6 +5,13 @@ import { cn } from 'utils/cn';
 const textStyles = tv({
   base: 'font-normal', // Base classes common for all headings
   variants: {
+    weight: {
+      light: 'font-light',
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold'
+    },
     intent: {
       primary: 'text-foreground',
       danger: 'text-red-600',
@@ -24,6 +31,7 @@ const textStyles = tv({
     }
   },
   defaultVariants: {
+    weight: 'normal',
     intent: 'primary',
     size: 'medium'
   }
@@ -33,9 +41,9 @@ const textStyles = tv({
 
 type Props = {
   text?: string;
-  as?: 'span' | 'p' | 'div' | 'blockquote' | 'caption';
+  as?: 'span' | 'p' | 'div' | 'blockquote' | 'caption' | 'strong';
 } & VariantProps<typeof textStyles> &
-  HTMLAttributes<'span' | 'p' | 'div' | 'blockquote' | 'caption'>;
+  HTMLAttributes<'span' | 'p' | 'div' | 'blockquote' | 'caption' | 'strong'>;
 
 const {
   text,
@@ -43,10 +51,11 @@ const {
   intent = 'primary',
   size = 'medium',
   class: className,
+  weight,
   ...props
 } = Astro.props satisfies Props;
 
-const style = cn(textStyles({ intent, size, className }));
+const style = cn(textStyles({ intent, size, weight, className }));
 const Tag = as ?? 'span';
 ---
 

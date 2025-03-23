@@ -4,10 +4,11 @@ import { t } from 'utils/i18n';
 import { stack } from 'src/components/stack/stack.style';
 import Stack from 'src/components/stack/stack.astro';
 import LinkButton from 'src/components/linkbutton/linkbutton.astro';
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
+import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = { address?: AddressSchema };
-
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { address } = Astro.props;
 ---
 
@@ -25,6 +26,7 @@ const { address } = Astro.props;
       <br />
       {address.map && (
         <LinkButton
+          variant="default"
           href={address.map}
           rel="nofollow"
           target="_blank"
@@ -35,8 +37,8 @@ const { address } = Astro.props;
             alignment: 'center'
           })}
         >
-          <Icon icon="ph:compass-fill" class="text-md" />
-          {t('Button.Directions')}
+          <Icon icon="ph:compass-fill" className="text-md" />
+          {t('Button.Directions', language)}
         </LinkButton>
       )}
     </Stack>

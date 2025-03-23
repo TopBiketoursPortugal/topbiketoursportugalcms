@@ -1,14 +1,86 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import 'src/styles/ccElegantBlack.css';
+// import { GoogleAnalytics } from '@astrolib/analytics';
+import { GOOGLE_ANALYTICS_ID } from 'astro:env/client';
+import {
+  CAT_ADVERTISEMENT,
+  CAT_ANALYTICS,
+  CAT_FUNCTIONALITY,
+  CAT_SECURITY,
+  config,
+  SERVICE_AD_PERSONALIZATION,
+  SERVICE_AD_STORAGE,
+  SERVICE_AD_USER_DATA,
+  SERVICE_ANALYTICS_STORAGE,
+  SERVICE_FUNCTIONALITY_STORAGE,
+  SERVICE_PERSONALIZATION_STORAGE,
+  SERVICE_SECURITY_STORAGE
+} from './CookieConsentConfig';
 ---
+
+<script
+  is:inline
+  type="text/partytown"
+  src={`https://www.googletagmanager.com/gtag/js?id=G-${GOOGLE_ANALYTICS_ID}`}
+></script>
+
+<script
+  is:inline
+  type="text/partytown"
+  define:vars={{
+    GOOGLE_ANALYTICS_ID,
+    CAT_ADVERTISEMENT,
+    CAT_ANALYTICS,
+    CAT_FUNCTIONALITY,
+    CAT_SECURITY,
+    config,
+    SERVICE_AD_PERSONALIZATION,
+    SERVICE_AD_STORAGE,
+    SERVICE_AD_USER_DATA,
+    SERVICE_ANALYTICS_STORAGE,
+    SERVICE_FUNCTIONALITY_STORAGE,
+    SERVICE_PERSONALIZATION_STORAGE,
+    SERVICE_SECURITY_STORAGE
+  }}
+>
+  function initAnalytics() {
+    // We need a global definition to avoid type warnings
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    // This should ALWAYS be set before the gtag("config", "G-XXXXXXXXXX"); line
+    gtag('consent', 'default', {
+      [SERVICE_AD_STORAGE]: 'denied',
+      [SERVICE_AD_USER_DATA]: 'denied',
+      [SERVICE_AD_PERSONALIZATION]: 'denied',
+      [SERVICE_ANALYTICS_STORAGE]: 'denied',
+      [SERVICE_FUNCTIONALITY_STORAGE]: 'denied',
+      [SERVICE_PERSONALIZATION_STORAGE]: 'denied',
+      [SERVICE_SECURITY_STORAGE]: 'denied'
+    });
+
+    gtag('config', GOOGLE_ANALYTICS_ID);
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    initAnalytics();
+  });
+
+  initAnalytics();
+</script>
 
 <script>
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
-
   // toggle custom black theme
   document.body.classList.add('cc--elegant-black');
 
+  // Trigger consent update when user choices change
   run(config);
 </script>

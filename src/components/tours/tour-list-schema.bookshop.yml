@@ -1,0 +1,161 @@
+# tour-schema.bookshop.yml
+spec:
+  label: Tour Schema
+  description: A component that generates JSON-LD schema for tour products
+  icon: code
+  tags:
+    - schema
+    - tours
+    - json-ld
+
+structures:
+  - tours_collection
+
+blueprint:
+  items:
+    label: Tour Items
+    type: array
+    preview: title
+    struct: tours_collection
+    description: Add and configure tour items for the schema
+  language:
+    label: Language
+    type: select
+    options:
+      - label: English
+        value: en
+      - label: Spanish
+        value: es
+      - label: French
+        value: fr
+      # Add more languages as needed based on your languages.json
+    default: en
+    description: Select the language for URL generation
+
+preview:
+  items:
+    - data:
+        title: 'Lisbon Bike Tour'
+        description: 'Explore Lisbon on a scenic bike tour.'
+        packages:
+          - title: 'Standard Package'
+            price:
+              price: 50
+              promo: 45
+              currency: 'EUR'
+          - title: 'Premium Package'
+            price:
+              price: 80
+              promo: 70
+              currency: 'EUR'
+        reviews:
+          - rating: 4
+            author:
+              givenName: 'John'
+              familyName: 'Doe'
+              country: 'US'
+            publishDate: '2024-01-15'
+            content: 'Great tour, highly recommend!'
+          - rating: 5
+            author:
+              givenName: 'Maria'
+              familyName: 'Silva'
+              country: 'PT'
+            publishDate: '2024-02-20'
+            content: 'Amazing experience!'
+  language: 'en'
+
+_structures:
+  tours_collection:
+    label: Tour Item
+    values:
+      - label: Tour
+        icon: directions_bike
+        fields:
+          title:
+            label: Title
+            type: text
+            description: The name of the tour
+            required: true
+          description:
+            label: Description
+            type: text
+            description: A short description of the tour
+          packages:
+            label: Packages
+            type: array
+            preview: title
+            description: Pricing packages for this tour
+            values:
+              - label: Package
+                icon: local_offer
+                fields:
+                  title:
+                    label: Package Title
+                    type: text
+                    description: Name of the package
+                  price:
+                    label: Price
+                    type: object
+                    fields:
+                      price:
+                        label: Regular Price
+                        type: number
+                        default: 0
+                        description: Standard price of the package
+                      promo:
+                        label: Promo Price
+                        type: number
+                        description: Promotional price (optional)
+                      currency:
+                        label: Currency
+                        type: select
+                        options:
+                          - label: Euro (EUR)
+                            value: EUR
+                          - label: US Dollar (USD)
+                            value: USD
+                          - label: British Pound (GBP)
+                            value: GBP
+                        default: EUR
+                        description: Currency for the price
+          reviews:
+            label: Reviews
+            type: array
+            preview: content
+            description: Customer reviews for this tour
+            values:
+              - label: Review
+                icon: star
+                fields:
+                  rating:
+                    label: Rating
+                    type: number
+                    description: Rating out of 5
+                    min: 1
+                    max: 5
+                    required: true
+                  author:
+                    label: Author
+                    type: object
+                    fields:
+                      givenName:
+                        label: First Name
+                        type: text
+                        description: Author's first name
+                      familyName:
+                        label: Last Name
+                        type: text
+                        description: Author's last name
+                      country:
+                        label: Country
+                        type: text
+                        description: Author's country (e.g., US, PT)
+                  publishDate:
+                    label: Publish Date
+                    type: date
+                    description: Date the review was published
+                  content:
+                    label: Review Content
+                    type: text
+                    description: The review text

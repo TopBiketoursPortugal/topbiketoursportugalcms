@@ -1,33 +1,58 @@
 ---
+import type { HrefLang } from 'src/types/hreflang';
 import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
+import type { FeaturedPost } from 'src/content/config';
+import LanguageData from 'src/../data/languages.json';
 
-type Props = {
+export type PaginatedProps = {
   frontmatter: {
     title: string;
-    featured_posts?: {
-      main_feature: string;
-      feature_list: Array<string>;
-    };
+    featured_posts: FeaturedPost;
     page_size?: number;
     seo?: SEOProps;
   };
+  hrefs?: ReadonlyArray<HrefLang>;
 };
 
+type Props = PaginatedProps;
+
 if (!Astro.props.frontmatter) {
-  throw new Error('Page frontmatter must be defined');
+  // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
+  throw new Error('Page frontmatter must be defined missing');
 }
-const { featured_posts, ...props } = Astro.props.frontmatter;
+const { frontmatter: props, hrefs = [] } = Astro.props;
+//console.log(hrefs);
 ---
 
-<Layout {...props}>
+<Layout {...props} hrefLangs={hrefs}>
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+
   <div class="blog-index py-[48px]">
     <h1
       class="mt-[48px] text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
     >
       {props.title}
     </h1>
-    {featured_posts && <FeaturedPosts bookshop:live {...featured_posts} />}
+    {
+      Astro.props.frontmatter?.featured_posts !== null &&
+      Astro.props.frontmatter?.featured_posts !== undefined ? (
+        <FeaturedPosts
+          bookshop:live
+          {...Astro.props.frontmatter.featured_posts}
+        />
+      ) : null
+    }
     <slot />
   </div>
 </Layout>

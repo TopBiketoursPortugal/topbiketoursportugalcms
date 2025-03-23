@@ -15,9 +15,9 @@ blueprint:
 
     Enter your Markdown content here.
   style:
-    container: Full
-    padding: Normal
-    align: Centered
+    container: full
+    padding: normal
+    align: centered
     tailwind:
 preview:
 
@@ -32,7 +32,7 @@ _inputs:
         - name: Normal
           value: normal
         - name: Loose
-          value: loos
+          value: loose
       preview:
         icon: 'short_text'
         text:

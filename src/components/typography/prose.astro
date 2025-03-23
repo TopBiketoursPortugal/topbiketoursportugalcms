@@ -9,13 +9,17 @@ type Props = {
 };
 const md = markdownit({ html: true });
 const { class: className, markdown } = Astro.props;
-const content = (markdown ? md.render(markdown) : markdown) ?? '';
-const style = cn([
-  'dark:prose-headings:text-slate-300  prose-ul:flex prose-headings:mb-4 prose-h1:text-3xl prose-h2:text-xl prose-h3:text-lg prose-h3:font-normal prose-h4:text-base prose-h5:text-sm prose-h6:text-xs prose-headings:leading-tighter prose-a:text-primary dark:prose-a:text-blue-400 prose prose-lg lg:prose-xl dark:prose-invert prose-headings:scroll-mt-[80px] prose-headings:font-bold prose-headings:tracking-tighter prose-p:w-full prose-li:my-0 prose-img:m-auto prose-img:rounded-md prose-img:shadow-lg w-full max-w-full',
-  className
-]);
+const content = (markdown ? md.render(markdown ?? '') : markdown) ?? '';
 ---
 
-<Stack as="div" layout="vertical" spacing="small" class={style}>
+<Stack
+  as="div"
+  layout="vertical"
+  spacing="small"
+  class={cn([
+    'dark:prose-headings:text-slate-300 prose-ul:flex prose-headings:mb-4 prose-a:font-semibold prose-a:underline prose-ul:flex-col prose-h1:text-5xl prose-h2:text-4xl prose-h3:text3xl prose-h3:font-normal prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg prose-headings:leading-tighter prose-a:text-primary dark:prose-a:text-blue-400 prose prose-lg lg:prose-xl dark:prose-invert  prose-headings:font-bold prose-headings:tracking-tighter prose-p:w-full prose-li:my-0 prose-img:m-auto prose-img:rounded-md prose-img:shadow-lg w-full max-w-full',
+    className
+  ])}
+>
   <slot set:html={content} />
 </Stack>

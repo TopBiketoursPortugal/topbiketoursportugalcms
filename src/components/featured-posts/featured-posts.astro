@@ -2,33 +2,40 @@
 import { getCollection } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
-import slugify from 'slugify';
 import type { VisuallyEditable } from 'src/types';
+import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { FeaturedPost } from 'src/content/config';
 
-type Props = {
-  main_feature: string;
-  feature_list: Array<string>;
-} & VisuallyEditable;
+type Props = FeaturedPost & VisuallyEditable;
 
-const allPosts = await getCollection('blog');
 const block = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif}',
   { eager: true }
 );
+const allPosts = (await getCollection('blog')).filter(
+  (post) =>
+    block.main_feature === post.data.id ||
+    block.feature_list?.includes(post.data.id)
+);
+const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'long',
+  timeZone: 'America/Chicago'
+});
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
   {
-    allPosts.map((post) => {
-      const featuredPostURL = `/blog/${slugify(block.main_feature, { lower: true })}`;
-
-      if (block.main_feature === post.data.title) {
+    allPosts
+      .filter(
+        (post) =>
+          block.main_feature === post.data.id && post.data.language === language
+      )
+      .map((post) => {
+        const featuredPostURL = getBlogPermalink(post);
         const date = new Date(post.data.date);
-        const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-          dateStyle: 'long',
-          timeZone: 'America/Chicago'
-        });
         const formattedDate = dateTimeFormatter.format(date);
         const imageSrc =
           images[post.data.thumb_image_path]?.default ??
@@ -50,8 +57,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
               <div class="flex flex-col gap-3 pt-3 sm:flex-row">
                 {tags.map((tag: string) => {
                   return (
-                    <a href={`/tags/${tag}`}>
-                      <span class="rounded-sm bg-slate-200 px-1">
+                    <a href={getBlogTagPath(tag, language)}>
+                      <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
                         {tag.charAt(0).toUpperCase() + tag.slice(1)}
                       </span>
                     </a>
@@ -67,71 +74,65 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
             <p>{formattedDate}</p>
           </div>
         );
-      }
-    })
+      })
   }
   <div
     class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
   >
     {
-      block.feature_list?.map((featuredPost) => {
-        const featuredPostURL = `/blog/${slugify(featuredPost, { lower: true })}`;
+      allPosts
+        .filter(
+          (post) =>
+            block.feature_list?.includes(post.data.id) &&
+            post.data.language === language
+        )
+        .map((post) => {
+          const featuredPostURL = getBlogPermalink(post);
+          const date = new Date(post.data.date);
+          const formattedDate = dateTimeFormatter.format(date);
+          const imageSrc =
+            images[post.data.thumb_image_path]?.default ??
+            post.data.thumb_image_path;
+          const tags = post.data.tags;
 
-        return allPosts.map((post) => {
-          if (post.data.title === featuredPost) {
-            const date = new Date(post.data.date);
-            const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
-              dateStyle: 'long',
-              timeZone: 'America/Chicago'
-            });
-            const formattedDate = dateTimeFormatter.format(date);
-            const imageSrc =
-              images[post.data.thumb_image_path]?.default ??
-              post.data.thumb_image_path;
-            const tags = post.data.tags;
-
-            return (
+          return (
+            <div>
+              <a href={featuredPostURL}>
+                <Image
+                  class="aspect-video w-full rounded-sm object-cover"
+                  alt={
+                    post.data.thumb_image_alt ??
+                    'Top walking tours portugal thumb_image_alt'
+                  }
+                  widths={[320, 500, 640]}
+                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                  src={imageSrc}
+                />
+              </a>
               <div>
+                {tags ? (
+                  <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                    {tags.map((tag: string) => {
+                      return (
+                        <a href={getBlogTagPath(tag, language)}>
+                          <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ''
+                )}
                 <a href={featuredPostURL}>
-                  <Image
-                    class="aspect-video w-full rounded-sm object-cover"
-                    alt={
-                      post.data.thumb_image_alt ??
-                      'Top walking tours portugal thumb_image_alt'
-                    }
-                    widths={[320, 500, 640]}
-                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
-                    src={imageSrc}
-                  />
+                  <h3 class="py-1 text-2xl font-semibold">{post.data.title}</h3>
                 </a>
-                <div>
-                  {tags ? (
-                    <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                      {tags.map((tag: string) => {
-                        return (
-                          <a href={`/tags/${tag}`}>
-                            <span class="rounded-sm bg-slate-200 px-1">
-                              {tag.charAt(0).toUpperCase() + tag.slice(1)}
-                            </span>
-                          </a>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <a href={featuredPostURL}>
-                    <h3 class="py-1 text-2xl font-semibold">
-                      {post.data.title}
-                    </h3>
-                  </a>
-                  <p>{formattedDate}</p>
-                </div>
+                <p>{formattedDate}</p>
               </div>
-            );
-          }
-        });
-      })
+            </div>
+          );
+        })
     }
   </div>
 </section>

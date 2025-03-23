@@ -32,9 +32,6 @@ interface Props {
 }
 
 const block = Astro.props;
-
-// console.log(block.image);
-
 const buttonComponents = import.meta.glob(
   '/src/components/buttons/**/*.astro',
   {
@@ -56,8 +53,8 @@ const { background_color, buttons = [], heading, subheading } = block;
 
 <section class={block.class} style={`background-color: ${background_color};`}>
   <div class="hero-container">
-    <div class="content">
-      <h1 class="heading">{heading?.heading_text}</h1>
+    <div class="content flex flex-col gap-4">
+      <h1 class="heading pb-3">{heading?.heading_text}</h1>
       <div class="subheading-text" style={`color: ${block.subheading.color};`}>
         <Markdown content={subheading.markdown_content} />
       </div>
@@ -112,11 +109,6 @@ const { background_color, buttons = [], heading, subheading } = block;
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
   }
 
   .subheading-text {

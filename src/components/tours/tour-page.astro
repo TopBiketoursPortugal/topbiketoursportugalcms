@@ -12,7 +12,7 @@ import Tooltip from '../tooltip/tooltip.astro';
 import Separator from '../separator/separator.astro';
 import Rating from '../rating/rating.astro';
 import Gallery from '../gallery/gallery.astro';
-import Prose from '../prose/prose.astro';
+import Prose from '../typography/prose.astro';
 import { getImageByPath } from 'utils/get-image';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import ResponsiveImage from '../responsive-image/ResponsiveImage.astro';
@@ -24,18 +24,13 @@ import TourFaqs from './tour-faqs.astro';
 import TourRelated from './tour-related.astro';
 import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
+import Heading from '../typography/heading.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
 const { tour } = Astro.props;
-// console.log(tour);
 
-// if (!tour) {
-//   throw new Error('Failed to get post with slug: ' + Astro.params.slug);
-// }
-// const { Content } = await render(tour);
-// const { data } = tour;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const {
   packages = [],
@@ -53,30 +48,35 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
+const enableFaqs = false;
 ---
 
 {tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}
 <div
-  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-3 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
+  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
-      <TabItem href="#detail" text={t('Tour.Tab.Details')} selected />
-      <TabItem href="#packages" text={t('Tour.Tab.Packages')} />
-      <TabItem href="#photos" text={t('Tour.Tab.Photos')} />
-      <TabItem href="#itinerary" text={t('Tour.Tab.Itineratry')} />
-      <TabItem href="#map" text={t('Tour.Tab.Map')} />
-      <TabItem href="#reviews" text={t('Tour.Tab.Reviews')} />
-      <TabItem href="#faqs" text={t('Tour.Tab.Faqs')} />
+      <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
+      <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
+      <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
+      <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
+      <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
+      <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
+      {
+        enableFaqs ? (
+          <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
+        ) : null
+      }
     </Tabs>
   </div>
-  <div
+  <section
     class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
     <div class="relative flex items-center gap-2">
-      <Icon icon="ph:tag-light" class="h4 w-4" />
+      <Icon icon="ph:tag-light" className="h4 w-4" />
       <span class="self-end text-sm text-gray-500"
-        >{t('Tour.Form.FromPrice')}</span
+        >{t('Tour.Form.FromPrice', language)}</span
       >
       <span
         class={cn(isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold')}
@@ -91,55 +91,63 @@ const isPromotional = minPromoPrice > 0;
           <Icon
             slot="trigger"
             icon="ph:info"
-            title={t('Tour.Form.FromPrice.Info')}
+            title={t('Tour.Form.FromPrice.Info', language)}
           />
-          <span slot="content">{t('Tour.Form.FromPrice.Info')}</span>
+          <span slot="content">{t('Tour.Form.FromPrice.Info', language)}</span>
         </Tooltip>
       </div>
     </div>
 
     <Separator />
-    <strong>{t('Tour.Form.Title')}</strong>
+    <strong>{t('Tour.Form.Title', language)}</strong>
     <TourForm />
-  </div>
-  <section class="col-end-2 flex w-full flex-col gap-4">
+  </section>
+  <section class="col-end-2 mb-8 flex w-full flex-col gap-4">
     <!-- {tour.image && <Hero {...tour.image} class="max-h-72 flex-1" />} -->
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
       <span class="text-neutral-700"
-        >({count} {t('Tour.Info.Reviews.Unit')})</span
+        >({count} {t('Tour.Info.Reviews.Unit', language)})</span
       >
     </div>
     <div>
       <ul class="center grid grid-cols-3 items-center justify-center gap-4">
         <li class="flex items-center gap-3">
-          <Icon icon="ph:clock" class="h-5 w-5" />{tour.duration}
-          {t('Tour.Info.Duration.Unit.Days')} / {(tour.duration ?? 0) - 1}
-          {t('Tour.Info.Duration.Unit.Nights')}
+          <Icon icon="ph:clock" className="h-5 w-5" />{tour.duration}
+          {t('Tour.Info.Duration.Unit.Days', language)} / {
+            (tour.duration ?? 0) - 1
+          }
+          {t('Tour.Info.Duration.Unit.Nights', language)}
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:users-three-light" class="h-5 w-5" />{
-            t('Tour.Info.Group.Label')
+          <Icon icon="ph:users-three-light" className="h-5 w-5" />{
+            t('Tour.Info.Group.Label', language)
           } : {tour.groupSize?.min ?? 0}-{tour.groupSize?.max ?? 0}
-          {t('Tour.Info.Group.Unit')}
+          {t('Tour.Info.Group.Unit', language)}
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:map-trifold-light" class="h-5 w-5" />{
-            t('Tour.Info.Distance.Label')
+          <Icon icon="ph:map-trifold-light" className="h-5 w-5" />{
+            t('Tour.Info.Distance.Label', language)
           }: {tour.distance} km
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:person-simple-bike-light" class="h-5 w-5" />
-          {t('Tour.Info.Difficulty.Label')} : {tour.difficulty}
+          {
+            tour.tourtype !== 'PackageTour' ? (
+              <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
+            ) : (
+              <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+            )
+          }
+          {t('Tour.Info.Difficulty.Label', language)} : {tour.difficulty}/5
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:airplane-light" class="h-5 w-5" />{
-            t('Tour.Info.ClosestAirport.Label')
+          <Icon icon="ph:airplane-light" className="h-5 w-5" />{
+            t('Tour.Info.ClosestAirport.Label', language)
           }: Aeroporto Sá Carneiro
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:user-light" class="h-5 w-5" />{
-            t('Tour.Info.MinAge.Label')
+          <Icon icon="ph:user-light" className="h-5 w-5" />{
+            t('Tour.Info.MinAge.Label', language)
           }: {tour.minAge}
         </li>
       </ul>
@@ -148,25 +156,34 @@ const isPromotional = minPromoPrice > 0;
     <Prose markdown={tour.content ?? ''} />
     <slot />
   </section>
-  <section id="packages" class="col-span-full grid grid-cols-4">
-    <h2 class="col-span-full">{t('Tour.Section.Packages.Title')}</h2>
+  <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6"
+      >{t('Tour.Section.Itinerary.Title', language)}</Heading
+    >
+    <TourItinerary itinerary={itinerary} />
+  </section>
+  <section id="packages" class="col-span-full mb-8 grid grid-cols-4 gap-10">
+    <Heading as="h2" class="mb-6">
+      {t('Tour.Section.Packages.Title', language)}
+    </Heading>
 
     <div class="col-span-full">
       <TourPricing language={language} packages={tour.packages} />
 
-      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full" />
+      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full mt-8" />
     </div>
   </section>
-  <section id="photos" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Photos.Title')}</h2>
+  <section id="photos" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6"
+      >{t('Tour.Section.Photos.Title', language)}</Heading
+    >
     <Gallery images={tour.images ?? []} />
   </section>
-  <section id="itinerary" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Itineratry.Title')}</h2>
-    <TourItinerary itinerary={itinerary} />
-  </section>
-  <section id="map" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Map.Title')}</h2>
+
+  <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6"
+      >{t('Tour.Section.Map.Title', language)}</Heading
+    >
 
     {
       tour.mapUrl && (
@@ -181,24 +198,36 @@ const isPromotional = minPromoPrice > 0;
       )
     }
   </section>
-  <section id="faqs" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Faq.Title')}</h2>
-    <TourFaqs faqs={faqs} language={language} />
-  </section>
-  <section id="reviews" class="col-span-full flex flex-col gap-4">
-    <h2>{t('Tour.Section.Reviews.Title')}</h2>
+  {
+    enableFaqs ? (
+      <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Faq.Title', language)}
+        </Heading>
+        <TourFaqs faqs={faqs} language={language} />
+      </section>
+    ) : null
+  }
+  <section id="reviews" class="col-span-full mb-8 flex flex-col gap-4">
+    <Heading as="h2" class="mb-6"
+      >{t('Tour.Section.Reviews.Title', language)}</Heading
+    >
     {
       reviews.length > 0 ? (
-        <div class="grid grid-cols-1 gap-6">
+        <div class="grid grid-cols-1 gap-12">
           {reviews.map(
             async ({ image, travelerType, content, author, rating }) => {
               const imageOptimized = image
                 ? (await getImageByPath(image.src)).default
                 : defaultImage;
-              const { country, givenName, familyName } = author ?? {};
+              const {
+                country = '',
+                givenName = '',
+                familyName = ''
+              } = author ?? {};
               const name = `${givenName} ${familyName}`.trimEnd();
               return (
-                <div class="flex flex-row items-center justify-evenly gap-4">
+                <div class="flex flex-row items-center justify-evenly gap-6">
                   <div class="flex grow">
                     <Image
                       src={imageOptimized}
@@ -213,7 +242,7 @@ const isPromotional = minPromoPrice > 0;
                   </div>
                   <div class="grow whitespace-nowrap">{name}</div>
                   <div>{travelerType ?? '-'}</div>
-                  <div class="text-balance flex grow flex-col whitespace-pre-line">
+                  <div class="text-balance flex grow flex-col gap-4 whitespace-pre-line">
                     <Rating rating={rating} />
                     {content}
                   </div>
@@ -223,14 +252,16 @@ const isPromotional = minPromoPrice > 0;
           )}
         </div>
       ) : (
-        <div>{t('Tour.Section.Reviews.Empty')}</div>
+        <div>{t('Tour.Section.Reviews.Empty', language)}</div>
       )
     }
   </section>
   {
     relatedTours.length > 0 ? (
-      <section id="related" class="col-span-full flex flex-col gap-4">
-        <h2>Related</h2>
+      <section id="related" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.RelatedTours.Title', language)}
+        </Heading>
         <TourRelated language={language} related={relatedTours} />
       </section>
     ) : null

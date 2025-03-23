@@ -1,11 +1,7 @@
 {
-  "site_title": "Astro Starter",
-  "description": "A starter template for Astro, built by Bookshop components - for CloudCannon CMS.",
-  "twitter_site": "",
-  "image": "/images/astro-logo-light-gradient.png",
-  "image_alt": "Astro logo",
   "ui": {
-    "theme": "system"
+    "theme": "system",
+    "theme_color": "#296a3f"
   },
   "en": {
     "site_title": "Top Walking Tours Portugal",
@@ -15,10 +11,9 @@
       "src": "/images/astro-logo-light-gradient.png",
       "alt": "Top Walking Tours Portugal logo"
     },
-
     "site": {
       "name": "Top Walking Tours Portugal",
-      "url": "http://localhost/"
+      "url": "https://topwalkingtoursportugal.com/"
     },
     "metadata": {
       "title": {
@@ -58,7 +53,7 @@
     },
     "site": {
       "name": "Top Walking Tours Portugal",
-      "url": "http://localhost/pt/"
+      "url": "https://topwalkingtoursportugal.com/pt/"
     },
     "metadata": {
       "title": {

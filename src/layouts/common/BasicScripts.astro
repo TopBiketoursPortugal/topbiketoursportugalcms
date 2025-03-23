@@ -1,7 +1,7 @@
 ---
-import Site from 'src/../data/site.json';
+import SiteData from 'src/../data/site.json';
 
-const { ui: UI } = Site;
+const { ui: UI } = SiteData;
 ---
 
 <script is:inline async defer define:vars={{ defaultTheme: UI.theme }}>
@@ -163,7 +163,7 @@ const { ui: UI } = Site;
   window.onpageshow = onPageShow;
 
   document.addEventListener('astro:after-swap', () => {
-    initTheme();
+    // initTheme();
     onLoad();
     onPageShow();
   });

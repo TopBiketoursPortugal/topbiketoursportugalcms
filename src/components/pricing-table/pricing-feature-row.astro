@@ -1,8 +1,8 @@
 ---
-import { cn } from 'utils/cn';
 import Tooltip from '../tooltip/tooltip.astro';
 import { tv } from 'tailwind-variants';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
+import { cn } from 'utils/cn';
 
 const {
   feature,
@@ -10,36 +10,80 @@ const {
   info,
   included,
   alternate = false,
-  icon = false
+  icon = false,
+  class: className = '',
+  distribute
 } = Astro.props;
 
-const container = tv({
-  base: 'flex h-12 items-center justify-center gap-2 border-gray-300 px-2 text-center text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+const containerVariants = tv({
+  base: '',
+  slots: {
+    container:
+      'flex h-24 flex-col items-center gap-2 border-gray-300 px-4 text-gray-600 transition-all dark:border-gray-600 dark:text-gray-400',
+    feature: ''
+  },
   variants: {
     alternate: {
-      true: 'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950',
-      false:
-        'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+      true: {
+        container:
+          'bg-gray-100 group-hover:bg-gray-200 dark:bg-gray-900 dark:text-white dark:group-hover:bg-gray-950'
+      },
+      false: {
+        container:
+          'bg-gray-200 group-hover:bg-gray-300 dark:bg-gray-800 dark:text-white dark:group-hover:bg-gray-900'
+      }
+    },
+    distribute: {
+      leading: {
+        feature: 'flex h-full w-full items-center justify-center text-center',
+        container: 'justify-start'
+      },
+      trailing: {
+        feature: 'flex h-full w-full items-center justify-end text-right',
+        container: 'justify-end'
+      },
+      center: {
+        feature: 'flex h-full w-full items-center justify-center text-center',
+        container: 'justify-center'
+      }
     }
+  },
+  defaultVariants: {
+    alternate: true,
+    distribute: 'center'
   }
 });
 
-const containerStyle = container({ alternate });
+const { container, feature: featureStyle } = containerVariants({
+  alternate,
+  distribute
+});
+const containerStyle = cn(container(), className);
 ---
 
-<div class={containerStyle}>
-  <div class="lg:hidden">{description}</div>
-  {feature}
-  {info}
+<div class={containerStyle} data-type="container">
+  <div class="flex-col lg:hidden">{description}</div>
+  {feature && <div class={featureStyle()}>{feature}</div>}
+  {info && <div class="w-full items-center justify-center">{info}</div>}
   {
     icon ? (
       <Tooltip class="align-top">
-        <Icon
-          slot="trigger"
-          icon={included ? 'ph:check-circle-fill' : 'ph:x-circle-fill'}
-          title={included ? 'Included in price.' : 'Not included in price.'}
-          class={cn(included ? 'text-green-600' : 'text-red-600', 'h-6 w-6')}
-        />
+        {included ? (
+          <Icon
+            slot="trigger"
+            icon="ph:check-circle-fill"
+            title="Included in price."
+            className="text-green-600 h-8 w-8 fill-green-600"
+          />
+        ) : (
+          <Icon
+            slot="trigger"
+            icon="ph:x-circle-fill"
+            title="Not included in price."
+            className="text-red-600 fill-red-600  h-8 w-8"
+          />
+        )}
+
         <span slot="content">
           {included ? 'Included in price.' : 'Not included in price.'}
         </span>

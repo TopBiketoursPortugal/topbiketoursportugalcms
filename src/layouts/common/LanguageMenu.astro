@@ -1,41 +1,59 @@
 ---
 import Languages from 'src/../data/languages.json';
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getHomePermalink } from 'utils/permalinks';
 
 export type LanguageMenuItem = {
-  code: string;
-  displayName: string;
+  code: LanguageCodes;
+  locale?: string;
   path: string;
-  icon: string;
+  display?: string;
+  icon?: string;
 };
 
 type Props = { localizedUrls?: ReadonlyArray<LanguageMenuItem> };
+const currenLanguage = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const languages = Object.values(Languages)
+  .filter((l) => l.code !== currenLanguage)
+  .map(
+    ({ code, display, icon }) =>
+      ({
+        code: code as LanguageCodes,
+        display,
+        icon,
+        path: getHomePermalink(code as LanguageCodes),
+        locale: Languages[code as LanguageCodes].locale
+      }) satisfies LanguageMenuItem
+  );
 
-const languages = Object.values(Languages).map(
-  ({ code, display, icon, isDefault }) =>
-    ({
-      code,
-      displayName: display,
-      icon,
-      path: isDefault ? '/' : `/${code}`
-    }) satisfies LanguageMenuItem
-);
+let { localizedUrls = [] } = Astro.props;
 
-const { localizedUrls = languages } = Astro.props;
+if (localizedUrls?.length === 0) {
+  localizedUrls = languages;
+} else {
+  localizedUrls = localizedUrls.map((l) => ({
+    ...l,
+    display: l.display ?? Languages[l.code].display,
+    icon: l.icon ?? Languages[l.code].icon,
+    locale: Languages[l.code].locale
+  }));
+}
+
+// console.log(localizedUrls);
 ---
 
 <div class="flex flex-row gap-4 text-2xl">
   {
-    localizedUrls
-      .filter(({ icon }) => !!icon)
-      .map(({ code, displayName, icon, path }) => (
-        <a href={path} title={displayName} hreflang={code} class="group">
-          <Icon
-            title={displayName}
-            icon={icon}
-            class="bg-opacity-100 fill-black text-white text-opacity-100 opacity-100 transition-transform duration-150 group-hover:scale-125"
-          />
-        </a>
-      ))
+    localizedUrls.map(({ locale, icon, display, path }) => (
+      <a
+        href={path}
+        title={display}
+        hreflang={locale}
+        class="transition-transform duration-150 hover:scale-125"
+      >
+        <Icon title={display} icon={icon!} />
+      </a>
+    ))
   }
 </div>

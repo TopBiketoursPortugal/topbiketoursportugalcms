@@ -4,75 +4,49 @@ import Text from 'src/components/typography/text.astro';
 import regions from 'src/../data/tour_regions.json';
 
 import NavigationData from 'src/../data/navigation.json';
-import { getRelativeLocaleUrl } from 'astro:i18n';
 import { t } from 'utils/i18n';
 import { getCollection } from 'astro:content';
-import { getTourRegionsPath } from 'utils/permalinks';
+import { getPagePath, getTourRegionsPath } from 'utils/permalinks';
 import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
-import slugify from 'slugify';
-import Icon from 'src/components/utility/icon';
+import Icon from 'src/components/utility/icon.astro';
 
-function getBaseLocaleBaseUrl(
-  language: LanguageCodes | string | undefined = 'en'
-): string {
-  if (language === 'en') {
-    return '/';
-  }
-
-  return `/${language}/`;
-}
-
-type Props = {
-  language: LanguageCodes;
-};
-
-const { language } = Astro.props;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
 const { links } = footer;
 const year = new Date().getFullYear();
 
-// console.log('currentLocale', Astro.currentLocale);
-
-const termsFilePathLocale = getRelativeLocaleUrl(
-  Astro.currentLocale ?? 'en',
-  'terms-and-conditions.md'
-);
-
-const privacyFilePathLocale = getRelativeLocaleUrl(
-  Astro.currentLocale ?? 'en',
-  'privacy-policy.md'
-);
-
 const pageCollection = await getCollection('pages');
 
 const termsPage = pageCollection.filter(
-  (p) => p.id === termsFilePathLocale.substring(1)
+  (p) =>
+    p.filePath?.endsWith('terms-and-conditions.mdx') &&
+    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 const privacyPage = pageCollection.filter(
-  (p) => p.id === privacyFilePathLocale.substring(1)
+  (p) =>
+    p.filePath?.endsWith('privacy-policy.mdx') &&
+    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
 )[0];
 
-const localePrefix = getBaseLocaleBaseUrl(Astro.currentLocale);
+const privacyPagePath = privacyPage ? getPagePath(privacyPage) : '';
 
-const privacyPagePath = `${localePrefix}${(privacyPage?.data as any)?.slug ?? slugify(privacyPage?.data?.title ?? '', { lower: true })}`;
-
-const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? slugify(termsPage?.data?.title ?? '', { lower: true })}`;
+const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 ---
 
 <footer
-  class="grid grid-cols-1 gap-8 bg-gray-100 p-10 text-gray-600 dark:bg-gray-900 dark:text-gray-400 sm:grid-cols-3"
+  class="mt-16 grid grid-cols-1 gap-8 bg-gray-100 p-10 text-gray-600 dark:bg-gray-950 dark:text-gray-400 sm:grid-cols-3"
 >
   <div class="flex flex-col gap-5">
     <!-- <Logo class="max-h-12" /> -->
-    <div class="flex justify-stretch gap-2">
+    <div class="flex justify-evenly gap-2">
       {
         links.map(({ text, links = [] }) => (
-          <div class="flex flex-col gap-2">
-            <h4 class="w-full text-sm font-bold">{text}</h4>
+          <div class="flex w-full flex-col gap-1">
+            <h4 class="w-full text-xl font-bold">{text}</h4>
             {links.map(({ link, text }) => (
-              <a class="text-xs" href={link.toLowerCase()}>
+              <a class="text-lg" href={link.toLowerCase()}>
                 {text}
               </a>
             ))}
@@ -81,8 +55,9 @@ const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? sl
       }
     </div>
     <div class="flex flex-col gap-2">
-      <span class="text-sm font-bold">{t('Footer.PaymentTitle')}</span>
-      <span class="text-xs">{t('Footer.PaymentDescription')}</span>
+      <span class="text-sm font-bold">{t('Footer.PaymentTitle', language)}</span
+      >
+      <span class="text-xs">{t('Footer.PaymentDescription', language)}</span>
       <div class="flex gap-2">
         <Icon icon="logos:mastercard" /><Icon icon="logos:visa" /><Icon
           icon="logos:amex"
@@ -92,8 +67,8 @@ const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? sl
   </div>
 
   <div class="grid grid-cols-4 gap-4 self-start sm:grid-cols-3">
-    <Text class="col-span-full"
-      ><h4 class="text-sm font-bold">{t('Footer.TourRegionsTitle')}</h4></Text
+    <Text as="strong" class="col-span-full" size="xlarge" weight="bold"
+      >{t('Footer.TourRegionsTitle', language)}</Text
     >
     {
       regions.map((region) => {
@@ -133,10 +108,12 @@ const termsPagePagePath = `${localePrefix}${(termsPage?.data as any)?.slug ?? sl
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={termsPagePagePath} rel="nofollow">{t('TermsAndConditions')}</a>
+    <a href={termsPagePagePath} rel="nofollow"
+      >{t('TermsAndConditions', language)}</a
+    >
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy')}</a>
+    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy', language)}</a>
   </li>
 </ul>

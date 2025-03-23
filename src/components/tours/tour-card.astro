@@ -1,6 +1,6 @@
 ---
 import CardMedia from '../card/CardMedia.astro';
-import { getTourPath } from 'utils/permalinks';
+import { getTourPath, getTourTagPath } from 'utils/permalinks';
 import CardContent, { type CardContentProps } from '../card/CardContent.astro';
 import Card from '../card/Card.astro';
 import Languages from 'src/../data/languages.json';
@@ -10,9 +10,10 @@ import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
-import slugify from 'slugify';
 import LinkButton from '../linkbutton/linkbutton.astro';
-import Icon from '../utility/icon';
+import Icon from '../utility/icon.astro';
+import { t } from 'utils/i18n';
+import { getAggregatedReviews } from 'utils/reviews';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -22,8 +23,19 @@ type Props = {
 
 const { tour: data, contentDisplay = 'inline' } = Astro.props;
 
-const { image, content, duration, tags = [], language, packages = [] } = data;
-
+const {
+  image,
+  content,
+  duration,
+  difficulty,
+  tags = [],
+  language,
+  packages = [],
+  tourtype,
+  distance,
+  reviews = []
+} = data;
+const { average, count } = getAggregatedReviews(reviews);
 const minPrice = Math.min(...packages.map((p) => p.price?.price ?? 0));
 const minPromoPrice = Math.max(...packages.map((p) => p.price?.promo ?? 0));
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
@@ -32,7 +44,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 });
 ---
 
-<Card href={getTourPath(data)} frame="light" {...data}>
+<Card href={getTourPath(data, language)} frame="light" {...data}>
   {image && <CardMedia {...image} />}
   <CardContent display={contentDisplay} class="px-10 pb-8 pt-6 sm:max-xl:px-4">
     <h3 class="font-oswald line-clamp-2 text-xl font-bold">
@@ -45,24 +57,55 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     <Stack spacing="medium" layout="vertical" class="w-full">
       {
         duration && (
-          <span class="text-gray-600">
-            {duration} days / {duration - 1} nights
+          <span class="flex gap-2 text-gray-600">
+            <Icon icon="ph:clock-countdown-light" /> {duration}{' '}
+            {t('Tour.Info.Duration.Unit.Days', language)} / {duration - 1}{' '}
+            {t('Tour.Info.Duration.Unit.Nights', language)}
           </span>
         )
       }
-
-      <Stack distribution="spaceBetween" alignment="center" class="w-full">
-        <Rating rating={4} />
-        <Stack spacing="small" alignment="trailing" layout="vertical">
-          {
-            minPromoPrice > 0 && (
-              <span class="line-through">{priceFormat.format(minPrice)}</span>
-            )
-          }
-          <span class="text-xl font-bold">
-            {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
+      {
+        difficulty && (
+          <span class="flex gap-2 text-gray-600">
+            {tourtype !== 'PackageTour' ? (
+              <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
+            ) : (
+              <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+            )}
+            {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
           </span>
-        </Stack>
+        )
+      }
+      {
+        distance ? (
+          <div class="flex items-center gap-2">
+            <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
+            <span>
+              {t('Tour.Info.Distance.Label', language)}: {distance} km
+            </span>
+          </div>
+        ) : null
+      }
+      <div class="flex gap-3">
+        <Rating rating={average} class="text-orange-500" />
+        <span class="text-neutral-700"
+          >({count} {t('Tour.Info.Reviews.Unit', language)})</span
+        >
+      </div>
+      <Stack
+        spacing="small"
+        alignment="trailing"
+        layout="vertical"
+        class="w-full"
+      >
+        {
+          minPromoPrice > 0 && (
+            <span class="line-through">{priceFormat.format(minPrice)}</span>
+          )
+        }
+        <span class="text-xl font-bold">
+          {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
+        </span>
       </Stack>
     </Stack>
 
@@ -71,12 +114,15 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     {
       tags && tags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
-          <Icon icon="ph:bookmark-simple-thin" class="h-5 w-5 text-gray-600" />
+          <Icon
+            icon="ph:bookmark-simple-light"
+            className="text-gray-600 h-5 w-5"
+          />
           {tags.map((t) => (
             <LinkButton
               variant="link"
               class="z-50"
-              href={`/tours/tags/${slugify(t, { lower: true })}`}
+              href={getTourTagPath(t, language)}
             >
               {t}
             </LinkButton>
