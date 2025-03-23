@@ -11,6 +11,7 @@ import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import rehypeExternalLinks from 'rehype-external-links';
+import partytown from '@astrojs/partytown';
 // import sentry from '@sentry/astro';
 // import spotlightjs from '@spotlightjs/astro';
 // import astroMetaTags from 'astro-meta-tags';
@@ -127,7 +128,7 @@ export default defineConfig({
       experimental: {
         directoryAndTrailingSlashHandler: true
       }
-    })
+    }),
     // shield({}),
     // playformInline()
     // min()
@@ -139,6 +140,7 @@ export default defineConfig({
     //   SVG: true,
     //   Logger: 0
     // })
+    partytown({ config: { forward: ['dataLayer.push'], debug: true } })
   ],
   markdown: {
     rehypePlugins: [rehypeExternalLinks]

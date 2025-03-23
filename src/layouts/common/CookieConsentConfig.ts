@@ -13,8 +13,37 @@ export const SERVICE_FUNCTIONALITY_STORAGE = 'functionality_storage';
 export const SERVICE_PERSONALIZATION_STORAGE = 'personalization_storage';
 export const SERVICE_SECURITY_STORAGE = 'security_storage';
 
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+    gtag: (...args: any[]) => void;
+  }
+}
+
+function updateGtagConsent() {
+  window.gtag?.('consent', 'default', {
+    [SERVICE_AD_STORAGE]: 'denied',
+    [SERVICE_AD_USER_DATA]: 'denied',
+    [SERVICE_AD_PERSONALIZATION]: 'denied',
+    [SERVICE_ANALYTICS_STORAGE]: 'denied',
+    [SERVICE_FUNCTIONALITY_STORAGE]: 'denied',
+    [SERVICE_PERSONALIZATION_STORAGE]: 'denied',
+    [SERVICE_SECURITY_STORAGE]: 'denied'
+  });
+}
+
 export const config: CookieConsentConfig = {
-  revision: 1,
+  root: '#cc-container',
+  onFirstConsent: () => {
+    updateGtagConsent();
+  },
+  onConsent: () => {
+    updateGtagConsent();
+  },
+  onChange: () => {
+    updateGtagConsent();
+  },
+  revision: 3,
   guiOptions: {
     consentModal: {
       layout: 'box inline',
@@ -36,17 +65,16 @@ export const config: CookieConsentConfig = {
       services: {
         ga4: {
           label:
-            '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4 (dummy)</a>',
-          onAccept: () => {},
+            '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4</a>',
+          onAccept: () => {
+            updateGtagConsent();
+          },
           onReject: () => {},
           cookies: [
             {
               name: /^_ga/
             }
           ]
-        },
-        another: {
-          label: 'Another one (dummy)'
         }
       }
     }
@@ -134,6 +162,90 @@ export const config: CookieConsentConfig = {
             {
               title: 'More information',
               description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topwalkingtoursportugal.com/privacy-policy/">contact us</a>.`
+            }
+          ]
+        }
+      },
+      pt: {
+        // Consulte: https://support.google.com/tagmanager/answer/10718549?hl=pt
+        consentModal: {
+          title: 'Utilizamos cookies',
+          description:
+            'Este website utiliza cookies essenciais para garantir o seu correto funcionamento e cookies de rastreamento para compreender como interage com o mesmo. Estes últimos só serão definidos após consentimento.',
+          acceptAllBtn: 'Aceitar todas',
+          acceptNecessaryBtn: 'Rejeitar todas',
+          showPreferencesBtn: 'Gerir preferências individuais'
+        },
+        preferencesModal: {
+          title: 'Gerir preferências de cookies',
+          acceptAllBtn: 'Aceitar todas',
+          acceptNecessaryBtn: 'Rejeitar todas',
+          savePreferencesBtn: 'Aceitar seleção atual',
+          closeIconLabel: 'Fechar modal',
+          sections: [
+            {
+              title: 'Utilização de cookies',
+              description:
+                'Utilizamos cookies para garantir as funcionalidades básicas do website e melhorar a sua experiência online.'
+            },
+            {
+              title: 'Cookies estritamente necessários',
+              description:
+                'Estes cookies são essenciais para o funcionamento adequado do website, por exemplo para autenticação de utilizadores.',
+              linkedCategory: CAT_NECESSARY
+            },
+            {
+              title: 'Analítica',
+              description:
+                'Cookies utilizados para análise ajudam a recolher dados que permitem aos serviços compreender como os utilizadores interagem com um determinado serviço. Estes insights permitem aos serviços melhorar conteúdos e desenvolver funcionalidades que otimizam a experiência do utilizador.',
+              linkedCategory: CAT_ANALYTICS,
+              cookieTable: {
+                headers: {
+                  name: 'Nome',
+                  domain: 'Serviço',
+                  description: 'Descrição',
+                  expiration: 'Validade'
+                },
+                body: [
+                  {
+                    name: '_ga',
+                    domain: 'Google Analytics',
+                    description:
+                      'Cookie definido pelo <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
+                    expiration: 'Expira após 12 dias'
+                  },
+                  {
+                    name: '_gid',
+                    domain: 'Google Analytics',
+                    description:
+                      'Cookie definido pelo <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
+                    expiration: 'Sessão'
+                  }
+                ]
+              }
+            },
+            {
+              title: 'Publicidade',
+              description:
+                'O Google utiliza cookies para publicidade, incluindo veiculação e renderização de anúncios, personalização de anúncios (consoante as suas definições de anúncio em <a href="https://g.co/adsettings">g.co/adsettings</a>), limitação do número de vezes que um anúncio é exibido, ocultação de anúncios que escolheu parar de ver e medição da eficácia de anúncios.',
+              linkedCategory: CAT_ADVERTISEMENT
+            },
+            {
+              title: 'Funcionalidade',
+              description:
+                'Cookies utilizados para funcionalidade permitem que os utilizadores interajam com um serviço ou site para aceder a características fundamentais. Consideram-se fundamentais preferências como idioma do utilizador, otimizações de produto que ajudam a manter e melhorar serviços, e manutenção de informação relativa à sessão do utilizador, como conteúdo de um carrinho de compras.',
+              linkedCategory: CAT_FUNCTIONALITY
+            },
+            {
+              title: 'Segurança',
+              description:
+                'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
+              linkedCategory: CAT_SECURITY
+            },
+            {
+              title: 'Mais informações',
+              description:
+                'Para quaisquer questões relativas à política de cookies e às suas escolhas, por favor <a href="https://topwalkingtoursportugal.com/privacy-policy/">contacte-nos</a>.'
             }
           ]
         }
