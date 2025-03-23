@@ -1,7 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { cn, tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 import type { StackProps } from '../stack/stack.style';
+import { cn } from 'utils/cn';
 const cardVariants = tv({
   base: 'border:border-slate-100 group relative overflow-clip rounded-2xl bg-white shadow-xl shadow-slate-900/10',
   variants: {

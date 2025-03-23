@@ -1,0 +1,81 @@
+---
+import { tv } from 'tailwind-variants';
+import { cn } from 'utils/cn';
+import { v7 } from 'uuid';
+
+// Define Tailwind Variants for the Tooltip
+const tooltip = tv({
+  slots: {
+    base: 'group relative inline-block',
+    trigger: 'cursor-pointer',
+    content:
+      'tooltip max-w-96 text-pretty invisible absolute z-50 w-52 whitespace-pre-wrap rounded-md bg-gray-800 px-3 py-2 text-sm text-white opacity-0 transition-opacity duration-200',
+    tip: 'absolute h-2 w-2 rotate-45 transform bg-gray-800' // Tip (arrow) styles
+  },
+  variants: {
+    position: {
+      top: {
+        content: 'bottom-full left-1/2 mb-2 -translate-x-1/2',
+        tip: 'bottom-0 left-1/2 -mb-1 -translate-x-1/2' // Position tip below the tooltip
+      },
+      bottom: {
+        content: 'left-1/2 top-full mt-2 -translate-x-1/2',
+        tip: 'left-1/2 top-0 -mt-1 -translate-x-1/2' // Position tip above the tooltip
+      },
+      left: {
+        content: 'right-full top-1/2 mr-2 -translate-y-1/2',
+        tip: 'right-0 top-1/2 -mr-1 -translate-y-1/2' // Position tip to the right of the tooltip
+      },
+      right: {
+        content: 'left-full top-1/2 ml-2 -translate-y-1/2',
+        tip: 'left-0 top-1/2 -ml-1 -translate-y-1/2' // Position tip to the left of the tooltip
+      }
+    },
+    delay: {
+      0: { content: 'transition-delay-0' },
+      100: { content: 'transition-delay-100' },
+      200: { content: 'transition-delay-200' },
+      300: { content: 'transition-delay-300' }
+    }
+  },
+  defaultVariants: {
+    position: 'top',
+    delay: 300
+  }
+});
+
+// Props for the component
+export interface Props {
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  delay?: 0 | 100 | 200 | 300;
+  id?: string;
+  class?: string;
+}
+
+const uui = v7();
+const { position, delay, id = uui, class: className } = Astro.props;
+
+// Apply Tailwind Variants
+const { base, trigger, content, tip } = tooltip({ position, delay });
+---
+
+<div class={cn(base(), className)}>
+  <!-- Trigger Slot -->
+  <span class={trigger()} aria-describedby={id} tabindex="0">
+    <slot name="trigger" />
+  </span>
+
+  <!-- Tooltip Content Slot -->
+  <div id={id} role="tooltip" class={content()} aria-hidden="true">
+    <slot name="content" />
+    <div class={tip()}></div>
+  </div>
+</div>
+
+<!-- Add Tailwind's group-hover behavior -->
+<style>
+  .group:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+</style>

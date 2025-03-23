@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import Grid from '../grid/grid.astro';
+import TourCard from './tour-card.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = { related: string[]; language: LanguageCodes };
+
+const { related, language } = Astro.props;
+
+const tours = (await getCollection('tours')).filter(
+  (t) => related.indexOf(t.data.id) !== -1 && t.data.language === language
+);
+---
+
+<Grid cols={3}>
+  {
+    tours.map((tour) => (
+      <TourCard language={language} tour={tour.data} contentDisplay="inline" />
+    ))
+  }
+</Grid>

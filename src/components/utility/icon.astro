@@ -1,0 +1,593 @@
+---
+import type { IconNames } from 'src/types';
+import { cn } from 'utils/cn';
+// import PhLanguageLightIcon from 'src/assets/icons/ph/light/language-light.svg';
+// import PhWheatLightIcon from 'src/assets/icons/ph/light/wheat-light.svg';
+// import PhAppleLightIcon from 'src/assets/icons/ph/light/apple-light.svg';
+// import PhBowlRiceLightIcon from 'src/assets/icons/ph/light/bowl-rice-light.svg';
+import MastercardLogo from 'src/assets/icons/logos/mastercard.svg';
+import VisaLogo from 'src/assets/icons/logos/visa.svg';
+import AmexLogo from 'src/assets/icons/logos/amex.svg';
+import JCBLogo from 'src/assets/icons/logos/jcb.svg';
+import FaTripadvisor from 'src/assets/icons/fa/tripadvisor.svg';
+import PhCompassFillIcon from 'src/assets/icons/ph/fill/compass-fill.svg';
+import PhRssLightIcon from 'src/assets/icons/ph/light/rss-light.svg';
+import PhSunLightIcon from 'src/assets/icons/ph/light/sun-light.svg';
+import PhMoonLightIcon from 'src/assets/icons/ph/light/moon-light.svg';
+import PhStarFillIcon from 'src/assets/icons/ph/fill/star-fill.svg';
+import PhStarLightIcon from 'src/assets/icons/ph/light/star-light.svg';
+import PhStarHalfFillIcon from 'src/assets/icons/ph/fill/star-half-fill.svg';
+import PhEnvelopeSimpleLightIcon from 'src/assets/icons/ph/light/envelope-simple-light.svg';
+import PhUserLightIcon from 'src/assets/icons/ph/light/user-light.svg';
+import PhUserCircleLightIcon from 'src/assets/icons/ph/light/user-circle-light.svg';
+import PhBreadSliceLightIcon from 'src/assets/icons/ph/light/bread-light.svg';
+import PhMugLightIcon from 'src/assets/icons/ph/light/coffee-light.svg';
+import PhEggLightIcon from 'src/assets/icons/ph/light/egg-light.svg';
+import PhUtensilsLightIcon from 'src/assets/icons/ph/light/fork-knife-light.svg';
+import PhPersonSimpleWalkLight from 'src/assets/icons/ph/light/person-simple-walk-light.svg';
+import PhQuotesFill from 'src/assets/icons/ph/fill/quotes-fill.svg';
+import PhCarrotLightIcon from 'src/assets/icons/ph/light/carrot-light.svg';
+import PhBurgerLightIcon from 'src/assets/icons/ph/light/hamburger-light.svg';
+import PhFishLightIcon from 'src/assets/icons/ph/light/fish-simple-light.svg';
+import PhSeedlingLightIcon from 'src/assets/icons/ph/light/plant-light.svg';
+import PhPlateLightIcon from 'src/assets/icons/ph/light/bowl-food-light.svg';
+import PhPizzaLightIcon from 'src/assets/icons/ph/light/pizza-light.svg';
+import PhPepperLightIcon from 'src/assets/icons/ph/light/pepper-light.svg';
+import PhChampagneLightIcon from 'src/assets/icons/ph/light/wine-light.svg';
+import PhCheckLightIcon from 'src/assets/icons/ph/light/check-light.svg';
+import PhCheckCircleFillIcon from 'src/assets/icons/ph/fill/check-circle-fill.svg';
+import PhXCircleFillIcon from 'src/assets/icons/ph/fill/x-circle-fill.svg';
+import PhArrowRightLightIcon from 'src/assets/icons/ph/light/arrow-right-light.svg';
+import PhArrowLeftLightIcon from 'src/assets/icons/ph/light/arrow-left-light.svg';
+import PhArrowDownLightIcon from 'src/assets/icons/ph/light/arrow-down-light.svg';
+import PhArrowUpLightIcon from 'src/assets/icons/ph/light/arrow-up-light.svg';
+import PhCaretLeftLightIcon from 'src/assets/icons/ph/light/caret-left-light.svg';
+import PhCaretRightLightIcon from 'src/assets/icons/ph/light/caret-right-light.svg';
+import PhCaretDownLightIcon from 'src/assets/icons/ph/light/caret-down-light.svg';
+import PhCaretUpLightIcon from 'src/assets/icons/ph/light/caret-up-light.svg';
+import PhPaperPlaneLightIcon from 'src/assets/icons/ph/light/paper-plane-light.svg';
+import PhCartShoppingLightIcon from 'src/assets/icons/ph/light/shopping-cart-light.svg';
+import PhShopLightIcon from 'src/assets/icons/ph/light/storefront-light.svg';
+import PhBagShoppingLightIcon from 'src/assets/icons/ph/light/shopping-bag-light.svg';
+import PhCreditCardLightIcon from 'src/assets/icons/ph/light/credit-card-light.svg';
+import PhStoreLightIcon from 'src/assets/icons/ph/light/storefront-light.svg';
+import PhShopLockLightIcon from 'src/assets/icons/ph/light/lock-light.svg';
+import PhCarLightIcon from 'src/assets/icons/ph/light/car-light.svg';
+import PhCircleHalfFillIcon from 'src/assets/icons/ph/fill/circle-half-fill.svg';
+import PhLocationDotLightIcon from 'src/assets/icons/ph/light/map-pin-light.svg';
+import PhLocationPinLightIcon from 'src/assets/icons/ph/light/map-pin-line-light.svg';
+import PhLocationCrosshairsLightIcon from 'src/assets/icons/ph/light/crosshair-light.svg';
+import PhGiftLightIcon from 'src/assets/icons/ph/light/gift-light.svg';
+import PhHouseLightIcon from 'src/assets/icons/ph/light/house-light.svg';
+import PhMagnifyingGlassLightIcon from 'src/assets/icons/ph/light/magnifying-glass-light.svg';
+import PhImageLightIcon from 'src/assets/icons/ph/light/image-light.svg';
+import PhPhoneLightIcon from 'src/assets/icons/ph/light/phone-light.svg';
+import PhPhoneFillIcon from 'src/assets/icons/ph/fill/phone-fill.svg';
+import PhBarsLightIcon from 'src/assets/icons/ph/light/list-light.svg';
+import PhHeartLightIcon from 'src/assets/icons/ph/light/heart-light.svg';
+import PhXMarkLightIcon from 'src/assets/icons/ph/light/x-light.svg';
+import PhCommentLightIcon from 'src/assets/icons/ph/light/chat-text-light.svg';
+import PhTruckFastLightIcon from 'src/assets/icons/ph/light/truck-light.svg';
+import PhFaceSmileLightIcon from 'src/assets/icons/ph/light/smiley-light.svg';
+import PhBellLightIcon from 'src/assets/icons/ph/light/bell-light.svg';
+import PhCalendarLightIcon from 'src/assets/icons/ph/light/calendar-light.svg';
+import PhInfoFillIcon from 'src/assets/icons/ph/fill/info-fill.svg';
+import PhFireLightIcon from 'src/assets/icons/ph/light/fire-light.svg';
+import PhHandLightIcon from 'src/assets/icons/ph/light/hand-light.svg';
+import PhLemonLightIcon from 'src/assets/icons/ph/light/orange-light.svg';
+import PhTagLightIcon from 'src/assets/icons/ph/light/tag-light.svg';
+import PhBookmarkLightIcon from 'src/assets/icons/ph/light/bookmark-simple-light.svg';
+import PhFacebookLightIcon from 'src/assets/icons/ph/light/facebook-logo-light.svg';
+import PhInstagramLightIcon from 'src/assets/icons/ph/light/instagram-logo-light.svg';
+import PhYoutubeLightIcon from 'src/assets/icons/ph/light/youtube-logo-light.svg';
+import PhGoogleLightIcon from 'src/assets/icons/ph/light/google-logo-light.svg';
+import PhWhatsappLightIcon from 'src/assets/icons/ph/light/whatsapp-logo-light.svg';
+import PhXLogoLightIcon from 'src/assets/icons/ph/light/x-logo-light.svg';
+import PhAirplaneLightIcon from 'src/assets/icons/ph/light/airplane-light.svg';
+import PhBikeLightIcon from 'src/assets/icons/ph/light/bicycle-light.svg';
+import PhUsersLightIcon from 'src/assets/icons/ph/light/users-three-light.svg';
+import PhMapLightIcon from 'src/assets/icons/ph/light/map-trifold-light.svg';
+import PhClockLightIcon from 'src/assets/icons/ph/light/clock-light.svg';
+import PhNavigationArrowFillIcon from 'src/assets/icons/ph/fill/navigation-arrow-fill.svg';
+import PhNavigationArrowLightIcon from 'src/assets/icons/ph/light/navigation-arrow-light.svg';
+import PhClockCountdownLight from 'src/assets/icons/ph/light/clock-countdown-light.svg';
+
+import CircleFlagsAFIcon from 'src/assets/icons/circle-flags/af.svg';
+import CircleFlagsALIcon from 'src/assets/icons/circle-flags/al.svg';
+import CircleFlagsDZIcon from 'src/assets/icons/circle-flags/dz.svg';
+import CircleFlagsADIcon from 'src/assets/icons/circle-flags/ad.svg';
+import CircleFlagsAOIcon from 'src/assets/icons/circle-flags/ao.svg';
+import CircleFlagsAGIcon from 'src/assets/icons/circle-flags/ag.svg';
+import CircleFlagsARIcon from 'src/assets/icons/circle-flags/ar.svg';
+import CircleFlagsAMIcon from 'src/assets/icons/circle-flags/am.svg';
+import CircleFlagsAUIcon from 'src/assets/icons/circle-flags/au.svg';
+import CircleFlagsATIcon from 'src/assets/icons/circle-flags/at.svg';
+import CircleFlagsAZIcon from 'src/assets/icons/circle-flags/az.svg';
+import CircleFlagsBSIcon from 'src/assets/icons/circle-flags/bs.svg';
+import CircleFlagsBHIcon from 'src/assets/icons/circle-flags/bh.svg';
+import CircleFlagsBDIcon from 'src/assets/icons/circle-flags/bd.svg';
+import CircleFlagsBBIcon from 'src/assets/icons/circle-flags/bb.svg';
+import CircleFlagsBYIcon from 'src/assets/icons/circle-flags/by.svg';
+import CircleFlagsBEIcon from 'src/assets/icons/circle-flags/be.svg';
+import CircleFlagsBZIcon from 'src/assets/icons/circle-flags/bz.svg';
+import CircleFlagsBJIcon from 'src/assets/icons/circle-flags/bj.svg';
+import CircleFlagsBTIcon from 'src/assets/icons/circle-flags/bt.svg';
+import CircleFlagsBOIcon from 'src/assets/icons/circle-flags/bo.svg';
+import CircleFlagsBAIcon from 'src/assets/icons/circle-flags/ba.svg';
+import CircleFlagsBWIcon from 'src/assets/icons/circle-flags/bw.svg';
+import CircleFlagsBRIcon from 'src/assets/icons/circle-flags/br.svg';
+import CircleFlagsCAIcon from 'src/assets/icons/circle-flags/ca.svg';
+import CircleFlagsCNIcon from 'src/assets/icons/circle-flags/cn.svg';
+import CircleFlagsFRIcon from 'src/assets/icons/circle-flags/fr.svg';
+import CircleFlagsDEIcon from 'src/assets/icons/circle-flags/de.svg';
+import CircleFlagsINIcon from 'src/assets/icons/circle-flags/in.svg';
+import CircleFlagsITIcon from 'src/assets/icons/circle-flags/it.svg';
+import CircleFlagsJPIcon from 'src/assets/icons/circle-flags/jp.svg';
+import CircleFlagsMXIcon from 'src/assets/icons/circle-flags/mx.svg';
+import CircleFlagsPTIcon from 'src/assets/icons/circle-flags/pt.svg';
+import CircleFlagsESIcon from 'src/assets/icons/circle-flags/es.svg';
+import CircleFlagsGBIcon from 'src/assets/icons/circle-flags/gb.svg';
+import CircleFlagsUSIcon from 'src/assets/icons/circle-flags/us.svg';
+import CircleFlagsBGIcon from 'src/assets/icons/circle-flags/bg.svg';
+import CircleFlagsKHIcon from 'src/assets/icons/circle-flags/kh.svg';
+import CircleFlagsCMIcon from 'src/assets/icons/circle-flags/cm.svg';
+import CircleFlagsCLIcon from 'src/assets/icons/circle-flags/cl.svg';
+import CircleFlagsCOIcon from 'src/assets/icons/circle-flags/co.svg';
+import CircleFlagsCRIcon from 'src/assets/icons/circle-flags/cr.svg';
+import CircleFlagsHRIcon from 'src/assets/icons/circle-flags/hr.svg';
+import CircleFlagsCUIcon from 'src/assets/icons/circle-flags/cu.svg';
+import CircleFlagsCYIcon from 'src/assets/icons/circle-flags/cy.svg';
+import CircleFlagsCZIcon from 'src/assets/icons/circle-flags/cz.svg';
+import CircleFlagsDKIcon from 'src/assets/icons/circle-flags/dk.svg';
+import CircleFlagsDMIcon from 'src/assets/icons/circle-flags/dm.svg';
+import CircleFlagsECIcon from 'src/assets/icons/circle-flags/ec.svg';
+import CircleFlagsEGIcon from 'src/assets/icons/circle-flags/eg.svg';
+import CircleFlagsEEIcon from 'src/assets/icons/circle-flags/ee.svg';
+import CircleFlagsFIIcon from 'src/assets/icons/circle-flags/fi.svg';
+import CircleFlagsGRIcon from 'src/assets/icons/circle-flags/gr.svg';
+import CircleFlagsHUIcon from 'src/assets/icons/circle-flags/hu.svg';
+import CircleFlagsISIcon from 'src/assets/icons/circle-flags/is.svg';
+import CircleFlagsIDIcon from 'src/assets/icons/circle-flags/id.svg';
+import CircleFlagsIEIcon from 'src/assets/icons/circle-flags/ie.svg';
+import CircleFlagsILIcon from 'src/assets/icons/circle-flags/il.svg';
+import CircleFlagsJMIcon from 'src/assets/icons/circle-flags/jm.svg';
+import CircleFlagsKEIcon from 'src/assets/icons/circle-flags/ke.svg';
+import CircleFlagsLVIcon from 'src/assets/icons/circle-flags/lv.svg';
+import CircleFlagsLTIcon from 'src/assets/icons/circle-flags/lt.svg';
+import CircleFlagsLUIcon from 'src/assets/icons/circle-flags/lu.svg';
+import CircleFlagsMYIcon from 'src/assets/icons/circle-flags/my.svg';
+import CircleFlagsMVIcon from 'src/assets/icons/circle-flags/mv.svg';
+import CircleFlagsMTIcon from 'src/assets/icons/circle-flags/mt.svg';
+import CircleFlagsMAIcon from 'src/assets/icons/circle-flags/ma.svg';
+import CircleFlagsNLIcon from 'src/assets/icons/circle-flags/nl.svg';
+import CircleFlagsNZIcon from 'src/assets/icons/circle-flags/nz.svg';
+import CircleFlagsNGIcon from 'src/assets/icons/circle-flags/ng.svg';
+import CircleFlagsNOIcon from 'src/assets/icons/circle-flags/no.svg';
+import CircleFlagsPKIcon from 'src/assets/icons/circle-flags/pk.svg';
+import CircleFlagsPHIcon from 'src/assets/icons/circle-flags/ph.svg';
+import CircleFlagsPLIcon from 'src/assets/icons/circle-flags/pl.svg';
+import CircleFlagsROIcon from 'src/assets/icons/circle-flags/ro.svg';
+import CircleFlagsRUIcon from 'src/assets/icons/circle-flags/ru.svg';
+import CircleFlagsSAIcon from 'src/assets/icons/circle-flags/sa.svg';
+import CircleFlagsRSIcon from 'src/assets/icons/circle-flags/rs.svg';
+import CircleFlagsSGIcon from 'src/assets/icons/circle-flags/sg.svg';
+import CircleFlagsSKIcon from 'src/assets/icons/circle-flags/sk.svg';
+import CircleFlagsSIIcon from 'src/assets/icons/circle-flags/si.svg';
+import CircleFlagsZAIcon from 'src/assets/icons/circle-flags/za.svg';
+import CircleFlagsKRIcon from 'src/assets/icons/circle-flags/kr.svg';
+import CircleFlagsSEIcon from 'src/assets/icons/circle-flags/se.svg';
+import CircleFlagsCHIcon from 'src/assets/icons/circle-flags/ch.svg';
+import CircleFlagsTHIcon from 'src/assets/icons/circle-flags/th.svg';
+import CircleFlagsTRIcon from 'src/assets/icons/circle-flags/tr.svg';
+import CircleFlagsUAIcon from 'src/assets/icons/circle-flags/ua.svg';
+import CircleFlagsVNIcon from 'src/assets/icons/circle-flags/vn.svg';
+
+type Props = {
+  icon: IconNames;
+  className?: string;
+  class?: string;
+  title?: string;
+  slot?: string;
+};
+
+const { icon, className, class: className2, title } = Astro.props;
+const style = cn('h-6 w-6 fill-current', className, className2);
+
+function getIconComponent(iconName: IconNames): any {
+  switch (iconName) {
+    // case 'Stripe':
+    //   return (
+    //     <FontAwesomeIcon icon={faStripe} className={style} />
+    //   );
+    // case 'Shopify':
+    //   return (
+    //     <FontAwesomeIcon icon={faShopify} className={style} />
+    //   );
+    // case 'Github':
+    //   return (
+    //     <FontAwesomeIcon icon={faGithub} className={style} />
+    //   );
+    // case 'Language':
+    //   return PhLanguageLightIcon;
+    // case 'WheatAwn':
+    //   return PhWheatLightIcon;
+    // case 'AppleWhole':
+    //   return PhAppleLightIcon;
+    // case 'BowlRice':
+    //   return PhBowlRiceLightIcon;
+    case 'logos:visa':
+      return VisaLogo;
+    case 'logos:mastercard':
+      return MastercardLogo;
+    case 'logos:amex':
+      return AmexLogo;
+    case 'logos:jcb':
+      return JCBLogo;
+    case 'ph:compass-fill':
+      return PhCompassFillIcon;
+    case 'ph:rss-light':
+      return PhRssLightIcon;
+    case 'ph:sun-light':
+      return PhSunLightIcon;
+    case 'ph:moon-light':
+      return PhMoonLightIcon;
+    case 'ph:star-fill':
+      return PhStarFillIcon;
+    case 'ph:star-light':
+      return PhStarLightIcon;
+    case 'ph:star-half-fill':
+      return PhStarHalfFillIcon;
+    case 'Envelope':
+    case 'ph:envelope-simple-light':
+      return PhEnvelopeSimpleLightIcon;
+    case 'ph:navigation-arrow-fill':
+      return PhNavigationArrowFillIcon;
+    case 'ph:navigation-arrow-light':
+      return PhNavigationArrowLightIcon;
+    case 'ph:clock-countdown-light':
+      return PhClockCountdownLight;
+    case 'User':
+    case 'ph:user-light':
+      return PhUserLightIcon;
+    case 'ph:user-circle-light':
+      return PhUserCircleLightIcon;
+    case 'Bread':
+      return PhBreadSliceLightIcon;
+    case 'Mug':
+      return PhMugLightIcon;
+    case 'Egg':
+      return PhEggLightIcon;
+    case 'Utensils':
+      return PhUtensilsLightIcon;
+    case 'Carrot':
+      return PhCarrotLightIcon;
+    case 'Burger':
+      return PhBurgerLightIcon;
+    case 'Fish':
+      return PhFishLightIcon;
+    case 'Seedling':
+      return PhSeedlingLightIcon;
+    case 'PlateWheat':
+      return PhPlateLightIcon;
+    case 'PizzaSlice':
+      return PhPizzaLightIcon;
+    case 'PepperHot':
+      return PhPepperLightIcon;
+    case 'ChampagneGlasses':
+      return PhChampagneLightIcon;
+    case 'Check':
+      return PhCheckLightIcon;
+    case 'CircleCheck':
+    case 'ph:check-circle-fill':
+      return PhCheckCircleFillIcon;
+    case 'ph:x-circle-fill':
+      return PhXCircleFillIcon;
+    case 'ArrowRight':
+      return PhArrowRightLightIcon;
+    case 'ArrowLeft':
+      return PhArrowLeftLightIcon;
+    case 'ArrowDown':
+      return PhArrowDownLightIcon;
+    case 'ArrowUp':
+      return PhArrowUpLightIcon;
+    case 'CaretLeft':
+      return PhCaretLeftLightIcon;
+    case 'CaretRight':
+      return PhCaretRightLightIcon;
+    case 'CaretDown':
+      return PhCaretDownLightIcon;
+    case 'CaretUp':
+      return PhCaretUpLightIcon;
+    case 'PaperPlane':
+      return PhPaperPlaneLightIcon;
+    case 'CartShopping':
+      return PhCartShoppingLightIcon;
+    case 'Shop':
+      return PhShopLightIcon;
+    case 'BagShopping':
+      return PhBagShoppingLightIcon;
+    case 'CreditCard':
+      return PhCreditCardLightIcon;
+    case 'Store':
+      return PhStoreLightIcon;
+    case 'ShopLock':
+      return PhShopLockLightIcon;
+    case 'Car':
+      return PhCarLightIcon;
+    case 'CircleHalfStroke':
+      return PhCircleHalfFillIcon;
+    case 'LocationDot':
+      return PhLocationDotLightIcon;
+    case 'LocationPin':
+      return PhLocationPinLightIcon;
+    case 'LocationCrosshairs':
+      return PhLocationCrosshairsLightIcon;
+    case 'Gift':
+      return PhGiftLightIcon;
+    case 'House':
+      return PhHouseLightIcon;
+    case 'MagnifyingGlass':
+      return PhMagnifyingGlassLightIcon;
+    case 'Image':
+      return PhImageLightIcon;
+    case 'Phone':
+    case 'ph:phone-light':
+      return PhPhoneLightIcon;
+    case 'ph:phone-fill':
+      return PhPhoneFillIcon;
+    case 'Bars':
+      return PhBarsLightIcon;
+    case 'Heart':
+      return PhHeartLightIcon;
+    case 'Xmark':
+      return PhXMarkLightIcon;
+    case 'Comment':
+      return PhCommentLightIcon;
+    case 'TruckFast':
+      return PhTruckFastLightIcon;
+    case 'FaceSmile':
+      return PhFaceSmileLightIcon;
+    case 'Bell':
+      return PhBellLightIcon;
+    case 'CalendarDays':
+      return PhCalendarLightIcon;
+    case 'ph:info':
+    case 'CircleInfo':
+      return PhInfoFillIcon;
+    case 'Fire':
+      return PhFireLightIcon;
+    case 'Hand':
+      return PhHandLightIcon;
+    case 'Lemon':
+      return PhLemonLightIcon;
+    case 'ph:tag-light':
+      return PhTagLightIcon;
+    case 'Bookmark':
+    case 'ph:bookmark-simple-light':
+      return PhBookmarkLightIcon;
+    case 'Facebook':
+    case 'ph:facebook-logo-light':
+      return PhFacebookLightIcon;
+    case 'Instagram':
+    case 'ph:instagram-logo-light':
+      return PhInstagramLightIcon;
+    case 'Youtube':
+    case 'ph:youtube-logo-light':
+      return PhYoutubeLightIcon;
+    case 'Google':
+      return PhGoogleLightIcon;
+    case 'ph:whatsapp-logo-light':
+      return PhWhatsappLightIcon;
+    case 'ph:x-logo-light':
+      return PhXLogoLightIcon;
+    case 'Tripadvisor':
+    case 'fa:tripadvisor':
+      return FaTripadvisor;
+    case 'ph:airplane-light':
+      return PhAirplaneLightIcon;
+    case 'ph:person-simple-bike-light':
+      return PhBikeLightIcon;
+    case 'ph:users-three-light':
+      return PhUsersLightIcon;
+    case 'ph:map-trifold-light':
+      return PhMapLightIcon;
+    case 'ph:clock':
+      return PhClockLightIcon;
+    case 'ph:person-simple-walk-light':
+      return PhPersonSimpleWalkLight;
+    case 'ph:quotes-fill':
+      return PhQuotesFill;
+
+    case 'circle-flags:af':
+      return CircleFlagsAFIcon;
+    case 'circle-flags:al':
+      return CircleFlagsALIcon;
+    case 'circle-flags:dz':
+      return CircleFlagsDZIcon;
+    case 'circle-flags:ad':
+      return CircleFlagsADIcon;
+    case 'circle-flags:ao':
+      return CircleFlagsAOIcon;
+    case 'circle-flags:ag':
+      return CircleFlagsAGIcon;
+    case 'circle-flags:ar':
+      return CircleFlagsARIcon;
+    case 'circle-flags:am':
+      return CircleFlagsAMIcon;
+    case 'circle-flags:au':
+      return CircleFlagsAUIcon;
+    case 'circle-flags:at':
+      return CircleFlagsATIcon;
+    case 'circle-flags:az':
+      return CircleFlagsAZIcon;
+    case 'circle-flags:bs':
+      return CircleFlagsBSIcon;
+    case 'circle-flags:bh':
+      return CircleFlagsBHIcon;
+    case 'circle-flags:bd':
+      return CircleFlagsBDIcon;
+    case 'circle-flags:bb':
+      return CircleFlagsBBIcon;
+    case 'circle-flags:by':
+      return CircleFlagsBYIcon;
+    case 'circle-flags:be':
+      return CircleFlagsBEIcon;
+    case 'circle-flags:bz':
+      return CircleFlagsBZIcon;
+    case 'circle-flags:bj':
+      return CircleFlagsBJIcon;
+    case 'circle-flags:bt':
+      return CircleFlagsBTIcon;
+    case 'circle-flags:bo':
+      return CircleFlagsBOIcon;
+    case 'circle-flags:ba':
+      return CircleFlagsBAIcon;
+    case 'circle-flags:bw':
+      return CircleFlagsBWIcon;
+    case 'circle-flags:br':
+      return CircleFlagsBRIcon;
+    case 'circle-flags:ca':
+      return CircleFlagsCAIcon;
+    case 'circle-flags:cn':
+      return CircleFlagsCNIcon;
+    case 'circle-flags:fr':
+      return CircleFlagsFRIcon;
+    case 'circle-flags:de':
+      return CircleFlagsDEIcon;
+    case 'circle-flags:in':
+      return CircleFlagsINIcon;
+    case 'circle-flags:it':
+      return CircleFlagsITIcon;
+    case 'circle-flags:jp':
+      return CircleFlagsJPIcon;
+    case 'circle-flags:mx':
+      return CircleFlagsMXIcon;
+    case 'circle-flags:pt':
+      return CircleFlagsPTIcon;
+    case 'circle-flags:es':
+      return CircleFlagsESIcon;
+    case 'circle-flags:gb':
+      return CircleFlagsGBIcon;
+    case 'circle-flags:us':
+      return CircleFlagsUSIcon;
+    case 'circle-flags:bg':
+      return CircleFlagsBGIcon;
+    case 'circle-flags:kh':
+      return CircleFlagsKHIcon;
+    case 'circle-flags:cm':
+      return CircleFlagsCMIcon;
+    case 'circle-flags:cl':
+      return CircleFlagsCLIcon;
+    case 'circle-flags:co':
+      return CircleFlagsCOIcon;
+    case 'circle-flags:cr':
+      return CircleFlagsCRIcon;
+    case 'circle-flags:hr':
+      return CircleFlagsHRIcon;
+    case 'circle-flags:cu':
+      return CircleFlagsCUIcon;
+    case 'circle-flags:cy':
+      return CircleFlagsCYIcon;
+    case 'circle-flags:cz':
+      return CircleFlagsCZIcon;
+    case 'circle-flags:dk':
+      return CircleFlagsDKIcon;
+    case 'circle-flags:dm':
+      return CircleFlagsDMIcon;
+    case 'circle-flags:ec':
+      return CircleFlagsECIcon;
+    case 'circle-flags:eg':
+      return CircleFlagsEGIcon;
+    case 'circle-flags:ee':
+      return CircleFlagsEEIcon;
+    case 'circle-flags:fi':
+      return CircleFlagsFIIcon;
+    case 'circle-flags:gr':
+      return CircleFlagsGRIcon;
+    case 'circle-flags:hu':
+      return CircleFlagsHUIcon;
+    case 'circle-flags:is':
+      return CircleFlagsISIcon;
+    case 'circle-flags:id':
+      return CircleFlagsIDIcon;
+    case 'circle-flags:ie':
+      return CircleFlagsIEIcon;
+    case 'circle-flags:il':
+      return CircleFlagsILIcon;
+    case 'circle-flags:jm':
+      return CircleFlagsJMIcon;
+    case 'circle-flags:ke':
+      return CircleFlagsKEIcon;
+    case 'circle-flags:lv':
+      return CircleFlagsLVIcon;
+    case 'circle-flags:lt':
+      return CircleFlagsLTIcon;
+    case 'circle-flags:lu':
+      return CircleFlagsLUIcon;
+    case 'circle-flags:my':
+      return CircleFlagsMYIcon;
+    case 'circle-flags:mv':
+      return CircleFlagsMVIcon;
+    case 'circle-flags:mt':
+      return CircleFlagsMTIcon;
+    case 'circle-flags:ma':
+      return CircleFlagsMAIcon;
+    case 'circle-flags:nl':
+      return CircleFlagsNLIcon;
+    case 'circle-flags:nz':
+      return CircleFlagsNZIcon;
+    case 'circle-flags:ng':
+      return CircleFlagsNGIcon;
+    case 'circle-flags:no':
+      return CircleFlagsNOIcon;
+    case 'circle-flags:pk':
+      return CircleFlagsPKIcon;
+    case 'circle-flags:ph':
+      return CircleFlagsPHIcon;
+    case 'circle-flags:pl':
+      return CircleFlagsPLIcon;
+    case 'circle-flags:ro':
+      return CircleFlagsROIcon;
+    case 'circle-flags:ru':
+      return CircleFlagsRUIcon;
+    case 'circle-flags:sa':
+      return CircleFlagsSAIcon;
+    case 'circle-flags:rs':
+      return CircleFlagsRSIcon;
+    case 'circle-flags:sg':
+      return CircleFlagsSGIcon;
+    case 'circle-flags:sk':
+      return CircleFlagsSKIcon;
+    case 'circle-flags:si':
+      return CircleFlagsSIIcon;
+    case 'circle-flags:za':
+      return CircleFlagsZAIcon;
+    case 'circle-flags:kr':
+      return CircleFlagsKRIcon;
+    case 'circle-flags:se':
+      return CircleFlagsSEIcon;
+    case 'circle-flags:ch':
+      return CircleFlagsCHIcon;
+    case 'circle-flags:th':
+      return CircleFlagsTHIcon;
+    case 'circle-flags:tr':
+      return CircleFlagsTRIcon;
+    case 'circle-flags:ua':
+      return CircleFlagsUAIcon;
+    case 'circle-flags:vn':
+      return CircleFlagsVNIcon;
+    default:
+      return iconName;
+  }
+}
+
+const IconComponent = getIconComponent(icon);
+---
+
+{
+  IconComponent ? (
+    <IconComponent class={style} title={title} />
+  ) : (
+    <div>{icon}</div>
+  )
+}

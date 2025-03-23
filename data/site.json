@@ -1,7 +1,86 @@
 {
-  "site_title": "Astro Starter",
-  "description": "A starter template for Astro, built by Bookshop components - for CloudCannon CMS.",
-  "twitter_site": "",
-  "image": "/images/astro-logo-light-gradient.png",
-  "image_alt": "Astro logo"
+  "ui": {
+    "theme": "system",
+    "theme_color": "#296a3f"
+  },
+  "en": {
+    "site_title": "Top Walking Tours Portugal",
+    "description": "Top Walking Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/images/astro-logo-light-gradient.png",
+      "alt": "Top Walking Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Walking Tours Portugal",
+      "url": "https://topwalkingtoursportugal.com/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Walking Tours Portugal",
+        "template": "%s — Top Walking Tours Portugal"
+      },
+      "description": "Top Walking Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Walking Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
+  },
+  "pt": {
+    "site_title": "Top Walking Tours Portugal",
+    "description": "Top Walking Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/images/astro-logo-light-gradient.png",
+      "alt": "Top Walking Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Walking Tours Portugal",
+      "url": "https://topwalkingtoursportugal.com/pt/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Walking Tours Portugal",
+        "template": "%s — Top Walking Tours Portugal"
+      },
+      "description": "Top Walking Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Walking Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
+  }
 }

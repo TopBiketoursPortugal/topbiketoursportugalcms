@@ -1,6 +1,5 @@
 ---
-import { z } from 'astro:content';
-import type { languageSchema } from '~/schemas/language';
+import Prose from '../typography/prose.astro';
 
 type Props = {
   type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';
@@ -9,21 +8,23 @@ type Props = {
   frame: 'none' | 'light' | 'heavy';
   layout: 'horizontal' | 'vertical';
   title: string;
-  language?: z.infer<typeof languageSchema>;
 };
 
 const collectionComponentImports = import.meta.glob(
-  '/src/components/collection/**/*.collection.astro',
+  '/src/components/collection/**/*-collection.astro',
   {
     eager: true
   }
 );
 
 const { type = 'tours', ...data } = Astro.props;
-const componentName = `/src/components/collection/components/${type}.collection.astro`;
-// console.log(componentName);
+
+const componentName = `/src/components/collection/${type}-collection.astro`;
 const CollectionComponent = (collectionComponentImports[componentName] as any)
   ?.default;
 ---
 
-<CollectionComponent {...data} />
+<div class="flex flex-col gap-3 p-3 sm:gap-10 sm:p-16">
+  {data.title ? <Prose markdown={data.title} class="px-6" /> : null}
+  <CollectionComponent {...data} />
+</div>

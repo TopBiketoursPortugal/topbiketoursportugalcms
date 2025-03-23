@@ -1,0 +1,31 @@
+---
+import type { JSX } from 'astro/jsx-runtime';
+import FormField from './FormField.astro';
+import { cn } from 'utils/cn';
+// import { GOOGLE_PUBLIC_CAPTCHA } from 'astro:env/client';
+
+// const googleScript = `https://www.google.com/recaptcha/enterprise.js?render=${GOOGLE_PUBLIC_CAPTCHA}`;
+type Props = JSX.FormHTMLAttributes & { honeyPot?: boolean };
+
+const { class: className, honeyPot = true, ...props } = Astro.props;
+---
+
+<form
+  {...props}
+  class={cn('flex w-full flex-col gap-3 validate-form', className)}
+  autocomplete="off"
+>
+  {
+    honeyPot ? (
+      <FormField
+        name="honeypot"
+        as="hidden"
+        type="hidden"
+        label="honeypot"
+        required
+        value=""
+      />
+    ) : null
+  }
+  <slot />
+</form>

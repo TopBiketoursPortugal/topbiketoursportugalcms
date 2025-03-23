@@ -1,0 +1,188 @@
+---
+import ToggleMenu from './ToggleMenu.astro';
+import ToggleTheme from './ToggleTheme.astro';
+import Logo from './Logo.astro';
+import LanguageMenu from './LanguageMenu.astro';
+import { getHomePermalink, trimSlash } from 'utils/permalinks';
+import type { HTMLAttributes } from 'astro/types';
+import type { LanguageCodes } from 'src/schemas/language';
+import Icon from 'src/components/utility/icon.astro';
+import type { HrefLang } from 'src/types/hreflang';
+
+interface Link {
+  text?: string;
+  href?: string;
+  ariaLabel?: string;
+  icon?: string;
+  enabled?: boolean;
+}
+
+interface MenuLink extends Link {
+  links?: Array<MenuLink>;
+}
+
+export interface CallToAction extends Omit<HTMLAttributes<'a'>, 'slot'> {
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'link';
+  text?: string;
+  icon?: string;
+  classes?: Record<string, string>;
+  target: astroHTML.JSX.HTMLAttributeAnchorTarget;
+}
+
+export interface Props {
+  id?: string;
+  links?: Array<MenuLink>;
+  actions?: Array<CallToAction>;
+  isSticky?: boolean;
+  isFullWidth?: boolean;
+  showRssFeed?: boolean;
+  position?: string;
+  hrefLangs?: ReadonlyArray<HrefLang>;
+}
+
+const {
+  id = 'header',
+  links = [],
+  actions = [],
+  isSticky = false,
+  showRssFeed = false,
+  position = 'center',
+  hrefLangs
+} = Astro.props;
+
+const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+---
+
+<header
+  class:list={[
+    { sticky: isSticky, relative: !isSticky },
+    'top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-[opacity] ease-in-out dark:bg-slate-950'
+  ]}
+  {...isSticky ? { 'data-aw-sticky-header': true } : {}}
+  {...id ? { id } : {}}
+>
+  <div class="absolute inset-0"></div>
+  <div
+    class="text-default relative z-50 flex w-full justify-between px-3 py-3 md:px-6"
+  >
+    <div
+      class:list={[
+        { 'mr-auto rtl:ml-auto rtl:mr-0': position === 'right' },
+        'flex w-full justify-between md:w-auto'
+      ]}
+    >
+      <a
+        class="flex items-center"
+        href={getHomePermalink(Astro.currentLocale as LanguageCodes)}
+        title="Home"
+      >
+        <Logo />
+      </a>
+      <div class="flex items-center md:hidden">
+        <ToggleMenu />
+      </div>
+    </div>
+    <nav
+      class="hidden w-full items-center overflow-y-auto overflow-x-hidden text-slate-900 dark:text-slate-300 md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
+      aria-label="Main navigation"
+    >
+      <ul
+        class="flex w-full flex-col text-xl font-medium tracking-[0.01rem] md:w-auto md:flex-row md:justify-center md:self-center md:text-[0.9375rem]"
+      >
+        {
+          links
+            .filter(({ enabled }) => enabled ?? true)
+            .map(({ text, href, links }) => (
+              <li class={links?.length ? 'dropdown' : ''}>
+                {links?.length ? (
+                  <>
+                    <button
+                      type="button"
+                      class="hover:text-link flex items-center gap-1 whitespace-nowrap px-4 py-3"
+                    >
+                      {text}{' '}
+                      <Icon
+                        icon="ph:caret-down-light"
+                        className="hidden h-4 w-4 md:inline"
+                      />
+                    </button>
+                    <ul class="dropdown-menu rounded pl-4 font-medium text-black drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
+                      {links.map(({ text: text2, href: href2 }) => (
+                        <li>
+                          <a
+                            class:list={[
+                              'hover:text-link whitespace-no-wrap block px-5 py-2 first:rounded-t last:rounded-b',
+                              { 'aw-link-active': href2 === currentPath }
+                            ]}
+                            href={href2}
+                          >
+                            {text2}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <a
+                    class:list={[
+                      'hover:text-link flex items-center whitespace-nowrap px-4 py-3 text-2xl',
+                      { 'aw-link-active': href === currentPath }
+                    ]}
+                    href={href}
+                  >
+                    {text}
+                  </a>
+                )}
+              </li>
+            ))
+        }
+      </ul>
+    </nav>
+    <div
+      class:list={[
+        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
+        'fixed bottom-0 left-0 hidden w-full items-center justify-end p-3 rtl:left-auto rtl:right-0 md:static md:mb-0 md:flex md:w-auto md:self-center md:justify-self-end md:p-0'
+      ]}
+    >
+      <div class="flex w-full items-center justify-between gap-4 md:w-auto">
+        <LanguageMenu
+          localizedUrls={hrefLangs?.map((l) => ({
+            code: l.hreflang,
+            path: l.href
+          }))}
+        />
+        <div class="flex items-center">
+          <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
+          {
+            showRssFeed && (
+              <a
+                class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+                aria-label="RSS Feed"
+                href="/feed.xml"
+              >
+                <Icon
+                  icon="ph:rss-light"
+                  className="h-5 w-5 hover:scale-125 transition-transform duration-150"
+                />
+              </a>
+            )
+          }
+        </div>
+        {
+          actions?.length ? (
+            <span class="ml-4 rtl:ml-0 rtl:mr-4">
+              {/* {actions.map((btnProps) => (
+                <button
+                  {...btnProps}
+                  class="px-5.5 ml-2 w-auto py-2.5 text-sm font-semibold shadow-none md:px-6"
+                />
+              ))} */}
+            </span>
+          ) : (
+            ''
+          )
+        }
+      </div>
+    </div>
+  </div>
+</header>

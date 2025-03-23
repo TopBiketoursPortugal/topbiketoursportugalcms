@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = { items: CollectionEntry<'tours'>[] };
+
+const { items } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org/',
+  '@graph': items.flatMap((product) =>
+    (product.data.reviews ?? []).map((review) => ({
+      '@type': 'Review',
+      'itemReviewed': {
+        '@type': 'Product',
+        'name': product.data.title,
+        'sku': product.data.code,
+        'description': product.data.description,
+        'image': product.data.image?.src,
+        'brand': {
+          '@type': 'Brand',
+          'name': 'Top Bike Tours Portugal'
+        }
+      },
+      'reviewRating': {
+        '@type': 'Rating',
+        'ratingValue': review.rating,
+        'bestRating': 5,
+        'worstRating': 1
+      },
+      'author': {
+        '@type': 'Person',
+        'givenName': review.author?.givenName,
+        'familyName': review.author?.familyName,
+        'address': {
+          '@type': 'PostalAddress',
+          'addressCountry': review.author?.country
+        }
+      },
+      'datePublished': review.publishDate,
+      'reviewBody': review.content
+    }))
+  )
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

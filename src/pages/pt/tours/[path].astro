@@ -1,0 +1,63 @@
+---
+import slugify from 'slugify';
+import { getCollection, render } from 'astro:content';
+import TourPage from 'src/components/tours/tour-page.astro';
+import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
+import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
+import { getTourLanguagesAlternates, trailingSlash } from 'utils/permalinks';
+import LanguageData from 'src/../data/languages.json';
+
+export async function getStaticPaths() {
+  const tours = (await getCollection('tours')).filter(
+    (t) => t.data.language === 'pt'
+  );
+
+  return tours.map((tour) => ({
+    params: {
+      // language: 'pt',
+      path:
+        slugify(tour.data.path ?? tour.data?.path ?? tour.data.title, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
+    },
+    props: {
+      tour
+    }
+  }));
+}
+
+const { tour } = Astro.props;
+
+const { Content } = await render(tour);
+
+const seo = {
+  no_index: false,
+  page_title: tour.data.title,
+  page_description: tour.data.description ?? tour.data.title,
+  open_graph_type: 'product',
+  author_twitter_handle: null,
+  featured_image: tour.data.image?.src ?? defaultImage.src,
+  featured_image_alt: tour.data.image?.src ?? tour.data.title,
+  canonical_url: null
+} satisfies SEOProps;
+const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
+---
+
+<Layout title={tour.data.title} seo={seo} hrefLangs={hrefs}>
+  <slot slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <TourPage tour={tour.data}>
+    <Content />
+  </TourPage>
+</Layout>

@@ -1,53 +1,224 @@
 {
-  "header": {
-    "logo": "/images/logos/logo-wordmark-blue.png",
-    "logo_url": "/",
-    "background_color": "#ffffff",
-    "color": "#393939",
-    "links": [
-      {
-        "link": "/blog/",
-        "text": "Blog"
-      },
-      {
-        "link": "/feed.xml",
-        "text": "RSS Feed"
-      }
-    ]
+  "en": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/"
+        },
+        {
+          "text": "Hiking tours",
+          "page": "",
+          "href": "/hiking-tours-portugal/"
+        },
+        {
+          "text": "Biking tours",
+          "page": "",
+          "href": "/bike-tours-in-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Day tours",
+          "page": "",
+          "href": "/bike-tours-porto-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Calendar",
+          "page": "",
+          "href": "/guided-bike-tours-calendar-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Bikes",
+          "page": "",
+          "href": "/rent-bike-porto-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/blog/"
+        },
+        {
+          "text": "Contacts",
+          "page": "",
+          "href": "/contacts/"
+        },
+        {
+          "text": "About us",
+          "page": "",
+          "href": "/about-us/"
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Main pages",
+          "links": [
+            {
+              "text": "Home",
+              "link": "/"
+            },
+            {
+              "text": "Hiking tours",
+              "link": "/hiking-tours-portugal/"
+            },
+            {
+              "text": "Blog",
+              "link": "/blog/"
+            },
+            {
+              "text": "Testimonials",
+              "link": "/testimonials/"
+            }
+          ]
+        },
+        {
+          "text": "Support",
+          "links": [
+            {
+              "text": "About us",
+              "link": "/about-us/"
+            },
+            {
+              "text": "Contacts",
+              "link": "/contacts/"
+            },
+            {
+              "text": "Faqs",
+              "link": "/faqs/"
+            },
+            {
+              "text": "Terms & Conditions",
+              "link": "/terms-and-Conditions/"
+            },
+            {
+              "text": "Privacy Policy",
+              "link": "/privacy-policy/"
+            }
+          ]
+        }
+      ]
+    }
   },
-  "footer": {
-    "logo": "/images/logos/logo-wordmark-white.png",
-    "logo_url": "/",
-    "copyright": "MyCompany. All rights reserved.",
-    "background_color": "#333232",
-    "color": "#ffffff",
-    "links": [
-      {
-        "link": "/blog/",
-        "text": "Blog"
-      },
-      {
-        "link": "/feed.xml",
-        "text": "RSS Feed"
-      }
-    ],
-    "social": [
-      {
-        "link": "https://www.facebook.com/mycompany",
-        "social_icon": "Facebook"
-      },
-      {
-        "link": "https://www.instagram.com/mycompany",
-        "social_icon": "Instagram"
-      },
-      {
-        "link": "https://www.github.com/mycompany",
-        "social_icon": "Github"
-      },
-      {
-        "link": "https://www.youtube.com/mycompany",
-        "social_icon": "Youtube"
-      }
-    ]
+  "pt": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/pt/"
+        },
+        {
+          "text": "Caminhadas",
+          "page": "",
+          "href": "/pt/passeios-pedestres-portugal/"
+        },
+        {
+          "text": "Biking tours",
+          "page": "",
+          "href": "/pt/bike-tours-in-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Day tours",
+          "page": "",
+          "href": "/pt/bike-tours-porto-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Calendar",
+          "page": "",
+          "href": "/pt/guided-bike-tours-calendar-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Bikes",
+          "page": "",
+          "href": "/pt/rent-bike-porto-portugal/",
+          "enabled": false
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/pt/blog/"
+        },
+        {
+          "text": "Contatos",
+          "page": "",
+          "href": "/pt/contatos/"
+        },
+        {
+          "text": "Sobre nós",
+          "page": "",
+          "href": "/pt/sobre-nos/"
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/pt/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Páginas principais",
+          "links": [
+            {
+              "text": "Início",
+              "link": "/pt/"
+            },
+            {
+              "text": "Caminhadas",
+              "link": "/pt/passeios-pedestres-portugal/"
+            },
+            {
+              "text": "Blog",
+              "link": "/pt/blog/"
+            },
+            {
+              "text": "Testemunhos",
+              "link": "/pt/testemunhos/"
+            }
+          ]
+        },
+        {
+          "text": "Suporte",
+          "links": [
+            {
+              "text": "Sobre nós",
+              "link": "/pt/sobre-nos/"
+            },
+            {
+              "text": "Contatos",
+              "link": "/pt/contatos/"
+            },
+            {
+              "text": "Perguntas frequentes",
+              "link": "/pt/perguntas-frequentes/"
+            },
+            {
+              "text": "Termos e Condições",
+              "link": "/pt/termos-condicoes/"
+            },
+            {
+              "text": "Política de Privacidade",
+              "link": "/pt/politica-de-privacidade/"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

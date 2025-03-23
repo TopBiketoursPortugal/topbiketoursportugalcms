@@ -1,19 +1,54 @@
 ---
-import PageHelper from "../shared/astro/page.astro";
-import Layout, { type SEOProps } from "./Layout.astro";
+import Heading from 'src/components/typography/heading.astro';
+import PageHelper from '../shared/astro/page.astro';
+import Layout, { type LayoutProps } from './Layout.astro';
+import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
+import LanguageData from 'src/../data/languages.json';
 
 type Props = {
   frontmatter: {
-    title: string;
     content_blocks?: any[];
     page_size?: number;
-    seo?: SEOProps;
-  };
+  } & Except<LayoutProps, 'class'>;
+  class?: string;
+  showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
 };
 
-const props = Astro.props.frontmatter;
+const {
+  frontmatter,
+  class: className,
+  showPageTitle = false,
+  hrefs = []
+} = Astro.props;
+
+if (!frontmatter) {
+  throw new Error('No frontmatter');
+}
+
+const { content_blocks = [] } = frontmatter;
 ---
 
-<Layout {...props}>
-  <PageHelper bookshop:live contentBlocks={props.content_blocks ?? []} />
+<Layout {...frontmatter} class={className} hrefLangs={hrefs}>
+  <slot name="head" slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  {
+    showPageTitle ? (
+      <Heading as="h1" class="px-6 text-4xl font-bold capitalize">
+        {frontmatter?.title}
+      </Heading>
+    ) : null
+  }
+  <slot />
+  <PageHelper bookshop:live contentBlocks={content_blocks} />
 </Layout>

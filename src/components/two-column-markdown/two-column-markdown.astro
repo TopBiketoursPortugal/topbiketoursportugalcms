@@ -1,0 +1,42 @@
+---
+import Prose from '../typography/prose.astro';
+import { type VariantProps, tv } from 'tailwind-variants';
+
+// type Column = {
+//   content?: string;
+//   animation: 'slide-in';
+//   type: 'markdown';
+//   label?: string;
+// };
+
+interface Props extends VariantProps<typeof twoColumnVariants> {
+  column1: string; // Markdown content for column 1
+  column2: string; // Markdown content for column 2
+}
+
+const twoColumnVariants = tv({
+  base: 'text-balance grid grid-cols-1 gap-8 md:grid-cols-2',
+  variants: {
+    padding: {
+      contained: 'px-6 py-12 md:px-12 md:py-20',
+      tight: 'px-4 py-8 md:px-8 md:py-16',
+      normal: 'px-6 py-10 md:px-10 md:py-16'
+    },
+    fullwidth: {
+      true: 'max-w-none',
+      false: 'mx-auto max-w-screen-xl'
+    }
+  },
+  defaultVariants: {
+    padding: 'normal',
+    fullwidth: false
+  }
+});
+
+const { column1, column2, padding, fullwidth = false } = Astro.props;
+---
+
+<div class={twoColumnVariants({ padding, fullwidth })}>
+  <Prose markdown={column1 ?? ''} />
+  <Prose markdown={column2 ?? ''} />
+</div>

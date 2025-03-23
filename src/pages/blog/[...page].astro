@@ -1,45 +1,58 @@
 ---
-import type { Page } from "astro";
-import BlogList from "../../components/blog/list.astro";
-import BlogPagination from "../../components/blog/pagination";
-import { type Props as LayoutProps } from "../../layouts/Layout.astro";
-import Layout from "../../layouts/Paginated.astro";
-import {
-  getCollection,
-  getEntryBySlug,
-  type CollectionEntry,
-} from "astro:content";
+import type { Page } from 'astro';
+import BlogList from '../../components/blog/list.astro';
+import BlogPagination from '../../components/blog/pagination.astro';
+import PaginatedLayout, {
+  type PaginatedProps
+} from '../../layouts/Paginated.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = {
-  page: Page<CollectionEntry<"blog">>;
+  page: Page<CollectionEntry<'blog'>>;
 };
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
-  const posts = await getCollection("blog");
-  const page = await getEntryBySlug("pages", "blog");
+  const language = 'en';
+  const posts = await getCollection('blog');
+
+  const page = await getBlogIndexPage(language);
+
   // Filter out what is already displayed in featured stories
-  const filteredPosts = posts.filter(
-    (post) =>
-      post.data.title !== page.data.featured_posts?.main_feature &&
-      !page.data.featured_posts?.feature_list.includes(post.data.title)
-  );
+  const filteredPosts = posts
+    .filter((p) => p.data.language === language)
+    .sort((a, b) => {
+      const dateA = new Date(a.data.date).getTime();
+      const dateB = new Date(b.data.date).getTime();
+      return dateB - dateA; // For descending order (newest first)
+    });
   return paginate(filteredPosts, {
-    pageSize: "page_size" in page.data ? page.data.page_size : 6,
+    pageSize: page?.data && 'page_size' in page.data ? page.data.page_size : 6
   });
 }
 
-const page = await getEntryBySlug("pages", "blog");
-const frontmatter = page.data as LayoutProps;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const page = await getBlogIndexPage(language);
+const frontmatter = page?.data as PaginatedProps['frontmatter'];
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
+const { page: pageNumberStr } = Astro.params;
+const pageNumber = parseInt(pageNumberStr ?? 1, 10);
+const hrefs = (
+  page ? await getPageLanguagesAlternates(page, Astro.site) : []
+).map((p) => ({
+  ...p,
+  href: p.href + (pageNumber === 1 ? '' : pageNumber + '/')
+}));
 ---
 
-<Layout frontmatter={frontmatter}>
+<PaginatedLayout frontmatter={frontmatter} hrefs={hrefs}>
   <section class="blog-index mx-auto flex flex-col justify-center">
     <BlogList posts={posts} />
     <BlogPagination pagination={pagination} />
   </section>
-</Layout>
+</PaginatedLayout>
 
 <style>
   .blog-index {

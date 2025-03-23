@@ -7,7 +7,7 @@ import { seoSchema } from './seo';
 // Schema for individual image objects
 const imageSchema = z.object({
   src: z.string(),
-  alt: z.string().optional()
+  alt: z.string()
 });
 
 export const baseSchema = {
@@ -24,7 +24,7 @@ const locationSchema = z.object({
   lat: z.string().optional(),
   lng: z.string().optional(),
   country: z.enum(['pt', 'es']).optional().default('pt'),
-  region: z.string().optional(),
+  region: z.string().optional().default(''),
   city: z.string().optional()
 });
 
@@ -32,7 +32,8 @@ const locationSchema = z.object({
 const priceSchema = z.object({
   currency: z.enum(['EUR', 'USD']).default('EUR'),
   price: z.number().optional().nullable(),
-  promo: z.number().optional().nullable()
+  promo: z.number().optional().nullable(),
+  bestValue: z.boolean().optional().nullable().default(false)
 });
 
 // Schema for the itinerary items
@@ -70,7 +71,7 @@ const groupSizeSchema = z.object({
 const reviewSchema = z.object({
   author: z
     .object({
-      familyName: z.string().optional(),
+      familyName: z.string().optional().nullable(),
       givenName: z.string(),
       country: z.string()
     })
@@ -100,18 +101,23 @@ const faqsSchema = z.object({
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
-  slug: z.string().optional(),
-  language: languageSchema, // Assuming `languageField` is a string, adjust as necessary
-  ...baseSchema,
-  description: z.string().optional(),
-  region: z.string().optional(),
   path: z.string().optional().nullable(),
+  language: languageSchema, // Assuming `languageField` is a string, adjust as necessary
+  id: z.string().uuid(),
+  title: z.string(),
+  subTitle: z.string().optional(),
+  content: z.string().nullable().optional(),
+  image: imageSchema.nullable().optional(),
+  order: z.number().optional(),
+  description: z.string().optional(),
+  afterPricing: z.string().optional().nullable(),
+  region: z.string().optional().default(''),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),
   packages: z.array(tourPackageSchema).optional(),
   seo: seoSchema.optional(),
-  tags: z.string().optional(),
+  tags: z.array(z.string()).optional().nullable(),
   duration: z.number().optional().nullable(),
   distance: z.number().optional(),
   difficulty: z.number().min(1).max(5).optional(),
@@ -122,10 +128,12 @@ const tourSchema = z.object({
   minAge: z.number().optional(),
   highlight: z.enum(['HotTrip', 'BestSeller', 'New']).optional(),
   content_blocks: z.array(z.any()).optional().nullable(),
-  type: z.enum(['CityTour', 'DayTour', 'PackageTour']).default('PackageTour'),
+  tourtype: z
+    .enum(['CityTour', 'DayTour', 'PackageTour', 'WalkingTour'])
+    .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
-  relatedTours: z.array(z.string()).optional().default([])
+  relatedTours: z.array(z.string().uuid()).optional().default([])
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;

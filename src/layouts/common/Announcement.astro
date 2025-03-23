@@ -1,0 +1,37 @@
+---
+import SocialMenu from './SocialMenu.astro';
+import Contact from 'src/../data/contact.json';
+import Icon from 'src/components/utility/icon.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+import { cleanPhoneNumberFormatting } from 'utils/clean-phone-number-formatting';
+
+type Props = {
+  language: LanguageCodes;
+};
+
+const { language = 'en' } = Astro.props;
+const { cellPhone, email } = Contact[language];
+---
+
+<div
+  class="relative hidden justify-between gap-1 overflow-hidden text-ellipsis whitespace-nowrap bg-black px-3 py-2 text-sm text-gray-300 dark:border-b dark:border-slate-800 dark:bg-slate-950 dark:bg-transparent md:flex"
+>
+  <div class="flex gap-4 text-white dark:text-slate-400">
+    <a
+      href={'tel:' + cleanPhoneNumberFormatting(cellPhone)}
+      class="flex flex-row items-center justify-start gap-2"
+    >
+      <Icon icon="ph:phone-light" />
+      <span class="whitespace-nowrap">{cellPhone}</span>
+    </a>
+    <a
+      href={'mailto:' + email}
+      class="flex flex-row items-center justify-start gap-2"
+    >
+      <Icon icon="ph:envelope-simple-light" /><span class="whitespace-nowrap">
+        {email}
+      </span>
+    </a>
+  </div>
+  <SocialMenu class:list="flex" />
+</div>

@@ -1,0 +1,70 @@
+---
+import PricingTable from '../pricing-table/pricing-table.astro';
+import PricingFeatureRow from '../pricing-table/pricing-feature-row.astro';
+import type { TourPackageSchema } from 'src/schemas/tours';
+import languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import PricingColumn from '../pricing-table/pricing-column.astro';
+
+type Props = { packages?: TourPackageSchema[]; language?: LanguageCodes };
+
+const { packages = [], language = 'en' } = Astro.props;
+
+const currency =
+  (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
+
+const priceFormat = new Intl.NumberFormat(languages[language].locale, {
+  style: 'currency',
+  currency
+});
+---
+
+<PricingTable>
+  <slot slot="features">
+    {
+      [
+        ...new Set(packages.flatMap((p) => p.included).map((i) => i?.title))
+      ].map((feature, index) => (
+        <PricingFeatureRow
+          feature={feature}
+          alternate={index % 2 === 0}
+          included={false}
+          distribute="trailing"
+        />
+      ))
+    }
+  </slot>
+  <slot slot="packages">
+    {
+      packages.map(
+        ({ title, duration, popular, included = [], price = { price: 0 } }) => (
+          <PricingColumn
+            title={title}
+            price={priceFormat.format(price?.price ?? 0)}
+            period={duration}
+            popular={popular}
+          >
+            {(included ?? []).map((feature, featureIndex) => {
+              const {
+                description,
+                included,
+                title: featureTitle = ''
+              } = feature;
+              const isFeatureDescriptionBoolean =
+                description === 'Yes' || description === 'No';
+              return (
+                <PricingFeatureRow
+                  feature={isFeatureDescriptionBoolean ? '' : description}
+                  icon={isFeatureDescriptionBoolean}
+                  included={included || description === 'Yes'}
+                  description={featureTitle}
+                  alternate={featureIndex % 2 === 0}
+                />
+              );
+            })}
+          </PricingColumn>
+        )
+      )
+    }
+  </slot>
+</PricingTable>

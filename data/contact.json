@@ -1,0 +1,36 @@
+{
+  "en": {
+    "address": {
+      "street": "R. João das Regras",
+      "number": "62",
+      "postalCode": "4000-290",
+      "city": "Oporto",
+      "state": "Oporto",
+      "country": "Portugal",
+      "latitude": "41.155230",
+      "longitude": "-8.608440",
+      "complement": "400 m of Trindade Metro, near Oporto City Hall",
+      "map": "https://maps.app.goo.gl/R36YUaUwFrhousgBA"
+    },
+    "phone": null,
+    "cellPhone": "(+351) 915 316 999",
+    "email": "info@topwalkingportugal.com"
+  },
+  "pt": {
+    "address": {
+      "street": "R. João das Regras",
+      "number": "62",
+      "postalCode": "4000-290",
+      "city": "Porto",
+      "state": "Porto",
+      "country": "Portugal",
+      "latitude": "41.155230",
+      "longitude": "-8.608440",
+      "complement": "400m da Estação da Trindade Metro, perto da camara municipal",
+      "map": "https://maps.app.goo.gl/R36YUaUwFrhousgBA"
+    },
+    "phone": null,
+    "cellPhone": "(+351) 915 316 999",
+    "email": "info@topwalkingportugal.com"
+  }
+}

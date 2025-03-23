@@ -1,27 +1,28 @@
 // .prettierrc.mjs
 /** @type {import("prettier").Config} */
 export default {
-  trailingComma: "none",
-  arrowParens: "always",
-  endOfLine: "auto",
+  trailingComma: 'none',
+  arrowParens: 'always',
+  endOfLine: 'auto',
   semi: true,
   printWidth: 80,
   singleQuote: true,
-  proseWrap: "always",
+  quoteProps: 'consistent',
+  proseWrap: 'always',
   plugins: [
-    "prettier-plugin-astro",
-    // "prettier-plugin-astro-organize-imports",
-    "prettier-plugin-tailwindcss",
+    'prettier-plugin-astro',
+    'prettier-plugin-astro-organize-imports',
+    'prettier-plugin-tailwindcss'
   ],
   overrides: [
     {
-      files: "*.astro",
+      files: '*.astro',
       options: {
-        parser: "astro",
-      },
-    },
+        parser: 'astro'
+      }
+    }
   ],
-  astroOrganizeImportsMode: "All",
-  tailwindAttributes: ["class:list", "class"],
-  tailwindFunctions: ["tv"],
+  astroOrganizeImportsMode: 'All',
+  tailwindAttributes: ['class:list', 'class'],
+  tailwindFunctions: ['tv']
 };

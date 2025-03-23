@@ -4,14 +4,14 @@ spec:
     - content_blocks
   label: Featured Posts
   description: Featured stories grid
-  icon: "newspaper"
+  icon: 'newspaper'
   tags:
     - Grid
     - Posts
 
 # Defines the structure of this component, as well as the default values
 blueprint:
-  main_feature: ""
+  main_feature: ''
   feature_list: []
 
 # Overrides any fields in the blueprint when viewing this component in the component browser

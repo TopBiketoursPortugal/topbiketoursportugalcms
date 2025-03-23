@@ -1,176 +1,405 @@
-timezone: Pacific/Auckland
-
+_schema: _schema
 paths:
-  static: "public"
-  uploads: public/images
-
+  uploads: src/assets/images
+  static: ''
 collections_config:
   pages:
     path: src/content/pages
     glob:
-      - "**/*.md"
-    url: "/[full_slug]/"
+      - '**/*.md*'
+    name: Pages
     icon: laptop_mac
+    # /home, /pt/home
+    url: "/[relative_base_path]{path|default:title|prepend:'/'|deburr|slugify|lowercase|trim|strip|replace:'/home',|append:'/'|replace:'//','/'}"
+    disable_url: false
+    description: ''
     _enabled_editors:
       - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
     add_options:
       - name: Add New Page
-        schema: default
         icon: pages
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
+        path: schemas/page.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
         name: New Page
-        path: schemas/page.md
-        remove_extra_inputs: false
+        icon: web_asset
+        _enabled_editors:
+        create:
+          path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
+          extra_data:
+          publish_to:
+          _inputs:
+          _select_data:
+          _structures:
+        new_preview_url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
       paginated:
-        name: Paginated collection
-        path: schemas/paginated.md
+        path: schemas/paginated.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
         remove_extra_inputs: false
-    create:
-      path: "[relative_base_path]/{title|slugify}.md"
+        name: Paginated collection
+        icon: pages
+        _enabled_editors:
+        create:
+        new_preview_url:
   blog:
     path: src/content/blog
     glob:
-      - "**/*.mdx"
-    url: "/blog/[full_slug]/"
+      - '**/*.md*'
+    name: Blog
     icon: newspaper
+    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
     _enabled_editors:
       - content
       - visual
-    add_options:
-      - name: Add New Post
-        schema: default
-        icon: post_add
-    schemas:
-      default:
-        name: New Post
-        path: schemas/post.mdx
-    create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       title:
+        type: auto
         options:
           empty_type: string
+        cascade: true
       image:
         type: image
         options:
-          empty_type: string
           paths:
-            static: ""
             uploads: src/assets/images
+            static: ''
+          empty_type: string
+        cascade: true
       thumb_image_path:
         type: image
         options:
-          empty_type: string
           paths:
-            static: ""
             uploads: src/assets/images
+            static: ''
+          empty_type: string
+        cascade: true
       image_alt:
+        type: auto
         options:
           empty_type: string
+        cascade: true
       author:
+        type: auto
         options:
           empty_type: string
+        cascade: true
       tags:
         type: multiselect
-        comment: To add a new tag, go to the [tags data file](cloudcannon:collections/data/tags.json)
         options:
-          values: data.tags
           empty_type: array
-  data:
-    path: data
-    disable_add: true
-    disable_add_folder: true
-    _inputs:
-      icons:
-        comment: Add an icon from the list of [Font Awesome icons](https://fontawesome.com/search?o=r&m=free). Then add it to the ```src/components/utility/icon.jsx``` file, following the existing pattern.
-  tours:
-    path: src/content/tours
-    glob:
-      - "**/*.md*"
-    name: Tours
-    singular_name: Tour
-    icon: directions_bike
-    disable_url: false
-    description: ""
+          values: data.tags
+        comment: >-
+          To add a new tag, go to the [tags data
+          file](cloudcannon:collections/data/tags.json)
+        cascade: true
+    add_options:
+      - name: Add New Post
+        icon: post_add
+        schema: default
     create:
-      path: "[relative_base_path]/{title|slugify}.md"
+      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
-    disable_file_actions: false
-    add_options:
-      - name: "New Tour English"
-        icon: "language"
-        schema: "default"
-        base_path: ""
-        editor: visual
-      - name: "New Tour Portuguese"
-        icon: "language"
-        schema: "defaultPT"
-        editor: visual
-        base_path: "/pt/"
+    disable_file_actions: true
     schemas:
       default:
-        path: schemas/tour.md
+        path: schemas/post.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: true
+        name: New Post
+        icon: notes
+  data:
+    path: data
+    name: Data
+    icon: drive_file_move
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    _inputs:
+      icons:
+        type: auto
+        comment: >-
+          Add an icon from the list of [Font Awesome
+          icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
+          ```~/components/utility/icon.astro.tsx``` file, following the existing
+          pattern.
+        cascade: true
+    disable_add: true
+    disable_add_folder: true
+    disable_file_actions: true
+  tours:
+    path: src/content/tours
+    glob:
+      - '**/*.md*'
+    name: Tours
+    singular_name: Tour
+    icon: directions_bike
+    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    _enabled_editors:
+    _inputs:
+      type:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - DayTour
+            - PackageTour
+            - WalkingTour
+        cascade: true
+      packages[*].title:
+        type: markdown
+        cascade: true
+      packages[*].description:
+        type: markdown
+        cascade: true
+      included[*].title:
+        type: markdown
+        cascade: true
+      included[*].description:
+        type: markdown
+        cascade: true
+      reviews[*].title:
+        type: markdown
+        cascade: true
+      itinerary:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.itinerary_stage
+        cascade: true
+      itinerary[*].title:
+        type: markdown
+        cascade: true
+      itinerary[*].description:
+        type: markdown
+        cascade: true
+      itinerary[*].location:
+        type: object
+        options:
+          allow_label_formatting: false
+          place_groups_below: false
+          subtype: object
+          empty_type: 'null'
+          preview:
+            text: city
+            subtext: countryCode.englishName
+            icon: map
+        cascade: true
+      itinerary[*].location.lat:
+        type: text
+        cascade: true
+      itinerary[*].location.lon:
+        type: text
+        cascade: true
+      itinerary[*].location.country:
+        type: select
+        options:
+          allow_empty: true
+          values: data.countries
+          value_key: alpha2
+          preview:
+            text: englishName
+          picker_preview:
+            text: englishName
+            subtext: alpha2
+        cascade: true
+      itinerary[*].location.city:
+        type: text
+        cascade: true
+      itinerary[*].location.region:
+        type: text
+        cascade: true
+      relatedTours:
+        type: multiselect
+        options:
+          allow_empty: true
+          empty_type: array
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+        cascade: true
+      faqs:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.faqs
+        cascade: true
+      faqs[*].question:
+        type: markdown
+        cascade: true
+      faqs[*].answer:
+        type: markdown
+        cascade: true
+      images:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.images
+        cascade: true
+      tags:
+        type: array
+        options:
+          structures: _structures.tags
+        cascade: true
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      region:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values: data.tour_regions[*]
+          value_key: id
+          preview:
+            text:
+              - key: en.name
+            image:
+              - key: en.src
+        comment: >-
+          To add a new region, go to the [tour_regions data
+          file](cloudcannon:collections/data/tour_regions.json)
+        cascade: true
+      content:
+        type: markdown
+        cascade: true
+      afterPricing:
+        type: markdown
+        cascade: true
+    add_options:
+      - name: New Tour English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+      - name: New Tour Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour.mdx
+        reorder_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: false
         name: New tour
         icon: notes
       defaultPT:
-        path: schemas/pt/tour.md
+        path: schemas/pt/tour.mdx
         reorder_inputs: true
-        hide_extra_inputs: false
-        remove_empty_inputs: false
+        hide_extra_inputs: true
+        remove_empty_inputs: true
         remove_extra_inputs: true
         name: New tour
         icon: notes
   team:
     path: src/content/team
     glob:
-      - "**/*.md*"
+      - '**/*.md*'
+    name: Team
+    singular_name: Team member
     icon: people
+    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
     disable_url: false
-    description: ""
+    description: ''
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: subTitle
+      image:
+        - key: image.src
     _enabled_editors:
       - content
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       language:
         type: text
         hidden: true
+        cascade: true
       subTitle:
         type: select
         options:
           allow_create: true
           allow_empty: false
-          value_key: code
           values:
             - name: Guide
               key: Guide
             - name: Owner / Founder
               key: Owner
+          value_key: code
         cascade: true
     add_options:
-      - name: "New Team Member English"
-        icon: "language"
-        schema: "default"
-        base_path: ""
+      - name: New Team Member English
+        icon: language
         editor: visual
-      - name: "New Team Member Portuguese"
-        icon: "language"
-        schema: "defaultPT"
+        base_path: ''
+        schema: default
+      - name: New Team Member Portuguese
+        icon: language
         editor: visual
-        base_path: "/pt/"
+        base_path: /pt/
+        schema: defaultPT
     create:
-      path: "[relative_base_path]/{title|slugify}.md"
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
-    singular_name: "Team member"
     schemas:
       default:
-        path: schemas/team-member.md
+        path: schemas/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
@@ -178,59 +407,13 @@ collections_config:
         name: NewTeamMember
         icon: people
       defaultPT:
-        path: schemas/pt/team-member.md
+        path: schemas/pt/team-member.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
         name: NovoMembro
         icon: people
-    preview:
-      text:
-        - key: title # Displays the 'title' field (e.g., "Sérgio Marques")
-      image:
-        - key: image.src # Displays the image from 'image.src' (e.g., "/src/assets/images/team/sergio-marques.jpg")
-      subtext:
-        - key: subTitle
-data_config:
-  icons:
-    path: data/icons.json
-  colors:
-    path: data/colors.json
-  tags:
-    path: data/tags.json
-
-file_config:
-  - glob: data/colors.json
-    _structures:
-      color:
-        values:
-          - value:
-              name:
-              value:
-            preview:
-              icon: palette
-    _inputs:
-      $:
-        type: array
-        label: Colors
-        comment: Set the colors available in the color selectors throughout the site.
-        options:
-          structures: _structures.color
-      value:
-        type: color
-      name:
-        type: text
-        comment: What is seen in the color selector dropdown.
-  - glob: data/tags.json
-    _inputs:
-      $:
-        type: array
-        label: Tags
-        comment: Set the tags available in posts.
-      $[*]:
-        type: text
-
 collection_groups:
   - heading: Pages
     collections:
@@ -241,251 +424,426 @@ collection_groups:
   - heading: Data
     collections:
       - data
-
-_editables:
-  content:
-    blockquote: true
-    bold: true
-    format: p h2 h3 h4
-    italic: true
-    strike: true
-    subscript: true
-    superscript: true
-    underline: true
-    link: true
-    bulletedlist: true
-    indent: true
-    numberedlist: true
-    outdent: true
-    code: true
-    embed: true
-    horizontalrule: true
-    image: true
-    table: true
-    undo: true
-    redo: true
-    removeformat: true
-    copyformatting: true
-    styles: /css/editor.css
-    left: align-left
-    center: align-center
-    right: align-right
-    justify: align-justify
-    image_size_attributes: true
-    snippet: true
-
 _inputs:
+  path:
+    type: text
+    label: Url
+    comment: Set this only with lower case and '-'
   template:
+    type: auto
     hidden: true
+    cascade: true
+  image:
+    type: object
+    options:
+      preview:
+        text:
+          - key: alt
+        icon: Image
+        image:
+          - key: src
+        gallery:
+          fit: cover
+      structures:
+        style: select
+        values:
+          - value:
+              src: ''
+              alt: ''
+    cascade: true
+  rating:
+    type: number
+    options:
+      min: 0
+      max: 5
+    cascade: true
   src:
     type: image
+    options:
+      paths:
+        uploads: src/assets/images
+      accepts_mime_types:
+        - image/png
+        - image/jpeg
+        - image/webp
+      empty_type: 'null'
+      resize_style: contain
+      expandable: false
+      prevent_resize_existing_files: true
     cascade: true
   memberType:
     type: select
     options:
       allow_empty: true
-      value_key: code
       values:
         - name: Owner / Founder
           code: Owner
         - name: Guide
           code: Guide
+      value_key: code
+    cascade: true
   language:
     type: select
-    hidden: true
     options:
-      value_key: code
+      allow_empty: true
       values:
         - name: English
           code: en
         - name: Portuguese
           code: pt
-  id:
-    type: auto
-    instance_value: UUID
+      value_key: code
     hidden: true
+    cascade: true
   feature_list:
     type: multiselect
     options:
       empty_type: array
       values: collections.blog
-      # todo: change to id
-      value_key: title
+      value_key: id
+    cascade: true
   main_feature:
     type: select
     options:
+      allow_empty: true
       values: collections.blog
-      # todo: change to id
-      value_key: title
+      value_key: id
+    cascade: true
   markdown_content:
     type: markdown
     options:
+      allow_resize: true
+      allow_custom_markup: false
+      remove_custom_markup: false
+      initial_height: 320
       blockquote: true
       bold: true
+      bulletedlist: true
+      code: true
+      copyformatting: true
+      embed: true
       format: p h1 h2 h3 h4
+      horizontalrule: true
+      image: true
+      image_size_attributes: true
       italic: true
+      link: true
+      numberedlist: true
+      redo: true
+      removeformat: true
       strike: true
       subscript: true
       superscript: true
-      underline: true
-      link: true
-      bulletedlist: true
-      numberedlist: true
       table: true
-      code: true
-      embed: true
-      horizontalrule: true
-      image: true
+      underline: true
       undo: true
-      redo: true
-      removeformat: true
-      copyformatting: true
+    cascade: true
   image_path:
     type: image
-    comment: The path to the source file of the image to be optimized.
     options:
       paths:
-        static: ""
         uploads: src/assets/images
+        static: ''
+    comment: The path to the source file of the image to be optimized.
+    cascade: true
   alt_text:
-    label: Image Alt Text
     type: textarea
-    hidden: "!image_path"
+    label: Image Alt Text
+    hidden: '!image_path'
+    cascade: true
   width:
     type: number
+    cascade: true
   height:
     type: number
+    cascade: true
   background_color:
-    hidden: "border_only"
     type: select
     options:
+      allow_empty: true
       values: data.colors
       value_key: value
       preview:
         text:
           - key: name
+    hidden: border_only
+    cascade: true
   text_color:
     type: select
     options:
+      allow_empty: true
       values: data.colors
       value_key: value
       preview:
         text:
           - key: name
+    cascade: true
   color:
     type: select
     options:
+      allow_empty: true
       values: data.colors
       value_key: value
       preview:
         text:
           - key: name
+    cascade: true
   icon:
     type: select
     options:
+      allow_empty: true
       values: data.icons
+    cascade: true
   button_icon:
     type: select
     options:
+      allow_empty: true
       values: data.icons
+    cascade: true
   button_link:
     type: url
+    cascade: true
   hover_brightness:
     type: range
     options:
       min: 0
       max: 1.5
       step: 0.05
+    cascade: true
   seo:
     type: object
     options:
       preview:
-        icon: query_stats
         text:
-          - "Search engine optimization"
+          - Search engine optimization
         subtext:
           - key: page_description
-          - "Update SEO values for the page"
+          - Update SEO values for the page
+        icon: query_stats
+    cascade: true
   layout:
+    type: auto
     hidden: true
+    cascade: true
   date:
+    type: auto
     instance_value: NOW
+    cascade: true
   page_size:
     type: number
     comment: The number of collection items to list per page
+    cascade: true
   featured_posts:
     type: object
     options:
       preview:
-        icon: newspaper
         text: Featured Posts
+        icon: newspaper
+    cascade: true
   social:
     type: object
     options:
       preview:
         icon: link
+    cascade: true
   links[*]:
     type: object
     options:
       preview:
-        icon: link
         text:
           - key: text
-          - "Link"
+          - Link
         subtext:
           - key: link
-          - "Add a social link"
+          - Add a social link
+        icon: link
+    cascade: true
   social_icon:
     type: select
     options:
+      allow_empty: true
       values: data.icons
+    cascade: true
   social[*]:
     type: object
     options:
       preview:
         icon: query_stats
+    cascade: true
   logo:
     type: image
+    cascade: true
   logo_url:
+    type: auto
     comment: Link for the logo in the top left of the footer
+    cascade: true
   copyright:
+    type: auto
     comment: Automatically prefixed with the current year
-  page_description:
+    cascade: true
+  page_title:
+    type: auto
     comment: Defaults to the description set in the Site SEO data file
+    cascade: true
+  page_description:
+    type: auto
+    comment: Defaults to the description set in the Site SEO data file
+    cascade: true
   canonical_url:
+    type: auto
     comment: Defaults to the pages url
+    cascade: true
   featured_image:
+    type: auto
     comment: Defaults to the image set in the Site SEO data file
+    cascade: true
   open_graph_type:
     type: select
     options:
+      allow_empty: true
       values:
         - website
         - article
+        - product
     comment: Defaults to the type 'website'
+    cascade: true
   author_twitter_handle:
+    type: auto
     comment: Defaults to the twitter site value set in the Site SEO data file
+    cascade: true
   twitter_site:
     type: url
+    cascade: true
   no_index:
     type: checkbox
-    comment:
+    comment: >-
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
-
+    cascade: true
+_structures:
+  itinerary_stage:
+    style: select
+    values:
+      - icon: place
+        label: Itinerary stage
+        value:
+          title: ''
+          description: ''
+          location:
+            lat: '1'
+            lng: '1'
+            country: pt
+            region: ''
+            city: ''
+  tags:
+    style: select
+    values:
+      - default: false
+        icon: label
+        label: Tags
+        place_groups_below: false
+        tabbed: false
+        value: ''
+  faqs:
+    values:
+      - label: FAQs
+        icon: question_mark
+        value:
+          question: ''
+          answer: ''
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+  reviews:
+    values:
+      - label: Review
+        icon: message
+        value:
+          title: ''
+          rating: 5
+          author:
+            givenName: John
+            familyName: Doe
+            country: Portugal
+          datePublished: 2023-10-15T00:00:00Z
+          content: >-
+            These headphones are fantastic! The noise cancellation works
+            perfectly, and the sound quality is top-notch. Highly recommend them
+            for anyone looking for a premium audio experience.
+        preview:
+          text:
+            - key: question
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+  images:
+    values:
+      - label: Image
+        value:
+          src: ''
+          alt: ''
+        preview:
+          text:
+            - key: alt
+          icon: Image
+          image:
+            - key: src
+    style: select
+    reorder_inputs: true
+    remove_empty_inputs: true
+    hide_extra_inputs: true
+    remove_extra_inputs: false
+_editables:
+  content:
+    allow_custom_markup: false
+    remove_custom_markup: false
+    blockquote: true
+    bold: true
+    bulletedlist: true
+    center: align-center
+    code: true
+    copyformatting: true
+    embed: true
+    format: p h2 h3 h4
+    horizontalrule: true
+    image: true
+    image_size_attributes: true
+    indent: true
+    italic: true
+    justify: align-justify
+    left: align-left
+    link: true
+    numberedlist: true
+    outdent: true
+    redo: true
+    removeformat: true
+    right: align-right
+    snippet: true
+    strike: true
+    styles: /css/editor.css
+    subscript: true
+    superscript: true
+    table: true
+    underline: true
+    undo: true
 _snippets_imports:
   mdx: true
-
 _snippets:
   alert:
     template: mdx_component
     inline: false
     preview:
-      icon: announcement
       text: Alert
       subtext:
         - key: alert_message
         - Update alert content and styles
+      icon: announcement
     definitions:
       component_name: SnippetsAlert
       named_args:
@@ -505,26 +863,33 @@ _snippets:
       background_color:
         type: select
         options:
+          allow_empty: true
           values: data.colors
           value_key: value
           preview:
             text:
               - key: name
+        cascade: true
       icon:
         type: select
         options:
+          allow_empty: true
           values: data.icons
+        cascade: true
       color:
         type: select
         options:
+          allow_empty: true
           values: data.colors
           value_key: value
           preview:
             text:
               - key: name
+        cascade: true
       alert_message:
-        comment: This is the text displayed in the alert
         type: textarea
+        comment: This is the text displayed in the alert
+        cascade: true
   astro_image:
     template: mdx_component
     inline: false
@@ -552,13 +917,15 @@ _snippets:
     _inputs:
       image_alt:
         type: textarea
+        cascade: true
       image_path:
         type: image
         options:
-          empty_type: string
           paths:
-            static: ""
             uploads: src/assets/images
+            static: ''
+          empty_type: string
+        cascade: true
   accordion:
     template: mdx_component
     inline: false
@@ -572,16 +939,18 @@ _snippets:
           source_key: text
           type: string
     preview:
-      icon: expand_more
       text: Accordion
       subtext:
         - key: text
         - Update accordion content.
+      icon: expand_more
     _inputs:
       heading:
         type: textarea
+        cascade: true
       text:
         type: textarea
+        cascade: true
   video:
     template: mdx_component
     inline: false
@@ -597,11 +966,12 @@ _snippets:
       icon: duo
     _inputs:
       src:
-        comment: Link to a video hosted in our own files.
         type: file
         options:
           paths:
             uploads: public/videos
+        comment: Link to a video hosted in our own files.
+        cascade: true
   youtube:
     template: mdx_component
     inline: false
@@ -621,25 +991,29 @@ _snippets:
           source_key: title
           type: string
     preview:
-      icon: duo
       text:
         - key: title
         - Youtube Video
       subtext:
         - key: video_source
         - Update Youtube video details
+      icon: duo
     _inputs:
       video_source:
         type: url
         comment: Get an embed link from a Youtube video and paste it here.
+        cascade: true
       width:
         type: number
         comment: The width of the video, measured in px.
+        cascade: true
       height:
         type: number
         comment: The height of the video, measured in px.
+        cascade: true
       title:
         type: textarea
+        cascade: true
   file:
     template: mdx_component
     inline: false
@@ -660,16 +1034,20 @@ _snippets:
     _inputs:
       src:
         type: file
-        label: File source
         options:
           paths:
             uploads: public/documents
-            static: "public"
+            static: public
+        label: File source
+        cascade: true
       file_name:
+        type: auto
         comment: The name of the file, once downloaded.
+        cascade: true
       link_message:
         type: textarea
         comment: The text for the download link
+        cascade: true
   mdx_tint:
     template: mdx_paired_component
     inline: true
@@ -686,5 +1064,78 @@ _snippets:
     _inputs:
       tint_color:
         type: color
+        cascade: true
       inner_text:
+        type: auto
         comment: This text will be tinted
+        cascade: true
+file_config:
+  - glob: data/colors.json
+    _inputs:
+      $:
+        type: array
+        options:
+          structures: _structures.color
+        label: Colors
+        comment:
+          Set the colors available in the color selectors throughout the site.
+        cascade: true
+      value:
+        type: color
+        cascade: true
+      name:
+        type: text
+        comment: What is seen in the color selector dropdown.
+        cascade: true
+    _structures:
+      color:
+        style: select
+        values:
+          - preview:
+              icon: palette
+            value:
+              name:
+              value:
+  - glob: data/tags.json
+    _inputs:
+      $:
+        type: array
+        label: Tags
+        comment: Set the tags available in posts.
+        cascade: true
+      $[*]:
+        type: text
+        cascade: true
+data_config:
+  countries:
+    path: data/contries.json
+  icons:
+    path: data/icons.json
+  colors:
+    path: data/colors.json
+  tags:
+    path: data/tags.json
+  tour_regions:
+    path: data/tour_regions.json
+timezone: Europe/Lisbon
+markdown:
+  engine:
+  options:
+    xhtml: true
+    breaks: true
+    linkify: false
+    typographer: false
+    quotes:
+    spaced_lists: false
+    sentence_per_line: false
+    gfm: false
+    code_block_fences: '```'
+    escape_snippets_in_code_blocks: false
+    treat_indentation_as_code: false
+    table: false
+    strikethrough: false
+    subscript: false
+    superscript: false
+    heading_ids: false
+    attributes: false
+    attribute_elements:

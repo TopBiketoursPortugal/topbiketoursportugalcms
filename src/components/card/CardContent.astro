@@ -1,5 +1,5 @@
 ---
-import { cn, tv, type VariantProps } from 'tailwind-variants';
+import { tv, type VariantProps } from 'tailwind-variants';
 import { stack } from '../stack/stack.style';
 
 const stackBase = stack({ layout: 'vertical', spacing: 'medium' });
@@ -17,9 +17,12 @@ const cardContentVariants = tv({
   }
 });
 
-export type Props = VariantProps<typeof cardContentVariants> & {
+export type CardContentProps = VariantProps<typeof cardContentVariants> & {
   class?: string;
 };
+
+type Props = CardContentProps;
+
 const { display = 'overlay', class: className } = Astro.props;
 const style = cardContentVariants({ display, className });
 ---

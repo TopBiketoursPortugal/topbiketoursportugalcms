@@ -1,0 +1,93 @@
+# headline.bookshop.yml
+
+# Metadata about this component
+spec:
+  structures:
+    - content_blocks # This component can be used in content block structures
+  label: Headline # Display name in CloudCannon
+  description:
+    A customizable headline component with title, subtitle, and tagline
+  icon: title # CloudCannon icon suggestion
+  tags:
+    - Headline
+    - Text
+    - Section
+
+# Define the blueprint for component properties
+blueprint:
+  title:
+    type: rich-text # Since it accepts HTML via set:html
+    label: Title
+    default: Enter your headline
+    can_sync: true # Allows syncing with content
+  subtitle:
+    type: rich-text
+    label: Subtitle
+    default: Add a supporting subtitle
+    can_sync: true
+  tagline:
+    type: rich-text
+    label: Tagline
+    default: Optional tagline text
+    can_sync: true
+  classes:
+    type: object
+    label: Custom Classes
+    preview: container # Show container class in preview
+    properties:
+      container:
+        type: string
+        label: Container Class
+        default: max-w-3xl
+        description: Custom Tailwind classes for container
+      title:
+        type: string
+        label: Title Class
+        default: text-3xl md:text-4xl
+        description: Custom Tailwind classes for title
+      subtitle:
+        type: string
+        label: Subtitle Class
+        default: text-xl
+        description: Custom Tailwind classes for subtitle
+
+# Define how the component should be previewed
+preview:
+  title: Sample Title
+  subtitle: Sample subtitle text
+  tagline: SAMPLE TAGLINE
+  classes:
+    container: max-w-3xl
+    title: text-3xl md:text-4xl
+    subtitle: text-xl
+
+# Define inputs for the visual editor
+inputs:
+  - name: title
+    type: rich-text
+    label: Title
+    comment: Main headline text (supports HTML)
+  - name: subtitle
+    type: rich-text
+    label: Subtitle
+    comment: Supporting text below title (supports HTML)
+  - name: tagline
+    type: rich-text
+    label: Tagline
+    comment: Optional uppercase tagline (supports HTML)
+  - name: classes
+    type: object
+    label: Styling Classes
+    options:
+      - name: container
+        type: text
+        label: Container Classes
+        default: max-w-3xl
+      - name: title
+        type: text
+        label: Title Classes
+        default: text-3xl md:text-4xl
+      - name: subtitle
+        type: text
+        label: Subtitle Classes
+        default: text-xl
