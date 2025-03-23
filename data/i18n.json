@@ -86,7 +86,7 @@
     "Tour.Tab.Faqs": "Faqs",
     "Tour.Tab.Itinerary": "Itinerary",
     "Tour.Tab.Map": "Map",
-    "Tour.Tab.Packages": "Packages",
+    "Tour.Tab.Packages": "Price",
     "Tour.Tab.Photos": "Photos",
     "Tour.Tab.Reviews": "Reviews"
   },
@@ -177,7 +177,7 @@
     "Tour.Tab.Faqs": "Perguntas Frequentes",
     "Tour.Tab.Itinerary": "Itinerário",
     "Tour.Tab.Map": "Mapa",
-    "Tour.Tab.Packages": "Pacotes",
+    "Tour.Tab.Packages": "Preços",
     "Tour.Tab.Photos": "Fotografias",
     "Tour.Tab.Reviews": "Avaliações"
   }
