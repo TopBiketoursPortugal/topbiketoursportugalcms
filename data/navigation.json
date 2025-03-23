@@ -5,47 +5,47 @@
         {
           "text": "Home",
           "page": "",
-          "link": "/"
+          "href": "/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "link": "/bike-tours-in-portugal/"
+          "href": "/bike-tours-in-portugal/"
         },
         {
           "text": "Day tours",
           "page": "",
-          "link": "/bike-tours-porto-portugal/"
+          "href": "/bike-tours-porto-portugal/"
         },
         {
           "text": "Calendar",
           "page": "",
-          "link": "/guided-bike-tours-calendar-portugal/"
+          "href": "/guided-bike-tours-calendar-portugal/"
         },
         {
           "text": "Bikes",
           "page": "",
-          "link": "/rent-bike-porto-portugal/"
+          "href": "/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
           "page": "",
-          "link": "/blog/"
+          "href": "/blog/"
         },
         {
           "text": "Contacts",
           "page": "",
-          "link": "/contacts/"
+          "href": "/contacts/"
         },
         {
           "text": "About us",
           "page": "",
-          "link": "/about-us/"
+          "href": "/about-us/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "link": "/widgets/",
+          "href": "/widgets/",
           "enabled": false
         }
       ]
@@ -57,27 +57,27 @@
           "links": [
             {
               "text": "Home",
-              "link": "/"
+              "href": "/"
             },
             {
               "text": "Biking tours",
-              "link": "/bike-tours-in-portugal/"
+              "href": "/bike-tours-in-portugal/"
             },
             {
               "text": "Day tours",
-              "link": "/bike-tours-porto-portugal/"
+              "href": "/bike-tours-porto-portugal/"
             },
             {
               "text": "Calendar",
-              "link": "/guided-bike-tours-calendar-portugal/"
+              "href": "/guided-bike-tours-calendar-portugal/"
             },
             {
               "text": "Blog",
-              "link": "/blog/"
+              "href": "/blog/"
             },
             {
               "text": "Testimonials",
-              "link": "/testimonials/"
+              "href": "/testimonials/"
             }
           ]
         },
@@ -86,23 +86,23 @@
           "links": [
             {
               "text": "About us",
-              "link": "/about-us/"
+              "href": "/about-us/"
             },
             {
               "text": "Contacts",
-              "link": "/contacts/"
+              "href": "/contacts/"
             },
             {
               "text": "Faqs",
-              "link": "/faqs/"
+              "href": "/faqs/"
             },
             {
               "text": "Terms & Conditions",
-              "link": "/terms-and-Conditions/"
+              "href": "/terms-and-Conditions/"
             },
             {
               "text": "Privacy Policy",
-              "link": "/privacy-policy/"
+              "href": "/privacy-policy/"
             }
           ]
         }
@@ -115,47 +115,47 @@
         {
           "text": "Home",
           "page": "",
-          "link": "/pt/"
+          "href": "/pt/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "link": "/pt/bike-tours-in-portugal/"
+          "href": "/pt/bike-tours-in-portugal/"
         },
         {
           "text": "Day tours",
           "page": "",
-          "link": "/pt/bike-tours-porto-portugal/"
+          "href": "/pt/bike-tours-porto-portugal/"
         },
         {
           "text": "Calendar",
           "page": "",
-          "link": "/pt/guided-bike-tours-calendar-portugal/"
+          "href": "/pt/guided-bike-tours-calendar-portugal/"
         },
         {
           "text": "Bikes",
           "page": "",
-          "link": "/pt/rent-bike-porto-portugal/"
+          "href": "/pt/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
           "page": "",
-          "link": "/pt/blog/"
+          "href": "/pt/blog/"
         },
         {
           "text": "Contatos",
           "page": "",
-          "link": "/pt/contatos/"
+          "href": "/pt/contatos/"
         },
         {
           "text": "Sobre nós",
           "page": "",
-          "link": "/pt/sobre-nos/"
+          "href": "/pt/sobre-nos/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "link": "/pt/widgets/",
+          "href": "/pt/widgets/",
           "enabled": false
         }
       ]
@@ -167,30 +167,30 @@
           "links": [
             {
               "text": "Início",
-              "link": "/pt/"
+              "href": "/pt/"
             },
             {
               "text": "Biking tours",
               "page": "",
-              "link": "/pt/bike-tours-in-portugal/"
+              "href": "/pt/bike-tours-in-portugal/"
             },
             {
               "text": "Day tours",
               "page": "",
-              "link": "/pt/bike-tours-porto-portugal/"
+              "href": "/pt/bike-tours-porto-portugal/"
             },
             {
               "text": "Calendar",
               "page": "",
-              "link": "/pt/guided-bike-tours-calendar-portugal/"
+              "href": "/pt/guided-bike-tours-calendar-portugal/"
             },
             {
               "text": "Blog",
-              "link": "/pt/blog/"
+              "href": "/pt/blog/"
             },
             {
               "text": "Testemunhos",
-              "link": "/pt/testemunhos/"
+              "href": "/pt/testemunhos/"
             }
           ]
         },
@@ -199,23 +199,23 @@
           "links": [
             {
               "text": "Sobre nós",
-              "link": "/pt/sobre-nos/"
+              "href": "/pt/sobre-nos/"
             },
             {
               "text": "Contatos",
-              "link": "/pt/contatos/"
+              "href": "/pt/contatos/"
             },
             {
               "text": "Perguntas frequentes",
-              "link": "/pt/perguntas-frequentes/"
+              "href": "/pt/perguntas-frequentes/"
             },
             {
               "text": "Termos e Condições",
-              "link": "/pt/termos-condicoes/"
+              "href": "/pt/termos-condicoes/"
             },
             {
               "text": "Política de Privacidade",
-              "link": "/pt/politica-de-privacidade/"
+              "href": "/pt/politica-de-privacidade/"
             }
           ]
         }
