@@ -10,7 +10,7 @@ collections_config:
     name: Pages
     icon: laptop_mac
     # /home, /pt/home
-    url: "/[relative_base_path]{path|default:title|prepend:'/'|deburr|slugify|lowercase|trim|strip|replace:'/home',|append:'/'|replace:'//','/'}"
+    url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|strip|prepend:'/'|replace:'/home','/'|append:'/'|replace:'//','/'}"
     disable_url: false
     description: ''
     _enabled_editors:
