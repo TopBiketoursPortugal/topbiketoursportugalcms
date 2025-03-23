@@ -151,11 +151,7 @@
       "destination": "/tags/",
       "status": 301
     },
-    {
-      "from": "/pt/tours/coastal-route-to-santiago-compostela-stage-2/",
-      "destination": "/pt/tours/rota-costeira-santiago-de-compostela-etapa-2/",
-      "status": 301
-    },
+
     {
       "from": "/pt/tours/portuguese-central-camino-stage-1/",
       "destination": "/pt/tours/caminho-central-santiago-compoatela-porto-etapa-1/",
@@ -309,6 +305,11 @@
     {
       "from": "/pt/blog/what-is-hiking-a-complete-beginners-guide/",
       "destination": "/pt/blog/o-que-e-caminhada-um-guia-completo-para-iniciantes/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/coastal-route-to-santiago-compostela-stage-2/",
+      "destination": "/pt/tours/rota-costeira-santiago-de-compostela-etapa-2/",
       "status": 301
     },
     {
