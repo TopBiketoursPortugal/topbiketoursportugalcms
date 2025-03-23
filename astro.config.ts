@@ -95,22 +95,24 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: {
         name: 'Top Walking Tours Portugal',
+        description:
+          'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Walking Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
         short_name: 'Walking tours',
         theme_color: '#296a3f',
         background_color: '#fff',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'android-chrome-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
