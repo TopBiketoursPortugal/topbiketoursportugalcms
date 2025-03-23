@@ -1,4 +1,5 @@
 ---
+id: 77f0de46-cfb4-430d-8d46-8cfad87c3e58
 templateKey: tour-gen
 order: 9
 path: rail-trail-ecopista-tamega

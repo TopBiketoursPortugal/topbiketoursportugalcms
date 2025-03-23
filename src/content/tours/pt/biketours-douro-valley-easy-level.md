@@ -1,4 +1,5 @@
 ---
+id: fa3d6349-f087-4ecf-b6bc-0adfa3aa8a5c
 templateKey: tour-gen
 order: 12
 path: biketours-douro-valley-easy-level

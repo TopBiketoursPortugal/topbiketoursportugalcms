@@ -1,4 +1,5 @@
 ---
+id: a297951d-9afc-4b9e-93c0-fd8306c8296c
 templateKey: tour-gen
 order: 2
 path: costa-da-prata-rota-1

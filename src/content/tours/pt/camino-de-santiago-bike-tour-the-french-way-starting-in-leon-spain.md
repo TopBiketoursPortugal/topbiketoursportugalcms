@@ -1,4 +1,5 @@
 ---
+id: 4b5f5f91-6616-467d-859d-d09cd1b4431c
 templateKey: tour-gen
 order: 11
 path: bike-tour-camino-de-santiago-cycling-french-way-leon

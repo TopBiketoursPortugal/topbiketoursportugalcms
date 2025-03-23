@@ -1,4 +1,5 @@
 ---
+id: 020a9d34-5dbc-41a5-afaf-be719a4797ad
 templateKey: tour-gen
 order: 5
 path: food-tour-bike-tour-wine-gastournomy-en

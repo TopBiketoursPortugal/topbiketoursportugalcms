@@ -1,4 +1,5 @@
 ---
+id: 38134295-954c-4abb-8bd0-551700389ed6
 templateKey: tour-gen
 order: 2
 path: electric-bike-tour-porto-pt

@@ -1,4 +1,5 @@
 ---
+id: 763a288a-5852-47f5-b7d2-430c8bf8547b
 templateKey: tour-gen
 order: 8
 path: full-day-biketour-deluxe

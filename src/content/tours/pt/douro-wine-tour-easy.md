@@ -1,4 +1,5 @@
 ---
+id: cbf1fce3-c0f8-42fc-bca6-26ea3fa84e3c
 templateKey: tour-gen
 order: 6
 path: cycling-tours-douro-wine

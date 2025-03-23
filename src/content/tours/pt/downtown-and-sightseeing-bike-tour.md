@@ -1,4 +1,5 @@
 ---
+id: 03704a59-5dbb-4a88-9f8e-d42dde600a89
 templateKey: tour-gen
 order: 1
 path: bike-tour-sightseeing-porto-pt

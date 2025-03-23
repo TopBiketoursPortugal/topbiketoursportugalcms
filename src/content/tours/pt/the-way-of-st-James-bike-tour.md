@@ -1,4 +1,5 @@
 ---
+id: cb799472-4882-4fe2-9e85-cf43ab2b5a0e
 templateKey: tour-gen
 order: 89
 path: pt-caminho-frances-a-santiago-bike-tour

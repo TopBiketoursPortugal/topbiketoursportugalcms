@@ -1,4 +1,5 @@
 ---
+id: 09e6d0ab-3568-411a-a4f5-2ae2c14ea170
 templateKey: tour-gen
 order: 4
 path: douro-valley-full-day-bike-ride

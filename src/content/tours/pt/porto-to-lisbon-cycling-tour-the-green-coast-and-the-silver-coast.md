@@ -1,4 +1,5 @@
 ---
+id: bea1cab1-c67a-4f44-9c06-d4a689eed242
 templateKey: tour-gen
 order: 5
 path: pt-porto-lisboa-bike-tour

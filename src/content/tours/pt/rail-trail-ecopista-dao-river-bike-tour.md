@@ -1,4 +1,5 @@
 ---
+id: db0aadef-810f-4e5c-8250-9267d7937256
 templateKey: tour-gen
 order: 8
 path: rail-trail-ecopista-dao-river

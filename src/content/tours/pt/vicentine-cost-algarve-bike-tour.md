@@ -1,4 +1,5 @@
 ---
+id: 1cd59b02-d2b3-4160-8c08-fe46aa5fe1e5
 templateKey: tour-gen
 order: 4
 path: costa-vicentina-bike-tour

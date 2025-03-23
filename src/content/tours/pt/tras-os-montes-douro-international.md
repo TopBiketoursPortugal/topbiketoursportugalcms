@@ -1,4 +1,5 @@
 ---
+id: a779ec56-4bab-454a-8749-189add41004b
 templateKey: tour-gen
 order: 79
 path: cycling-tours-tras-os-montes

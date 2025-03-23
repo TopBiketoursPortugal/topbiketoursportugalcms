@@ -1,4 +1,5 @@
 ---
+id: 5c7dce11-8fee-413a-a2cb-1947ffa3554c
 templateKey: tour-gen
 order: 3
 path: pt-norte-de-portugal-bike-tour

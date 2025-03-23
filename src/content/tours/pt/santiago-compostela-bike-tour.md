@@ -1,4 +1,5 @@
 ---
+id: 6e6d1135-fa8d-4149-93fc-02152fa26f13
 templateKey: tour-gen
 order: 1
 path: santiago-compostela-pela-costa

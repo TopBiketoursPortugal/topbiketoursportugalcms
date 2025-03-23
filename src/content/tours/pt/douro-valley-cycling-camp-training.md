@@ -1,4 +1,5 @@
 ---
+id: bba36c52-37a0-4eb5-8623-c608df081088
 templateKey: tour-gen
 order: 99
 path: campo-de-treino-douro-em-bicicleta
