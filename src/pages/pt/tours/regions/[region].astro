@@ -27,7 +27,7 @@ export async function getStaticPaths() {
         tours.filter(
           (tour) =>
             parseInt(tour.data.region + '', 10) === region.id &&
-            tour.data.language === 'en'
+            tour.data.language === 'pt'
         ) ?? []
     }
   }));
