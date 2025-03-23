@@ -11,15 +11,20 @@ image:
   alt: Top bike tours portugal
 title: Rail trail - Ecopista Tâmega river bike tour
 tourtype: DayTour
-meta:
-  title: Ecopista Tâmega River - Rail Trail with Top Bike Tours
-  description:
+seo:
+  page_title: Ecopista Tâmega River - Rail Trail with Top Bike Tours
+  page_description:
     Embark on an adventure along  Ecopista Tâmega river with Top Bike Tours.
     Ideal for families or newcomers to cycling, explore the picturesque scenery.
   keywords:
     ecopista tãmega bike tour, rail trail tãmega bike tour, bike tour in the
     northern area of portugal
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 minAge: 16
 skillLevel: 1
 distance: 49
@@ -76,7 +81,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Supported Bike tour
-    packageContents:
+    description: Supported Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: No
       - title: Luggage shuttling
@@ -114,7 +120,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 1'
-    packageContents:
+    description: ' Self guided Option 1'
+    included:
       - title: Accommodations W/ Breakfast
         value: 1 Night in 4 star hotel
       - title: Luggage shuttling
@@ -153,7 +160,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 2'
-    packageContents:
+    description: ' Self guided Option 2'
+    included:
       - title: Accommodations W/ Breakfast
         value: 2 Nights (4 and 5 star)
       - title: Luggage shuttling

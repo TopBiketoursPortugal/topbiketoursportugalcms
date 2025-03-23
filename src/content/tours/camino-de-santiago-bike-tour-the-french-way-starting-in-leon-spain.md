@@ -18,7 +18,7 @@ tags:
   - Santiago de compostela star leo bike tour
   - bike tour leon the way of saint james
   - ''
-meta:
+seo:
   description: >
     Join our Camino de Santiago French Way bike tour & enjoy the best-curated
     cycling experiences. Explore stunning landscapes with Top Bike Tours
@@ -29,7 +29,12 @@ meta:
     adventure,Biking the French Way from León,León to Santiago bike
     pilgrimage,Camino Francés bike tour,Cycling route León to Santiago,Bike
     journey on the Camino de Santiago
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Camino de Santiago Bike Tour | Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: 20
@@ -156,7 +161,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike tour
-    packageContents:
+    description: Self Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (3 and 4 stars, farms or rural houses)
@@ -211,7 +217,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Bike tour
-    packageContents:
+    description: Guided Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -264,7 +271,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 and 5 stars, farms or rural houses)
       - title: Luggage shuttling

@@ -23,7 +23,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Join our Douro valley bike camp training and enjoy the best cycling
     experiences in Portugal. Explore stunning landscapes with Top Bike Tours
@@ -32,7 +32,12 @@ meta:
     Douro Valley training camp, road bike in douro valley. road bike tour
     portugal, road bike
   title: Douro Valley Bike Camp Training - Top Bike Tours Portugal
-  robots: FOLLOW
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 groupSizeMax: 0
 groupSizeMin: 0
 minAge: 0

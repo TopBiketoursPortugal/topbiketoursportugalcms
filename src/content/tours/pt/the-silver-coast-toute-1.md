@@ -24,7 +24,7 @@ tags:
   - e-bike
   - electric bicycle
   - atlantic coast
-meta:
+seo:
   description: >
     Aventure-se nesta tour Porto-Coimbra de bicicleta, pela costa verde e prata
     com a Top Bike Tours. Conheça os melhores locais históricos, gastronómicos e
@@ -32,7 +32,12 @@ meta:
   keywords:
     ferias em bicicleta porto a coimbra, tour de bicicleta porto a coimbra, bike
     tour porto a coimbra
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Tour Porto-Coimbra de Bicicleta com Guia - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -172,7 +177,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bikeTour
-    packageContents:
+    description: Self Guided bikeTour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -223,7 +229,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -275,7 +282,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

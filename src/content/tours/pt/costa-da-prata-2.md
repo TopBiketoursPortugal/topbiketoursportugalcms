@@ -24,7 +24,7 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Da Figueira da Foz a Cascais ou Lisboa de bicicleta. Pedale de bicicleta
     pela Costa Prata, com a Top Bike Tours e descubra as maravilhas da Rota do
@@ -32,7 +32,12 @@ meta:
   keywords:
     Cycling Tours costa da prata, costa da prata em bicicleta, costa azul em
     bicicleta, bike tour costa atlântica
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Costa Prata - Rota Atlântica Portuguesa - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -212,7 +217,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike tour
-    packageContents:
+    description: Self Guided bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -262,7 +268,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -314,7 +321,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

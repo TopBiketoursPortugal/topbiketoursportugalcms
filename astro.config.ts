@@ -74,14 +74,14 @@ export default defineConfig({
     //   /**
     //    * required
     //    **/
-    //   name: 'Top Walking Tours Portugal',
+    //   name: 'Top Bike Tours Portugal',
 
     //   /**
     //    * optional
     //    **/
     //   icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
     //   short_name: 'TWTP',
-    //   description: 'Top walking tours portugal',
+    //   description: 'Top Bike Tours Portugal',
     //   start_url: '/',
     //   theme_color: '#296a3f',
     //   background_color: '#fff',
@@ -94,9 +94,9 @@ export default defineConfig({
       includeAssets: ['favicon.svg'],
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Top Walking Tours Portugal',
+        name: 'Top Bike Tours Portugal',
         description:
-          'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Walking Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
+          'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Bike Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
         short_name: 'Walking tours',
         theme_color: '#296a3f',
         background_color: '#fff',
@@ -180,6 +180,11 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         default: 'https://topbiketoursportugal.com'
+      }),
+      INDEX: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'false'
       })
       // API_SECRET: envField.string({ context: "server", access: "secret" }),
     }

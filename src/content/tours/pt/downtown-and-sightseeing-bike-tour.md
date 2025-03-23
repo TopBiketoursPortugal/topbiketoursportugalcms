@@ -19,7 +19,7 @@ tags:
   - Porto
   - North
   - touring bicycle
-meta:
+seo:
   description:
     Para os apaixonados de velocidade, história urbana, jardins e parques com
     áreas verdes, fornecemos uma visita guiada pela maior artéria da cidade, em
@@ -27,7 +27,12 @@ meta:
   keywords:
     SIGHTSEEING City Tour no Porto, circuitos em bicicleta, actividades em
     bicicleta, ferias em bicicleta
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: 'SIGHTSEEING BIKE CITY TOUR NO PORTO '
 difficulty: 1
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1px6K5F8BOih0B5tRKPQdRuea9hY
@@ -137,7 +142,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Preço de grupo por pessoa
-    packageContents:
+    description: Preço de grupo por pessoa
+    included:
       - title: Bicicleta e capacete
         value: Sim
       - title: Guia a acompanhar o grupo
@@ -153,7 +159,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Grupo privado preço por pessoa
-    packageContents:
+    description: Grupo privado preço por pessoa
+    included:
       - title: Bicicleta e capacete
         value: Sim
       - title: Guia a acompanhar o grupo

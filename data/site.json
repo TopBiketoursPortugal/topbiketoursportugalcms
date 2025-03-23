@@ -4,29 +4,29 @@
     "theme_color": "#296a3f"
   },
   "en": {
-    "site_title": "Top Walking Tours Portugal",
-    "description": "Top Walking Tours Portugal",
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
     "twitter_site": "",
     "image": {
       "src": "/images/astro-logo-light-gradient.png",
-      "alt": "Top Walking Tours Portugal logo"
+      "alt": "Top Bike Tours Portugal logo"
     },
     "site": {
-      "name": "Top Walking Tours Portugal",
+      "name": "Top Bike Tours Portugal",
       "url": "https://topbiketoursportugal.com/"
     },
     "metadata": {
       "title": {
-        "default": "Top Walking Tours Portugal",
-        "template": "%s — Top Walking Tours Portugal"
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
       },
-      "description": "Top Walking Tours Portugal",
+      "description": "Top Bike Tours Portugal",
       "robots": {
         "index": true,
         "follow": true
       },
       "openGraph": {
-        "site_name": "Top Walking Tours Portugal",
+        "site_name": "Top Bike Tours Portugal",
         "images": [
           {
             "url": "/src/assets/images/default.png",
@@ -44,29 +44,29 @@
     }
   },
   "pt": {
-    "site_title": "Top Walking Tours Portugal",
-    "description": "Top Walking Tours Portugal",
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
     "twitter_site": "",
     "image": {
       "src": "/images/astro-logo-light-gradient.png",
-      "alt": "Top Walking Tours Portugal logo"
+      "alt": "Top Bike Tours Portugal logo"
     },
     "site": {
-      "name": "Top Walking Tours Portugal",
+      "name": "Top Bike Tours Portugal",
       "url": "https://topbiketoursportugal.com/pt/"
     },
     "metadata": {
       "title": {
-        "default": "Top Walking Tours Portugal",
-        "template": "%s — Top Walking Tours Portugal"
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
       },
-      "description": "Top Walking Tours Portugal",
+      "description": "Top Bike Tours Portugal",
       "robots": {
         "index": true,
         "follow": true
       },
       "openGraph": {
-        "site_name": "Top Walking Tours Portugal",
+        "site_name": "Top Bike Tours Portugal",
         "images": [
           {
             "url": "/src/assets/images/default.png",

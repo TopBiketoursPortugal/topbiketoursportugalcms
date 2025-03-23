@@ -12,16 +12,21 @@ image:
 title: Alentejo Wine country and Castles
 packagetype: PackageTour
 tourtype: PackageTour
-meta:
-  title: Alentejo Bike Tour -Wine & Castles-Top Bike Tours Portugal
-  description:
+seo:
+  page_title: Alentejo Bike Tour -Wine & Castles-Top Bike Tours Portugal
+  page_description:
     Join our Alentejo bike tour and enjoy the best cycling experiences in
     Portugal. Explore stunning landscapes, wine and castles with Top Bike Tours
     Portugal.
   keywords:
     bike tour alentejo portugal, bike tour portugal wine, alentejo bike tour,
     bike tour in alentejo
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 groupSizeMin: -1
 minAge: 16
 skillLevel: 3
@@ -159,8 +164,15 @@ gallery:
 pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
-    package: Self Guided bikeTour
-    packageContents:
+    title: Self Guided bikeTour
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 1589
+      promo: 0
+      amount: 9999
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -205,13 +217,12 @@ pricing:
         value: e﻿xtra 45€
       - title: Drinks, snacks and experiences
         value: X
-    type: ''
-    observations: ''
-    price: 1589
+
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -251,19 +262,25 @@ pricing:
       - title: '* Summer Season'
         value: 2.445€
       - title: Premium hotel upgrade supplement
-        value: 8﻿50€
+        value: 850€
       - title: Top Bike Tours Portugal Jersey
-        value: Y﻿es
+        value: Yes
       - title: Drinks, snacks and experiences
         value: X
     type: ''
     observations: ''
     discount: 0
     price: 2095
-  - bestValue: false
+  - title: Guided Premium*
+    description: Our best package
+    price:
+      bestValue: false
+      currency: EUR
+      price: 3595
+      promo: 0
+      amount: 9999
     highSeasonPriceSupplement: 100
-    package: Guided Premium*
-    packageContents:
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -305,10 +322,10 @@ pricing:
       - title: Premium hotel upgrade supplement
         value: X
       - title: Top Bike Tours Portugal Jersey
-        value: Y﻿es
+        value: Yes
       - title: Drinks, snacks and experiences
         value: Yes (post ride)
-    price: 3595
+
 afterpricing: >-
   **\*Season:**
 

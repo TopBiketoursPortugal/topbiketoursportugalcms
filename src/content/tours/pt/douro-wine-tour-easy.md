@@ -23,7 +23,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Explore o Douro Vinhateiro em bicicleta, uma experiência única entre
     vinhedos e vistas espetaculares. Um Passeio cuidadosamente curado pela Top
@@ -31,7 +31,12 @@ meta:
   keywords:
     passeios de bicicleta no douro, tours em bicicleta no rio douro, ferias em
     bicicleta no vale do douro
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Tour Douro Vinhateiro em Bicicleta - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -158,7 +163,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike tour
-    packageContents:
+    description: Self Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -209,7 +215,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -261,7 +268,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

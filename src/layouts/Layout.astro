@@ -15,6 +15,7 @@ import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
 import type { HrefLang } from 'src/types/hreflang';
+import { INDEX } from 'astro:env/client';
 // import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 // import { pwaInfo } from 'virtual:pwa-info';
 // import { Breadcrumbs } from 'astro-breadcrumbs';
@@ -48,6 +49,9 @@ const seoProps = getPageSeo(
   Astro.props,
   language
 );
+if (INDEX == 'false') {
+  seoProps.noindex = true;
+}
 ---
 
 <!doctype html>

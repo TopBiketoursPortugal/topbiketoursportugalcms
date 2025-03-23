@@ -24,13 +24,18 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Aventure-se do Porto a Lisboa com o tour de bicicleta, uma jornada
     inesquecível pelo coração de Portugal. Uma viagem organizada por Top Bike
     Tours, com guia.
   keywords: port a lisboa passeio de bicicleta, porto a lsibos tour em bicicleta
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Porto a Lisboa Tour em Bicicleta - Top Bike Tours
 distance: 493
 distanceUnit: Km
@@ -281,7 +286,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike tour
-    packageContents:
+    description: Self Guided bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -339,7 +345,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -397,7 +404,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour Premium*
-    packageContents:
+    description: Guided bike tour Premium*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling

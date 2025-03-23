@@ -19,12 +19,17 @@ tags:
   - Porto
   - North
   - touring bicycle
-meta:
+seo:
   description:
     Speed, urban history, gardens and other green areas are to be taken in this
     extreme bicycle tour. For those who enjoy riding a bike in extreme and...
   keywords: Tours porto, Bike Tours porto portugal, Walking Tours porto portugal
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: BIKE TOURS,CITY TOURS PORTO PORTUGAL
 difficulty: 1
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1px6K5F8BOih0B5tRKPQdRuea9hY
@@ -135,7 +140,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Group price per person
-    packageContents:
+    description: Group price per person
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group
@@ -151,7 +157,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Private price per person
-    packageContents:
+    description: Private price per person
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group

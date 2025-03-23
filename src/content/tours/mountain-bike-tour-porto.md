@@ -13,14 +13,19 @@ title: Mountain Bike Tour in Porto - Top Bike Tours
 tourtype: DayTour
 tourcategory:
   - Bike
-meta:
-  title: Mountain Bike Tour in Porto - Top Bike Tours
-  description:
+seo:
+  page_title: Mountain Bike Tour in Porto - Top Bike Tours
+  page_description:
     Explore Porto in a unique way with Top Bike Tours. Our Mountain Bike Tour in
     Porto offers thrilling trails, breathtaking views, and an unforgettable
     experience.
   keywords: mountain bike tour porto, mtb tour porto, mountain bicycle in porto
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 minAge: 16
 skillLevel: 1
 difficulty: 1
@@ -59,7 +64,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Half-Day price per person
-    packageContents:
+    description: Half-Day price per person
+    included:
       - title: Porto van transfer included
         value: Yes
       - title: Hard Trail Trek Mountain bike
@@ -100,4 +106,4 @@ strong enough to go to the top of the mountain, you can expect a great viewpoint
 
 Tracks available between 20 km and 50 km.
 
-![in the top of the mountain](/img/mtb-tour-top-of-the-mountain.jpg 'MTB pictureour ')
+![in the top of the mountain](/src/assets/images/mtb-tour-top-of-the-mountain.jpg 'MTB pictureour ')

@@ -24,14 +24,19 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Join our Silver Coast bike tour and enjoy the best cycling experiences in
     Portugal. Explore stunning landscapes with Top Bike Tours Portugal.
   keywords:
     cycling vacations Lisbon, atlantic coast bike tour, bike tour silver Coast,
     bicycle tours sintra
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Silver Coast Bike Tour - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: -2
@@ -227,7 +232,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike tour
-    packageContents:
+    description: Self Guided bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -277,7 +283,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -329,7 +336,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

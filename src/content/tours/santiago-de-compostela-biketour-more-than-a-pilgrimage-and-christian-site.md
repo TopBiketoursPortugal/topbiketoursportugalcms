@@ -23,7 +23,7 @@ tags:
   - e-bike
   - electric bicycle
   - Spain
-meta:
+seo:
   description:
     Join our Camino de Santiago bike tour and enjoy the best cycling experience
     to Compostela. Explore stunning landscapes and cultures with Top Bike Tours
@@ -31,7 +31,12 @@ meta:
   keywords:
     'Cycling tours, Santiago de compostela, religious tourism, bicycle, pilgrim,
     Portugal, Gallicia '
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Camino de Santiago Bike Tour - Top Bike Tours Portugal
 distance: 243
 distanceUnit: Km
@@ -146,7 +151,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike Tour
-    packageContents:
+    description: Self Guided bike Tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -190,7 +196,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Bike tour
-    packageContents:
+    description: Guided Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -234,7 +241,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour plus*
-    packageContents:
+    description: Guided Biketour plus*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling

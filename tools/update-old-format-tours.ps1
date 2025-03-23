@@ -1,8 +1,8 @@
 # Define the directory containing the .md files
-$directoryPath = "C:\personal\topbiketoursportugalcmsVNEW\src\content\tours"
+$directoryPath = "C:\personal\topbiketoursportugalcmsVNEW\src\content\blog"
 
 # Get all .md files in the directory
-$mdFiles = Get-ChildItem -Path $directoryPath -Filter *.md
+$mdFiles = Get-ChildItem -Path $directoryPath -Filter *.mdx
 
 foreach ($file in $mdFiles) {
     $content = Get-Content -Path $file.FullName

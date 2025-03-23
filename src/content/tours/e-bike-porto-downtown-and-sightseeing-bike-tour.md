@@ -19,12 +19,17 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Enjoy Porto city in a E-bike with Top Bike Tours. Join a group or make it
     your private group and discover the city center, the river and sea.
   keywords: Electric bike tour Porto
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Feel Porto with our E-bike Tours - Top Bike Tours Portugal
 difficulty: 1
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1px6K5F8BOih0B5tRKPQdRuea9hY
@@ -121,7 +126,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Group Price per person
-    packageContents:
+    description: Group Price per person
+    included:
       - title: Electric Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group
@@ -137,7 +143,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Private Price per person
-    packageContents:
+    description: Private Price per person
+    included:
       - title: Electric Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group

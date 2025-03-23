@@ -23,7 +23,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Desfrute de um campo de treino de ciclismo no Douro, com a Top Bike Tours,
     ideal para aprimorar as suas habilidades e aproveitar paisagens
@@ -31,7 +31,12 @@ meta:
   keywords:
     tour em bicicleta de estrada no douro, douro road bike tour, bicicleta de
     speed no douro em ferias
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Campo de treino de ciclismo no Douro - Top Bike Tours
 groupSizeMax: 0
 groupSizeMin: 0

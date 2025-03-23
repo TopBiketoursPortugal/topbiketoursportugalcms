@@ -19,12 +19,17 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Descubra o Porto de uma nova maneira com o nosso e-bike tour no Porto, ideal
     para explorar a cidade sem esforço. Verifique o percurso da Top Bike Tours.
   keywords: tour em bicicleta electrica porto
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: 'E-Bike Tour no Porto: Visitar Sobre Rodas  - Top Bike Tours'
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1px6K5F8BOih0B5tRKPQdRuea9hY
 itinerary:
@@ -119,7 +124,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Preço de grupo por pessoa
-    packageContents:
+    description: Preço de grupo por pessoa
+    included:
       - title: Bicicleta electrica e capacete
         value: Sim
       - title: Guia a acompanhar o grupo
@@ -135,7 +141,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Preço para grupos privados
-    packageContents:
+    description: Preço para grupos privados
+    included:
       - title: Bicicleta electrica e capacete
         value: Sim
       - title: Guia a acompanhar o grupo

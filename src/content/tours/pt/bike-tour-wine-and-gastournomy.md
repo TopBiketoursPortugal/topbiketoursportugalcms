@@ -17,12 +17,17 @@ tags:
   - Porto
   - North
   - touring bicycle
-meta:
+seo:
   description:
     Enjoy the best of Portugal's cuisine and wines with Top Bike Tours. Our Food
     and Wine Tour offers a delicious and culturally rich experience.
   keywords: BIKE TOUR WINE AND GASTOURNOMY PORTO PORTUGAL,food tour
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Food and Wine BIke Tour Portugal - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: 1
@@ -140,7 +145,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 105
     package: Group price per person
-    packageContents:
+    description: Group price per person
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group
@@ -160,7 +166,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 139
     package: Private price per person
-    packageContents:
+    description: Private price per person
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group

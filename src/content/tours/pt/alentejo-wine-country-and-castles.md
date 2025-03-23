@@ -12,16 +12,21 @@ image:
 title: Alentejo Wine country and Castles
 packagetype: PackageTour
 tourtype: PackageTour
-meta:
-  title: Alentejo Bike Tour -Wine & Castles-Top Bike Tours Portugal
-  description:
+seo:
+  page_title: Alentejo Bike Tour -Wine & Castles-Top Bike Tours Portugal
+  page_description:
     Join our Alentejo bike tour and enjoy the best cycling experiences in
     Portugal. Explore stunning landscapes, wine and castles with Top Bike Tours
     Portugal.
   keywords:
     bike tour alentejo portugal, bike tour portugal wine, alentejo bike tour,
     bike tour in alentejo
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 groupSizeMin: -1
 minAge: 16
 skillLevel: 3
@@ -160,7 +165,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Self Guided bikeTour
-    packageContents:
+    description: Self Guided bikeTour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -211,7 +217,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -263,7 +270,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling

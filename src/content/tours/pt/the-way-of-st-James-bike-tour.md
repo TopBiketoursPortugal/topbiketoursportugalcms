@@ -24,7 +24,7 @@ tags:
   - e-bike
   - electric bicycle
   - Spain
-meta:
+seo:
   description: >
     Descubra a aventura de percorrer o Caminho Francês de Santiago de bicicleta
     com a Top Bike Tours. Experiência única, paisagens deslumbrantes e cultura
@@ -32,7 +32,12 @@ meta:
   keywords:
     Passeios de bicicleta guiados portugal - Santiago de Compostela, caminho
     francês
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Santiago de Compostela - Caminho Francês de Bicicleta
 groupSizeMax: 1
 groupSizeMin: 20
@@ -226,7 +231,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (3 and 4 stars, farms or rural houses)

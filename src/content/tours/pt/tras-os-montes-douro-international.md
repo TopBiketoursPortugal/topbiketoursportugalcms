@@ -23,7 +23,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Pedale por Trás-os-Montes e Alto Douro, descobrindo paisagens rurais
     autênticas e vinhas históricas, com a Top Bike Tours. Aproveite o melhor da
@@ -31,7 +31,12 @@ meta:
   keywords:
     Cycling Tours vale do douro, passeio bicicleta no douro, douro em bicicleta,
     tour de bicicleta no douro
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Trás-os-Montes e Alto Douro de Bicicleta - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -121,7 +126,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided biketour
-    packageContents:
+    description: Self Guided biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -160,7 +166,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -200,7 +207,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour Plus*
-    packageContents:
+    description: Guided bike tour Plus*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

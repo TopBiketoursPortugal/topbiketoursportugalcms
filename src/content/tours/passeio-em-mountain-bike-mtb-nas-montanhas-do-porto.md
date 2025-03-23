@@ -11,14 +11,19 @@ image:
   alt: Top bike tours portugal
 title: Conheça o Nosso Passeio de MTB no Porto - Top Bike Tours
 tourtype: DayTour
-meta:
-  title: Conheça o Nosso Passeio de MTB no Porto - Top Bike Tours
-  description:
+seo:
+  page_title: Conheça o Nosso Passeio de MTB no Porto - Top Bike Tours
+  page_description:
     Descubra o emocionante Passeio de MTB no Porto oferecido pela Top Bike
     Tours. Percursos desafiadores, paisagens incríveis e muita aventura esperam
     por si.
   keywords: mountain bike tour porto, mtb tour porto, mountain bike no porto
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 minAge: 16
 skillLevel: 1
 difficulty: 1
@@ -64,7 +69,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Half-Day price per person
-    packageContents:
+    description: Half-Day price per person
+    included:
       - title: Porto van transfer included
         value: Yes
       - title: Hard Trail Trek Mountain bike
@@ -84,7 +90,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Full-Day price per person
-    packageContents:
+    description: Full-Day price per person
+    included:
       - title: Porto van transfer included
         value: yes
       - title: Hard Trail Trek Mountain bike
@@ -128,4 +135,4 @@ o suficiente para subir ao topo da montanha, a vista será memorável.
 
 Temos roteiros disponíveis entre 20 km e 50 km.
 
-![no topo da montanha](/img/mtb-tour-top-of-the-mountain.jpg 'tour de MTB no Porto em Portugal')
+![no topo da montanha](/src/assets/images/mtb-tour-top-of-the-mountain.jpg 'tour de MTB no Porto em Portugal')

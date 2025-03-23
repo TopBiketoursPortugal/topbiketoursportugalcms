@@ -22,14 +22,19 @@ tags:
   - e-bike
   - electric bicycle
   - Spain
-meta:
+seo:
   description:
     Quer conhecer o caminho de Santiago de Compostela de Bicicleta? Descubra o
     percurso da Top Bike Tours e pedale por estradas medievais antigas.
   keywords:
     santiago de compostela em bicicleta, o caminho até santiago em bicicleta a
     começar no porto
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Santiago de Compostela de Bicicleta - Top Bike Tours
 distance: 243
 distanceUnit: Km
@@ -157,7 +162,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bike Tour
-    packageContents:
+    description: Self Guided bike Tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -201,7 +207,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Bike tour
-    packageContents:
+    description: Guided Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -245,7 +252,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour plus*
-    packageContents:
+    description: Guided Biketour plus*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling

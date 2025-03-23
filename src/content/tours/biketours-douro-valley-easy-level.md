@@ -20,7 +20,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Join our easy Douro valley bike tour and enjoy the best cycling experiences
     in Portugal. Explore stunning landscapes and culture with Top Bike Tours
@@ -28,7 +28,12 @@ meta:
   keywords:
     Cycling Tours wine tour, douro valley bike tour, douro valley cycling tour,
     holidays in a bike in douro valley
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Easy Douro Valley Bike Tour -Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: -2
@@ -131,7 +136,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided biketour
-    packageContents:
+    description: Self Guided biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

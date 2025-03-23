@@ -21,7 +21,7 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Discover the hidden gems of Northern Portugal with our bike tour in Minho
     Portugal. Enjoy the natural and cultural beauty with Top Bike Tours
@@ -29,7 +29,12 @@ meta:
   keywords:
     North and Minho bike tour, cyling holiday north of portugal, minho bike
     tour,
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Bike Tour in North and Minho Portugal - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: 1
@@ -181,7 +186,8 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Self Guided bikeTour
-    packageContents:
+    description: Self Guided bikeTour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -232,7 +238,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -283,7 +290,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

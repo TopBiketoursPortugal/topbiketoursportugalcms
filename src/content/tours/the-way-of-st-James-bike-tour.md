@@ -24,7 +24,7 @@ tags:
   - e-bike
   - electric bicycle
   - Spain
-meta:
+seo:
   description: >
     Join our walk of St. James bike tour and enjoy the best cycling experiences
     Through the Camino to Compsotela. Explore stunning with Top Bike Tours
@@ -32,7 +32,12 @@ meta:
   keywords:
     FRENSH WAY TO SANTIAGO DE COMPOSTELA IN A BICYCLE, ORIGINAL ROUTE TO
     SANTIAGO DE COMPOSTELA INA BICYCLE
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Walk of St. James Bike Tour - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: 20
@@ -224,7 +229,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (3 and 4 stars, farms or rural houses)
@@ -265,7 +271,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Guided Premium
-    packageContents:
+    description: Guided Premium
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 and 5 stars, farms or rural houses)
       - title: Luggage shuttling

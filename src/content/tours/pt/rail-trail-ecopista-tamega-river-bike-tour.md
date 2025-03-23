@@ -11,14 +11,19 @@ image:
   alt: Top bike tours portugal
 title: Douro Valley Full-Day Bike Tour | Top Bike Tours Portugal
 tourtype: DayTour
-meta:
-  title: Douro Valley Full-Day Bike Tour | Top Bike Tours Portugal
-  description:
+seo:
+  page_title: Douro Valley Full-Day Bike Tour | Top Bike Tours Portugal
+  page_description:
     Experience a Douro Valley bike tour with stunning vineyard routes, scenic
     viewpoints, and local wine farm visits in Portugal. Book your tour today!
   keywords:
     cycle in douro, bike tours douro valley, bike tours régua, bike tours pinhão
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 minAge: 16
 skillLevel: 1
 distance: 75
@@ -88,7 +93,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Supported Bike tour
-    packageContents:
+    description: Supported Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: No
       - title: Luggage shuttling
@@ -126,7 +132,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 1'
-    packageContents:
+    description: ' Self guided Option 1'
+    included:
       - title: Accommodations W/ Breakfast
         value: 1 Night in 4 star hotel
       - title: Luggage shuttling
@@ -165,7 +172,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 2'
-    packageContents:
+    description: ' Self guided Option 2'
+    included:
       - title: Accommodations W/ Breakfast
         value: 2 Night in 4 star hotel
       - title: Luggage shuttling

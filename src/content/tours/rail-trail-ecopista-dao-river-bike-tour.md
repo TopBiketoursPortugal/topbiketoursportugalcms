@@ -11,13 +11,18 @@ image:
   alt: Top bike tours portugal
 title: Rail trail - Ecopista Dão river bike tour
 tourtype: DayTour
-meta:
-  title: Ecopista Dão River - Rail Trail with Top Bike Tours
-  description:
+seo:
+  page_title: Ecopista Dão River - Rail Trail with Top Bike Tours
+  page_description:
     Discover the beauty of Ecoopista Dão river on a family-friendly bike tour
     with Top Bike Tours. Perfect for beginners or exploring the region.
   keywords: ecopista dao bike tour, rail trail dao bike tour
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
 minAge: 16
 skillLevel: 1
 distance: 49
@@ -74,7 +79,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: Supported Bike tour
-    packageContents:
+    description: Supported Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: No
       - title: Luggage shuttling
@@ -112,7 +118,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 1'
-    packageContents:
+    description: ' Self guided Option 1'
+    included:
       - title: Accommodations W/ Breakfast
         value: 1 Night in a rural house
       - title: Luggage shuttling
@@ -151,7 +158,8 @@ pricing:
   - bestValue: false
     highSeasonPriceSupplement: 100
     package: ' Self guided Option 2'
-    packageContents:
+    description: ' Self guided Option 2'
+    included:
       - title: Accommodations W/ Breakfast
         value: 2 Nights (4 stars and rural house)
       - title: Luggage shuttling

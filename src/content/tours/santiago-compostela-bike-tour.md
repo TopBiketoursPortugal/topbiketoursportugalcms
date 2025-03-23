@@ -25,7 +25,7 @@ tags:
   - electric bicycle
   - Spain
   - atlantic coast
-meta:
+seo:
   canonicalLink: ''
   description: >
     Experience the historic route from Porto to Santiago by bike with Top Bike
@@ -34,7 +34,12 @@ meta:
   keywords:
     porto to santiago de compostela Bike tour , guided bike tour santiago de
     compostela,porto to santiago bike tour
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Bike Tour Porto to Santiago de Compostela - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: -2
@@ -204,7 +209,8 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Self Guided bike Tour
-    packageContents:
+    description: Self Guided bike Tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -258,7 +264,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Bike tour
-    packageContents:
+    description: Guided Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -313,7 +320,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling

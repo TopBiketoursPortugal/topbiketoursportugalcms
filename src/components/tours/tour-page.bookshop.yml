@@ -404,7 +404,7 @@ blueprint:
     textcolor: white
     subtitle: 'Coastal route to Santiago Compostela: Stage 1'
     title: ' Coastal route to Santiago Compostela: Stage 1'
-    image: /img/top-walking-tours-portugal.jpg
+    image: /src/assets/images/top-walking-tours-portugal.jpg
     bokunLinkText: Book now
 
 # Overrides any fields in the blueprint when viewing this component in the component browser

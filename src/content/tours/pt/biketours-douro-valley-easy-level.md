@@ -23,7 +23,7 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Delicie-se com a tour vinícola pelo Douro de bicicleta, combinando
     enoturismo com aventura, com a Top Bike Tours. Transferes incluído para o
@@ -31,7 +31,12 @@ meta:
   keywords:
     Cycling Tours wine tour, douro valley bike tour, douro valley cycling tour,
     holidays in a bike in douro valley
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Tours Vinícolas pelo Douro de Bicicleta - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -131,7 +136,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided biketour
-    packageContents:
+    description: Self Guided biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

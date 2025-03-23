@@ -42,7 +42,7 @@ const allTours = (await getCollection('tours')).filter(
             <a href={featuredTourURL}>
               <Image
                 class="aspect-video w-full rounded-sm object-cover"
-                alt={tour.data.image?.alt ?? 'Top walking tours portugal'}
+                alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
                 widths={[320, 500, 640, 960, 1280]}
                 sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
                 src={imageSrc}
@@ -89,7 +89,7 @@ const allTours = (await getCollection('tours')).filter(
               <a href={featuredTourURL}>
                 <Image
                   class="aspect-video w-full rounded-sm object-cover"
-                  alt={tour.data.image?.src ?? 'Top walking tours portugal'}
+                  alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
                   widths={[320, 500, 640]}
                   sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
                   src={imageSrc}

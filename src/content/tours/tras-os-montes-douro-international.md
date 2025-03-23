@@ -23,14 +23,19 @@ tags:
   - road bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
     Join our wine bike tours and enjoy the best cycling experiences in Portugal.
     Explore stunning landscapes, food and wine with Top Bike Tours Portugal.
   keywords:
     'Cycling tours, Douro Valley, nature, heritage, Portugal, North, bicycle,
     nature tourism '
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Douro Wine Bike Tours - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: -2
@@ -120,7 +125,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided biketour
-    packageContents:
+    description: Self Guided biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -159,7 +165,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour
-    packageContents:
+    description: Guided bike tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -199,7 +206,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided bike tour Plus*
-    packageContents:
+    description: Guided bike tour Plus*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

@@ -5,56 +5,47 @@
         {
           "text": "Home",
           "page": "",
-          "href": "/"
-        },
-        {
-          "text": "Hiking tours",
-          "page": "",
-          "href": "/hiking-tours-portugal/"
+          "link": "/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "href": "/bike-tours-in-portugal/",
-          "enabled": false
+          "link": "/bike-tours-in-portugal/"
         },
         {
           "text": "Day tours",
           "page": "",
-          "href": "/bike-tours-porto-portugal/",
-          "enabled": false
+          "link": "/bike-tours-porto-portugal/"
         },
         {
           "text": "Calendar",
           "page": "",
-          "href": "/guided-bike-tours-calendar-portugal/",
-          "enabled": false
+          "link": "/guided-bike-tours-calendar-portugal/"
         },
         {
           "text": "Bikes",
           "page": "",
-          "href": "/rent-bike-porto-portugal/",
-          "enabled": false
+          "link": "/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
           "page": "",
-          "href": "/blog/"
+          "link": "/blog/"
         },
         {
           "text": "Contacts",
           "page": "",
-          "href": "/contacts/"
+          "link": "/contacts/"
         },
         {
           "text": "About us",
           "page": "",
-          "href": "/about-us/"
+          "link": "/about-us/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "href": "/widgets/",
+          "link": "/widgets/",
           "enabled": false
         }
       ]
@@ -69,8 +60,16 @@
               "link": "/"
             },
             {
-              "text": "Hiking tours",
-              "link": "/hiking-tours-portugal/"
+              "text": "Biking tours",
+              "link": "/bike-tours-in-portugal/"
+            },
+            {
+              "text": "Day tours",
+              "link": "/bike-tours-porto-portugal/"
+            },
+            {
+              "text": "Calendar",
+              "link": "/guided-bike-tours-calendar-portugal/"
             },
             {
               "text": "Blog",
@@ -116,56 +115,47 @@
         {
           "text": "Home",
           "page": "",
-          "href": "/pt/"
-        },
-        {
-          "text": "Caminhadas",
-          "page": "",
-          "href": "/pt/passeios-pedestres-portugal/"
+          "link": "/pt/"
         },
         {
           "text": "Biking tours",
           "page": "",
-          "href": "/pt/bike-tours-in-portugal/",
-          "enabled": false
+          "link": "/pt/bike-tours-in-portugal/"
         },
         {
           "text": "Day tours",
           "page": "",
-          "href": "/pt/bike-tours-porto-portugal/",
-          "enabled": false
+          "link": "/pt/bike-tours-porto-portugal/"
         },
         {
           "text": "Calendar",
           "page": "",
-          "href": "/pt/guided-bike-tours-calendar-portugal/",
-          "enabled": false
+          "link": "/pt/guided-bike-tours-calendar-portugal/"
         },
         {
           "text": "Bikes",
           "page": "",
-          "href": "/pt/rent-bike-porto-portugal/",
-          "enabled": false
+          "link": "/pt/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
           "page": "",
-          "href": "/pt/blog/"
+          "link": "/pt/blog/"
         },
         {
           "text": "Contatos",
           "page": "",
-          "href": "/pt/contatos/"
+          "link": "/pt/contatos/"
         },
         {
           "text": "Sobre nós",
           "page": "",
-          "href": "/pt/sobre-nos/"
+          "link": "/pt/sobre-nos/"
         },
         {
           "text": "Widgets",
           "page": "",
-          "href": "/pt/widgets/",
+          "link": "/pt/widgets/",
           "enabled": false
         }
       ]
@@ -180,8 +170,19 @@
               "link": "/pt/"
             },
             {
-              "text": "Caminhadas",
-              "link": "/pt/passeios-pedestres-portugal/"
+              "text": "Biking tours",
+              "page": "",
+              "link": "/pt/bike-tours-in-portugal/"
+            },
+            {
+              "text": "Day tours",
+              "page": "",
+              "link": "/pt/bike-tours-porto-portugal/"
+            },
+            {
+              "text": "Calendar",
+              "page": "",
+              "link": "/pt/guided-bike-tours-calendar-portugal/"
             },
             {
               "text": "Blog",

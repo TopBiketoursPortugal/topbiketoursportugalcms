@@ -21,7 +21,7 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description: >
 
     Pedalar até às praias do Norte de Portugal nunca foi tão agradável ao sabor
@@ -29,7 +29,12 @@ meta:
   keywords:
     city tours,circuitos em bicicleta PORTO, actividades em bicicleta PORTO,
     ferias em bicicleta PORTO
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Full Day Biketour Deluxe | Top Bike Tours Portugal
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1D3CjvZ4Tdut09u7F2KwCOAxBqNA
 itinerary:
@@ -165,7 +170,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Preço de grupo por pessoa
-    packageContents:
+    description: Preço de grupo por pessoa
+    included:
       - title: Bicicleta e capacete
         value: Sim
       - title: Guia a acompanhar o grupo
@@ -188,7 +194,8 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Preço Privado por pessoa
-    packageContents:
+    description: Preço Privado por pessoa
+    included:
       - title: Bicicleta e capacete
         value: Sim
       - title: Guia a acompanhar o grupo

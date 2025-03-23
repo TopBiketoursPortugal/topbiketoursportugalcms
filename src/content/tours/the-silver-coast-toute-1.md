@@ -24,7 +24,7 @@ tags:
   - e-bike
   - electric bicycle
   - atlantic coast
-meta:
+seo:
   description:
     Check our bike tour from Porto to Coimbra, a specially curated bike tour.
     Discover the unique scenery and history of Portugal with Top Bike Tours
@@ -32,7 +32,12 @@ meta:
   keywords:
     guided bike tour atlantic sea, bike tour porto to coimbra, bike tour porto
     to lisbon, cycling holidays portugal
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Bike Tour from Porto to Coimbra - Top Bike Tours Portugal
 groupSizeMax: 1
 groupSizeMin: -2
@@ -180,7 +185,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Self Guided bikeTour
-    packageContents:
+    description: Self Guided bikeTour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -231,7 +237,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -284,7 +291,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

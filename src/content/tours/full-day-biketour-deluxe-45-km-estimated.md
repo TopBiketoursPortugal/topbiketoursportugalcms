@@ -21,13 +21,18 @@ tags:
   - touring bicycle
   - e-bike
   - electric bicycle
-meta:
+seo:
   description:
     Explore the stunning Douro valley through a full day bike tour with Top Bike
     Tours. Explore the vineyards, visit wine farms, and capture memories of a
     lifetime.
   keywords: city tours,ACTIVITIES IN PORTO, CITY TOURS PORTO
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Full Day Bike Tour Through Douro Valley - Top Bike Tours
 mapUrl: https://www.google.com/maps/d/u/2/embed?mid=1D3CjvZ4Tdut09u7F2KwCOAxBqNA
 itinerary:
@@ -165,7 +170,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Group price per person
-    packageContents:
+    description: Group price per person
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group
@@ -188,9 +194,10 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Private price per person
+    description: Private price per person
     price: 260
     type: ''
-    packageContents:
+    included:
       - title: Bicycle and Helmet
         value: Yes
       - title: Guide riding with your group

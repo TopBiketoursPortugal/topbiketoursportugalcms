@@ -22,7 +22,7 @@ tags:
   - e-bike
   - electric bicycle
   - atlantic coast
-meta:
+seo:
   description:
     Explore o Minho de bicicleta, a vila mais antiga de Portugal, o mar e o rio
     num único bike tour! Desfrute da paisagem dos rios Lima e Minho com a Top
@@ -30,7 +30,12 @@ meta:
   keywords:
     Norte e Minho Bike tour, ferias em bicicleta no norte de portugal, bike tour
     no minho, passeios em bicicleta no norte de portugal
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Tour pelo Minho de Bicicleta - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: 1
@@ -155,7 +160,8 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Self Guided bikeTour
-    packageContents:
+    description: Self Guided bikeTour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -206,7 +212,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour
-    packageContents:
+    description: Guided Biketour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -257,7 +264,8 @@ pricing:
   - discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Biketour Premium *
-    packageContents:
+    description: Guided Biketour Premium *
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)

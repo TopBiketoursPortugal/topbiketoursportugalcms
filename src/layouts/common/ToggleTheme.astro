@@ -16,7 +16,7 @@ const { enableSystem = false } = Astro.props;
 
   <button
     x-on:click="darkMode = 'light'"
-    class="transition-transform duration-150 hover:scale-125"
+    class="hidden transition-transform duration-150 hover:scale-125 dark:block"
   >
     <Icon
       icon="ph:sun-light"
@@ -28,7 +28,7 @@ const { enableSystem = false } = Astro.props;
 
   <button
     x-on:click="darkMode = 'dark'"
-    class="transition-transform duration-150 hover:scale-125"
+    class="block transition-transform duration-150 hover:scale-125 dark:hidden"
   >
     <Icon
       icon="ph:moon-light"

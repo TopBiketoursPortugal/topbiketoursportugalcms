@@ -25,7 +25,7 @@ tags:
   - electric bicycle
   - Spain
   - atlantic coast
-meta:
+seo:
   description: >
     O Caminho de Santiado pela Costa de bicicleta, preparado pela Top Bike
     Tours, é mais simples do que os tradicionais portugueses, e promete muito
@@ -33,7 +33,12 @@ meta:
   keywords:
     passeio de bicicleta santiago de compostela, passeio guiado até santiago de
     compostela, bike tour porto a santiago de compostela
-  robots: INDEX
+  canonical_url:
+  featured_image:
+  featured_image_alt:
+  author_twitter_handle:
+  open_graph_type: product
+  no_index: false
   title: Caminho de Santiago Pela Costa de Bicicleta - Top Bike Tours
 groupSizeMax: 1
 groupSizeMin: -2
@@ -194,7 +199,8 @@ pricing:
     highSeasonPriceSupplement: 100
     observations: ''
     package: Self Guided bike Tour
-    packageContents:
+    description: Self Guided bike Tour
+    included:
       - icon: ✓
         title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
@@ -248,7 +254,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Bike tour
-    packageContents:
+    description: Guided Bike tour
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
@@ -303,7 +310,8 @@ pricing:
     discount: 0
     highSeasonPriceSupplement: 100
     package: Guided Premium*
-    packageContents:
+    description: Guided Premium*
+    included:
       - title: Accommodations W/ Breakfast
         value: Yes (4 stars, farms or rural houses)
       - title: Luggage shuttling
