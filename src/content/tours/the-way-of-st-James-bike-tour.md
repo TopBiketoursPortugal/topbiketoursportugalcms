@@ -1,0 +1,402 @@
+---
+id: b9fb1fd6-09b7-4eb0-b03c-490a46f44783
+templateKey: tour-gen
+order: 89
+path: french-way-to-santiago-bike-tour
+code: SANTIAGO 03
+featured: false
+language: en
+image:
+  src: /src/assets/images/santiago1.png
+  alt: Top bike tours portugal
+title: The Way of St. James BikeTour - The French Way
+packagetype: PackageTour
+tourtype: PackageTour
+tourcategory:
+  - Bike
+tags:
+  - Santiago Compostela
+  - Cycling Holiday
+  - Porto
+  - North
+  - Biketour
+  - road bicycle
+  - e-bike
+  - electric bicycle
+  - Spain
+meta:
+  description: >
+    Join our walk of St. James bike tour and enjoy the best cycling experiences
+    Through the Camino to Compsotela. Explore stunning with Top Bike Tours
+    Portugal.
+  keywords:
+    FRENSH WAY TO SANTIAGO DE COMPOSTELA IN A BICYCLE, ORIGINAL ROUTE TO
+    SANTIAGO DE COMPOSTELA INA BICYCLE
+  robots: INDEX
+  title: Walk of St. James Bike Tour - Top Bike Tours Portugal
+groupSizeMax: 1
+groupSizeMin: 20
+minAge: 16
+skillLevel: 1
+distance: 791
+distanceUnit: km
+duration: 16
+durationUnit: Days | 15 Nights
+difficulty: 4
+physicality: 1
+mapUrl: https://www.google.com/maps/d/u/1/embed?mid=1HO1scn3_ETs8wsMq-TzxiymjG6iY5ydf
+itinerary:
+  - day: '1'
+    description: Reception at Saint-Jean-Pied-De-Port
+    location:
+      lat: '43.1629528'
+      lng: '-1.2380528'
+    title: Day 1 - Saint-Jean-Pied-De-Port
+  - day: '2'
+    description:
+      This amazing cycling trip starts in the little village of
+      Saint-Jean-De-Port. This place is famous, because it is a starting point
+      to the Camino Francés. This road crosses the Pyrenees with several
+      medieval streets ending in Spain, in Roncesvalles. This village is known
+      as the first resting point for all pilgrims.
+    location:
+      lat: '43.009286'
+      lng: '43.009286'
+    title: Day 2 - Saint-Jean-Pied-De-Port - Roncesvalles / 27 Km
+  - day: '3'
+    description:
+      Today's route passes through the interior of Spain. The destination is
+      Puente la Reina. Prepare to see lots of nature and amazing views. During
+      this path there is some little villages to stop. Puente la Reina lies
+      between Pamplona and Estella on the Way of St. James pilgrimage route to
+      Santiago de Compostela. It is the first town after the junction of the
+      French Way and the Aragonese Way.
+    location:
+      lat: '42.6717107'
+      lng: '-1.8155291'
+    title: Day 3 -  Roncesvalles - Puente la Reina / 67 km
+  - day: '4'
+    description:
+      Continuing through the interior of Spain, the next stop is Logrono. This
+      town is a centre of the trade in Rioja wine, for which the area is noted.
+      It also produces wood, metal, and textile products. This village is also
+      known for its Tapas, offering 50 taperías (tapas restaurants) located
+      within a four-block area near the city center.
+    location:
+      lat: '42.4661196'
+      lng: '-2.4396676'
+    title: Day 4 - Puente la Reina - Logrono / 76 km
+  - day: '5'
+    description:
+      The next destination is Santo Domingo de la Calzada. In this day you will
+      see several fishermen and diverse agricultural lands, with several vines,
+      since this place is famous for the Rioja wine. The town of Santo Domingo
+      is a municipality situated on the banks of the Oja River. Its name refers
+      to its founder, Dominic de la Calzada, who built a bridge, hospital, and
+      hotel for pilgrims on the Way of St. James.
+    location:
+      lat: '42.44293826'
+      lng: '-2.95695305'
+    title: Day 5 -  Logrono - Santo Domingo / 52 km
+  - day: '6'
+    description:
+      The ride today has severeal rivers and streams and the destination is the
+      city of Burgos. This city has many historical landmarks, of particular
+      importance; the Cathedral of Burgos, declared World Heritage Site by
+      UNESCO in 1984, seat of the Metropolitan Roman Catholic Archdiocese of
+      Burgos. The city is known as a main crossroad of northern Spain along the
+      Camino of Santiago, which runs parallel to the River Arlanzón.
+    location:
+      lat: '42.343926'
+      lng: '-3.696977'
+    title: Day 6 - Santo Domingo - Burgos /72 km
+  - day: '7'
+    description:
+      Continuing the Camino, the next stop is Carrión de los Condes. Carrión de
+      los Condes was taken from the Moors by Alonso Carreño, around 791–842. Don
+      Carreño took the name Carrión at this time. This city was known for the
+      strong presence of the Jews. Although they outnumbered the Christians both
+      in numbers and in property, they submitted in 1126 to the victorious King
+      Alfonso VI.
+    location:
+      lat: '42.3385404'
+      lng: '-4.6017128'
+    title: Day 7 -  Burgos - Carrión de los Condes / 85 km
+  - day: '8'
+    description:
+      You will spend one day resting in the city of Sahugún or in the city of
+      Leon. Leaving Carrión de los Condes and continuing the cycling trip, the
+      destination is Sahugún. This town is located in the province of León.
+      Sahagún contains some of the earliest examples of the mudéjar style of
+      architecture. The city of Leon is located on the Camino de Santiago, which
+      is ranked as a UNESCO World Heritage Site. Some of the city's most
+      prominent historical buildings are the Cathedral, the finest example of
+      French gothic classical style architecture in Spain.
+    location:
+      lat: '42.5989995'
+      lng: '-5.5682413'
+    title: Day 8 - Carrión de los Condes – Sahugún - Léon (extra night)
+  - day: '9'
+    description: Discover Léon city
+    location:
+      lat: '42.5989995'
+      lng: '-5.5682413'
+    title: Day 9 – Rest day
+  - day: '10'
+    description:
+      The road is to Astorga. This path is made on clay and with many viewpoints
+      to admire the landscape. Arriving to the city center of Astorga, you can
+      admire several monuments, such as the Cathedral the Episcopal Palace and
+      the walls that surround the town built at the time of Ancient Rome.
+    location:
+      lat: '42.4553555'
+      lng: '-6.0529025'
+    title: Day 10 - León - Astorga / 51 km
+  - day: '11'
+    description:
+      Upon departing Astorga, the next town is Cacabelos. On this day the way
+      presents us with diverse agricultural lands and forest areas. You can also
+      admire the rails until reaching Cacabelos, which are from the time of the
+      Medieval Era. Arriving to Cacabelos, you can taste its famous wines, while
+      admiring the medieval bridge that passes over the Cua river.
+    location:
+      lat: '42.5988042'
+      lng: '-6.7259329'
+    title: Day 11 -  Astorga - Ponferrada - Bierzo
+  - day: '12'
+    description:
+      scend into the Galician mountains, enjoying the challenge of the climbs as
+      you head to Las Herrerias. The fresh mountain air and rugged surroundings
+      create an exhilarating experience.
+    location:
+      lat: '42.7563403'
+      lng: '-7.2397461'
+    title: Day 12 - Ponferrada - Las Herrerias
+  - day: '13'
+    description:
+      Descend from the mountains into Sarria, a bustling town marking the
+      100-kilometer point on the Camino. This stretch takes you through lush
+      Galician countryside and offers a mix of terrains.
+    location:
+      lat: '42.808161'
+      lng: '-7.6156139'
+    title: Day 13 -  Las Herrerias - Sarria
+  - day: '14'
+    description:
+      Cycle through picturesque villages and shaded paths as you approach Arzúa.
+      The gentle terrain allows you to savor the natural beauty of Galicia.
+    location:
+      lat: '42.9145741'
+      lng: '-8.0136139'
+    title: Day 14 -  Sarria - Arzúa
+  - day: '15'
+    description:
+      "The final leg of your journey leads you through serene landscapes and
+      traditional villages. Arrive in Santiago de Compostela, where the grand
+      Cathedral awaits, marking the culmination of your pilgrimage. Day 8:
+      Departure As your remarkable bike tour comes to an end, take time to
+      reflect on the experiences and connections you've gained. Depart from
+      Santiago de Compostela with memories of a transformative journey along the
+      Camino de Santiago. This 8-day bike tour takes you through diverse
+      landscapes, historic towns, and challenging terrains, offering a mix of
+      physical accomplishment and spiritual reflection."
+    location:
+      lat: '42.8804219'
+      lng: '-8.5458608'
+    title: Day 15 -  Melide - Santiago de Compostela / 54 km
+  - day: '16'
+    description: Departure
+    location:
+      lat: '42.8804219'
+      lng: '-8.5458608'
+    title: Day 16 - Santiago de Compostela
+gallery:
+  - alt: FRENCH CAMINO IN A BYCICLE
+    image: /src/assets/images/french-camino-in-a-bycicle.png
+  - alt: FRENCH CAMINO IN A BYCICLE
+    image: /src/assets/images/french-camino-in-a-bycicle2.png
+  - alt: FRENCH CAMINO IN A BYCICLE
+    image: /src/assets/images/french-camino-in-a-bycicle3.png
+  - alt: FRENCH CAMINO IN A BYCICLE
+    image: /src/assets/images/french-camino-in-a-bycicle4.png
+pricing:
+  - bestValue: false
+    discount: 0
+    highSeasonPriceSupplement: 100
+    package: Guided bike tour
+    packageContents:
+      - icon: ✓
+        title: Accommodations W/ Breakfast
+        value: Yes (3 and 4 stars, farms or rural houses)
+      - title: Luggage shuttling
+        value: Yes
+      - title: San Sebatian Airport Transfers
+        value: Yes
+      - icon: '-'
+        title: Trains or Bus Tickets
+        value: ''
+      - title: Van Support
+        value: Yes
+      - icon: '-'
+        title: GPS With route per booking
+        value: ''
+      - title: Bike rent
+        value: Yes
+      - title: Guide
+        value: Yes
+      - title: Mechanical Assistance
+        value: Yes
+      - title: 14 dinners (Half-Board)
+        value: Extra 700€
+      - title: 14 lunchs + 14 dinners (Full-board)
+        value: extra 1.400€
+      - title: Personal Accident Insurance
+        value: Yes
+      - title: Liability Insurance
+        value: Yes
+      - title: 15 Nights /16 Days (price per person)
+        value: 4.399€
+      - title: July, August and September Prices
+        value: '* 600€'
+      - title: Min. Participants
+        value: '10'
+    price: 4399
+    type: '1'
+  - bestValue: false
+    highSeasonPriceSupplement: 100
+    package: Guided Premium
+    packageContents:
+      - title: Accommodations W/ Breakfast
+        value: Yes (4 and 5 stars, farms or rural houses)
+      - title: Luggage shuttling
+        value: Y﻿es
+      - title: San Sebatian Airport Transfers
+        value: Y﻿es
+      - title: Trains or Bus Tickets
+        value: X
+      - title: Van Support
+        value: Y﻿es
+      - title: GPS With route per booking
+        value: X
+      - title: Bike rent
+        value: Y﻿es
+      - title: Guide
+        value: Y﻿es
+      - title: Mechanical Assistance
+        value: Y﻿es
+      - title: 14 dinners (Half-Board)
+        value: 1.300€
+      - title: 14 lunchs + 14 dinners (Full-board)
+        value: 2.100€
+      - title: Personal Accident Insurance
+        value: Y﻿es
+      - title: Liability Insurance
+        value: Y﻿es
+      - title: 15 Nights /16 Days (price per person)
+        value: 6﻿.420€
+      - title: July, August and September Prices
+        value: 1.200€
+      - title: Min. Participants
+        value: '8'
+    price: 6420
+afterpricing: >-
+  **Observations:**
+
+
+  * Prices are based for 2 people sharing the same standard room;
+
+  * Sea view (when available) or premium rooms, price on request;
+
+  * Prices can suffer updates due high season, holidays or weekends
+
+  * Beverages are not included in Self Guided and Guided option when meals are
+  booked
+
+  * Selected drinks are included in Premium package when meals are booked
+
+  * If in a triple room with parents Children up to 10 years old - 35% discount.
+  Children from 11 to 14 years old - 20% discount. Children from 15 to 17 years
+  old - 15% discount.
+
+
+  **Extras**
+
+
+  * Electric bicycles price: 480€
+
+  * Supplement for single room: LS: 800€, RS: 840€, HS: 900€, SS.480€ (Premium
+  option plus 500€)
+
+  * Extra nights: on request
+
+  * Private group price on request
+
+  *  City taxes is not included in the price package (approximately 2€ per
+  person per night - payable on site - in Lisbon city tax is 4€ per person per
+  night)
+
+  *  Ferry (boat) in river / lake crossing is not included in price package
+  (approximately 2€ to 10€ per person)
+feature:
+  align: center
+  image: /src/assets/images/furadouro-forest-in-a-bicycle.jpg
+  imageAlign: center
+  subtitle: Guided and unguided cycling tours Portugal
+  textcolor: white
+  title: Guided and unguided cycling tours Portugal
+---
+
+# The Way of St. James BikeTour
+
+## The French Way
+
+Going from Saint Jean Pied de Port, in the Pyrenees, all the way to Santiago de
+Compostela, the French way is probably the most known route of the St. James
+Way. Its use goes back to the IXth century, when the route only extended from
+Oviedo to Santiago de Compostela.
+
+Thousands of pilgrims choose this amazing route each year, not only for its
+authenticity, but also for all the amazing places one finds him/herself in,
+while on the road.
+
+**Route description:**
+
+- On this long route all kind of terrains are to be expected. Route with long
+  and difficult climbs.
+- 12.000 meters with cumulated ascents
+
+\
+**Itinerary:**
+
+\
+Day 1 - Saint-Jean-Pied-De-Port reception
+
+Day 2 - Saint-Jean-Pied-De-Port - Roncesvalles / 27 Km
+
+Day 3 - Roncesvalles - Puente la Reina / 67 km
+
+Day 4 - Puente la Reina - Logrono / 76 km
+
+Day 5 - Logrono - Santo Domingo / 52 km
+
+Day 6 - Santo Domingo - Burgos /72 km
+
+Day 7 - Burgos - Carrión de los Condes / 85 km
+
+Day 8 - Carrión de los Condes - Sahugún (optional)- León / 97 km
+
+Day 9 - León (rest day)
+
+Day 10 - León - Astorga / 51 km
+
+Day 11 - Astorga - Ponteferrada
+
+Day 12 - Ponteferrada - Bierzo
+
+Day 13 - Bierzo - Sarria
+
+Day 14 - Sarria - Arzúa
+
+Day 15 - Arzúa - Santiago de Compostela
+
+Day 16 - Santiago de Compostela – departure

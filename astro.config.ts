@@ -38,7 +38,7 @@ function convertJson(inputJson: {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://topwalkingtoursportugal.com',
+  site: 'https://topbiketoursportugal.com',
   integrations: [
     // sentry(),
     // spotlightjs(),
@@ -147,45 +147,15 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [rehypeExternalLinks]
   },
-  redirects: convertJson(
-    RouteData as {
-      routes: {
-        from: string;
-        destination: string;
-        status: ValidRedirectStatus;
-      }[];
-    }
-  ),
-  // redirects: {
-  //   '/hiking-alentejo-vicentine-southeast-portugal-coast/': {
-  //     destination: '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
-  //     status: 301
-  //   },
-  //   '/passeios-pedestres-portugal/': {
-  //     destination: '/pt/passeios-pedestres-portugal/',
-  //     status: 301
-  //   },
-  //   '/hiking-douro-valley-wine-region': {
-  //     destination: '/tours/hiking-douro-valley-wine-region/',
-  //     status: 301
-  //   },
-  //   '/hiking-algarve-vicentine-southeast-portugal-coast': {
-  //     destination: '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
-  //     status: 301
-  //   },
-  //   '/hiking-alentejo-castles-wine-heritage': {
-  //     destination: '/tours/hiking-alentejo-castles-wine-heritage/',
-  //     status: 301
-  //   },
-  //   '/hiking-atlantic-coast-porto': {
-  //     destination: '/tours/hiking-atlantic-coast-porto/',
-  //     status: 301
-  //   },
-  //   '/hiking-coast-santiago-compostela-stage-2': {
-  //     destination: '/tours/hiking-coast-santiago-compostela-stage-2/',
-  //     status: 301
+  // redirects: convertJson(
+  //   RouteData as {
+  //     routes: {
+  //       from: string;
+  //       destination: string;
+  //       status: ValidRedirectStatus;
+  //     }[];
   //   }
-  // },
+  // ),
   prefetch: {
     prefetchAll: true
   },
@@ -209,7 +179,7 @@ export default defineConfig({
       SITE_URL: envField.string({
         context: 'client',
         access: 'public',
-        default: 'https://topwalkingtoursportugal.com'
+        default: 'https://topbiketoursportugal.com'
       })
       // API_SECRET: envField.string({ context: "server", access: "secret" }),
     }

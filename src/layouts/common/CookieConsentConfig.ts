@@ -161,7 +161,7 @@ export const config: CookieConsentConfig = {
             },
             {
               title: 'More information',
-              description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topwalkingtoursportugal.com/privacy-policy/">contact us</a>.`
+              description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topbiketoursportugal.com/privacy-policy/">contact us</a>.`
             }
           ]
         }
@@ -245,7 +245,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Mais informações',
               description:
-                'Para quaisquer questões relativas à política de cookies e às suas escolhas, por favor <a href="https://topwalkingtoursportugal.com/privacy-policy/">contacte-nos</a>.'
+                'Para quaisquer questões relativas à política de cookies e às suas escolhas, por favor <a href="https://topbiketoursportugal.com/privacy-policy/">contacte-nos</a>.'
             }
           ]
         }
