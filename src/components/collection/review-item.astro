@@ -30,7 +30,7 @@ const countryCode = CountryData.filter(
 )[0]?.alpha2;
 
 const countryFlagIcon = countryCode
-  ? `circle-flags:${countryCode.toLowerCase()}`
+  ? `circle-flags:${countryCode?.toLowerCase()}`
   : 'ph:user-circle-light';
 ---
 
