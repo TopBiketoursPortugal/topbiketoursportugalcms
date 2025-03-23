@@ -20,7 +20,13 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const page = await getBlogIndexPage(language);
 
   // Filter out what is already displayed in featured stories
-  const filteredPosts = posts.filter((p) => p.data.language === language);
+  const filteredPosts = posts
+    .filter((p) => p.data.language === language)
+    .sort((a, b) => {
+      const dateA = new Date(a.data.date).getTime();
+      const dateB = new Date(b.data.date).getTime();
+      return dateB - dateA; // For descending order (newest first)
+    });
   return paginate(filteredPosts, {
     pageSize: page?.data && 'page_size' in page.data ? page.data.page_size : 6
   });
