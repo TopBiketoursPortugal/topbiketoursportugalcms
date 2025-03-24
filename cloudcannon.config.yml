@@ -399,10 +399,11 @@ collections_config:
         cascade: true
     disable_url: true
     preview:
-      text:
-        - key: title
       subtext:
         - key: author.country
+      metadata:
+        - text:
+            - template: '{language}-{title}'
     _enabled_editors:
       - content
     create:
