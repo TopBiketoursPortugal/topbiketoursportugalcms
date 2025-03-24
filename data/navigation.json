@@ -8,7 +8,7 @@
           "href": "/"
         },
         {
-          "text": "Biking tours",
+          "text": "Bike tours",
           "page": "",
           "href": "/bike-tours-in-portugal/"
         },
@@ -21,11 +21,6 @@
           "text": "Calendar",
           "page": "",
           "href": "/guided-bike-tours-calendar-portugal/"
-        },
-        {
-          "text": "Bikes",
-          "page": "",
-          "href": "/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
@@ -60,7 +55,7 @@
               "href": "/"
             },
             {
-              "text": "Biking tours",
+              "text": "Bike tours",
               "href": "/bike-tours-in-portugal/"
             },
             {
@@ -93,6 +88,10 @@
               "href": "/contacts/"
             },
             {
+              "text": "Bicycles",
+              "href": "/Bicycles"
+            },
+            {
               "text": "Faqs",
               "href": "/faqs/"
             },
@@ -118,24 +117,19 @@
           "href": "/pt/"
         },
         {
-          "text": "Biking tours",
+          "text": "Férias em Bicicleta",
           "page": "",
           "href": "/pt/bike-tours-in-portugal/"
         },
         {
-          "text": "Day tours",
+          "text": "Tours Diárias",
           "page": "",
           "href": "/pt/bike-tours-porto-portugal/"
         },
         {
-          "text": "Calendar",
+          "text": "Calendário",
           "page": "",
           "href": "/pt/guided-bike-tours-calendar-portugal/"
-        },
-        {
-          "text": "Bikes",
-          "page": "",
-          "href": "/pt/rent-bike-porto-portugal/"
         },
         {
           "text": "Blog",
@@ -170,12 +164,12 @@
               "href": "/pt/"
             },
             {
-              "text": "Biking tours",
+              "text": "Férias em Bicicleta",
               "page": "",
               "href": "/pt/bike-tours-in-portugal/"
             },
             {
-              "text": "Day tours",
+              "text": "Tours Diárias",
               "page": "",
               "href": "/pt/bike-tours-porto-portugal/"
             },
