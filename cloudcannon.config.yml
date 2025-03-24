@@ -345,6 +345,52 @@ collections_config:
         remove_extra_inputs: true
         name: New tour
         icon: notes
+  testimonials:
+    path: src/content/testimonials
+    glob:
+      - '**/*.md*'
+    name: Testimonials
+    singular_name: Testimonial
+    _inputs:
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        cascade: true
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: author.country
+    _enabled_editors:
+      - content
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    add_options:
+      - name: New Testimonial
+        icon: language
+        editor: content
+        base_path: ''
+        schema: default
+    schemas:
+      default:
+        path: schemas/testimonial.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Testimonial
+        icon: message
   team:
     path: src/content/team
     glob:
@@ -371,7 +417,15 @@ collections_config:
         hidden: true
         cascade: true
       language:
-        type: text
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
         hidden: true
         cascade: true
       subTitle:
@@ -426,6 +480,7 @@ collection_groups:
       - blog
       - tours
       - team
+      - testimonials
   - heading: Data
     collections:
       - data
