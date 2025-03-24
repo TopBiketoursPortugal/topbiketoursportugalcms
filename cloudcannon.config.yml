@@ -376,8 +376,7 @@ collections_config:
       relatedProduct:
         type: select
         options:
-          values:
-            - collections.tours
+          values: collections.tours
           value_key: id
           preview:
             text:
@@ -403,7 +402,6 @@ collections_config:
         - key: title
       subtext:
         - template: '{language} - {author.country} - {author.name}'
-
     _enabled_editors:
       - content
     create:
