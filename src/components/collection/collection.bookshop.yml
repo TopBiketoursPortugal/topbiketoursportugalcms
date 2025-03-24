@@ -32,7 +32,7 @@ _inputs:
       values:
         - tours
         - tours-package-tour
-        - tours-single-tour
+        - tours-day-tour
         - reviews
         - team
         - bikes

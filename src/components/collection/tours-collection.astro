@@ -6,8 +6,6 @@ import type { LanguageCodes } from 'src/schemas/language';
 import TourListSchema from 'src/components/tours/tour-list-schema.astro';
 import TourCard from 'src/components/tours/tour-card.astro';
 import type { TourSchema } from 'src/schemas/tours';
-import type { KebabCase } from 'type-fest';
-import { undefined } from 'astro:schema';
 
 export type TourCollectionProps = {
   type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';
@@ -17,18 +15,20 @@ export type TourCollectionProps = {
   layout: 'horizontal' | 'vertical';
   title: string;
   heading: { text: string };
-  tourType?: KebabCase<TourSchema['tourtype']>;
+  tourType?: TourSchema['tourtype'];
 };
 
 type Props = TourCollectionProps;
 
 const { contentDisplay = 'inline', tourType } = Astro.props;
+console.log(tourType);
+
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const tours = await getCollection(
   'tours',
   (item) =>
     item.data?.language === language &&
-    (tourType || item.data.tourtype === tourType)
+    ((tourType ?? '') === '' || item.data.tourtype === tourType)
 );
 const items =
   tours.sort((a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)) ?? [];

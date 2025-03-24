@@ -4,8 +4,8 @@ import type { TourCollectionProps } from './tours-collection.astro';
 import ToursCollection from './tours-collection.astro';
 
 type Props = Except<TourCollectionProps, 'tourType'> & {
-  tourType: 'package-tour';
+  tourType: 'day-tour';
 };
 ---
 
-<ToursCollection {...Astro.props} tourType="package-tour" />
+<ToursCollection {...Astro.props} tourType="DayTour" />

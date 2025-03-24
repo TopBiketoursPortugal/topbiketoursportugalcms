@@ -69,6 +69,7 @@ const groupSizeSchema = z.object({
 });
 
 const reviewSchema = z.object({
+  id: z.string().uuid().optional().nullable(),
   author: z
     .object({
       familyName: z.string().optional().nullable(),

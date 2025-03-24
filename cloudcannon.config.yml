@@ -190,6 +190,11 @@ collections_config:
       included[*].description:
         type: markdown
         cascade: true
+      reviews[*].id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
       reviews[*].title:
         type: markdown
         cascade: true
@@ -425,7 +430,7 @@ collection_groups:
     collections:
       - data
 _inputs:
-  feature_reviews:
+  feature_testimonials:
     type: multiselect
     options:
       empty_type: array
@@ -793,18 +798,14 @@ _structures:
           title: ''
           rating: 5
           author:
-            givenName: John
-            familyName: Doe
+            givenName: ''
+            familyName: ''
             country: Portugal
-          datePublished: 2023-10-15T00:00:00Z
-          content: >-
-            These headphones are fantastic! The noise cancellation works
-            perfectly, and the sound quality is top-notch. Highly recommend them
-            for anyone looking for a premium audio experience.
+          datePublished:
+          content:
         preview:
           text:
-            - key: question
-    style: select
+            - key: title
     reorder_inputs: true
     remove_empty_inputs: true
     hide_extra_inputs: true

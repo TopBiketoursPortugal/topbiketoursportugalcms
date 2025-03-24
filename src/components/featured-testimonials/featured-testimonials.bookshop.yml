@@ -2,18 +2,17 @@
 spec:
   structures:
     - content_blocks
-  label: Featured reviews/testimonials
-  description: Featured review/testimonials grid
+  label: Featured testimonials/reviews
+  description: Featured testimonials grid
   icon: 'message'
   tags:
     - Grid
-    - Reviews
     - Testimonials
     - Tours
 
 # Defines the structure of this component, as well as the default values
 blueprint:
-  feature_reviews: []
+  feature_testimonials: []
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
