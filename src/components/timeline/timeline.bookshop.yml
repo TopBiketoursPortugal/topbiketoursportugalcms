@@ -17,6 +17,8 @@ blueprint:
         description: New date for guided tour description
 
 preview:
+  text: title
+  subtext: date
 
 # structures:
 
