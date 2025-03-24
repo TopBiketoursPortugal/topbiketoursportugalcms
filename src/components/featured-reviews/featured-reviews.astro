@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import type { VisuallyEditable } from 'src/types';
+import { getTourPath, getTourTagPath } from 'utils/permalinks';
+import Logo from 'src/assets/icons/logo.svg';
+import type { LanguageCodes } from 'src/schemas/language';
+type Props = {
+  main_feature: string;
+  feature_list: readonly string[];
+} & VisuallyEditable;
+
+const block = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpeg,jpg,png,gif}',
+  { eager: true }
+);
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const allTours = (await getCollection('tours')).filter(
+  (tour) =>
+    (block.main_feature === tour.data.id ||
+      block.feature_list?.includes(tour.data.id)) &&
+    tour.data.language === language
+);
+---
+
+<section class="flex flex-col gap-6 py-[48px] lg:flex-row">
+  {
+    allTours
+      .filter((tour) => block.main_feature === tour.data.id)
+      .map((tour) => {
+        const featuredTourURL = getTourPath(tour.data);
+        const imageSrc =
+          (tour.data.image?.src
+            ? images[tour.data.image?.src]?.default
+            : null) ?? Logo;
+        const tags = tour.data.tags;
+
+        return (
+          <div class="lg:w-3/4">
+            <a href={featuredTourURL}>
+              <Image
+                class="aspect-video w-full rounded-sm object-cover"
+                alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
+                widths={[320, 500, 640, 960, 1280]}
+                sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
+                src={imageSrc}
+              />
+            </a>
+            {tags ? (
+              <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                {tags.map((tag: string) => {
+                  return (
+                    <a href={getTourTagPath(tag, language)}>
+                      <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            ) : (
+              ''
+            )}
+            <a href={featuredTourURL}>
+              <h3 class="py-2 text-3xl font-semibold">{tour.data.title}</h3>
+            </a>
+          </div>
+        );
+      })
+  }
+  <div
+    class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
+  >
+    {
+      allTours
+        .filter((tour) => block.feature_list?.includes(tour.data.id))
+        .map((tour) => {
+          const featuredTourURL = getTourPath(tour.data);
+          const imageSrc =
+            (tour.data.image?.src
+              ? images[tour.data.image?.src]?.default
+              : null) ?? Logo;
+          const tags = tour.data.tags;
+
+          return (
+            <div>
+              <a href={featuredTourURL}>
+                <Image
+                  class="aspect-video w-full rounded-sm object-cover"
+                  alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
+                  widths={[320, 500, 640]}
+                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                  src={imageSrc}
+                />
+              </a>
+              <div>
+                {tags ? (
+                  <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                    {tags.map((tag: string) => {
+                      return (
+                        <a href={getTourTagPath(tag, language)}>
+                          <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  ''
+                )}
+                <a href={featuredTourURL}>
+                  <h3 class="py-1 text-2xl font-semibold">{tour.data.title}</h3>
+                </a>
+              </div>
+            </div>
+          );
+        })
+    }
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: var(--pageContainer);
+    margin-inline: auto;
+    padding-inline: var(--pagePadding);
+    padding-block: 24px;
+  }
+
+  .non-featured-posts {
+    padding-inline: var(--pagePadding);
+    margin-inline: auto;
+  }
+</style>

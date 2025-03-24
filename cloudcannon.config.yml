@@ -425,6 +425,33 @@ collection_groups:
     collections:
       - data
 _inputs:
+  feature_reviews:
+    type: multiselect
+    options:
+      empty_type: array
+      values:
+        - collections.tours[*].reviews
+        - collections.testimonials
+      value_key: id
+      preview:
+        text:
+          - key: title
+        icon: message
+    cascade: true
+  feature_tours:
+    type: multiselect
+    options:
+      empty_type: array
+      values:
+        - collections.tours
+      value_key: id
+      preview:
+        text:
+          - key: title
+        image:
+          - key: image.src
+        icon: message
+    cascade: true
   path:
     type: text
     label: Url

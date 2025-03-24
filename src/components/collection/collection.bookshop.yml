@@ -31,7 +31,8 @@ _inputs:
       allow_empty: false
       values:
         - tours
+        - tours-package-tour
+        - tours-single-tour
         - reviews
         - team
-        # -  bikes
-        # - posts
+        - bikes

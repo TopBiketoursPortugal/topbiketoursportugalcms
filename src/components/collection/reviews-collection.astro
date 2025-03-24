@@ -5,6 +5,8 @@ import type { LanguageCodes } from 'src/schemas/language';
 import Grid from 'src/components/grid/grid.astro';
 import ReviewListSchema from './review-list-schema.astro';
 import ReviewItem from './review-item.astro';
+import type { ReviewSchema, TourSchema } from 'src/schemas/tours';
+import { undefined } from 'astro:schema';
 
 type Props = {
   type: 'reviews';
@@ -16,10 +18,37 @@ type Props = {
 };
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const testimonials = (
+  await getCollection('testimonials', (t) => t.data.language === language)
+).map(
+  (t) =>
+    ({
+      content: t.body ?? '',
+      rating: t.data.score,
+      title: t.data.title,
+      author: {
+        country: t.data.author.country ?? '',
+        givenName: t.data.author.name ?? ''
+      },
+      source: {
+        url: t.data.reviewSource,
+        name:
+          t.data.reviewSource?.indexOf('tripadvisor') !== -1
+            ? 'TripAdvisor'
+            : ''
+      }
+    }) satisfies ReviewSchema
+);
 const tours = (await getCollection('tours')).filter(
   (r) => r.data.language === language
 );
-const items = tours.flatMap((t) => t.data.reviews ?? []) ?? [];
+const items = (tours.flatMap((t) => t.data.reviews ?? []) ?? [])
+  .concat(testimonials ?? [])
+  .sort((a, b) => {
+    const dateA = new Date(a.publishDate ?? '').getTime();
+    const dateB = new Date(b.publishDate ?? '').getTime();
+    return dateB - dateA; // For descending order (newest first)
+  });
 ---
 
 <Stack class="border-solid sm:p-6" layout="vertical">

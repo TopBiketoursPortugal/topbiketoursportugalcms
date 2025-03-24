@@ -2,7 +2,14 @@
 import Prose from '../typography/prose.astro';
 
 type Props = {
-  type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';
+  type:
+    | 'tours'
+    | 'tours-PackageTour'
+    | 'tours-SingleTour'
+    | 'reviews'
+    | 'team'
+    | 'bikes'
+    | 'posts';
   display: 'slideshow' | 'list';
   contentDisplay: 'overlay' | 'inline';
   frame: 'none' | 'light' | 'heavy';

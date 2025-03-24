@@ -3,6 +3,7 @@ import { defineCollection, z } from 'astro:content';
 import { languageSchema } from 'src/schemas/language';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
+import { testimonialCollection } from 'src/schemas/testimonal';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
@@ -68,5 +69,6 @@ export const collections = {
   blog: blogCollection,
   pages: pagesCollection,
   tours: tourCollection,
-  team: teamCollection
+  team: teamCollection,
+  testimonials: testimonialCollection
 };

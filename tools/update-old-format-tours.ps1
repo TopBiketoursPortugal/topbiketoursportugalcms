@@ -1,5 +1,5 @@
 # Define the directory containing the .md files
-$directoryPath = "C:\personal\topbiketoursportugalcmsVNEW\src\content\blog"
+$directoryPath = "C:\personal\topbiketoursportugalcmsVNEW\src\content\testimonials"
 
 # Get all .md files in the directory
 $mdFiles = Get-ChildItem -Path $directoryPath -Filter *.mdx

@@ -5,7 +5,6 @@ import Rating from 'src/components/rating/rating.astro';
 import { getImageByPath } from 'utils/get-image';
 import Icon from 'src/components/utility/icon.astro';
 import Prose from '../typography/prose.astro';
-import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import CountryData from 'src/../data/countries.json';
 
 type Props = {
@@ -25,8 +24,16 @@ const imageOptimized = photo
 
 const countryCode = CountryData.filter(
   (c) =>
-    c.englishName.toLocaleLowerCase() === country?.toLocaleLowerCase() ||
-    c.alpha3.toLocaleLowerCase() === country?.toLocaleLowerCase()
+    c.englishName.toLocaleLowerCase() === country?.toLocaleLowerCase().trim() ||
+    c.portugueseName.toLocaleLowerCase() ===
+      country?.toLocaleLowerCase().trim() ||
+    c.englishName.toLocaleLowerCase() ===
+      country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
+    c.portugueseName.toLocaleLowerCase() ===
+      country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
+    c.alpha3.toLocaleLowerCase() === country?.toLocaleLowerCase() ||
+    c.alpha3.toLocaleLowerCase() ===
+      country?.toLocaleLowerCase().split(',')?.at(-1)?.trim()
 )[0]?.alpha2;
 
 const countryFlagIcon = countryCode
