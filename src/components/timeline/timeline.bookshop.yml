@@ -1,0 +1,30 @@
+# src/components/two-column-markdown/two-column-markdown.bookshop.yml
+spec:
+  structures:
+    - content_blocks # or any structure you are using
+  label: Timeline
+  description: Timeline
+  icon: text # Choose an appropriate icon
+  tags:
+    - Markdown
+    - Text
+
+blueprint:
+  - dates:
+      - date: 2015-01-01 10:00
+        title: New date for guided tour title
+        description: New date for guided tour description
+
+preview:
+
+# structures:
+
+_inputs:
+  dates:
+    type: array
+  dates.date:
+    type: date
+  title:
+    type: markdown
+  description:
+    type: markdown
