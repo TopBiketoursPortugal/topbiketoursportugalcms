@@ -352,6 +352,40 @@ collections_config:
     name: Testimonials
     singular_name: Testimonial
     _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+      title:
+        type: markdown
+      quote:
+        type: markdown
+      reviewSource:
+        type: url
+        options:
+          hide_link_to_email_address: true
+          hide_link_to_file: true
+          hide_link_to_page: true
+      score:
+        type: number
+        options:
+          min: 1
+          max: 5
+      author.avatar:
+        type: image
+      relatedProduct:
+        type: select
+        options:
+          values:
+            - collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
       language:
         type: select
         options:
