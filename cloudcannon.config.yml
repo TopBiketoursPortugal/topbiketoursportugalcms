@@ -435,12 +435,14 @@ _inputs:
     options:
       empty_type: array
       values:
-        - collections.tours[*].reviews
+        #  - collections.tours[*].reviews
         - collections.testimonials
       value_key: id
       preview:
         text:
           - key: title
+        subtext:
+          - key: language
         icon: message
     cascade: true
   feature_tours:
