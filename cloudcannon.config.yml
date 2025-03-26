@@ -526,9 +526,7 @@ _inputs:
     type: multiselect
     options:
       empty_type: array
-      values:
-        #  - collections.tours[*].reviews
-        - collections.testimonials
+      values: collections.testimonials
       value_key: id
       preview:
         text:

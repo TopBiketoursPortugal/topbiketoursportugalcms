@@ -16,6 +16,21 @@ blueprint:
 
 # Overrides any fields in the blueprint when viewing this component in the component browser
 preview:
-
+  text:
+    - key: title
+  subtext:
+    - key: language
 # Any extra CloudCannon inputs configuration to apply to the blueprint
 _inputs:
+  feature_testimonials:
+    type: multiselect
+    options:
+      empty_type: array
+      values: collections.testimonials
+      value_key: id
+      preview:
+        text:
+          - key: title
+        subtext:
+          - key: language
+        icon: message
