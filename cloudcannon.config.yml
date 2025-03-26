@@ -625,6 +625,7 @@ _inputs:
       values: collections.blog
       value_key: id
     cascade: true
+
   main_feature:
     type: select
     options:
