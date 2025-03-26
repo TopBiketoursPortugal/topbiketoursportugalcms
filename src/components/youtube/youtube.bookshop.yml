@@ -50,7 +50,7 @@ _inputs:
     default: 'YouTube Video Player'
 
   allowFullscreen:
-    type: boolean
+    type: switch
     label: Allow Fullscreen
     default: true
 
