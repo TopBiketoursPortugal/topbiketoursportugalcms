@@ -63,7 +63,7 @@ _inputs:
       underline: true
       undo: true
   column2:
-    type: markdown~
+    type: markdown
     options:
       allow_resize: true
       allow_custom_markup: false
@@ -91,7 +91,7 @@ _inputs:
       underline: true
       undo: true
   fullwidth:
-    type: boolean
+    type: switch
   padding:
     type: select
     options:
