@@ -1,0 +1,78 @@
+# .bookshop/youtube-video.yml
+spec:
+  structures:
+    - content_blocks # or any structure you are using
+  label: YouTube Video
+  description:
+    Embeds a responsive YouTube video player with accessibility features
+  icon: video
+  tags:
+    - Media
+    - Video
+    - YouTube
+
+blueprint:
+  videoId: '_EutA0fW23A'
+  width: '100%'
+  height: 'auto'
+  title: 'YouTube Video Player'
+  allowFullscreen: true
+  loading: 'lazy'
+  className: ''
+
+_inputs:
+  videoId:
+    type: text
+    label: YouTube Video ID
+    description: The ID from the YouTube URL (after v=)
+    example: '_EutA0fW23A'
+    comment: |
+      Extract from URL: https://www.youtube.com/watch?v=VIDEO_ID
+      Only include the part after "v="
+    required: true
+
+  width:
+    type: text
+    label: Width
+    description: CSS width value (e.g., "100%", "800px")
+    default: '100%'
+
+  height:
+    type: text
+    label: Height
+    description: CSS height value (e.g., "450px", "auto")
+    default: 'auto'
+
+  title:
+    type: text
+    label: Video Title
+    description: Used for accessibility and optional caption
+    default: 'YouTube Video Player'
+
+  allowFullscreen:
+    type: boolean
+    label: Allow Fullscreen
+    default: true
+
+  loading:
+    type: select
+    label: Loading Strategy
+    default: 'lazy'
+    options:
+      - label: Lazy Load (recommended)
+        value: 'lazy'
+      - label: Load Immediately
+        value: 'eager'
+
+  className:
+    type: text
+    label: CSS Class
+    description: Additional classes for custom styling
+    required: false
+
+preview:
+  height: 300
+  width: 100%
+  src:
+    "https://www.youtube.com/embed/{{page.videoId |
+    default:'_EutA0fW23A'}}?rel=0"

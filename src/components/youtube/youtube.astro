@@ -1,0 +1,114 @@
+---
+// src/components/YouTubeVideo.astro
+type YouTubeVideoProps = {
+  /**
+   * YouTube video ID (the part after v= in the URL)
+   * @example "dQw4w9WgXcQ"
+   */
+  videoId: string;
+
+  /**
+   * Width of the video player
+   * @default "100%"
+   */
+  width?: string;
+
+  /**
+   * Height of the video player
+   * @default "400px"
+   */
+  height?: string;
+
+  /**
+   * Title of the video (used for caption and aria-label)
+   */
+  title?: string;
+
+  /**
+   * Allow fullscreen mode
+   * @default true
+   */
+  allowFullscreen?: boolean;
+
+  /**
+   * Loading strategy
+   * @default "lazy"
+   */
+  loading?: 'eager' | 'lazy';
+
+  /**
+   * Additional CSS class
+   */
+  className?: string;
+};
+
+export interface Props extends YouTubeVideoProps {
+  // Optional props with defaults
+  width?: string;
+  height?: string;
+  title?: string;
+  allowFullscreen?: boolean;
+  loading?: 'eager' | 'lazy';
+  className?: string;
+}
+
+const {
+  videoId,
+  width = '100%',
+  height = '400px',
+  title = 'YouTube Video Player',
+  allowFullscreen = true,
+  loading = 'lazy',
+  className = ''
+} = Astro.props;
+
+const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
+---
+
+<figure class={`youtube-video-container ${className}`}>
+  <div
+    class="youtube-video-wrapper"
+    style={`padding-bottom: ${(9 / 16) * 100}%;`}
+  >
+    <iframe
+      src={embedUrl}
+      width={width}
+      height={height}
+      title={title}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen={allowFullscreen}
+      loading={loading}
+      aria-label={title}
+      role="application"
+      aria-roledescription="video player"
+      frameborder="0"></iframe>
+  </div>
+  {title && <figcaption>{title}</figcaption>}
+</figure>
+
+<style>
+  .youtube-video-container {
+    margin: 0;
+    max-width: 100%;
+  }
+  .youtube-video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+  .youtube-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .youtube-video-container figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+    text-align: center;
+  }
+</style>
