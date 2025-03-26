@@ -25,11 +25,11 @@ preview:
 _inputs:
   dates:
     type: array
-  dates.date:
+  dates[*].date:
     type: date
-  dates.title:
+  dates[*].title:
     type: markdown
-  dates.subtitle:
+  dates[*].subtitle:
     type: markdown
-  dates.description:
+  dates[*].description:
     type: markdown
