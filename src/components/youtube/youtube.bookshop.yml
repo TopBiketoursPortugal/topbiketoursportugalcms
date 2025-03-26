@@ -55,7 +55,7 @@ _inputs:
     default: true
 
   loading:
-    type: select
+    type: choice
     label: Loading Strategy
     default: 'lazy'
     options:
@@ -65,6 +65,7 @@ _inputs:
         value: 'eager'
 
   className:
+    hidden: true
     type: text
     label: CSS Class
     description: Additional classes for custom styling
