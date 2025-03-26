@@ -91,14 +91,7 @@ content_blocks:
     fullwidth: true
     class: ''
   - _bookshop_name: text
-    text: >-
-      ##
-
-
-      <SnippetsYoutube
-      video_source="https://www.youtube.com/watch?v=zO2uuYBtgt4&t=2s"
-      width={100} height={66} title="Testimonial for Guided Bike Tours in
-      Portugal"/>
+    text: '##'
     style:
       container: full
       padding: normal
@@ -118,5 +111,16 @@ content_blocks:
       image_path: /src/assets/images/walking-hiking-portugal.jpg
       alt_text: An image
     buttons: []
+  - _bookshop_name: two-column-markdown
+    column1: |
+      ## Column 1
+
+      Enter your Markdown content here.
+    column2: |
+      ## Column 2
+
+      Enter your Markdown content here.
+    padding: normal
+    fullwidth: true
 template: ~/layouts/Page.astro
 ---
