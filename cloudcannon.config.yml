@@ -1231,6 +1231,7 @@ file_config:
 data_config:
   countries:
     path: data/contries.json
+
   icons:
     path: data/icons.json
   colors:
