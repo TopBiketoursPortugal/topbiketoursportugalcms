@@ -90,6 +90,14 @@ content_blocks:
     padding: normal
     fullwidth: true
     class: ''
+  - _bookshop_name: youtube
+    videoId: https://www.youtube.com/watch?v=zO2uuYBtgt4&t=2s
+    width: 100%
+    height: auto
+    title: YouTube Video Player
+    allowFullscreen: true
+    loading: lazy
+    className: ''
   - _bookshop_name: text
     text: '##'
     style:
@@ -111,16 +119,5 @@ content_blocks:
       image_path: /src/assets/images/walking-hiking-portugal.jpg
       alt_text: An image
     buttons: []
-  - _bookshop_name: two-column-markdown
-    column1: |
-      ## Column 1
-
-      Enter your Markdown content here.
-    column2: |
-      ## Column 2
-
-      Enter your Markdown content here.
-    padding: normal
-    fullwidth: true
 template: ~/layouts/Page.astro
 ---
