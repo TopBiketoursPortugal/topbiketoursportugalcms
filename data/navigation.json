@@ -119,12 +119,12 @@
         {
           "text": "Bike Tours",
           "page": "",
-          "href": "/pt/bike-tours-in-portugal/"
+          "href": "/pt/passeios-de-bicicleta-portugal/"
         },
         {
           "text": "Tour Diárias",
           "page": "",
-          "href": "/pt/bike-tours-porto-portugal/"
+          "href": "/pt/passeios-bicicleta-porto/"
         },
         {
           "text": "Calendário",
@@ -197,7 +197,7 @@
             },
             {
               "text": "Contatos",
-              "href": "/pt/contatos/"
+              "href": "/pt/contactos/"
             },
             {
               "text": "Bicicletas",
