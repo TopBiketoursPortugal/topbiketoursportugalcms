@@ -36,8 +36,14 @@ const {
   reviews = []
 } = data;
 const { average, count } = getAggregatedReviews(reviews);
-const minPrice = Math.min(...packages.map((p) => p.price?.price ?? 0));
-const minPromoPrice = Math.max(...packages.map((p) => p.price?.promo ?? 0));
+const minPrice =
+  packages.length > 0
+    ? Math.min(...packages.map((p) => p.price?.price ?? 0))
+    : 0;
+const minPromoPrice =
+  packages.length > 0
+    ? Math.max(...packages.map((p) => p.price?.promo ?? 0))
+    : 0;
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
@@ -56,16 +62,16 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 
     <Stack spacing="medium" layout="vertical" class="w-full">
       {
-        duration && (
+        duration && duration > 0 ? (
           <span class="flex gap-2 text-gray-600">
             <Icon icon="ph:clock-countdown-light" /> {duration}{' '}
             {t('Tour.Info.Duration.Unit.Days', language)} / {duration - 1}{' '}
             {t('Tour.Info.Duration.Unit.Nights', language)}
           </span>
-        )
+        ) : null
       }
       {
-        difficulty && (
+        difficulty && difficulty > 0 && (
           <span class="flex gap-2 text-gray-600">
             {tourtype !== 'PackageTour' ? (
               <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
@@ -77,7 +83,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
         )
       }
       {
-        distance ? (
+        distance && distance > 0 ? (
           <div class="flex items-center gap-2">
             <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
             <span>
@@ -92,21 +98,23 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
           >({count} {t('Tour.Info.Reviews.Unit', language)})</span
         >
       </div>
-      <Stack
-        spacing="small"
-        alignment="trailing"
-        layout="vertical"
-        class="w-full"
-      >
-        {
-          minPromoPrice > 0 && (
-            <span class="line-through">{priceFormat.format(minPrice)}</span>
-          )
-        }
-        <span class="text-xl font-bold">
-          {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
-        </span>
-      </Stack>
+      {
+        minPromoPrice > 0 || minPromoPrice > 0 ? (
+          <Stack
+            spacing="small"
+            alignment="trailing"
+            layout="vertical"
+            class="w-full"
+          >
+            {minPromoPrice > 0 && (
+              <span class="line-through">{priceFormat.format(minPrice)}</span>
+            )}
+            <span class="text-xl font-bold">
+              {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
+            </span>
+          </Stack>
+        ) : null
+      }
     </Stack>
 
     <Separator weight="thin" color="neutral" />

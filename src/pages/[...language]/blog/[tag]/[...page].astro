@@ -63,7 +63,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       return paginate(tagPosts, {
         params: {
           blogTags: 'blog',
-          language: language ?? 'en',
+          language: language === 'en' ? undefined : language,
           tag:
             slugify(tag, { lower: true, strict: true, trim: true }) +
             trailingSlash

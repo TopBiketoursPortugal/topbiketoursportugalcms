@@ -43,15 +43,14 @@ const {
 } = tour;
 
 const { average, count } = getAggregatedReviews(reviews);
-const minPrice = Math.min(...packages.map((p) => p.price?.price ?? 0));
-const minPromoPrice = Math.max(...packages.map((p) => p.price?.promo ?? 0));
+const minPrice = packages.length > 0 ? Math.min(...packages.map((p) => p.price?.price ?? 0)) : 0;
+const minPromoPrice = packages.length > 0 ? Math.max(...packages.map((p) => p.price?.promo ?? 0)) : 0;
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = false;
-console.log(minPrice, minPrice);
 ---
 
 {image && <ResponsiveImage {...image} class="max-h-72" />}
@@ -88,14 +87,14 @@ console.log(minPrice, minPrice);
   <section
     class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
-  { (minPrice !==Infinity && minPrice>0) || (minPromoPrice !==Infinity && minPromoPrice>0)?
+  {  minPrice>0 || minPromoPrice>0?
     (<div class="relative flex items-center gap-2">
       <Icon icon="ph:tag-light" className="h4 w-4" />
       <span class="self-end text-sm text-gray-500"
         >{t('Tour.Form.FromPrice', language)}</span
       >
       {
-        Infinity !== minPrice && minPrice > 0 ? (
+        minPrice > 0 ? (
           <span
             class={cn(
               isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
@@ -106,7 +105,7 @@ console.log(minPrice, minPrice);
         ) : null
       }
       {
-        isPromotional && Infinity !== minPromoPrice && minPromoPrice > 0 ? (
+        isPromotional && minPromoPrice > 0 ? (
           <span class="font-bold">
             {isPromotional && priceFormat.format(minPromoPrice)}
           </span>

@@ -32,8 +32,8 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       }),
       {
         params: {
-          blog: 'blog',
-          language: language ?? 'en'
+          // blog: 'blog',
+          language: language === 'en' ? undefined : language
         },
         pageSize:
           page?.data && 'page_size' in page.data ? page.data.page_size : 6
