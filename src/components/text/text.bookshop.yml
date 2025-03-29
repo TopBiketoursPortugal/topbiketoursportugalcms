@@ -68,8 +68,8 @@ _inputs:
       values:
         - name: Full
           value: full
-        - name: Contained
-          value: contained
+        - name: Centered
+          value: centered
       preview:
         icon: 'short_text'
         text:

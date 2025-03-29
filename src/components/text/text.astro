@@ -20,8 +20,8 @@ const textVariants = tv({
       tight: { container: 'px-2 py-4 md:px-4 md:py-8' }
     },
     container: {
-      fluid: 'max-w-none',
-      normal: 'mx-auto max-w-screen-xl'
+      fluid: { container: 'max-w-none' },
+      centered: { container: 'mx-auto max-w-screen-xl' }
     },
     align: {
       leading: { text: 'flex items-start text-left' },
@@ -35,7 +35,7 @@ const textVariants = tv({
   },
   defaultVariants: {
     padding: 'normal',
-    container: 'fluid',
+    container: 'centered',
     align: 'leading'
   }
 });

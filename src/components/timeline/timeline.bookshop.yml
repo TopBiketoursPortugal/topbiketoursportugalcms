@@ -15,10 +15,36 @@ blueprint:
       title: New date for guided tour title
       subtitle: New date for guided tour title
       description: New date for guided tour description
-
+  style:
+    container: centered
+    padding: normal
 # structures:
 
 _inputs:
+  padding:
+    options:
+      values:
+        - name: Tight
+          value: tight
+        - name: Normal
+          value: normal
+        - name: Loose
+          value: loose
+      preview:
+        icon: 'short_text'
+        text:
+          - key: style.padding
+  container:
+    options:
+      values:
+        - name: Full
+          value: full
+        - name: Centered
+          value: centered
+      preview:
+        icon: 'short_text'
+        text:
+          - key: style.container
   dates:
     type: array
   dates[*].date:
