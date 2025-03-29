@@ -42,12 +42,17 @@ const {
   mapUrl = '',
   image,
   feature
-
 } = tour;
 
 const { average, count } = getAggregatedReviews(reviews);
-const minPrice = packages.length > 0 ? Math.min(...packages.map((p) => p.price?.price ?? 0)) : 0;
-const minPromoPrice = packages.length > 0 ? Math.max(...packages.map((p) => p.price?.promo ?? 0)) : 0;
+const minPrice =
+  packages.length > 0
+    ? Math.min(...packages.map((p) => p.price?.price ?? 0))
+    : 0;
+const minPromoPrice =
+  packages.length > 0
+    ? Math.max(...packages.map((p) => p.price?.promo ?? 0))
+    : 0;
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
@@ -91,51 +96,61 @@ console.log(feature);
   <section
     class="z-40 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
-  {  minPrice>0 || minPromoPrice>0?
-    (<div class="relative flex items-center gap-2">
-      <Icon icon="ph:tag-light" className="h4 w-4" />
-      <span class="self-end text-sm text-gray-500"
-        >{t('Tour.Form.FromPrice', language)}</span
-      >
-      {
-        minPrice > 0 ? (
-          <span
-            class={cn(
-              isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
-            )}
-          >
-            {priceFormat.format(minPrice)}
+    {
+      minPrice > 0 || minPromoPrice > 0 ? (
+        <div class="relative flex items-center gap-2">
+          <Icon icon="ph:tag-light" className="h4 w-4" />
+          <span class="self-end text-sm text-gray-500">
+            {t('Tour.Form.FromPrice', language)}
           </span>
-        ) : null
-      }
-      {
-        isPromotional && minPromoPrice > 0 ? (
-          <span class="font-bold">
-            {isPromotional && priceFormat.format(minPromoPrice)}
-          </span>
-        ) : null
-      }
+          {minPrice > 0 ? (
+            <span
+              class={cn(
+                isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
+              )}
+            >
+              {priceFormat.format(minPrice)}
+            </span>
+          ) : null}
+          {isPromotional && minPromoPrice > 0 ? (
+            <span class="font-bold">
+              {isPromotional && priceFormat.format(minPromoPrice)}
+            </span>
+          ) : null}
 
-      <div class="w-2 -translate-x-1">
-        <Tooltip class="align-top">
-          <Icon
-            slot="trigger"
-            icon="ph:info"
-            title={t('Tour.Form.FromPrice.Info', language)}
-          />
-          <span slot="content">{t('Tour.Form.FromPrice.Info', language)}</span>
-        </Tooltip>
-      </div>
-    </div>
-
-    <Separator />):null}
+          <div class="w-2 -translate-x-1">
+            <Tooltip class="align-top">
+              <Icon
+                slot="trigger"
+                icon="ph:info"
+                title={t('Tour.Form.FromPrice.Info', language)}
+              />
+              <span slot="content">
+                {t('Tour.Form.FromPrice.Info', language)}
+              </span>
+            </Tooltip>
+          </div>
+        </div>
+      ) : null
+    }
+    {minPrice > 0 || minPromoPrice > 0 ? <Separator /> : null}
     <strong>{t('Tour.Form.Title', language)}</strong>
-    {feature?.bokunLink? <script
-    is:inline
+    {
+      feature?.bokunLink ? (
+        <script
+          is:inline
           type="text/javascript"
           src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
-        ></script>:null}
-    {feature?.bokunLink?<Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>:<TourForm />}
+        />
+      ) : null
+    }
+    {
+      feature?.bokunLink ? (
+        <Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>
+      ) : (
+        <TourForm />
+      )
+    }
   </section>
   <section class="col-end-2 mb-8 flex w-full flex-col gap-4">
     <div class="flex gap-3">
