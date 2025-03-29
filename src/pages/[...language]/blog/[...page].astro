@@ -8,7 +8,6 @@ import PaginatedLayout, {
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
-import { groupBy } from 'lodash';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
@@ -17,34 +16,30 @@ type Props = {
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const posts = await getCollection('blog');
 
-  const postPerLanguage = groupBy(posts, (p) => p.data.language);
+  const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
 
   const pageIndex = await Promise.all(
-    Object.keys(postPerLanguage).map((language) =>
-      getBlogIndexPage(language as LanguageCodes)
-    )
+    postPerLanguage.entries().map(([language]) => getBlogIndexPage(language))
   );
 
-  return Object.entries(postPerLanguage).flatMap(
-    ([language, filteredPosts]) => {
-      const page = pageIndex.filter((p) => p.data.language === language)[0];
-      return paginate(
-        filteredPosts.sort((a, b) => {
-          const dateA = new Date(a.data.date).getTime();
-          const dateB = new Date(b.data.date).getTime();
-          return dateB - dateA; // For descending order (newest first)
-        }),
-        {
-          params: {
-            // blog: 'blog',
-            language: language === 'en' ? undefined : language
-          },
-          pageSize:
-            page?.data && 'page_size' in page.data ? page.data.page_size : 6
-        }
-      );
-    }
-  );
+  return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
+    const page = pageIndex.filter((p) => p.data.language === language)[0];
+    return paginate(
+      filteredPosts.sort((a, b) => {
+        const dateA = new Date(a.data.date).getTime();
+        const dateB = new Date(b.data.date).getTime();
+        return dateB - dateA; // For descending order (newest first)
+      }),
+      {
+        params: {
+          // blog: 'blog',
+          language: language === 'en' ? undefined : language
+        },
+        pageSize:
+          page?.data && 'page_size' in page.data ? page.data.page_size : 6
+      }
+    );
+  });
 }
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
