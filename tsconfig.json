@@ -2,9 +2,9 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "types": [
-      "astro/client",
-      "vite-plugin-pwa/info.d.ts",
-      "vite-plugin-pwa/client.d.ts"
+      "astro/client"
+      // "vite-plugin-pwa/info.d.ts",
+      // "vite-plugin-pwa/client.d.ts"
     ],
     "baseUrl": ".",
     "jsx": "react-jsx",

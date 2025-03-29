@@ -3,6 +3,7 @@ import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 import type { HrefLang } from 'src/types/hreflang';
+import PermalinkData from 'src/../data/permalinks.json';
 
 const doublSlashRegex = /([^:])\/{2,}/g;
 
@@ -29,8 +30,9 @@ export function getTourPath(
   { path, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
+  const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}tours/${slugify(path ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/${slugify(path ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
@@ -38,8 +40,9 @@ export function getTourRegionsPath(
   region: string,
   language: LanguageCodes = 'en'
 ): string {
+  const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}tours/regions/${slugify(region, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
@@ -47,7 +50,9 @@ export function getTourTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const tourPermalink = PermalinkData.tours[language];
+
+  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
@@ -178,6 +183,7 @@ export async function getTourLanguagesAlternates(
 ): Promise<ReadonlyArray<HrefLang>> {
   const tours = await getCollection('tours');
   const alternateEntryName = tour.filePath?.split('/').at(-1)!;
+
   var alternateTours =
     tours.filter(
       (t) =>
@@ -187,7 +193,7 @@ export async function getTourLanguagesAlternates(
 
   return alternateTours.map(({ data: alternateTour }) => ({
     href: sanitizeUrl(
-      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.path ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}${PermalinkData.tours[alternateTour.language ?? 'en']}/${slugify(alternateTour.path ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
     ),
     hreflang: alternateTour.language
   }));

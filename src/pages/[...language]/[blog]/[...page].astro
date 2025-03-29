@@ -1,10 +1,10 @@
 ---
 import type { Page } from 'astro';
-import BlogList from '../../components/blog/list.astro';
-import BlogPagination from '../../components/blog/pagination.astro';
+import BlogList from 'src/components/blog/list.astro';
+import BlogPagination from 'src/components/blog/pagination.astro';
 import PaginatedLayout, {
   type PaginatedProps
-} from '../../layouts/Paginated.astro';
+} from 'src/layouts/Paginated.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -14,21 +14,31 @@ type Props = {
 };
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
-  const language = 'en';
   const posts = await getCollection('blog');
 
-  const page = await getBlogIndexPage(language);
+  const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
 
-  // Filter out what is already displayed in featured stories
-  const filteredPosts = posts
-    .filter((p) => p.data.language === language)
-    .sort((a, b) => {
-      const dateA = new Date(a.data.date).getTime();
-      const dateB = new Date(b.data.date).getTime();
-      return dateB - dateA; // For descending order (newest first)
-    });
-  return paginate(filteredPosts, {
-    pageSize: page?.data && 'page_size' in page.data ? page.data.page_size : 6
+  const pageIndex = await Promise.all(
+    postPerLanguage.entries().map(([language]) => getBlogIndexPage(language))
+  );
+
+  return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
+    const page = pageIndex.filter((p) => p.data.language === language)[0];
+    return paginate(
+      filteredPosts.sort((a, b) => {
+        const dateA = new Date(a.data.date).getTime();
+        const dateB = new Date(b.data.date).getTime();
+        return dateB - dateA; // For descending order (newest first)
+      }),
+      {
+        params: {
+          blog: 'blog',
+          language: language ?? 'en'
+        },
+        pageSize:
+          page?.data && 'page_size' in page.data ? page.data.page_size : 6
+      }
+    );
   });
 }
 

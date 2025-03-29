@@ -5,11 +5,11 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import alpine from '@astrojs/alpinejs';
 import sitemap from '@astrojs/sitemap';
-import AstroPWA from '@vite-pwa/astro';
+// import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
-import RouteData from './data/routing.json';
-import type { RedirectConfig, ValidRedirectStatus } from 'astro';
+// import RouteData from './data/routing.json';
+// import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import rehypeExternalLinks from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
 // import sentry from '@sentry/astro';
@@ -21,20 +21,20 @@ import partytown from '@astrojs/partytown';
 // import min from 'astro-min';
 // import webmanifest from 'astro-webmanifest';
 
-function convertJson(inputJson: {
-  routes: { from: string; destination: string; status: ValidRedirectStatus }[];
-}): Record<string, RedirectConfig> {
-  const result = new Map<string, RedirectConfig>();
+// function convertJson(inputJson: {
+//   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
+// }): Record<string, RedirectConfig> {
+//   const result = new Map<string, RedirectConfig>();
 
-  inputJson.routes.forEach((route) => {
-    result.set(route.from, {
-      destination: route.destination,
-      status: route.status
-    });
-  });
+//   inputJson.routes.forEach((route) => {
+//     result.set(route.from, {
+//       destination: route.destination,
+//       status: route.status
+//     });
+//   });
 
-  return Object.fromEntries(result);
-}
+//   return Object.fromEntries(result);
+// }
 
 // https://astro.build/config
 export default defineConfig({
@@ -87,50 +87,50 @@ export default defineConfig({
     //   background_color: '#fff',
     //   display: 'standalone'
     // }),
-    AstroPWA({
-      mode: 'development',
-      base: '/',
-      scope: '/',
-      includeAssets: ['favicon.svg'],
-      registerType: 'autoUpdate',
-      manifest: {
-        name: 'Top Bike Tours Portugal',
-        description:
-          'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Bike Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
-        short_name: 'Walking tours',
-        theme_color: '#296a3f',
-        background_color: '#fff',
-        icons: [
-          {
-            src: 'android-chrome-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
-      },
-      workbox: {
-        navigateFallback: '/',
-        globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
-      },
-      devOptions: {
-        enabled: true,
-        navigateFallbackAllowlist: [/^\//]
-      },
-      experimental: {
-        directoryAndTrailingSlashHandler: true
-      }
-    }),
+    // AstroPWA({
+    //   mode: 'development',
+    //   base: '/',
+    //   scope: '/',
+    //   includeAssets: ['favicon.svg'],
+    //   registerType: 'autoUpdate',
+    //   manifest: {
+    //     name: 'Top Bike Tours Portugal',
+    //     description:
+    //       'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Bike Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
+    //     short_name: 'Walking tours',
+    //     theme_color: '#296a3f',
+    //     background_color: '#fff',
+    //     icons: [
+    //       {
+    //         src: 'android-chrome-192x192.png',
+    //         sizes: '192x192',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'android-chrome-512x512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png'
+    //       },
+    //       {
+    //         src: 'android-chrome-512x512.png',
+    //         sizes: '512x512',
+    //         type: 'image/png',
+    //         purpose: 'any maskable'
+    //       }
+    //     ]
+    //   },
+    //   workbox: {
+    //     navigateFallback: '/',
+    //     globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
+    //   },
+    //   devOptions: {
+    //     enabled: true,
+    //     navigateFallbackAllowlist: [/^\//]
+    //   },
+    //   experimental: {
+    //     directoryAndTrailingSlashHandler: true
+    //   }
+    // }),
     // shield({}),
     // playformInline()
     // min()
@@ -193,7 +193,8 @@ export default defineConfig({
     locales: ['en', 'pt'],
     defaultLocale: 'en',
     routing: {
-      prefixDefaultLocale: false
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: true
     }
   },
   trailingSlash: 'always',
@@ -207,25 +208,25 @@ export default defineConfig({
     svg: {
       mode: 'sprite'
     }
-  },
+  }
   // redirects: {
   //   '/[...path]': '/[...path]/'
   // },
-  vite: {
-    // resolve: {
-    //   alias: {
-    //     '~': path.resolve('./src/') // Maps ~ to the src directory
-    //   }
-    // }
-    //   css: {
-    //     transformer: "lightningcss",
-    //   },
-    // plugins: [],
-    build: {
-      //   // inlineStylesheets: 'never',
-      rollupOptions: {
-        external: ['astro:content-layer-deferred-module']
-      }
-    }
-  }
+  // vite: {
+  // resolve: {
+  //   alias: {
+  //     '~': path.resolve('./src/') // Maps ~ to the src directory
+  //   }
+  // }
+  //   css: {
+  //     transformer: "lightningcss",
+  //   },
+  // plugins: [],
+  // build: {
+  //   //   // inlineStylesheets: 'never',
+  //   rollupOptions: {
+  //     external: ['astro:content-layer-deferred-module']
+  //   }
+  // }
+  // }
 });

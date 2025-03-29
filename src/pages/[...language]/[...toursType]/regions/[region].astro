@@ -6,30 +6,35 @@ import Layout from 'src/layouts/Layout.astro';
 import RegionsData from 'src/../data/tour_regions.json';
 import TourList from 'src/components/tours/tour-list.astro';
 import { trailingSlash } from 'utils/permalinks';
-export async function getStaticPaths() {
-  const tours = (await getCollection('tours')).filter(
-    (t) => t.data.language === 'en'
-  );
+import PermalinkData from 'src/../data/permalinks.json';
+import { languageCodes } from 'src/schemas/language';
 
-  return RegionsData.map((region) => ({
-    params: {
-      region:
-        slugify(region.en.name!, {
-          lower: true,
-          strict: true,
-          trim: true
-        }) + trailingSlash
-    },
-    props: {
-      regionData: region,
-      tours:
-        tours.filter(
-          (tour) =>
-            parseInt(tour.data.region + '', 10) === region.id &&
-            tour.data.language === 'en'
-        ) ?? []
-    }
-  }));
+export async function getStaticPaths() {
+  const tours = await getCollection('tours');
+
+  return languageCodes.flatMap((language) => {
+    return RegionsData.map((region) => ({
+      params: {
+        language: language ?? 'en',
+        tourType: PermalinkData.tours[language],
+        region:
+          slugify(region[language].name!, {
+            lower: true,
+            strict: true,
+            trim: true
+          }) + trailingSlash
+      },
+      props: {
+        regionData: region,
+        tours:
+          tours.filter(
+            (tour) =>
+              parseInt(tour.data.region + '', 10) === region.id &&
+              tour.data.language === language
+          ) ?? []
+      }
+    }));
+  });
 }
 const { tours, regionData } = Astro.props;
 

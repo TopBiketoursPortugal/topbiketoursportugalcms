@@ -14,20 +14,19 @@ import { trailingSlash } from 'utils/permalinks';
 
 export async function getStaticPaths() {
   const team = await getCollection('team');
-  return team
-    .filter((t) => t.data.language === 'pt')
-    .map((teamMember) => ({
-      params: {
-        // language: 'pt',
-        path:
-          slugify(teamMember.data.title, {
-            lower: true,
-            strict: true,
-            trim: true
-          }) + trailingSlash
-      },
-      props: { teamMember }
-    }));
+  return team.map((teamMember) => ({
+    params: {
+      team: 'team',
+      language: teamMember.data.language ?? 'en',
+      path:
+        slugify(teamMember.data.title, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
+    },
+    props: { teamMember }
+  }));
 }
 
 const language = 'en';

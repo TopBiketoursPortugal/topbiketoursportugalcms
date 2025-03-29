@@ -2,7 +2,6 @@
 import Prose from '../typography/prose.astro';
 
 type Props = {
-  order?: 'latest' | 'oldest';
   dates: {
     date?: string;
     title?: string;
@@ -17,7 +16,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat(culture, {
   dateStyle: 'long'
 });
 
-const { dates = [], order = 'latest' } = Astro.props;
+const { dates = [] } = Astro.props;
 ---
 
 <div class="px-12">

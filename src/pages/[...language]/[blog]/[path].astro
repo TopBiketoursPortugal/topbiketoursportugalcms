@@ -1,17 +1,16 @@
 ---
 import type { LanguageCodes } from 'src/schemas/language';
-import PostLayout from '../../../layouts/Post.astro';
+import PostLayout from 'src/layouts/Post.astro';
 import { getCollection, render } from 'astro:content';
 import slugify from 'slugify';
 import { trailingSlash } from 'utils/permalinks';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter(
-    (p) => (p.data.language ?? 'en') === 'pt'
-  );
+  const posts = await getCollection('blog');
   return posts.map((post) => ({
     params: {
-      // language: 'pt',
+      blog: 'blog',
+      language: post.data.language ?? 'en',
       path:
         slugify(post.data.path ?? post.data.title, {
           lower: true,
@@ -31,11 +30,9 @@ if (!post) {
   throw new Error('Failed to get post with path: ' + Astro.params.path);
 }
 const { Content } = await render(post);
-const language = (Astro.currentLocale as LanguageCodes) ?? 'en';
-// const hrefs = []; //await getPostLanguagesAlternates(page, Astro.site);
+const language = Astro.currentLocale as LanguageCodes;
 ---
 
-<!-- <PostLayout {...post.data} body={post.body} language={language} hrefs={hrefs}> -->
 <PostLayout {...post.data} body={post.body} language={language}>
   <Content />
 </PostLayout>

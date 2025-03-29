@@ -1,4 +1,4 @@
-import SiteData from '../../data/site.json';
+import SiteData from 'src/../data/site.json';
 import { getCollection } from 'astro:content';
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import { SITE_URL } from 'astro:env/client';

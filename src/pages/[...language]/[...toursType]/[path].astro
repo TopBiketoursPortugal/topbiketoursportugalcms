@@ -6,26 +6,27 @@ import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import { getTourLanguagesAlternates, trailingSlash } from 'utils/permalinks';
 import LanguageData from 'src/../data/languages.json';
+import PermalinkData from 'src/../data/permalinks.json';
 
 export async function getStaticPaths() {
-  const tours = (await getCollection('tours')).filter(
-    (t) => t.data.language === 'pt'
-  );
-
-  return tours.map((tour) => ({
-    params: {
-      // language: 'pt',
-      path:
-        slugify(tour.data.path ?? tour.data?.path ?? tour.data.title, {
-          lower: true,
-          strict: true,
-          trim: true
-        }) + trailingSlash
-    },
-    props: {
-      tour
-    }
-  }));
+  const tours = await getCollection('tours');
+  return tours.map((tour) => {
+    return {
+      params: {
+        language: tour.data.language ?? 'en',
+        toursType: PermalinkData.tours[tour.data.language],
+        path:
+          slugify(tour.data.path ?? tour.data.title, {
+            lower: true,
+            strict: true,
+            trim: true
+          }) + trailingSlash
+      },
+      props: {
+        tour
+      }
+    };
+  });
 }
 
 const { tour } = Astro.props;
