@@ -74,6 +74,21 @@ collections_config:
       - content
       - visual
     _inputs:
+      relatedPosts:
+        type: multiselect
+        options:
+          allow_create: false
+          allow_empty: true
+          empty_type: array
+          values: collections.blog
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
       id:
         type: auto
         instance_value: UUID

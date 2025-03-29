@@ -18,6 +18,7 @@ const blogCollection = defineCollection({
     thumb_image_path: z.string(),
     thumb_image_alt: z.string(),
     language: languageSchema,
+    relatedPosts: z.array(z.string().uuid()).optional().default([]),
     image: z.object({
       src: z.string(),
       alt: z.string()

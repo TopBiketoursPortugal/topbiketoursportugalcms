@@ -24,7 +24,7 @@ const content = isMarkdown(Astro.props)
   ? Astro.props.rawContent()
   : Astro.props.body;
 
-const { title, date, author, hrefs = [] } = props;
+const { title, date, author, hrefs = [], relatedPosts = [] } = props;
 const { src, alt } = props.image;
 const wordCount = content?.split(' ')?.length ?? 0;
 const readingTime = Math.floor(wordCount / 183);
@@ -34,6 +34,13 @@ const language = Astro.currentLocale ?? 'en';
 const posts = await getCollection('blog');
 const filteredPosts = posts.filter(
   (post) => post.data.language === language && post.data.title !== title
+);
+
+const filterdRelatedPosts = posts.filter(
+  (post) =>
+    post.data.language === language &&
+    post.data.title !== title &&
+    relatedPosts.includes(post.data.id)
 );
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -101,13 +108,15 @@ const imageSrc = images[src]?.default ?? src;
       <h2 class="text-2xl">Recent Posts</h2>
       <div class="mt-5 grid gap-5 sm:grid-cols-2">
         {
-          filteredPosts.slice(0, 2).map((post) => {
-            return (
-              <div class="max-w-[420px]">
-                <PostSummary {...post} />
-              </div>
-            );
-          })
+          (filterdRelatedPosts.length > 0 ? filterdRelatedPosts : filteredPosts)
+            .slice(0, 2)
+            .map((post) => {
+              return (
+                <div class="max-w-[420px]">
+                  <PostSummary {...post} />
+                </div>
+              );
+            })
         }
       </div>
     </section>
