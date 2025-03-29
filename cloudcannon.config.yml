@@ -129,10 +129,17 @@ collections_config:
         type: multiselect
         options:
           empty_type: array
-          values: data.tags
+          values: collections.postTags
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
         comment: >-
-          To add a new tag, go to the [tags data
-          file](cloudcannon:collections/data/tags.json)
+          To add a new tag, go to the postTags collection
         cascade: true
     add_options:
       - name: Add New Post
@@ -311,7 +318,7 @@ collections_config:
             subtext:
               - key: language
             image:
-              - key: image.src
+              - key: seo.featured_image
         cascade: true
       id:
         type: auto
@@ -328,6 +335,8 @@ collections_config:
           preview:
             text:
               - key: name
+            subtext:
+              - key: language
             image:
               - key: seo.featured_image
         comment: >-
