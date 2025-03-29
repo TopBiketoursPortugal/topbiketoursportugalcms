@@ -4,7 +4,6 @@ import PostLayout from 'src/layouts/Post.astro';
 import { getCollection, render } from 'astro:content';
 import slugify from 'slugify';
 import { trailingSlash } from 'utils/permalinks';
-import { undefined } from 'astro:schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
