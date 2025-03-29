@@ -74,6 +74,9 @@ importers:
       core-js:
         specifier: ^3.41.0
         version: 3.41.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       nightwind:
         specifier: 1.1.13
         version: 1.1.13(tailwindcss@3.3.3)
@@ -132,6 +135,9 @@ importers:
       '@tailwindcss/typography':
         specifier: 0.5.16
         version: 0.5.16(tailwindcss@3.3.3)
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
       '@types/markdown-it':
         specifier: 14.1.2
         version: 14.1.2

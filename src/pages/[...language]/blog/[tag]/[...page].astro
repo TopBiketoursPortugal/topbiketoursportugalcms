@@ -5,7 +5,8 @@ import BlogPagination from 'src/components/blog/pagination.astro';
 import Layout from 'src/layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
-
+import { groupBy } from 'lodash';
+import type { LanguageCodes } from 'src/schemas/language';
 // interface Page<T = any> {
 //   /** array containing the page’s slice of data that you passed to the paginate() function */
 //   data: T[];
@@ -39,39 +40,43 @@ import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const posts = await getCollection('blog');
 
-  const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
+  const postPerLanguage = groupBy(posts, (p) => p.data.language);
   const pageIndex = await Promise.all(
-    postPerLanguage.entries().map(([language]) => getBlogIndexPage(language))
+    Object.entries(postPerLanguage).map(([language]) =>
+      getBlogIndexPage(language as LanguageCodes)
+    )
   );
 
-  return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
-    const tags = new Set(
-      filteredPosts
-        .flatMap((p) => p.data.tags ?? [])
-        .filter((t) => t && t !== '')
-    );
-
-    const page = pageIndex.filter((p) => p.data.language === language)[0];
-    const pageSize =
-      page?.data && 'page_size' in page?.data ? page?.data.page_size : 6;
-
-    return [...tags].flatMap((tag) => {
-      const tagPosts = filteredPosts.filter(({ data }) =>
-        data.tags?.includes(tag)
+  return Object.entries(postPerLanguage).flatMap(
+    ([language, filteredPosts]) => {
+      const tags = new Set(
+        filteredPosts
+          .flatMap((p) => p.data.tags ?? [])
+          .filter((t) => t && t !== '')
       );
 
-      return paginate(tagPosts, {
-        params: {
-          blogTags: 'blog',
-          language: language === 'en' ? undefined : language,
-          tag:
-            slugify(tag, { lower: true, strict: true, trim: true }) +
-            trailingSlash
-        },
-        pageSize
+      const page = pageIndex.filter((p) => p.data.language === language)[0];
+      const pageSize =
+        page?.data && 'page_size' in page?.data ? page?.data.page_size : 6;
+
+      return [...tags].flatMap((tag) => {
+        const tagPosts = filteredPosts.filter(({ data }) =>
+          data.tags?.includes(tag)
+        );
+
+        return paginate(tagPosts, {
+          params: {
+            blogTags: 'blog',
+            language: language === 'en' ? undefined : language,
+            tag:
+              slugify(tag, { lower: true, strict: true, trim: true }) +
+              trailingSlash
+          },
+          pageSize
+        });
       });
-    });
-  });
+    }
+  );
 }
 
 const tag = Astro.params.tag ?? '';
