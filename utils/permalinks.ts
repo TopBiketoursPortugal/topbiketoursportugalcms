@@ -202,6 +202,28 @@ export async function getPostLanguagesAlternates(
   });
 }
 
+export async function getTourTagLanguagesAlternates(
+  tourTag: CollectionEntry<'tourTags'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const tourTags = await getCollection('tourTags');
+  const alternateEntryName = tourTag.filePath?.split('/').at(-1)!;
+
+  var alternateTourTags =
+    tourTags.filter(
+      (t) =>
+        t.data.language !== tourTag.data.language &&
+        t.filePath?.endsWith(alternateEntryName)
+    ) ?? [];
+
+  return alternateTourTags.map(({ data: alternateTourTag }) => ({
+    href: sanitizeUrl(
+      `${site}${alternateTourTag.language === 'en' ? '' : alternateTourTag.language + '/'}${PermalinkData.tours[alternateTourTag.language ?? 'en']}/tags/${slugify(alternateTourTag.path ?? alternateTourTag.name ?? alternateTourTag.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternateTourTag.language
+  }));
+}
+
 export async function getTourRegionLanguagesAlternates(
   tourRegion: CollectionEntry<'tourRegions'>,
   site: URL = new URL('https://topwalkingtoursportual.com')

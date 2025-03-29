@@ -100,13 +100,13 @@ const faqsSchema = z.object({
 });
 
 const featureSchema = z.object({
-  align: z.enum(['center', 'left', 'right']).optional().default('center'),
-  imageAlign: z
-    .string()
-    .regex(/^(center|left|right) (center|top|bottom)$/)
-    .optional()
-    .default('center center'),
-  bokunLink: z.string().url().optional(),
+  // align: z.enum(['center', 'left', 'right']).optional().default('center'),
+  // imageAlign: z
+  //   .string()
+  //   .regex(/^(center|left|right) (center|top|bottom)$/)
+  //   .optional()
+  //   .default('center center'),
+  bokunLink: z.string().url().optional().nullable(),
   bokunId: z.string().optional(),
   textcolor: z.enum(['white', 'black', 'custom']).optional().default('white'),
   subtitle: z.string().optional(),
