@@ -492,17 +492,47 @@ collections_config:
               key: Owner
           value_key: code
         cascade: true
+  tourRegions:
+    path: src/content/tour-regions
+    glob:
+      - '**/*.md*'
+    name: Tour Regions
+    singular_name: Tour Region
+    icon: place
+    url: /[relative_base_path]/tours/regions/{title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
     add_options:
-      - name: New Team Member English
+      - name: New Tour Region
         icon: language
         editor: visual
         base_path: ''
         schema: default
-      - name: New Team Member Portuguese
-        icon: language
-        editor: visual
-        base_path: /pt/
-        schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
@@ -510,27 +540,132 @@ collections_config:
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/team-member.mdx
+        path: schemas/tour-region.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewTeamMember
-        icon: people
-      defaultPT:
-        path: schemas/pt/team-member.mdx
+        name: NewTourRegionMember
+        icon: pedal_bike
+  tourTags:
+    path: src/content/tour-tags
+    glob:
+      - '**/*.md*'
+    name: Post Tags
+    singular_name: Post Tag
+    icon: tag
+    url: /[relative_base_path]/tours/tags/{title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Tour tag
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour-tag.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NovoMembro
-        icon: people
+        name: NewTourTagMember
+        icon: pedal_bike
+  postTags:
+    path: src/content/post-tags
+    glob:
+      - '**/*.md*'
+    name: Post Tags
+    singular_name: Post Tag
+    icon: tag
+    url: /[relative_base_path]/tags/{title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Post tag
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: NewPostTagMember
+        icon: newspaper
 collection_groups:
   - heading: Pages
     collections:
       - pages
       - blog
+      - postTags
       - tours
+      - tourRegions
+      - tourTags
       - team
       - testimonials
   - heading: Data
