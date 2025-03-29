@@ -32,9 +32,6 @@ const dateObj = new Date(date);
 const language = Astro.currentLocale ?? 'en';
 
 const posts = await getCollection('blog');
-const filteredPosts = posts.filter(
-  (post) => post.data.language === language && post.data.title !== title
-);
 
 const filterdRelatedPosts = posts.filter(
   (post) =>
@@ -102,23 +99,19 @@ const imageSrc = images[src]?.default ?? src;
         <slot />
       </Prose>
     </article>
-    <section
-      class="mx-auto flex max-w-screen-md flex-col items-center pt-[48px]"
-    >
-      <h2 class="text-2xl">Recent Posts</h2>
-      <div class="mt-5 grid gap-5 sm:grid-cols-2">
-        {
-          (filterdRelatedPosts.length > 0 ? filterdRelatedPosts : filteredPosts)
-            .slice(0, 2)
-            .map((post) => {
-              return (
-                <div class="max-w-[420px]">
-                  <PostSummary {...post} />
-                </div>
-              );
-            })
-        }
-      </div>
-    </section>
+    {
+      filterdRelatedPosts.length > 0 ? (
+        <section class="mx-auto flex max-w-screen-md flex-col items-center pt-[48px]">
+          <h2 class="text-2xl">Recent Posts</h2>
+          <div class="mt-5 grid gap-5 sm:grid-cols-2">
+            {filterdRelatedPosts.slice(0, 2).map((post) => (
+              <div class="max-w-[420px]">
+                <PostSummary {...post} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
   </main>
 </Layout>

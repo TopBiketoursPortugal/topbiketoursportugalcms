@@ -105,6 +105,9 @@
     "workbox-window": "7.3.0"
   },
   "lint-staged": {},
+  "engines": {
+    "node": "^20.x"
+  },
   "packageManager": "pnpm@10.7.0",
   "pnpm": {
     "onlyBuiltDependencies": [
