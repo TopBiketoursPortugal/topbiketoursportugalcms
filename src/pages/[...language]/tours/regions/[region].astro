@@ -10,6 +10,8 @@ import Stack from 'src/components/stack/stack.astro';
 import Heading from 'src/components/typography/heading.astro';
 import Text from 'src/components/typography/text.astro';
 import LanguageData from 'src/../data/languages.json';
+import SiteData from 'src/../data/site.json';
+import { getImage } from 'astro:assets';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
@@ -51,10 +53,49 @@ const tourRegions = await getCollection(
   'tourRegions',
   (f) => f.data.language === language
 );
+
+
+const siteData = SiteData[language];
+const baseUrl=Astro.site;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
+  { eager: true }
+);
+
+const image=await getImage({src: images[regionData.data.seo?.featured_image!].default, format: 'avif'})
+
+const imageSrc=image.src.startsWith("/")?image.src.substring(1):image.src;
 const frontmatter = {
-  title: 'Tours - Top Bike Tours Portugal',
+  title:  regionData.data.seo?.page_title?? regionData.data.title,
   page_size: 6,
-  seo: undefined
+  seo: {
+    noindex: false,
+    title: regionData.data.title??regionData.data.seo?.page_title,
+    description: regionData.data.title??regionData.data.seo?.page_description,
+    canonical: regionData.data.seo?.canonical_url?new URL(regionData.data.seo?.canonical_url):"",
+    openGraph: {
+      basic: {
+        title:regionData.data.title??regionData.data.seo?.page_title,
+        url: baseUrl,
+        type: `${regionData.data.seo?.open_graph_type || 'website'}`,
+        image: `${baseUrl}${imageSrc}`
+      },
+      optional: {
+        description: regionData.data.title??regionData.data.seo?.page_description,
+      },
+      image: {
+        url: `${baseUrl}${imageSrc}`,
+        alt: regionData.data.seo?.featured_image_alt??regionData.data.title??regionData.data.seo?.page_title
+      }
+    },
+    twitter: {
+      creator: `${regionData.data.seo?.author_twitter_handle || siteData.twitter_site}`,
+      site: `${siteData.twitter_site}`,
+      card: 'summary_large_image'
+    }
+
+  }
 } satisfies {
   title: string;
   page_size?: number;
@@ -79,6 +120,9 @@ hrefLangs={hrefs}>
       ))
     }
   </slot>
+  <div>
+    {JSON.stringify(frontmatter.seo)}
+  </div>
 <Stack spacing="large" layout="vertical" class="pt-6">
   {
     packageTours.length > 0 ? (
@@ -97,8 +141,8 @@ hrefLangs={hrefs}>
       <div class="flex flex-col px-6 gap-2">
         <Text size="xlarge" >No tours yet for region {regionData.data.name}</Text>
         <Text size="large">Could try other region:</Text>
-        <ul>{tourRegions.filter((r) => r.data.id !== regionData.data.id)
-                        .map((r) => (<li><a href={getTourRegionsPath(r,language)} title={r.data.name ?? r.data.title}>{r.data.name ?? r.data.title}</a></li>))}</u>
+        <ul class="list-disc pl-8">{tourRegions.filter((r) => r.data.id !== regionData.data.id)
+                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={r.data.name ?? r.data.title} class="underline">{r.data.name ?? r.data.title}</a></li>))}</u>
       </div>
     ) : null
   }
