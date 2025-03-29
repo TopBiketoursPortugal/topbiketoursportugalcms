@@ -6,7 +6,6 @@ import type { SEOProps } from 'astro-seo';
 import TourList from 'src/components/tours/tour-list.astro';
 import { trailingSlash } from 'utils/permalinks';
 import { languageCodes } from 'src/schemas/language';
-import PermalinkData from 'src/../data/permalinks.json';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
   const tours = await getCollection('tours');

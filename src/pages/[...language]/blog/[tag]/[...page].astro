@@ -5,7 +5,6 @@ import BlogPagination from 'src/components/blog/pagination.astro';
 import Layout from 'src/layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
-import { groupBy } from 'lodash';
 import type { LanguageCodes } from 'src/schemas/language';
 // interface Page<T = any> {
 //   /** array containing the page’s slice of data that you passed to the paginate() function */

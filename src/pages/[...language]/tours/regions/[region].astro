@@ -3,41 +3,54 @@ import { getCollection } from 'astro:content';
 import slugify from 'slugify';
 import type { SEOProps } from 'astro-seo';
 import Layout from 'src/layouts/Layout.astro';
-import RegionsData from 'src/../data/tour_regions.json';
 import TourList from 'src/components/tours/tour-list.astro';
-import { trailingSlash } from 'utils/permalinks';
-import PermalinkData from 'src/../data/permalinks.json';
-import { languageCodes } from 'src/schemas/language';
+import { getTourRegionLanguagesAlternates, getTourRegionsPath, trailingSlash } from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Stack from 'src/components/stack/stack.astro';
+import Heading from 'src/components/typography/heading.astro';
+import Text from 'src/components/typography/text.astro';
+import LanguageData from 'src/../data/languages.json';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
+  const tourRegions = await getCollection('tourRegions');
 
   return languageCodes.flatMap((language) => {
-    return RegionsData.map((region) => ({
-      params: {
-        language: language === 'en' ? undefined : language,
-        // toursType: PermalinkData.tours[language],
-        region:
-          slugify(region[language].name!, {
-            lower: true,
-            strict: true,
-            trim: true
-          }) + trailingSlash
-      },
-      props: {
-        regionData: region,
-        tours:
-          tours.filter(
-            (tour) =>
-              parseInt(tour.data.region + '', 10) === region.id &&
-              tour.data.language === language
-          ) ?? []
-      }
-    }));
+    return tourRegions
+      .filter((tr) => tr.data.language === language)
+      .map((region) => ({
+        params: {
+          language: language === 'en' ? undefined : language,
+          // toursType: PermalinkData.tours[language],
+          region:
+            slugify(region.data.name ?? region.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
+        },
+        props: {
+          regionData: region,
+          tours:
+            tours.filter(
+              (tour) =>
+                tour.data.region === region.data.id &&
+                tour.data.language === language
+            ) ?? []
+        }
+      }));
   });
 }
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { tours, regionData } = Astro.props;
 
+const packageTours = tours.filter((t) => t.data.tourtype === 'PackageTour');
+const dayTours = tours.filter((t) => t.data.tourtype === 'DayTour');
+
+const tourRegions = await getCollection(
+  'tourRegions',
+  (f) => f.data.language === language
+);
 const frontmatter = {
   title: 'Tours - Top Bike Tours Portugal',
   page_size: 6,
@@ -47,26 +60,47 @@ const frontmatter = {
   page_size?: number;
   seo?: SEOProps;
 };
+const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
 ---
 
 <Layout
   class="mb-16 px-8"
   {...frontmatter}
-  title={`Tour list region ${regionData.en.name}`}
->
-  <h1>Tour list region {regionData.en.name}</h1>
+  title={`Tour list region ${regionData.data.name}`}
+hrefLangs={hrefs}>
+  <slot slot="head">
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+<Stack spacing="large" layout="vertical" class="pt-6">
   {
-    tours.length == 0 ? (
-      <div class="flex flex-col">
-        <div>No tours yet for region {regionData.en.name}</div>
-        <div>Could try other region</div>
-        <div>
-          {RegionsData.filter((r) => r.id !== regionData.id).map((r) => (
-            <div>{r.en.name}</div>
-          ))}
-        </div>
+    packageTours.length > 0 ? (
+      <Heading as="h1" class="px-6">Tour list region {regionData.data.name}</Heading>
+      <TourList items={packageTours} language={language} />
+    ) : null
+  }
+  {
+    dayTours.length > 0 ? (
+      <Heading as="h2"  class="px-6">Day tour list region {regionData.data.name}</Heading>
+      <TourList items={dayTours} language={language} />
+    ) : null
+  }
+  {
+    packageTours.length == 0 && dayTours.length === 0 ? (
+      <div class="flex flex-col px-6 gap-2">
+        <Text size="xlarge" >No tours yet for region {regionData.data.name}</Text>
+        <Text size="large">Could try other region:</Text>
+        <ul>{tourRegions.filter((r) => r.data.id !== regionData.data.id)
+                        .map((r) => (<li><a href={getTourRegionsPath(r,language)} title={r.data.name ?? r.data.title}>{r.data.name ?? r.data.title}</a></li>))}</u>
       </div>
     ) : null
   }
-  <TourList items={tours} language="en" />
+  </Stack>
 </Layout>

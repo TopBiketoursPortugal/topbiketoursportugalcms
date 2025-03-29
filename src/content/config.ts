@@ -1,9 +1,12 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { languageSchema } from 'src/schemas/language';
+import { postTagsCollection } from 'src/schemas/post-tags';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
 import { testimonialCollection } from 'src/schemas/testimonal';
+import { tourRegionsCollection } from 'src/schemas/tour-regions';
+import { tourTagsCollection } from 'src/schemas/tour-tags';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
@@ -68,8 +71,11 @@ const pagesCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
+  postTags: postTagsCollection,
   pages: pagesCollection,
   tours: tourCollection,
+  tourTags: tourTagsCollection,
+  tourRegions: tourRegionsCollection,
   team: teamCollection,
   testimonials: testimonialCollection
 };

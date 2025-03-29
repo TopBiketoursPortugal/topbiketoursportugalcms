@@ -37,12 +37,12 @@ export function getTourPath(
 }
 
 export function getTourRegionsPath(
-  region: string,
+  region: CollectionEntry<'tourRegions'>,
   language: LanguageCodes = 'en'
 ): string {
   const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region.data.name ?? region.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
@@ -200,6 +200,28 @@ export async function getPostLanguagesAlternates(
       hreflang: alternate.language
     };
   });
+}
+
+export async function getTourRegionLanguagesAlternates(
+  tourRegion: CollectionEntry<'tourRegions'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const tourRegions = await getCollection('tourRegions');
+  const alternateEntryName = tourRegion.filePath?.split('/').at(-1)!;
+
+  var alternateTourRegions =
+    tourRegions.filter(
+      (t) =>
+        t.data.language !== tourRegion.data.language &&
+        t.filePath?.endsWith(alternateEntryName)
+    ) ?? [];
+
+  return alternateTourRegions.map(({ data: alternateTourRegion }) => ({
+    href: sanitizeUrl(
+      `${site}${alternateTourRegion.language === 'en' ? '' : alternateTourRegion.language + '/'}${PermalinkData.tours[alternateTourRegion.language ?? 'en']}/regions/${slugify(alternateTourRegion.path ?? alternateTourRegion.name ?? alternateTourRegion.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternateTourRegion.language
+  }));
 }
 
 export async function getTourLanguagesAlternates(

@@ -313,16 +313,15 @@ collections_config:
         options:
           allow_create: false
           allow_empty: true
-          values: data.tour_regions[*]
+          values: collections.tourRegions
           value_key: id
           preview:
             text:
-              - key: en.name
+              - key: name
             image:
-              - key: en.src
+              - key: seo.featured_image
         comment: >-
-          To add a new region, go to the [tour_regions data
-          file](cloudcannon:collections/data/tour_regions.json)
+          To add a new region, go to the tour regions collection
         cascade: true
       content:
         type: markdown
@@ -1402,8 +1401,6 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
-  tour_regions:
-    path: data/tour_regions.json
 timezone: Europe/Lisbon
 markdown:
   engine:
