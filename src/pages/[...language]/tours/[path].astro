@@ -6,8 +6,6 @@ import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import { getTourLanguagesAlternates, trailingSlash } from 'utils/permalinks';
 import LanguageData from 'src/../data/languages.json';
-import PermalinkData from 'src/../data/permalinks.json';
-import { undefined } from 'astro:schema';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');

@@ -522,6 +522,14 @@ collection_groups:
     collections:
       - data
 _inputs:
+  tourtype:
+    type: select
+    options:
+      values:
+        - PackageTour
+        - DayTour
+        - WalkingTour
+
   feature_testimonials:
     type: multiselect
     options:

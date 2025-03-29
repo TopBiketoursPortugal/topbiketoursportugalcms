@@ -37,7 +37,9 @@ const {
   itinerary = [],
   faqs,
   reviews = [],
-  relatedTours = []
+  relatedTours = [],
+  mapUrl = '',
+  image
 } = tour;
 
 const { average, count } = getAggregatedReviews(reviews);
@@ -49,19 +51,32 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = false;
+console.log(minPrice, minPrice);
 ---
 
-{tour.image && <ResponsiveImage {...tour.image} class="max-h-72" />}
+{image && <ResponsiveImage {...image} class="max-h-72" />}
 <div
   class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
-      <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
-      <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
+      {
+        itinerary.length > 0 ? (
+          <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
+        ) : null
+      }
+      {
+        packages?.length > 0 ? (
+          <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
+        ) : null
+      }
       <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
-      <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
+      {
+        mapUrl.length > 0 ? (
+          <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
+        ) : null
+      }
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
       {
         enableFaqs ? (
@@ -73,18 +88,30 @@ const enableFaqs = false;
   <section
     class="z-50 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
   >
-    <div class="relative flex items-center gap-2">
+  { (minPrice !==Infinity && minPrice>0) || (minPromoPrice !==Infinity && minPromoPrice>0)?
+    (<div class="relative flex items-center gap-2">
       <Icon icon="ph:tag-light" className="h4 w-4" />
       <span class="self-end text-sm text-gray-500"
         >{t('Tour.Form.FromPrice', language)}</span
       >
-      <span
-        class={cn(isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold')}
-        >{priceFormat.format(minPrice)}</span
-      >
-      <span class="font-bold"
-        >{isPromotional && priceFormat.format(minPromoPrice)}</span
-      >
+      {
+        Infinity !== minPrice && minPrice > 0 ? (
+          <span
+            class={cn(
+              isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
+            )}
+          >
+            {priceFormat.format(minPrice)}
+          </span>
+        ) : null
+      }
+      {
+        isPromotional && Infinity !== minPromoPrice && minPromoPrice > 0 ? (
+          <span class="font-bold">
+            {isPromotional && priceFormat.format(minPromoPrice)}
+          </span>
+        ) : null
+      }
 
       <div class="w-2 -translate-x-1">
         <Tooltip class="align-top">
@@ -98,12 +125,11 @@ const enableFaqs = false;
       </div>
     </div>
 
-    <Separator />
+    <Separator />):null}
     <strong>{t('Tour.Form.Title', language)}</strong>
     <TourForm />
   </section>
   <section class="col-end-2 mb-8 flex w-full flex-col gap-4">
-    <!-- {tour.image && <Hero {...tour.image} class="max-h-72 flex-1" />} -->
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
       <span class="text-neutral-700"
@@ -112,24 +138,35 @@ const enableFaqs = false;
     </div>
     <div>
       <ul class="center grid grid-cols-3 items-center justify-center gap-4">
-        <li class="flex items-center gap-3">
-          <Icon icon="ph:clock" className="h-5 w-5" />{tour.duration}
-          {t('Tour.Info.Duration.Unit.Days', language)} / {
-            (tour.duration ?? 0) - 1
-          }
-          {t('Tour.Info.Duration.Unit.Nights', language)}
-        </li>
-        <li class="flex items-center gap-3">
-          <Icon icon="ph:users-three-light" className="h-5 w-5" />{
-            t('Tour.Info.Group.Label', language)
-          } : {tour.groupSize?.min ?? 0}-{tour.groupSize?.max ?? 0}
-          {t('Tour.Info.Group.Unit', language)}
-        </li>
-        <li class="flex items-center gap-3">
-          <Icon icon="ph:map-trifold-light" className="h-5 w-5" />{
-            t('Tour.Info.Distance.Label', language)
-          }: {tour.distance} km
-        </li>
+        {
+          tour.duration ? (
+            <li class="flex items-center gap-3">
+              <Icon icon="ph:clock" className="h-5 w-5" />
+              {tour.duration}
+              {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
+              {(tour.duration ?? 0) - 1}
+              {t('Tour.Info.Duration.Unit.Nights', language)}
+            </li>
+          ) : null
+        }
+        {
+          (tour.groupSize?.min ?? 0) + (tour.groupSize?.max ?? 0) > 0 ? (
+            <li class="flex items-center gap-3">
+              <Icon icon="ph:users-three-light" className="h-5 w-5" />
+              {t('Tour.Info.Group.Label', language)} :{' '}
+              {tour.groupSize?.min ?? 0}-{tour.groupSize?.max ?? 0}
+              {t('Tour.Info.Group.Unit', language)}
+            </li>
+          ) : null
+        }
+        {
+          tour.distance ? (
+            <li class="flex items-center gap-3">
+              <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
+              {t('Tour.Info.Distance.Label', language)}: {tour.distance} km
+            </li>
+          ) : null
+        }
         <li class="flex items-center gap-3">
           {
             tour.tourtype !== 'PackageTour' ? (
@@ -145,34 +182,48 @@ const enableFaqs = false;
             t('Tour.Info.ClosestAirport.Label', language)
           }: Aeroporto Sá Carneiro
         </li>
-        <li class="flex items-center gap-3">
-          <Icon icon="ph:user-light" className="h-5 w-5" />{
-            t('Tour.Info.MinAge.Label', language)
-          }: {tour.minAge}
-        </li>
+        {
+          tour.minAge ? (
+            <li class="flex items-center gap-3">
+              <Icon icon="ph:user-light" className="h-5 w-5" />
+              {t('Tour.Info.MinAge.Label', language)}: {tour.minAge}
+            </li>
+          ) : null
+        }
       </ul>
     </div>
     <Separator />
     <Prose markdown={tour.content ?? ''} />
     <slot />
   </section>
-  <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
-    <Heading as="h2" class="mb-6"
-      >{t('Tour.Section.Itinerary.Title', language)}</Heading
-    >
-    <TourItinerary itinerary={itinerary} />
-  </section>
-  <section id="packages" class="col-span-full mb-8 grid grid-cols-4 gap-10">
-    <Heading as="h2" class="mb-6">
-      {t('Tour.Section.Packages.Title', language)}
-    </Heading>
+  {
+    itinerary.length > 0 ? (
+      <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Itinerary.Title', language)}
+        </Heading>
+        <TourItinerary itinerary={itinerary} />
+      </section>
+    ) : null
+  }
+  {
+    packages?.length > 0 ? (
+      <section id="packages" class="col-span-full mb-8 grid grid-cols-4 gap-10">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Packages.Title', language)}
+        </Heading>
 
-    <div class="col-span-full">
-      <TourPricing language={language} packages={tour.packages} />
+        <div class="col-span-full">
+          <TourPricing language={language} packages={tour.packages} />
 
-      <Prose markdown={tour.afterPricing ?? ''} class="col-span-full mt-8" />
-    </div>
-  </section>
+          <Prose
+            markdown={tour.afterPricing ?? ''}
+            class="col-span-full mt-8"
+          />
+        </div>
+      </section>
+    ) : null
+  }
   <section id="photos" class="col-span-full mb-8 flex flex-col gap-4">
     <Heading as="h2" class="mb-6"
       >{t('Tour.Section.Photos.Title', language)}</Heading
@@ -180,24 +231,20 @@ const enableFaqs = false;
     <Gallery images={tour.images ?? []} />
   </section>
 
-  <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
-    <Heading as="h2" class="mb-6"
-      >{t('Tour.Section.Map.Title', language)}</Heading
-    >
-
-    {
-      tour.mapUrl && (
+  {
+    mapUrl.length > 0 ? (
+      <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Map.Title', language)}
+        </Heading>
+        (
         <div class="w-full select-none">
-          <iframe
-            title="tour"
-            src={tour.mapUrl}
-            width={'100%'}
-            height={'480'}
-          />
+          <iframe title="tour" src={mapUrl} width={'100%'} height={'480'} />
         </div>
-      )
-    }
-  </section>
+        )
+      </section>
+    ) : null
+  }
   {
     enableFaqs ? (
       <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
