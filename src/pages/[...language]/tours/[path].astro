@@ -7,14 +7,15 @@ import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import { getTourLanguagesAlternates, trailingSlash } from 'utils/permalinks';
 import LanguageData from 'src/../data/languages.json';
 import PermalinkData from 'src/../data/permalinks.json';
+import { undefined } from 'astro:schema';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
   return tours.map((tour) => {
     return {
       params: {
-        language: tour.data.language ?? 'en',
-        toursType: PermalinkData.tours[tour.data.language],
+        language: tour.data.language === 'en' ? undefined : tour.data.language,
+        // toursType: PermalinkData.tours[tour.data.language],
         path:
           slugify(tour.data.path ?? tour.data.title, {
             lower: true,

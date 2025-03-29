@@ -35,7 +35,7 @@
         {
           "text": "About us",
           "page": "",
-          "href": "/about-us/"
+          "href": "/about-us-biking-travel/"
         },
         {
           "text": "Widgets",
@@ -81,7 +81,7 @@
           "links": [
             {
               "text": "About us",
-              "href": "/about-us/"
+              "href": "/about-us-biking-travel/"
             },
             {
               "text": "Contacts",

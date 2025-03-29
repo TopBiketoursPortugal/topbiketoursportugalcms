@@ -15,8 +15,8 @@ export async function getStaticPaths() {
   return languageCodes.flatMap((language) => {
     return RegionsData.map((region) => ({
       params: {
-        language: language ?? 'en',
-        tourType: PermalinkData.tours[language],
+        language: language === 'en' ? undefined : language,
+        // toursType: PermalinkData.tours[language],
         region:
           slugify(region[language].name!, {
             lower: true,

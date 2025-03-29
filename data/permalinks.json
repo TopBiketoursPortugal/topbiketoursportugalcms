@@ -1,6 +1,18 @@
 {
   "tours": {
-    "en": "cycling-tours",
-    "pt": "passeios-bicicleta"
+    "en": "tours",
+    "pt": "tours"
+  },
+  "blog": {
+    "en": "blog",
+    "pt": "blog"
+  },
+  "blogTags": {
+    "en": "tags",
+    "pt": "tags"
+  },
+  "team": {
+    "en": "team",
+    "pt": "team"
   }
 }

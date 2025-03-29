@@ -115,6 +115,31 @@ export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
   );
 }
 
+export async function getTeamLanguagesAlternates(
+  pageEntry: CollectionEntry<'team'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const teamPages = await getCollection('team');
+  const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
+
+  var alternatePages =
+    teamPages.filter(
+      (t) =>
+        t.data.language !== pageEntry.data.language &&
+        t.filePath?.endsWith(alternateEntryName)
+    ) ?? [];
+
+  return alternatePages.map((page) => {
+    const { data: alternate } = page;
+    return {
+      href: sanitizeUrl(
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}team/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      ),
+      hreflang: alternate.language
+    };
+  });
+}
+
 export async function getPageLanguagesAlternates(
   pageEntry: CollectionEntry<'pages'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
