@@ -299,9 +299,19 @@ collections_config:
           structures: _structures.images
         cascade: true
       tags:
-        type: array
+        type: multiselect
         options:
-          structures: _structures.tags
+          allow_empty: true
+          empty_type: array
+          values: collections.tourTags
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
         cascade: true
       id:
         type: auto
@@ -550,8 +560,8 @@ collections_config:
     path: src/content/tour-tags
     glob:
       - '**/*.md*'
-    name: Post Tags
-    singular_name: Post Tag
+    name: Tour Tags
+    singular_name: Tour Tag
     icon: tag
     url: /[relative_base_path]/tours/tags/{title|deburr|slugify|lowercase|trim}/
     disable_url: false

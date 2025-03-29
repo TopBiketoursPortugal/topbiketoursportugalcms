@@ -5,7 +5,7 @@ import CardContent, { type CardContentProps } from '../card/CardContent.astro';
 import Card from '../card/Card.astro';
 import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
-import type { InferEntrySchema } from 'astro:content';
+import { getCollection, type InferEntrySchema } from 'astro:content';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
@@ -48,6 +48,10 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
+const tourTags = await getCollection(
+  'tourTags',
+  (t) => tags?.includes(t.data.id) && t.data.language === language
+);
 ---
 
 <Card href={getTourPath(data, language)} frame="light" {...data}>
@@ -120,19 +124,19 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     <Separator weight="thin" color="neutral" />
 
     {
-      tags && tags.length > 0 && (
+      tourTags && tourTags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
           <Icon
             icon="ph:bookmark-simple-light"
             className="text-gray-600 h-5 w-5"
           />
-          {tags.map((t) => (
+          {tourTags.map((t) => (
             <LinkButton
               variant="link"
               class="z-20"
               href={getTourTagPath(t, language)}
             >
-              {t}
+              {t.data.name ?? t.data.title}
             </LinkButton>
           ))}
         </Stack>

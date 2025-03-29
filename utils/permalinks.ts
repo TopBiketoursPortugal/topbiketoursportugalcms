@@ -47,12 +47,12 @@ export function getTourRegionsPath(
 }
 
 export function getTourTagPath(
-  tag: string,
+  tag: CollectionEntry<'tourTags'>,
   language: LanguageCodes = 'en'
 ): string {
   const tourPermalink = PermalinkData.tours[language];
 
-  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 

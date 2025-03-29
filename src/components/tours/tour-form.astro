@@ -4,10 +4,15 @@ import Form from '../form/Form.astro';
 import FormField from '../form/FormField.astro';
 import { t } from 'utils/i18n';
 import Prose from '../typography/prose.astro';
+import FormData from 'src/../data/forms.json';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
-<Form action="https://formspree.io/xzbalqpw" method="post" id="tour-form">
+<Form
+  action={FormData.packageTours ?? 'https://formspree.io/xzbalqpw'}
+  method="post"
+  id="tour-form"
+>
   <FormField
     as="input"
     name="name"

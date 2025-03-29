@@ -26,6 +26,8 @@ import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
 import Icon from '../utility/icon.astro';
 import Heading from '../typography/heading.astro';
+import FeaturedPosts from '../featured-posts/featured-posts.astro';
+import Linkbutton from '../linkbutton/linkbutton.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -39,7 +41,9 @@ const {
   reviews = [],
   relatedTours = [],
   mapUrl = '',
-  image
+  image,
+  feature
+
 } = tour;
 
 const { average, count } = getAggregatedReviews(reviews);
@@ -51,6 +55,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = false;
+console.log(feature);
 ---
 
 {image && <ResponsiveImage {...image} class="max-h-72" />}
@@ -126,7 +131,12 @@ const enableFaqs = false;
 
     <Separator />):null}
     <strong>{t('Tour.Form.Title', language)}</strong>
-    <TourForm />
+    {feature?.bokunLink? <script
+    is:inline
+          type="text/javascript"
+          src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
+        ></script>:null}
+    {feature?.bokunLink?<Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>:<TourForm />}
   </section>
   <section class="col-end-2 mb-8 flex w-full flex-col gap-4">
     <div class="flex gap-3">
