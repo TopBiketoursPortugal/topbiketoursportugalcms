@@ -12,7 +12,6 @@ import type { LanguageCodes } from 'src/schemas/language';
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
 };
-
 if (!Map.groupBy) {
   Map.groupBy = function (items, callbackFn: Function) {
     const map = new Map();
@@ -26,14 +25,29 @@ if (!Map.groupBy) {
     return map;
   };
 }
-
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  if (!Map.groupBy) {
+    Map.groupBy = function (items, callbackFn: Function) {
+      const map = new Map();
+      for (const item of items) {
+        const key = callbackFn(item);
+        if (!map.has(key)) {
+          map.set(key, []);
+        }
+        map.get(key).push(item);
+      }
+      return map;
+    };
+  }
+
   const posts = await getCollection('blog');
 
   const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
 
   const pageIndex = await Promise.all(
-    postPerLanguage.entries().map(([language]) => getBlogIndexPage(language))
+    Object.entries(postPerLanguage).map(([language]) =>
+      getBlogIndexPage(language as LanguageCodes)
+    )
   );
 
   return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {

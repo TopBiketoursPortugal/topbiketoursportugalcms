@@ -6,6 +6,7 @@ import Layout from 'src/layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
 import { groupBy } from 'lodash';
+import type { LanguageCodes } from 'src/schemas/language';
 // interface Page<T = any> {
 //   /** array containing the page’s slice of data that you passed to the paginate() function */
 //   data: T[];
@@ -51,11 +52,26 @@ if (!Map.groupBy) {
 }
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  if (!Map.groupBy) {
+    Map.groupBy = function (items, callbackFn: Function) {
+      const map = new Map();
+      for (const item of items) {
+        const key = callbackFn(item);
+        if (!map.has(key)) {
+          map.set(key, []);
+        }
+        map.get(key).push(item);
+      }
+      return map;
+    };
+  }
   const posts = await getCollection('blog');
 
   const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
   const pageIndex = await Promise.all(
-    postPerLanguage.entries().map(([language]) => getBlogIndexPage(language))
+    Object.entries(postPerLanguage).map(([language]) =>
+      getBlogIndexPage(language as LanguageCodes)
+    )
   );
 
   return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {

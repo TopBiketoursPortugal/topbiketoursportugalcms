@@ -73,12 +73,6 @@ collections_config:
     _enabled_editors:
       - content
       - visual
-    _structures:
-      relatedPosts:
-        style: select
-        values:
-          - value:
-              id: ''
     _inputs:
       relatedPosts:
         type: multiselect
@@ -874,6 +868,13 @@ _inputs:
       robots meta tag
     cascade: true
 _structures:
+  relatedPosts:
+    style: select
+    values:
+      - icon: newspaper
+        label: Related post
+        value:
+          id: ''
   itinerary_stage:
     style: select
     values:
