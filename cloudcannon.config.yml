@@ -67,7 +67,7 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/blog/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -185,7 +185,7 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -442,7 +442,7 @@ collections_config:
     _enabled_editors:
       - content
     create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
+      path: '[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
@@ -468,7 +468,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/team/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -517,7 +517,7 @@ collections_config:
     name: Tour Regions
     singular_name: Tour Region
     icon: place
-    url: /[relative_base_path]/tours/regions/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/regions/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -572,7 +572,7 @@ collections_config:
     name: Tour Tags
     singular_name: Tour Tag
     icon: tag
-    url: /[relative_base_path]/tours/tags/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/tags/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -627,7 +627,7 @@ collections_config:
     name: Post Tags
     singular_name: Post Tag
     icon: tag
-    url: /[relative_base_path]/tags/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tags/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
