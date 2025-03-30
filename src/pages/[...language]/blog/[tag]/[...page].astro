@@ -6,6 +6,8 @@ import Layout from 'src/layouts/Layout.astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
+import type { PaginatedProps } from 'src/layouts/Paginated.astro';
+import { t } from 'utils/i18n';
 // interface Page<T = any> {
 //   /** array containing the page’s slice of data that you passed to the paginate() function */
 //   data: T[];
@@ -105,6 +107,16 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 
 const tag = Astro.params.tag ?? '';
 const page = (await getEntry('pages', 'blog'))!.data;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { page: pageNumberStr } = Astro.params;
+const seo = {
+  ...(page as PaginatedProps['frontmatter']),
+  page_title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
+  page_description: t('Blog.Paged.Description', language).replace(
+    '$1',
+    pageNumberStr
+  )
+};
 
 const pagination = Astro.props.page;
 page.title = pagination.data
@@ -115,7 +127,7 @@ page.title = pagination.data
 const filteredPosts = pagination.data;
 ---
 
-<Layout title={page.title} seo={page.seo}>
+<Layout title={page.title} seo={seo}>
   <div class="py-[96px]">
     <h1
       class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"

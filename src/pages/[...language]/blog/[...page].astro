@@ -8,6 +8,7 @@ import PaginatedLayout, {
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
@@ -72,11 +73,24 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const page = await getBlogIndexPage(language);
-const frontmatter = page?.data as PaginatedProps['frontmatter'];
-const pagination = Astro.props.page;
-const { data: posts } = pagination;
+let frontmatter = page?.data as PaginatedProps['frontmatter'];
+
 const { page: pageNumberStr } = Astro.params;
 const pageNumber = parseInt(pageNumberStr ?? 1, 10);
+frontmatter = {
+  ...frontmatter,
+  seo: {
+    ...frontmatter.seo,
+    page_title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
+    page_description: t('Blog.Paged.Description', language).replace(
+      '$1',
+      pageNumberStr
+    )
+  }
+};
+
+const pagination = Astro.props.page;
+const { data: posts } = pagination;
 const hrefs = (
   page ? await getPageLanguagesAlternates(page, Astro.site) : []
 ).map((p) => ({

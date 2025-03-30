@@ -1,5 +1,7 @@
 {
   "en": {
+    "Blog.Paged.Title": "Blog page $1",
+    "Blog.Paged.Description": "Blog page $1",
     "Button.Directions": "Directions",
     "Contact.Feature.Address.Description": "Curious about our walking and biking tours? Visit us at in Oporto! We'll help you find the perfect guided or self-guided adventure. Drop by and start your journey today!",
     "Contact.Feature.Address.Label": "Address",
@@ -99,6 +101,8 @@
     "Tours.Tags.PackageTour.Title": "Tour list tag $1"
   },
   "pt": {
+    "Blog.Paged.Title": "Blog página $1",
+    "Blog.Paged.Description": "Blog página $1",
     "Button.Directions": "Direções",
     "Contact.Feature.Address.Description": "Curioso sobre os nossos passeios a pé e de bicicleta? Visite-nos no Porto! Ajudamo-lo a encontrar a aventura guiada ou autoguiada perfeita. Passe por cá e inicie a sua jornada hoje mesmo!",
     "Contact.Feature.Address.Label": "Morada",

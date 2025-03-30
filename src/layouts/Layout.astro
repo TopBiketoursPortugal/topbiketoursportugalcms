@@ -20,12 +20,12 @@ import { INDEX } from 'astro:env/client';
 export type SEOProps = {
   page_title: string | null;
   page_description: string | null;
-  featured_image: string | null;
-  featured_image_alt: string | null;
-  canonical_url: string | null;
-  no_index: boolean | null;
-  open_graph_type: string | null;
-  author_twitter_handle: string | null;
+  featured_image?: string | null;
+  featured_image_alt?: string | null;
+  canonical_url?: string | null;
+  no_index?: boolean | null;
+  open_graph_type?: string | null;
+  author_twitter_handle?: string | null;
   keywords?: string;
 };
 
