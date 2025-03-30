@@ -112,7 +112,7 @@ const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);
 
 <Layout class="mb-16 px-8 pt-8"
   {...frontmatter}
-  title={`Tour list tag ${tagData.data.name}`} class="px-10" hrefLangs={hrefs}>
+  title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} class="px-10" hrefLangs={hrefs}>
   <slot slot="head">
     {
       hrefs.map(({ href, hreflang }) => (

@@ -108,7 +108,7 @@ const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
 <Layout
   class="mb-16 px-8"
   {...frontmatter}
-  title={`Tour list region ${regionData.data.name}`}
+  title={t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}
 hrefLangs={hrefs}>
   <slot slot="head">
     {

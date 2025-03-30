@@ -79,6 +79,7 @@ const { page: pageNumberStr } = Astro.params;
 const pageNumber = parseInt(pageNumberStr ?? 1, 10);
 frontmatter = {
   ...frontmatter,
+  title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
   seo: {
     ...frontmatter.seo,
     page_title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),

@@ -111,11 +111,12 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { page: pageNumberStr } = Astro.params;
 const seo = {
   ...(page as PaginatedProps['frontmatter']),
-  page_title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
-  page_description: t('Blog.Paged.Description', language).replace(
-    '$1',
-    pageNumberStr
-  )
+  page_title: t('Blog.Tags.Paged.Title', language)
+    .replace('$1', tag)
+    .replace('$2', pageNumberStr),
+  page_description: t('Blog.Tags.Paged.Description', language)
+    .replace('$1', tag)
+    .replace('$2', pageNumberStr)
 };
 
 const pagination = Astro.props.page;
@@ -128,7 +129,9 @@ const filteredPosts = pagination.data;
 ---
 
 <Layout
-  title={t('Blog.Paged.Title', language).replace('$1', pageNumberStr)}
+  title={t('Blog.Tags.Paged.Title', language)
+    .replace('$1', tag)
+    .replace('$2', pageNumberStr)}
   seo={seo}
 >
   <div class="py-[96px]">
