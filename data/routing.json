@@ -2,12 +2,12 @@
   "routes": [
     {
       "from": "/wine-gastournomy-biketour",
-      "destination": "/tours/wine-gastournomy-biketour/",
+      "destination": "/pt/tours/wine-gastournomy-biketour/",
       "status": 301
     },
     {
       "from": "/tour-bicicleta-montanha",
-      "destination": "/tours/tour-bicicleta-montanha/",
+      "destination": "/pt/tours/tour-bicicleta-montanha/",
       "status": 301
     },
     {
