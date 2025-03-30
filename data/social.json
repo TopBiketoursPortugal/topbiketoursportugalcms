@@ -1,13 +1,13 @@
 {
   "facebook": {
     "trackId": "",
-    "href": null,
-    "icon": null,
-    "alt": null,
-    "target": null
+    "href": "https://www.facebook.com/topbiketoursportugal",
+    "icon": "Facebook",
+    "alt": "Facebook",
+    "target": "_blank"
   },
   "instagram": {
-    "trackId": "",
+    "trackId": null,
     "href": "https://www.instagram.com/topwalkingtoursportugal/",
     "icon": "ph:instagram-logo-light",
     "alt": "Instagram",
