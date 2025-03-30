@@ -1,6 +1,26 @@
 {
   "routes": [
     {
+      "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
+      "destination": "/blog/clima-e-geografia-para-pedalar-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/campo-de-treino-douro-em-bicicleta/",
+      "destination": "/tours/bike-tours-douro-valley-easy/",
+      "status": 301
+    },
+    {
+      "from": "/douro-valley-cycling-camp-road-bike/",
+      "destination": "/tours/douro-valley-cycling-camp-road-bike/",
+      "status": 301
+    },
+    {
+      "from": "/alentejo-vinho-tradicao-passseio-bicicleta",
+      "destination": "/pt/tours/alentejo-vinho-tradicao-passseio-bicicleta/",
+      "status": 301
+    },
+    {
       "from": "/wine-gastournomy-biketour",
       "destination": "/pt/tours/wine-gastournomy-biketour/",
       "status": 301
@@ -65,116 +85,136 @@
       "destination": "/pt/passeios-de-bicicleta-portugal/",
       "status": 301
     },
-    { "from": "/passeios-bicicleta-porto/", "destination": "", "status": 301 },
-    { "from": "/mountain-bike-tours-porto", "destination": "", "status": 301 },
-    { "from": "/full-day-biketour-deluxe/", "destination": "", "status": 301 },
+    {
+      "from": "/passeios-bicicleta-porto/",
+      "destination": "/pt/passeios-bicicleta-porto/",
+      "status": 301
+    },
+    {
+      "from": "/mountain-bike-tours-porto",
+      "destination": "/pt/tours/mountain-bike-tours-porto/",
+      "status": 301
+    },
+    {
+      "from": "/full-day-biketour-deluxe/",
+      "destination": "/tours/full-day-biketour-deluxe/",
+      "status": 301
+    },
     {
       "from": "/electric-bike-tour-porto-pt/",
-      "destination": "",
+      "destination": "/pt/tours/electric-bike-tour-porto-pt/",
       "status": 301
     },
     {
       "from": "/douro-valley-full-day-bike-ride",
-      "destination": "",
+      "destination": "/tours/douro-valley-full-day-bike-ride/",
       "status": 301
     },
-    {
-      "from": "/douro-valley-cycling-camp-road-bike/",
-      "destination": "",
-      "status": 301
-    },
+
     {
       "from": "/cycling-tours-tras-os-montes/",
-      "destination": "",
+      "destination": "/tours/cycling-tours-tras-os-montes/",
       "status": 301
     },
-    { "from": "/cycling-tours-douro-wine/", "destination": "", "status": 301 },
+    {
+      "from": "/cycling-tours-douro-wine/",
+      "destination": "/tours/cycling-tours-douro-wine/",
+      "status": 301
+    },
     {
       "from": "/cycling-holiday-pack-recommendations",
-      "destination": "",
-      "status": 301
-    },
-    { "from": "/costa-vicentina-bike-tour/", "destination": "", "status": 301 },
-    { "from": "/costa-da-prata-rota-1/", "destination": "", "status": 301 },
-    { "from": "/costa-da-prata-2/", "destination": "", "status": 301 },
-    {
-      "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
-      "destination": "",
+      "destination": "/blog/cycling-holiday-pack-recommendations/",
       "status": 301
     },
     {
-      "from": "/campo-de-treino-douro-em-bicicleta/",
-      "destination": "",
+      "from": "/costa-vicentina-bike-tour/",
+      "destination": "/pt/tours/costa-vicentina-bike-tour/",
       "status": 301
     },
-    { "from": "/blog/what-is-nike-tour", "destination": "", "status": 301 },
-    { "from": "/blog/updates/", "destination": "", "status": 301 },
+    {
+      "from": "/costa-da-prata-rota-1/",
+      "destination": "/pt/tours/costa-da-prata-rota-1/",
+      "status": 301
+    },
+    {
+      "from": "/costa-da-prata-2/",
+      "destination": "/pt/tours/costa-da-prata-2/",
+      "status": 301
+    },
+
+    {
+      "from": "/blog/what-is-nike-tour",
+      "destination": "/blog/what-is-nike-tour/",
+      "status": 301
+    },
     {
       "from": "/blog/Tips-for-Exploring-Portugal-Historic-Villages-by-Bicycle",
-      "destination": "",
+      "destination": "/blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
       "status": 301
     },
     {
       "from": "/blog/The-Role-of-Bicycle-Tours-in-Promoting-Sustainable-Tourism",
-      "destination": "",
+      "destination": "/blog/the-role-of-bicycle-tours-in-promoting-sustainable-tourism/",
       "status": 301
     },
     {
       "from": "/blog/safety-tips-cycling-child",
-      "destination": "",
+      "destination": "/blog/safety-tips-cycling-child/",
       "status": 301
     },
     {
       "from": "/blog/O-Papel-das-Bike-Tours-na Promocao-do-Turismo-Sustentavel-em-Portugal",
-      "destination": "",
+      "destination": "/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
       "status": 301
     },
-    { "from": "/blog/news/", "destination": "", "status": 301 },
     {
       "from": "/blog/How-to-ride-your-bike-at-night-Tips-essential-equipment",
-      "destination": "",
+      "destination": "/blog/how-to-ride-your-bike-at-night-tips-essential-equipment/",
       "status": 301
     },
     {
       "from": "/blog/How-to-Keep-Your-Bike-in-Perfect-Condition",
-      "destination": "",
+      "destination": "/blog/how-to-keep-your-bike-in-perfect-condition/",
       "status": 301
     },
-    { "from": "/blog/how-put-gears-bike", "destination": "", "status": 301 },
-    { "from": "/blog/family-bike-rides", "destination": "", "status": 301 },
+    {
+      "from": "/blog/how-put-gears-bike",
+      "destination": "/blog/how-put-gears-bike/",
+      "status": 301
+    },
+    {
+      "from": "/blog/family-bike-rides",
+      "destination": "/blog/family-bike-rides/",
+      "status": 301
+    },
     {
       "from": "/blog/electric-bikes-sustainability",
-      "destination": "",
+      "destination": "/blog/electric-bikes-sustainability/",
       "status": 301
     },
     {
       "from": "/blog/best-bike-tours-portugal",
-      "destination": "",
+      "destination": "/blog/best-bike-tours-portugal/",
       "status": 301
     },
     {
       "from": "/blog/7-reasons-bike-tour-porto-lisbon",
-      "destination": "",
+      "destination": "/blog/7-reasons-bike-tour-porto-lisbon/",
       "status": 301
     },
     {
       "from": "/bike-tour-sightseeing-porto-pt/",
-      "destination": "",
+      "destination": "/pt/tours/bike-tour-sightseeing-porto-pt/",
       "status": 301
     },
     {
       "from": "/biketours-douro-valley-easy-level/",
-      "destination": "",
+      "destination": "/tours/biketours-douro-valley-easy-level/",
       "status": 301
     },
     {
       "from": "/alentejo-wine-heritage-bicycle-tour",
-      "destination": "",
-      "status": 301
-    },
-    {
-      "from": "/alentejo-vinho-tradicao-passseio-bicicleta",
-      "destination": "",
+      "destination": "/tours/alentejo-wine-heritage-bicycle-tour/",
       "status": 301
     },
 
