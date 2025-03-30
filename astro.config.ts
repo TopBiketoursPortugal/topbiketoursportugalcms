@@ -8,33 +8,26 @@ import sitemap from '@astrojs/sitemap';
 // import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
-// import RouteData from './data/routing.json';
+import RouteData from './data/routing.json';
 // import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import rehypeExternalLinks from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
-// import sentry from '@sentry/astro';
-// import spotlightjs from '@spotlightjs/astro';
-// import astroMetaTags from 'astro-meta-tags';
-// import { shield } from '@kindspells/astro-shield';
-// import playformInline from '@playform/inline';
-// import playformCompress from '@playform/compress';
-// import min from 'astro-min';
-// import webmanifest from 'astro-webmanifest';
+import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 
-// function convertJson(inputJson: {
-//   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
-// }): Record<string, RedirectConfig> {
-//   const result = new Map<string, RedirectConfig>();
+function convertJson(inputJson: {
+  routes: { from: string; destination: string; status: ValidRedirectStatus }[];
+}): Record<string, RedirectConfig> {
+  const result = new Map<string, RedirectConfig>();
 
-//   inputJson.routes.forEach((route) => {
-//     result.set(route.from, {
-//       destination: route.destination,
-//       status: route.status
-//     });
-//   });
+  inputJson.routes.forEach((route) => {
+    result.set(route.from, {
+      destination: route.destination,
+      status: route.status
+    });
+  });
 
-//   return Object.fromEntries(result);
-// }
+  return Object.fromEntries(result);
+}
 
 // https://astro.build/config
 export default defineConfig({
@@ -147,15 +140,15 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [rehypeExternalLinks]
   },
-  // redirects: convertJson(
-  //   RouteData as {
-  //     routes: {
-  //       from: string;
-  //       destination: string;
-  //       status: ValidRedirectStatus;
-  //     }[];
-  //   }
-  // ),
+  redirects: convertJson(
+    RouteData as {
+      routes: {
+        from: string;
+        destination: string;
+        status: ValidRedirectStatus;
+      }[];
+    }
+  ),
   prefetch: {
     prefetchAll: false
   },
@@ -211,7 +204,7 @@ export default defineConfig({
   }
   // redirects: {
   //   '/[...path]': '/[...path]/'
-  // },
+  // }
   // vite: {
   // resolve: {
   //   alias: {
