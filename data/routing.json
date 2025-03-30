@@ -260,12 +260,12 @@
     },
     {
       "from": "/bike-tours-porto-portugal/",
-      "destination": "/tours/bike-tours-porto-portugal/",
+      "destination": "/bike-tours-porto-portugal/",
       "status": 301
     },
     {
-      "from": "/bike-tours-in-portugal/",
-      "destination": "/tours/bike-tours-in-portugal/",
+      "from": "/bike-tours-in-portugal",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
