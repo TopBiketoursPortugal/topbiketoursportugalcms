@@ -127,7 +127,10 @@ page.title = pagination.data
 const filteredPosts = pagination.data;
 ---
 
-<Layout title={page.title} seo={seo}>
+<Layout
+  title={t('Blog.Paged.Title', language).replace('$1', pageNumberStr)}
+  seo={seo}
+>
   <div class="py-[96px]">
     <h1
       class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"
