@@ -517,7 +517,7 @@ collections_config:
     name: Tour Regions
     singular_name: Tour Region
     icon: place
-    url: /[relative_base_path]/tours/regions/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/regions/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
