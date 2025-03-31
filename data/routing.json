@@ -7,12 +7,12 @@
     },
     {
       "from": "/campo-de-treino-douro-em-bicicleta/",
-      "destination": "/tours/bike-tours-douro-valley-easy/",
+      "destination": "/pt/tours/cycling-tours-douro-wine/",
       "status": 301
     },
     {
       "from": "/douro-valley-cycling-camp-road-bike/",
-      "destination": "/tours/douro-valley-cycling-camp-road-bike/",
+      "destination": "/tours/bike-tours-douro-valley/",
       "status": 301
     },
     {
@@ -293,6 +293,11 @@
     {
       "from": "/pt/posts/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
       "destination": "/pt/blog/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
+      "status": 301
+    },
+    {
+      "from": "/blog/O-Papel-das-Bike-Tours-na%20Promocao-do-Turismo-Sustentavel-em-Portugal",
+      "destination": "/pt/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
       "status": 301
     }
   ]
