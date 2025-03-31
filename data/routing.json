@@ -284,6 +284,11 @@
       "from": "/pt/posts/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
       "destination": "/pt/blog/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/passeio-de-bicicleta-em-lisboa-uma-aventura-imperdivel",
+      "destination": "/pt/blog/postspasseio-de-bicicleta-em-lisboa-uma-aventura-imperdivel",
+      "status": 301
     }
   ]
 }
