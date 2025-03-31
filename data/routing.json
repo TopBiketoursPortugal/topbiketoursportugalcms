@@ -110,7 +110,6 @@
       "destination": "/tours/douro-valley-full-day-bike-ride/",
       "status": 301
     },
-
     {
       "from": "/cycling-tours-tras-os-montes/",
       "destination": "/tours/cycling-tours-tras-os-montes/",
@@ -141,7 +140,6 @@
       "destination": "/pt/tours/costa-da-prata-2/",
       "status": 301
     },
-
     {
       "from": "/blog/what-is-nike-tour",
       "destination": "/blog/what-is-nike-tour/",
@@ -217,7 +215,6 @@
       "destination": "/tours/alentejo-wine-heritage-bicycle-tour/",
       "status": 301
     },
-
     {
       "from": "/porto-to-coimbra-biketour/",
       "destination": "/tours/porto-to-coimbra-biketour/",
@@ -281,6 +278,11 @@
     {
       "from": "/bike-tour-camino-de-santiago-cycling-french-way-leon/",
       "destination": "/tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
+      "status": 301
+    },
+    {
+      "from": "/pt/posts/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
+      "destination": "/pt/blog/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro",
       "status": 301
     }
   ]
