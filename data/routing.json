@@ -87,7 +87,7 @@
     },
     {
       "from": "/mountain-bike-tours-porto",
-      "destination": "/pt/tours/mountain-bike-tours-porto/",
+      "destination": "/tours/mountain-bike-tours-porto/",
       "status": 301
     },
     {
@@ -202,7 +202,7 @@
     },
     {
       "from": "/biketours-douro-valley-easy-level/",
-      "destination": "/tours/biketours-douro-valley-easy-level/",
+      "destination": "/pt/tours/biketours-douro-valley-easy-level/",
       "status": 301
     },
     {
