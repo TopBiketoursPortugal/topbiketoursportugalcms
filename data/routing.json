@@ -2,7 +2,7 @@
   "routes": [
     {
       "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
-      "destination": "/blog/clima-e-geografia-para-pedalar-em-portugal/",
+      "destination": "pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
       "status": 301
     },
     {
@@ -298,6 +298,46 @@
     {
       "from": "/blog/O-Papel-das-Bike-Tours-na%20Promocao-do-Turismo-Sustentavel-em-Portugal",
       "destination": "/pt/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/santiago-compostela-pela-costa/",
+      "destination": "/pt/tours/santiago-compostela-pela-costa/",
+      "status": 301
+    },
+    {
+      "from": "/pt-caminho-frances-a-santiago-bike-tour/",
+      "destination": "/pt/tours/pt-caminho-frances-a-santiago-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/south-portugal-biketour/",
+      "destination": "/tours/south-portugal-biketour/",
+      "status": 301
+    },
+    {
+      "from": "/pt-norte-de-portugal-bike-tour/",
+      "destination": "/pt/tours/pt-norte-de-portugal-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/rail-trail-ecopista-dao-river",
+      "destination": "/tours/bike-tour-sightseeing-porto/",
+      "status": 301
+    },
+    {
+      "from": "/rail-trail-ecopista-tamega",
+      "destination": "/tours/bike-tour-sightseeing-porto/",
+      "status": 301
+    },
+    {
+      "from": "/pt-porto-lisboa-bike-tour/",
+      "destination": "/pt/tours/pt-porto-lisboa-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/santiago-compostela/",
+      "destination": "/pt/tours/santiago-compostela/",
       "status": 301
     }
   ]
