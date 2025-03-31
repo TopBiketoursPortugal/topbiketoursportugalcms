@@ -339,6 +339,16 @@
       "from": "/santiago-compostela/",
       "destination": "/pt/tours/santiago-compostela/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/pelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela",
+      "destination": "/pt/blog/postspelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela/",
+      "status": 301
+    },
+    {
+      "from": "/pt/posts/ciclismo-e-gastronomia-como-viver-a-beleza-do-porto-no-seu-melhor//",
+      "destination": "/pt/blog/ciclismo-e-gastronomia-como-viver-a-beleza-do-porto-no-seu-melhor/",
+      "status": 301
     }
   ]
 }
