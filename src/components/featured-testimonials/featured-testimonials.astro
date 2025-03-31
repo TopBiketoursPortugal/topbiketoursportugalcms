@@ -18,7 +18,6 @@ const reviews: ReviewSchema[] = ((
   .flatMap((t) => t.data.reviews)
   .filter((item) => block.feature_testimonials?.includes(item.id ?? '')) ??
   []) satisfies ReviewSchema[];
-console.log(reviews);
 const items = (
   await getCollection(
     'testimonials',

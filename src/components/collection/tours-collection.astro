@@ -21,7 +21,6 @@ export type TourCollectionProps = {
 type Props = TourCollectionProps;
 
 const { contentDisplay = 'inline', tourType } = Astro.props;
-console.log(tourType);
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const tours = await getCollection(

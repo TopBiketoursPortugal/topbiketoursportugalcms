@@ -5,14 +5,14 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import alpine from '@astrojs/alpinejs';
 import sitemap from '@astrojs/sitemap';
-// import AstroPWA from '@vite-pwa/astro';
+import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
-// import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import rehypeExternalLinks from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
+import webmanifest from 'astro-webmanifest';
 
 function convertJson(inputJson: {
   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
@@ -63,67 +63,39 @@ export default defineConfig({
     mdx({
       rehypePlugins: [rehypeExternalLinks]
     }),
-    // webmanifest({
-    //   /**
-    //    * required
-    //    **/
-    //   name: 'Top Bike Tours Portugal',
+    webmanifest({
+      /**
+       * required
+       **/
+      name: 'Top Bike Tours Portugal',
 
-    //   /**
-    //    * optional
-    //    **/
-    //   icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
-    //   short_name: 'TWTP',
-    //   description: 'Top Bike Tours Portugal',
-    //   start_url: '/',
-    //   theme_color: '#296a3f',
-    //   background_color: '#fff',
-    //   display: 'standalone'
-    // }),
-    // AstroPWA({
-    //   mode: 'development',
-    //   base: '/',
-    //   scope: '/',
-    //   includeAssets: ['favicon.svg'],
-    //   registerType: 'autoUpdate',
-    //   manifest: {
-    //     name: 'Top Bike Tours Portugal',
-    //     description:
-    //       'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Bike Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
-    //     short_name: 'Walking tours',
-    //     theme_color: '#296a3f',
-    //     background_color: '#fff',
-    //     icons: [
-    //       {
-    //         src: 'android-chrome-192x192.png',
-    //         sizes: '192x192',
-    //         type: 'image/png'
-    //       },
-    //       {
-    //         src: 'android-chrome-512x512.png',
-    //         sizes: '512x512',
-    //         type: 'image/png'
-    //       },
-    //       {
-    //         src: 'android-chrome-512x512.png',
-    //         sizes: '512x512',
-    //         type: 'image/png',
-    //         purpose: 'any maskable'
-    //       }
-    //     ]
-    //   },
-    //   workbox: {
-    //     navigateFallback: '/',
-    //     globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
-    //   },
-    //   devOptions: {
-    //     enabled: true,
-    //     navigateFallbackAllowlist: [/^\//]
-    //   },
-    //   experimental: {
-    //     directoryAndTrailingSlashHandler: true
-    //   }
-    // }),
+      /**
+       * optional
+       **/
+      icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
+      short_name: 'TBTP',
+      description: 'Top Bike Tours Portugal',
+      start_url: '/',
+      theme_color: '#ff7700',
+      background_color: '#fff',
+      display: 'standalone'
+    }),
+    AstroPWA({
+      base: '/',
+      scope: '/',
+      registerType: 'autoUpdate',
+      workbox: {
+        navigateFallback: '/',
+        globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
+      },
+      devOptions: {
+        enabled: true,
+        navigateFallbackAllowlist: [/^\//]
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true
+      }
+    }),
     // shield({}),
     // playformInline()
     // min()
@@ -150,7 +122,7 @@ export default defineConfig({
     }
   ),
   prefetch: {
-    prefetchAll: false
+    prefetchAll: true
   },
   env: {
     schema: {

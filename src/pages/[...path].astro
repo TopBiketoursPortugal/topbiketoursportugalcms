@@ -25,7 +25,6 @@ export async function getStaticPaths() {
 }
 
 const { page, language } = Astro.props;
-console.log(language);
 const template = (page.data as any).template ?? '~/layouts/Page.astro';
 const hrefs = await getPageLanguagesAlternates(page, Astro.site);
 ---
