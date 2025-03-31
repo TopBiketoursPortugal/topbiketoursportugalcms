@@ -2,7 +2,7 @@
   "routes": [
     {
       "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
-      "destination": "pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
+      "destination": "/pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
       "status": 301
     },
     {
