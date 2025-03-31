@@ -289,6 +289,11 @@
       "from": "/pt/blog/10-beneficios-andar-bicicleta",
       "destination": "/pt/blog/10-beneficios-andar-bicicleta/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
+      "destination": "/pt/blog/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
+      "status": 301
     }
   ]
 }
