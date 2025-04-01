@@ -14,12 +14,12 @@ import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 // import webmanifest from 'astro-webmanifest';
 
-const redirects = new Set(
-  (RouteData.routes ?? []).flatMap((r) => [
-    'https://topbiketoursportugal.com' + r.from,
-    'https://seemly-winds.cloudvent.net' + r.from
-  ])
-);
+// const redirects = new Set(
+//   (RouteData.routes ?? []).flatMap((r) => [
+//     'https://topbiketoursportugal.com' + r.from,
+//     'https://seemly-winds.cloudvent.net' + r.from
+//   ])
+// );
 
 function convertJson(inputJson: {
   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
@@ -79,22 +79,22 @@ export default defineConfig({
     //   background_color: '#fff',
     //   display: 'standalone'
     // }),
-    // AstroPWA({
-    //   base: '/',
-    //   scope: '/',
-    //   registerType: 'autoUpdate',
-    //   workbox: {
-    //     navigateFallback: '/',
-    //     globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
-    //   },
-    //   devOptions: {
-    //     enabled: true,
-    //     navigateFallbackAllowlist: [/^\//]
-    //   },
-    //   experimental: {
-    //     directoryAndTrailingSlashHandler: true
-    //   }
-    // }),
+    AstroPWA({
+      base: '/',
+      scope: '/',
+      registerType: 'autoUpdate',
+      workbox: {
+        navigateFallback: '/',
+        globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
+      },
+      devOptions: {
+        enabled: true,
+        navigateFallbackAllowlist: [/^\//]
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true
+      }
+    }),
     // shield({}),
     // playformInline()
     // min()
@@ -107,7 +107,7 @@ export default defineConfig({
     //   Logger: 0
     // })
     sitemap({
-      filter: (page) => !redirects.has(page),
+      // filter: (page) => !redirects.has(page),
       i18n: {
         defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
         locales: {
