@@ -181,11 +181,6 @@
       "status": 301
     },
     {
-      "from": "/bike-tour-sightseeing-porto-pt/",
-      "destination": "/pt/tours/bike-tour-sightseeing-porto-pt/",
-      "status": 301
-    },
-    {
       "from": "/electric-bike-tour-porto-pt/",
       "destination": "/pt/tours/electric-bike-tour-porto-pt/",
       "status": 301
@@ -358,11 +353,6 @@
     {
       "from": "/bike-tour-sightseeing-porto/",
       "destination": "/tours/bike-tour-sightseeing-porto/",
-      "status": 301
-    },
-    {
-      "from": "/electric-bike-tour-porto/",
-      "destination": "/tours/electric-bike-tour-porto/",
       "status": 301
     },
     {
