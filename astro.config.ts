@@ -39,7 +39,25 @@ function removeDuplicateRedirects(
       uniqueRedirects.push(redirect);
     }
   }
-  console.log(JSON.stringify(uniqueRedirects));
+  console.log(
+    JSON.stringify(
+      uniqueRedirects
+        .filter(
+          (ur) =>
+            ur.from.toLocaleLowerCase() !==
+              ur.destination.toLocaleLowerCase() &&
+            ur.from.toLocaleLowerCase() !==
+              ur.destination
+                .toLocaleLowerCase()
+                .substring(0, ur.destination.length - 1)
+        )
+        .sort((a, b) => {
+          const fromA = a.from.toLowerCase();
+          const fromB = b.from.toLowerCase();
+          return fromA.localeCompare(fromB);
+        })
+    )
+  );
   return uniqueRedirects;
 }
 
