@@ -12,6 +12,7 @@ import RouteData from './data/routing.json';
 import rehypeExternalLinks from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
+import { stringify } from 'uuid';
 // import webmanifest from 'astro-webmanifest';
 
 // const redirects = new Set(
@@ -38,7 +39,7 @@ function removeDuplicateRedirects(
       uniqueRedirects.push(redirect);
     }
   }
-
+  console.log(JSON.stringify(uniqueRedirects));
   return uniqueRedirects;
 }
 
