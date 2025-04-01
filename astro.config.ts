@@ -12,7 +12,7 @@ import RouteData from './data/routing.json';
 import rehypeExternalLinks from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
-import webmanifest from 'astro-webmanifest';
+// import webmanifest from 'astro-webmanifest';
 
 const redirects = new Set(
   (RouteData.routes ?? []).flatMap((r) => [
@@ -62,23 +62,23 @@ export default defineConfig({
     mdx({
       rehypePlugins: [rehypeExternalLinks]
     }),
-    webmanifest({
-      /**
-       * required
-       **/
-      name: 'Top Bike Tours Portugal',
+    // webmanifest({
+    //   /**
+    //    * required
+    //    **/
+    //   name: 'Top Bike Tours Portugal',
 
-      /**
-       * optional
-       **/
-      icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
-      short_name: 'TBTP',
-      description: 'Top Bike Tours Portugal',
-      start_url: '/',
-      theme_color: '#ff7700',
-      background_color: '#fff',
-      display: 'standalone'
-    }),
+    //   /**
+    //    * optional
+    //    **/
+    //   icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
+    //   short_name: 'TBTP',
+    //   description: 'Top Bike Tours Portugal',
+    //   start_url: '/',
+    //   theme_color: '#ff7700',
+    //   background_color: '#fff',
+    //   display: 'standalone'
+    // }),
     // AstroPWA({
     //   base: '/',
     //   scope: '/',
