@@ -1,353 +1,209 @@
 {
   "routes": [
+    { "from": "/wine-gastournomy-biketour/", "destination": "", "status": 301 },
     {
-      "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
-      "destination": "/pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
+      "from": "    /bike-tour-sightseeing-porto/",
+      "destination": "    /tours/bike-tour-sightseeing-porto/",
       "status": 301
     },
+    {
+      "from": "    /electric-bike-tour-porto/",
+      "destination": "    /tours/electric-bike-tour-porto/",
+      "status": 301
+    },
+    {
+      "from": "    /douro-valley-full-day-bike-ride",
+      "destination": "    /tours/douro-valley-full-day-bike-ride/",
+      "status": 301
+    },
+    {
+      "from": "    /food-tour-bike-tour-wine-gastournomy-en/",
+      "destination": "    /tours/food-tour-bike-tour-wine-gastournomy-en/",
+      "status": 301
+    },
+    {
+      "from": "    /mountain-bike-tours-porto",
+    "destination": "    /tours/mountain-bike-tours-porto/",
+    "status": 301
+    },
+    {
+      "from": "    /biketour-porto-deluxe/",
+      "destination": "    /tours/biketour-porto-deluxe/",
+      "status": 301
+    },
+    {
+      "from": "    /rail-trail-ecopista-dao-river",
+      "destination": "    /bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "    /rail-trail-ecopista-tamega",
+      "destination": "    /bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "    /porto-santiago-compostela-bike-tour/",
+      "destination": "    /tours/porto-santiago-compostela-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "    /porto-to-coimbra-biketour/",
+      "destination": "    /tours/porto-to-coimbra-biketour/",
+      "status": 301
+    },
+    {
+      "from": "    /north-of-portugal-en/",
+      "destination": "    /tours/north-of-portugal-en/",
+      "status": 301
+    },
+    {
+      "from": "    /south-portugal-biketour/",
+      "destination": "    /tours/south-portugal-biketour/",
+      "status": 301
+    },
+    {
+      "from": "    /porto-to-lisbon-cycling-tour--en/",
+      "destination": "    /tours/porto-to-lisbon-cycling-tour-en/",
+      "status": 301
+    },
+    {
+      "from": "    /bike-tours-douro-valley/",
+      "destination": "    /tours/bike-tours-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "    /from-coimbra-to-lisbon-bike-tour/",
+      "destination": "    /tours/from-coimbra-to-lisbon-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "    /alentejo-wine-heritage-bicycle-tour",
+      "destination": "    /tours/alentejo-wine-heritage-bicycle-tour/",
+      "status": 301
+    },
+    {
+      "from": "    /bike-tour-camino-de-santiago-cycling-french-way-leon/",
+      "destination": "    /tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
+      "status": 301
+    },
+    {
+      "from": "    /bike-tours-douro-valley-easy/",
+      "destination": "    /tours/bike-tours-douro-valley-easy/",
+      "status": 301
+    },
+    {
+      "from": "    /santiago-de-compostela/",
+      "destination": "    /tours/santiago-de-compostela/",
+      "status": 301
+    },
+    {
+      "from": "    /bike-tours-portugal-douro-wine/",
+      "destination": "    /tours/bike-tours-portugal-douro-wine/",
+      "status": 301
+    },
+    {
+      "from": "    /french-way-to-santiago-bike-tour/",
+      "destination": "    /tours/french-way-to-santiago-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "    /douro-valley-cycling-camp-road-bike/",
+      "destination": "    /bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/The-Role-of-Bicycle-Tours-in-Promoting-Sustainable-Tourism",
+      "destination": "    /blog/the-role-of-bicycle-tours-in-promoting-sustainable-tourism/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/Tips-for-Exploring-Portugal-Historic-Villages-by-Bicycle",
+      "destination": "    /blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/How-to-ride-your-bike-at-night-Tips-essential-equipment",
+      "destination": "    /blog/how-to-ride-your-bike-at-night-tips-essential-equipment/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/How-to-Keep-Your-Bike-in-Perfect-Condition",
+      "destination": "    /blog/how-to-keep-your-bike-in-perfect-condition/",
+      "status": 301
+    },
+    {
+      "from": "    /pt/blog/10-health-benefits-of-cycling-regularly",
+      "destination": "    /blog/10-health-benefits-of-cycling-regularly/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/best-bike-tours-portugal",
+      "destination": "    /blog/best-bike-tours-portugal/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/7-reasons-bike-tour-porto-lisbon",
+      "destination": "    /blog/7-reasons-bike-tour-porto-lisbon/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/what-is-nike-tour",
+      "destination": "    /blog/what-is-nike-tour/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/electric-bikes-sustainability",
+      "destination": "    /blog/electric-bikes-sustainability/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/family-bike-rides",
+      "destination": "    /blog/family-bike-rides/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/how-put-gears-bike",
+      "destination": "    /blog/how-put-gears-bike/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/safety-tips-cycling-child",
+      "destination": "    /blog/safety-tips-cycling-child/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/main-touring-bike-routes-around-the-world",
+      "destination": "    /blog/main-touring-bike-routes-around-the-world/",
+      "status": 301
+    },
+    {
+      "from": "    /blog/how-to-choose-your-bicycle-practical-guide-for-cyclists",
+      "destination": "    /blog/how-to-choose-your-bicycle-practical-guide-for-cyclists/",
+      "status": 301
+    },
+    {
+    "from": "    /blog/unique-experiences-with-guided-bike-tours",
+    "destination": "    /blog/unique-experiences-with-guided-bike-tours/",
+    "status": 301
+    },
+    { 
+      "from": "    /blog/creating-bike-routes-strategies",
+      "destination": "    /blog/creating-bike-routes-strategies/",
+      "status": 301
+    },
+    {
+      "from": "    /posts/cycling-in-lisbon-an-adventure-not-to-be-missed",
+      "destination": "    /blog/cycling-in-lisbon-an-adventure-not-to-be-missed/",
+      "status": 301
+    },
+    {
+      "from": "    /posts/complete-guide-how-to-choose-the-right-bike-for-you/",
+      "destination": "    /blog/complete-guide-how-to-choose-the-right-bike-for-you/",
+      "status": 301
+    }
     {
       "from": "/campo-de-treino-douro-em-bicicleta/",
-      "destination": "/pt/tours/cycling-tours-douro-wine/",
-      "status": 301
-    },
-    {
-      "from": "/douro-valley-cycling-camp-road-bike/",
-      "destination": "/tours/bike-tours-douro-valley/",
-      "status": 301
-    },
-    {
-      "from": "/alentejo-vinho-tradicao-passseio-bicicleta",
-      "destination": "/pt/tours/alentejo-vinho-tradicao-passseio-bicicleta/",
-      "status": 301
-    },
-    {
-      "from": "/wine-gastournomy-biketour",
-      "destination": "/pt/tours/wine-gastournomy-biketour/",
-      "status": 301
-    },
-    {
-      "from": "/tour-bicicleta-montanha",
-      "destination": "/pt/tours/tour-bicicleta-montanha/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/Como-Manter-a-sua-Bicicleta-em-Perfeitas-Condicoes",
-      "destination": "/pt/blog/como-manter-a-sua-bicicleta-em-perfeitas-condicoes/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/Como-conduzir-a-sua-bicicleta-em-segurança-noite-Dicas-equipamentos-essenciais",
-      "destination": "/pt/blog/como-conduzir-a-sua-bicicleta-em-seguranca-noite-dicas-equipamentos-essenciais/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/climate-and-geography-in-portugal-for-cycling/",
-      "destination": "/pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/bicicletas-eletricas-sustentabilidade",
-      "destination": "/pt/blog/bicicletas-eletricas-sustentabilidade/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/best-bike-tours-portugal",
-      "destination": "/pt/blog/as-melhores-bike-tours-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/apoioIEFP",
-      "destination": "/pt/blog/apoioiefp/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/7-motivos-bike-tour-porto-lisboa",
-      "destination": "/pt/blog/7-motivos-bike-tour-porto-lisboa/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/10-health-benefits-of-cycling-regularly",
-      "destination": "/pt/blog/10-health-benefits-of-cycling-regularly/",
-      "status": 301
-    },
-    {
-      "from": "/porto-to-lisbon-cycling-tour--en/",
-      "destination": "/tours/porto-to-lisbon-cycling-tour-en/",
-      "status": 301
-    },
-    {
-      "from": "/passeios-de-bicicleta-portugal/",
-      "destination": "/pt/passeios-de-bicicleta-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/passeios-bicicleta-porto/",
-      "destination": "/pt/passeios-bicicleta-porto/",
-      "status": 301
-    },
-    {
-      "from": "/mountain-bike-tours-porto",
-      "destination": "/tours/mountain-bike-tours-porto/",
-      "status": 301
-    },
-    {
-      "from": "/full-day-biketour-deluxe/",
-      "destination": "/tours/full-day-biketour-deluxe/",
-      "status": 301
-    },
-    {
-      "from": "/electric-bike-tour-porto-pt/",
-      "destination": "/pt/tours/electric-bike-tour-porto-pt/",
-      "status": 301
-    },
-    {
-      "from": "/douro-valley-full-day-bike-ride",
-      "destination": "/tours/douro-valley-full-day-bike-ride/",
-      "status": 301
-    },
-    {
-      "from": "/cycling-tours-tras-os-montes/",
-      "destination": "/pt/tours/cycling-tours-tras-os-montes/",
-      "status": 301
-    },
-    {
-      "from": "/cycling-tours-douro-wine/",
-      "destination": "/pt/tours/cycling-tours-douro-wine/",
-      "status": 301
-    },
-    {
-      "from": "/cycling-holiday-pack-recommendations",
-      "destination": "/blog/cycling-holiday-pack-recommendations/",
-      "status": 301
-    },
-    {
-      "from": "/costa-vicentina-bike-tour/",
-      "destination": "/pt/tours/costa-vicentina-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/costa-da-prata-rota-1/",
-      "destination": "/pt/tours/costa-da-prata-rota-1/",
-      "status": 301
-    },
-    {
-      "from": "/costa-da-prata-2/",
-      "destination": "/pt/tours/costa-da-prata-2/",
-      "status": 301
-    },
-    {
-      "from": "/blog/what-is-nike-tour",
-      "destination": "/blog/what-is-nike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/blog/Tips-for-Exploring-Portugal-Historic-Villages-by-Bicycle",
-      "destination": "/blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
-      "status": 301
-    },
-    {
-      "from": "/blog/The-Role-of-Bicycle-Tours-in-Promoting-Sustainable-Tourism",
-      "destination": "/blog/the-role-of-bicycle-tours-in-promoting-sustainable-tourism/",
-      "status": 301
-    },
-    {
-      "from": "/blog/safety-tips-cycling-child",
-      "destination": "/blog/safety-tips-cycling-child/",
-      "status": 301
-    },
-    {
-      "from": "/blog/O-Papel-das-Bike-Tours-na Promocao-do-Turismo-Sustentavel-em-Portugal",
-      "destination": "/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/blog/How-to-ride-your-bike-at-night-Tips-essential-equipment",
-      "destination": "/blog/how-to-ride-your-bike-at-night-tips-essential-equipment/",
-      "status": 301
-    },
-    {
-      "from": "/blog/How-to-Keep-Your-Bike-in-Perfect-Condition",
-      "destination": "/blog/how-to-keep-your-bike-in-perfect-condition/",
-      "status": 301
-    },
-    {
-      "from": "/blog/how-put-gears-bike",
-      "destination": "/blog/how-put-gears-bike/",
-      "status": 301
-    },
-    {
-      "from": "/blog/family-bike-rides",
-      "destination": "/blog/family-bike-rides/",
-      "status": 301
-    },
-    {
-      "from": "/blog/electric-bikes-sustainability",
-      "destination": "/blog/electric-bikes-sustainability/",
-      "status": 301
-    },
-    {
-      "from": "/blog/best-bike-tours-portugal",
-      "destination": "/blog/best-bike-tours-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/blog/7-reasons-bike-tour-porto-lisbon",
-      "destination": "/blog/7-reasons-bike-tour-porto-lisbon/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tour-sightseeing-porto-pt/",
-      "destination": "/pt/tours/bike-tour-sightseeing-porto-pt/",
-      "status": 301
-    },
-    {
-      "from": "/biketours-douro-valley-easy-level/",
-      "destination": "/pt/tours/biketours-douro-valley-easy-level/",
-      "status": 301
-    },
-    {
-      "from": "/alentejo-wine-heritage-bicycle-tour",
-      "destination": "/tours/alentejo-wine-heritage-bicycle-tour/",
-      "status": 301
-    },
-    {
-      "from": "/porto-to-coimbra-biketour/",
-      "destination": "/tours/porto-to-coimbra-biketour/",
-      "status": 301
-    },
-    {
-      "from": "/porto-santiago-compostela-bike-tour/",
-      "destination": "/tours/porto-santiago-compostela-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/north-of-portugal-en/",
-      "destination": "/tours/north-of-portugal-en/",
-      "status": 301
-    },
-    {
-      "from": "/from-coimbra-to-lisbon-bike-tour/",
-      "destination": "/tours/from-coimbra-to-lisbon-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/french-way-to-santiago-bike-tour/",
-      "destination": "/tours/french-way-to-santiago-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/food-tour-bike-tour-wine-gastournomy-en/",
-      "destination": "/tours/food-tour-bike-tour-wine-gastournomy-en/",
-      "status": 301
-    },
-    {
-      "from": "/electric-bike-tour-porto/",
-      "destination": "/tours/electric-bike-tour-porto/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tours-portugal-douro-wine/",
-      "destination": "/tours/bike-tours-portugal-douro-wine/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tour-sightseeing-porto/",
-      "destination": "/tours/bike-tour-sightseeing-porto/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tours-douro-valley-easy/",
-      "destination": "/tours/bike-tours-douro-valley-easy/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tours-douro-valley/",
-      "destination": "/tours/bike-tours-douro-valley/",
-      "status": 301
-    },
-    {
-      "from": "/biketour-porto-deluxe/",
-      "destination": "/tours/biketour-porto-deluxe/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tour-camino-de-santiago-cycling-french-way-leon/",
-      "destination": "/tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
-      "status": 301
-    },
-    {
-      "from": "/pt/posts/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
-      "destination": "/pt/blog/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro",
-      "status": 301
-    },
-    {
-      "from": "/pt/posts/passeio-de-bicicleta-em-lisboa-uma-aventura-imperdivel",
-      "destination": "/pt/blog/postspasseio-de-bicicleta-em-lisboa-uma-aventura-imperdivel",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/10-beneficios-andar-bicicleta",
-      "destination": "/pt/blog/10-beneficios-andar-bicicleta/",
-      "status": 301
-    },
-    {
-      "from": "/pt/posts/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
-      "destination": "/pt/blog/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
-      "status": 301
-    },
-    {
-      "from": "/blog/O-Papel-das-Bike-Tours-na%20Promocao-do-Turismo-Sustentavel-em-Portugal",
-      "destination": "/pt/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/santiago-compostela-pela-costa/",
-      "destination": "/pt/tours/santiago-compostela-pela-costa/",
-      "status": 301
-    },
-    {
-      "from": "/pt-caminho-frances-a-santiago-bike-tour/",
-      "destination": "/pt/tours/pt-caminho-frances-a-santiago-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/south-portugal-biketour/",
-      "destination": "/tours/south-portugal-biketour/",
-      "status": 301
-    },
-    {
-      "from": "/pt-norte-de-portugal-bike-tour/",
-      "destination": "/pt/tours/pt-norte-de-portugal-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/rail-trail-ecopista-dao-river",
-      "destination": "/tours/bike-tour-sightseeing-porto/",
-      "status": 301
-    },
-    {
-      "from": "/rail-trail-ecopista-tamega",
-      "destination": "/tours/bike-tour-sightseeing-porto/",
-      "status": 301
-    },
-    {
-      "from": "/pt-porto-lisboa-bike-tour/",
-      "destination": "/pt/tours/pt-porto-lisboa-bike-tour/",
-      "status": 301
-    },
-    {
-      "from": "/santiago-compostela/",
-      "destination": "/pt/tours/santiago-compostela/",
-      "status": 301
-    },
-    {
-      "from": "/pt/posts/pelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela",
-      "destination": "/pt/blog/postspelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela/",
-      "status": 301
-    },
-    {
-      "from": "/pt/posts/ciclismo-e-gastronomia-como-viver-a-beleza-do-porto-no-seu-melhor//",
-      "destination": "/pt/blog/ciclismo-e-gastronomia-como-viver-a-beleza-do-porto-no-seu-melhor/",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     }
   ]
