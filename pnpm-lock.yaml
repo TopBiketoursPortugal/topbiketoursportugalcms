@@ -69,17 +69,11 @@ importers:
         specifier: 0.0.3
         version: 0.0.3(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))
       astro-webmanifest:
-        specifier: ^1.0.0
+        specifier: 1.0.0
         version: 1.0.0
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      core-js:
-        specifier: ^3.41.0
-        version: 3.41.0
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
       nightwind:
         specifier: 1.1.13
         version: 1.1.13(tailwindcss@3.3.3)
@@ -99,8 +93,8 @@ importers:
         specifier: 0.33.5
         version: 0.33.5
       tailwind-merge:
-        specifier: 3.0.2
-        version: 3.0.2
+        specifier: 3.1.0
+        version: 3.1.0
       tailwind-variants:
         specifier: 1.0.0
         version: 1.0.0(tailwindcss@3.3.3)
@@ -229,8 +223,8 @@ importers:
         specifier: 0.0.25
         version: 0.0.25
       type-fest:
-        specifier: 4.38.0
-        version: 4.38.0
+        specifier: 4.39.0
+        version: 4.39.0
       vite-plugin-pwa:
         specifier: 1.0.0
         version: 1.0.0(@vite-pwa/assets-generator@1.0.0)(vite@6.2.4(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(sass@1.85.1)(terser@5.39.0)(yaml@2.7.0))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@7.3.0)
@@ -2896,9 +2890,6 @@ packages:
 
   core-js-compat@3.41.0:
     resolution: {integrity: sha512-RFsU9LySVue9RTwdDVX/T0e2Y6jRYWXERKElIjpuEOEnxaXffI0X7RUwVzfYLfzuLXSNJDYoRYUAmRUcyln20A==}
-
-  core-js@3.41.0:
-    resolution: {integrity: sha512-SJ4/EHwS36QMJd6h/Rg+GyR4A5xE0FSI3eZ+iBVpfqf1x0eTSg1smWLHrA+2jQThZSh97fmSgFSU8B61nxosxA==}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -5728,6 +5719,9 @@ packages:
   tailwind-merge@3.0.2:
     resolution: {integrity: sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==}
 
+  tailwind-merge@3.1.0:
+    resolution: {integrity: sha512-aV27Oj8B7U/tAOMhJsSGdWqelfmudnGMdXIlMnk1JfsjwSjts6o8HyfN7SFH3EztzH4YH8kk6GbLTHzITJO39Q==}
+
   tailwind-variants@1.0.0:
     resolution: {integrity: sha512-2WSbv4ulEEyuBKomOunut65D8UZwxrHoRfYnxGcQNnHqlSCp2+B7Yz2W+yrNDrxRodOXtGD/1oCcKGNBnUqMqA==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
@@ -5857,8 +5851,8 @@ packages:
     resolution: {integrity: sha512-eaBzG6MxNzEn9kiwvtre90cXaNLkmadMWa1zQMs3XORCXNbsH/OewwbxC5ia9dCxIxnTAsSxXJaa/p5y8DlvJg==}
     engines: {node: '>=10'}
 
-  type-fest@4.38.0:
-    resolution: {integrity: sha512-2dBz5D5ycHIoliLYLi0Q2V7KRaDlH0uWIvmk7TYlAg5slqwiPv1ezJdZm1QEM0xgk29oYWMCbIG7E6gHpvChlg==}
+  type-fest@4.39.0:
+    resolution: {integrity: sha512-w2IGJU1tIgcrepg9ZJ82d8UmItNQtOFJG0HCUE3SzMokKkTsruVDALl2fAdiEzJlfduoU+VyXJWIIUZ+6jV+nw==}
     engines: {node: '>=16'}
 
   type-is@1.6.18:
@@ -9317,7 +9311,7 @@ snapshots:
       chalk: 5.4.1
       cli-boxes: 3.0.0
       string-width: 7.2.0
-      type-fest: 4.38.0
+      type-fest: 4.39.0
       widest-line: 5.0.0
       wrap-ansi: 9.0.0
 
@@ -9574,8 +9568,6 @@ snapshots:
   core-js-compat@3.41.0:
     dependencies:
       browserslist: 4.24.4
-
-  core-js@3.41.0: {}
 
   core-util-is@1.0.3: {}
 
@@ -13119,6 +13111,8 @@ snapshots:
 
   tailwind-merge@3.0.2: {}
 
+  tailwind-merge@3.1.0: {}
+
   tailwind-variants@1.0.0(tailwindcss@3.3.3):
     dependencies:
       tailwind-merge: 3.0.2
@@ -13284,7 +13278,7 @@ snapshots:
 
   type-fest@0.16.0: {}
 
-  type-fest@4.38.0: {}
+  type-fest@4.39.0: {}
 
   type-is@1.6.18:
     dependencies:
