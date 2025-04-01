@@ -454,6 +454,11 @@
       "from": "/Clima-e-Geografia-para-pedalar-em-Portugal",
       "destination": "/pt/blog/clima-e-geografia-para-pedalar-em-portugal/",
       "status": 301
+    },
+    {
+      "from": "/electric-bike-tour-porto/",
+      "destination": "/tours/electric-bike-tour-porto/",
+      "status": 301
     }
   ]
 }
