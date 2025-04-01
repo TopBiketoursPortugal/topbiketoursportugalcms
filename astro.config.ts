@@ -14,6 +14,13 @@ import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import webmanifest from 'astro-webmanifest';
 
+const redirects = new Set(
+  (RouteData.routes ?? []).flatMap((r) => [
+    'https://topbiketoursportugal.com' + r.from,
+    'https://seemly-winds.cloudvent.net' + r.from
+  ])
+);
+
 function convertJson(inputJson: {
   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
 }): Record<string, RedirectConfig> {
@@ -51,15 +58,7 @@ export default defineConfig({
       // },
       iconDir: 'src/assets/icons'
     }),
-    sitemap({
-      i18n: {
-        defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
-        locales: {
-          en: 'en', // The `defaultLocale` value must present in `locales` keys
-          pt: 'pt'
-        }
-      }
-    }),
+
     mdx({
       rehypePlugins: [rehypeExternalLinks]
     }),
@@ -107,6 +106,16 @@ export default defineConfig({
     //   SVG: true,
     //   Logger: 0
     // })
+    sitemap({
+      filter: (page) => !redirects.has(page),
+      i18n: {
+        defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
+        locales: {
+          en: 'en', // The `defaultLocale` value must present in `locales` keys
+          pt: 'pt'
+        }
+      }
+    }),
     partytown({ config: { forward: ['dataLayer.push'], debug: true } })
   ],
   markdown: {
