@@ -1,6 +1,5 @@
 {
   "routes": [
-    { "from": "/wine-gastournomy-biketour/", "destination": "", "status": 301 },
     {
       "from": "    /bike-tour-sightseeing-porto/",
       "destination": "    /tours/bike-tour-sightseeing-porto/",
