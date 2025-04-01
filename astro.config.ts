@@ -21,12 +21,33 @@ import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 //   ])
 // );
 
+function removeDuplicateRedirects(
+  redirects: {
+    from: string;
+    destination: string;
+    status: ValidRedirectStatus;
+  }[]
+) {
+  const seen = new Set();
+  const uniqueRedirects = [];
+
+  for (const redirect of redirects) {
+    const key = `${redirect.from}->${redirect.destination}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      uniqueRedirects.push(redirect);
+    }
+  }
+
+  return uniqueRedirects;
+}
+
 function convertJson(inputJson: {
   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
 }): Record<string, RedirectConfig> {
   const result = new Map<string, RedirectConfig>();
 
-  inputJson.routes.forEach((route) => {
+  removeDuplicateRedirects(inputJson.routes).forEach((route) => {
     result.set(route.from, {
       destination: route.destination,
       status: route.status
