@@ -79,22 +79,22 @@ export default defineConfig({
       background_color: '#fff',
       display: 'standalone'
     }),
-    // AstroPWA({
-    //   base: '/',
-    //   scope: '/',
-    //   registerType: 'autoUpdate',
-    //   workbox: {
-    //     navigateFallback: '/',
-    //     globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
-    //   },
-    //   devOptions: {
-    //     enabled: true,
-    //     navigateFallbackAllowlist: [/^\//]
-    //   },
-    //   experimental: {
-    //     directoryAndTrailingSlashHandler: true
-    //   }
-    // }),
+    AstroPWA({
+      base: '/',
+      scope: '/',
+      registerType: 'autoUpdate',
+      workbox: {
+        navigateFallback: '/',
+        globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
+      },
+      devOptions: {
+        enabled: true,
+        navigateFallbackAllowlist: [/^\//]
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true
+      }
+    }),
     // shield({}),
     // playformInline()
     // min()
