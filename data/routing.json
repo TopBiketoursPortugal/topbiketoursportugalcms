@@ -52,7 +52,7 @@
     },
     {
       "from": "/campo-de-treino-douro-em-bicicleta/",
-      "destination": "https://topbiketoursportugal.com/bike-tours-in-portugal/",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
@@ -97,7 +97,7 @@
     },
     {
       "from": "/douro-valley-cycling-camp-road-bike/",
-      "destination": "https://topbiketoursportugal.com/bike-tours-in-portugal/",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
@@ -132,7 +132,7 @@
     },
     {
       "from": "/north-of-portugal-en/",
-      "destination": "https://topbiketoursportugal.com/tours/north-of-portugal-en/",
+      "destination": "/tours/north-of-portugal-en/",
       "status": 301
     },
     {
@@ -257,12 +257,12 @@
     },
     {
       "from": "/rail-trail-ecopista-dao-river",
-      "destination": "https://topbiketoursportugal.com/bike-tours-in-portugal/",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
       "from": "/rail-trail-ecopista-tamega",
-      "destination": "https://topbiketoursportugal.com/bike-tours-in-portugal/",
+      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
