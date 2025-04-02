@@ -6,6 +6,10 @@ import { t } from 'utils/i18n';
 import Prose from '../typography/prose.astro';
 import FormData from 'src/../data/forms.json';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+type Props = {
+  code?: string;
+};
+const { code } = Astro.props;
 ---
 
 <Form
@@ -14,9 +18,10 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
   id="tour-booking-enquiry-form"
   class="tour-booking-enquiry-form"
 >
+  <input type="hidden" name="product-code" value={code} />
   <FormField
     as="input"
-    name="name"
+    name="full-name"
     required
     placeholder={t('Tour.Form.Name.Placeholder', language)}
     label={t('Tour.Form.Name.Label', language)}
@@ -31,7 +36,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
   />
   <FormField
     as="input"
-    name="phone"
+    name="tel"
     required
     type="phone"
     placeholder={t('Tour.Form.Phone.Placeholder', language)}
@@ -64,7 +69,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       t('Tour.Form.TourType.OptionGuided', language),
       t('Tour.Form.TourType.OptionUnguided', language)
     ]}
-    name="tour-type"
+    name="package"
     label={t('Tour.Form.TourType.Label', language)}
     placeholder={t('Tour.Form.TourType.Placeholder', language)}
   />
