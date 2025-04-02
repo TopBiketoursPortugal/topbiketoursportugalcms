@@ -329,6 +329,11 @@
       "from": "/pt/posts/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
       "destination": "/pt/blog/descubra-portugal-com-passeios-de-bicicleta-pelo-douro/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/unindo-equipas-as-5-melhores-atividades-de-team-building//",
+      "destination": "/pt/blog/de-bicicleta-pedalar-pelas-costas-encantadoras-de-portugal/",
+      "status": 301
     }
   ]
 }
