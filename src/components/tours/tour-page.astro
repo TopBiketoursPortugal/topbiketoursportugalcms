@@ -147,7 +147,7 @@ const enableFaqs = false;
       feature?.bokunLink ? (
         <Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>
       ) : (
-        <TourForm code={tour.code} />
+        <TourForm code={tour.code} title={tour.title} />
       )
     }
   </section>

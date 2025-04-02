@@ -8,8 +8,9 @@ import FormData from 'src/../data/forms.json';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 type Props = {
   code?: string;
+  title?: string;
 };
-const { code } = Astro.props;
+const { code, title } = Astro.props;
 ---
 
 <Form
@@ -19,6 +20,7 @@ const { code } = Astro.props;
   class="tour-booking-enquiry-form"
 >
   <input type="hidden" name="product-code" value={code} />
+  <input type="hidden" name="product-title" value={title} />
   <FormField
     as="input"
     name="full-name"
