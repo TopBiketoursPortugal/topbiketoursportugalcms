@@ -13,6 +13,6 @@ const postTagsSchema = z.object({
 });
 
 export const postTagsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/post-tags' }),
+  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/blog-tags' }),
   schema: postTagsSchema
 });

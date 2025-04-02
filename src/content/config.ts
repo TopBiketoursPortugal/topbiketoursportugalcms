@@ -1,7 +1,7 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { languageSchema } from 'src/schemas/language';
-import { postTagsCollection } from 'src/schemas/post-tags';
+import { postTagsCollection } from 'src/schemas/blog-tags';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
 import { testimonialCollection } from 'src/schemas/testimonal';

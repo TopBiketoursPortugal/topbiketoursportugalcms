@@ -25,7 +25,7 @@ const testimonial = z.object({
   score: z.number().min(0).max(5),
   author: z.object({
     country: z.string().optional(),
-    avatar: z.string().optional(),
+    avatar: z.string().optional().nullable(),
     name: z.string().optional()
   }),
   relatedProduct: z.string().uuid().optional().nullable()
