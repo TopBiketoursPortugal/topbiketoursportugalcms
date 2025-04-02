@@ -334,6 +334,11 @@
       "from": "/pt/posts/unindo-equipas-as-5-melhores-atividades-de-team-building//",
       "destination": "/pt/blog/de-bicicleta-pedalar-pelas-costas-encantadoras-de-portugal/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/pedalando-pela-historia-caminho-de-santiago-rota-francesa-a-partir-de-leon//",
+      "destination": "/pt/blog/pedalando-pela-historia-caminho-santiago-rota-francesa-a-partir-de-leon/",
+      "status": 301
     }
   ]
 }
