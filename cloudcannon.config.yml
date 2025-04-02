@@ -621,7 +621,7 @@ collections_config:
         name: NewTourTagMember
         icon: pedal_bike
   postTags:
-    path: src/content/post-tags
+    path: src/content/blog-tags
     glob:
       - '**/*.md*'
     name: Post Tags
