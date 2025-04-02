@@ -324,6 +324,11 @@
       "from": "/pt/posts/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
       "destination": "/pt/blog/bicicletas-electricas-como-ajudam-no-seu-percurso/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
+      "destination": "/pt/blog/descubra-portugal-com-passeios-de-bicicleta-pelo-douro/",
+      "status": 301
     }
   ]
 }
