@@ -442,7 +442,7 @@ collections_config:
     _enabled_editors:
       - content
     create:
-      path: '[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim}.mdx'
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
