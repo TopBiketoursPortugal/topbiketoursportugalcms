@@ -319,6 +319,11 @@
       "from": "/bike-tour-sightseeing-porto-pt/",
       "destination": "/pt/tours/bike-tour-sightseeing-porto-pt/",
       "status": 301
+    },
+    {
+      "from": "/pt/posts/bicicletas-electricas-como-e-que-estas-podem-ajuda-lo-nas-rotas-ciclisticas-mais-dificeis/",
+      "destination": "/pt/blog/bicicletas-electricas-como-ajudam-no-seu-percurso/",
+      "status": 301
     }
   ]
 }
