@@ -8,15 +8,15 @@
   },
   "instagram": {
     "trackId": null,
-    "href": "https://www.instagram.com/topwalkingtoursportugal/",
+    "href": "https://www.instagram.com/topbiketoursportugal/",
     "icon": "ph:instagram-logo-light",
     "alt": "Instagram",
     "target": "_blank"
   },
-  "youtube": null,
+  "youtube": "https://www.youtube.com/@topbiketoursportugal1653",
   "tripadvisor": {
     "trackId": "",
-    "href": "https://www.tripadvisor.com.br/Attraction_Review-g189158-d23103173-Reviews-Walking_Hiking_tours_Portugal-Lisbon_Lisbon_District_Central_Portugal.html",
+    "href": "https://www.tripadvisor.com/Attraction_Review-g189180-d4105907-Reviews-Top_Bike_Tours_Portugal-Porto_Porto_District_Northern_Portugal.html",
     "icon": "fa:tripadvisor",
     "alt": "TripAdvisor",
     "target": "_blank"
@@ -24,7 +24,7 @@
   "google": null,
   "twitter": {
     "trackId": "",
-    "href": "https://x.com/hike_tours",
+    "href": "https://x.com/FoldnVisit",
     "icon": "ph:x-logo-light",
     "alt": "X",
     "target": "_blank"
