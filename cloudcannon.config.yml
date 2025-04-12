@@ -1420,7 +1420,7 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
-timezone: Europe/Lisbon
+timezone: Etc/UTC
 markdown:
   engine:
   options:
