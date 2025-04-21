@@ -28,6 +28,7 @@ import Icon from '../utility/icon.astro';
 import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
+import CountryData from 'src/../data/countries.json';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -306,16 +307,31 @@ const enableFaqs = false;
         <div class="grid grid-cols-1 gap-12">
           {reviews.map(
             async ({ image, travelerType, content, author, rating }) => {
-              const countryCode = author?.country;
-              const countryFlagIcon = countryCode
-                ? `circle-flags:${countryCode?.toLowerCase()}`
-                : 'ph:user-circle-light';
-
               const {
                 country = '',
                 givenName = '',
                 familyName = ''
               } = author ?? {};
+
+              const countryCode = CountryData.filter(
+                (c) =>
+                  c.englishName.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase().trim() ||
+                  c.portugueseName.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase().trim() ||
+                  c.englishName.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
+                  c.portugueseName.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
+                  c.alpha3.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase() ||
+                  c.alpha3.toLocaleLowerCase() ===
+                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim()
+              )[0]?.alpha2;
+
+              const countryFlagIcon = countryCode
+                ? `circle-flags:${countryCode?.toLowerCase()}`
+                : 'ph:user-circle-light';
 
               const name = `${givenName} ${familyName}`.trimEnd();
               return (

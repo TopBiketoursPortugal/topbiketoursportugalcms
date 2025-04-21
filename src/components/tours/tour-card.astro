@@ -15,6 +15,7 @@ import Icon from '../utility/icon.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import type { ReviewSchema } from 'src/schemas/tours';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -42,25 +43,7 @@ const testimonials = (
     'testimonials',
     (t) => t.data.language === language && t.data.relatedProduct === data.id
   )) ?? []
-).map(
-  (t) =>
-    ({
-      content: t.body ?? '',
-      rating: t.data.score,
-      title: t.data.title,
-      author: {
-        country: t.data.author.country ?? '',
-        givenName: t.data.author.name ?? ''
-      },
-      source: {
-        url: t.data.reviewSource,
-        name:
-          t.data.reviewSource?.indexOf('tripadvisor') !== -1
-            ? 'TripAdvisor'
-            : ''
-      }
-    }) satisfies ReviewSchema
-);
+).map(MapTestimonialToReview);
 
 const reviews = initialReviews.concat(testimonials);
 
