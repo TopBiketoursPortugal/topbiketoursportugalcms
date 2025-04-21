@@ -373,7 +373,7 @@
     {
       "from": "/pt/posts/passeio-de-bicicleta-em-lisboa-uma-aventura-imperdivel/",
       "destination": "/pt/blog/postspasseio-de-bicicleta-em-lisboa-uma-aventura-imperdivel/",
-      "status": 0
+      "status": 301
     },
     {
       "from": "/pt/blog/pedalando-pela-historia-caminho-de-santiago-rota-francesa-a-partir-de-leon/",
@@ -398,6 +398,11 @@
     {
       "from": "/-campo-de-treino-douro-em-bicicleta/?lightbox=i020v9",
       "destination": "/pt/passeios-de-bicicleta-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/coastal-bike-tour-cycling-along-portugals-enchanting-coasts",
+      "destination": "/blog/coastal-bike-tour-cycling-along-portugals-enchanting-coasts/",
       "status": 301
     }
   ]
