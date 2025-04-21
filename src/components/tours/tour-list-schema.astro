@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
 import type { ReviewSchema } from 'src/schemas/tours';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 import { getTourPath } from 'utils/permalinks';
 
 type Props = { items: CollectionEntry<'tours'>[]; language: LanguageCodes };
@@ -21,25 +22,7 @@ const schema = {
     const tourReviewsAndTestimonials = (tour.reviews ?? []).concat(
       testimonials
         .filter((t) => t.data.relatedProduct === tour.id)
-        .map(
-          (t) =>
-            ({
-              content: t.body ?? '',
-              rating: t.data.score,
-              title: t.data.title,
-              author: {
-                country: t.data.author.country ?? '',
-                givenName: t.data.author.name ?? ''
-              },
-              source: {
-                url: t.data.reviewSource,
-                name:
-                  t.data.reviewSource?.indexOf('tripadvisor') !== -1
-                    ? 'TripAdvisor'
-                    : ''
-              }
-            }) satisfies ReviewSchema
-        )
+        .map(MapTestimonialToReview)
     ) satisfies ReviewSchema[];
 
     const ratings = tourReviewsAndTestimonials.map((r) => r.rating);

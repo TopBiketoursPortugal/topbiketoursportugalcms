@@ -6,43 +6,27 @@ import Grid from '../grid/grid.astro';
 import Stack from '../stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 type Props = {
   feature_testimonials: readonly string[];
 } & VisuallyEditable;
 
 const block = Astro.props;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const reviews: ReviewSchema[] = ((
-  await getCollection('tours', (item) => item.data.language === language)
-)
-  .flatMap((t) => t.data.reviews)
-  .filter((item) => block.feature_testimonials?.includes(item.id ?? '')) ??
-  []) satisfies ReviewSchema[];
-const items = (
-  await getCollection(
-    'testimonials',
-    (item) =>
-      block.feature_testimonials?.includes(item.data.id) &&
-      item.data.language === language
-  )
-).map(
-  (t) =>
-    ({
-      content: t.body ?? '',
-      rating: t.data.score,
-      title: t.data.title,
-      author: {
-        country: t.data.author.country ?? '',
-        givenName: t.data.author.name ?? ''
-      },
-      source: {
-        url: t.data.reviewSource,
-        name:
-          t.data.reviewSource?.indexOf('tripadvisor') !== -1
-            ? 'TripAdvisor'
-            : ''
-      }
-    }) satisfies ReviewSchema
+const reviews =
+  (await getCollection('tours', (item) => item.data.language === language))
+    .flatMap((t) => t.data.reviews)
+    .filter((item) => block.feature_testimonials?.includes(item.id ?? '')) ??
+  [];
+const items = reviews.concat(
+  (
+    await getCollection(
+      'testimonials',
+      (item) =>
+        block.feature_testimonials?.includes(item.data.id) &&
+        item.data.language === language
+    )
+  ).map(MapTestimonialToReview)
 );
 ---
 

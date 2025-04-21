@@ -306,34 +306,41 @@ const enableFaqs = false;
         <div class="grid grid-cols-1 gap-12">
           {reviews.map(
             async ({ image, travelerType, content, author, rating }) => {
-              const imageOptimized = image
-                ? (await getImageByPath(image.src)).default
-                : defaultImage;
+              const countryCode = author?.country;
+              const countryFlagIcon = countryCode
+                ? `circle-flags:${countryCode?.toLowerCase()}`
+                : 'ph:user-circle-light';
+
               const {
                 country = '',
                 givenName = '',
                 familyName = ''
               } = author ?? {};
+
               const name = `${givenName} ${familyName}`.trimEnd();
               return (
                 <div class="flex flex-row items-center justify-evenly gap-6">
                   <div class="flex grow">
-                    <Image
-                      src={imageOptimized}
-                      widths={[320, 500, 640]}
-                      sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
-                      fetchpriority="auto"
-                      decoding="async"
-                      loading="lazy"
-                      alt={name ?? country ?? 'review image'}
-                      class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
-                    />
+                    {image ? (
+                      <Image
+                        src={(await getImageByPath(image.src)).default}
+                        widths={[320, 500, 640]}
+                        sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
+                        fetchpriority="auto"
+                        decoding="async"
+                        loading="lazy"
+                        alt={name ?? country ?? 'review image'}
+                        class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
+                      />
+                    ) : (
+                      <Icon icon={countryFlagIcon} className="h-12 w-12 mb-6" />
+                    )}
                   </div>
                   <div class="grow whitespace-nowrap">{name}</div>
                   <div>{travelerType ?? '-'}</div>
                   <div class="text-balance flex grow flex-col gap-4 whitespace-pre-line">
                     <Rating rating={rating} />
-                    {content}
+                    <Prose markdown={content} />
                   </div>
                 </div>
               );
