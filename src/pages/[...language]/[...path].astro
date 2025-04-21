@@ -13,9 +13,11 @@ export async function getStaticPaths() {
   const pagesCollection = await getCollection('pages');
   var pages = pagesCollection.map((page) => {
     const path = getPagePath(page);
+    console.log(path);
     return {
       params: {
-        path
+        path: path.replace('/pt/', '/'),
+        language: page.data.language === 'en' ? undefined : page.data.language
       },
       props: { page, language: page.data.language, path }
     };

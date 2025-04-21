@@ -17,7 +17,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const allTours = (await getCollection('tours')).filter(
+const allTours = await getCollection(
+  'tours',
   (tour) =>
     (block.main_feature === tour.data.id ||
       block.feature_list?.includes(tour.data.id)) &&

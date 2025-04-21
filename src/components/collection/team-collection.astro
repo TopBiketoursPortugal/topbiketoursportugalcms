@@ -20,11 +20,14 @@ type Props = {
 };
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const collectionItems = await getCollection('team');
+const collectionItems = await getCollection(
+  'team',
+  (item) => item.data.language === language
+);
 const items =
-  collectionItems
-    .filter((item) => item.data.language === language)
-    .sort((a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)) ?? [];
+  collectionItems.sort(
+    (a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)
+  ) ?? [];
 ---
 
 <div class="bg-neutral-200 dark:bg-slate-800">

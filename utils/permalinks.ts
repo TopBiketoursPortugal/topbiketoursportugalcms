@@ -10,6 +10,9 @@ const doublSlashRegex = /([^:])\/{2,}/g;
 export const trailingSlash = '/';
 
 function sanitizeUrl(url: string) {
+  if (url?.length === 0) {
+    return '/404/';
+  }
   return url.replace(doublSlashRegex, '$1/');
 }
 
@@ -119,15 +122,14 @@ export async function getTeamLanguagesAlternates(
   pageEntry: CollectionEntry<'team'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const teamPages = await getCollection('team');
   const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
-
-  var alternatePages =
-    teamPages.filter(
+  const alternatePages =
+    (await getCollection(
+      'team',
       (t) =>
         t.data.language !== pageEntry.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternatePages.map((page) => {
     const { data: alternate } = page;
@@ -144,15 +146,14 @@ export async function getPageLanguagesAlternates(
   pageEntry: CollectionEntry<'pages'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const pages = await getCollection('pages');
   const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
-
-  var alternatePages =
-    pages.filter(
+  const alternatePages =
+    (await getCollection(
+      'pages',
       (t) =>
         t.data.language !== pageEntry.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternatePages.map((page) => {
     const { data: alternate } = page;
@@ -182,14 +183,14 @@ export async function getPostLanguagesAlternates(
   post: CollectionEntry<'blog'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const posts = await getCollection('blog');
   const alternateEntryName = post.filePath?.split('/').at(-1)!;
-  var alternatePosts =
-    posts.filter(
+  const alternatePosts =
+    (await getCollection(
+      'blog',
       (t) =>
         t.data.language !== post.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternatePosts.map((alternatePost) => {
     const { data: alternate } = alternatePost;
@@ -206,15 +207,14 @@ export async function getTourTagLanguagesAlternates(
   tourTag: CollectionEntry<'tourTags'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const tourTags = await getCollection('tourTags');
   const alternateEntryName = tourTag.filePath?.split('/').at(-1)!;
-
-  var alternateTourTags =
-    tourTags.filter(
+  const alternateTourTags =
+    (await getCollection(
+      'tourTags',
       (t) =>
         t.data.language !== tourTag.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternateTourTags.map(({ data: alternateTourTag }) => ({
     href: sanitizeUrl(
@@ -228,15 +228,14 @@ export async function getTourRegionLanguagesAlternates(
   tourRegion: CollectionEntry<'tourRegions'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const tourRegions = await getCollection('tourRegions');
   const alternateEntryName = tourRegion.filePath?.split('/').at(-1)!;
-
-  var alternateTourRegions =
-    tourRegions.filter(
+  const alternateTourRegions =
+    (await getCollection(
+      'tourRegions',
       (t) =>
         t.data.language !== tourRegion.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternateTourRegions.map(({ data: alternateTourRegion }) => ({
     href: sanitizeUrl(
@@ -250,15 +249,14 @@ export async function getTourLanguagesAlternates(
   tour: CollectionEntry<'tours'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const tours = await getCollection('tours');
   const alternateEntryName = tour.filePath?.split('/').at(-1)!;
-
-  var alternateTours =
-    tours.filter(
+  const alternateTours =
+    (await getCollection(
+      'tours',
       (t) =>
         t.data.language !== tour.data.language &&
         t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+    )) ?? [];
 
   return alternateTours.map(({ data: alternateTour }) => ({
     href: sanitizeUrl(
@@ -269,11 +267,11 @@ export async function getTourLanguagesAlternates(
 }
 
 export async function getBlogIndexPage(language: LanguageCodes) {
-  const blogIndexes = await getCollection('pages', (p) => {
-    return (
+  const blogIndexes = await getCollection(
+    'pages',
+    (p) =>
       (p.filePath ?? '').endsWith('blog.mdx') && p.data.language === language
-    );
-  });
+  );
 
   return blogIndexes[0];
 }

@@ -38,9 +38,7 @@ const testimonials = (
       }
     }) satisfies ReviewSchema
 );
-const tours = (await getCollection('tours')).filter(
-  (r) => r.data.language === language
-);
+const tours = await getCollection('tours', (r) => r.data.language === language);
 const items = (tours.flatMap((t) => t.data.reviews ?? []) ?? [])
   .concat(testimonials ?? [])
   .sort((a, b) => {

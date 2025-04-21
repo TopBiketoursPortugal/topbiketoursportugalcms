@@ -39,25 +39,25 @@ function removeDuplicateRedirects(
       uniqueRedirects.push(redirect);
     }
   }
-  console.log(
-    JSON.stringify(
-      uniqueRedirects
-        .filter(
-          (ur) =>
-            ur.from.toLocaleLowerCase() !==
-              ur.destination.toLocaleLowerCase() &&
-            ur.from.toLocaleLowerCase() !==
-              ur.destination
-                .toLocaleLowerCase()
-                .substring(0, ur.destination.length - 1)
-        )
-        .sort((a, b) => {
-          const fromA = a.from.toLowerCase();
-          const fromB = b.from.toLowerCase();
-          return fromA.localeCompare(fromB);
-        })
-    )
-  );
+  // console.log(
+  //   JSON.stringify(
+  //     uniqueRedirects
+  //       .filter(
+  //         (ur) =>
+  //           ur.from.toLocaleLowerCase() !==
+  //             ur.destination.toLocaleLowerCase() &&
+  //           ur.from.toLocaleLowerCase() !==
+  //             ur.destination
+  //               .toLocaleLowerCase()
+  //               .substring(0, ur.destination.length - 1)
+  //       )
+  //       .sort((a, b) => {
+  //         const fromA = a.from.toLowerCase();
+  //         const fromB = b.from.toLowerCase();
+  //         return fromA.localeCompare(fromB);
+  //       })
+  //   )
+  // );
   return uniqueRedirects;
 }
 
@@ -120,11 +120,12 @@ export default defineConfig({
     //   display: 'standalone'
     // }),
     AstroPWA({
+      mode: 'production',
       base: '/',
       scope: '/',
       registerType: 'autoUpdate',
       workbox: {
-        navigateFallback: '/',
+        // navigateFallback: '/',
         globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
       },
       devOptions: {

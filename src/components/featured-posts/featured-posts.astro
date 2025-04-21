@@ -14,7 +14,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
-const allPosts = (await getCollection('blog')).filter(
+const allPosts = await getCollection(
+  'blog',
   (post) =>
     block.main_feature === post.data.id ||
     block.feature_list?.includes(post.data.id)
