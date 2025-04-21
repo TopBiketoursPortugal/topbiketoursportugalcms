@@ -339,6 +339,11 @@
       "from": "/pt/blog/Como-conduzir-a-sua-bicicleta-em-segurança-noite-Dicas-equipamentos-essenciais",
       "destination": "/pt/blog/como-conduzir-a-sua-bicicleta-em-seguranca-noite/",
       "status": 301
+    },
+    {
+      "from": "/santiago-de-compostela-coastal-route/",
+      "destination": "/tours/porto-santiago-compostela-bike-tour/",
+      "status": 301
     }
   ]
 }
