@@ -316,7 +316,7 @@ const enableFaqs = false;
               const countryCode = getCountryCode(country);
 
               const countryFlagIcon = countryCode
-                ? `circle-flags:${countryCode?.toLowerCase()}`
+                ? `circle-flags:${countryCode.toLowerCase()}`
                 : 'ph:user-circle-light';
 
               const name = `${givenName} ${familyName}`.trimEnd();
