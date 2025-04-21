@@ -409,6 +409,11 @@
       "from": "/tours/porto-to-santiago-de-compostela-bike-tour-costal-path/",
       "destination": "/tours/porto-santiago-compostela-bike-tour/",
       "status": 301
+    },
+    {
+      "from": "/https://topbiketoursportugal.com/posts/uniting-teams-the-5-best-team-building-activities/",
+      "destination": "/blog/uniting-teams-the-5-best-team-building-activities/",
+      "status": 301
     }
   ]
 }
