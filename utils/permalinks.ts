@@ -9,7 +9,7 @@ const doublSlashRegex = /([^:])\/{2,}/g;
 
 export const trailingSlash = '/';
 
-function sanitizeUrl(url: string) {
+export function sanitizeUrl(url: string) {
   if (url?.length === 0) {
     return '/404/';
   }

@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
 import type { ReviewSchema } from 'src/schemas/tours';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
-import { getTourPath } from 'utils/permalinks';
+import { getTourPath, sanitizeUrl } from 'utils/permalinks';
 
 type Props = { items: CollectionEntry<'tours'>[]; language: LanguageCodes };
 
@@ -14,6 +14,17 @@ const testimonials = await getCollection(
   'testimonials',
   (t) => t.data.language === language
 );
+
+function getPackagePrice(
+  promo: number | null | undefined,
+  price: number | null | undefined
+): number {
+  if (promo && promo > 0) {
+    return promo;
+  }
+
+  return price ?? 0;
+}
 
 // Generate the JSON-LD schema
 const schema = {
@@ -34,6 +45,8 @@ const schema = {
         0
       ) / ratings.length;
 
+    console.log(tour.packages);
+
     return {
       '@type': 'Product',
       'name': tour.title,
@@ -52,21 +65,21 @@ const schema = {
       'offers': {
         '@type': 'Offer',
         'highPrice': Math.max(
-          ...(tour.packages?.map(
-            (p) => p.price.promo ?? p.price?.price ?? 0
+          ...(tour.packages?.map((p) =>
+            getPackagePrice(p.price.promo, p.price?.price)
           ) ?? [0])
         ),
         'lowPrice': Math.min(
-          ...(tour.packages?.map(
-            (p) => p.price.promo ?? p.price?.price ?? 0
+          ...(tour.packages?.map((p) =>
+            getPackagePrice(p.price.promo, p.price?.price)
           ) ?? [0])
         ),
         'offerCount': tour.packages?.length ?? 1,
         'offers': tour.packages?.map((p) => ({
           '@type': 'Offer',
           'name': p.title,
-          'url': Astro.site + getTourPath(tour, language),
-          'price': p.price.promo ?? p.price.price ?? 0,
+          'url': sanitizeUrl(Astro.site + getTourPath(tour, language)),
+          'price': getPackagePrice(p.price.promo, p.price?.price),
           'priceCurrency': 'EUR'
         })),
         'priceCurrency': 'EUR',
