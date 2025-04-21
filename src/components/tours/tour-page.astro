@@ -134,15 +134,7 @@ const enableFaqs = false;
     }
     {minPrice > 0 || minPromoPrice > 0 ? <Separator /> : null}
     <strong>{t('Tour.Form.Title', language)}</strong>
-    {
-      feature?.bokunLink ? (
-        <script
-          is:inline
-          type="text/javascript"
-          src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
-        />
-      ) : null
-    }
+
     {
       feature?.bokunLink ? (
         <Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>
@@ -333,6 +325,17 @@ const enableFaqs = false;
         </Heading>
         <TourRelated language={language} related={relatedTours} />
       </section>
+    ) : null
+  }
+  {
+    feature?.bokunLink ? (
+      <script
+        is:inline
+        async
+        defer
+        type="text/javascript"
+        src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
+      />
     ) : null
   }
 </div>
