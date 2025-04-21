@@ -14,6 +14,7 @@ import LinkButton from '../linkbutton/linkbutton.astro';
 import Icon from '../utility/icon.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
+import type { ReviewSchema } from 'src/schemas/tours';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -33,8 +34,36 @@ const {
   packages = [],
   tourtype,
   distance,
-  reviews = []
+  reviews: initialReviews = []
 } = data;
+
+const testimonials = (
+  (await getCollection(
+    'testimonials',
+    (t) => t.data.language === language && t.data.relatedProduct === data.id
+  )) ?? []
+).map(
+  (t) =>
+    ({
+      content: t.body ?? '',
+      rating: t.data.score,
+      title: t.data.title,
+      author: {
+        country: t.data.author.country ?? '',
+        givenName: t.data.author.name ?? ''
+      },
+      source: {
+        url: t.data.reviewSource,
+        name:
+          t.data.reviewSource?.indexOf('tripadvisor') !== -1
+            ? 'TripAdvisor'
+            : ''
+      }
+    }) satisfies ReviewSchema
+);
+
+const reviews = initialReviews.concat(testimonials);
+
 const { average, count } = getAggregatedReviews(reviews);
 const minPrice =
   packages.length > 0

@@ -1,88 +1,118 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
+import type { ReviewSchema } from 'src/schemas/tours';
 import { getTourPath } from 'utils/permalinks';
 
 type Props = { items: CollectionEntry<'tours'>[]; language: LanguageCodes };
 
 const { items, language } = Astro.props;
 
+const testimonials = await getCollection(
+  'testimonials',
+  (t) => t.data.language === language
+);
+
 // Generate the JSON-LD schema
 const schema = {
   '@context': 'https://schema.org/',
   '@graph': items.map(({ data: tour }) => {
-    const bestRating = 5;
-    const worstRating = 1;
+    const tourReviewsAndTestimonials = (tour.reviews ?? []).concat(
+      testimonials
+        .filter((t) => t.data.relatedProduct === tour.id)
+        .map(
+          (t) =>
+            ({
+              content: t.body ?? '',
+              rating: t.data.score,
+              title: t.data.title,
+              author: {
+                country: t.data.author.country ?? '',
+                givenName: t.data.author.name ?? ''
+              },
+              source: {
+                url: t.data.reviewSource,
+                name:
+                  t.data.reviewSource?.indexOf('tripadvisor') !== -1
+                    ? 'TripAdvisor'
+                    : ''
+              }
+            }) satisfies ReviewSchema
+        )
+    ) satisfies ReviewSchema[];
+
+    const ratings = tourReviewsAndTestimonials.map((r) => r.rating);
+    const bestRating = Math.max(...ratings);
+    const worstRating = Math.min(...ratings);
+    const ratingValue =
+      ratings.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      ) / ratings.length;
 
     return {
       '@type': 'Product',
-      name: tour.title,
-      description: tour.description,
-      brand: {
+      'name': tour.title,
+      'description': tour.description,
+      'brand': {
         '@type': 'Brand',
-        name: 'Top Bike Tours Portugal'
+        'name': 'Top Bike Tours Portugal'
       },
-      aggregateRating: {
+      'aggregateRating': {
         '@type': 'AggregateRating',
-        ratingValue: Math.ceil(
-          (tour.reviews ?? [])
-            .map((r) => r.rating)
-            .reduce(
-              (accumulator, currentValue) => accumulator + currentValue,
-              0
-            ) / tour.reviews.length
-        ),
-        reviewCount: (tour.reviews ?? []).length,
+        'ratingValue': Math.ceil(ratingValue),
+        'reviewCount': ratings.length,
         bestRating,
         worstRating
       },
-      offers: {
+      'offers': {
         '@type': 'Offer',
-        highPrice: Math.max(
+        'highPrice': Math.max(
           ...(tour.packages?.map(
             (p) => p.price.promo ?? p.price?.price ?? 0
           ) ?? [0])
         ),
-        lowPrice: Math.min(
+        'lowPrice': Math.min(
           ...(tour.packages?.map(
             (p) => p.price.promo ?? p.price?.price ?? 0
           ) ?? [0])
         ),
-        offerCount: tour.packages?.length ?? 1,
-        offers: tour.packages?.map((p) => ({
+        'offerCount': tour.packages?.length ?? 1,
+        'offers': tour.packages?.map((p) => ({
           '@type': 'Offer',
-          name: p.title,
-          url: Astro.site + getTourPath(tour, language),
-          price: p.price.promo ?? p.price.price ?? 0,
-          priceCurrency: 'EUR'
+          'name': p.title,
+          'url': Astro.site + getTourPath(tour, language),
+          'price': p.price.promo ?? p.price.price ?? 0,
+          'priceCurrency': 'EUR'
         })),
-        priceCurrency: 'EUR',
-        availability: 'https://schema.org/InStock'
+        'priceCurrency': 'EUR',
+        'availability': 'https://schema.org/InStock'
       },
-      review: tour.reviews.map((review: any) => ({
+      'review': tourReviewsAndTestimonials.map((review: any) => ({
         '@type': 'Review',
-        reviewRating: {
+        'reviewRating': {
           '@type': 'Rating',
-          ratingValue: review.rating,
+          'ratingValue': review.rating,
           bestRating,
           worstRating
         },
-        author: {
+        'author': {
           '@type': 'Person',
-          name: `${review.author?.givenName}${
+          'name': `${review.author?.givenName}${
             (review.author?.familyName ?? '' !== '')
               ? ' ' + review.author?.familyName
               : ''
           }`,
-          givenName: review.author?.givenName,
-          familyName: review.author?.familyName ?? '',
-          address: {
+          'givenName': review.author?.givenName,
+          'familyName': review.author?.familyName ?? '',
+          'address': {
             '@type': 'PostalAddress',
-            addressCountry: review.author?.country
+            'addressCountry': review.author?.country
           }
         },
-        datePublished: review.publishDate,
-        reviewBody: review.content
+        'datePublished': review.publishDate,
+        'reviewBody': review.content
       }))
     };
   })

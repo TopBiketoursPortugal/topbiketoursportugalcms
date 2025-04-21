@@ -18,7 +18,7 @@ import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
 import ResponsiveImage from '../responsive-image/ResponsiveImage.astro';
 import { Image } from 'astro:assets';
 import type { VisuallyEditable } from 'src/types';
-import type { InferEntrySchema } from 'astro:content';
+import { getCollection, type InferEntrySchema } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
 import TourFaqs from './tour-faqs.astro';
 import TourRelated from './tour-related.astro';
@@ -27,6 +27,7 @@ import TourItinerary from './tour-itinerary.astro';
 import Icon from '../utility/icon.astro';
 import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
+import type { ReviewSchema } from 'src/schemas/tours';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -37,12 +38,39 @@ const {
   packages = [],
   itinerary = [],
   faqs,
-  reviews = [],
+  reviews: initialReviews = [],
   relatedTours = [],
   mapUrl = '',
   image,
   feature
 } = tour;
+
+const testimonials = (
+  (await getCollection(
+    'testimonials',
+    (t) => t.data.language === language && t.data.relatedProduct === tour.id
+  )) ?? []
+).map(
+  (t) =>
+    ({
+      content: t.body ?? '',
+      rating: t.data.score,
+      title: t.data.title,
+      author: {
+        country: t.data.author.country ?? '',
+        givenName: t.data.author.name ?? ''
+      },
+      source: {
+        url: t.data.reviewSource,
+        name:
+          t.data.reviewSource?.indexOf('tripadvisor') !== -1
+            ? 'TripAdvisor'
+            : ''
+      }
+    }) satisfies ReviewSchema
+);
+
+const reviews = initialReviews.concat(testimonials);
 
 const { average, count } = getAggregatedReviews(reviews);
 const minPrice =
