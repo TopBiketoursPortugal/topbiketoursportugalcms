@@ -404,6 +404,11 @@
       "from": "/coastal-bike-tour-cycling-along-portugals-enchanting-coasts",
       "destination": "/blog/coastal-bike-tour-cycling-along-portugals-enchanting-coasts/",
       "status": 301
+    },
+    {
+      "from": "/tours/porto-to-santiago-de-compostela-bike-tour-costal-path/",
+      "destination": "/tours/porto-santiago-compostela-bike-tour/",
+      "status": 301
     }
   ]
 }
