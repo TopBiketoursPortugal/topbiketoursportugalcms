@@ -28,7 +28,7 @@ import Icon from '../utility/icon.astro';
 import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
-import CountryData from 'src/../data/countries.json';
+import { getCountryCode } from 'utils/get-country-code';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -313,21 +313,7 @@ const enableFaqs = false;
                 familyName = ''
               } = author ?? {};
 
-              const countryCode = CountryData.filter(
-                (c) =>
-                  c.englishName.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase().trim() ||
-                  c.portugueseName.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase().trim() ||
-                  c.englishName.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
-                  c.portugueseName.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim() ||
-                  c.alpha3.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase() ||
-                  c.alpha3.toLocaleLowerCase() ===
-                    country?.toLocaleLowerCase().split(',')?.at(-1)?.trim()
-              )[0]?.alpha2;
+              const countryCode = getCountryCode(country);
 
               const countryFlagIcon = countryCode
                 ? `circle-flags:${countryCode?.toLowerCase()}`
