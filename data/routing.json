@@ -344,6 +344,61 @@
       "from": "/santiago-de-compostela-coastal-route/",
       "destination": "/tours/porto-santiago-compostela-bike-tour/",
       "status": 301
+    },
+    {
+      "from": "/tours/vicentine-cost-algarve-bike-tour.pt/",
+      "destination": "/tours/south-portugal-biketour/",
+      "status": 301
+    },
+    {
+      "from": "/passeios-em-bicicleta-portugal",
+      "destination": "/pt/passeios-de-bicicleta-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/bike-tours-portugal-the-way-of-st-james",
+      "destination": "/tours/french-way-to-santiago-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/bike-tours-portugal-the-way-of-st-james/c1jxx",
+      "destination": "/bike-tours-portugal-the-way-of-st-james/c1jxx",
+      "status": 301
+    },
+    {
+      "from": "/single-post/2017/10/18/Great-Reviews-about-our-bike-tours-in-Portugal",
+      "destination": "/pt/blog/great-reviews-about-our-bike-tours-in-portugal-pt/",
+      "status": 301
+    },
+    {
+      "from": "/pt/posts/passeio-de-bicicleta-em-lisboa-uma-aventura-imperdivel/",
+      "destination": "/pt/blog/postspasseio-de-bicicleta-em-lisboa-uma-aventura-imperdivel/",
+      "status": 0
+    },
+    {
+      "from": "/pt/blog/pedalando-pela-historia-caminho-de-santiago-rota-francesa-a-partir-de-leon/",
+      "destination": "/pt/blog/pedalando-pela-historia-caminho-santiago-rota-francesa-a-partir-de-leon/",
+      "status": 301
+    },
+    {
+      "from": "/tours/porto-to-lisbon-cycling-tour-the-green-coast-and-the-silver-coast/",
+      "destination": "/tours/porto-to-lisbon-cycling-tour-en/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/caminho-pela-costa-de-bicicleta-pedalar-pelas-costas-encantadoras-de-portugal/",
+      "destination": "/pt/blog/de-bicicleta-pedalar-pelas-costas-encantadoras-de-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/descubra-as-maravilhas-de-portugal-com-passeios-de-bicicleta-pelo-vale-do-douro/",
+      "destination": "/pt/blog/descubra-portugal-com-passeios-de-bicicleta-pelo-douro/",
+      "status": 301
+    },
+    {
+      "from": "/-campo-de-treino-douro-em-bicicleta/?lightbox=i020v9",
+      "destination": "/pt/passeios-de-bicicleta-portugal/",
+      "status": 301
     }
   ]
 }
