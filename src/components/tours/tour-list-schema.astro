@@ -63,7 +63,7 @@ const schema = {
         worstRating
       },
       'offers': {
-        '@type': 'Offer',
+        '@type': 'AggregateOffer',
         'highPrice': Math.max(
           ...(tour.packages?.map((p) =>
             getPackagePrice(p.price.promo, p.price?.price)
