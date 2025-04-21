@@ -334,6 +334,11 @@
       "from": "/pt/posts/pedalando-pela-historia-caminho-de-santiago-rota-francesa-a-partir-de-leon//",
       "destination": "/pt/blog/pedalando-pela-historia-caminho-santiago-rota-francesa-a-partir-de-leon/",
       "status": 301
+    },
+    {
+      "from": "/pt/blog/Como-conduzir-a-sua-bicicleta-em-segurança-noite-Dicas-equipamentos-essenciais",
+      "destination": "/pt/blog/como-conduzir-a-sua-bicicleta-em-seguranca-noite/",
+      "status": 301
     }
   ]
 }
