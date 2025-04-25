@@ -212,7 +212,7 @@ export default defineConfig({
       redirectToDefaultLocale: true
     }
   },
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
