@@ -47,6 +47,19 @@ const schema = {
 
     console.log(tour.packages);
 
+    const aggregateRating =
+      ratings.length > 0
+        ? {
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              'ratingValue': Math.ceil(ratingValue),
+              'reviewCount': ratings.length,
+              bestRating,
+              worstRating
+            }
+          }
+        : {};
+
     return {
       '@type': 'Product',
       'name': tour.title,
@@ -55,13 +68,7 @@ const schema = {
         '@type': 'Brand',
         'name': 'Top Bike Tours Portugal'
       },
-      'aggregateRating': {
-        '@type': 'AggregateRating',
-        'ratingValue': Math.ceil(ratingValue),
-        'reviewCount': ratings.length,
-        bestRating,
-        worstRating
-      },
+      ...aggregateRating,
       'offers': {
         '@type': 'AggregateOffer',
         'highPrice': Math.max(
