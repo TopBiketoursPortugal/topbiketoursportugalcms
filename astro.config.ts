@@ -126,7 +126,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         // navigateFallback: '/',
-        globPatterns: ['**/*.{css,js,html,svg,png,avif,webp,jpg,ico}']
+        globPatterns: ['**/*.{css,js,html,png,avif,webp,jpg,ico}']
       },
       devOptions: {
         enabled: true,
@@ -172,7 +172,7 @@ export default defineConfig({
     }
   ),
   prefetch: {
-    prefetchAll: true
+    defaultStrategy: 'viewport'
   },
   env: {
     schema: {

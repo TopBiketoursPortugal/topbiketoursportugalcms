@@ -1,45 +1,66 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { undefined } from 'astro:schema';
+import type { ReviewSchema } from 'src/schemas/tours';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 
 type Props = { items: CollectionEntry<'tours'>[] };
 
 const { items } = Astro.props;
 
+const testimonials = await getCollection(
+  'testimonials',
+  (t) => t.data.language === items[0].data.language
+);
 const schema = {
   '@context': 'https://schema.org/',
-  '@graph': items.flatMap((product) =>
-    (product.data.reviews ?? []).map((review) => ({
-      '@type': 'Review',
-      'itemReviewed': {
-        '@type': 'Product',
-        'name': product.data.title,
-        'sku': product.data.code,
-        'description': product.data.description,
-        'image': product.data.image?.src,
-        'brand': {
-          '@type': 'Brand',
-          'name': 'Top Bike Tours Portugal'
-        }
-      },
-      'reviewRating': {
-        '@type': 'Rating',
-        'ratingValue': review.rating,
-        'bestRating': 5,
-        'worstRating': 1
-      },
-      'author': {
-        '@type': 'Person',
-        'givenName': review.author?.givenName,
-        'familyName': review.author?.familyName,
-        'address': {
-          '@type': 'PostalAddress',
-          'addressCountry': review.author?.country
-        }
-      },
-      'datePublished': review.publishDate,
-      'reviewBody': review.content
-    }))
-  )
+  '@graph': items.flatMap((product) => {
+    const tourReviewsAndTestimonials = (product.data.reviews ?? []).concat(
+      testimonials
+        .filter((t) => t.data.relatedProduct === product.data.id)
+        .map(MapTestimonialToReview)
+    ) satisfies ReviewSchema[];
+
+    const ratings = tourReviewsAndTestimonials.map((r) => r.rating);
+    const bestRating = Math.max(...ratings);
+    const worstRating = Math.min(...ratings);
+    return tourReviewsAndTestimonials
+      .filter(
+        (review) =>
+          review !== null && review.rating !== null && review.rating !== 0
+      )
+      .map((review) => ({
+        '@type': 'Review',
+        'itemReviewed': {
+          '@type': 'Product',
+          'name': product.data.title,
+          'sku': product.data.code,
+          'description': product.data.description,
+          'image': product.data.image?.src,
+          'brand': {
+            '@type': 'Brand',
+            'name': 'Top Bike Tours Portugal'
+          }
+        },
+        'reviewRating': {
+          '@type': 'Rating',
+          'ratingValue': review.rating,
+          'bestRating': bestRating,
+          'worstRating': worstRating
+        },
+        'author': {
+          '@type': 'Person',
+          'givenName': review.author?.givenName,
+          'familyName': review.author?.familyName,
+          'address': {
+            '@type': 'PostalAddress',
+            'addressCountry': review.author?.country
+          }
+        },
+        'datePublished': review.publishDate,
+        'reviewBody': review.content
+      }));
+  })
 };
 ---
 
