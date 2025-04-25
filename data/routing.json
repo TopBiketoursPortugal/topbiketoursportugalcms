@@ -414,6 +414,16 @@
       "from": "/https://topbiketoursportugal.com/posts/uniting-teams-the-5-best-team-building-activities/",
       "destination": "/blog/uniting-teams-the-5-best-team-building-activities/",
       "status": 301
+    },
+    {
+      "from": "/sul-portugal",
+      "destination": "/tours/south-portugal-biketour/",
+      "status": 301
+    },
+    {
+      "from": "/tours/vicentine-cost-algarve-bike-tour/",
+      "destination": "/tours/south-portugal-biketour/",
+      "status": 301
     }
   ]
 }
