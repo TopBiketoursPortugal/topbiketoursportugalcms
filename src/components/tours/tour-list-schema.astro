@@ -60,6 +60,37 @@ const schema = {
           }
         : {};
 
+    const reviews =
+      tourReviewsAndTestimonials.length > 0
+        ? {
+            review: tourReviewsAndTestimonials.map((review: any) => ({
+              '@type': 'Review',
+              'reviewRating': {
+                '@type': 'Rating',
+                'ratingValue': review.rating,
+                bestRating,
+                worstRating
+              },
+              'author': {
+                '@type': 'Person',
+                'name': `${review.author?.givenName}${
+                  (review.author?.familyName ?? '' !== '')
+                    ? ' ' + review.author?.familyName
+                    : ''
+                }`,
+                'givenName': review.author?.givenName,
+                'familyName': review.author?.familyName ?? '',
+                'address': {
+                  '@type': 'PostalAddress',
+                  'addressCountry': review.author?.country
+                }
+              },
+              'datePublished': review.publishDate,
+              'reviewBody': review.content
+            }))
+          }
+        : {};
+
     return {
       '@type': 'Product',
       'name': tour.title,
@@ -69,6 +100,7 @@ const schema = {
         'name': 'Top Bike Tours Portugal'
       },
       ...aggregateRating,
+      ...reviews,
       'offers': {
         '@type': 'AggregateOffer',
         'highPrice': Math.max(
@@ -91,32 +123,7 @@ const schema = {
         })),
         'priceCurrency': 'EUR',
         'availability': 'https://schema.org/InStock'
-      },
-      'review': tourReviewsAndTestimonials.map((review: any) => ({
-        '@type': 'Review',
-        'reviewRating': {
-          '@type': 'Rating',
-          'ratingValue': review.rating,
-          bestRating,
-          worstRating
-        },
-        'author': {
-          '@type': 'Person',
-          'name': `${review.author?.givenName}${
-            (review.author?.familyName ?? '' !== '')
-              ? ' ' + review.author?.familyName
-              : ''
-          }`,
-          'givenName': review.author?.givenName,
-          'familyName': review.author?.familyName ?? '',
-          'address': {
-            '@type': 'PostalAddress',
-            'addressCountry': review.author?.country
-          }
-        },
-        'datePublished': review.publishDate,
-        'reviewBody': review.content
-      }))
+      }
     };
   })
 };
