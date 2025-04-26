@@ -1,7 +1,17 @@
 ---
 import markdownit from 'markdown-it';
+import markdownItExternalLinks from 'markdown-it-external-links';
 import Prose from '../typography/prose.astro';
+const externalLinksConfig = {
+  externalTarget: '_blank',
+  externalRel: 'nofollow noopener noreferrer',
+  internalTarget: '',
+  internalRel: '',
+  internalDomains: ['topwalkingtoursportual.com']
+};
+
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const { content } = Astro.props;
 ---
 

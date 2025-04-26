@@ -2,12 +2,23 @@
 import markdownit from 'markdown-it';
 import Stack from '../stack/stack.astro';
 import { cn } from 'utils/cn';
+import markdownItExternalLinks from 'markdown-it-external-links';
 
 type Props = {
   class?: string;
   markdown?: string;
 };
+
+const externalLinksConfig = {
+  externalTarget: '_blank',
+  externalRel: 'nofollow noopener noreferrer',
+  internalTarget: '',
+  internalRel: '',
+  internalDomains: ['topwalkingtoursportual.com']
+};
+
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const { class: className, markdown } = Astro.props;
 const content = (markdown ? md.render(markdown ?? '') : markdown) ?? '';
 ---

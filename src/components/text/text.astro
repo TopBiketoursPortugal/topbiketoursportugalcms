@@ -1,5 +1,7 @@
 ---
 import markdownit from 'markdown-it'; // or your preferred Markdown component
+import markdownItExternalLinks from 'markdown-it-external-links';
+
 import { tv, type VariantProps } from 'tailwind-variants';
 import Prose from '../typography/prose.astro';
 
@@ -42,8 +44,16 @@ const textVariants = tv({
 
 const { text, style } = Astro.props;
 const { padding, align, container } = style;
+const externalLinksConfig = {
+  externalTarget: '_blank',
+  externalRel: 'nofollow noopener noreferrer',
+  internalTarget: '',
+  internalRel: '',
+  internalDomains: ['topwalkingtoursportual.com']
+};
 
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const textHTML = md.render(text ?? '');
 const { container: containerStyle, text: textStyle } = textVariants({
   padding,

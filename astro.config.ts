@@ -16,6 +16,7 @@ import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 const externalLinksConfig = {
   target: '_blank',
   rel: ['nofollow', 'noopener', 'noreferrer'],
+
   skip: (node: any) => {
     try {
       const url = node.properties?.href;
