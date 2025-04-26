@@ -10,17 +10,24 @@ import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
 import rehypeExternalLinks from 'rehype-external-links';
-import partytown from '@astrojs/partytown';
+// import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
-import { stringify } from 'uuid';
-// import webmanifest from 'astro-webmanifest';
 
-// const redirects = new Set(
-//   (RouteData.routes ?? []).flatMap((r) => [
-//     'https://topbiketoursportugal.com' + r.from,
-//     'https://seemly-winds.cloudvent.net' + r.from
-//   ])
-// );
+const externalLinksConfig = {
+  target: '_blank',
+  rel: ['nofollow', 'noopener', 'noreferrer'],
+  skip: (node: any) => {
+    try {
+      const url = node.properties?.href;
+      return (
+        typeof url === 'string' &&
+        new URL(url).hostname === 'topbiketoursportugal.com'
+      );
+    } catch {
+      return false;
+    }
+  }
+};
 
 function removeDuplicateRedirects(
   redirects: {
@@ -100,7 +107,7 @@ export default defineConfig({
     }),
 
     mdx({
-      rehypePlugins: [rehypeExternalLinks]
+      rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
     }),
     // webmanifest({
     //   /**
@@ -160,7 +167,7 @@ export default defineConfig({
     // partytown({ config: { forward: ['dataLayer.push'], debug: true } })
   ],
   markdown: {
-    rehypePlugins: [rehypeExternalLinks]
+    rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
   },
   redirects: convertJson(
     RouteData as {
