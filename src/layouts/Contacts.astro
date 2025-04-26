@@ -71,6 +71,8 @@ const {
     class="m-w-screen h-96 w-full border-none"
     id="gmap_canvas"
     src="https://maps.google.com/maps?q=Top%20bike%20tours%20portugal&t=&z=17&ie=UTF8&iwloc=&output=embed"
+    referrerpolicy="strict-origin-when-cross-origin"
+    loading="lazy"
     allowfullscreen></iframe>
   <slot />
   <PageHelper bookshop:live contentBlocks={content_blocks_after ?? []} />

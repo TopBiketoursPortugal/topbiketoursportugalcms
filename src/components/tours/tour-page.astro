@@ -166,7 +166,13 @@ const enableFaqs = false;
 
     {
       feature?.bokunLink ? (
-        <Linkbutton href={feature?.bokunLink}>Book now</Linkbutton>
+        <Linkbutton
+          href={feature?.bokunLink}
+          title={t('Tour.Form.Button.Text', language)}
+          rel="nofollow noreferrer noopener"
+        >
+          {t('Tour.Form.Button.Text', language)}
+        </Linkbutton>
       ) : (
         <TourForm code={tour.code} title={tour.title} />
       )
