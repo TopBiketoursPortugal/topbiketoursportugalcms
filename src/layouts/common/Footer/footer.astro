@@ -113,12 +113,12 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={termsPagePagePath} rel="nofollow"
-      >{t('TermsAndConditions', language)}</a
-    >
+    <a href={termsPagePagePath}>{t('TermsAndConditions', language)}</a>
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy', language)}</a>
+    <a href={privacyPagePath} title={t('PrivacyPolicy', language)}
+      >{t('PrivacyPolicy', language)}</a
+    >
   </li>
 </ul>

@@ -45,7 +45,7 @@ export function getTourRegionsPath(
 ): string {
   const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region.data.name ?? region.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region.data.path ?? region.data.name ?? region.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 

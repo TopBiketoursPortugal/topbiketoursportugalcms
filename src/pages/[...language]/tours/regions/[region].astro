@@ -26,7 +26,7 @@ export async function getStaticPaths() {
           language: language === 'en' ? undefined : language,
           // toursType: PermalinkData.tours[language],
           region:
-            slugify(region.data.name ?? region.data.title, {
+            slugify(region.data.path ?? region.data.name ?? region.data.title, {
               lower: true,
               strict: true,
               trim: true
@@ -57,37 +57,41 @@ const tourRegions = await getCollection(
 
 
 const siteData = SiteData[language];
-const baseUrl=Astro.site;
+const baseUrl = Astro.site;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
 
-const image=await getImage({src: images[regionData.data.seo?.featured_image!].default, format: 'avif'})
+const image = await getImage({src: images[regionData.data.seo?.featured_image!].default, format: 'avif'});
 
-const imageSrc=image.src.startsWith("/")?image.src.substring(1):image.src;
+const imageSrc = image.src.startsWith("/") ? image.src.substring(1) : image.src;
+
+const regionSeoTitle = t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"") ?? regionData.data.seo?.page_title ?? regionData.data.title;
+const regionSeoDescription = regionData.data.seo?.page_description ?? regionSeoTitle;
+
 const frontmatter = {
-  title:  regionData.data.seo?.page_title?? regionData.data.title,
+  title: regionData.data.title,
   page_size: 6,
   seo: {
     noindex: false,
-    title: regionData.data.title??regionData.data.seo?.page_title,
-    description: regionData.data.title??regionData.data.seo?.page_description,
-    canonical: regionData.data.seo?.canonical_url?new URL(regionData.data.seo?.canonical_url):"",
+    title:  regionSeoTitle,
+    description: regionSeoDescription,
+    canonical: regionData.data.seo?.canonical_url ? new URL(regionData.data.seo?.canonical_url) : "",
     openGraph: {
       basic: {
-        title:regionData.data.title??regionData.data.seo?.page_title,
+        title: regionSeoTitle,
         url: baseUrl,
         type: `${regionData.data.seo?.open_graph_type || 'website'}`,
         image: `${baseUrl}${imageSrc}`
       },
       optional: {
-        description: regionData.data.title??regionData.data.seo?.page_description,
+        description: regionData.data.seo?.page_description ?? regionSeoDescription,
       },
       image: {
         url: `${baseUrl}${imageSrc}`,
-        alt: regionData.data.seo?.featured_image_alt??regionData.data.title??regionData.data.seo?.page_title
+        alt: regionData.data.seo?.featured_image_alt ?? regionSeoTitle
       }
     },
     twitter: {
@@ -105,11 +109,7 @@ const frontmatter = {
 const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
 ---
 
-<Layout
-  class="mb-16 px-8"
-  {...frontmatter}
-  title={t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}
-hrefLangs={hrefs}>
+<Layout class="mb-16 px-8" {...frontmatter} hrefLangs={hrefs}>
   <slot slot="head">
     {
       hrefs.map(({ href, hreflang }) => (
@@ -137,10 +137,10 @@ hrefLangs={hrefs}>
   {
     packageTours.length == 0 && dayTours.length === 0 ? (
       <div class="flex flex-col px-6 gap-2">
-        <Text size="xlarge">{t("Tours.Regions.NoResults.Title", language).replace("$1",regionData.data.name??"")}</Text>
+        <Text size="xlarge">{t("Tours.Regions.NoResults.Title", language).replace("$1",regionData.data.name ?? "")}</Text>
         <Text size="large">{t("Tours.Regions.NoResults.AlternateTags.Title", language)}</Text>
         <ul class="list-disc pl-8">{tourRegions.filter((r) => r.data.id !== regionData.data.id)
-                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={r.data.name ?? r.data.title} class="underline">{r.data.name ?? r.data.title}</a></li>))}</u>
+                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={regionSeoTitle} class="underline">{regionSeoTitle}</a></li>))}</u>
       </div>
     ) : null
   }
