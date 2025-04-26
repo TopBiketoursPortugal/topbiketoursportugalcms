@@ -84,13 +84,15 @@ export default defineConfig({
           };
           const redirectsRules = removeDuplicateRedirects(routeData.routes);
           const maxLength = Math.max(
-            ...redirectsRules.map(({ from }) => from?.length ?? 0)
+            ...redirectsRules.map(
+              ({ from }) => encodeURIComponent(from)?.length ?? 0
+            )
           );
 
           const textRedirects = removeDuplicateRedirects(routeData.routes)
             .map(
               ({ from, destination }) =>
-                `${from.padEnd(maxLength, ' ')} ${destination}`
+                `${encodeURIComponent(from).padEnd(maxLength, ' ')} ${destination}`
             )
             .join('\n');
 
