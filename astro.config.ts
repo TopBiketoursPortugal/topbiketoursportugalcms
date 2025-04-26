@@ -92,7 +92,11 @@ export default defineConfig({
           const textRedirects = removeDuplicateRedirects(routeData.routes)
             .map(
               ({ from, destination }) =>
-                `${encodeURIComponent(from).padEnd(maxLength, ' ')} ${destination}`
+                `${from
+                  .split('/')
+                  .map((segement) => encodeURI(segement))
+                  .join('/')
+                  .padEnd(maxLength, ' ')} ${destination}`
             )
             .join('\n');
 
