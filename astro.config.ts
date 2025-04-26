@@ -156,8 +156,8 @@ export default defineConfig({
           pt: 'pt'
         }
       }
-    }),
-    partytown({ config: { forward: ['dataLayer.push'], debug: true } })
+    })
+    // partytown({ config: { forward: ['dataLayer.push'], debug: true } })
   ],
   markdown: {
     rehypePlugins: [rehypeExternalLinks]

@@ -213,7 +213,7 @@ export async function getTourTagLanguagesAlternates(
       'tourTags',
       (t) =>
         t.data.language !== tourTag.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternateTourTags.map(({ data: alternateTourTag }) => ({

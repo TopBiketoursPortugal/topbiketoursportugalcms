@@ -62,10 +62,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-const image =tagData.data.seo?.featured_image? await getImage({
+const image = tagData.data.seo?.featured_image ? await getImage({
   src: images[tagData.data.seo?.featured_image].default,
   format: 'png'
-}):null;
+}) : null;
 
 const imageSrc = image?.src?.startsWith('/') ? image.src?.substring(1) : image?.src;
 const frontmatter = {

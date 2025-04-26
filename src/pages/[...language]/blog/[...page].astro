@@ -77,16 +77,22 @@ let frontmatter = page?.data as PaginatedProps['frontmatter'];
 
 const { page: pageNumberStr } = Astro.params;
 const pageNumber = parseInt(pageNumberStr ?? 1, 10);
+
+const blogPageTitle = pageNumberStr
+  ? t('Blog.Paged.Title', language).replace('$1', pageNumberStr)
+  : page.data.title;
+
+const blogPageDescription = pageNumberStr
+  ? t('Blog.Paged.Description', language).replace('$1', pageNumberStr)
+  : (page.data.seo?.page_description ?? blogPageTitle);
+
 frontmatter = {
   ...frontmatter,
-  title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
+  title: blogPageTitle,
   seo: {
     ...frontmatter.seo,
-    page_title: t('Blog.Paged.Title', language).replace('$1', pageNumberStr),
-    page_description: t('Blog.Paged.Description', language).replace(
-      '$1',
-      pageNumberStr
-    )
+    page_title: blogPageTitle,
+    page_description: blogPageDescription
   }
 };
 
