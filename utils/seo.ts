@@ -11,9 +11,7 @@ export function getPageSeo(
   const { seo } = page;
   const pageTitle = page.seo?.page_title ?? page.title;
   const siteData = SiteData[language];
-  const title = pageTitle
-    ? `${pageTitle} | ${siteData.site_title}`
-    : siteData.site_title;
+  const title = pageTitle ? pageTitle : siteData.site_title;
 
   const baseUrl = site ?? import.meta.env.BASE_URL;
   const description = seo?.page_description ?? siteData.description;
