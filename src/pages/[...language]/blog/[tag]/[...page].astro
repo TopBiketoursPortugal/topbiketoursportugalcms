@@ -109,14 +109,22 @@ const tag = Astro.params.tag ?? '';
 const page = (await getEntry('pages', 'blog'))!.data;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { page: pageNumberStr } = Astro.params;
+
+const blogTagPageTitle = pageNumberStr
+  ? t('Blog.Tags.Paged.Title', language)
+      .replace('$1', tag)
+      .replace('$2', pageNumberStr)
+  : page.title;
+const blogTagPageDescription = pageNumberStr
+  ? t('Blog.Tags.Paged.Description', language)
+      .replace('$1', tag)
+      .replace('$2', pageNumberStr)
+  : (page.seo?.page_description ?? blogTagPageTitle);
+
 const seo = {
   ...(page as PaginatedProps['frontmatter']),
-  page_title: t('Blog.Tags.Paged.Title', language)
-    .replace('$1', tag)
-    .replace('$2', pageNumberStr),
-  page_description: t('Blog.Tags.Paged.Description', language)
-    .replace('$1', tag)
-    .replace('$2', pageNumberStr)
+  page_title: blogTagPageTitle,
+  page_description: blogTagPageDescription
 };
 
 const pagination = Astro.props.page;
