@@ -87,13 +87,16 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       page?.data && 'page_size' in page?.data ? page?.data.page_size : 6;
 
     return [...tags].flatMap((tag) => {
-      const tagPosts = filteredPosts.filter(({ data }) =>
-        data.tags?.includes(tag)
-      );
+      const tagPosts = filteredPosts
+        .filter(({ data }) => data.tags?.includes(tag))
+        .sort((a, b) => {
+          const dateA = new Date(a.data.date).getTime();
+          const dateB = new Date(b.data.date).getTime();
+          return dateB - dateA; // For descending order (newest first)
+        });
 
       return paginate(tagPosts, {
         params: {
-          blogTags: 'blog',
           language: language === 'en' ? undefined : language,
           tag:
             slugify(tag, { lower: true, strict: true, trim: true }) +

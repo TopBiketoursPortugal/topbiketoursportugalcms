@@ -133,12 +133,12 @@ export default defineConfig({
       scope: '/',
       registerType: 'autoUpdate',
       workbox: {
+        navigateFallback: '/404/',
         // navigateFallback: '/',
         globPatterns: ['**/*.{css,js,html,png,avif,webp,jpg,ico}']
       },
       devOptions: {
-        enabled: true,
-        navigateFallbackAllowlist: [/^\//]
+        enabled: false
       },
       experimental: {
         directoryAndTrailingSlashHandler: true

@@ -63,7 +63,7 @@ export function getBlogTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}blog/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
