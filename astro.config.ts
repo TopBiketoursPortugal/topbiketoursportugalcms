@@ -12,6 +12,8 @@ import RouteData from './data/routing.json';
 import rehypeExternalLinks from 'rehype-external-links';
 // import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
+import { mkdir, writeFile } from 'fs/promises';
+import path from 'path';
 
 const externalLinksConfig = {
   target: '_blank',
@@ -47,25 +49,6 @@ function removeDuplicateRedirects(
       uniqueRedirects.push(redirect);
     }
   }
-  // console.log(
-  //   JSON.stringify(
-  //     uniqueRedirects
-  //       .filter(
-  //         (ur) =>
-  //           ur.from.toLocaleLowerCase() !==
-  //             ur.destination.toLocaleLowerCase() &&
-  //           ur.from.toLocaleLowerCase() !==
-  //             ur.destination
-  //               .toLocaleLowerCase()
-  //               .substring(0, ur.destination.length - 1)
-  //       )
-  //       .sort((a, b) => {
-  //         const fromA = a.from.toLowerCase();
-  //         const fromB = b.from.toLowerCase();
-  //         return fromA.localeCompare(fromB);
-  //       })
-  //   )
-  // );
   return uniqueRedirects;
 }
 
@@ -88,6 +71,36 @@ function convertJson(inputJson: {
 export default defineConfig({
   site: 'https://topbiketoursportugal.com',
   integrations: [
+    {
+      name: 'NetliflyRedirects',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const routeData = RouteData as {
+            routes: {
+              from: string;
+              destination: string;
+              status: ValidRedirectStatus;
+            }[];
+          };
+          const redirectsRules = removeDuplicateRedirects(routeData.routes);
+          const maxLength = Math.max(
+            ...redirectsRules.map(({ from }) => from?.length ?? 0)
+          );
+
+          const textRedirects = removeDuplicateRedirects(routeData.routes)
+            .map(
+              ({ from, destination }) =>
+                `${from.padEnd(maxLength, ' ')} ${destination}`
+            )
+            .join('\n');
+
+          const redirectsPath = path.resolve('./dist', '_redirects');
+          await writeFile(redirectsPath, textRedirects, 'utf8');
+
+          console.log('✅ _redirects file generated after build!');
+        }
+      }
+    },
     // sentry(),
     // spotlightjs(),
     // astroMetaTags(),
@@ -170,15 +183,15 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
   },
-  redirects: convertJson(
-    RouteData as {
-      routes: {
-        from: string;
-        destination: string;
-        status: ValidRedirectStatus;
-      }[];
-    }
-  ),
+  // redirects: convertJson(
+  //   RouteData as {
+  //     routes: {
+  //       from: string;
+  //       destination: string;
+  //       status: ValidRedirectStatus;
+  //     }[];
+  //   }
+  // ),
   prefetch: {
     defaultStrategy: 'viewport'
   },
