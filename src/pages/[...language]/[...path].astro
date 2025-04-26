@@ -13,7 +13,7 @@ export async function getStaticPaths() {
   const pagesCollection = await getCollection('pages');
   var pages = pagesCollection.map((page) => {
     const path = getPagePath(page);
-    console.log(path);
+    // console.log(path);
     return {
       params: {
         path: path.replace('/pt/', '/'),
