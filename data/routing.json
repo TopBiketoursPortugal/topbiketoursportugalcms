@@ -341,6 +341,11 @@
       "status": 301
     },
     {
+      "from": "/pt/posts/pelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela",
+      "destination": "/pt/blog/pelos-trilhos-ciclisticos-o-caminho-de-santiago-de-compostela/",
+      "status": 301
+    },
+    {
       "from": "/santiago-de-compostela-coastal-route/",
       "destination": "/tours/porto-santiago-compostela-bike-tour/",
       "status": 301
