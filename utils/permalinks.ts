@@ -127,8 +127,8 @@ export async function getTeamLanguagesAlternates(
     (await getCollection(
       'team',
       (t) =>
-        t.data.language !== pageEntry.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        // t.data.language !== pageEntry.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternatePages.map((page) => {
@@ -151,8 +151,8 @@ export async function getPageLanguagesAlternates(
     (await getCollection(
       'pages',
       (t) =>
-        t.data.language !== pageEntry.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        // t.data.language !== pageEntry.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternatePages.map((page) => {
@@ -188,8 +188,8 @@ export async function getPostLanguagesAlternates(
     (await getCollection(
       'blog',
       (t) =>
-        t.data.language !== post.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        // t.data.language !== post.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternatePosts.map((alternatePost) => {
@@ -212,7 +212,7 @@ export async function getTourTagLanguagesAlternates(
     (await getCollection(
       'tourTags',
       (t) =>
-        t.data.language !== tourTag.data.language &&
+        // t.data.language !== tourTag.data.language &&
         t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
@@ -233,8 +233,8 @@ export async function getTourRegionLanguagesAlternates(
     (await getCollection(
       'tourRegions',
       (t) =>
-        t.data.language !== tourRegion.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        // t.data.language !== tourRegion.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternateTourRegions.map(({ data: alternateTourRegion }) => ({
@@ -254,8 +254,8 @@ export async function getTourLanguagesAlternates(
     (await getCollection(
       'tours',
       (t) =>
-        t.data.language !== tour.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
+        // t.data.language !== tour.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternateTours.map(({ data: alternateTour }) => ({

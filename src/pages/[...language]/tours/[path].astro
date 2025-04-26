@@ -43,10 +43,17 @@ const seo = {
   canonical_url: null
 } satisfies SEOProps;
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
 <Layout title={tour.data.title} seo={seo} hrefLangs={hrefs}>
   <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
     {
       hrefs.map(({ href, hreflang }) => (
         <link

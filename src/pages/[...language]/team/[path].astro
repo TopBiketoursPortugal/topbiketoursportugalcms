@@ -61,10 +61,17 @@ const schema = {
   }
 };
 const hrefs = await getTeamLanguagesAlternates(teamMember, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
 <Layout title={title} seo={seo} hrefLangs={hrefs}>
   <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
     {
       hrefs.map(({ href, hreflang }) => (
         <link

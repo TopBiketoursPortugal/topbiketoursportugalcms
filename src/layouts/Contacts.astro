@@ -30,10 +30,17 @@ const {
   frontmatter,
   hrefs = []
 } = Astro.props;
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
 <Layout {...frontmatter} hrefLangs={hrefs}>
   <slot name="head" slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
     {
       hrefs.map(({ href, hreflang }) => (
         <link

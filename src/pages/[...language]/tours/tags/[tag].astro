@@ -108,12 +108,19 @@ const frontmatter = {
   seo?: SEOProps;
 };
 const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
 <Layout class="mb-16 px-8 pt-8"
   {...frontmatter}
   title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} class="px-10" hrefLangs={hrefs}>
   <slot slot="head">
+      {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
     {
       hrefs.map(({ href, hreflang }) => (
         <link
