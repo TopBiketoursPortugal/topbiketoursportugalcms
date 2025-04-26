@@ -30,11 +30,13 @@ function getPackagePrice(
 const schema = {
   '@context': 'https://schema.org/',
   '@graph': items.map(({ data: tour }) => {
-    const tourReviewsAndTestimonials = (tour.reviews ?? []).concat(
-      testimonials
-        .filter((t) => t.data.relatedProduct === tour.id)
-        .map(MapTestimonialToReview)
-    ) satisfies ReviewSchema[];
+    const tourReviewsAndTestimonials = (tour.reviews ?? [])
+      .concat(
+        testimonials
+          .filter((t) => t.data.relatedProduct === tour.id)
+          .map(MapTestimonialToReview)
+      )
+      .filter((r) => r.rating > 0) satisfies ReviewSchema[];
 
     const ratings = tourReviewsAndTestimonials.map((r) => r.rating);
     const bestRating = Math.max(...ratings);
