@@ -8,7 +8,7 @@
     "description": "Top Bike Tours Portugal",
     "twitter_site": "",
     "image": {
-      "src": "/images/astro-logo-light-gradient.png",
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
       "alt": "Top Bike Tours Portugal logo"
     },
     "site": {
@@ -48,7 +48,7 @@
     "description": "Top Bike Tours Portugal",
     "twitter_site": "",
     "image": {
-      "src": "/images/astro-logo-light-gradient.png",
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
       "alt": "Top Bike Tours Portugal logo"
     },
     "site": {

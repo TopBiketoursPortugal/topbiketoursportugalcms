@@ -2,12 +2,15 @@ import SiteData from 'src/../data/site.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import type { SEOProps } from 'astro-seo';
 import type { LayoutProps } from 'src/layouts/Layout.astro';
+import { sanitizeUrl } from './permalinks';
+import { getImage } from 'astro:assets';
+import { getImageByPath } from './get-image';
 
-export function getPageSeo(
+export async function getPageSeo(
   site: string | URL,
   page: LayoutProps,
   language: LanguageCodes
-): SEOProps {
+): Promise<SEOProps> {
   const { seo } = page;
   const pageTitle = page.seo?.page_title ?? page.title;
   const siteData = SiteData[language];
@@ -21,6 +24,8 @@ export function getPageSeo(
     ? new URL(seo?.canonical_url, baseUrl)
     : undefined;
 
+  const imageGenerated = (await getImageByPath(image)).default.src;
+
   return {
     // noindex: seo?.no_index || false,
     noindex: false,
@@ -32,13 +37,13 @@ export function getPageSeo(
         title,
         url: baseUrl,
         type: `${seo?.open_graph_type || 'website'}`,
-        image: `${baseUrl}${image}`
+        image: sanitizeUrl(`${baseUrl}${imageGenerated}`)
       },
       optional: {
         description: description
       },
       image: {
-        url: `${baseUrl}${image}`,
+        url: sanitizeUrl(`${baseUrl}${imageGenerated}`),
         alt: image_alt
       }
     },
