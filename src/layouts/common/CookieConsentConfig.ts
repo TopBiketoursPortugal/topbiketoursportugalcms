@@ -53,7 +53,7 @@ export const SERVICE_SECURITY_STORAGE = 'security_storage';
 //   });
 // }
 
-type CookieParam = { cookie: CookieConsent.CookieValue };
+// type CookieParam = { cookie: CookieConsent.CookieValue };
 
 export const config: CookieConsentConfig = {
   root: '#cc-container',
