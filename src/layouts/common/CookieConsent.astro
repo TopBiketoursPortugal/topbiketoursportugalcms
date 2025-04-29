@@ -78,11 +78,6 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
       !concentCookieValue.categories.includes('ad_personalization')
         ? 'denied'
         : 'granted',
-    ads_data_redaction:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('ads_data_redaction')
-        ? 'denied'
-        : 'granted',
     analytics_storage:
       concentCookieValue === null ||
       !concentCookieValue.categories.includes('analytics_storage')
