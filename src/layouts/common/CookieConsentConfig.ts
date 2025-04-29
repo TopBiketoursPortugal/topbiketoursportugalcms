@@ -2,6 +2,7 @@ import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 
 export const CAT_NECESSARY = 'necessary';
 export const CAT_ANALYTICS = 'analytics';
+export const CAT_MARKETING = 'marketing';
 export const CAT_ADVERTISEMENT = 'advertisement';
 export const CAT_FUNCTIONALITY = 'functionality';
 export const CAT_SECURITY = 'security';
@@ -20,30 +21,46 @@ declare global {
   }
 }
 
-function updateGtagConsent() {
+function updateGtagConsent(cookie: CookieConsent.CookieValue) {
   window.gtag?.('consent', 'default', {
-    [SERVICE_AD_STORAGE]: 'denied',
-    [SERVICE_AD_USER_DATA]: 'denied',
-    [SERVICE_AD_PERSONALIZATION]: 'denied',
-    [SERVICE_ANALYTICS_STORAGE]: 'denied',
-    [SERVICE_FUNCTIONALITY_STORAGE]: 'denied',
-    [SERVICE_PERSONALIZATION_STORAGE]: 'denied',
-    [SERVICE_SECURITY_STORAGE]: 'denied'
+    [SERVICE_AD_STORAGE]: cookie.categories.includes(SERVICE_AD_STORAGE)
+      ? 'granted'
+      : 'denied',
+    [SERVICE_AD_USER_DATA]: cookie.categories.includes(SERVICE_AD_USER_DATA)
+      ? 'granted'
+      : 'denied',
+    [SERVICE_AD_PERSONALIZATION]: cookie.categories.includes(
+      SERVICE_AD_PERSONALIZATION
+    )
+      ? 'granted'
+      : 'denied',
+    [SERVICE_ANALYTICS_STORAGE]: 'granted',
+    [SERVICE_FUNCTIONALITY_STORAGE]: cookie.categories.includes(
+      SERVICE_FUNCTIONALITY_STORAGE
+    )
+      ? 'granted'
+      : 'denied',
+    [SERVICE_PERSONALIZATION_STORAGE]: cookie.categories.includes(
+      SERVICE_PERSONALIZATION_STORAGE
+    )
+      ? 'granted'
+      : 'denied',
+    [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
+      SERVICE_SECURITY_STORAGE
+    )
+      ? 'granted'
+      : 'denied'
   });
 }
 
+type CookieParam = { cookie: CookieConsent.CookieValue };
+
 export const config: CookieConsentConfig = {
   root: '#cc-container',
-  onFirstConsent: () => {
-    updateGtagConsent();
-  },
-  onConsent: () => {
-    updateGtagConsent();
-  },
-  onChange: () => {
-    updateGtagConsent();
-  },
-  revision: 3,
+  onFirstConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  onConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  onChange: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  revision: 5,
   guiOptions: {
     consentModal: {
       layout: 'box inline',
@@ -60,16 +77,13 @@ export const config: CookieConsentConfig = {
     necessary: {
       readOnly: true
     },
+    marketing: {},
     functionality: {},
     analytics: {
       services: {
         ga4: {
           label:
             '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4</a>',
-          onAccept: () => {
-            updateGtagConsent();
-          },
-          onReject: () => {},
           cookies: [
             {
               name: /^_ga/
@@ -140,6 +154,12 @@ export const config: CookieConsentConfig = {
                   }
                 ]
               }
+            },
+            {
+              title: 'Advertisement Cookies',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+              linkedCategory: CAT_MARKETING
             },
             {
               title: 'Advertising',
@@ -251,5 +271,6 @@ export const config: CookieConsentConfig = {
         }
       }
     }
-  }
+  },
+  disablePageInteraction: true
 };

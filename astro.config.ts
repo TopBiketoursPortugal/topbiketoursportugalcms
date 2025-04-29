@@ -208,6 +208,12 @@ export default defineConfig({
         access: 'public',
         optional: true
       }),
+      GOOGLE_TAG_MANAGER_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+        default: 'GTM-KRC3B4ZQ'
+      }),
       GOOGLE_ANALYTICS_ID: envField.string({
         context: 'client',
         access: 'public',
