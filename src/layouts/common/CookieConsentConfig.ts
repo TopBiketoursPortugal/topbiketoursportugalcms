@@ -14,52 +14,52 @@ export const SERVICE_FUNCTIONALITY_STORAGE = 'functionality_storage';
 export const SERVICE_PERSONALIZATION_STORAGE = 'personalization_storage';
 export const SERVICE_SECURITY_STORAGE = 'security_storage';
 
-declare global {
-  interface Window {
-    dataLayer: Record<string, any>[];
-    gtag: (...args: any[]) => void;
-  }
-}
+// declare global {
+//   interface Window {
+//     dataLayer: Record<string, any>[];
+//     gtag: (...args: any[]) => void;
+//   }
+// }
 
-function updateGtagConsent(cookie: CookieConsent.CookieValue) {
-  window.gtag?.('consent', 'default', {
-    [SERVICE_AD_STORAGE]: cookie.categories.includes(SERVICE_AD_STORAGE)
-      ? 'granted'
-      : 'denied',
-    [SERVICE_AD_USER_DATA]: cookie.categories.includes(SERVICE_AD_USER_DATA)
-      ? 'granted'
-      : 'denied',
-    [SERVICE_AD_PERSONALIZATION]: cookie.categories.includes(
-      SERVICE_AD_PERSONALIZATION
-    )
-      ? 'granted'
-      : 'denied',
-    [SERVICE_ANALYTICS_STORAGE]: 'granted',
-    [SERVICE_FUNCTIONALITY_STORAGE]: cookie.categories.includes(
-      SERVICE_FUNCTIONALITY_STORAGE
-    )
-      ? 'granted'
-      : 'denied',
-    [SERVICE_PERSONALIZATION_STORAGE]: cookie.categories.includes(
-      SERVICE_PERSONALIZATION_STORAGE
-    )
-      ? 'granted'
-      : 'denied'
-    // [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
-    //   SERVICE_SECURITY_STORAGE
-    // )
-    //   ? 'granted'
-    //   : 'denied'
-  });
-}
+// function updateGtagConsent(cookie: CookieConsent.CookieValue) {
+//   window.gtag?.('consent', 'default', {
+//     [SERVICE_AD_STORAGE]: cookie.categories.includes(SERVICE_AD_STORAGE)
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_AD_USER_DATA]: cookie.categories.includes(SERVICE_AD_USER_DATA)
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_AD_PERSONALIZATION]: cookie.categories.includes(
+//       SERVICE_AD_PERSONALIZATION
+//     )
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_ANALYTICS_STORAGE]: 'granted',
+//     [SERVICE_FUNCTIONALITY_STORAGE]: cookie.categories.includes(
+//       SERVICE_FUNCTIONALITY_STORAGE
+//     )
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_PERSONALIZATION_STORAGE]: cookie.categories.includes(
+//       SERVICE_PERSONALIZATION_STORAGE
+//     )
+//       ? 'granted'
+//       : 'denied'
+//     // [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
+//     //   SERVICE_SECURITY_STORAGE
+//     // )
+//     //   ? 'granted'
+//     //   : 'denied'
+//   });
+// }
 
 type CookieParam = { cookie: CookieConsent.CookieValue };
 
 export const config: CookieConsentConfig = {
   root: '#cc-container',
-  onFirstConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
-  onConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
-  onChange: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  // onFirstConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  // onConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  // onChange: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
   revision: 5,
   guiOptions: {
     consentModal: {
