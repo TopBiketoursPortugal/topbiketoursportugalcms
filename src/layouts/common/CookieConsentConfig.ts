@@ -44,12 +44,12 @@ function updateGtagConsent(cookie: CookieConsent.CookieValue) {
       SERVICE_PERSONALIZATION_STORAGE
     )
       ? 'granted'
-      : 'denied',
-    [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
-      SERVICE_SECURITY_STORAGE
-    )
-      ? 'granted'
       : 'denied'
+    // [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
+    //   SERVICE_SECURITY_STORAGE
+    // )
+    //   ? 'granted'
+    //   : 'denied'
   });
 }
 
@@ -95,7 +95,7 @@ export const config: CookieConsentConfig = {
   },
   language: {
     default: 'en',
-    autoDetect: 'browser',
+    autoDetect: 'document',
     translations: {
       en: {
         // See: https://support.google.com/tagmanager/answer/10718549?hl=en
@@ -158,7 +158,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Advertisement Cookies',
               description:
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href=\"https://g.co/adsettings\">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
               linkedCategory: CAT_MARKETING
             },
             {
@@ -173,12 +173,12 @@ export const config: CookieConsentConfig = {
                 'Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user’s choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user’s session, such as the content of a shopping cart.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            {
-              title: 'Security',
-              description:
-                'Cookies used for security authenticate users, prevent fraud, and protect users as they interact with a service.',
-              linkedCategory: CAT_SECURITY
-            },
+            // {
+            //   title: 'Security',
+            //   description:
+            //     'Cookies used for security authenticate users, prevent fraud, and protect users as they interact with a service.',
+            //   linkedCategory: CAT_SECURITY
+            // },
             {
               title: 'More information',
               description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topbiketoursportugal.com/privacy-policy/">contact us</a>.`
@@ -245,6 +245,12 @@ export const config: CookieConsentConfig = {
               }
             },
             {
+              title: 'Cookies Publicidade',
+              description:
+                'O Google utiliza cookies para publicidade, incluindo veiculação e renderização de anúncios, personalização de anúncios (consoante as suas definições de anúncio em <a href="https://g.co/adsettings">g.co/adsettings</a>), limitação do número de vezes que um anúncio é exibido, ocultação de anúncios que escolheu parar de ver e medição da eficácia de anúncios.',
+              linkedCategory: CAT_MARKETING
+            },
+            {
               title: 'Publicidade',
               description:
                 'O Google utiliza cookies para publicidade, incluindo veiculação e renderização de anúncios, personalização de anúncios (consoante as suas definições de anúncio em <a href="https://g.co/adsettings">g.co/adsettings</a>), limitação do número de vezes que um anúncio é exibido, ocultação de anúncios que escolheu parar de ver e medição da eficácia de anúncios.',
@@ -256,12 +262,12 @@ export const config: CookieConsentConfig = {
                 'Cookies utilizados para funcionalidade permitem que os utilizadores interajam com um serviço ou site para aceder a características fundamentais. Consideram-se fundamentais preferências como idioma do utilizador, otimizações de produto que ajudam a manter e melhorar serviços, e manutenção de informação relativa à sessão do utilizador, como conteúdo de um carrinho de compras.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            {
-              title: 'Segurança',
-              description:
-                'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
-              linkedCategory: CAT_SECURITY
-            },
+            // {
+            //   title: 'Segurança',
+            //   description:
+            //     'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
+            //   linkedCategory: CAT_SECURITY
+            // },
             {
               title: 'Mais informações',
               description:
