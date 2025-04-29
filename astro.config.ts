@@ -217,7 +217,8 @@ export default defineConfig({
       GOOGLE_ANALYTICS_ID: envField.string({
         context: 'client',
         access: 'public',
-        optional: true
+        optional: true,
+        default: '385531271'
       }),
       GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',
@@ -232,7 +233,7 @@ export default defineConfig({
       INDEX: envField.string({
         context: 'client',
         access: 'public',
-        default: 'false'
+        default: 'true'
       })
       // API_SECRET: envField.string({ context: "server", access: "secret" }),
     }
