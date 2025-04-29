@@ -43,14 +43,56 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
     dataLayer.push(arguments);
   }
 
+  function getCookieJson(name) {
+    const cookieValue = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith(name + '='));
+
+    if (!cookieValue) return null;
+
+    try {
+      const rawValue = decodeURIComponent(cookieValue.split('=')[1]);
+      return JSON.parse(rawValue);
+    } catch (e) {
+      console.error('Failed to parse cookie:', e);
+      return null;
+    }
+  }
+
+  const concentCookieValue = getCookieJson('cc_cookie');
+
   // default consent mode
   gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    functionality_storage: 'denied',
-    personalization_storage: 'denied'
+    ad_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_storage')
+        ? 'denied'
+        : 'granted',
+    ad_user_data:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_user_data')
+        ? 'denied'
+        : 'granted',
+    ad_personalization:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_personalization')
+        ? 'denied'
+        : 'granted',
+    ads_data_redaction:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ads_data_redaction')
+        ? 'denied'
+        : 'granted',
+    analytics_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('analytics_storage')
+        ? 'denied'
+        : 'granted',
+    personalization_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('personalization_storage')
+        ? 'denied'
+        : 'granted'
   });
 </script>
 
