@@ -17,31 +17,42 @@ import {
   SERVICE_PERSONALIZATION_STORAGE,
   SERVICE_SECURITY_STORAGE
 } from './CookieConsentConfig';
+
+const vars = {
+  GOOGLE_ANALYTICS_ID,
+  CAT_ADVERTISEMENT,
+  CAT_ANALYTICS,
+  CAT_FUNCTIONALITY,
+  CAT_SECURITY,
+  config,
+  SERVICE_AD_PERSONALIZATION,
+  SERVICE_AD_STORAGE,
+  SERVICE_AD_USER_DATA,
+  SERVICE_ANALYTICS_STORAGE,
+  SERVICE_FUNCTIONALITY_STORAGE,
+  SERVICE_PERSONALIZATION_STORAGE,
+  SERVICE_SECURITY_STORAGE
+};
 ---
 
-<script
+<!-- <script
   is:inline
   src={`https://www.googletagmanager.com/gtag/js?id=G-${GOOGLE_ANALYTICS_ID}`}
-></script>
-
-<script
-  is:inline
-  define:vars={{
-    GOOGLE_ANALYTICS_ID,
-    CAT_ADVERTISEMENT,
-    CAT_ANALYTICS,
-    CAT_FUNCTIONALITY,
-    CAT_SECURITY,
-    config,
-    SERVICE_AD_PERSONALIZATION,
-    SERVICE_AD_STORAGE,
-    SERVICE_AD_USER_DATA,
-    SERVICE_ANALYTICS_STORAGE,
-    SERVICE_FUNCTIONALITY_STORAGE,
-    SERVICE_PERSONALIZATION_STORAGE,
-    SERVICE_SECURITY_STORAGE
-  }}
->
+></script> --><!-- Google Tag Manager -->
+<script is:inline>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), 'event': 'gtm.js' });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-KRC3B4ZQ');
+</script>
+<!-- End Google Tag Manager -->
+<script is:inline define:vars={vars}>
   function initAnalytics() {
     // We need a global definition to avoid type warnings
 
