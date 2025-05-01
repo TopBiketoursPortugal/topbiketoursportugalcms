@@ -1,5 +1,9 @@
 ---
 import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+import SiteData from 'src/../data/site.json';
+
+const { ui: UI } = SiteData;
+
 const tagScriptSrc = `https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`;
 ---
 
