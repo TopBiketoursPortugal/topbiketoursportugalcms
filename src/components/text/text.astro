@@ -4,6 +4,7 @@ import markdownItExternalLinks from 'markdown-it-external-links';
 
 import { tv, type VariantProps } from 'tailwind-variants';
 import Prose from '../typography/prose.astro';
+import { externalLinksConfig } from 'utils/permalinks';
 
 export type TextProps = {
   text: string;
@@ -44,13 +45,6 @@ const textVariants = tv({
 
 const { text, style } = Astro.props;
 const { padding, align, container } = style;
-const externalLinksConfig = {
-  externalTarget: '_blank',
-  externalRel: 'nofollow noopener noreferrer',
-  internalTarget: '',
-  internalRel: '',
-  internalDomains: ['topwalkingtoursportual.com']
-};
 
 const md = markdownit({ html: true });
 md.use(markdownItExternalLinks, externalLinksConfig);
