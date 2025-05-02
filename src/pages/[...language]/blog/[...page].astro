@@ -81,9 +81,10 @@ const pageNumber = parseInt(pageNumberStr ?? 1, 10);
 const blogPageTitle = pageNumberStr
   ? t('Blog.Paged.Title', language).replace('$1', pageNumberStr)
   : page.data.title;
-const blogPageDescription = pageNumberStr
-  ? t('Blog.Paged.Description', language).replace('$1', pageNumberStr)
-  : (page.data.seo?.page_description ?? blogPageTitle);
+const blogPageDescription = t('Blog.Paged.Description', language).replace(
+  '$1',
+  pageNumberStr
+);
 
 frontmatter = {
   ...frontmatter,

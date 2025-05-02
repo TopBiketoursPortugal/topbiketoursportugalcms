@@ -9,6 +9,14 @@ const doublSlashRegex = /([^:])\/{2,}/g;
 
 export const trailingSlash = '/';
 
+export const externalLinksConfig = {
+  externalTarget: '_blank',
+  externalRel: 'nofollow noopener noreferrer',
+  internalTarget: '',
+  internalRel: '',
+  internalDomains: ['topbiketoursportugal.com']
+};
+
 export function sanitizeUrl(url: string) {
   if (url?.length === 0) {
     return '/404/';
