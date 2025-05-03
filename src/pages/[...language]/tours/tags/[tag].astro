@@ -131,7 +131,7 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
       ))
     }
   </slot>
-   {
+  {
     packageTours.length > 0 ? (
       <Heading as="h1" class="px-6">{t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)}</Heading>
       <TourList items={packageTours} language={language} />
@@ -139,7 +139,7 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
   }
   {
     dayTours.length > 0 ? (
-      <Heading as="h2"  class="px-6">{t("Tours.Tags.DayTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)}</Heading>
+      <Heading as={packageTours.length > 0 ?"h2":"h1"}  class="px-6">{t("Tours.Tags.DayTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)}</Heading>
       <TourList items={dayTours} language={language} />
     ) : null
   }
