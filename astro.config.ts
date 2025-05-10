@@ -9,7 +9,7 @@ import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
-import rehypeExternalLinks from 'rehype-external-links';
+import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 // import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
 import { mkdir, writeFile } from 'fs/promises';
@@ -18,19 +18,18 @@ import path from 'path';
 const externalLinksConfig = {
   target: '_blank',
   rel: ['nofollow', 'noopener', 'noreferrer'],
-
-  skip: (node: any) => {
+  test: (node: any) => {
     try {
       const url = node.properties?.href;
       return (
         typeof url === 'string' &&
-        new URL(url).hostname === 'topbiketoursportugal.com'
+        new URL(url).hostname.indexOf('topbiketoursportugal.com') === -1
       );
     } catch {
       return false;
     }
   }
-};
+} satisfies Options;
 
 function removeDuplicateRedirects(
   redirects: {
