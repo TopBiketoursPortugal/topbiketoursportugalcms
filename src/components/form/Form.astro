@@ -29,7 +29,7 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
   }
   <slot />
 </form>
-<script is:inline>
+<script is:inline defer async>
   var $wc_load = function (a) {
       return JSON.parse(JSON.stringify(a));
     },
@@ -42,4 +42,5 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
       }
     };
 </script>
-<script is:inline src="//s.ksrndkehqnwntyxlhgto.com/137152.js"></script>
+<script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
+></script>
