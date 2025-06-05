@@ -24,8 +24,8 @@ importers:
         specifier: 6.0.2
         version: 6.0.2(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))(tailwindcss@3.3.3)
       '@bookshop/astro-bookshop':
-        specifier: 3.16.1
-        version: 3.16.1(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
+        specifier: 3.14.0
+        version: 3.14.0(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
       '@iconify-json/circle-flags':
         specifier: 1.2.6
         version: 1.2.6
@@ -118,14 +118,14 @@ importers:
         specifier: 3.4.1
         version: 3.4.1
       '@bookshop/astro-engine':
-        specifier: 3.16.1
-        version: 3.16.1(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
+        specifier: 3.14.0
+        version: 3.14.0(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
       '@bookshop/browser':
-        specifier: 3.16.1
-        version: 3.16.1
+        specifier: 3.14.0
+        version: 3.14.0
       '@bookshop/generate':
-        specifier: 3.16.1
-        version: 3.16.1
+        specifier: 3.14.0
+        version: 3.14.0
       '@kindspells/astro-shield':
         specifier: 1.7.1
         version: 1.7.1(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))
@@ -874,31 +874,31 @@ packages:
     resolution: {integrity: sha512-+EzkxvLNfiUeKMgy/3luqfsCWFRXLb7U6wNQTk60tovuckwB15B191tJWvpp4HjiQWdJkCxO3Wbvc6jlk3Xb2Q==}
     engines: {node: '>=6.9.0'}
 
-  '@bookshop/astro-bookshop@3.16.1':
-    resolution: {integrity: sha512-YHQ9NkHRHZG4rIQLnB3t7qi8GPkawWjtU8zgJ0392QqNIdRTiYXJMlbOw9h/yEjmbo1g9RBHa4nKy6W7IhysDg==}
+  '@bookshop/astro-bookshop@3.14.0':
+    resolution: {integrity: sha512-jjJ1MeT+eaQlBSDO6vAX9OevX/fgabTX0MtAD5+a3zh/m5KpnbRSbpd4aySbRfCOtWoiVuwNTds6s+AWX3/W0w==}
     engines: {node: '>=14.16'}
     peerDependencies:
       react-dom: ^17.0.2 || ^18.0.0
 
-  '@bookshop/astro-engine@3.16.1':
-    resolution: {integrity: sha512-GxufE5UKd4DiyZ8VQNbKWxRDfrTlEOt8PZGijG5D+cly5RzPv2U32J8bA3q5UduRKAUx5pzSyWZm40fZrd9zPw==}
+  '@bookshop/astro-engine@3.14.0':
+    resolution: {integrity: sha512-K05Tg4jaTPgXWjz/ftdU1suWK21UnaGp2rN6SA0k1vhX+Wun2DdL3r1YWlf1zFc3oOt8s/TU/s+4w5YGqPljOA==}
     engines: {node: '>=14.16'}
     peerDependencies:
       astro: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
       react: ^17.0.2 || ^18.0.0
       react-dom: ^17.0.2 || ^18.0.0
 
-  '@bookshop/browser@3.16.1':
-    resolution: {integrity: sha512-OxfYqPYhDR8x/I95lEn1ivUcAMBHKsd60fpyHlM35IE1NnxfUHj/V0ORusnOkRyirx/uSHLMuNEycb9TDsgduA==}
+  '@bookshop/browser@3.14.0':
+    resolution: {integrity: sha512-ySjkmjOIvRsqN7Wz8Oi6ALFxxbPRopSybNlTalVpTwee+0GKNGQNr405EfBgUklQDn6F0V2aU5IhkdW3IeO2NA==}
     engines: {node: '>=14.16'}
     hasBin: true
 
-  '@bookshop/builder@3.16.1':
-    resolution: {integrity: sha512-C01YjFcT3LpDkOMAVslowr89zxmqT5NtP5vIW6YUYCWogM9vvxoXE+tWhzMmKPt2QJhxEWeV3tzAn0ONRkX9ig==}
+  '@bookshop/builder@3.14.0':
+    resolution: {integrity: sha512-ODnRwtW3Uf5JZvByjx8ZjnwGzUzH7/5MYxMC4JE922pqsOr/Sya9d76h0tDwDapO1yBKUTQuw2nAtCP62PTLjA==}
     engines: {node: '>=14.16'}
 
-  '@bookshop/generate@3.16.1':
-    resolution: {integrity: sha512-ytnVBCuKT+Y8NBdT7sXFRRu1u6Magto/cY0evTIDD+8AL6xbJ3+aCRgaeOZv9qv7tv6I+Xvso3zAJPu/PSHipQ==}
+  '@bookshop/generate@3.14.0':
+    resolution: {integrity: sha512-CkP/6Js/9j7khto4E+JjOpfLSGF/5WP95lEut4Mox1BCL/QXqeNqNB5sAoU7q+s9FhmjSPxcpLCFRhHtCc75WA==}
     engines: {node: '>=14.16'}
     hasBin: true
 
@@ -906,21 +906,17 @@ packages:
     resolution: {integrity: sha512-28jwpUr28vzusSblzBpJFumU1NmUgokytdIOozfk/11JXNWcLKIPMLdVi4eiGPA27IBRxmCO+iVEav06Ed0wmg==}
     engines: {node: '>=14.16'}
 
-  '@bookshop/helpers@3.16.1':
-    resolution: {integrity: sha512-G49/8MtQk0Mc/+KkulC4nHuesK0TSygBvok2RgyU4rfTjDi2r+PjFZmywn68+Vok2QdNyCHXSOjYaeNBN3Pisg==}
-    engines: {node: '>=14.16'}
-
-  '@bookshop/live@3.16.1':
-    resolution: {integrity: sha512-ClfWv11y3/5pmqqp70qP+oHlDy8X0LgqvTmVhZcnC2R1BWeHLQUAgjBXsxnV5RXeQy0IVzKlQ/LczBSEQMiibQ==}
+  '@bookshop/live@3.14.0':
+    resolution: {integrity: sha512-rIBagtkT/NJkKokY9dNelDRMpEvI4D8OPluTuAF+m4eI5pN1/5rKLWITgGet7NridCPzrsY5jHSp2b11VZe2Dg==}
     engines: {node: '>=14.16'}
     hasBin: true
 
-  '@bookshop/styles@3.16.1':
-    resolution: {integrity: sha512-qvqogoUBe4Ijp/Eq1qXGnNxSJxre9BZxVvU5lLchCxmRJeopy+w9nm/ih8H0bmcb88ABk9Wv2H0kwYmOiTQWmQ==}
+  '@bookshop/styles@3.14.0':
+    resolution: {integrity: sha512-+UPNaSzUgcb5+fkA2vFtzEYB6sB0JciVT6wS9A753ShT74Avpuf8PKLH96SC39rEThiWByF2+NUWuLY9oKG02w==}
     engines: {node: '>=14.16'}
 
-  '@bookshop/vite-plugin-astro-bookshop@3.16.1':
-    resolution: {integrity: sha512-SK0WkhBd49GiGjGTayRRvEojVGjlJ8XDCPdemVnZg2FQVZFnFlUl8g0JIGRU+JWzvwfnM0CyPnyVCpJNhOw7oA==}
+  '@bookshop/vite-plugin-astro-bookshop@3.14.0':
+    resolution: {integrity: sha512-duc1BtKylqdzwK3kCDDgWmg3Em8wYHkkAEX7gymeckae8dFFKUYLXStVJs2Q4vVJ0epxMoa9bi3FuhqZ+T+lAQ==}
     engines: {node: '>=14.16'}
 
   '@canvas/image-data@1.0.0':
@@ -7675,11 +7671,11 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
-  '@bookshop/astro-bookshop@3.16.1(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)':
+  '@bookshop/astro-bookshop@3.14.0(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)':
     dependencies:
       '@astrojs/react': 3.6.3(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
       '@bookshop/helpers': 3.14.0
-      '@bookshop/vite-plugin-astro-bookshop': 3.16.1
+      '@bookshop/vite-plugin-astro-bookshop': 3.14.0
       '@cloudcannon/remark-auto-import': 1.0.1
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -7696,11 +7692,11 @@ snapshots:
       - supports-color
       - terser
 
-  '@bookshop/astro-engine@3.16.1(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)':
+  '@bookshop/astro-engine@3.14.0(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(astro@5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0))(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)':
     dependencies:
       '@astrojs/compiler': 2.11.0
-      '@bookshop/astro-bookshop': 3.16.1(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
-      '@bookshop/vite-plugin-astro-bookshop': 3.16.1
+      '@bookshop/astro-bookshop': 3.14.0(@types/node@22.13.14)(@types/react-dom@18.2.7)(@types/react@18.2.21)(lightningcss@1.29.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.85.1)(terser@5.39.0)
+      '@bookshop/vite-plugin-astro-bookshop': 3.14.0
       astro: 5.5.6(@types/node@22.13.14)(jiti@2.4.2)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.85.1)(terser@5.39.0)(typescript@5.8.2)(yaml@2.8.0)
       esbuild: 0.19.12
       esbuild-sass-plugin: 2.16.1(esbuild@0.19.12)
@@ -7722,10 +7718,10 @@ snapshots:
       - supports-color
       - terser
 
-  '@bookshop/browser@3.16.1':
+  '@bookshop/browser@3.14.0':
     dependencies:
-      '@bookshop/builder': 3.16.1
-      '@bookshop/helpers': 3.16.1
+      '@bookshop/builder': 3.14.0
+      '@bookshop/helpers': 3.14.0
       '@codemirror/basic-setup': 0.18.2
       '@codemirror/commands': 0.18.3
       '@codemirror/legacy-modes': 0.18.1
@@ -7749,10 +7745,10 @@ snapshots:
       - ts-node
       - utf-8-validate
 
-  '@bookshop/builder@3.16.1':
+  '@bookshop/builder@3.14.0':
     dependencies:
-      '@bookshop/helpers': 3.16.1
-      '@bookshop/styles': 3.16.1
+      '@bookshop/helpers': 3.14.0
+      '@bookshop/styles': 3.14.0
       esbuild: 0.13.15
       fast-glob: 3.3.3
       normalize-path: 3.0.0
@@ -7760,12 +7756,12 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  '@bookshop/generate@3.16.1':
+  '@bookshop/generate@3.14.0':
     dependencies:
-      '@bookshop/browser': 3.16.1
-      '@bookshop/builder': 3.16.1
-      '@bookshop/helpers': 3.16.1
-      '@bookshop/live': 3.16.1
+      '@bookshop/browser': 3.14.0
+      '@bookshop/builder': 3.14.0
+      '@bookshop/helpers': 3.14.0
+      '@bookshop/live': 3.14.0
       '@ltd/j-toml': 1.38.0
       chalk: 5.4.1
       commander: 8.3.0
@@ -7773,7 +7769,7 @@ snapshots:
       normalize-path: 3.0.0
       pluralize: 8.0.0
       slugify: 1.6.6
-      yaml: 2.7.1
+      yaml: 2.8.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -7782,19 +7778,17 @@ snapshots:
 
   '@bookshop/helpers@3.14.0': {}
 
-  '@bookshop/helpers@3.16.1': {}
-
-  '@bookshop/live@3.16.1':
+  '@bookshop/live@3.14.0':
     dependencies:
-      '@bookshop/builder': 3.16.1
-      '@bookshop/helpers': 3.16.1
+      '@bookshop/builder': 3.14.0
+      '@bookshop/helpers': 3.14.0
       commander: 8.3.0
     transitivePeerDependencies:
       - ts-node
 
-  '@bookshop/styles@3.16.1':
+  '@bookshop/styles@3.14.0':
     dependencies:
-      '@bookshop/helpers': 3.16.1
+      '@bookshop/helpers': 3.14.0
       fast-glob: 3.3.3
       normalize-path: 3.0.0
       postcss: 8.5.3
@@ -7803,7 +7797,7 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
-  '@bookshop/vite-plugin-astro-bookshop@3.16.1':
+  '@bookshop/vite-plugin-astro-bookshop@3.14.0':
     dependencies:
       '@babel/generator': 7.27.1
       '@babel/parser': 7.27.2
