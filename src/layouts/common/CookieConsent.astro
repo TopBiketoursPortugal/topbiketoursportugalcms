@@ -37,7 +37,7 @@ const vars = {
 const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}')`;
 ---
 
-<script is:inline defer async>
+<script is:inline defer async type="module">
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -93,7 +93,7 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
 
 <script is:inline defer async set:html={GTM_SCRIPT} />
 
-<script>
+<script type="module" defer async>
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
   // toggle custom black theme
@@ -101,4 +101,6 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
 
   // Trigger consent update when user choices change
   run(config);
+
+ document.addEventListener('astro:after-swap', () => {   run(config);});
 </script>
