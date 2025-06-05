@@ -2,8 +2,7 @@
 import { Container, type ContainerProps } from '../container';
 import Prose from '../typography/prose.astro';
 import AccordionItem from './accordion-item.astro';
-import markdownit from 'markdown-it';
-
+import markdownToTxt from 'markdown-to-txt';
 export type AccordionItemProps = {
   header?: { text?: string };
   content?: string;
@@ -18,20 +17,12 @@ export type AccordionProps = {
 };
 
 type Props = AccordionProps;
-const md = markdownit({ html: true });
-
-function markdownToText(text: string): string {
-  const html = md.render(text);
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
-}
 
 const {
   items = [],
   container = 'full',
   padding = 'none',
-  type = ''
+   type = ''
 } = Astro.props;
 const faqSchema =
   type === 'faq'
@@ -40,27 +31,27 @@ const faqSchema =
         '@type': 'FAQPage',
         'mainEntity': items.map((i) => ({
           '@type': 'Question',
-          'name': markdownToText(i.header?.text ?? ''),
+          'name': markdownToTxt(i.header?.text ?? ''),
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': markdownToText(i.content ?? '')
+            'text': markdownToTxt(i.content ?? '')
           }
         }))
       }
     : '';
 ---
-
-<Container size={container} padding={padding}>
-  {
-    type === 'faq' ? (
+{
+    type === 'faq' && (
       <script
         is:inline
         async
         type="application/ld+json"
         set:html={JSON.stringify(faqSchema)}
       />
-    ) : null
+    ) 
   }
+<Container size={container} padding={padding}>
+  
   <div
     role="group"
     aria-label="Accordion"

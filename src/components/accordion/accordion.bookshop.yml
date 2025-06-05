@@ -25,10 +25,12 @@ preview:
 
 _inputs:
   type:
-    label: Type
     type: select
+    hidden: false
     options:
-      - faq
+      allow_empty: true
+      values:
+        - faq
     description: The schema type for the accordion.  
   container:
     hidden: true
