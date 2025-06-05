@@ -93,14 +93,13 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
 
 <script is:inline defer async set:html={GTM_SCRIPT} />
 
-<script type="module" defer async>
+<script>
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
   // toggle custom black theme
   document.body.classList.add('cc--elegant-black');
-
+  
   // Trigger consent update when user choices change
   run(config);
-
- document.addEventListener('astro:after-swap', () => {   run(config);});
+  //  document.addEventListener('astro:after-swap', () => {   run(config);});
 </script>
