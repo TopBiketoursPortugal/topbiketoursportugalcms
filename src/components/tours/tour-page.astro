@@ -29,6 +29,9 @@ import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
 import { getCountryCode } from 'utils/get-country-code';
+import Stack from '../stack/stack.astro';
+import Grid from '../grid/grid.astro';
+import ReviewItem from '../collection/review-item.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -88,6 +91,8 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = false;
+
+// mapa, itenerario, preço
 ---
 
 {image && <ResponsiveImage {...image} class="max-h-72" />}
@@ -97,6 +102,11 @@ const enableFaqs = false;
   <div class="overflow-auto sm:overflow-hidden">
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
+      {
+        mapUrl.length > 0 ? (
+          <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
+        ) : null
+      }
       {
         itinerary.length > 0 ? (
           <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
@@ -108,11 +118,7 @@ const enableFaqs = false;
         ) : null
       }
       <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
-      {
-        mapUrl.length > 0 ? (
-          <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
-        ) : null
-      }
+
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
       {
         enableFaqs ? (
@@ -246,6 +252,26 @@ const enableFaqs = false;
     <slot />
   </section>
   {
+    mapUrl.length > 0 ? (
+      <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.Map.Title', language)}
+        </Heading>
+        <div class="w-full select-none">
+          <iframe
+            title="tour"
+            src={mapUrl}
+            width="100%"
+            height="480"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </section>
+    ) : null
+  }
+  {
     itinerary.length > 0 ? (
       <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4">
         <Heading as="h2" class="mb-6">
@@ -281,26 +307,6 @@ const enableFaqs = false;
   </section>
 
   {
-    mapUrl.length > 0 ? (
-      <section id="map" class="col-span-full mb-8 flex flex-col gap-4">
-        <Heading as="h2" class="mb-6">
-          {t('Tour.Section.Map.Title', language)}
-        </Heading>
-        <div class="w-full select-none">
-          <iframe
-            title="tour"
-            src={mapUrl}
-            width="100%"
-            height="480"
-            style="border:0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </section>
-    ) : null
-  }
-  {
     enableFaqs ? (
       <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4">
         <Heading as="h2" class="mb-6">
@@ -316,51 +322,18 @@ const enableFaqs = false;
     >
     {
       reviews.length > 0 ? (
-        <div class="grid grid-cols-1 gap-12">
-          {reviews.map(
-            async ({ image, travelerType, content, author, rating }) => {
-              const {
-                country = '',
-                givenName = '',
-                familyName = ''
-              } = author ?? {};
-
-              const countryCode = getCountryCode(country);
-
-              const countryFlagIcon = countryCode
-                ? `circle-flags:${countryCode.toLowerCase()}`
-                : 'ph:user-circle-light';
-
-              const name = `${givenName} ${familyName}`.trimEnd();
-              return (
-                <div class="flex flex-row items-center justify-evenly gap-6">
-                  <div class="flex grow">
-                    {image ? (
-                      <Image
-                        src={(await getImageByPath(image.src)).default}
-                        widths={[320, 500, 640]}
-                        sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
-                        fetchpriority="auto"
-                        decoding="async"
-                        loading="lazy"
-                        alt={name ?? country ?? 'review image'}
-                        class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
-                      />
-                    ) : (
-                      <Icon icon={countryFlagIcon} className="h-12 w-12 mb-6" />
-                    )}
-                  </div>
-                  <div class="grow whitespace-nowrap">{name}</div>
-                  <div>{travelerType ?? '-'}</div>
-                  <div class="text-balance flex grow flex-col gap-4 whitespace-pre-line">
-                    <Rating rating={rating} />
-                    <Prose markdown={content} />
-                  </div>
-                </div>
-              );
-            }
-          )}
-        </div>
+        <Grid cols={3}>
+          {reviews.map(async ({ content, author, rating }) => (
+            <Stack as="section" class="border-solid sm:p-6" layout="vertical">
+              <ReviewItem
+                name={`${author?.givenName}`}
+                country={author?.country}
+                content={content}
+                rating={rating}
+              />
+            </Stack>
+          ))}
+        </Grid>
       ) : (
         <div>{t('Tour.Section.Reviews.Empty', language)}</div>
       )
