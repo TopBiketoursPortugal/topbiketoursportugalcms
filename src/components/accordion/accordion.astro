@@ -2,7 +2,6 @@
 import { Container, type ContainerProps } from '../container';
 import Prose from '../typography/prose.astro';
 import AccordionItem from './accordion-item.astro';
-import markdownit from 'markdown-it';
 
 export type AccordionItemProps = {
   header?: { text?: string };
@@ -18,13 +17,14 @@ export type AccordionProps = {
 };
 
 type Props = AccordionProps;
-const md = markdownit({ html: true });
 
-function markdownToText(text: string): string {
-  const html = md.render(text);
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
+function markdownToText(md:string) {
+  return md
+    .replace(/!\[.*?\]\(.*?\)/g, '')         // remove images
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // remove links but keep text
+    .replace(/[*_~`>#-]/g, '')               // remove common markdown chars
+    .replace(/\n+/g, ' ')                    // collapse new lines
+    .trim();
 }
 
 const {
