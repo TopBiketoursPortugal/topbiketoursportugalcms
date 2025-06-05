@@ -12,6 +12,7 @@ blueprint:
   container: 'full'
   expansionType: 'plus'
   padding: 'normal'
+  type: ""
   items:
     - header:
         text: 'Q1'
@@ -23,6 +24,12 @@ blueprint:
 preview:
 
 _inputs:
+  type:
+    label: Type
+    type: select
+    options:
+      - faq
+    description: The schema type for the accordion.  
   container:
     hidden: true
   expansionType:
