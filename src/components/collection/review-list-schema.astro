@@ -13,53 +13,75 @@ const testimonials = await getCollection(
 );
 const schema = {
   '@context': 'https://schema.org/',
-  '@graph': items.flatMap((product) => {
-    const tourReviewsAndTestimonials = (product.data.reviews ?? []).concat(
-      testimonials
-        .filter((t) => t.data.relatedProduct === product.data.id)
-        .map(MapTestimonialToReview)
-    ) satisfies ReviewSchema[];
+  '@graph': items
+    .map((product) => {
+      const tourReviewsAndTestimonials = (product.data.reviews ?? []).concat(
+        testimonials
+          .filter((t) => t.data.relatedProduct === product.data.id)
+          .map(MapTestimonialToReview)
+      ) satisfies ReviewSchema[];
 
-    const ratings = tourReviewsAndTestimonials.map((r) => r.rating);
-    const bestRating = Math.max(...ratings);
-    const worstRating = Math.min(...ratings);
-    return tourReviewsAndTestimonials
-      .filter(
-        (review) =>
-          review !== null && review.rating !== null && review.rating !== 0
-      )
-      .map((review) => ({
-        '@type': 'Review',
-        'itemReviewed': {
-          '@type': 'Product',
-          'name': product.data.title,
-          'sku': product.data.code,
-          'description': product.data.description,
-          'image': product.data.image?.src,
-          'brand': {
-            '@type': 'Brand',
-            'name': 'Top Bike Tours Portugal'
-          }
+      const ratings = tourReviewsAndTestimonials.map((r) => r.rating);
+      const reviewCount = ratings.length;
+
+      // Skip products with no reviews to avoid schema errors if desired,
+      // or just output them without aggregateRating if that's acceptable.
+      // However, the error was "Either 'offers', 'review', or 'aggregateRating' should be specified".
+      // So if we have no reviews, we might still have issues unless we have offers.
+      // For now, let's assume we only want to output schema for products with reviews
+      // OR we output what we can. But to fix the specific error, we need at least one of those.
+      // If there are no reviews, we can't do aggregateRating or review.
+      // So let's return null if no reviews, and filter out nulls later.
+
+      if (reviewCount === 0) return null;
+
+      const ratingValue = ratings.reduce((a, b) => a + b, 0) / reviewCount;
+
+      return {
+        '@type': 'Product',
+        'name': product.data.title,
+        'sku': product.data.code,
+        'description': product.data.description,
+        'image': product.data.image?.src,
+        'brand': {
+          '@type': 'Brand',
+          'name': 'Top Bike Tours Portugal'
         },
-        'reviewRating': {
-          '@type': 'Rating',
-          'ratingValue': review.rating,
-          'bestRating': bestRating,
-          'worstRating': worstRating
+        'aggregateRating': {
+          '@type': 'AggregateRating',
+          'ratingValue': ratingValue,
+          'reviewCount': reviewCount,
+          'bestRating': 5,
+          'worstRating': 1
         },
-        'author': {
-          '@type': 'Person',
-          'givenName': review.author?.givenName,
-          'familyName': review.author?.familyName,
-          'address': {
-            '@type': 'PostalAddress',
-            'addressCountry': review.author?.country
-          }
-        },
-        'datePublished': review.publishDate,
-        'reviewBody': review.content
-      }));
-  })
+        'review': tourReviewsAndTestimonials
+          .filter(
+            (review) =>
+              review !== null && review.rating !== null && review.rating !== 0
+          )
+          .map((review) => ({
+            '@type': 'Review',
+            'reviewRating': {
+              '@type': 'Rating',
+              'ratingValue': review.rating,
+              'bestRating': 5,
+              'worstRating': 1
+            },
+            'author': {
+              '@type': 'Person',
+              'givenName': review.author?.givenName,
+              'familyName': review.author?.familyName,
+              'address': {
+                '@type': 'PostalAddress',
+                'addressCountry': review.author?.country
+              }
+            },
+            'datePublished': review.publishDate,
+            'reviewBody': review.content
+          }))
+      };
+    })
+    .filter(Boolean)
 };
 ---
 
