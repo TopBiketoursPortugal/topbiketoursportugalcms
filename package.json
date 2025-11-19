@@ -22,10 +22,9 @@
     "json2ts": "json2ts",
     "prepare": "husky",
     "mdx-clone": "node ./tools/mdx-clone.mjs",
-    "deps": "pnpx npm-check-updates -i "
+    "deps": "pnpx npm-check-updates -i"
   },
   "dependencies": {
-    "@astrojs/alpinejs": "0.4.9",
     "@astrojs/mdx": "4.3.11",
     "@astrojs/partytown": "2.1.4",
     "@astrojs/react": "4.4.2",
@@ -37,12 +36,10 @@
     "@iconify-json/ph": "1.2.2",
     "@jop-software/astro-cookieconsent": "3.0.1",
     "@playform/compress": "0.2.0",
-    "@types/alpinejs": "3.13.11",
     "@types/markdown-it-external-links": "^0.0.4",
     "@types/react": "19.2.6",
     "@types/react-dom": "19.2.3",
     "@vite-pwa/assets-generator": "1.0.2",
-    "alpinejs": "3.15.2",
     "astro": "5.15.9",
     "astro-breadcrumbs": "3.3.1",
     "astro-ui-avatars": "0.1.0",

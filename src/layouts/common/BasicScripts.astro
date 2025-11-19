@@ -66,22 +66,40 @@ const tagScriptSrc = `https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_M
         ?.classList.toggle('hidden');
     });
 
-    // document.addEventListener('click', function (event) {
-    //   if (
-    //     event.target.id === 'theme-toggle' ||
-    //     event.target.parentElement.id === 'theme-toggle'
-    //   ) {
-    //     if (defaultTheme.endsWith(':only')) {
-    //       return;
-    //     }
-    //     document.documentElement.classList.toggle('dark');
-    //     const isDark = document.documentElement.classList.contains('dark');
-    //     document.documentElement.setAttribute(
-    //       'data-theme',
-    //       isDark ? 'dark' : 'light'
-    //     );
-    //   }
-    // });
+    attachEvent('[data-theme-toggle]', 'click', function (_, elem) {
+      const theme = elem.getAttribute('data-theme-toggle');
+      if (theme === 'system') {
+        localStorage.removeItem('darkMode');
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } else {
+        localStorage.setItem('darkMode', theme);
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      // Update UI state if needed (e.g., active class on buttons)
+      // Since we use CSS classes based on .dark or data attributes, this might be automatic
+      // or handled by the CSS in ToggleTheme.astro
+    });
+
+    // Listen for system preference changes
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        if (!localStorage.getItem('darkMode')) {
+          if (event.matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        }
+      });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
       const network = elem.getAttribute('data-aw-social-share');

@@ -3,7 +3,6 @@ import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
-import alpine from '@astrojs/alpinejs';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
@@ -11,8 +10,8 @@ import icon from 'astro-icon';
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 // import partytown from '@astrojs/partytown';
-import type { RedirectConfig, ValidRedirectStatus } from 'astro';
-import { mkdir, writeFile } from 'fs/promises';
+import type { ValidRedirectStatus } from 'astro';
+import { writeFile } from 'fs/promises';
 import path from 'path';
 
 const externalLinksConfig = {
@@ -51,20 +50,20 @@ function removeDuplicateRedirects(
   return uniqueRedirects;
 }
 
-function convertJson(inputJson: {
-  routes: { from: string; destination: string; status: ValidRedirectStatus }[];
-}): Record<string, RedirectConfig> {
-  const result = new Map<string, RedirectConfig>();
+// function convertJson(inputJson: {
+//   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
+// }): Record<string, RedirectConfig> {
+//   const result = new Map<string, RedirectConfig>();
 
-  removeDuplicateRedirects(inputJson.routes).forEach((route) => {
-    result.set(route.from, {
-      destination: route.destination,
-      status: route.status
-    });
-  });
+//   removeDuplicateRedirects(inputJson.routes).forEach((route) => {
+//     result.set(route.from, {
+//       destination: route.destination,
+//       status: route.status
+//     });
+//   });
 
-  return Object.fromEntries(result);
-}
+//   return Object.fromEntries(result);
+// }
 
 // https://astro.build/config
 export default defineConfig({
@@ -73,7 +72,7 @@ export default defineConfig({
     {
       name: 'NetliflyRedirects',
       hooks: {
-        'astro:build:done': async ({ dir }) => {
+        'astro:build:done': async ({ dir: _ }) => {
           const routeData = RouteData as {
             routes: {
               from: string;
@@ -112,8 +111,6 @@ export default defineConfig({
     react(),
     tailwind(),
     bookshop(),
-    alpine(),
-
     icon({
       // svgoOptions: {},
       // include: {

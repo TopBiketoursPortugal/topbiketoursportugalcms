@@ -42,7 +42,7 @@ const startDistribution = getStarDistribution(rating);
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
           <PhStarFill
-            title="Star rating"
+            aria-label="Star rating"
             class={startIconStyle}
             mode="sprite"
           />
@@ -53,7 +53,7 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.halfStars && (
       <li>
         <PhStarHalfFill
-          title="Half Star rating"
+          aria-label="Half Star rating"
           class={startIconStyle}
           mode="sprite"
         />
@@ -65,7 +65,7 @@ const startDistribution = getStarDistribution(rating);
       [...Array(startDistribution.emptyStars).keys()].map(() => (
         <li>
           <PhStarLight
-            title="Half Star rating"
+            aria-label="Half Star rating"
             class={startIconStyle}
             mode="sprite"
           />

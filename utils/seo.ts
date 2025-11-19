@@ -3,7 +3,6 @@ import type { LanguageCodes } from 'src/schemas/language';
 import type { SEOProps } from 'astro-seo';
 import type { LayoutProps } from 'src/layouts/Layout.astro';
 import { sanitizeUrl } from './permalinks';
-import { getImage } from 'astro:assets';
 import { getImageByPath } from './get-image';
 
 export async function getPageSeo(

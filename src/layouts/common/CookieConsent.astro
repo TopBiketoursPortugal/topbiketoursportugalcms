@@ -1,38 +1,7 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import 'src/styles/ccElegantBlack.css';
-import { GOOGLE_ANALYTICS_ID, GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
-import {
-  CAT_ADVERTISEMENT,
-  CAT_ANALYTICS,
-  CAT_FUNCTIONALITY,
-  CAT_SECURITY,
-  config,
-  SERVICE_AD_PERSONALIZATION,
-  SERVICE_AD_STORAGE,
-  SERVICE_AD_USER_DATA,
-  SERVICE_ANALYTICS_STORAGE,
-  SERVICE_FUNCTIONALITY_STORAGE,
-  SERVICE_PERSONALIZATION_STORAGE,
-  SERVICE_SECURITY_STORAGE
-} from './CookieConsentConfig';
-
-const vars = {
-  GOOGLE_TAG_MANAGER_ID,
-  GOOGLE_ANALYTICS_ID,
-  CAT_ADVERTISEMENT,
-  CAT_ANALYTICS,
-  CAT_FUNCTIONALITY,
-  CAT_SECURITY,
-  config,
-  SERVICE_AD_PERSONALIZATION,
-  SERVICE_AD_STORAGE,
-  SERVICE_AD_USER_DATA,
-  SERVICE_ANALYTICS_STORAGE,
-  SERVICE_FUNCTIONALITY_STORAGE,
-  SERVICE_PERSONALIZATION_STORAGE,
-  SERVICE_SECURITY_STORAGE
-};
+import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 
 const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}')`;
 ---
@@ -98,7 +67,7 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
   import { config } from './CookieConsentConfig';
   // toggle custom black theme
   document.body.classList.add('cc--elegant-black');
-  
+
   // Trigger consent update when user choices change
   run(config);
   //  document.addEventListener('astro:after-swap', () => {   run(config);});

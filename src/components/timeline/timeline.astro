@@ -46,7 +46,6 @@ const container = containerVariants({ ...style });
   <div class="px-12">
     {
       dates.map(({ date, title, subtitle, description }) => {
-        const dateA = new Date(date ?? '').getTime();
         return (
           <div class="group relative py-6 pl-8 sm:pl-32">
             {title ? (

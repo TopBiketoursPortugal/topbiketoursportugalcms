@@ -55,13 +55,38 @@ const seoProps = await getPageSeo(
   lang={language}
   dir="ltr"
   class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth"
-  x-data="{
-      darkMode: localStorage.getItem('darkMode')
-      || localStorage.setItem('darkMode', 'system')}"
-  x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))"
-  x-bind:class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
 >
   <head>
+    <script is:inline>
+      // Initialize theme
+      const getTheme = () => {
+        if (
+          typeof localStorage !== 'undefined' &&
+          localStorage.getItem('darkMode')
+        ) {
+          return localStorage.getItem('darkMode');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      };
+
+      const theme = getTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      if (typeof localStorage !== 'undefined') {
+        // Ensure we don't overwrite 'system' preference if it was set
+        if (!localStorage.getItem('darkMode')) {
+          // Optional: Set it if you want to persist the detected preference
+          // localStorage.setItem('darkMode', theme);
+        }
+      }
+    </script>
     <CommonMeta />
 
     <SiteVerification />
