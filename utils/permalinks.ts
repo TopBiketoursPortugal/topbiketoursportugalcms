@@ -7,6 +7,8 @@ import PermalinkData from 'src/../data/permalinks.json';
 
 const doublSlashRegex = /([^:])\/{2,}/g;
 
+import { getInternalDomains } from './domains';
+
 export const trailingSlash = '/';
 
 export const externalLinksConfig = {
@@ -14,7 +16,7 @@ export const externalLinksConfig = {
   externalRel: 'nofollow noopener noreferrer',
   internalTarget: '',
   internalRel: '',
-  internalDomains: ['topbiketoursportugal.com']
+  internalDomains: getInternalDomains()
 };
 
 export function sanitizeUrl(url: string) {

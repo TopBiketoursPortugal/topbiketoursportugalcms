@@ -14,16 +14,15 @@ import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 
+import { isInternalDomain } from './utils/domains';
+
 const externalLinksConfig = {
   target: '_blank',
   rel: ['nofollow', 'noopener', 'noreferrer'],
   test: (node: any) => {
     try {
       const url = node.properties?.href;
-      return (
-        typeof url === 'string' &&
-        new URL(url).hostname.indexOf('topbiketoursportugal.com') === -1
-      );
+      return typeof url === 'string' && !isInternalDomain(url);
     } catch {
       return false;
     }
