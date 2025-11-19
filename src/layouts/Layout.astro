@@ -3,7 +3,7 @@ import '../styles/main.css';
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 import SiteVerification from './common/SiteVerification.astro';
-import Favicons from './common/Favicons.astro';
+
 import CommonMeta from './common/CommonMeta.astro';
 import Navigation from 'src/../data/navigation.json';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -63,7 +63,7 @@ const seoProps = await getPageSeo(
 >
   <head>
     <CommonMeta />
-    <Favicons />
+
     <SiteVerification />
     <ClientRouter fallback="swap" />
     <meta name="title" content={seoProps.title} />

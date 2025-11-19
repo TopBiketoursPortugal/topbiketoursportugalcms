@@ -7,7 +7,7 @@ import alpine from '@astrojs/alpinejs';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
-import favicons from 'astro-favicons';
+
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 // import partytown from '@astrojs/partytown';
@@ -113,7 +113,7 @@ export default defineConfig({
     tailwind(),
     bookshop(),
     alpine(),
-    favicons(),
+
     icon({
       // svgoOptions: {},
       // include: {
@@ -128,39 +128,38 @@ export default defineConfig({
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
     }),
-    // webmanifest({
-    //   /**
-    //    * required
-    //    **/
-    //   name: 'Top Bike Tours Portugal',
-
-    //   /**
-    //    * optional
-    //    **/
-    //   icon: 'src/assets/icons/logo_sq.svg', // source for favicon & icons
-    //   short_name: 'TBTP',
-    //   description: 'Top Bike Tours Portugal',
-    //   start_url: '/',
-    //   theme_color: '#ff7700',
-    //   background_color: '#fff',
-    //   display: 'standalone'
-    // }),
     AstroPWA({
       mode: 'production',
       base: '/',
       scope: '/',
       registerType: 'autoUpdate',
+      manifest: {
+        name: 'Top Bike Tours Portugal',
+        short_name: 'TBTP',
+        description: 'Top Bike Tours Portugal',
+        theme_color: '#ff7700',
+        background_color: '#fff',
+        display: 'standalone',
+        icons: [
+          {
+            src: '/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      },
       workbox: {
         navigateFallback: '/404/',
-        // navigateFallback: '/',
         globPatterns: ['**/*.{css,js,html,png,avif,webp,jpg,ico}']
       },
       devOptions: {
         enabled: false
       },
-      experimental: {
-        directoryAndTrailingSlashHandler: true
-      }
     }),
     // shield({}),
     // playformInline()
@@ -251,12 +250,7 @@ export default defineConfig({
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
   //   experimentalLayout: 'responsive'
   // },
-  experimental: {
-    // responsiveImages: true,
-    svg: {
-      mode: 'sprite'
-    }
-  }
+
   // redirects: {
   //   '/[...path]': '/[...path]/'
   // }
