@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
-import icon from 'astro-icon';
+import svgs from 'astro-svgs';
 
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
@@ -110,15 +110,14 @@ export default defineConfig({
     react(),
     tailwind(),
     bookshop(),
-    icon({
-      // svgoOptions: {},
-      // include: {
-      //   fa: ['*'],
-      //   ph: ['*'],
-      //   logos: ['*'],
-      //   'circle-flags': ['us', 'pt']
-      // },
-      iconDir: 'src/assets/icons'
+    svgs({
+      input: [
+        'src/assets/icons/ph/light',
+        'src/assets/icons/ph/fill',
+        'src/assets/icons/logos',
+        'src/assets/icons/fa',
+        'src/assets/icons/circle-flags'
+      ]
     }),
 
     mdx({
@@ -260,6 +259,35 @@ export default defineConfig({
     }
   },
   trailingSlash: 'ignore',
+  experimental: {
+    // csp: {
+    //   // change the default algorithm
+    //   algorithm: "SHA-512",
+    //   // insert additional directives
+    //   directives: [
+    //     "default-src: 'self'",
+    //   ],
+    //   // add more information to the `style-src` directive
+    //   styleDirective: {
+    //     hashes: [
+    //       "sha384-somehash" // hash generated for some external style e.g. white label, etc.
+    //     ],
+    //     // **Override** default resources
+    //     resources: ["self"]
+    //   },
+
+    //   // add more information to the `style-src` directive
+    //   scriptDirective: {
+    //     hashes: [
+    //       "sha384-somehash" // hash generated for some external script e.g. analytics, jQuery, etc.
+    //     ],
+    //     // **Override** default resources
+    //     resources: ["self"],
+    //     // Toggle the keyword `strict-dynamic`
+    //     strictDynamic: true
+    //   }
+    // }
+  }
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop

@@ -6,11 +6,11 @@
     "//install": "pnpm exec husky init && echo pnpm lint-staged > .husky/pre-commit",
     "postinstall": "mkcert create-ca && mkcert create-cert",
     "dev": "astro dev",
-    "server": "caddy file-server -r ./dist -d localhost -b",
+    "server": "caddy run --config ./caddyfile",
     "start": "pnpm build --site:https://localhost && pnpm server",
     "start:prod": "pnpm build:prod && pnpm server",
     "build": "astro build",
-    "build:prod": "astro build --site:https://localhost && pnpm dlx @divriots/jampack ./dist",
+    "build:prod": "astro build --site:https://localhost",
     "build:prod:extra": "astro build && pnpm dlx @divriots/jampack ./dist",
     "preview": "astro preview",
     "astro": "astro",
@@ -70,6 +70,7 @@
     "astro-icon": "1.1.5",
     "astro-meta-tags": "0.4.0",
     "astro-seo": "0.8.4",
+    "astro-svgs": "^1.2.2",
     "eslint": "9.39.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "1.5.0",
@@ -99,13 +100,14 @@
     "tailwindcss-signals": "0.0.25",
     "type-fest": "5.2.0",
     "vite-plugin-pwa": "1.1.0",
+    "vite-plugin-svg-icons": "^2.0.1",
     "workbox-window": "7.4.0"
   },
   "lint-staged": {},
   "engines": {
     "node": "^20.x || ^22.x"
   },
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
