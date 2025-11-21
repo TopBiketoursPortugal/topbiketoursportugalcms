@@ -9,7 +9,7 @@ import icon from 'astro-icon';
 
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
-// import partytown from '@astrojs/partytown';
+import partytown from '@astrojs/partytown';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
@@ -138,12 +138,31 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: '/android-chrome-192x192.png',
-            sizes: '192x192',
+            src: '/favicon-16.png',
+            sizes: '16x16',
             type: 'image/png'
           },
           {
-            src: '/android-chrome-512x512.png',
+            src: '/favicon-32.png',
+            sizes: '32x32',
+            type: 'image/png'
+          },
+          {
+            src: '/favicon-16.png',
+            sizes: '16x16',
+            type: 'image/png'
+          },
+          {
+            src: '/favicon-48.png',
+            sizes: '48x48',
+            type: 'image/png'
+          }, {
+            src: '/favicon-128.png',
+            sizes: '128x128',
+            type: 'image/png'
+          },
+          {
+            src: '/favicon-512.png',
             sizes: '512x512',
             type: 'image/png'
           }
@@ -177,8 +196,8 @@ export default defineConfig({
           pt: 'pt-PT'
         }
       }
-    })
-    // partytown({ config: { forward: ['dataLayer.push'], debug: true } })
+    }),
+    partytown({ config: { forward: ['dataLayer.push'] } })
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
