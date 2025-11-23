@@ -258,7 +258,7 @@ export default defineConfig({
       redirectToDefaultLocale: true
     }
   },
-  trailingSlash: 'ignore',
+  trailingSlash: 'always',
   experimental: {
     // csp: {
     //   // change the default algorithm

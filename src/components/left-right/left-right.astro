@@ -61,9 +61,11 @@ if (!imageSrc) {
           src={imageSrc}
         />
         <div class="left-right__text order-1 md:order-2">
-          <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
-            {block.heading?.heading_text}
-          </h2>
+          {block.heading?.heading_text ? (
+            <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
+              {block.heading?.heading_text}
+            </h2>
+          ) : null}
           <div class="mb-4" style={`color: ${block.text?.color};`}>
             <Markdown content={block.text.markdown_content ?? ''} />
           </div>
@@ -73,9 +75,11 @@ if (!imageSrc) {
     ) : (
       <div class="left-right__wrapper">
         <div class="left-right__text">
-          <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
-            {block.heading?.heading_text}
-          </h2>
+          {block.heading?.heading_text ? (
+            <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
+              {block.heading?.heading_text}
+            </h2>
+          ) : null}
           <div class="mb-4" style={`color: ${block.text?.color};`}>
             <Markdown content={block.text.markdown_content} />
           </div>
