@@ -10,14 +10,18 @@ spec:
     - Layout
 
 blueprint:
-  column1: |
-    ## Column 1
+  column1:
+    text: |
+      ## Column 1
 
-    Enter your Markdown content here.
-  column2: |
-    ## Column 2
+      Enter your Markdown content here.
+    button: bookshop:structure:buttons
+  column2:
+    text: |
+      ## Column 1
 
-    Enter your Markdown content here.
+      Enter your Markdown content here.
+    button: bookshop:structure:buttons
   padding: 'normal'
   fullwidth: true
 
@@ -34,7 +38,7 @@ blueprint:
 #     This is some **Markdown** content for the first column.
 
 _inputs:
-  column1:
+  column1.text:
     type: markdown
     options:
       allow_resize: true
@@ -62,7 +66,7 @@ _inputs:
       table: true
       underline: true
       undo: true
-  column2:
+  column2.text:
     type: markdown
     options:
       allow_resize: true

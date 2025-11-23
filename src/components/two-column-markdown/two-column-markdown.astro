@@ -2,16 +2,35 @@
 import Prose from '../typography/prose.astro';
 import { type VariantProps, tv } from 'tailwind-variants';
 
-// type Column = {
-//   content?: string;
-//   animation: 'slide-in';
-//   type: 'markdown';
-//   label?: string;
-// };
+// Import button components with proper types
+import PrimaryButton from '@components/buttons/primary/primary.astro';
+import SecondaryButton from '@components/buttons/secondary/secondary.astro';
 
 interface Props extends VariantProps<typeof twoColumnVariants> {
-  column1: string; // Markdown content for column 1
-  column2: string; // Markdown content for column 2
+  column1: {
+    text: string;
+    button?: {
+      _bookshop_name: string;
+      button_text: string;
+      button_icon: string;
+      button_link: string;
+      background_color?: string;
+      hover_brightness: number;
+      text_color: string;
+    };
+  };
+  column2: {
+    text: string;
+    button?: {
+      _bookshop_name: string;
+      button_text: string;
+      button_icon: string;
+      button_link: string;
+      background_color?: string;
+      hover_brightness: number;
+      text_color: string;
+    };
+  };
 }
 
 const twoColumnVariants = tv({
@@ -34,9 +53,43 @@ const twoColumnVariants = tv({
 });
 
 const { column1, column2, padding, fullwidth = false } = Astro.props;
+
+// Get button components based on bookshop name
+const getButtonComponent = (buttonName: string) => {
+  const name = buttonName.split('/').reverse()[0];
+  switch (name) {
+    case 'primary':
+      return PrimaryButton;
+    case 'secondary':
+      return SecondaryButton;
+    default:
+      return null;
+  }
+};
+
+const Button1 = column1?.button
+  ? getButtonComponent(column1.button._bookshop_name)
+  : null;
+const Button2 = column2?.button
+  ? getButtonComponent(column2.button._bookshop_name)
+  : null;
 ---
 
 <div class={twoColumnVariants({ padding, fullwidth })}>
-  <Prose markdown={column1 ?? ''} />
-  <Prose markdown={column2 ?? ''} />
+  <div class="column-wrapper">
+    <Prose markdown={column1?.text ?? ''} />
+    {column1?.button && Button1 && <Button1 {...column1.button} />}
+  </div>
+  <div class="column-wrapper">
+    <Prose markdown={column2?.text ?? ''} />
+    {column2?.button && Button2 && <Button2 {...column2.button} />}
+  </div>
 </div>
+
+<style>
+  .column-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+</style>

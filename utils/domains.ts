@@ -16,7 +16,7 @@ export function getSocialDomains(): string[] {
 }
 
 export function getInternalDomains(): string[] {
-    return ['topbiketoursportugal.com', ...getSocialDomains()];
+    return ['topbiketoursportugal.com', 'topwalkingtoursportugal.com', ...getSocialDomains()];
 }
 
 export function isInternalDomain(url: string): boolean {

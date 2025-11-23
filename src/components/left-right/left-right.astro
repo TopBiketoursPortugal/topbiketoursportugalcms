@@ -101,6 +101,20 @@ if (!imageSrc) {
     display: flex;
     align-items: center;
     overflow: hidden;
+    background-color: var(--bg-color, #ffffff);
+  }
+
+  /* Dark mode support */
+  :global(.dark) .left-right {
+    background-color: var(--bg-color-dark, #1e293b);
+  }
+
+  /* If background is white or very light, use dark background in dark mode */
+  :global(.dark) .left-right[style*='#ffffff'],
+  :global(.dark) .left-right[style*='#f2f2f2'],
+  :global(.dark) .left-right[style*='rgb(255, 255, 255)'],
+  :global(.dark) .left-right[style*='rgb(242, 242, 242)'] {
+    background-color: #1e293b !important;
   }
 
   .left-right__wrapper {

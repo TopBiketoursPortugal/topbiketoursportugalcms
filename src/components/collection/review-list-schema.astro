@@ -11,6 +11,23 @@ const testimonials = await getCollection(
   'testimonials',
   (t) => t.data.language === items[0].data.language
 );
+
+const getAuthorName = (review: ReviewSchema) => {
+  if (review.author?.givenName && review.author?.familyName) {
+    return `${review.author?.givenName} ${review.author?.familyName}`;
+  }
+
+  if (review.author?.givenName) {
+    return review.author?.givenName;
+  }
+
+  if (review.author?.familyName) {
+    return review.author?.familyName;
+  }
+
+  return 'Unknown';
+};
+
 const schema = {
   '@context': 'https://schema.org/',
   '@graph': items
@@ -69,6 +86,7 @@ const schema = {
             },
             'author': {
               '@type': 'Person',
+              'name': getAuthorName(review),
               'givenName': review.author?.givenName,
               'familyName': review.author?.familyName,
               'address': {

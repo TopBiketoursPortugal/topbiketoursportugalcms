@@ -259,7 +259,9 @@ export default defineConfig({
     }
   },
   trailingSlash: 'always',
+
   experimental: {
+    svgo: true,
     // csp: {
     //   // change the default algorithm
     //   algorithm: "SHA-512",

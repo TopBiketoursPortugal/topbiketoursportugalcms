@@ -88,6 +88,21 @@ const { background_color, buttons = [], heading, subheading } = block;
   </div>
 </section>
 <style define:vars={{ headingGradientColor }}>
+  section {
+    background-color: var(--bg-color, #ffffff);
+  }
+
+  /* Dark mode support */
+  :global(.dark) section {
+    background-color: var(--bg-color-dark, #1e293b);
+  }
+
+  /* If background is white or very light, use dark background in dark mode */
+  :global(.dark) section[style*='#ffffff'],
+  :global(.dark) section[style*='rgb(255, 255, 255)'] {
+    background-color: #1e293b !important;
+  }
+
   .hero-container {
     display: flex;
     flex-direction: column;
