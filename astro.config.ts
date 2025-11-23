@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
-import svgs from 'astro-svgs';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
@@ -110,15 +110,15 @@ export default defineConfig({
     react(),
     tailwind(),
     bookshop(),
-    svgs({
-      input: [
-        'src/assets/icons/ph/light',
-        'src/assets/icons/ph/fill',
-        'src/assets/icons/logos',
-        'src/assets/icons/fa',
-        'src/assets/icons/circle-flags'
-      ]
-    }),
+    // svgs({
+    //   input: [
+    //     'src/assets/icons/ph/light',
+    //     'src/assets/icons/ph/fill',
+    //     'src/assets/icons/logos',
+    //     'src/assets/icons/fa',
+    //     'src/assets/icons/circle-flags'
+    //   ]
+    // }),
 
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
@@ -168,8 +168,8 @@ export default defineConfig({
         ]
       },
       workbox: {
-        navigateFallback: '/404/',
-        globPatterns: ['**/*.{css,js,html,png,avif,webp,jpg,ico}']
+        navigateFallback: '/404',
+        globPatterns: ['**/*.{css,js,html,avif,ico}'],
       },
       devOptions: {
         enabled: false
@@ -289,7 +289,7 @@ export default defineConfig({
     //     strictDynamic: true
     //   }
     // }
-  }
+  },
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
@@ -299,21 +299,14 @@ export default defineConfig({
   // redirects: {
   //   '/[...path]': '/[...path]/'
   // }
-  // vite: {
-  // resolve: {
-  //   alias: {
-  //     '~': path.resolve('./src/') // Maps ~ to the src directory
-  //   }
-  // }
-  //   css: {
-  //     transformer: "lightningcss",
-  //   },
-  // plugins: [],
-  // build: {
-  //   //   // inlineStylesheets: 'never',
-  //   rollupOptions: {
-  //     external: ['astro:content-layer-deferred-module']
-  //   }
-  // }
-  // }
+  vite: {
+    plugins: [
+      createSvgIconsPlugin({
+        iconDirs: [
+          path.resolve(process.cwd(), 'src/assets/icons/used'),
+        ],
+        symbolId: '[name]'
+      }) as Plugin
+    ]
+  }
 });

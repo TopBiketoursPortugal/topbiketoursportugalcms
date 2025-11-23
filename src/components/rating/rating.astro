@@ -1,9 +1,7 @@
 ---
 /** @jsxImportSource astro */
 import { cn } from 'utils/cn';
-import PhStarFill from 'src/assets/icons/ph/fill/star-fill.svg';
-import PhStarHalfFill from 'src/assets/icons/ph/fill/star-half-fill.svg';
-import PhStarLight from 'src/assets/icons/ph/light/star-light.svg';
+import Icon from 'src/components/utility/icon.astro';
 
 type Props = {
   rating: number;
@@ -41,10 +39,10 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.fullStars > 0 &&
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
-          <PhStarFill
+          <Icon
+            icon="ph:star-fill"
             aria-label="Star rating"
-            class={startIconStyle}
-            mode="sprite"
+            className={startIconStyle}
           />
         </li>
       ))
@@ -52,10 +50,10 @@ const startDistribution = getStarDistribution(rating);
   {
     startDistribution.halfStars && (
       <li>
-        <PhStarHalfFill
+        <Icon
+          icon="ph:star-half-fill"
           aria-label="Half Star rating"
-          class={startIconStyle}
-          mode="sprite"
+          className={startIconStyle}
         />
       </li>
     )
@@ -64,10 +62,10 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.emptyStars > 0 &&
       [...Array(startDistribution.emptyStars).keys()].map(() => (
         <li>
-          <PhStarLight
+          <Icon
+            icon="ph:star-light"
             aria-label="Half Star rating"
-            class={startIconStyle}
-            mode="sprite"
+            className={startIconStyle}
           />
         </li>
       ))

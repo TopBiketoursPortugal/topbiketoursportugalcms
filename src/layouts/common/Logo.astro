@@ -1,6 +1,6 @@
 ---
 import SiteData from 'src/../data/site.json';
-import LogoIcon from 'src/assets/icons/logo.svg';
+import Icon from 'src/components/utility/icon.astro';
 import { cn } from 'utils/cn';
 type Props = {
   class?: string;
@@ -11,11 +11,11 @@ const { class: className = '' } = Astro.props;
 const { site_title } = (SiteData as any)[Astro.currentLocale ?? 'en'];
 ---
 
-<LogoIcon
-  aria-label={site_title}
-  class={cn(
-    'h-28 w-80 text-black dark:text-white fill-black dark:fill-white',
+<Icon
+  icon="logo"
+  title={site_title}
+  className={cn(
+    'h-28 w-80 fill-black text-black dark:fill-white dark:text-white',
     className
   )}
-  mode="sprite"
 />

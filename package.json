@@ -22,7 +22,8 @@
     "json2ts": "json2ts",
     "prepare": "husky",
     "mdx-clone": "node ./tools/mdx-clone.mjs",
-    "deps": "pnpx npm-check-updates -i"
+    "deps": "pnpx npm-check-updates -i",
+    "icons:update": "pwsh ./tools/update-icons.ps1"
   },
   "dependencies": {
     "@astrojs/mdx": "4.3.12",

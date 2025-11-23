@@ -62,5 +62,12 @@
   "User",
   "Utensils",
   "WheatAwn",
-  "Xmark"
+  "Xmark",
+  "logo",
+  "ph:star-fill",
+  "ph:star-half-fill",
+  "ph:star-light",
+  "ph:caret-down-light",
+  "ph:rss-light",
+  "ph:arrow-right-light"
 ]
