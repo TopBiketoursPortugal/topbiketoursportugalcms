@@ -67,13 +67,28 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/blog/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
       - content
       - visual
     _inputs:
+      relatedPosts:
+        type: multiselect
+        options:
+          allow_create: false
+          allow_empty: true
+          empty_type: array
+          values: collections.blog
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
       id:
         type: auto
         instance_value: UUID
@@ -114,10 +129,17 @@ collections_config:
         type: multiselect
         options:
           empty_type: array
-          values: data.tags
+          values: collections.postTags
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
         comment: >-
-          To add a new tag, go to the [tags data
-          file](cloudcannon:collections/data/tags.json)
+          To add a new tag, go to the postTags collection
         cascade: true
     add_options:
       - name: Add New Post
@@ -163,7 +185,7 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -189,6 +211,15 @@ collections_config:
         cascade: true
       included[*].description:
         type: markdown
+        cascade: true
+      reviews:
+        options:
+          empty_type: array
+          structures: _structures.reviews
+      reviews[*].id:
+        type: auto
+        instance_value: UUID
+        hidden: true
         cascade: true
       reviews[*].title:
         type: markdown
@@ -275,9 +306,19 @@ collections_config:
           structures: _structures.images
         cascade: true
       tags:
-        type: array
+        type: multiselect
         options:
-          structures: _structures.tags
+          allow_empty: true
+          empty_type: array
+          values: collections.tourTags
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
         cascade: true
       id:
         type: auto
@@ -289,16 +330,17 @@ collections_config:
         options:
           allow_create: false
           allow_empty: true
-          values: data.tour_regions[*]
+          values: collections.tourRegions
           value_key: id
           preview:
             text:
-              - key: en.name
+              - key: name
+            subtext:
+              - key: language
             image:
-              - key: en.src
+              - key: seo.featured_image
         comment: >-
-          To add a new region, go to the [tour_regions data
-          file](cloudcannon:collections/data/tour_regions.json)
+          To add a new region, go to the tour regions collection
         cascade: true
       content:
         type: markdown
@@ -340,6 +382,85 @@ collections_config:
         remove_extra_inputs: true
         name: New tour
         icon: notes
+  testimonials:
+    path: src/content/testimonials
+    glob:
+      - '**/*.md*'
+    name: Testimonials
+    singular_name: Testimonial
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+      title:
+        type: text
+      quote:
+        type: markdown
+      reviewSource:
+        type: url
+        options:
+          hide_link_to_email_address: true
+          hide_link_to_file: true
+          hide_link_to_page: true
+      score:
+        type: number
+        options:
+          min: 1
+          max: 5
+      author.avatar:
+        type: image
+      relatedProduct:
+        type: select
+        options:
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        cascade: true
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - template: '{language} - {author.country} - {author.name}'
+    _enabled_editors:
+      - content
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    add_options:
+      - name: New Testimonial
+        icon: language
+        editor: content
+        base_path: ''
+        schema: default
+    schemas:
+      default:
+        path: schemas/testimonial.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Testimonial
+        icon: message
   team:
     path: src/content/team
     glob:
@@ -347,7 +468,7 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/team/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -366,7 +487,15 @@ collections_config:
         hidden: true
         cascade: true
       language:
-        type: text
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
         hidden: true
         cascade: true
       subTitle:
@@ -381,17 +510,47 @@ collections_config:
               key: Owner
           value_key: code
         cascade: true
+  tourRegions:
+    path: src/content/tour-regions
+    glob:
+      - '**/*.md*'
+    name: Tour Regions
+    singular_name: Tour Region
+    icon: place
+    url: /[relative_base_path]/tours/regions/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
     add_options:
-      - name: New Team Member English
+      - name: New Tour Region
         icon: language
         editor: visual
         base_path: ''
         schema: default
-      - name: New Team Member Portuguese
-        icon: language
-        editor: visual
-        base_path: /pt/
-        schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
@@ -399,32 +558,173 @@ collections_config:
     disable_file_actions: true
     schemas:
       default:
-        path: schemas/team-member.mdx
+        path: schemas/tour-region.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewTeamMember
-        icon: people
-      defaultPT:
-        path: schemas/pt/team-member.mdx
+        name: NewTourRegionMember
+        icon: pedal_bike
+  tourTags:
+    path: src/content/tour-tags
+    glob:
+      - '**/*.md*'
+    name: Tour Tags
+    singular_name: Tour Tag
+    icon: tag
+    url: /[relative_base_path]/tours/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Tour tag
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour-tag.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NovoMembro
-        icon: people
+        name: NewTourTagMember
+        icon: pedal_bike
+  postTags:
+    path: src/content/blog-tags
+    glob:
+      - '**/*.md*'
+    name: Post Tags
+    singular_name: Post Tag
+    icon: tag
+    url: /[relative_base_path]/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Post tag
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: NewPostTagMember
+        icon: newspaper
 collection_groups:
   - heading: Pages
     collections:
       - pages
       - blog
+      - postTags
       - tours
+      - tourRegions
+      - tourTags
       - team
+      - testimonials
   - heading: Data
     collections:
       - data
 _inputs:
+  tourtype:
+    type: select
+    options:
+      values:
+        - PackageTour
+        - DayTour
+        - WalkingTour
+
+  feature_testimonials:
+    type: multiselect
+    options:
+      empty_type: array
+      values: collections.testimonials
+      value_key: id
+      preview:
+        text:
+          - key: title
+        subtext:
+          - key: language
+        icon: message
+    cascade: true
+  feature_tours:
+    type: multiselect
+    options:
+      empty_type: array
+      values:
+        - collections.tours
+      value_key: id
+      preview:
+        text:
+          - key: title
+        image:
+          - key: image.src
+        icon: message
+    cascade: true
   path:
     type: text
     label: Url
@@ -501,6 +801,7 @@ _inputs:
       values: collections.blog
       value_key: id
     cascade: true
+
   main_feature:
     type: select
     options:
@@ -720,6 +1021,13 @@ _inputs:
       robots meta tag
     cascade: true
 _structures:
+  relatedPosts:
+    style: select
+    values:
+      - icon: newspaper
+        label: Related post
+        value:
+          id: ''
   itinerary_stage:
     style: select
     values:
@@ -766,18 +1074,14 @@ _structures:
           title: ''
           rating: 5
           author:
-            givenName: John
-            familyName: Doe
+            givenName: ''
+            familyName: ''
             country: Portugal
-          datePublished: 2023-10-15T00:00:00Z
-          content: >-
-            These headphones are fantastic! The noise cancellation works
-            perfectly, and the sound quality is top-notch. Highly recommend them
-            for anyone looking for a premium audio experience.
+          datePublished:
+          content:
         preview:
           text:
-            - key: question
-    style: select
+            - key: title
     reorder_inputs: true
     remove_empty_inputs: true
     hide_extra_inputs: true
@@ -1109,15 +1413,14 @@ file_config:
 data_config:
   countries:
     path: data/contries.json
+
   icons:
     path: data/icons.json
   colors:
     path: data/colors.json
   tags:
     path: data/tags.json
-  tour_regions:
-    path: data/tour_regions.json
-timezone: Europe/Lisbon
+timezone: Etc/UTC
 markdown:
   engine:
   options:

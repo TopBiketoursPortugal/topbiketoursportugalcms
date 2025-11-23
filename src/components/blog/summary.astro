@@ -13,7 +13,7 @@ const { thumb_image_path, thumb_image_alt, title, date, tags } = data;
 
 const dateObj = new Date(date);
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif}',
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
@@ -25,7 +25,7 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
     <Image
       class="aspect-video w-full rounded-sm"
       src={imageSrc}
-      alt={thumb_image_alt ?? 'Top walking tours portugal'}
+      alt={thumb_image_alt ?? 'Top Bike Tours Portugal'}
       loading="lazy"
     />
   </a>

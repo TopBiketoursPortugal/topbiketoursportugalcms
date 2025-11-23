@@ -81,6 +81,7 @@ const { link, container, item, icon } = pager();
               'page-link rounded-bl-md rounded-tl-md'
             )}
             href={prev}
+            aria-label="Previous page"
             aria-disabled={currentPage === 1}
           >
             <Icon icon="ArrowLeft" className={icon()} />
@@ -92,6 +93,7 @@ const { link, container, item, icon } = pager();
             <a
               class={cn('page-link', link({ active: pageNum === currentPage }))}
               href={getBlogPagePath(pageNum, language, Astro.site)}
+              aria-label={`Page ${currentPage}`}
             >
               {pageNum}
             </a>
@@ -107,6 +109,7 @@ const { link, container, item, icon } = pager();
               'page-link border-r-1 rounded-br-md rounded-tr-md'
             )}
             href={next}
+            aria-label="Next page"
             aria-disabled={pageLinks.length - 1 === currentPage}
           >
             <Icon icon="ArrowRight" className={icon()} />

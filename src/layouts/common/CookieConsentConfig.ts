@@ -2,6 +2,7 @@ import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 
 export const CAT_NECESSARY = 'necessary';
 export const CAT_ANALYTICS = 'analytics';
+export const CAT_MARKETING = 'marketing';
 export const CAT_ADVERTISEMENT = 'advertisement';
 export const CAT_FUNCTIONALITY = 'functionality';
 export const CAT_SECURITY = 'security';
@@ -13,37 +14,53 @@ export const SERVICE_FUNCTIONALITY_STORAGE = 'functionality_storage';
 export const SERVICE_PERSONALIZATION_STORAGE = 'personalization_storage';
 export const SERVICE_SECURITY_STORAGE = 'security_storage';
 
-declare global {
-  interface Window {
-    dataLayer: Record<string, any>[];
-    gtag: (...args: any[]) => void;
-  }
-}
+// declare global {
+//   interface Window {
+//     dataLayer: Record<string, any>[];
+//     gtag: (...args: any[]) => void;
+//   }
+// }
 
-function updateGtagConsent() {
-  window.gtag?.('consent', 'default', {
-    [SERVICE_AD_STORAGE]: 'denied',
-    [SERVICE_AD_USER_DATA]: 'denied',
-    [SERVICE_AD_PERSONALIZATION]: 'denied',
-    [SERVICE_ANALYTICS_STORAGE]: 'denied',
-    [SERVICE_FUNCTIONALITY_STORAGE]: 'denied',
-    [SERVICE_PERSONALIZATION_STORAGE]: 'denied',
-    [SERVICE_SECURITY_STORAGE]: 'denied'
-  });
-}
+// function updateGtagConsent(cookie: CookieConsent.CookieValue) {
+//   window.gtag?.('consent', 'default', {
+//     [SERVICE_AD_STORAGE]: cookie.categories.includes(SERVICE_AD_STORAGE)
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_AD_USER_DATA]: cookie.categories.includes(SERVICE_AD_USER_DATA)
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_AD_PERSONALIZATION]: cookie.categories.includes(
+//       SERVICE_AD_PERSONALIZATION
+//     )
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_ANALYTICS_STORAGE]: 'granted',
+//     [SERVICE_FUNCTIONALITY_STORAGE]: cookie.categories.includes(
+//       SERVICE_FUNCTIONALITY_STORAGE
+//     )
+//       ? 'granted'
+//       : 'denied',
+//     [SERVICE_PERSONALIZATION_STORAGE]: cookie.categories.includes(
+//       SERVICE_PERSONALIZATION_STORAGE
+//     )
+//       ? 'granted'
+//       : 'denied'
+//     // [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
+//     //   SERVICE_SECURITY_STORAGE
+//     // )
+//     //   ? 'granted'
+//     //   : 'denied'
+//   });
+// }
+
+// type CookieParam = { cookie: CookieConsent.CookieValue };
 
 export const config: CookieConsentConfig = {
   root: '#cc-container',
-  onFirstConsent: () => {
-    updateGtagConsent();
-  },
-  onConsent: () => {
-    updateGtagConsent();
-  },
-  onChange: () => {
-    updateGtagConsent();
-  },
-  revision: 3,
+  // onFirstConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  // onConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  // onChange: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  revision: 5,
   guiOptions: {
     consentModal: {
       layout: 'box inline',
@@ -60,16 +77,13 @@ export const config: CookieConsentConfig = {
     necessary: {
       readOnly: true
     },
+    marketing: {},
     functionality: {},
     analytics: {
       services: {
         ga4: {
           label:
             '<a href="https://marketingplatform.google.com/about/analytics/terms/us/" target="_blank">Google Analytics 4</a>',
-          onAccept: () => {
-            updateGtagConsent();
-          },
-          onReject: () => {},
           cookies: [
             {
               name: /^_ga/
@@ -81,7 +95,7 @@ export const config: CookieConsentConfig = {
   },
   language: {
     default: 'en',
-    autoDetect: 'browser',
+    autoDetect: 'document',
     translations: {
       en: {
         // See: https://support.google.com/tagmanager/answer/10718549?hl=en
@@ -142,6 +156,12 @@ export const config: CookieConsentConfig = {
               }
             },
             {
+              title: 'Advertisement Cookies',
+              description:
+                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href=\"https://g.co/adsettings\">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
+              linkedCategory: CAT_MARKETING
+            },
+            {
               title: 'Advertising',
               description:
                 'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href=\"https://g.co/adsettings\">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
@@ -153,15 +173,15 @@ export const config: CookieConsentConfig = {
                 'Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user’s choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user’s session, such as the content of a shopping cart.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            {
-              title: 'Security',
-              description:
-                'Cookies used for security authenticate users, prevent fraud, and protect users as they interact with a service.',
-              linkedCategory: CAT_SECURITY
-            },
+            // {
+            //   title: 'Security',
+            //   description:
+            //     'Cookies used for security authenticate users, prevent fraud, and protect users as they interact with a service.',
+            //   linkedCategory: CAT_SECURITY
+            // },
             {
               title: 'More information',
-              description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topwalkingtoursportugal.com/privacy-policy/">contact us</a>.`
+              description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topbiketoursportugal.com/privacy-policy/">contact us</a>.`
             }
           ]
         }
@@ -225,6 +245,12 @@ export const config: CookieConsentConfig = {
               }
             },
             {
+              title: 'Cookies Publicidade',
+              description:
+                'O Google utiliza cookies para publicidade, incluindo veiculação e renderização de anúncios, personalização de anúncios (consoante as suas definições de anúncio em <a href="https://g.co/adsettings">g.co/adsettings</a>), limitação do número de vezes que um anúncio é exibido, ocultação de anúncios que escolheu parar de ver e medição da eficácia de anúncios.',
+              linkedCategory: CAT_MARKETING
+            },
+            {
               title: 'Publicidade',
               description:
                 'O Google utiliza cookies para publicidade, incluindo veiculação e renderização de anúncios, personalização de anúncios (consoante as suas definições de anúncio em <a href="https://g.co/adsettings">g.co/adsettings</a>), limitação do número de vezes que um anúncio é exibido, ocultação de anúncios que escolheu parar de ver e medição da eficácia de anúncios.',
@@ -236,20 +262,21 @@ export const config: CookieConsentConfig = {
                 'Cookies utilizados para funcionalidade permitem que os utilizadores interajam com um serviço ou site para aceder a características fundamentais. Consideram-se fundamentais preferências como idioma do utilizador, otimizações de produto que ajudam a manter e melhorar serviços, e manutenção de informação relativa à sessão do utilizador, como conteúdo de um carrinho de compras.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            {
-              title: 'Segurança',
-              description:
-                'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
-              linkedCategory: CAT_SECURITY
-            },
+            // {
+            //   title: 'Segurança',
+            //   description:
+            //     'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
+            //   linkedCategory: CAT_SECURITY
+            // },
             {
               title: 'Mais informações',
               description:
-                'Para quaisquer questões relativas à política de cookies e às suas escolhas, por favor <a href="https://topwalkingtoursportugal.com/privacy-policy/">contacte-nos</a>.'
+                'Para quaisquer questões relativas à política de cookies e às suas escolhas, por favor <a href="https://topbiketoursportugal.com/privacy-policy/">contacte-nos</a>.'
             }
           ]
         }
       }
     }
-  }
+  },
+  disablePageInteraction: true
 };

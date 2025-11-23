@@ -1,8 +1,6 @@
 ---
 import FooterContact from './footer-contact.astro';
 import Text from 'src/components/typography/text.astro';
-import regions from 'src/../data/tour_regions.json';
-
 import NavigationData from 'src/../data/navigation.json';
 import { t } from 'utils/i18n';
 import { getCollection } from 'astro:content';
@@ -11,27 +9,34 @@ import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
 import Icon from 'src/components/utility/icon.astro';
+import type { CollectionEntry } from 'astro:content';
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
 const { links } = footer;
 const year = new Date().getFullYear();
 
-const pageCollection = await getCollection('pages');
+const regions = await getCollection(
+  'tourRegions',
+  (r) => r.data.language === language
+);
 
-const termsPage = pageCollection.filter(
-  (p) =>
-    p.filePath?.endsWith('terms-and-conditions.mdx') &&
-    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
-)[0];
-const privacyPage = pageCollection.filter(
-  (p) =>
-    p.filePath?.endsWith('privacy-policy.mdx') &&
-    (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en')
-)[0];
+const termsPageSelector = (p: CollectionEntry<'pages'>) =>
+  p.filePath?.endsWith('terms-and-conditions.mdx') &&
+  (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en');
 
+const privacyPageSelector = (p: CollectionEntry<'pages'>) =>
+  p.filePath?.endsWith('privacy-policy.mdx') &&
+  (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en');
+
+const pageCollection = await getCollection(
+  'pages',
+  (p) => privacyPageSelector(p) || termsPageSelector(p)
+);
+
+const termsPage = pageCollection.filter(termsPageSelector)[0];
+const privacyPage = pageCollection.filter(privacyPageSelector)[0];
 const privacyPagePath = privacyPage ? getPagePath(privacyPage) : '';
-
 const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 ---
 
@@ -45,8 +50,8 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
         links.map(({ text, links = [] }) => (
           <div class="flex w-full flex-col gap-1">
             <h4 class="w-full text-xl font-bold">{text}</h4>
-            {links.map(({ link, text }) => (
-              <a class="text-lg" href={link.toLowerCase()}>
+            {links.map(({ href, text }) => (
+              <a class="text-lg" href={href.toLowerCase()}>
                 {text}
               </a>
             ))}
@@ -71,22 +76,22 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
       >{t('Footer.TourRegionsTitle', language)}</Text
     >
     {
-      regions.map((region) => {
-        const { src, title, name } = region[language];
+      regions.map((r) => {
+        const { data } = r;
+        const { title, name, seo } = data;
         return (
           <div class="group relative cursor-pointer overflow-clip">
-            <ResponsiveImage
-              src={src}
-              alt={title}
-              widths={[200]}
-              paralax={false}
-              class="animate-ease-in-out-out animate-duration-200 transition-transform group-hover:scale-150"
-            />
+            {seo?.featured_image ? (
+              <ResponsiveImage
+                src={seo?.featured_image}
+                alt={seo?.featured_image_alt ?? title}
+                widths={[200]}
+                paralax={false}
+                class="animate-ease-in-out-out animate-duration-200 transition-transform group-hover:scale-150"
+              />
+            ) : null}
             <a
-              href={getTourRegionsPath(
-                name,
-                Astro.currentLocale as LanguageCodes
-              )}
+              href={getTourRegionsPath(r, language)}
               class="absolute bottom-0 left-0 right-0 top-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold capitalize text-white opacity-0 group-hover:flex group-hover:opacity-90"
             >
               {name}
@@ -104,16 +109,16 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   class="flex w-full flex-wrap justify-center gap-1 bg-gray-50 p-3 dark:bg-gray-800 dark:text-gray-400"
 >
   <li>
-    @Top Walking Tours Portugal {year}
+    @Top Bike Tours Portugal {year}
   </li>
   <li aria-hidden="true">-</li>
   <li>
-    <a href={termsPagePagePath} rel="nofollow"
-      >{t('TermsAndConditions', language)}</a
+    <a href={termsPagePagePath}>{t('TermsAndConditions', language)}</a>
+  </li>
+  <li aria-hidden="true">-</li>
+  <li>
+    <a href={privacyPagePath} title={t('PrivacyPolicy', language)}
+      >{t('PrivacyPolicy', language)}</a
     >
-  </li>
-  <li aria-hidden="true">-</li>
-  <li>
-    <a href={privacyPagePath} rel="nofollow">{t('PrivacyPolicy', language)}</a>
   </li>
 </ul>

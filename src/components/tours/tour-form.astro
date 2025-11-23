@@ -4,20 +4,33 @@ import Form from '../form/Form.astro';
 import FormField from '../form/FormField.astro';
 import { t } from 'utils/i18n';
 import Prose from '../typography/prose.astro';
+import FormData from 'src/../data/forms.json';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+type Props = {
+  code?: string;
+  title?: string;
+};
+const { code, title } = Astro.props;
 ---
 
-<Form action="https://formspree.io/xzbalqpw" method="post" id="tour-form">
+<Form
+  action={FormData.packageTours ?? 'https://formspree.io/xzbalqpw'}
+  method="post"
+  id="tour-booking-enquiry-form"
+  class="tour-booking-enquiry-form"
+>
+  <input type="hidden" name="product-code" value={code} />
+  <input type="hidden" name="product-title" value={title} />
   <FormField
     as="input"
-    name="name"
+    name="full-name"
     required
     placeholder={t('Tour.Form.Name.Placeholder', language)}
     label={t('Tour.Form.Name.Label', language)}
   />
   <FormField
     as="input"
-    name="email"
+    name="email-address"
     type="email"
     required
     placeholder={t('Tour.Form.EmailAddress.Placeholder', language)}
@@ -25,7 +38,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
   />
   <FormField
     as="input"
-    name="phone"
+    name="tel"
     required
     type="phone"
     placeholder={t('Tour.Form.Phone.Placeholder', language)}
@@ -58,7 +71,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       t('Tour.Form.TourType.OptionGuided', language),
       t('Tour.Form.TourType.OptionUnguided', language)
     ]}
-    name="tour-type"
+    name="package"
     label={t('Tour.Form.TourType.Label', language)}
     placeholder={t('Tour.Form.TourType.Placeholder', language)}
   />
@@ -108,7 +121,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
     <button
       slot="submit"
       type="submit"
-      class="w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      class="tour-booking-button w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
     >
       {t('Tour.Form.Submit.Text', language)}
     </button>

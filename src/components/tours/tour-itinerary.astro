@@ -16,7 +16,7 @@ const { itinerary = [] } = Astro.props;
 <Accordion>
   {
     itinerary.map(({ title = '', description = '' }) => (
-      <AccordionItem title={title}>
+      <AccordionItem title={title} open={false}>
         <Prose markdown={description} />
       </AccordionItem>
     ))

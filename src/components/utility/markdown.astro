@@ -1,7 +1,11 @@
 ---
 import markdownit from 'markdown-it';
+import markdownItExternalLinks from 'markdown-it-external-links';
 import Prose from '../typography/prose.astro';
+import { externalLinksConfig } from 'utils/permalinks';
+
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const { content } = Astro.props;
 ---
 

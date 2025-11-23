@@ -9,24 +9,54 @@ import AstroPWA from '@vite-pwa/astro';
 import icon from 'astro-icon';
 import favicons from 'astro-favicons';
 import RouteData from './data/routing.json';
+import rehypeExternalLinks, { type Options } from 'rehype-external-links';
+// import partytown from '@astrojs/partytown';
 import type { RedirectConfig, ValidRedirectStatus } from 'astro';
-import rehypeExternalLinks from 'rehype-external-links';
-import partytown from '@astrojs/partytown';
-// import sentry from '@sentry/astro';
-// import spotlightjs from '@spotlightjs/astro';
-// import astroMetaTags from 'astro-meta-tags';
-// import { shield } from '@kindspells/astro-shield';
-// import playformInline from '@playform/inline';
-// import playformCompress from '@playform/compress';
-// import min from 'astro-min';
-// import webmanifest from 'astro-webmanifest';
+import { mkdir, writeFile } from 'fs/promises';
+import path from 'path';
+
+const externalLinksConfig = {
+  target: '_blank',
+  rel: ['nofollow', 'noopener', 'noreferrer'],
+  test: (node: any) => {
+    try {
+      const url = node.properties?.href;
+      return (
+        typeof url === 'string' &&
+        new URL(url).hostname.indexOf('topbiketoursportugal.com') === -1
+      );
+    } catch {
+      return false;
+    }
+  }
+} satisfies Options;
+
+function removeDuplicateRedirects(
+  redirects: {
+    from: string;
+    destination: string;
+    status: ValidRedirectStatus;
+  }[]
+) {
+  const seen = new Set();
+  const uniqueRedirects = [];
+
+  for (const redirect of redirects) {
+    const key = `${redirect.from}->${redirect.destination}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      uniqueRedirects.push(redirect);
+    }
+  }
+  return uniqueRedirects;
+}
 
 function convertJson(inputJson: {
   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
 }): Record<string, RedirectConfig> {
   const result = new Map<string, RedirectConfig>();
 
-  inputJson.routes.forEach((route) => {
+  removeDuplicateRedirects(inputJson.routes).forEach((route) => {
     result.set(route.from, {
       destination: route.destination,
       status: route.status
@@ -40,6 +70,42 @@ function convertJson(inputJson: {
 export default defineConfig({
   site: 'https://topwalkingtoursportugal.com',
   integrations: [
+    {
+      name: 'NetliflyRedirects',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          const routeData = RouteData as {
+            routes: {
+              from: string;
+              destination: string;
+              status: ValidRedirectStatus;
+            }[];
+          };
+          const redirectsRules = removeDuplicateRedirects(routeData.routes);
+          const maxLength = Math.max(
+            ...redirectsRules.map(
+              ({ from }) => encodeURIComponent(from)?.length ?? 0
+            )
+          );
+
+          const textRedirects = removeDuplicateRedirects(routeData.routes)
+            .map(
+              ({ from, destination }) =>
+                `${from
+                  .split('/')
+                  .map((segement) => encodeURI(segement))
+                  .join('/')
+                  .padEnd(maxLength, ' ')} ${destination}`
+            )
+            .join('\n');
+
+          const redirectsPath = path.resolve('./dist', '_redirects');
+          await writeFile(redirectsPath, textRedirects, 'utf8');
+
+          console.log('? _redirects file generated after build!');
+        }
+      }
+    },
     // sentry(),
     // spotlightjs(),
     // astroMetaTags(),
@@ -58,17 +124,9 @@ export default defineConfig({
       // },
       iconDir: 'src/assets/icons'
     }),
-    sitemap({
-      i18n: {
-        defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
-        locales: {
-          en: 'en', // The `defaultLocale` value must present in `locales` keys
-          pt: 'pt'
-        }
-      }
-    }),
+
     mdx({
-      rehypePlugins: [rehypeExternalLinks]
+      rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
     }),
     // webmanifest({
     //   /**
@@ -88,44 +146,17 @@ export default defineConfig({
     //   display: 'standalone'
     // }),
     AstroPWA({
-      mode: 'development',
+      mode: 'production',
       base: '/',
       scope: '/',
-      includeAssets: ['favicon.svg'],
       registerType: 'autoUpdate',
-      manifest: {
-        name: 'Top Walking Tours Portugal',
-        description:
-          'Founded in 2013, Top Bike Tours Portugal, unipessoal, Lda referred to here in as "Top Walking Tours Portugal" is a company with experience in pedestrian and cycling tours in the city of Porto and long distance cycling routes to the north of the Iberian Peninsula and all around Portugal. Our activities are coordinated by tourism professionals, with a huge knowledge on heritage and sports.',
-        short_name: 'Walking tours',
-        theme_color: '#296a3f',
-        background_color: '#fff',
-        icons: [
-          {
-            src: 'android-chrome-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
-      },
       workbox: {
-        navigateFallback: '/',
-        globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}']
+        navigateFallback: '/404/',
+        // navigateFallback: '/',
+        globPatterns: ['**/*.{css,js,html,png,avif,webp,jpg,ico}']
       },
       devOptions: {
-        enabled: true,
-        navigateFallbackAllowlist: [/^\//]
+        enabled: false
       },
       experimental: {
         directoryAndTrailingSlashHandler: true
@@ -142,52 +173,32 @@ export default defineConfig({
     //   SVG: true,
     //   Logger: 0
     // })
-    partytown({ config: { forward: ['dataLayer.push'], debug: true } })
+    sitemap({
+      // filter: (page) => !redirects.has(page),
+      i18n: {
+        defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
+        locales: {
+          en: 'en-US', // The `defaultLocale` value must present in `locales` keys
+          pt: 'pt-PT'
+        }
+      }
+    })
+    // partytown({ config: { forward: ['dataLayer.push'], debug: true } })
   ],
   markdown: {
-    rehypePlugins: [rehypeExternalLinks]
+    rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
   },
-  redirects: convertJson(
-    RouteData as {
-      routes: {
-        from: string;
-        destination: string;
-        status: ValidRedirectStatus;
-      }[];
-    }
-  ),
-  // redirects: {
-  //   '/hiking-alentejo-vicentine-southeast-portugal-coast/': {
-  //     destination: '/tours/hiking-alentejo-vicentine-southeast-portugal-coast/',
-  //     status: 301
-  //   },
-  //   '/passeios-pedestres-portugal/': {
-  //     destination: '/pt/passeios-pedestres-portugal/',
-  //     status: 301
-  //   },
-  //   '/hiking-douro-valley-wine-region': {
-  //     destination: '/tours/hiking-douro-valley-wine-region/',
-  //     status: 301
-  //   },
-  //   '/hiking-algarve-vicentine-southeast-portugal-coast': {
-  //     destination: '/tours/hiking-algarve-vicentine-southeast-portugal-coast/',
-  //     status: 301
-  //   },
-  //   '/hiking-alentejo-castles-wine-heritage': {
-  //     destination: '/tours/hiking-alentejo-castles-wine-heritage/',
-  //     status: 301
-  //   },
-  //   '/hiking-atlantic-coast-porto': {
-  //     destination: '/tours/hiking-atlantic-coast-porto/',
-  //     status: 301
-  //   },
-  //   '/hiking-coast-santiago-compostela-stage-2': {
-  //     destination: '/tours/hiking-coast-santiago-compostela-stage-2/',
-  //     status: 301
+  // redirects: convertJson(
+  //   RouteData as {
+  //     routes: {
+  //       from: string;
+  //       destination: string;
+  //       status: ValidRedirectStatus;
+  //     }[];
   //   }
-  // },
+  // ),
   prefetch: {
-    prefetchAll: true
+    defaultStrategy: 'viewport'
   },
   env: {
     schema: {
@@ -196,10 +207,17 @@ export default defineConfig({
         access: 'public',
         optional: true
       }),
+      GOOGLE_TAG_MANAGER_ID: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+        default: 'GTM-KRC3B4ZQ'
+      }),
       GOOGLE_ANALYTICS_ID: envField.string({
         context: 'client',
         access: 'public',
-        optional: true
+        optional: true,
+        default: '385531271'
       }),
       GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',
@@ -210,6 +228,11 @@ export default defineConfig({
         context: 'client',
         access: 'public',
         default: 'https://topwalkingtoursportugal.com'
+      }),
+      INDEX: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'true'
       })
       // API_SECRET: envField.string({ context: "server", access: "secret" }),
     }
@@ -218,10 +241,11 @@ export default defineConfig({
     locales: ['en', 'pt'],
     defaultLocale: 'en',
     routing: {
-      prefixDefaultLocale: false
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: true
     }
   },
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   // image: {
   //   // Used for all Markdown images; not configurable per-image
   //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
@@ -232,25 +256,25 @@ export default defineConfig({
     svg: {
       mode: 'sprite'
     }
-  },
+  }
   // redirects: {
   //   '/[...path]': '/[...path]/'
-  // },
-  vite: {
-    // resolve: {
-    //   alias: {
-    //     '~': path.resolve('./src/') // Maps ~ to the src directory
-    //   }
-    // }
-    //   css: {
-    //     transformer: "lightningcss",
-    //   },
-    // plugins: [],
-    build: {
-      //   // inlineStylesheets: 'never',
-      rollupOptions: {
-        external: ['astro:content-layer-deferred-module']
-      }
-    }
-  }
+  // }
+  // vite: {
+  // resolve: {
+  //   alias: {
+  //     '~': path.resolve('./src/') // Maps ~ to the src directory
+  //   }
+  // }
+  //   css: {
+  //     transformer: "lightningcss",
+  //   },
+  // plugins: [],
+  // build: {
+  //   //   // inlineStylesheets: 'never',
+  //   rollupOptions: {
+  //     external: ['astro:content-layer-deferred-module']
+  //   }
+  // }
+  // }
 });

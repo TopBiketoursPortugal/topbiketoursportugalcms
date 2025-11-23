@@ -1,0 +1,114 @@
+---
+import { getCollection, render } from 'astro:content';
+import slugify from 'slugify';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import SiteData from 'src/../data/site.json';
+import ContactsData from 'src/../data/contact.json';
+import Layout from 'src/layouts/Layout.astro';
+import Card from 'src/components/card/Card.astro';
+import Grid from 'src/components/grid/grid.astro';
+import CardMedia from 'src/components/card/CardMedia.astro';
+import CardContent from 'src/components/card/CardContent.astro';
+import Stack from 'src/components/stack/stack.astro';
+import { trailingSlash, getTeamLanguagesAlternates } from 'utils/permalinks';
+import { languageCodes } from 'src/schemas/language';
+import LanguageData from 'src/../data/languages.json';
+
+export async function getStaticPaths() {
+  const team = await getCollection('team');
+  return languageCodes.flatMap((language) => {
+    return team
+      .filter((t) => t.data.language === language)
+      .map((teamMember) => ({
+        params: {
+          team: 'team',
+          language: language === 'en' ? undefined : language,
+          path:
+            slugify(teamMember.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
+        },
+        props: { teamMember }
+      }));
+  });
+}
+
+const { teamMember } = Astro.props;
+const language = teamMember.data.language ?? 'en';
+const { title, seo, image, memberType } = teamMember.data;
+const { Content } = await render(teamMember);
+const excerpt = getMarkdownExcerpt(teamMember.body ?? '', 300);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  'name': title,
+  'jobTitle': memberType,
+  'worksFor': {
+    '@type': 'Organization',
+    'name': SiteData[language].site.name,
+    'url': Astro.site ?? SiteData[language].site.url
+  },
+  'description': excerpt,
+  'address': {
+    '@type': 'PostalAddress',
+    'addressLocality': ContactsData[language].address.state,
+    'addressRegion': ContactsData[language].address.city,
+    'postalCode': ContactsData[language].address.postalCode,
+    'streetAddress': ContactsData[language].address.street,
+    'addressCountry': ContactsData[language].address.country
+  }
+};
+const hrefs = await getTeamLanguagesAlternates(teamMember, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+---
+
+<Layout title={title} seo={seo} hrefLangs={hrefs}>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <Card>
+    <Grid cols={3}>
+      {image && <CardMedia {...image} />}
+
+      <CardContent
+        display="inline"
+        class="col-span-2 bg-white dark:bg-slate-900"
+      >
+        <Stack class="gap-2 p-4" layout="vertical" distribution="center">
+          <h1 class="text-neutral-700 dark:text-neutral-100">
+            {title}
+          </h1>
+          <p class="text-neutral-400 dark:text-neutral-200">
+            {memberType}
+          </p>
+          <article>
+            <Content />
+          </article>
+        </Stack>
+      </CardContent>
+    </Grid>
+  </Card>
+  <script
+    is:inline
+    async
+    defer
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+  />
+</Layout>

@@ -3,12 +3,24 @@ import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
 import type { HrefLang } from 'src/types/hreflang';
+import PermalinkData from 'src/../data/permalinks.json';
 
 const doublSlashRegex = /([^:])\/{2,}/g;
 
 export const trailingSlash = '/';
 
-function sanitizeUrl(url: string) {
+export const externalLinksConfig = {
+  externalTarget: '_blank',
+  externalRel: 'nofollow noopener noreferrer',
+  internalTarget: '',
+  internalRel: '',
+  internalDomains: ['topbiketoursportugal.com']
+};
+
+export function sanitizeUrl(url: string) {
+  if (url?.length === 0) {
+    return '/404/';
+  }
   return url.replace(doublSlashRegex, '$1/');
 }
 
@@ -29,25 +41,29 @@ export function getTourPath(
   { path, title }: TourSchema,
   language: LanguageCodes = 'en'
 ): string {
+  const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}tours/${slugify(path ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/${slugify(path ?? title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
 export function getTourRegionsPath(
-  region: string,
+  region: CollectionEntry<'tourRegions'>,
   language: LanguageCodes = 'en'
 ): string {
+  const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
-    `${getBasePath(language)}tours/regions/${slugify(region, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    `${getBasePath(language)}${tourPermalink}/regions/${slugify(region.data.path ?? region.data.name ?? region.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
   );
 }
 
 export function getTourTagPath(
-  tag: string,
+  tag: CollectionEntry<'tourTags'>,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}tours/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const tourPermalink = PermalinkData.tours[language];
+
+  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
@@ -55,7 +71,7 @@ export function getBlogTagPath(
   tag: string,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}blog/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
@@ -110,19 +126,42 @@ export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
   );
 }
 
+export async function getTeamLanguagesAlternates(
+  pageEntry: CollectionEntry<'team'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
+  const alternatePages =
+    (await getCollection(
+      'team',
+      (t) =>
+        // t.data.language !== pageEntry.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternatePages.map((page) => {
+    const { data: alternate } = page;
+    return {
+      href: sanitizeUrl(
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}team/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      ),
+      hreflang: alternate.language
+    };
+  });
+}
+
 export async function getPageLanguagesAlternates(
   pageEntry: CollectionEntry<'pages'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const pages = await getCollection('pages');
   const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
-
-  var alternatePages =
-    pages.filter(
+  const alternatePages =
+    (await getCollection(
+      'pages',
       (t) =>
-        t.data.language !== pageEntry.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+        // t.data.language !== pageEntry.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
 
   return alternatePages.map((page) => {
     const { data: alternate } = page;
@@ -152,14 +191,14 @@ export async function getPostLanguagesAlternates(
   post: CollectionEntry<'blog'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const posts = await getCollection('blog');
   const alternateEntryName = post.filePath?.split('/').at(-1)!;
-  var alternatePosts =
-    posts.filter(
+  const alternatePosts =
+    (await getCollection(
+      'blog',
       (t) =>
-        t.data.language !== post.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+        // t.data.language !== post.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
 
   return alternatePosts.map((alternatePost) => {
     const { data: alternate } = alternatePost;
@@ -172,33 +211,75 @@ export async function getPostLanguagesAlternates(
   });
 }
 
+export async function getTourTagLanguagesAlternates(
+  tourTag: CollectionEntry<'tourTags'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = tourTag.filePath?.split('/').at(-1)!;
+  const alternateTourTags =
+    (await getCollection(
+      'tourTags',
+      (t) =>
+        // t.data.language !== tourTag.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternateTourTags.map(({ data: alternateTourTag }) => ({
+    href: sanitizeUrl(
+      `${site}${alternateTourTag.language === 'en' ? '' : alternateTourTag.language + '/'}${PermalinkData.tours[alternateTourTag.language ?? 'en']}/tags/${slugify(alternateTourTag.path ?? alternateTourTag.name ?? alternateTourTag.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternateTourTag.language
+  }));
+}
+
+export async function getTourRegionLanguagesAlternates(
+  tourRegion: CollectionEntry<'tourRegions'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = tourRegion.filePath?.split('/').at(-1)!;
+  const alternateTourRegions =
+    (await getCollection(
+      'tourRegions',
+      (t) =>
+        // t.data.language !== tourRegion.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternateTourRegions.map(({ data: alternateTourRegion }) => ({
+    href: sanitizeUrl(
+      `${site}${alternateTourRegion.language === 'en' ? '' : alternateTourRegion.language + '/'}${PermalinkData.tours[alternateTourRegion.language ?? 'en']}/regions/${slugify(alternateTourRegion.path ?? alternateTourRegion.name ?? alternateTourRegion.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternateTourRegion.language
+  }));
+}
+
 export async function getTourLanguagesAlternates(
   tour: CollectionEntry<'tours'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const tours = await getCollection('tours');
   const alternateEntryName = tour.filePath?.split('/').at(-1)!;
-  var alternateTours =
-    tours.filter(
+  const alternateTours =
+    (await getCollection(
+      'tours',
       (t) =>
-        t.data.language !== tour.data.language &&
-        t.filePath?.endsWith(alternateEntryName)
-    ) ?? [];
+        // t.data.language !== tour.data.language &&
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
 
   return alternateTours.map(({ data: alternateTour }) => ({
     href: sanitizeUrl(
-      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}tours/${slugify(alternateTour.path ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      `${site}${alternateTour.language === 'en' ? '' : alternateTour.language + '/'}${PermalinkData.tours[alternateTour.language ?? 'en']}/${slugify(alternateTour.path ?? alternateTour.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
     ),
     hreflang: alternateTour.language
   }));
 }
 
 export async function getBlogIndexPage(language: LanguageCodes) {
-  const blogIndexes = await getCollection('pages', (p) => {
-    return (
+  const blogIndexes = await getCollection(
+    'pages',
+    (p) =>
       (p.filePath ?? '').endsWith('blog.mdx') && p.data.language === language
-    );
-  });
+  );
 
   return blogIndexes[0];
 }

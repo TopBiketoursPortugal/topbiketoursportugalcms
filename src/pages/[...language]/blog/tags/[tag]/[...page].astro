@@ -1,0 +1,137 @@
+---
+import slugify from 'slugify';
+import BlogList from 'src/components/blog/list.astro';
+import BlogPagination from 'src/components/blog/pagination.astro';
+import Layout from 'src/layouts/Layout.astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getBlogIndexPage, trailingSlash } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { PaginatedProps } from 'src/layouts/Paginated.astro';
+import { t } from 'utils/i18n';
+
+if (!Map.groupBy) {
+  Map.groupBy = function (items, callbackFn: Function) {
+    const map = new Map();
+    for (const item of items) {
+      const key = callbackFn(item);
+      if (!map.has(key)) {
+        map.set(key, []);
+      }
+      map.get(key).push(item);
+    }
+    return map;
+  };
+}
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  if (!Map.groupBy) {
+    Map.groupBy = function (items, callbackFn: Function) {
+      const map = new Map();
+      for (const item of items) {
+        const key = callbackFn(item);
+        if (!map.has(key)) {
+          map.set(key, []);
+        }
+        map.get(key).push(item);
+      }
+      return map;
+    };
+  }
+  const posts = await getCollection('blog');
+
+  const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
+  const pageIndex = await Promise.all(
+    Object.entries(postPerLanguage).map(([language]) =>
+      getBlogIndexPage(language as LanguageCodes)
+    )
+  );
+
+  return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
+    const tags = new Set(
+      filteredPosts
+        .flatMap((p) => p.data.tags ?? [])
+        .filter((t) => t && t !== '')
+    );
+
+    const page = pageIndex.filter((p) => p.data.language === language)[0];
+    const pageSize =
+      page?.data && 'page_size' in page?.data ? page?.data.page_size : 6;
+
+    return [...tags].flatMap((tag) => {
+      const tagPosts = filteredPosts
+        .filter(({ data }) => data.tags?.includes(tag))
+        .sort((a, b) => {
+          const dateA = new Date(a.data.date).getTime();
+          const dateB = new Date(b.data.date).getTime();
+          return dateB - dateA; // For descending order (newest first)
+        });
+
+      return paginate(tagPosts, {
+        params: {
+          language: language === 'en' ? undefined : language,
+          tag:
+            slugify(tag, { lower: true, strict: true, trim: true }) +
+            trailingSlash
+        },
+        pageSize
+      });
+    });
+  });
+}
+
+const tag = Astro.params.tag ?? '';
+const page = (await getEntry('pages', 'blog'))!.data;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { page: pageNumberStr } = Astro.params;
+
+const blogTagPageTitle = pageNumberStr
+  ? t('Blog.Tags.Paged.Title', language)
+      .replace('$1', tag)
+      .replace('$2', pageNumberStr)
+  : page.title;
+const blogTagPageDescription = pageNumberStr
+  ? t('Blog.Tags.Paged.Description', language)
+      .replace('$1', tag)
+      .replace('$2', pageNumberStr)
+  : (page.seo?.page_description ?? blogTagPageTitle);
+
+const seo = {
+  ...(page as PaginatedProps['frontmatter']),
+  page_title: blogTagPageTitle,
+  page_description: blogTagPageDescription
+};
+
+const pagination = Astro.props.page;
+page.title = pagination.data
+  .flatMap((p: CollectionEntry<'blog'>) => p.data.tags ?? [])
+  .filter(
+    (t: string) => slugify(t, { lower: true, strict: true, trim: true }) === tag
+  )[0];
+const filteredPosts = pagination.data;
+---
+
+<Layout
+  title={t('Blog.Tags.Paged.Title', language)
+    .replace('$1', tag)
+    .replace('$2', pageNumberStr)}
+  seo={seo}
+>
+  <div class="py-[96px]">
+    <h1
+      class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"
+    >
+      {page.title}
+    </h1>
+    <section class="blog-index mx-auto">
+      <BlogList posts={filteredPosts} />
+      <BlogPagination pagination={pagination} />
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .blog-index {
+    max-width: var(--pageContainer);
+    padding-inline: var(--pagePadding);
+  }
+</style>

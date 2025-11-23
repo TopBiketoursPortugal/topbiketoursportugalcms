@@ -1,5 +1,6 @@
 ---
 import type { JSX } from 'astro/jsx-runtime';
+import slugify from 'slugify';
 import { cn } from 'utils/cn';
 
 const {
@@ -90,7 +91,15 @@ const container = layout === 'col' ? 'flex flex-col w-full ' : 'flex w-full';
         {...rest}
       >
         {rest.options.map((option: JSX.OptionHTMLAttributes) => (
-          <option value={(option.value + '').toLowerCase()}>{option}</option>
+          <option
+            value={slugify(option + '', {
+              lower: true,
+              strict: true,
+              trim: true
+            })}
+          >
+            {option}
+          </option>
         ))}
       </select>
     )

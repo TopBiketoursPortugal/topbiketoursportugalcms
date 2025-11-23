@@ -13,16 +13,19 @@ type Props = {
 
 const block = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif}',
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const allTours = (await getCollection('tours')).filter(
+const allTours = await getCollection(
+  'tours',
   (tour) =>
     (block.main_feature === tour.data.id ||
       block.feature_list?.includes(tour.data.id)) &&
     tour.data.language === language
 );
+
+const tourTags = await getCollection('tourTags');
 ---
 
 <section class="flex flex-col gap-6 py-[48px] lg:flex-row">
@@ -35,14 +38,16 @@ const allTours = (await getCollection('tours')).filter(
           (tour.data.image?.src
             ? images[tour.data.image?.src]?.default
             : null) ?? Logo;
-        const tags = tour.data.tags;
-
+        const tags = tourTags.filter(
+          (t) =>
+            tour.data.tags?.includes(t.data.id) && t.data.language === language
+        );
         return (
           <div class="lg:w-3/4">
             <a href={featuredTourURL}>
               <Image
                 class="aspect-video w-full rounded-sm object-cover"
-                alt={tour.data.image?.alt ?? 'Top walking tours portugal'}
+                alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
                 widths={[320, 500, 640, 960, 1280]}
                 sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
                 src={imageSrc}
@@ -50,11 +55,11 @@ const allTours = (await getCollection('tours')).filter(
             </a>
             {tags ? (
               <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                {tags.map((tag: string) => {
+                {tags.map((tag) => {
                   return (
                     <a href={getTourTagPath(tag, language)}>
                       <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                        {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                        {tag.data.name ?? tag.data.title}
                       </span>
                     </a>
                   );
@@ -82,14 +87,18 @@ const allTours = (await getCollection('tours')).filter(
             (tour.data.image?.src
               ? images[tour.data.image?.src]?.default
               : null) ?? Logo;
-          const tags = tour.data.tags;
+          const tags = tourTags.filter(
+            (t) =>
+              tour.data.tags?.includes(t.data.id) &&
+              t.data.language === language
+          );
 
           return (
             <div>
               <a href={featuredTourURL}>
                 <Image
                   class="aspect-video w-full rounded-sm object-cover"
-                  alt={tour.data.image?.src ?? 'Top walking tours portugal'}
+                  alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
                   widths={[320, 500, 640]}
                   sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
                   src={imageSrc}
@@ -98,11 +107,11 @@ const allTours = (await getCollection('tours')).filter(
               <div>
                 {tags ? (
                   <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                    {tags.map((tag: string) => {
+                    {tags.map((tag) => {
                       return (
                         <a href={getTourTagPath(tag, language)}>
                           <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+                            {tag.data.name ?? tag.data.title}
                           </span>
                         </a>
                       );

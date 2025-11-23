@@ -1,8 +1,12 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 import { languageSchema } from 'src/schemas/language';
+import { postTagsCollection } from 'src/schemas/blog-tags';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
+import { testimonialCollection } from 'src/schemas/testimonal';
+import { tourRegionsCollection } from 'src/schemas/tour-regions';
+import { tourTagsCollection } from 'src/schemas/tour-tags';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
@@ -17,6 +21,7 @@ const blogCollection = defineCollection({
     thumb_image_path: z.string(),
     thumb_image_alt: z.string(),
     language: languageSchema,
+    relatedPosts: z.array(z.string().uuid()).optional().default([]),
     image: z.object({
       src: z.string(),
       alt: z.string()
@@ -66,7 +71,11 @@ const pagesCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
+  postTags: postTagsCollection,
   pages: pagesCollection,
   tours: tourCollection,
-  team: teamCollection
+  tourTags: tourTagsCollection,
+  tourRegions: tourRegionsCollection,
+  team: teamCollection,
+  testimonials: testimonialCollection
 };

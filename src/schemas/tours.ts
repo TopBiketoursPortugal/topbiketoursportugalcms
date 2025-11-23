@@ -69,6 +69,7 @@ const groupSizeSchema = z.object({
 });
 
 const reviewSchema = z.object({
+  id: z.string().uuid().optional().nullable(),
   author: z
     .object({
       familyName: z.string().optional().nullable(),
@@ -98,6 +99,24 @@ const faqsSchema = z.object({
   answer: z.string()
 });
 
+const featureSchema = z.object({
+  // align: z.enum(['center', 'left', 'right']).optional().default('center'),
+  // imageAlign: z
+  //   .string()
+  //   .regex(/^(center|left|right) (center|top|bottom)$/)
+  //   .optional()
+  //   .default('center center'),
+  bokunLink: z.string().url().optional().nullable(),
+  bokunId: z.string().optional(),
+  textcolor: z.enum(['white', 'black', 'custom']).optional().default('white'),
+  subtitle: z.string().optional(),
+  title: z.string(),
+  image: z.string().refine((val) => val.startsWith('/src/assets/images/'), {
+    message: "Image path must start with '/src/assets/images/'"
+  }),
+  bokunLinkText: z.string().optional().default('Book now')
+});
+
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
@@ -117,7 +136,7 @@ const tourSchema = z.object({
   itinerary: z.array(itinerarySchema).optional(),
   packages: z.array(tourPackageSchema).optional(),
   seo: seoSchema.optional(),
-  tags: z.array(z.string()).optional().nullable(),
+  tags: z.array(z.string().uuid()).optional().default([]),
   duration: z.number().optional().nullable(),
   distance: z.number().optional(),
   difficulty: z.number().min(1).max(5).optional(),
@@ -133,7 +152,8 @@ const tourSchema = z.object({
     .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
-  relatedTours: z.array(z.string().uuid()).optional().default([])
+  relatedTours: z.array(z.string().uuid()).optional().default([]),
+  feature: featureSchema.optional().nullable()
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;

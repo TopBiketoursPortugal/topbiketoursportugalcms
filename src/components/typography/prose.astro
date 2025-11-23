@@ -2,12 +2,16 @@
 import markdownit from 'markdown-it';
 import Stack from '../stack/stack.astro';
 import { cn } from 'utils/cn';
+import markdownItExternalLinks from 'markdown-it-external-links';
+import { externalLinksConfig } from 'utils/permalinks';
 
 type Props = {
   class?: string;
   markdown?: string;
 };
+
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const { class: className, markdown } = Astro.props;
 const content = (markdown ? md.render(markdown ?? '') : markdown) ?? '';
 ---

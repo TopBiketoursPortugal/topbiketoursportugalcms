@@ -1,8 +1,21 @@
 ---
+import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 import SiteData from 'src/../data/site.json';
 
 const { ui: UI } = SiteData;
+
+const tagScriptSrc = `https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`;
 ---
+
+<!-- Google Tag Manager (noscript) -->
+<noscript
+  ><iframe
+    src={tagScriptSrc}
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden"></iframe></noscript
+>
+<!-- End Google Tag Manager (noscript) -->
 
 <script is:inline async defer define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {

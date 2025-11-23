@@ -1,8 +1,7 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import 'src/styles/ccElegantBlack.css';
-// import { GoogleAnalytics } from '@astrolib/analytics';
-import { GOOGLE_ANALYTICS_ID } from 'astro:env/client';
+import { GOOGLE_ANALYTICS_ID, GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 import {
   CAT_ADVERTISEMENT,
   CAT_ANALYTICS,
@@ -17,70 +16,90 @@ import {
   SERVICE_PERSONALIZATION_STORAGE,
   SERVICE_SECURITY_STORAGE
 } from './CookieConsentConfig';
+
+const vars = {
+  GOOGLE_TAG_MANAGER_ID,
+  GOOGLE_ANALYTICS_ID,
+  CAT_ADVERTISEMENT,
+  CAT_ANALYTICS,
+  CAT_FUNCTIONALITY,
+  CAT_SECURITY,
+  config,
+  SERVICE_AD_PERSONALIZATION,
+  SERVICE_AD_STORAGE,
+  SERVICE_AD_USER_DATA,
+  SERVICE_ANALYTICS_STORAGE,
+  SERVICE_FUNCTIONALITY_STORAGE,
+  SERVICE_PERSONALIZATION_STORAGE,
+  SERVICE_SECURITY_STORAGE
+};
+
+const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}')`;
 ---
 
-<script
-  is:inline
-  type="text/partytown"
-  src={`https://www.googletagmanager.com/gtag/js?id=G-${GOOGLE_ANALYTICS_ID}`}
-></script>
-
-<script
-  is:inline
-  type="text/partytown"
-  define:vars={{
-    GOOGLE_ANALYTICS_ID,
-    CAT_ADVERTISEMENT,
-    CAT_ANALYTICS,
-    CAT_FUNCTIONALITY,
-    CAT_SECURITY,
-    config,
-    SERVICE_AD_PERSONALIZATION,
-    SERVICE_AD_STORAGE,
-    SERVICE_AD_USER_DATA,
-    SERVICE_ANALYTICS_STORAGE,
-    SERVICE_FUNCTIONALITY_STORAGE,
-    SERVICE_PERSONALIZATION_STORAGE,
-    SERVICE_SECURITY_STORAGE
-  }}
->
-  function initAnalytics() {
-    // We need a global definition to avoid type warnings
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    // This should ALWAYS be set before the gtag("config", "G-XXXXXXXXXX"); line
-    gtag('consent', 'default', {
-      [SERVICE_AD_STORAGE]: 'denied',
-      [SERVICE_AD_USER_DATA]: 'denied',
-      [SERVICE_AD_PERSONALIZATION]: 'denied',
-      [SERVICE_ANALYTICS_STORAGE]: 'denied',
-      [SERVICE_FUNCTIONALITY_STORAGE]: 'denied',
-      [SERVICE_PERSONALIZATION_STORAGE]: 'denied',
-      [SERVICE_SECURITY_STORAGE]: 'denied'
-    });
-
-    gtag('config', GOOGLE_ANALYTICS_ID);
+<script is:inline defer async type="module">
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
   }
 
-  document.addEventListener('astro:page-load', () => {
-    initAnalytics();
-  });
+  function getCookieJson(name) {
+    const cookieValue = document.cookie
+      .split('; ')
+      .find((row) => row.startsWith(name + '='));
 
-  initAnalytics();
+    if (!cookieValue) return null;
+
+    try {
+      const rawValue = decodeURIComponent(cookieValue.split('=')[1]);
+      return JSON.parse(rawValue);
+    } catch (e) {
+      console.error('Failed to parse cookie:', e);
+      return null;
+    }
+  }
+
+  const concentCookieValue = getCookieJson('cc_cookie');
+
+  // default consent mode
+  gtag('consent', 'default', {
+    ad_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_storage')
+        ? 'denied'
+        : 'granted',
+    ad_user_data:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_user_data')
+        ? 'denied'
+        : 'granted',
+    ad_personalization:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('ad_personalization')
+        ? 'denied'
+        : 'granted',
+    analytics_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('analytics_storage')
+        ? 'denied'
+        : 'granted',
+    personalization_storage:
+      concentCookieValue === null ||
+      !concentCookieValue.categories.includes('personalization_storage')
+        ? 'denied'
+        : 'granted'
+  });
 </script>
+
+<script is:inline defer async set:html={GTM_SCRIPT} />
 
 <script>
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
   // toggle custom black theme
   document.body.classList.add('cc--elegant-black');
-
+  
   // Trigger consent update when user choices change
   run(config);
+  //  document.addEventListener('astro:after-swap', () => {   run(config);});
 </script>

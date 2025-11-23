@@ -5,8 +5,8 @@ import Rating from 'src/components/rating/rating.astro';
 import { getImageByPath } from 'utils/get-image';
 import Icon from 'src/components/utility/icon.astro';
 import Prose from '../typography/prose.astro';
-import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import CountryData from 'src/../data/countries.json';
+import { getCountryCode } from 'utils/get-country-code';
 
 type Props = {
   name?: string;
@@ -23,11 +23,7 @@ const imageOptimized = photo
     }>)
   : null;
 
-const countryCode = CountryData.filter(
-  (c) =>
-    c.englishName.toLocaleLowerCase() === country?.toLocaleLowerCase() ||
-    c.alpha3.toLocaleLowerCase() === country?.toLocaleLowerCase()
-)[0]?.alpha2;
+const countryCode = getCountryCode(country ?? '');
 
 const countryFlagIcon = countryCode
   ? `circle-flags:${countryCode.toLowerCase()}`

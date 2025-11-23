@@ -12,15 +12,55 @@ export type AccordionProps = {
   container?: ContainerProps['size'];
   padding?: ContainerProps['padding'];
   expansionType?: 'plus' | 'arrow';
+  type?: 'faq';
   items?: AccordionItemProps[];
 };
 
 type Props = AccordionProps;
 
-const { items = [], container = 'full', padding = 'none' } = Astro.props;
----
+function markdownToText(md:string) {
+  return md
+    .replace(/!\[.*?\]\(.*?\)/g, '')         // remove images
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // remove links but keep text
+    .replace(/[*_~`>#-]/g, '')               // remove common markdown chars
+    .replace(/\n+/g, ' ')                    // collapse new lines
+    .trim();
+}
 
+const {
+  items = [],
+  container = 'full',
+  padding = 'none',
+   type = ''
+} = Astro.props;
+const faqSchema =
+  type === 'faq'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': items.map((i) => ({
+          '@type': 'Question',
+          'name': markdownToText(i.header?.text ?? ''),
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': markdownToText(i.content ?? '')
+          }
+        }))
+      }
+    : '';
+---
+{
+    type === 'faq' && (
+      <script
+        is:inline
+        async
+        type="application/ld+json"
+        set:html={JSON.stringify(faqSchema)}
+      />
+    ) 
+  }
 <Container size={container} padding={padding}>
+  
   <div
     role="group"
     aria-label="Accordion"

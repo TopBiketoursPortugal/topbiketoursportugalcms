@@ -177,19 +177,19 @@
           "links": [
             {
               "text": "Início",
-              "link": "/pt/"
+              "href": "/pt/"
             },
             {
               "text": "Caminhadas",
-              "link": "/pt/passeios-pedestres-portugal/"
+              "href": "/pt/passeios-pedestres-portugal/"
             },
             {
               "text": "Blog",
-              "link": "/pt/blog/"
+              "href": "/pt/blog/"
             },
             {
               "text": "Testemunhos",
-              "link": "/pt/testemunhos/"
+              "href": "/pt/testemunhos/"
             }
           ]
         },
@@ -198,23 +198,23 @@
           "links": [
             {
               "text": "Sobre nós",
-              "link": "/pt/sobre-nos/"
+              "href": "/pt/sobre-nos/"
             },
             {
               "text": "Contatos",
-              "link": "/pt/contatos/"
+              "href": "/pt/contatos/"
             },
             {
               "text": "Perguntas frequentes",
-              "link": "/pt/perguntas-frequentes/"
+              "href": "/pt/perguntas-frequentes/"
             },
             {
               "text": "Termos e Condições",
-              "link": "/pt/termos-condicoes/"
+              "href": "/pt/termos-condicoes/"
             },
             {
               "text": "Política de Privacidade",
-              "link": "/pt/politica-de-privacidade/"
+              "href": "/pt/politica-de-privacidade/"
             }
           ]
         }

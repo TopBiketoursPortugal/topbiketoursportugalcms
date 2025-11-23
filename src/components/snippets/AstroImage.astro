@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 const block = Astro.props;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif}',
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
 

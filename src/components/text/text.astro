@@ -1,7 +1,10 @@
 ---
 import markdownit from 'markdown-it'; // or your preferred Markdown component
+import markdownItExternalLinks from 'markdown-it-external-links';
+
 import { tv, type VariantProps } from 'tailwind-variants';
 import Prose from '../typography/prose.astro';
+import { externalLinksConfig } from 'utils/permalinks';
 
 export type TextProps = {
   text: string;
@@ -20,8 +23,8 @@ const textVariants = tv({
       tight: { container: 'px-2 py-4 md:px-4 md:py-8' }
     },
     container: {
-      fluid: 'max-w-none',
-      normal: 'mx-auto max-w-screen-xl'
+      fluid: { container: 'max-w-none' },
+      centered: { container: 'mx-auto max-w-screen-xl' }
     },
     align: {
       leading: { text: 'flex items-start text-left' },
@@ -35,7 +38,7 @@ const textVariants = tv({
   },
   defaultVariants: {
     padding: 'normal',
-    container: 'fluid',
+    container: 'centered',
     align: 'leading'
   }
 });
@@ -44,6 +47,7 @@ const { text, style } = Astro.props;
 const { padding, align, container } = style;
 
 const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
 const textHTML = md.render(text ?? '');
 const { container: containerStyle, text: textStyle } = textVariants({
   padding,

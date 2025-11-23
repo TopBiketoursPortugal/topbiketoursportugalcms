@@ -8,7 +8,8 @@ type Props = { related: string[]; language: LanguageCodes };
 
 const { related, language } = Astro.props;
 
-const tours = (await getCollection('tours')).filter(
+const tours = await getCollection(
+  'tours',
   (t) => related.indexOf(t.data.id) !== -1 && t.data.language === language
 );
 ---

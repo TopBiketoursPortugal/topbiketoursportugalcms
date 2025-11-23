@@ -50,7 +50,7 @@ export function getImageByPath(imageSrc: string): Promise<{
   const image = images[imageSrc];
   if (!image)
     throw new Error(
-      `"${imageSrc}" does not exist in glob: "/src/assets/**/*.{jpeg,jpg,png,gif,avif,svg}"`
+      `"${imageSrc}" does not exist in glob: "/src/assets/**/*.{jpeg,jpg,png,gif,avif,svg,webp}"`
     );
   return image();
 }

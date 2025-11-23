@@ -15,21 +15,18 @@ import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
 import type { HrefLang } from 'src/types/hreflang';
-// import { pwaAssetsHead } from 'virtual:pwa-assets/head';
-// import { pwaInfo } from 'virtual:pwa-info';
-// import { Breadcrumbs } from 'astro-breadcrumbs';
-
-// import 'astro-breadcrumbs/breadcrumbs.css';
+import { pwaInfo } from 'virtual:pwa-info';
+import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 
 export type SEOProps = {
   page_title: string | null;
   page_description: string | null;
-  featured_image: string | null;
-  featured_image_alt: string | null;
-  canonical_url: string | null;
-  no_index: boolean | null;
-  open_graph_type: string | null;
-  author_twitter_handle: string | null;
+  featured_image?: string | null;
+  featured_image_alt?: string | null;
+  canonical_url?: string | null;
+  no_index?: boolean | null;
+  open_graph_type?: string | null;
+  author_twitter_handle?: string | null;
   keywords?: string;
 };
 
@@ -43,11 +40,14 @@ export type LayoutProps = {
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { seo } = Astro.props;
 const { keywords } = seo ?? { keywords: '' };
-const seoProps = getPageSeo(
+const seoProps = await getPageSeo(
   Astro.site ?? import.meta.env.BASE_URL,
   Astro.props,
   language
 );
+// if (INDEX == 'false') {
+//   seoProps.noindex = true;
+// }
 ---
 
 <!doctype html>
@@ -69,16 +69,30 @@ const seoProps = getPageSeo(
     <meta name="title" content={seoProps.title} />
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     <SEO {...seoProps} />
-    <!-- <script src="/src/pwa.ts"></script>
+    <slot name="head" />
     {
       pwaAssetsHead.themeColor && (
         <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
       )
     }
     {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
-    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />} -->
     <script src="/src/pwa.ts"></script>
-    <slot name="head" />
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script is:inline defer async>
+      var $wc_load = function (a) {
+          return JSON.parse(JSON.stringify(a));
+        },
+        $wc_leads = $wc_leads || {
+          doc: {
+            url: $wc_load(document.URL),
+            ref: $wc_load(document.referrer),
+            search: $wc_load(location.search),
+            hash: $wc_load(location.hash)
+          }
+        };
+    </script>
+    <script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
+    ></script>
   </head>
   <body
     class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
