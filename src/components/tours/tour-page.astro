@@ -230,7 +230,7 @@ const enableFaqs = false;
         <li class="flex items-center gap-3">
           <Icon icon="ph:airplane-light" className="h-5 w-5" />{
             t('Tour.Info.ClosestAirport.Label', language)
-          }: Aeroporto Sá Carneiro
+          }: {tour.closestAirport ?? 'Aeroporto Sá Carneiro'}
         </li>
         {
           tour.minAge ? (

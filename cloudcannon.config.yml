@@ -351,6 +351,9 @@ collections_config:
       afterPricing:
         type: markdown
         cascade: true
+      closestAirport:
+        type: text
+        cascade: true
     add_options:
       - name: New Tour English
         icon: language

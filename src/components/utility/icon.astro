@@ -1,7 +1,14 @@
 ---
 import type { IconNames } from 'src/types';
 import { cn } from 'utils/cn';
-import { file, type SymbolId } from 'virtual:astro-svgs';
+// CloudCannon Bookshop postbuild does not support Vite virtual modules
+const isBookshop = import.meta.env.BOOKSHOP === 'true';
+import { type SymbolId } from 'virtual:astro-svgs';
+
+let file;
+if (!isBookshop) {
+  ({ file } = await import('virtual:astro-svgs'));
+}
 
 type Props = {
   icon: IconNames;
@@ -16,7 +23,7 @@ const style = cn('h-6 w-6 fill-current', className, className2);
 
 /**
  * Convert icon name to astro-svgs symbolId format
- * astro-svgs uses just the filename (without directory) as the symbol ID
+ * astro-svgs uses just the filename (without directory) satisfies the symbol ID
  * Examples:
  *   'ph:sun-light' -> 'sun-light'
  *   'logos:visa' -> 'visa'
@@ -25,65 +32,65 @@ const style = cn('h-6 w-6 fill-current', className, className2);
 function getSymbolId(iconName: IconNames): SymbolId {
   // Legacy icon name mappings
   const legacyMappings: Record<string, SymbolId> = {
-    Envelope: 'envelope-simple-light' as SymbolId,
-    User: 'user-light' as SymbolId,
-    Bread: 'bread-light' as SymbolId,
-    Mug: 'coffee-light' as SymbolId,
-    Egg: 'egg-light' as SymbolId,
-    Utensils: 'fork-knife-light' as SymbolId,
-    Carrot: 'carrot-light' as SymbolId,
-    Burger: 'hamburger-light' as SymbolId,
-    Fish: 'fish-simple-light' as SymbolId,
-    Seedling: 'plant-light' as SymbolId,
-    PlateWheat: 'bowl-food-light' as SymbolId,
-    PizzaSlice: 'pizza-light' as SymbolId,
-    PepperHot: 'pepper-light' as SymbolId,
-    ChampagneGlasses: 'wine-light' as SymbolId,
-    Check: 'check-light' as SymbolId,
-    CircleCheck: 'check-circle-fill' as SymbolId,
-    ArrowRight: 'arrow-right-light' as SymbolId,
-    ArrowLeft: 'arrow-left-light' as SymbolId,
-    ArrowDown: 'arrow-down-light' as SymbolId,
-    ArrowUp: 'arrow-up-light' as SymbolId,
-    CaretLeft: 'caret-left-light' as SymbolId,
-    CaretRight: 'caret-right-light' as SymbolId,
-    CaretDown: 'caret-down-light' as SymbolId,
-    CaretUp: 'caret-up-light' as SymbolId,
-    PaperPlane: 'paper-plane-light' as SymbolId,
-    CartShopping: 'shopping-cart-light' as SymbolId,
-    Shop: 'storefront-light' as SymbolId,
-    BagShopping: 'shopping-bag-light' as SymbolId,
-    CreditCard: 'credit-card-light' as SymbolId,
-    Store: 'storefront-light' as SymbolId,
-    ShopLock: 'lock-light' as SymbolId,
-    Car: 'car-light' as SymbolId,
-    CircleHalfStroke: 'circle-half-fill' as SymbolId,
-    LocationDot: 'map-pin-light' as SymbolId,
-    LocationPin: 'map-pin-line-light' as SymbolId,
-    LocationCrosshairs: 'crosshair-light' as SymbolId,
-    Gift: 'gift-light' as SymbolId,
-    House: 'house-light' as SymbolId,
-    MagnifyingGlass: 'magnifying-glass-light' as SymbolId,
-    Image: 'image-light' as SymbolId,
-    Phone: 'phone-light' as SymbolId,
-    Bars: 'list-light' as SymbolId,
-    Heart: 'heart-light' as SymbolId,
-    Xmark: 'x-light' as SymbolId,
-    Comment: 'chat-text-light' as SymbolId,
-    TruckFast: 'truck-light' as SymbolId,
-    FaceSmile: 'smiley-light' as SymbolId,
-    Bell: 'bell-light' as SymbolId,
-    CalendarDays: 'calendar-light' as SymbolId,
-    CircleInfo: 'info-fill' as SymbolId,
-    Fire: 'fire-light' as SymbolId,
-    Hand: 'hand-light' as SymbolId,
-    Lemon: 'orange-light' as SymbolId,
-    Bookmark: 'bookmark-simple-light' as SymbolId,
-    Facebook: 'facebook-logo-light' as SymbolId,
-    Instagram: 'instagram-logo-light' as SymbolId,
-    Youtube: 'youtube-logo-light' as SymbolId,
-    Google: 'google-logo-light' as SymbolId,
-    Tripadvisor: 'tripadvisor' as SymbolId
+    Envelope: 'envelope-simple-light' satisfies SymbolId,
+    User: 'user-light' satisfies SymbolId,
+    Bread: 'bread-light' satisfies SymbolId,
+    Mug: 'coffee-light' satisfies SymbolId,
+    Egg: 'egg-light' satisfies SymbolId,
+    Utensils: 'fork-knife-light' satisfies SymbolId,
+    Carrot: 'carrot-light' satisfies SymbolId,
+    Burger: 'hamburger-light' satisfies SymbolId,
+    Fish: 'fish-simple-light' satisfies SymbolId,
+    Seedling: 'plant-light' satisfies SymbolId,
+    PlateWheat: 'bowl-food-light' satisfies SymbolId,
+    PizzaSlice: 'pizza-light' satisfies SymbolId,
+    PepperHot: 'pepper-light' satisfies SymbolId,
+    ChampagneGlasses: 'wine-light' satisfies SymbolId,
+    Check: 'check-light' satisfies SymbolId,
+    CircleCheck: 'check-circle-fill' satisfies SymbolId,
+    ArrowRight: 'arrow-right-light' satisfies SymbolId,
+    ArrowLeft: 'arrow-left-light' satisfies SymbolId,
+    ArrowDown: 'arrow-down-light' satisfies SymbolId,
+    ArrowUp: 'arrow-up-light' satisfies SymbolId,
+    CaretLeft: 'caret-left-light' satisfies SymbolId,
+    CaretRight: 'caret-right-light' satisfies SymbolId,
+    CaretDown: 'caret-down-light' satisfies SymbolId,
+    CaretUp: 'caret-up-light' satisfies SymbolId,
+    PaperPlane: 'paper-plane-light' satisfies SymbolId,
+    CartShopping: 'shopping-cart-light' satisfies SymbolId,
+    Shop: 'storefront-light' satisfies SymbolId,
+    BagShopping: 'shopping-bag-light' satisfies SymbolId,
+    CreditCard: 'credit-card-light' satisfies SymbolId,
+    Store: 'storefront-light' satisfies SymbolId,
+    ShopLock: 'lock-light' satisfies SymbolId,
+    Car: 'car-light' satisfies SymbolId,
+    CircleHalfStroke: 'circle-half-fill' satisfies SymbolId,
+    LocationDot: 'map-pin-light' satisfies SymbolId,
+    LocationPin: 'map-pin-line-light' satisfies SymbolId,
+    LocationCrosshairs: 'crosshair-light' satisfies SymbolId,
+    Gift: 'gift-light' satisfies SymbolId,
+    House: 'house-light' satisfies SymbolId,
+    MagnifyingGlass: 'magnifying-glass-light' satisfies SymbolId,
+    Image: 'image-light' satisfies SymbolId,
+    Phone: 'phone-light' satisfies SymbolId,
+    Bars: 'list-light' satisfies SymbolId,
+    Heart: 'heart-light' satisfies SymbolId,
+    Xmark: 'x-light' satisfies SymbolId,
+    Comment: 'chat-text-light' satisfies SymbolId,
+    TruckFast: 'truck-light' satisfies SymbolId,
+    FaceSmile: 'smiley-light' satisfies SymbolId,
+    Bell: 'bell-light' satisfies SymbolId,
+    CalendarDays: 'calendar-light' satisfies SymbolId,
+    CircleInfo: 'info-fill' satisfies SymbolId,
+    Fire: 'fire-light' satisfies SymbolId,
+    Hand: 'hand-light' satisfies SymbolId,
+    Lemon: 'orange-light' satisfies SymbolId,
+    Bookmark: 'bookmark-simple-light' satisfies SymbolId,
+    Facebook: 'facebook-logo-light' satisfies SymbolId,
+    Instagram: 'instagram-logo-light' satisfies SymbolId,
+    Youtube: 'youtube-logo-light' satisfies SymbolId,
+    Google: 'google-logo-light' satisfies SymbolId,
+    Tripadvisor: 'tripadvisor' satisfies SymbolId
   };
 
   // Check for legacy mapping first
@@ -92,7 +99,7 @@ function getSymbolId(iconName: IconNames): SymbolId {
   }
 
   // Handle modern icon names with prefixes (e.g., 'ph:sun-light', 'logos:visa')
-  // astro-svgs uses just the filename as the symbol ID
+  // astro-svgs uses just the filename satisfies the symbol ID
   if (iconName.includes(':')) {
     const [_prefix, name] = iconName.split(':');
     // Just return the name part (filename without directory)
@@ -106,13 +113,19 @@ function getSymbolId(iconName: IconNames): SymbolId {
 const symbolId = getSymbolId(icon);
 ---
 
-<svg
-  class={style}
-  aria-hidden="true"
-  xmlns="http://www.w3.org/2000/svg"
-  focusable="false"
->
-  <use href={`${file}#${symbolId}`} xmlns:xlink="http://www.w3.org/1999/xlink"
-  ></use>
-  {title && <title>{title}</title>}
-</svg>
+{
+  isBookshop ? null : (
+    <svg
+      class={style}
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      focusable="false"
+    >
+      <use
+        href={`${file}#${symbolId}`}
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      />
+      {title && <title>{title}</title>}
+    </svg>
+  )
+}
