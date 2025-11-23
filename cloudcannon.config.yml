@@ -212,18 +212,18 @@ collections_config:
       included[*].description:
         type: markdown
         cascade: true
-      reviews:
-        options:
-          empty_type: array
-          structures: _structures.reviews
-      reviews[*].id:
-        type: auto
-        instance_value: UUID
-        hidden: true
-        cascade: true
-      reviews[*].title:
-        type: markdown
-        cascade: true
+      # reviews:
+      #   options:
+      #     empty_type: array
+      #     structures: _structures.reviews
+      # reviews[*].id:
+      #   type: auto
+      #   instance_value: UUID
+      #   hidden: true
+      #   cascade: true
+      # reviews[*].title:
+      #   type: markdown
+      #   cascade: true
       itinerary:
         type: array
         options:
