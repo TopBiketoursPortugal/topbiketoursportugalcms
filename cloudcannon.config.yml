@@ -1,4 +1,7 @@
 _schema: _schema
+bookshop:
+  exclude:
+    - src/components/utility/icon.astro
 paths:
   uploads: src/assets/images
   static: ''
@@ -690,6 +693,88 @@ collection_groups:
     collections:
       - data
 _inputs:
+  # Tailwind Color System - Radix-inspired semantic scales
+  # Colors automatically invert in dark mode (e.g., gray-1 becomes dark:gray-12)
+  background_color:
+    type: select
+    options:
+      allow_empty: false
+      values:
+        # Gray scale - Backgrounds
+        - label: "Background - Subtle (Gray 1)"
+          value: "gray-1"
+        - label: "Background - Muted (Gray 2)"
+          value: "gray-2"
+        - label: "Background - Default (Gray 3)"
+          value: "gray-3"
+        # Accent scale - Brand colors
+        - label: "Accent - Subtle (Orange 3)"
+          value: "accent-3"
+        - label: "Accent - Default (Orange 9)"
+          value: "accent-9"
+        - label: "Accent - Strong (Orange 11)"
+          value: "accent-11"
+        # Legacy hex colors (backward compatibility)
+        - label: "Legacy - White"
+          value: "#ffffff"
+        - label: "Legacy - Light Gray"
+          value: "#f2f2f2"
+    comment: "Color automatically inverts in dark mode. Use Tailwind colors (e.g., gray-1) for auto dark mode support."
+    cascade: true
+  
+  color:
+    type: select
+    options:
+      allow_empty: false
+      values:
+        # Gray scale - Text colors
+        - label: "Text - Low Contrast (Gray 10)"
+          value: "gray-10"
+        - label: "Text - Default (Gray 11)"
+          value: "gray-11"
+        - label: "Text - High Contrast (Gray 12)"
+          value: "gray-12"
+        # Accent colors
+        - label: "Text - Accent (Orange 11)"
+          value: "accent-11"
+        # Legacy hex colors
+        - label: "Legacy - Dark Gray"
+          value: "#393939"
+        - label: "Legacy - Black"
+          value: "#000000"
+    comment: "Text color automatically inverts in dark mode."
+    cascade: true
+  
+  text_color:
+    type: select
+    options:
+      allow_empty: false
+      values:
+        - label: "Text - Low Contrast (Gray 10)"
+          value: "gray-10"
+        - label: "Text - Default (Gray 11)"
+          value: "gray-11"
+        - label: "Text - High Contrast (Gray 12)"
+          value: "gray-12"
+        - label: "Text - Accent (Orange 11)"
+          value: "accent-11"
+        - label: "Text - White"
+          value: "#ffffff"
+    comment: "Text color automatically inverts in dark mode."
+    cascade: true
+  
+  heading_gradient_color:
+    type: select
+    options:
+      allow_empty: false
+      values:
+        - label: "Accent - Orange"
+          value: "accent-9"
+        - label: "Legacy - Orange (#FF785A)"
+          value: "#FF785A"
+    comment: "Gradient color for headings"
+    cascade: true
+
   tourtype:
     type: select
     options:
