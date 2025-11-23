@@ -8,6 +8,9 @@
       // "vite-plugin-pwa/client.d.ts"
     ],
     "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"]
+    },
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "strictNullChecks": true
