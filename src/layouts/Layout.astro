@@ -121,11 +121,32 @@ const seoProps = await getPageSeo(
   <body
     class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
   >
-    <div id="svg-sprite-container" transition:persist>
-      <script>
-        import 'virtual:svg-icons-register';
-      </script>
-    </div>
+    <script>
+      import 'virtual:svg-icons-register';
+    </script>
+    <script is:inline>
+      // Preserve SVG sprite across page navigations
+      let svgSpriteElement = null;
+
+      // Before Astro swaps the page, save the SVG sprite
+      document.addEventListener('astro:before-swap', (event) => {
+        const sprite = document.getElementById('__svg__icons__dom__');
+        if (sprite) {
+          svgSpriteElement = sprite.cloneNode(true);
+        }
+      });
+
+      // After Astro swaps the page, restore the SVG sprite
+      document.addEventListener('astro:after-swap', () => {
+        if (svgSpriteElement) {
+          const existingSprite = document.getElementById('__svg__icons__dom__');
+          if (existingSprite) {
+            existingSprite.remove();
+          }
+          document.body.appendChild(svgSpriteElement);
+        }
+      });
+    </script>
     <BasicScripts />
     <slot name="announcement">
       <Announcement language={language} />
