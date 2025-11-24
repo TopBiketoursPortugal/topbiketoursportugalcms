@@ -28,6 +28,7 @@ import type { ReviewSchema } from 'src/schemas/tours';
 import Stack from '../stack/stack.astro';
 import Grid from '../grid/grid.astro';
 import ReviewItem from '../collection/review-item.astro';
+import { getAuthorName } from 'utils/get-author-name';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -321,7 +322,7 @@ const enableFaqs = false;
           {reviews.map(async ({ content, author, rating }) => (
             <Stack as="section" class="border-solid sm:p-6" layout="vertical">
               <ReviewItem
-                name={`${author?.givenName}`}
+                name={getAuthorName(author)}
                 country={author?.country}
                 content={content}
                 rating={rating}

@@ -1,4 +1,24 @@
 ---
+function getAuthorName(review: {
+  content: string;
+  title: string;
+  rating: number;
+  id?: string | null | undefined;
+  author?:
+    | {
+        country: string;
+        givenName: string;
+        familyName?: string | null | undefined;
+      }
+    | undefined;
+  image?: { src: string; alt: string } | null | undefined;
+  travelerType?: 'Couple' | 'Solo' | 'Family' | undefined;
+  publishDate?: Date | undefined;
+  source?: { name: string; url?: string | null | undefined } | null | undefined;
+}): string | undefined {
+  throw new Error('Function not implemented.');
+}
+
 import { getCollection } from 'astro:content';
 import type { VisuallyEditable } from 'src/types';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -6,6 +26,7 @@ import Grid from '../grid/grid.astro';
 import Stack from '../stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
+import type { ReviewSchema } from 'src/schemas/tours';
 type Props = {
   feature_testimonials: readonly string[];
 } & VisuallyEditable;
@@ -34,7 +55,7 @@ const items = reviews.concat(
     {
       items.map((review) => (
         <ReviewItem
-          name={`${review.author?.givenName}`}
+          name={getAuthorName(review)}
           country={review.author?.country}
           content={review.content}
           rating={review.rating}

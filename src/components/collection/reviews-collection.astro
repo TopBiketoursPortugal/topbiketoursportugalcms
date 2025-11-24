@@ -6,6 +6,7 @@ import Grid from 'src/components/grid/grid.astro';
 import ReviewListSchema from './review-list-schema.astro';
 import ReviewItem from './review-item.astro';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
+import { getAuthorName } from 'utils/get-author-name';
 
 type Props = {
   type: 'reviews';
@@ -36,11 +37,7 @@ const items = (tours.flatMap((t) => t.data.reviews ?? []) ?? [])
       items.map((review) => {
         return (
           <ReviewItem
-            name={`${review.author?.givenName}${
-              review.author?.familyName && review.author?.familyName.length > 0
-                ? ' ' + review.author?.familyName
-                : ''
-            }`}
+            name={getAuthorName(review)}
             country={review.author?.country}
             content={review.content}
             rating={review.rating}
