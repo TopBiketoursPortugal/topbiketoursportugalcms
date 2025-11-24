@@ -1,15 +1,15 @@
 {
   "en": {
     "address": {
-      "street": "R. João das Regras",
+      "street": "Rua Dom João IV, nº 385, nº1 ",
       "number": "62",
-      "postalCode": "4000-290",
+      "postalCode": "4000-303",
       "city": "Oporto",
       "state": "Oporto",
       "country": "Portugal",
       "latitude": "41.155230",
       "longitude": "-8.608440",
-      "complement": "400 m of Trindade Metro, near Oporto City Hall",
+      "complement": "500 m from Bolhão Market ",
       "map": "https://maps.app.goo.gl/R36YUaUwFrhousgBA"
     },
     "phone": null,
@@ -18,15 +18,15 @@
   },
   "pt": {
     "address": {
-      "street": "R. João das Regras",
+      "street": "Rua Dom João IV, nº 385, nº1 ",
       "number": "62",
-      "postalCode": "4000-290",
+      "postalCode": "4000-303",
       "city": "Porto",
       "state": "Porto",
       "country": "Portugal",
       "latitude": "41.155230",
       "longitude": "-8.608440",
-      "complement": "400m da Estação da Trindade Metro, perto da camara municipal",
+      "complement": "500m do Mercado do Bolhão",
       "map": "https://maps.app.goo.gl/R36YUaUwFrhousgBA"
     },
     "phone": null,
