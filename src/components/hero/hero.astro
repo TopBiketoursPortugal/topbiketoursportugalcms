@@ -8,6 +8,7 @@ interface Props {
   heading: {
     heading_text: string;
     heading_gradient_color: string;
+    heading_size: string;
   };
   subheading: {
     markdown_content: string;
@@ -49,6 +50,28 @@ const imageSrc =
 const headingGradientColor = block.heading?.heading_gradient_color ?? '#a0a2ff';
 
 const { background_color, buttons = [], heading, subheading } = block;
+
+const heading_size = heading?.heading_size ?? 'h1';
+
+const getHeadingSizeComponent = (size: string) => {
+  switch (size) {
+    case 'h1':
+      return 'h1';
+    case 'h2':
+      return 'h2';
+    case 'h3':
+      return 'h3';
+    case 'h4':
+      return 'h4';
+    case 'h5':
+      return 'h5';
+    case 'h6':
+      return 'h6';
+    default:
+      return 'h1';
+  }
+};
+const Heading = getHeadingSizeComponent(heading_size);
 ---
 
 <section class={block.class} style={`background-color: ${background_color};`}>
@@ -56,7 +79,7 @@ const { background_color, buttons = [], heading, subheading } = block;
     <div class="content flex flex-col gap-4">
       {
         heading?.heading_text ? (
-          <h2 class="heading pb-3">{heading?.heading_text}</h2>
+          <Heading class="heading pb-3">{heading?.heading_text}</Heading>
         ) : null
       }
       <div class="subheading-text" style={`color: ${block.subheading.color};`}>

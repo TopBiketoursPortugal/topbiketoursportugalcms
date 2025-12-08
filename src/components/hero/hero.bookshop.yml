@@ -17,6 +17,7 @@ blueprint:
   heading:
     heading_text: Heading text
     heading_gradient_color: '#a0a2ff'
+    heading_size: 'h1'
   subheading:
     markdown_content: >-
       Content for this subheading
@@ -49,6 +50,26 @@ _inputs:
           - Subheading
         subtext:
           - 'Update subheading content and color.'
+  heading_size:
+    type: select
+    options:
+      values:
+        - value: 'h1'
+          name: 'H1'
+        - value: 'h2'
+          name: 'H2'
+        - value: 'h3'
+          name: 'H3'
+        - value: 'h4'
+          name: 'H4'
+        - value: 'h5'
+          name: 'H5'
+        - value: 'h6'
+          name: 'H6'
+      value_key: value
+      preview:
+        text:
+          - key: name
   heading_gradient_color:
     type: select
     options:
