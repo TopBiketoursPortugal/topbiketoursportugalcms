@@ -1,4 +1,5 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
+import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 
 export const CAT_NECESSARY = 'necessary';
 export const CAT_ANALYTICS = 'analytics';
@@ -14,52 +15,53 @@ export const SERVICE_FUNCTIONALITY_STORAGE = 'functionality_storage';
 export const SERVICE_PERSONALIZATION_STORAGE = 'personalization_storage';
 export const SERVICE_SECURITY_STORAGE = 'security_storage';
 
-// declare global {
-//   interface Window {
-//     dataLayer: Record<string, any>[];
-//     gtag: (...args: any[]) => void;
-//   }
-// }
+declare global {
+  interface Window {
+    dataLayer: Record<string, any>[];
+    gtag: (...args: any[]) => void;
+    _gtmLoaded?: boolean;
+  }
+}
 
-// function updateGtagConsent(cookie: CookieConsent.CookieValue) {
-//   window.gtag?.('consent', 'default', {
-//     [SERVICE_AD_STORAGE]: cookie.categories.includes(SERVICE_AD_STORAGE)
-//       ? 'granted'
-//       : 'denied',
-//     [SERVICE_AD_USER_DATA]: cookie.categories.includes(SERVICE_AD_USER_DATA)
-//       ? 'granted'
-//       : 'denied',
-//     [SERVICE_AD_PERSONALIZATION]: cookie.categories.includes(
-//       SERVICE_AD_PERSONALIZATION
-//     )
-//       ? 'granted'
-//       : 'denied',
-//     [SERVICE_ANALYTICS_STORAGE]: 'granted',
-//     [SERVICE_FUNCTIONALITY_STORAGE]: cookie.categories.includes(
-//       SERVICE_FUNCTIONALITY_STORAGE
-//     )
-//       ? 'granted'
-//       : 'denied',
-//     [SERVICE_PERSONALIZATION_STORAGE]: cookie.categories.includes(
-//       SERVICE_PERSONALIZATION_STORAGE
-//     )
-//       ? 'granted'
-//       : 'denied'
-//     // [SERVICE_SECURITY_STORAGE]: cookie.categories.includes(
-//     //   SERVICE_SECURITY_STORAGE
-//     // )
-//     //   ? 'granted'
-//     //   : 'denied'
-//   });
-// }
+function loadGTM() {
+  // Only load GTM once
+  if (window._gtmLoaded) return;
+  window._gtmLoaded = true;
 
-// type CookieParam = { cookie: CookieConsent.CookieValue };
+  (function (w: any, d: Document, s: string, l: string, i: string) {
+    w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s) as HTMLScriptElement, dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f?.parentNode?.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
+}
+
+function updateGtagConsent(cookie: CookieConsent.CookieValue) {
+  const hasAnalytics = cookie.categories?.includes(CAT_ANALYTICS);
+  const hasMarketing = cookie.categories?.includes(CAT_MARKETING);
+  const hasFunctionality = cookie.categories?.includes(CAT_FUNCTIONALITY);
+
+  window.gtag?.('consent', 'update', {
+    [SERVICE_AD_STORAGE]: hasMarketing ? 'granted' : 'denied',
+    [SERVICE_AD_USER_DATA]: hasMarketing ? 'granted' : 'denied',
+    [SERVICE_AD_PERSONALIZATION]: hasMarketing ? 'granted' : 'denied',
+    [SERVICE_ANALYTICS_STORAGE]: hasAnalytics ? 'granted' : 'denied',
+    [SERVICE_PERSONALIZATION_STORAGE]: hasFunctionality ? 'granted' : 'denied'
+  });
+
+  // Load GTM if analytics consent is granted
+  if (hasAnalytics) {
+    loadGTM();
+  }
+}
 
 export const config: CookieConsentConfig = {
   root: '#cc-container',
-  // onFirstConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
-  // onConsent: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
-  // onChange: ({ cookie }: CookieParam) => updateGtagConsent(cookie),
+  onFirstConsent: ({ cookie }) => updateGtagConsent(cookie),
+  onConsent: ({ cookie }) => updateGtagConsent(cookie),
+  onChange: ({ cookie }) => updateGtagConsent(cookie),
   revision: 5,
   guiOptions: {
     consentModal: {
@@ -128,7 +130,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Analytics',
               description:
-                'Cookies used for analytics help collect data that allows services to understand how users interact with a particular service. These insights allow services both to improve content and to build better features that improve the user’s experience.',
+                'Cookies used for analytics help collect data that allows services to understand how users interact with a particular service. These insights allow services both to improve content and to build better features that improve the user\'s experience.',
               linkedCategory: CAT_ANALYTICS,
               cookieTable: {
                 headers: {
@@ -158,27 +160,21 @@ export const config: CookieConsentConfig = {
             {
               title: 'Advertisement Cookies',
               description:
-                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href=\"https://g.co/adsettings\">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
+                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href="https://g.co/adsettings">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
               linkedCategory: CAT_MARKETING
             },
             {
               title: 'Advertising',
               description:
-                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href=\"https://g.co/adsettings\">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
+                'Google uses cookies for advertising, including serving and rendering ads, personalizing ads (depending on your ad settings at <a href="https://g.co/adsettings">g.co/adsettings</a>), limiting the number of times an ad is shown to a user, muting ads you have chosen to stop seeing, and measuring the effectiveness of ads.',
               linkedCategory: CAT_ADVERTISEMENT
             },
             {
               title: 'Functionality',
               description:
-                'Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user’s choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user’s session, such as the content of a shopping cart.',
+                'Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user\'s choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user\'s session, such as the content of a shopping cart.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            // {
-            //   title: 'Security',
-            //   description:
-            //     'Cookies used for security authenticate users, prevent fraud, and protect users as they interact with a service.',
-            //   linkedCategory: CAT_SECURITY
-            // },
             {
               title: 'More information',
               description: `For any queries in relation to the policy on cookies and your choices, please <a href="https://topbiketoursportugal.com/privacy-policy/">contact us</a>.`
@@ -262,12 +258,6 @@ export const config: CookieConsentConfig = {
                 'Cookies utilizados para funcionalidade permitem que os utilizadores interajam com um serviço ou site para aceder a características fundamentais. Consideram-se fundamentais preferências como idioma do utilizador, otimizações de produto que ajudam a manter e melhorar serviços, e manutenção de informação relativa à sessão do utilizador, como conteúdo de um carrinho de compras.',
               linkedCategory: CAT_FUNCTIONALITY
             },
-            // {
-            //   title: 'Segurança',
-            //   description:
-            //     'Cookies utilizados para segurança autenticam utilizadores, previnem fraudes e protegem utilizadores durante a interação com um serviço.',
-            //   linkedCategory: CAT_SECURITY
-            // },
             {
               title: 'Mais informações',
               description:
@@ -278,5 +268,5 @@ export const config: CookieConsentConfig = {
       }
     }
   },
-  disablePageInteraction: true
+  disablePageInteraction: false
 };

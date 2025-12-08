@@ -8,7 +8,6 @@ import AstroPWA from '@vite-pwa/astro';
 import tailwindcss from '@tailwindcss/vite';
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
-import partytown from '@astrojs/partytown';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
@@ -193,8 +192,7 @@ export default defineConfig({
           pt: 'pt-PT'
         }
       }
-    }),
-    partytown({ config: { forward: ['dataLayer.push'] } })
+    })
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]

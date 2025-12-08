@@ -1,11 +1,8 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
-import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
-
-const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}')`;
 ---
 
-<script is:inline defer async type="module">
+<script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -27,47 +24,45 @@ const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':ne
     }
   }
 
-  const concentCookieValue = getCookieJson('cc_cookie');
+  const consentCookieValue = getCookieJson('cc_cookie');
 
-  // default consent mode
+  // Map vanilla-cookieconsent categories to Google Consent Mode
+  const hasAnalytics = consentCookieValue?.categories?.includes('analytics');
+  const hasMarketing = consentCookieValue?.categories?.includes('marketing');
+  const hasFunctionality =
+    consentCookieValue?.categories?.includes('functionality');
+
+  // Set default consent mode
   gtag('consent', 'default', {
-    ad_storage:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('ad_storage')
-        ? 'denied'
-        : 'granted',
-    ad_user_data:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('ad_user_data')
-        ? 'denied'
-        : 'granted',
-    ad_personalization:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('ad_personalization')
-        ? 'denied'
-        : 'granted',
-    analytics_storage:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('analytics_storage')
-        ? 'denied'
-        : 'granted',
-    personalization_storage:
-      concentCookieValue === null ||
-      !concentCookieValue.categories.includes('personalization_storage')
-        ? 'denied'
-        : 'granted'
+    ad_storage: hasMarketing ? 'granted' : 'denied',
+    ad_user_data: hasMarketing ? 'granted' : 'denied',
+    ad_personalization: hasMarketing ? 'granted' : 'denied',
+    analytics_storage: hasAnalytics ? 'granted' : 'denied',
+    personalization_storage: hasFunctionality ? 'granted' : 'denied'
   });
-</script>
 
-<script is:inline set:html={GTM_SCRIPT} />
+  // Load GTM only if we already have consent (returning visitor)
+  if (consentCookieValue && hasAnalytics) {
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), 'event': 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
+  }
+</script>
 
 <script>
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
+
   // toggle custom black theme
   document.body.classList.add('cc--elegant-black');
 
-  // Trigger consent update when user choices change
+  // Initialize cookie consent
   run(config);
-  //  document.addEventListener('astro:after-swap', () => {   run(config);});
 </script>

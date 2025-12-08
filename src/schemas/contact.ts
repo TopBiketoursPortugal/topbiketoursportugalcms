@@ -2,7 +2,7 @@ import { z } from 'astro:content';
 
 const addressSchema = z.object({
   street: z.string(),
-  number: z.string().optional(),
+  number: z.number().optional(),
   postalCode: z.string().optional(),
   city: z.string().optional(),
   state: z.string().optional(),
