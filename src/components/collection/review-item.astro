@@ -7,6 +7,7 @@ import { getImageByPath } from 'utils/get-image';
 import Prose from '../typography/prose.astro';
 import { getCountryCode } from 'utils/get-country-code';
 import { cn } from '@utils/cn';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 
 type Props = {
   name?: string;
@@ -38,6 +39,7 @@ const countryFlagIcon = countryCode
   : 'icon-[ph--user-circle-light]';
 
 const uniqueId = `review-expand-${Math.random().toString(36).substr(2, 9)}`;
+const excerpt = getMarkdownExcerpt(content, 250);
 ---
 
 <div class="flex flex-col gap-6">
@@ -66,7 +68,10 @@ const uniqueId = `review-expand-${Math.random().toString(36).substr(2, 9)}`;
         <input type="checkbox" id={uniqueId} class="peer hidden" />
         <span class="inline text-neutral-600 dark:text-neutral-300">
           <i class="icon-[ph--quotes-fill]" />
-          <div class="truncate-text">
+          <div class="excerpt block transition-all duration-500 will-change-[max-height]">
+            <p>{excerpt}...</p>
+          </div>
+          <div class="full hidden transition-all duration-500 will-change-[max-height]">
             <Prose markdown={content} />
           </div>
         </span>
@@ -96,28 +101,28 @@ const uniqueId = `review-expand-${Math.random().toString(36).substr(2, 9)}`;
 </div>
 
 <style is:global>
-  .truncate-text p {
+  .truncate-text {
     display: -webkit-box;
     -webkit-line-clamp: 5; /* Limits text to 5 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.5; /* Consistent line height for predictability */
-    max-height: calc(1.5em * 5);
-    transition: all 0.8s cubic-bezier(0.33, 0.11, 0.14, 1);
   }
-  .truncate-text.expand-hover:hover p {
-    max-height: 100vh; /* Use viewport height for smooth animation */
-    transition-timing-function: cubic-bezier(0.33, 0.11, 0.14, 1.4);
-    overflow: clip;
-    text-overflow: unset;
+
+  .truncate-text p {
+    margin-bottom: 0.5em; /* Add some spacing between paragraphs */
+  }
+
+  .truncate-text.expand-hover:hover {
     -webkit-line-clamp: unset;
+    overflow: visible;
   }
 
   /* CSS Hack for Button Expansion */
-  input.peer:checked ~ span .truncate-text p {
-    max-height: none;
-    -webkit-line-clamp: unset;
-    overflow: visible;
+  input.peer:checked ~ span .excerpt {
+    display: none;
+  }
+  input.peer:checked ~ span .full {
+    display: block;
   }
 </style>
