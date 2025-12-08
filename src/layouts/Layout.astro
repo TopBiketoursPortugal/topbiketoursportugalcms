@@ -133,7 +133,7 @@ const seoProps = await getPageSeo(
       showRssFeed
       hrefLangs={Astro.props.hrefLangs}
     />
-    <main class={cn('h-full flex-1', className)}>
+    <main class={cn('h-full flex-1 max-w-7xl mx-auto', className)}>
       <!-- <Breadcrumbs /> -->
       <slot />
     </main>

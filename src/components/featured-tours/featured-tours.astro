@@ -6,6 +6,7 @@ import type { VisuallyEditable } from 'src/types';
 import { getTourPath, getTourTagPath } from 'utils/permalinks';
 import Logo from 'src/assets/icons/logo.svg';
 import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
 type Props = {
   main_feature: string;
   feature_list: readonly string[];
@@ -44,15 +45,22 @@ const tourTags = await getCollection('tourTags');
         );
         return (
           <div class="lg:w-3/4">
-            <a href={featuredTourURL}>
-              <Image
-                class="aspect-video w-full rounded-sm object-cover"
-                alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
-                widths={[320, 500, 640, 960, 1280]}
-                sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
-                src={imageSrc}
-              />
-            </a>
+            <div class="relative">
+              <a href={featuredTourURL}>
+                <Image
+                  class="aspect-video w-full rounded-sm object-cover"
+                  alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
+                  widths={[320, 500, 640, 960, 1280]}
+                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
+                  src={imageSrc}
+                />
+              </a>
+              {tour.data.isNewTour ? (
+                <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+                  {t('Tour.Badge.New', language)}
+                </span>
+              ) : null}
+            </div>
             {tags ? (
               <div class="flex flex-col gap-3 pt-3 sm:flex-row">
                 {tags.map((tag) => {
@@ -95,15 +103,22 @@ const tourTags = await getCollection('tourTags');
 
           return (
             <div>
-              <a href={featuredTourURL}>
-                <Image
-                  class="aspect-video w-full rounded-sm object-cover"
-                  alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
-                  widths={[320, 500, 640]}
-                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
-                  src={imageSrc}
-                />
-              </a>
+              <div class="relative">
+                <a href={featuredTourURL}>
+                  <Image
+                    class="aspect-video w-full rounded-sm object-cover"
+                    alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
+                    widths={[320, 500, 640]}
+                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                    src={imageSrc}
+                  />
+                </a>
+                {tour.data.isNewTour ? (
+                  <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+                    {t('Tour.Badge.New', language)}
+                  </span>
+                ) : null}
+              </div>
               <div>
                 {tags ? (
                   <div class="flex flex-col gap-3 pt-3 sm:flex-row">
