@@ -14,9 +14,17 @@ type Props = {
   content: string;
   rating: number;
   photo?: string;
+  expand_behavior?: 'hover' | 'button' | 'none';
 };
 
-const { name, country, content, rating, photo } = Astro.props;
+const {
+  name,
+  country,
+  content,
+  rating,
+  photo,
+  expand_behavior = 'hover'
+} = Astro.props;
 const imageOptimized = photo
   ? (getImageByPath(photo) satisfies Promise<{
       default: ImageMetadata;
@@ -28,6 +36,8 @@ const countryCode = getCountryCode(country ?? '');
 const countryFlagIcon = countryCode
   ? `icon-[circle-flags--${countryCode.toLowerCase()}]`
   : 'icon-[ph--user-circle-light]';
+
+const uniqueId = `review-expand-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
 <div class="flex flex-col gap-6">
@@ -50,17 +60,45 @@ const countryFlagIcon = countryCode
     }
   </div>
   <p class="text-xl font-semibold">{name} - {country}</p>
-  <span class="inline text-neutral-600 dark:text-neutral-300">
-    <i class="icon-[ph--quotes-fill]"></i>
-    <Prose markdown={content} class="truncate-text" />
-  </span>
+  {
+    expand_behavior === 'button' ? (
+      <>
+        <input type="checkbox" id={uniqueId} class="peer hidden" />
+        <span class="inline text-neutral-600 dark:text-neutral-300">
+          <i class="icon-[ph--quotes-fill]" />
+          <div class="truncate-text">
+            <Prose markdown={content} />
+          </div>
+        </span>
+        <label
+          for={uniqueId}
+          class="text-primary-600 dark:text-primary-400 cursor-pointer font-bold hover:underline"
+        >
+          <span class="inline peer-checked:hidden">Read more</span>
+          <span class="hidden peer-checked:inline">Read less</span>
+        </label>
+      </>
+    ) : (
+      <span class="inline text-neutral-600 dark:text-neutral-300">
+        <i class="icon-[ph--quotes-fill]" />
+        <div
+          class={cn(
+            'truncate-text',
+            expand_behavior === 'hover' && 'expand-hover'
+          )}
+        >
+          <Prose markdown={content} />
+        </div>
+      </span>
+    )
+  }
   <Rating rating={rating} />
 </div>
 
 <style is:global>
   .truncate-text p {
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Limits text to 3 lines */
+    -webkit-line-clamp: 5; /* Limits text to 5 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,11 +106,18 @@ const countryFlagIcon = countryCode
     max-height: calc(1.5em * 5);
     transition: all 0.8s cubic-bezier(0.33, 0.11, 0.14, 1);
   }
-  .truncate-text:hover p {
+  .truncate-text.expand-hover:hover p {
     max-height: 100vh; /* Use viewport height for smooth animation */
     transition-timing-function: cubic-bezier(0.33, 0.11, 0.14, 1.4);
     overflow: clip;
     text-overflow: unset;
     -webkit-line-clamp: unset;
+  }
+
+  /* CSS Hack for Button Expansion */
+  input.peer:checked ~ span .truncate-text p {
+    max-height: none;
+    -webkit-line-clamp: unset;
+    overflow: visible;
   }
 </style>

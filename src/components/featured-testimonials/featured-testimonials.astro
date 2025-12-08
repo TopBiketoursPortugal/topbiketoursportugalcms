@@ -7,40 +7,156 @@ import Stack from '../stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import { getAuthorName } from '@utils/get-author-name';
 import { MapTestimonialToReview } from '@utils/map-testimonial-to-review';
+
 type Props = {
   feature_testimonials: readonly string[];
+  carousel?: boolean;
+  cards_per_row?: number;
+  expand_behavior?: 'hover' | 'button' | 'none';
 } & VisuallyEditable;
 
-const block = Astro.props;
+const {
+  feature_testimonials,
+  carousel = false,
+  cards_per_row = 3,
+  expand_behavior = 'hover'
+} = Astro.props;
+
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const reviews =
   (await getCollection('tours', (item) => item.data.language === language))
     .flatMap((t) => t.data.reviews)
-    .filter((item) => block.feature_testimonials?.includes(item.id ?? '')) ??
-  [];
+    .filter((item) => feature_testimonials?.includes(item.id ?? '')) ?? [];
 const items = reviews.concat(
   (
     await getCollection(
       'testimonials',
       (item) =>
-        block.feature_testimonials?.includes(item.data.id) &&
+        feature_testimonials?.includes(item.data.id) &&
         item.data.language === language
     )
   ).map(MapTestimonialToReview)
 );
+
+const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
 ---
 
 <Stack as="section" class="border-solid sm:p-6" layout="vertical">
-  <Grid cols={3}>
-    {
-      items.map((review) => (
-        <ReviewItem
-          name={getAuthorName(review)}
-          country={review.author?.country}
-          content={review.content}
-          rating={review.rating}
-        />
-      ))
-    }
-  </Grid>
+  {
+    carousel ? (
+      <div class="carousel-container relative">
+        <button
+          class="nav-btn prev absolute top-1/2 -left-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Previous slide"
+        >
+          <i class="icon-[ph--caret-left-bold] text-xl" />
+        </button>
+        <button
+          class="nav-btn next absolute top-1/2 -right-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Next slide"
+        >
+          <i class="icon-[ph--caret-right-bold] text-xl" />
+        </button>
+
+        <div
+          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+        >
+          {items.map((review) => (
+            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+              <ReviewItem
+                name={getAuthorName(review)}
+                country={review.author?.country}
+                content={review.content}
+                rating={review.rating}
+                expand_behavior={expand_behavior}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <Grid cols={cards_per_row as 1 | 2 | 3 | 4}>
+        {items.map((review) => (
+          <ReviewItem
+            name={getAuthorName(review)}
+            country={review.author?.country}
+            content={review.content}
+            rating={review.rating}
+            expand_behavior={expand_behavior}
+          />
+        ))}
+      </Grid>
+    )
+  }
 </Stack>
+
+<script>
+  document.querySelectorAll('.carousel-container').forEach((container) => {
+    const scrollContainer = container.querySelector('.scroll-container');
+    const prevBtn = container.querySelector('.prev') as HTMLButtonElement;
+    const nextBtn = container.querySelector('.next') as HTMLButtonElement;
+
+    if (!scrollContainer || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = () => {
+      // Approximate slide width: take first item width + gap (1.5rem = 24px)
+      const item = scrollContainer.querySelector('.carousel-item');
+      return item ? item.getBoundingClientRect().width + 24 : 300;
+    };
+
+    const updateButtons = () => {
+      prevBtn.disabled = scrollContainer.scrollLeft <= 10;
+      nextBtn.disabled =
+        scrollContainer.scrollLeft >=
+        scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    scrollContainer.addEventListener('scroll', updateButtons);
+    // Initial check
+    updateButtons();
+    // Wait for layout
+    setTimeout(updateButtons, 100);
+  });
+</script>
+
+<style>
+  .carousel-item {
+    width: calc(100% - 2rem); /* Mobile: almost full width with some peek */
+    view-timeline-name: --carousel-item;
+    view-timeline-axis: inline;
+    animation: linear scale-up both;
+    animation-timeline: --carousel-item;
+    animation-range: entry 0% contain 0% exit 0% exit 100%; /* Fallback */
+    animation-range: entry 25% contain 25% exit 25% exit 75%; /* Refined range */
+  }
+
+  @keyframes scale-up {
+    from {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .carousel-item {
+      width: var(--desktop-slide-width);
+    }
+  }
+</style>
