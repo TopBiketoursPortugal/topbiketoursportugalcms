@@ -18,12 +18,12 @@ export type AccordionProps = {
 
 type Props = AccordionProps;
 
-function markdownToText(md:string) {
+function markdownToText(md: string) {
   return md
-    .replace(/!\[.*?\]\(.*?\)/g, '')         // remove images
+    .replace(/!\[.*?\]\(.*?\)/g, '') // remove images
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // remove links but keep text
-    .replace(/[*_~`>#-]/g, '')               // remove common markdown chars
-    .replace(/\n+/g, ' ')                    // collapse new lines
+    .replace(/[*_~`>#-]/g, '') // remove common markdown chars
+    .replace(/\n+/g, ' ') // collapse new lines
     .trim();
 }
 
@@ -31,7 +31,7 @@ const {
   items = [],
   container = 'full',
   padding = 'none',
-   type = ''
+  type = ''
 } = Astro.props;
 const faqSchema =
   type === 'faq'
@@ -49,22 +49,22 @@ const faqSchema =
       }
     : '';
 ---
+
 {
-    type === 'faq' && (
-      <script
-        is:inline
-        async
-        type="application/ld+json"
-        set:html={JSON.stringify(faqSchema)}
-      />
-    ) 
-  }
+  type === 'faq' && (
+    <script
+      is:inline
+      async
+      type="application/ld+json"
+      set:html={JSON.stringify(faqSchema)}
+    />
+  )
+}
 <Container size={container} padding={padding}>
-  
   <div
     role="group"
     aria-label="Accordion"
-    class="accordion flex flex-col gap-2"
+    class="accordion flex flex-col gap-2 [&_details[open]~details]:pointer-events-none [&_details[open]~details]:opacity-50"
   >
     <slot>
       {
@@ -80,7 +80,7 @@ const faqSchema =
                   aria-hidden="true"
                 >
                   <path
-                    class="vertical-line"
+                    class="vertical-line group-open:hidden"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
@@ -108,14 +108,3 @@ const faqSchema =
     </slot>
   </div>
 </Container>
-<style>
-  .accordion details[open] ~ details {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  .accordion details:not([open]) {
-    pointer-events: auto;
-    opacity: 1;
-  }
-</style>

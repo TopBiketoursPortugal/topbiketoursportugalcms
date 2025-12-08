@@ -1,20 +1,19 @@
 ---
-import Icon from 'src/components/utility/icon.astro';
-
 interface Props {
   button_text: string;
   button_icon: string;
   button_link: string;
-  background_color: string;
+  background_color?: string;
   hover_brightness: number;
   text_color: string;
 }
 
 const block = Astro.props;
 const hover_brightness = block.hover_brightness;
+const backgroundColor = block.background_color || '#f70'; // Default to orange if missing
 ---
 
-<button style={`background-color: ${block.background_color};`} class="button">
+<button style={`background-color: ${backgroundColor};`} class="button">
   <a
     style={`color: ${block.text_color}`}
     href={block.button_link}
@@ -23,7 +22,7 @@ const hover_brightness = block.hover_brightness;
     {
       block.button_icon ? (
         <span class="button__icon">
-          <Icon icon={block.button_icon} />
+          <i class={block.button_icon} />
         </span>
       ) : null
     }

@@ -1,5 +1,5 @@
 ---
-import Icon from 'src/components/utility/icon.astro';
+
 ---
 
 <button
@@ -7,13 +7,11 @@ import Icon from 'src/components/utility/icon.astro';
   role="button"
   aria-label="Go to top"
   title="Got to top"
-  class="top fixed bottom-16 right-5 z-[9999] mt-[calc(100vh+50px)] flex h-12 w-12 translate-y-12 items-center justify-center rounded-full bg-slate-900 p-3 text-white opacity-0 transition-all duration-300 hover:scale-110"
-  ><Icon
+  class="top fixed right-5 bottom-16 z-40 mt-[calc(100vh+50px)] flex h-12 w-12 translate-y-12 items-center justify-center rounded-full bg-slate-900 p-3 text-white opacity-0 transition-all duration-300 hover:scale-110"
+  ><i
     aria-hidden="true"
-    icon="ArrowUp"
-    className="h-7 w-7 fill-white text-white"
-    title="Got to top"
-  /></button
+    class="icon-[ph--arrow-up-light] h-7 w-7 fill-white text-white"
+    title="Got to top"></i></button
 >
 <style>
   @keyframes adjust-scroll-button {

@@ -1,7 +1,6 @@
 ---
 import type { LanguageCodes } from 'src/schemas/language';
 import { getBlogPagePath } from 'utils/permalinks';
-import Icon from '../utility/icon.astro';
 import { tv } from 'tailwind-variants';
 import { cn } from 'utils/cn';
 
@@ -74,17 +73,17 @@ const { link, container, item, icon } = pager();
   lastPage !== 1 && (
     <nav class="blog-pagination" aria-label="pagination">
       <ul class={cn('pagination', container())}>
-        <li class={cn('page-item rounded-bl-md rounded-tl-md', item())}>
+        <li class={cn('page-item rounded-tl-md rounded-bl-md', item())}>
           <a
             class={cn(
               link({ disabled: currentPage === 1 }),
-              'page-link rounded-bl-md rounded-tl-md'
+              'page-link rounded-tl-md rounded-bl-md'
             )}
             href={prev}
             aria-label="Previous page"
             aria-disabled={currentPage === 1}
           >
-            <Icon icon="ArrowLeft" className={icon()} />
+            <i class={cn(icon(), 'icon-[ph--arrow-left-light]')} />
           </a>
         </li>
 
@@ -101,18 +100,18 @@ const { link, container, item, icon } = pager();
         ))}
 
         <li
-          class={cn(item(), 'page-item border-r-1 rounded-br-md rounded-tr-md')}
+          class={cn(item(), 'page-item rounded-tr-md rounded-br-md border-r-1')}
         >
           <a
             class={cn(
               link({ disabled: pageLinks.length - 1 === currentPage }),
-              'page-link border-r-1 rounded-br-md rounded-tr-md'
+              'page-link rounded-tr-md rounded-br-md border-r-1'
             )}
             href={next}
             aria-label="Next page"
             aria-disabled={pageLinks.length - 1 === currentPage}
           >
-            <Icon icon="ArrowRight" className={icon()} />
+            <i class={cn(icon(), 'icon-[ph--arrow-right-light]')} />
           </a>
         </li>
       </ul>

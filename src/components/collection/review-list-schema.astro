@@ -1,8 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { ReviewSchema } from 'src/schemas/tours';
-import { getAuthorName } from 'utils/get-author-name';
-import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
+import { getAuthorName } from '@utils/get-author-name';
+import { MapTestimonialToReview } from '@utils/map-testimonial-to-review';
 
 type Props = { items: CollectionEntry<'tours'>[] };
 

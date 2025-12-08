@@ -21,14 +21,13 @@ import TourFaqs from './tour-faqs.astro';
 import TourRelated from './tour-related.astro';
 import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
-import Icon from '../utility/icon.astro';
 import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
 import Stack from '../stack/stack.astro';
 import Grid from '../grid/grid.astro';
 import ReviewItem from '../collection/review-item.astro';
-import { getAuthorName } from 'utils/get-author-name';
+import { getAuthorName } from '@utils/get-author-name';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -130,7 +129,7 @@ const enableFaqs = false;
     {
       minPrice > 0 || minPromoPrice > 0 ? (
         <div class="relative flex items-center gap-2">
-          <Icon icon="ph:tag-light" className="h4 w-4" />
+          <i class="icon-[ph--tag-light] h-5 w-5" aria-hidden="true" />
           <span class="self-end text-sm text-gray-500">
             {t('Tour.Form.FromPrice', language)}
           </span>
@@ -151,9 +150,10 @@ const enableFaqs = false;
 
           <div class="w-2 -translate-x-1">
             <Tooltip class="align-top">
-              <Icon
+              <i
                 slot="trigger"
-                icon="ph:info"
+                class="icon-[ph--info-light] h-5 w-5"
+                aria-hidden="true"
                 title={t('Tour.Form.FromPrice.Info', language)}
               />
               <span slot="content">
@@ -192,7 +192,10 @@ const enableFaqs = false;
         {
           tour.duration ? (
             <li class="flex items-center gap-3">
-              <Icon icon="ph:clock" className="h-5 w-5" />
+              <i
+                class="icon-[ph--clock-countdown-light] h-5 w-5"
+                aria-hidden="true"
+              />
               {tour.duration}
               {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
               {(tour.duration ?? 0) - 1}
@@ -203,7 +206,10 @@ const enableFaqs = false;
         {
           (tour.groupSize?.min ?? 0) + (tour.groupSize?.max ?? 0) > 0 ? (
             <li class="flex items-center gap-3">
-              <Icon icon="ph:users-three-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--users-three-light] h-5 w-5"
+                aria-hidden="true"
+              />
               {t('Tour.Info.Group.Label', language)} :{' '}
               {tour.groupSize?.min ?? 0}-{tour.groupSize?.max ?? 0}
               {t('Tour.Info.Group.Unit', language)}
@@ -213,7 +219,10 @@ const enableFaqs = false;
         {
           tour.distance ? (
             <li class="flex items-center gap-3">
-              <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--map-trifold-light] h-5 w-5"
+                aria-hidden="true"
+              />
               {t('Tour.Info.Distance.Label', language)}: {tour.distance} km
             </li>
           ) : null
@@ -221,22 +230,28 @@ const enableFaqs = false;
         <li class="flex items-center gap-3">
           {
             tour.tourtype !== 'PackageTour' ? (
-              <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--person-simple-walk-light] h-5 w-5"
+                aria-hidden="true"
+              />
             ) : (
-              <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--person-simple-bike-light] h-5 w-5"
+                aria-hidden="true"
+              />
             )
           }
           {t('Tour.Info.Difficulty.Label', language)} : {tour.difficulty}/5
         </li>
         <li class="flex items-center gap-3">
-          <Icon icon="ph:airplane-light" className="h-5 w-5" />{
-            t('Tour.Info.ClosestAirport.Label', language)
-          }: {tour.closestAirport ?? 'Aeroporto Sá Carneiro'}
+          <i class="icon-[ph--airplane-light] h-5 w-5" aria-hidden="true"></i>
+          {t('Tour.Info.ClosestAirport.Label', language)}:{' '}
+          {tour.closestAirport ?? 'Aeroporto Sá Carneiro'}
         </li>
         {
           tour.minAge ? (
             <li class="flex items-center gap-3">
-              <Icon icon="ph:user-light" className="h-5 w-5" />
+              <i class="icon-[ph--user-light] h-5 w-5" aria-hidden="true" />
               {t('Tour.Info.MinAge.Label', language)}: {tour.minAge}
             </li>
           ) : null
@@ -319,13 +334,13 @@ const enableFaqs = false;
     {
       reviews.length > 0 ? (
         <Grid cols={3}>
-          {reviews.map(async ({ content, author, rating }) => (
+          {reviews.map(async (review) => (
             <Stack as="section" class="border-solid sm:p-6" layout="vertical">
               <ReviewItem
-                name={getAuthorName(author)}
-                country={author?.country}
-                content={content}
-                rating={rating}
+                name={getAuthorName(review)}
+                country={review.author?.country}
+                content={review.content}
+                rating={review.rating}
               />
             </Stack>
           ))}

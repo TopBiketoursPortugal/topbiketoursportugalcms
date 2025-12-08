@@ -1,7 +1,6 @@
 ---
 import Tooltip from '../tooltip/tooltip.astro';
 import { tv } from 'tailwind-variants';
-import Icon from '../utility/icon.astro';
 import { cn } from 'utils/cn';
 
 const {
@@ -69,18 +68,16 @@ const containerStyle = cn(container(), className);
     icon ? (
       <Tooltip class="align-top">
         {included ? (
-          <Icon
+          <i
             slot="trigger"
-            icon="ph:check-circle-fill"
+            class="icon-[ph--check-circle-fill] h-8 w-8 fill-green-600 text-green-600"
             title="Included in price."
-            className="text-green-600 h-8 w-8 fill-green-600"
           />
         ) : (
-          <Icon
+          <i
             slot="trigger"
-            icon="ph:x-circle-fill"
+            class="icon-[ph--x-circle-fill] h-8 w-8 fill-red-600 text-red-600"
             title="Not included in price."
-            className="text-red-600 fill-red-600  h-8 w-8"
           />
         )}
 

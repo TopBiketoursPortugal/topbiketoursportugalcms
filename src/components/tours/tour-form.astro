@@ -17,7 +17,7 @@ const { code, title } = Astro.props;
   action={FormData.packageTours ?? 'https://formspree.io/xzbalqpw'}
   method="post"
   id="tour-booking-enquiry-form"
-  class="tour-booking-enquiry-form"
+  class="tour-booking-enquiry-form [&_:is(input,textarea,select):invalid:focus]:border-red-500 [&_:is(input,textarea,select):invalid:focus]:ring-2 [&_:is(input,textarea,select):invalid:focus]:ring-red-500/20"
 >
   <input type="hidden" name="product-code" value={code} />
   <input type="hidden" name="product-title" value={title} />
@@ -121,7 +121,7 @@ const { code, title } = Astro.props;
     <button
       slot="submit"
       type="submit"
-      class="tour-booking-button w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      class="tour-booking-button w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
     >
       {t('Tour.Form.Submit.Text', language)}
     </button>
@@ -133,7 +133,7 @@ const { code, title } = Astro.props;
 
 <!-- Terms and Conditions Modal -->
 <div
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-600 bg-opacity-50 transition-opacity duration-300 peer-checked:flex"
+  class="bg-opacity-50 fixed inset-0 z-50 hidden items-center justify-center bg-gray-600 transition-opacity duration-300 peer-checked:flex"
 >
   <div
     class="max-h-[80vh] w-full max-w-lg transform overflow-y-auto rounded-lg bg-white p-6 shadow-xl transition-all duration-300 dark:bg-gray-800"
@@ -159,20 +159,10 @@ const { code, title } = Astro.props;
     <div class="mt-6 flex justify-end">
       <label
         for="terms-toggle"
-        class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
       >
         {t('Tour.Form.Terms.Modal.Close', language)}
       </label>
     </div>
   </div>
 </div>
-
-<style>
-  /* Custom validation styles */
-  input:invalid:focus,
-  textarea:invalid:focus,
-  select:invalid:focus {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
-  }
-</style>

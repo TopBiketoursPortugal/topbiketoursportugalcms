@@ -1,12 +1,11 @@
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig, envField, passthroughImageService } from 'astro/config';
 import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 
+import tailwindcss from '@tailwindcss/vite';
 import RouteData from './data/routing.json';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 import partytown from '@astrojs/partytown';
@@ -108,7 +107,6 @@ export default defineConfig({
     // spotlightjs(),
     // astroMetaTags(),
     react(),
-    tailwind(),
     bookshop(),
     // svgs({
     //   input: [
@@ -290,23 +288,18 @@ export default defineConfig({
     //   }
     // }
   },
-  // image: {
-  //   // Used for all Markdown images; not configurable per-image
-  //   // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
-  //   experimentalLayout: 'responsive'
-  // },
+  image: {
+    service: process.env.NODE_ENV === 'production'
+      ? { entrypoint: 'astro/assets/services/sharp' }
+      : passthroughImageService()
+  },
 
   // redirects: {
   //   '/[...path]': '/[...path]/'
   // }
   vite: {
     plugins: [
-      createSvgIconsPlugin({
-        iconDirs: [
-          path.resolve(process.cwd(), 'src/assets/icons/used'),
-        ],
-        symbolId: '[name]'
-      }) as Plugin
-    ]
+      tailwindcss() as any,
+    ],
   }
 });

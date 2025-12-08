@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
 import type { ReviewSchema } from 'src/schemas/tours';
-import { getAuthorName } from 'utils/get-author-name';
+import { getAuthorName } from '@utils/get-author-name';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 import { getTourPath, sanitizeUrl } from 'utils/permalinks';
 

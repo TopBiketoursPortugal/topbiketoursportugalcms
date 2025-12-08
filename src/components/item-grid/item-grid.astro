@@ -1,6 +1,5 @@
 ---
 import { twMerge } from 'tailwind-merge';
-import Icon from '../utility/icon.astro';
 import { cn } from 'utils/cn';
 import type { Item } from 'src/types';
 
@@ -16,7 +15,7 @@ type Props = ItemGrid;
 const {
   items = [],
   columns,
-  defaultIcon = 'ph:arrow-right-light',
+  defaultIcon = 'icon-[ph--arrow-right-light]',
   classes = {}
 } = Astro.props;
 
@@ -64,13 +63,14 @@ const {
             >
               <div class="flex justify-center">
                 {(icon || defaultIcon) && (
-                  <Icon
-                    icon={icon || defaultIcon}
-                    className={cn(
-                      'mr-2 h-7 w-7 rtl:ml-2 rtl:mr-0',
+                  <i
+                    class={cn(
+                      'mr-2 h-7 w-7 rtl:mr-0 rtl:ml-2',
+                      icon || defaultIcon,
                       defaultIconClass,
                       itemClasses?.icon
                     )}
+                    aria-hidden="true"
                   />
                 )}
               </div>

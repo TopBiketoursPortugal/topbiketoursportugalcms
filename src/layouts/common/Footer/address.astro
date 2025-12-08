@@ -4,7 +4,6 @@ import { t } from 'utils/i18n';
 import { stack } from 'src/components/stack/stack.style';
 import Stack from 'src/components/stack/stack.astro';
 import LinkButton from 'src/components/linkbutton/linkbutton.astro';
-import Icon from 'src/components/utility/icon.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = { address?: AddressSchema };
@@ -35,7 +34,7 @@ const { address } = Astro.props;
             alignment: 'center'
           })}
         >
-          <Icon icon="ph:compass-fill" className="text-md" />
+          <i class="icon-[ph--compass-fill] h-6 w-6" aria-hidden="true" />
           {t('Button.Directions', language)}
         </LinkButton>
       )}

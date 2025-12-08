@@ -1,6 +1,6 @@
 ---
+import { cn } from '@utils/cn';
 import Languages from 'src/../data/languages.json';
-import Icon from 'src/components/utility/icon.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getHomePermalink } from 'utils/permalinks';
 
@@ -39,8 +39,6 @@ if (localizedUrls?.length === 0) {
     locale: Languages[l.code].locale
   }));
 }
-
-// console.log(localizedUrls);
 ---
 
 <div class="flex flex-row gap-4 text-2xl">
@@ -52,7 +50,7 @@ if (localizedUrls?.length === 0) {
         hreflang={locale}
         class="transition-transform duration-150 hover:scale-125"
       >
-        <Icon title={display} icon={icon!} />
+        <i class={cn(icon!, 'h-6 w-6')} title={display} />
       </a>
     ))
   }

@@ -6,7 +6,6 @@ import LanguageMenu from './LanguageMenu.astro';
 import { getHomePermalink, trimSlash } from 'utils/permalinks';
 import type { HTMLAttributes } from 'astro/types';
 import type { LanguageCodes } from 'src/schemas/language';
-import Icon from 'src/components/utility/icon.astro';
 import type { HrefLang } from 'src/types/hreflang';
 
 interface Link {
@@ -56,7 +55,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky },
-    'top-0 z-40 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-[opacity] ease-in-out dark:bg-slate-950'
+    'top-0 z-50 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-[opacity] ease-in-out dark:bg-slate-950'
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -67,7 +66,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   >
     <div
       class:list={[
-        { 'mr-auto rtl:ml-auto rtl:mr-0': position === 'right' },
+        { 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' },
         'flex w-full justify-between md:w-auto'
       ]}
     >
@@ -83,7 +82,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       </div>
     </div>
     <nav
-      class="hidden w-full items-center overflow-y-auto overflow-x-hidden text-slate-900 dark:text-slate-300 md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible"
+      class="hidden w-full items-center overflow-x-hidden overflow-y-auto text-slate-900 md:mx-5 md:flex md:w-auto md:justify-self-center md:overflow-x-auto md:overflow-y-visible dark:text-slate-300"
       aria-label="Main navigation"
     >
       <ul
@@ -98,12 +97,12 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   <>
                     <button
                       type="button"
-                      class="hover:text-link flex items-center gap-1 whitespace-nowrap px-4 py-3"
+                      class="hover:text-link flex items-center gap-1 px-4 py-3 whitespace-nowrap"
                     >
                       {text}{' '}
-                      <Icon
-                        icon="ph:caret-down-light"
-                        className="hidden h-4 w-4 md:inline"
+                      <i
+                        class="icon-[ph--caret-down-light] hidden h-4 w-4 md:inline"
+                        aria-hidden="true"
                       />
                     </button>
                     <ul class="dropdown-menu rounded pl-4 font-medium text-black drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
@@ -125,7 +124,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 ) : (
                   <a
                     class:list={[
-                      'hover:text-link flex items-center whitespace-nowrap px-4 py-3 text-2xl',
+                      'hover:text-link flex items-center px-4 py-3 text-2xl whitespace-nowrap',
                       { 'aw-link-active': href === currentPath }
                     ]}
                     href={href}
@@ -140,8 +139,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     </nav>
     <div
       class:list={[
-        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-        'fixed bottom-0 left-0 hidden w-full items-center justify-end p-3 rtl:left-auto rtl:right-0 md:static md:mb-0 md:flex md:w-auto md:self-center md:justify-self-end md:p-0'
+        { 'ml-auto rtl:mr-auto rtl:ml-0': position === 'left' },
+        'fixed bottom-0 left-0 hidden w-full items-center justify-end p-3 md:static md:mb-0 md:flex md:w-auto md:self-center md:justify-self-end md:p-0 rtl:right-0 rtl:left-auto'
       ]}
     >
       <div class="flex w-full items-center justify-between gap-4 md:w-auto">
@@ -156,13 +155,13 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           {
             showRssFeed && (
               <a
-                class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm focus:outline-none focus:ring-4 focus:ring-gray-200"
+                class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm focus:ring-4 focus:ring-gray-200 focus:outline-none"
                 aria-label="RSS Feed"
                 href="/feed.xml"
               >
-                <Icon
-                  icon="ph:rss-light"
-                  className="h-5 w-5 hover:scale-125 transition-transform duration-150"
+                <i
+                  class="icon-[ph--rss-light] h-5 w-5 transition-transform duration-150 hover:scale-125"
+                  aria-hidden="true"
                 />
               </a>
             )
@@ -170,7 +169,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         </div>
         {
           actions?.length ? (
-            <span class="ml-4 rtl:ml-0 rtl:mr-4">
+            <span class="ml-4 rtl:mr-4 rtl:ml-0">
               {/* {actions.map((btnProps) => (
                 <button
                   {...btnProps}

@@ -11,7 +11,6 @@ import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
 import LinkButton from '../linkbutton/linkbutton.astro';
-import Icon from '../utility/icon.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
@@ -67,7 +66,7 @@ const tourTags = await getCollection(
 
 <Card href={getTourPath(data, language)} frame="light" {...data}>
   {image && <CardMedia {...image} />}
-  <CardContent display={contentDisplay} class="px-10 pb-8 pt-6 sm:max-xl:px-4">
+  <CardContent display={contentDisplay} class="px-10 pt-6 pb-8 sm:max-xl:px-4">
     <h3 class="font-oswald line-clamp-2 text-xl font-bold">
       {data.title}
     </h3>
@@ -79,9 +78,12 @@ const tourTags = await getCollection(
       {
         duration && duration > 0 ? (
           <span class="flex gap-2 text-gray-600">
-            <Icon icon="ph:clock-countdown-light" /> {duration}{' '}
-            {t('Tour.Info.Duration.Unit.Days', language)} / {duration - 1}{' '}
-            {t('Tour.Info.Duration.Unit.Nights', language)}
+            <i
+              class="icon-[ph--clock-countdown-light] h-5 w-5"
+              aria-hidden="true"
+            />{' '}
+            {duration} {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
+            {duration - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
           </span>
         ) : null
       }
@@ -89,9 +91,15 @@ const tourTags = await getCollection(
         difficulty && difficulty > 0 && (
           <span class="flex gap-2 text-gray-600">
             {tourtype !== 'PackageTour' ? (
-              <Icon icon="ph:person-simple-walk-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--person-simple-walk-light] h-5 w-5"
+                aria-hidden="true"
+              />
             ) : (
-              <Icon icon="ph:person-simple-bike-light" className="h-5 w-5" />
+              <i
+                class="icon-[ph--person-simple-bike-light] h-5 w-5"
+                aria-hidden="true"
+              />
             )}
             {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
           </span>
@@ -100,7 +108,10 @@ const tourTags = await getCollection(
       {
         distance && distance > 0 ? (
           <div class="flex items-center gap-2">
-            <Icon icon="ph:map-trifold-light" className="h-5 w-5" />
+            <i
+              class="icon-[ph--map-trifold-light] h-5 w-5"
+              aria-hidden="true"
+            />
             <span>
               {t('Tour.Info.Distance.Label', language)}: {distance} km
             </span>
@@ -137,9 +148,9 @@ const tourTags = await getCollection(
     {
       tourTags && tourTags.length > 0 && (
         <Stack spacing="small" alignment="center" class="flex-wrap">
-          <Icon
-            icon="ph:bookmark-simple-light"
-            className="text-gray-600 h-5 w-5"
+          <i
+            class="icon-[ph--bookmark-simple-light] h-5 w-5"
+            aria-hidden="true"
           />
           {tourTags.map((t) => (
             <LinkButton

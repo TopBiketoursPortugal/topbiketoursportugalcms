@@ -1,11 +1,12 @@
 ---
 /** @jsxImportSource astro */
+import 'src/safelist-icons.ts';
 import { Image } from 'astro:assets';
 import Rating from 'src/components/rating/rating.astro';
 import { getImageByPath } from 'utils/get-image';
-import Icon from 'src/components/utility/icon.astro';
 import Prose from '../typography/prose.astro';
 import { getCountryCode } from 'utils/get-country-code';
+import { cn } from '@utils/cn';
 
 type Props = {
   name?: string;
@@ -25,11 +26,11 @@ const imageOptimized = photo
 const countryCode = getCountryCode(country ?? '');
 
 const countryFlagIcon = countryCode
-  ? `circle-flags:${countryCode.toLowerCase()}`
-  : 'ph:user-circle-light';
+  ? `icon-[circle-flags--${countryCode.toLowerCase()}]`
+  : 'icon-[ph--user-circle-light]';
 ---
 
-<div class="max-w-56 flex flex-col gap-6">
+<div class="flex flex-col gap-6">
   <div class="flex justify-center">
     {
       imageOptimized ? (
@@ -44,13 +45,13 @@ const countryFlagIcon = countryCode
           class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
         />
       ) : (
-        <Icon icon={countryFlagIcon} className="h-12 w-12 mb-6" />
+        <i class={cn('mb-6 h-12 w-12', countryFlagIcon)} />
       )
     }
   </div>
   <p class="text-xl font-semibold">{name} - {country}</p>
   <span class="inline text-neutral-600 dark:text-neutral-300">
-    <Icon icon="ph:quotes-fill" />
+    <i class="icon-[ph--quotes-fill]"></i>
     <Prose markdown={content} class="truncate-text" />
   </span>
   <Rating rating={rating} />

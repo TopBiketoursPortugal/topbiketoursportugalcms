@@ -1,6 +1,5 @@
 ---
 import ContactsData from "src/../data/contact.json"
-import Icon from "src/components/utility/icon.astro";
 import type { ContactSchema } from "src/schemas/contact";
 import type { LanguageCodes } from "src/schemas/language";
 import { cleanPhoneNumberFormatting } from "utils/clean-phone-number-formatting";
@@ -23,7 +22,7 @@ const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-
 
 <div class={style}>
 	<div class="flex flex-col items-center gap-6">
-		<Icon icon="ph:phone-light" class="pb-4 w-12 h-12" />
+		<i class="icon-[ph--phone-light] pb-4 w-12 h-12" aria-hidden="true" />
 		<h3 class="font-bold">{t('Contact.Feature.Phone.Label', language)}</h3>
 		<h6 class="text-pretty text-slate-600 text-center">
 			{t('Contact.Feature.Phone.Description', language)}
@@ -41,14 +40,14 @@ const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-
 						aria-label="Chat on WhatsApp"
                         class="flex items-center gap-1"
 					>
-						<Icon icon="ph:whatsapp-logo-light" className="text-md" /><span>whatsapp</span>
+						<i class="icon-[ph--whatsapp-logo-light]  text-md " aria-hidden="true" /><span>whatsapp</span>
 					</a>}
                 </div>
 			)
 		}
 	</div>
 	<div class="flex flex-col items-center gap-6">
-		<Icon icon="ph:envelope-simple-light" className="pb-4  w-12 h-12" />
+		<i class="icon-[ph--envelope-light] pb-4 w-12 h-12" aria-hidden="true" />
 		<h3 class="font-bold">{t('Contact.Feature.Email.Label', language)}</h3>
 		<h6 class="text-pretty text-slate-600 text-center">
 			{t('Contact.Feature.Email.Description', language)}
@@ -66,7 +65,7 @@ const style=cn("grid grid-cols-1 gap-6 p-4 placeholder-blue-400 lg:p-12 lg:grid-
 		}
 	</div>
 	<div class="flex flex-col items-center gap-6">
-		<Icon icon="ph:navigation-arrow-light" className="pb-4  w-12 h-12" />
+		<i class="icon-[ph--navigation-arrow-light] pb-4 w-12 h-12" aria-hidden="true" />
 		<h3 class="font-bold">{t('Contact.Feature.Address.Label', language)}</h3>
 		<h6 class="text-pretty text-slate-600 text-center">
 			{t('Contact.Feature.Address.Description', language)}

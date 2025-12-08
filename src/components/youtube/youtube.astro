@@ -54,10 +54,7 @@ export interface Props extends YouTubeVideoProps {
 
 const {
   videoId,
-  width = '100%',
-  height = '400px',
   title = 'YouTube Video Player',
-  allowFullscreen = true,
   loading = 'lazy',
   className = ''
 } = Astro.props;
@@ -66,16 +63,24 @@ const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
 ---
 
-<figure class={`youtube-video-container ${className}`}>
+<figure class={`youtube-video-container m-0 max-w-full ${className}`}>
   <div
-    class="youtube-video-wrapper"
+    class="youtube-video-wrapper relative h-0 w-full overflow-hidden bg-black"
     style={`padding-bottom: ${(9 / 16) * 100}%;`}
     data-video-id={videoId}
   >
-    <div class="youtube-facade">
-      <img src={thumbnailUrl} alt={title} loading={loading} decoding="async" />
+    <div
+      class="youtube-facade absolute top-0 left-0 h-full w-full cursor-pointer"
+    >
+      <img
+        src={thumbnailUrl}
+        alt={title}
+        loading={loading}
+        decoding="async"
+        class="absolute top-0 left-0 h-full w-full object-cover"
+      />
       <button
-        class="youtube-play-button"
+        class="youtube-play-button absolute top-1/2 left-1/2 h-[48px] w-[68px] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-none bg-transparent p-0 transition-transform duration-200 hover:scale-110"
         aria-label={`Play ${title}`}
         data-embed-url={embedUrl}
       >
@@ -88,68 +93,14 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
       </button>
     </div>
   </div>
-  {title && <figcaption>{title}</figcaption>}
+  {
+    title && (
+      <figcaption class="mt-2 text-center text-[0.9rem] text-[var(--text-color-secondary)]">
+        {title}
+      </figcaption>
+    )
+  }
 </figure>
-
-<style>
-  .youtube-video-container {
-    margin: 0;
-    max-width: 100%;
-  }
-  .youtube-video-wrapper {
-    position: relative;
-    width: 100%;
-    height: 0;
-    overflow: hidden;
-    background-color: #000;
-  }
-  .youtube-facade {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  .youtube-facade img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .youtube-play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 68px;
-    height: 48px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: transform 0.2s;
-  }
-  .youtube-play-button:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-  .youtube-video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  .youtube-video-container figcaption {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-color-secondary);
-    text-align: center;
-  }
-</style>
 
 <script>
   function initYouTubeFacades() {
@@ -166,6 +117,7 @@ const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
         if (embedUrl && wrapper) {
           const iframe = document.createElement('iframe');
           iframe.setAttribute('src', embedUrl);
+          iframe.className = 'absolute top-0 left-0 w-full h-full border-none';
           iframe.setAttribute(
             'allow',
             'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'

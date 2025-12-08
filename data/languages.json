@@ -6,7 +6,7 @@
     "isDefault": true,
     "locale": "en-US",
     "textDirection": "ltr",
-    "icon": "circle-flags:us"
+    "icon": "icon-[circle-flags--us]"
   },
   "pt": {
     "code": "pt",
@@ -15,6 +15,6 @@
     "isDefault": false,
     "locale": "pt-PT",
     "textDirection": "ltr",
-    "icon": "circle-flags:pt"
+    "icon": "icon-[circle-flags--pt]"
   }
 }

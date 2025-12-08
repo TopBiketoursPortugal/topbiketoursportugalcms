@@ -1,5 +1,5 @@
 ---
-import '../styles/main.css';
+import '../styles/global.css';
 import { SEO } from 'astro-seo';
 import { ClientRouter } from 'astro:transitions';
 import SiteVerification from './common/SiteVerification.astro';
@@ -103,6 +103,8 @@ const seoProps = await getPageSeo(
     {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
     <script src="/src/pwa.ts"></script>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
+    ></script>
     <script is:inline>
       var $wc_load = function (a) {
           return JSON.parse(JSON.stringify(a));
@@ -116,37 +118,10 @@ const seoProps = await getPageSeo(
           }
         };
     </script>
-    <script src="https://s.ksrndkehqnwntyxlhgto.com/137152.js"></script>
   </head>
   <body
     class="text-default flex min-h-screen flex-col overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
   >
-    <script>
-      import 'virtual:svg-icons-register';
-    </script>
-    <script is:inline>
-      // Preserve SVG sprite across page navigations
-      let svgSpriteElement = null;
-
-      // Before Astro swaps the page, save the SVG sprite
-      document.addEventListener('astro:before-swap', (event) => {
-        const sprite = document.getElementById('__svg__icons__dom__');
-        if (sprite) {
-          svgSpriteElement = sprite.cloneNode(true);
-        }
-      });
-
-      // After Astro swaps the page, restore the SVG sprite
-      document.addEventListener('astro:after-swap', () => {
-        if (svgSpriteElement) {
-          const existingSprite = document.getElementById('__svg__icons__dom__');
-          if (existingSprite) {
-            existingSprite.remove();
-          }
-          document.body.appendChild(svgSpriteElement);
-        }
-      });
-    </script>
     <BasicScripts />
     <slot name="announcement">
       <Announcement language={language} />
@@ -181,11 +156,5 @@ const seoProps = await getPageSeo(
         });
       </script>
     </div>
-    <style is:global>
-      :root {
-        --pageContainer: 1280px;
-        --pagePadding: 2rem;
-      }
-    </style>
   </body>
 </html>

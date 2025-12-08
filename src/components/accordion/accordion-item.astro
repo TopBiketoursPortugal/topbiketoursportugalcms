@@ -15,13 +15,13 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
 <details
   open={open}
   class={clsx(
-    'overflow-hidden border border-gray-200 dark:border-gray-900',
+    'group overflow-hidden border border-gray-200 dark:border-gray-900',
     className
   )}
   id={id}
 >
   <summary
-    class="w-full cursor-pointer"
+    class="w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden"
     aria-controls={`${id}-content`}
     aria-expanded="false"
   >
@@ -31,7 +31,7 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
       >
         <span class="font-medium">{title}</span>
         <svg
-          class="h-5 w-5 transform transition-transform duration-300 ease-in-out hover:bg-slate-200 dark:hover:bg-neutral-800"
+          class="h-5 w-5 transform transition-transform duration-300 ease-in-out group-open:rotate-180 hover:bg-slate-200 dark:hover:bg-neutral-800"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
   </summary>
   <div
     id={`${id}-content`}
-    class="origin-top transform bg-white transition-all duration-500 ease-in-out dark:bg-black"
+    class="max-h-0 origin-top scale-y-95 transform bg-white opacity-0 transition-all duration-500 ease-in-out group-open:max-h-200 group-open:scale-y-100 group-open:opacity-100 dark:bg-black"
     role="region"
     aria-labelledby={`${id}-heading`}
   >
@@ -57,43 +57,3 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
     </div>
   </div>
 </details>
-
-<style is:global>
-  /* Chevron rotation */
-  details[open] summary svg {
-    transform: rotate(180deg);
-  }
-
-  details[open] summary svg path.vertical-line {
-    display: none;
-  }
-
-  /* Summary background and slight scale */
-  /* details[open] summary {
-    @apply bg-gray-200;
-  } */
-
-  /* Content animation */
-  details:not([open]) > div {
-    max-height: 0;
-    opacity: 0;
-    transform: scaleY(0.95);
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  details[open] > div {
-    max-height: 50rem; /* Adjust as needed */
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  /* Remove default marker */
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary {
-    list-style: none;
-  }
-</style>

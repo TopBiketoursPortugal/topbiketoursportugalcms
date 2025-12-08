@@ -2,35 +2,35 @@
   "facebook": {
     "trackId": "",
     "href": "https://www.facebook.com/topbiketoursportugal/",
-    "icon": "ph:facebook-logo-light",
+    "icon": "icon-[ph--facebook-logo-light]",
     "alt": "Facebook",
     "target": "_blank"
   },
   "instagram": {
     "trackId": null,
     "href": "https://www.instagram.com/topbiketoursportugal/",
-    "icon": "ph:instagram-logo-light",
+    "icon": "icon-[ph--instagram-logo-light]",
     "alt": "Instagram",
     "target": "_blank"
   },
   "tripadvisor": {
     "trackId": "",
     "href": "https://www.tripadvisor.com/Attraction_Review-g189180-d4105907-Reviews-Top_Bike_Tours_Portugal-Porto_Porto_District_Northern_Portugal.html",
-    "icon": "fa:tripadvisor",
+    "icon": "icon-[fa--tripadvisor]",
     "alt": "TripAdvisor",
     "target": "_blank"
   },
   "twitter": {
     "trackId": "",
     "href": "https://x.com/FoldnVisit",
-    "icon": "ph:x-logo-light",
+    "icon": "icon-[ph--x-logo-light]",
     "alt": "X",
     "target": "_blank"
   },
   "whatsapp": {
     "trackId": "",
     "href": "https://wa.me/+351915316999",
-    "icon": "ph:whatsapp-logo-light",
+    "icon": "icon-[ph--whatsapp-logo-light]",
     "alt": "Whatsapp",
     "target": "_blank"
   }

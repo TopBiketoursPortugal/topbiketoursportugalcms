@@ -1,7 +1,6 @@
 ---
 /** @jsxImportSource astro */
 import { cn } from 'utils/cn';
-import Icon from 'src/components/utility/icon.astro';
 
 type Props = {
   rating: number;
@@ -39,10 +38,9 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.fullStars > 0 &&
       [...Array(startDistribution.fullStars).keys()].map(() => (
         <li>
-          <Icon
-            icon="ph:star-fill"
+          <i
             aria-label="Star rating"
-            className={startIconStyle}
+            class={cn(startIconStyle, 'icon-[ph--star-fill]')}
           />
         </li>
       ))
@@ -50,10 +48,9 @@ const startDistribution = getStarDistribution(rating);
   {
     startDistribution.halfStars && (
       <li>
-        <Icon
-          icon="ph:star-half-fill"
+        <i
           aria-label="Half Star rating"
-          className={startIconStyle}
+          class={cn(startIconStyle, 'icon-[ph--star-half-fill]')}
         />
       </li>
     )
@@ -62,10 +59,9 @@ const startDistribution = getStarDistribution(rating);
     startDistribution.emptyStars > 0 &&
       [...Array(startDistribution.emptyStars).keys()].map(() => (
         <li>
-          <Icon
-            icon="ph:star-light"
-            aria-label="Half Star rating"
-            className={startIconStyle}
+          <i
+            aria-label="Empty Star rating"
+            class={cn(startIconStyle, 'icon-[ph--star-light]')}
           />
         </li>
       ))

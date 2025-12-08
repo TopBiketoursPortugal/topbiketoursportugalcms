@@ -41,10 +41,3 @@ const hrefs = await getPageLanguagesAlternates(page, Astro.site);
     <PageLayout frontmatter={page.data as any} hrefs={hrefs} />
   ) : null
 }
-
-<style is:global>
-  :root {
-    --pageContainer: 1280px;
-    --pagePadding: 2rem;
-  }
-</style>
