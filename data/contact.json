@@ -2,7 +2,7 @@
   "en": {
     "address": {
       "street": "Rua Dom João IV 385, nº1",
-      "number": "62",
+      "number": 62,
       "postalCode": "4000-303",
       "city": "Oporto",
       "state": "Oporto",
@@ -19,7 +19,7 @@
   "pt": {
     "address": {
       "street": "Rua Dom João IV 385, nº1",
-      "number": "62",
+      "number": 62,
       "postalCode": "4000-303",
       "city": "Porto",
       "state": "Porto",
