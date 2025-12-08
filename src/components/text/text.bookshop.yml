@@ -53,12 +53,9 @@ _inputs:
   padding:
     options:
       values:
-        - name: Tight
-          value: tight
-        - name: Normal
-          value: normal
-        - name: Loose
-          value: loose
+        - tight
+        - normal
+        - loose
       preview:
         icon: 'short_text'
         text:
@@ -66,10 +63,8 @@ _inputs:
   container:
     options:
       values:
-        - name: Full
-          value: full
-        - name: Centered
-          value: centered
+        - full
+        - centered
       preview:
         icon: 'short_text'
         text:
@@ -77,12 +72,9 @@ _inputs:
   align:
     options:
       values:
-        - name: Leading
-          value: leading
-        - name: Trailing
-          value: trailing
-        - name: Centered
-          value: centered
+        - leading
+        - trailing
+        - centered
       value_key: value
       preview:
         icon: 'short_text'

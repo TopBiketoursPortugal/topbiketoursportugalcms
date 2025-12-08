@@ -27,7 +27,9 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 ---
 
-<section class="mx-auto flex flex-col gap-6 py-[48px] lg:flex-row">
+<section
+  class="mx-auto flex max-w-7xl flex-col gap-6 px-[48px] py-[48px] lg:flex-row"
+>
   {
     allPosts
       .filter(

@@ -4,6 +4,7 @@ import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
 import type { FeaturedPost } from 'src/content/config';
 import LanguageData from 'src/../data/languages.json';
+import { cn } from '@utils/cn';
 
 export type PaginatedProps = {
   frontmatter: {
@@ -13,6 +14,7 @@ export type PaginatedProps = {
     seo?: SEOProps;
   };
   hrefs?: ReadonlyArray<HrefLang>;
+  class?: string;
 };
 
 type Props = PaginatedProps;
@@ -21,13 +23,17 @@ if (!Astro.props.frontmatter) {
   // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
   throw new Error('Page frontmatter must be defined missing');
 }
-const { frontmatter: props, hrefs = [] } = Astro.props;
+const { frontmatter: props, hrefs = [], class: className } = Astro.props;
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 //console.log(hrefs);
 ---
 
-<Layout {...props} hrefLangs={hrefs}>
+<Layout
+  {...props}
+  hrefLangs={hrefs}
+  class={cn('flex flex-col gap-3 p-3 sm:gap-10 sm:p-16', className)}
+>
   <slot name="head" slot="head">
     {
       defaultHref ? (
@@ -45,21 +51,8 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     }
   </slot>
 
-  <div class="blog-index py-[48px]">
-    <h1
-      class="mt-[48px] text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
-    >
-      {props.title}
-    </h1>
-    {
-      Astro.props.frontmatter?.featured_posts !== null &&
-      Astro.props.frontmatter?.featured_posts !== undefined ? (
-        <FeaturedPosts
-          bookshop:live
-          {...Astro.props.frontmatter.featured_posts}
-        />
-      ) : null
-    }
-    <slot />
-  </div>
+  <h1 class="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl">
+    {props.title}
+  </h1>
+  <slot />
 </Layout>
