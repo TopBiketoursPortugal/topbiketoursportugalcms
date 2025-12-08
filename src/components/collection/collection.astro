@@ -4,6 +4,7 @@ import Prose from '../typography/prose.astro';
 type Props = {
   type:
     | 'tours'
+    | 'tour-regions'
     | 'tours-package-tour'
     | 'tours-day-tour'
     | 'reviews'
@@ -13,7 +14,7 @@ type Props = {
   display: 'slideshow' | 'list';
   contentDisplay: 'overlay' | 'inline';
   frame: 'none' | 'light' | 'heavy';
-  layout: 'horizontal' | 'vertical';
+  layout: 'horizontal' | 'vertical' | 'overlay' | 'hstack';
   title: string;
 };
 
@@ -24,7 +25,7 @@ const collectionComponentImports = import.meta.glob(
   }
 );
 
-const { type = 'tours', ...data } = Astro.props;
+const { type = 'tours', title, ...data } = Astro.props;
 
 const componentName = `/src/components/collection/${type}-collection.astro`;
 const CollectionComponent = (collectionComponentImports[componentName] as any)
@@ -32,6 +33,6 @@ const CollectionComponent = (collectionComponentImports[componentName] as any)
 ---
 
 <div class="flex flex-col gap-3 p-3 sm:gap-10 sm:p-16">
-  {data.title ? <Prose markdown={data.title} class="px-6" /> : null}
+  {title ? <Prose markdown={title} /> : null}
   <CollectionComponent {...data} />
 </div>

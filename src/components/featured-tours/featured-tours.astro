@@ -7,9 +7,14 @@ import { getTourPath, getTourTagPath } from 'utils/permalinks';
 import Logo from 'src/assets/icons/logo.svg';
 import type { LanguageCodes } from 'src/schemas/language';
 import { t } from 'utils/i18n';
+import Prose from '../typography/prose.astro';
+import Text from 'src/components/typography/text.astro';
+
 type Props = {
-  main_feature: string;
-  feature_list: readonly string[];
+  title?: string;
+  main_feature?: string;
+  feature_list?: readonly string[];
+  feature_tours?: readonly string[];
 } & VisuallyEditable;
 
 const block = Astro.props;
@@ -17,78 +22,28 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
 );
+
+const feature_tours = block.feature_tours ?? [];
+const main_feature = block.main_feature ?? feature_tours[0];
+const feature_list = block.feature_list ?? feature_tours.slice(1);
+
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const allTours = await getCollection(
   'tours',
   (tour) =>
-    (block.main_feature === tour.data.id ||
-      block.feature_list?.includes(tour.data.id)) &&
+    (main_feature === tour.data.id || feature_list?.includes(tour.data.id)) &&
     tour.data.language === language
 );
 
 const tourTags = await getCollection('tourTags');
 ---
 
-<section class="flex flex-col gap-6 py-[48px] lg:flex-row">
-  {
-    allTours
-      .filter((tour) => block.main_feature === tour.data.id)
-      .map((tour) => {
-        const featuredTourURL = getTourPath(tour.data);
-        const imageSrc =
-          (tour.data.image?.src
-            ? images[tour.data.image?.src]?.default
-            : null) ?? Logo;
-        const tags = tourTags.filter(
-          (t) =>
-            tour.data.tags?.includes(t.data.id) && t.data.language === language
-        );
-        return (
-          <div class="lg:w-3/4">
-            <div class="relative">
-              <a href={featuredTourURL}>
-                <Image
-                  class="aspect-video w-full rounded-sm object-cover"
-                  alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
-                  widths={[320, 500, 640, 960, 1280]}
-                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
-                  src={imageSrc}
-                />
-              </a>
-              {tour.data.isNewTour ? (
-                <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
-                  {t('Tour.Badge.New', language)}
-                </span>
-              ) : null}
-            </div>
-            {tags ? (
-              <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                {tags.map((tag) => {
-                  return (
-                    <a href={getTourTagPath(tag, language)}>
-                      <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                        {tag.data.name ?? tag.data.title}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-            ) : (
-              ''
-            )}
-            <a href={featuredTourURL}>
-              <h3 class="py-2 text-3xl font-semibold">{tour.data.title}</h3>
-            </a>
-          </div>
-        );
-      })
-  }
-  <div
-    class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
-  >
+<section class="flex flex-col gap-6 py-[48px]">
+  {block.title ? <Prose markdown={block.title} class="px-6" /> : null}
+  <div class="flex flex-col gap-6 lg:flex-row">
     {
       allTours
-        .filter((tour) => block.feature_list?.includes(tour.data.id))
+        .filter((tour) => main_feature === tour.data.id)
         .map((tour) => {
           const featuredTourURL = getTourPath(tour.data);
           const imageSrc =
@@ -100,16 +55,15 @@ const tourTags = await getCollection('tourTags');
               tour.data.tags?.includes(t.data.id) &&
               t.data.language === language
           );
-
           return (
-            <div>
+            <div class="lg:w-3/4">
               <div class="relative">
                 <a href={featuredTourURL}>
                   <Image
                     class="aspect-video w-full rounded-sm object-cover"
-                    alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
-                    widths={[320, 500, 640]}
-                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                    alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
+                    widths={[320, 500, 640, 960, 1280]}
+                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
                     src={imageSrc}
                   />
                 </a>
@@ -119,30 +73,103 @@ const tourTags = await getCollection('tourTags');
                   </span>
                 ) : null}
               </div>
-              <div>
-                {tags ? (
-                  <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                    {tags.map((tag) => {
-                      return (
-                        <a href={getTourTagPath(tag, language)}>
-                          <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                            {tag.data.name ?? tag.data.title}
-                          </span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  ''
-                )}
-                <a href={featuredTourURL}>
-                  <h3 class="py-1 text-2xl font-semibold">{tour.data.title}</h3>
-                </a>
-              </div>
+              {tags ? (
+                <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                  {tags.map((tag) => {
+                    return (
+                      <a href={getTourTagPath(tag, language)}>
+                        <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                          {tag.data.name ?? tag.data.title}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              ) : null}
+
+              <a href={featuredTourURL}>
+                <h3 class="py-2 text-3xl font-semibold">{tour.data.title}</h3>
+                <Text
+                  as="p"
+                  class="line-clamp-3 text-gray-600 dark:text-gray-400"
+                >
+                  {tour.data.seo?.page_description || tour.data.description}
+                </Text>
+              </a>
             </div>
           );
         })
     }
+    <div
+      class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
+    >
+      {
+        allTours
+          .filter((tour) => feature_list?.includes(tour.data.id))
+          .map((tour) => {
+            const featuredTourURL = getTourPath(tour.data);
+            const imageSrc =
+              (tour.data.image?.src
+                ? images[tour.data.image?.src]?.default
+                : null) ?? Logo;
+            const tags = tourTags.filter(
+              (t) =>
+                tour.data.tags?.includes(t.data.id) &&
+                t.data.language === language
+            );
+
+            return (
+              <div>
+                <div class="relative">
+                  <a href={featuredTourURL}>
+                    <Image
+                      class="aspect-video w-full rounded-sm object-cover"
+                      alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
+                      widths={[320, 500, 640]}
+                      sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
+                      src={imageSrc}
+                    />
+                  </a>
+                  {tour.data.isNewTour ? (
+                    <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+                      {t('Tour.Badge.New', language)}
+                    </span>
+                  ) : null}
+                </div>
+                <div>
+                  {tags ? (
+                    <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                      {tags.map((tag) => {
+                        return (
+                          <a href={getTourTagPath(tag, language)}>
+                            <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                              {tag.data.name ?? tag.data.title}
+                            </span>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  <a href={featuredTourURL}>
+                    <h3 class="py-1 text-2xl font-semibold">
+                      {tour.data.title}
+                      <Text
+                        as="p"
+                        class="line-clamp-3 text-gray-600 dark:text-gray-400"
+                      >
+                        {tour.data.seo?.page_description ||
+                          tour.data.description}
+                      </Text>
+                    </h3>
+                  </a>
+                </div>
+              </div>
+            );
+          })
+      }
+    </div>
   </div>
 </section>
 
