@@ -1,7 +1,3 @@
-_schema: _schema
-bookshop:
-  exclude:
-    - src/components/utility/icon.astro
 paths:
   uploads: src/assets/images
   static: ''
@@ -12,8 +8,8 @@ collections_config:
       - '**/*.md*'
     name: Pages
     icon: laptop_mac
-    # /home, /pt/home
-    url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|strip|prepend:'/'|replace:'/home','/'|append:'/'|replace:'//','/'}"
+    url: >-
+      /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|strip|prepend:'/'|replace:'/home','/'|append:'/'|replace:'//','/'}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -52,7 +48,8 @@ collections_config:
           _inputs:
           _select_data:
           _structures:
-        new_preview_url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
+        new_preview_url: >-
+          /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/
       paginated:
         path: schemas/paginated.mdx
         reorder_inputs: true
@@ -70,7 +67,8 @@ collections_config:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /[relative_base_path]/blog/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/blog/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -82,7 +80,6 @@ collections_config:
         options:
           allow_create: false
           allow_empty: true
-          empty_type: array
           values: collections.blog
           value_key: id
           preview:
@@ -92,6 +89,8 @@ collections_config:
               - key: language
             image:
               - key: image.src
+          empty_type: array
+        cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -131,7 +130,7 @@ collections_config:
       tags:
         type: multiselect
         options:
-          empty_type: array
+          allow_empty: true
           values: collections.postTags
           value_key: id
           preview:
@@ -141,8 +140,8 @@ collections_config:
               - key: language
             image:
               - key: seo.featured_image
-        comment: >-
-          To add a new tag, go to the postTags collection
+          empty_type: array
+        comment: To add a new tag, go to the postTags collection
         cascade: true
     add_options:
       - name: Add New Post
@@ -188,7 +187,8 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
@@ -215,18 +215,6 @@ collections_config:
       included[*].description:
         type: markdown
         cascade: true
-      # reviews:
-      #   options:
-      #     empty_type: array
-      #     structures: _structures.reviews
-      # reviews[*].id:
-      #   type: auto
-      #   instance_value: UUID
-      #   hidden: true
-      #   cascade: true
-      # reviews[*].title:
-      #   type: markdown
-      #   cascade: true
       itinerary:
         type: array
         options:
@@ -242,14 +230,13 @@ collections_config:
       itinerary[*].location:
         type: object
         options:
-          allow_label_formatting: false
-          place_groups_below: false
           subtype: object
           empty_type: 'null'
           preview:
             text: city
             subtext: countryCode.englishName
             icon: map
+          place_groups_below: false
         cascade: true
       itinerary[*].location.lat:
         type: text
@@ -279,7 +266,6 @@ collections_config:
         type: multiselect
         options:
           allow_empty: true
-          empty_type: array
           values: collections.tours
           value_key: id
           preview:
@@ -289,6 +275,7 @@ collections_config:
               - key: language
             image:
               - key: image.src
+          empty_type: array
         cascade: true
       faqs:
         type: array
@@ -312,7 +299,6 @@ collections_config:
         type: multiselect
         options:
           allow_empty: true
-          empty_type: array
           values: collections.tourTags
           value_key: id
           preview:
@@ -322,6 +308,7 @@ collections_config:
               - key: language
             image:
               - key: seo.featured_image
+          empty_type: array
         cascade: true
       id:
         type: auto
@@ -342,8 +329,7 @@ collections_config:
               - key: language
             image:
               - key: seo.featured_image
-        comment: >-
-          To add a new region, go to the tour regions collection
+        comment: To add a new region, go to the tour regions collection
         cascade: true
       content:
         type: markdown
@@ -367,7 +353,6 @@ collections_config:
         schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
-
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
@@ -394,31 +379,47 @@ collections_config:
       - '**/*.md*'
     name: Testimonials
     singular_name: Testimonial
+    icon: notes
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - template: '{language} - {author.country} - {author.name}'
+    _enabled_editors:
+      - content
     _inputs:
       id:
         type: auto
         instance_value: UUID
         hidden: true
+        cascade: true
       title:
         type: text
+        cascade: true
       quote:
         type: markdown
+        cascade: true
       reviewSource:
         type: url
         options:
-          hide_link_to_email_address: true
           hide_link_to_file: true
           hide_link_to_page: true
+          hide_link_to_email_address: true
+        cascade: true
       score:
         type: number
         options:
           min: 1
           max: 5
+        cascade: true
       author.avatar:
         type: image
+        cascade: true
       relatedProduct:
         type: select
         options:
+          allow_empty: true
           values: collections.tours
           value_key: id
           preview:
@@ -428,6 +429,7 @@ collections_config:
               - key: language
             image:
               - key: image.src
+        cascade: true
       language:
         type: select
         options:
@@ -439,25 +441,17 @@ collections_config:
             - name: English
               value: en
         cascade: true
-    disable_url: true
-    preview:
-      text:
-        - key: title
-      subtext:
-        - template: '{language} - {author.country} - {author.name}'
-    _enabled_editors:
-      - content
-    create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
-    disable_add: false
-    disable_add_folder: true
-    disable_file_actions: true
     add_options:
       - name: New Testimonial
         icon: language
         editor: content
         base_path: ''
         schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
     schemas:
       default:
         path: schemas/testimonial.mdx
@@ -474,7 +468,8 @@ collections_config:
     name: Team
     singular_name: Team member
     icon: people
-    url: /[relative_base_path]/team/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/team/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -516,6 +511,9 @@ collections_config:
               key: Owner
           value_key: code
         cascade: true
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
   tourRegions:
     path: src/content/tour-regions
     glob:
@@ -523,7 +521,8 @@ collections_config:
     name: Tour Regions
     singular_name: Tour Region
     icon: place
-    url: /[relative_base_path]/tours/regions/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/tours/regions/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -578,7 +577,8 @@ collections_config:
     name: Tour Tags
     singular_name: Tour Tag
     icon: tag
-    url: /[relative_base_path]/tours/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/tours/tags/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -633,7 +633,8 @@ collections_config:
     name: Post Tags
     singular_name: Post Tag
     icon: tag
-    url: /[relative_base_path]/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: >-
+      /[relative_base_path]/tags/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -696,100 +697,61 @@ collection_groups:
     collections:
       - data
 _inputs:
-  # Tailwind Color System - Radix-inspired semantic scales
-  # Colors automatically invert in dark mode (e.g., gray-1 becomes dark:gray-12)
   background_color:
     type: select
     options:
-      allow_empty: false
-      values:
-        # Gray scale - Backgrounds
-        - label: "Background - Subtle (Gray 1)"
-          value: "gray-1"
-        - label: "Background - Muted (Gray 2)"
-          value: "gray-2"
-        - label: "Background - Default (Gray 3)"
-          value: "gray-3"
-        # Accent scale - Brand colors
-        - label: "Accent - Subtle (Orange 3)"
-          value: "accent-3"
-        - label: "Accent - Default (Orange 9)"
-          value: "accent-9"
-        - label: "Accent - Strong (Orange 11)"
-          value: "accent-11"
-        # Legacy hex colors (backward compatibility)
-        - label: "Legacy - White"
-          value: "#ffffff"
-        - label: "Legacy - Light Gray"
-          value: "#f2f2f2"
-    comment: "Color automatically inverts in dark mode. Use Tailwind colors (e.g., gray-1) for auto dark mode support."
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+    hidden: border_only
     cascade: true
-  
   color:
     type: select
     options:
-      allow_empty: false
-      values:
-        # Gray scale - Text colors
-        - label: "Text - Low Contrast (Gray 10)"
-          value: "gray-10"
-        - label: "Text - Default (Gray 11)"
-          value: "gray-11"
-        - label: "Text - High Contrast (Gray 12)"
-          value: "gray-12"
-        # Accent colors
-        - label: "Text - Accent (Orange 11)"
-          value: "accent-11"
-        # Legacy hex colors
-        - label: "Legacy - Dark Gray"
-          value: "#393939"
-        - label: "Legacy - Black"
-          value: "#000000"
-    comment: "Text color automatically inverts in dark mode."
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
     cascade: true
-  
   text_color:
     type: select
     options:
-      allow_empty: false
-      values:
-        - label: "Text - Low Contrast (Gray 10)"
-          value: "gray-10"
-        - label: "Text - Default (Gray 11)"
-          value: "gray-11"
-        - label: "Text - High Contrast (Gray 12)"
-          value: "gray-12"
-        - label: "Text - Accent (Orange 11)"
-          value: "accent-11"
-        - label: "Text - White"
-          value: "#ffffff"
-    comment: "Text color automatically inverts in dark mode."
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
     cascade: true
-  
   heading_gradient_color:
     type: select
     options:
       allow_empty: false
       values:
-        - label: "Accent - Orange"
-          value: "accent-9"
-        - label: "Legacy - Orange (#FF785A)"
-          value: "#FF785A"
-    comment: "Gradient color for headings"
+        - label: Accent - Orange
+          value: accent-9
+        - label: Legacy - Orange (#FF785A)
+          value: '#FF785A'
+    comment: Gradient color for headings
     cascade: true
-
   tourtype:
     type: select
     options:
+      allow_empty: true
       values:
         - PackageTour
         - DayTour
         - WalkingTour
-
+    cascade: true
   feature_testimonials:
     type: multiselect
     options:
-      empty_type: array
+      allow_empty: true
       values: collections.testimonials
       value_key: id
       preview:
@@ -798,25 +760,28 @@ _inputs:
         subtext:
           - key: language
         icon: message
+      empty_type: array
     cascade: true
   feature_tours:
     type: multiselect
     options:
-      empty_type: array
+      allow_empty: true
       values:
         - collections.tours
       value_key: id
       preview:
         text:
           - key: title
+        icon: message
         image:
           - key: image.src
-        icon: message
+      empty_type: array
     cascade: true
   path:
     type: text
     label: Url
     comment: Set this only with lower case and '-'
+    cascade: true
   template:
     type: auto
     hidden: true
@@ -854,10 +819,10 @@ _inputs:
         - image/png
         - image/jpeg
         - image/webp
-      empty_type: 'null'
       resize_style: contain
       expandable: false
       prevent_resize_existing_files: true
+      empty_type: 'null'
     cascade: true
   memberType:
     type: select
@@ -885,11 +850,11 @@ _inputs:
   feature_list:
     type: multiselect
     options:
-      empty_type: array
+      allow_empty: true
       values: collections.blog
       value_key: id
+      empty_type: array
     cascade: true
-
   main_feature:
     type: select
     options:
@@ -944,37 +909,6 @@ _inputs:
     cascade: true
   height:
     type: number
-    cascade: true
-  background_color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
-    hidden: border_only
-    cascade: true
-  text_color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
-    cascade: true
-  color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
     cascade: true
   icon:
     type: select
@@ -1469,8 +1403,7 @@ file_config:
         options:
           structures: _structures.color
         label: Colors
-        comment:
-          Set the colors available in the color selectors throughout the site.
+        comment: Set the colors available in the color selectors throughout the site.
         cascade: true
       value:
         type: color
@@ -1501,21 +1434,22 @@ file_config:
 data_config:
   countries:
     path: data/contries.json
-
   icons:
     path: data/icons.json
   colors:
     path: data/colors.json
   tags:
     path: data/tags.json
+editor:
+  default_path:
 timezone: Etc/UTC
 markdown:
   engine:
   options:
     xhtml: true
     breaks: true
-    linkify: false
-    typographer: false
+    linkify: true
+    typographer: true
     quotes:
     spaced_lists: false
     sentence_per_line: false
@@ -1530,3 +1464,6 @@ markdown:
     heading_ids: false
     attributes: false
     attribute_elements:
+bookshop:
+  exclude:
+    - src/components/utility/icon.astro
