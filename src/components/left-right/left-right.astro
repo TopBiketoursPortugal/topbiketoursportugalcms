@@ -53,13 +53,15 @@ if (!imageSrc) {
   {
     block.flipped ? (
       <div class="left-right__wrapper">
-        <Image
-          class="order-2 md:order-1"
-          alt={block.image.alt_text ?? 'Left Right Top Bike Tours Portugal'}
-          widths={[320, 500, 640]}
-          sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-          src={imageSrc}
-        />
+        {imageSrc && (
+          <Image
+            class="order-2 md:order-1"
+            alt={block.image.alt_text ?? 'Left Right Top Bike Tours Portugal'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+          />
+        )}
         <div class="left-right__text order-1 md:order-2">
           {block.heading?.heading_text ? (
             <h2 class="text-4xl" style={`color: ${block.heading?.color};`}>
@@ -85,12 +87,14 @@ if (!imageSrc) {
           </div>
           {block.button && <Button {...block.button} />}
         </div>
-        <Image
-          alt={block.image.alt_text ?? 'Left right Top Bike Tours Portugal'}
-          widths={[320, 500, 640]}
-          sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-          src={imageSrc}
-        />
+        {imageSrc && (
+          <Image
+            alt={block.image.alt_text ?? 'Left right Top Bike Tours Portugal'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+          />
+        )}
       </div>
     )
   }
