@@ -410,7 +410,6 @@
       "destination": "/tours/porto-santiago-compostela-bike-tour/",
       "status": 301
     },
-
     {
       "from": "/sul-portugal",
       "destination": "/tours/south-portugal-biketour/",
@@ -428,6 +427,16 @@
     },
     {
       "from": "/tours/south-",
+      "destination": "/bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/blog/what-is-nike-tour/",
+      "destination": "/blog/what-is-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/static/94f3639374d100379659db7564b01b2c/416b2/kit-for-cycling -holidays.jpg",
       "destination": "/bike-tours-in-portugal/",
       "status": 301
     }
