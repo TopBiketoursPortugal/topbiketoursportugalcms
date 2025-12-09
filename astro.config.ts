@@ -165,7 +165,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        navigateFallback: '/404',
+        navigateFallback: '/404/',
         globPatterns: ['**/*.{css,js,html,avif,ico}'],
       },
       devOptions: {

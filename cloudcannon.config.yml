@@ -340,6 +340,11 @@ collections_config:
       closestAirport:
         type: text
         cascade: true
+      isNewTour:
+        type: checkbox
+        comment: >-
+          Mark this tour as new to display a green "NEW" badge over the tour image
+        cascade: true
     add_options:
       - name: New Tour English
         icon: language

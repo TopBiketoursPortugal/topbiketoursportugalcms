@@ -4,12 +4,12 @@ import Text from 'src/components/typography/text.astro';
 import NavigationData from 'src/../data/navigation.json';
 import { t } from 'utils/i18n';
 import { getCollection } from 'astro:content';
-import { getPagePath, getTourRegionsPath } from 'utils/permalinks';
+import { getPagePath } from 'utils/permalinks';
 import Stack from 'src/components/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
-import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
 import Logo from 'src/layouts/common/Logo.astro';
 import type { CollectionEntry } from 'astro:content';
+import TourRegionsCard from 'src/components/collection/tour-regions-card.astro';
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
@@ -77,29 +77,14 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
       >{t('Footer.TourRegionsTitle', language)}</Text
     >
     {
-      regions.map((r) => {
-        const { data } = r;
-        const { title, name, seo } = data;
-        return (
-          <div class="group relative cursor-pointer overflow-clip">
-            {seo?.featured_image ? (
-              <ResponsiveImage
-                src={seo?.featured_image}
-                alt={seo?.featured_image_alt ?? title}
-                widths={[200]}
-                paralax={false}
-                class="animate-ease-in-out-out animate-duration-200 transition-transform group-hover:scale-150"
-              />
-            ) : null}
-            <a
-              href={getTourRegionsPath(r, language)}
-              class="absolute top-0 right-0 bottom-0 left-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold text-white capitalize opacity-0 group-hover:flex group-hover:opacity-90"
-            >
-              {name}
-            </a>
-          </div>
-        );
-      })
+      regions.map((region) => (
+        <TourRegionsCard
+          region={region}
+          language={language}
+          layout="overlay"
+          imageWidths={[200]}
+        />
+      ))
     }
   </div>
   <Stack layout="vertical" spacing="small">

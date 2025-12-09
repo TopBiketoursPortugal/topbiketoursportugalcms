@@ -24,10 +24,8 @@ import TourItinerary from './tour-itinerary.astro';
 import Heading from '../typography/heading.astro';
 import Linkbutton from '../linkbutton/linkbutton.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
-import Stack from '../stack/stack.astro';
-import Grid from '../grid/grid.astro';
-import ReviewItem from '../collection/review-item.astro';
 import { getAuthorName } from '@utils/get-author-name';
+import ReviewItem from '@components/collection/review-item.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -86,8 +84,9 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
-const enableFaqs = false;
-
+const enableFaqs = true;
+const cards_per_row = 3;
+const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
 // mapa, itenerario, preço
 ---
 
@@ -95,7 +94,7 @@ const enableFaqs = false;
 <div
   class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
-  <div class="overflow-auto sm:overflow-hidden">
+  <div class="overflow-auto">
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
       {
@@ -124,7 +123,7 @@ const enableFaqs = false;
     </Tabs>
   </div>
   <section
-    class="z-10 row-span-4 mx-auto -mt-24 flex w-full flex-shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
+    class="z-10 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg sm:order-0 dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
@@ -333,18 +332,108 @@ const enableFaqs = false;
     >
     {
       reviews.length > 0 ? (
-        <Grid cols={3}>
-          {reviews.map(async (review) => (
-            <Stack as="section" class="border-solid sm:p-6" layout="vertical">
+    
+      <div class="carousel-container relative">
+        <button
+          class="nav-btn prev absolute top-1/2 -left-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Previous slide"
+        >
+          <i class="icon-[ph--caret-left-bold] text-xl" />
+        </button>
+        <button
+          class="nav-btn next absolute top-1/2 -right-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Next slide"
+        >
+          <i class="icon-[ph--caret-right-bold] text-xl" />
+        </button>
+
+        <div
+          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+        >
+          {reviews.map((review) => (
+            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
               <ReviewItem
                 name={getAuthorName(review)}
                 country={review.author?.country}
                 content={review.content}
                 rating={review.rating}
+                expand_behavior="button"
               />
-            </Stack>
+            </div>
           ))}
-        </Grid>
+        </div>
+      </div>
+
+<script>
+  document.querySelectorAll('.carousel-container').forEach((container) => {
+    const scrollContainer = container.querySelector('.scroll-container');
+    const prevBtn = container.querySelector('.prev') as HTMLButtonElement;
+    const nextBtn = container.querySelector('.next') as HTMLButtonElement;
+
+    if (!scrollContainer || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = () => {
+      // Approximate slide width: take first item width + gap (1.5rem = 24px)
+      const item = scrollContainer.querySelector('.carousel-item');
+      return item ? item.getBoundingClientRect().width + 24 : 300;
+    };
+
+    const updateButtons = () => {
+      prevBtn.disabled = scrollContainer.scrollLeft <= 10;
+      nextBtn.disabled =
+        scrollContainer.scrollLeft >=
+        scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
+    };
+
+    prevBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      scrollContainer.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    scrollContainer.addEventListener('scroll', updateButtons);
+    // Initial check
+    updateButtons();
+    // Wait for layout
+    setTimeout(updateButtons, 100);
+  });
+</script>
+
+<style>
+  .carousel-item {
+    width: calc(100% - 2rem); /* Mobile: almost full width with some peek */
+    view-timeline-name: --carousel-item;
+    view-timeline-axis: inline;
+    animation: linear scale-up both;
+    animation-timeline: --carousel-item;
+    animation-range: entry 0% contain 0% exit 0% exit 100%; /* Fallback */
+    animation-range: entry 25% contain 25% exit 25% exit 75%; /* Refined range */
+  }
+
+  @keyframes scale-up {
+    from {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .carousel-item {
+      width: var(--desktop-slide-width);
+    }
+  }
+</style>
       ) : (
         <div>{t('Tour.Section.Reviews.Empty', language)}</div>
       )

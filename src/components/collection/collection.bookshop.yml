@@ -30,7 +30,8 @@ _inputs:
     options:
       allow_empty: false
       values:
-        - tours
+        - tour
+        - tour-regions
         - tours-package-tour
         - tours-day-tour
         - reviews

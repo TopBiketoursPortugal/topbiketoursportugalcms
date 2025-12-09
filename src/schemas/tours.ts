@@ -154,7 +154,8 @@ const tourSchema = z.object({
   faqs: z.array(faqsSchema).optional().default([]),
   relatedTours: z.array(z.string().uuid()).optional().default([]),
   feature: featureSchema.optional().nullable(),
-  closestAirport: z.string().optional().nullable()
+  closestAirport: z.string().optional().nullable(),
+  isNewTour: z.boolean().optional().nullable().default(false)
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;

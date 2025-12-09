@@ -101,7 +101,8 @@
     "Tours.Tags.DayTour.Title": "Day tour list tag  $1",
     "Tours.Tags.NoResults.AlternateTags.Title": "Could try other tags:",
     "Tours.Tags.NoResults.Title": "No tours yet for tag $1",
-    "Tours.Tags.PackageTour.Title": "Tour list tag $1"
+    "Tours.Tags.PackageTour.Title": "Tour list tag $1",
+    "Tour.Badge.New": "NEW"
   },
   "pt": {
     "Blog.Paged.Description": "Blog página $1",
@@ -205,6 +206,7 @@
     "Tours.Tags.DayTour.Title": "Etiqueta de lista de tours diários $1",
     "Tours.Tags.NoResults.AlternateTags.Title": "Pode experimentar outras etiquetas:",
     "Tours.Tags.NoResults.Title": "Ainda não há tours para a etiqueta $1",
-    "Tours.Tags.PackageTour.Title": "Etiqueta de lista de tours $1"
+    "Tours.Tags.PackageTour.Title": "Etiqueta de lista de tours $1",
+    "Tour.Badge.New": "NOVO"
   }
 }
