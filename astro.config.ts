@@ -276,7 +276,7 @@ export default defineConfig({
       redirectToDefaultLocale: true
     }
   },
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
 
   experimental: {
     svgo: true,
