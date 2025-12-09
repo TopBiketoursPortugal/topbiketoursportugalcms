@@ -47,6 +47,14 @@ function removeDuplicateRedirects(
   return uniqueRedirects;
 }
 
+// Generate denylist patterns from routing.json to exclude redirect paths from navigateFallback
+const redirectDenylist = RouteData.routes.map(route => {
+  // Escape special regex characters and create exact match pattern
+  const escapedPath = route.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`^${escapedPath}$`);
+});
+
+
 // function convertJson(inputJson: {
 //   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
 // }): Record<string, RedirectConfig> {
@@ -166,7 +174,21 @@ export default defineConfig({
       },
       workbox: {
         navigateFallback: '/404/',
+        navigateFallbackDenylist: redirectDenylist,
         globPatterns: ['**/*.{css,js,html,avif,ico}'],
+        runtimeCaching: [
+          {
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'pages',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+              },
+            },
+          },
+        ],
       },
       devOptions: {
         enabled: false
