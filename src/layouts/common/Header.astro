@@ -3,7 +3,7 @@ import ToggleMenu from './ToggleMenu.astro';
 import ToggleTheme from './ToggleTheme.astro';
 import Logo from './Logo.astro';
 import LanguageMenu from './LanguageMenu.astro';
-import SearchModal from '../../components/search/SearchModal.astro';
+// import SearchModal from '../../components/search/SearchModal.astro';
 import { getHomePermalink, trimSlash } from 'utils/permalinks';
 import type { HTMLAttributes } from 'astro/types';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -56,7 +56,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky },
-    'top-0 z-50 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-[opacity] ease-in-out dark:bg-slate-950'
+    'top-0 z-50 mx-auto w-full flex-none border-b border-gray-50/0 bg-slate-50 transition-opacity ease-in-out dark:bg-slate-950'
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -100,7 +100,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                       type="button"
                       class="hover:text-link flex items-center gap-1 px-4 py-3 whitespace-nowrap"
                     >
-                      {text}{' '}
+                      {text}
                       <i
                         class="icon-[ph--caret-down-light] hidden h-4 w-4 md:inline"
                         aria-hidden="true"
@@ -152,7 +152,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           }))}
         />
         <div class="flex items-center">
-          <button
+          <!-- <button
             popovertarget="search-modal"
             class="text-muted inline-flex items-center rounded-lg p-2.5 text-sm focus:ring-4 focus:ring-gray-200 focus:outline-none"
             aria-label="Search"
@@ -160,7 +160,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             <i
               class="icon-[ph--magnifying-glass-light] h-5 w-5 transition-transform duration-150 hover:scale-125"
               aria-hidden="true"></i>
-          </button>
+          </button> -->
           <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
           {
             showRssFeed && (
@@ -187,12 +187,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 />
               ))} */}
             </span>
-          ) : (
-            ''
-          )
+          ) : null
         }
       </div>
     </div>
   </div>
-  <SearchModal />
+  <!-- <SearchModal /> -->
 </header>
