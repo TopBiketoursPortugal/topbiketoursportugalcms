@@ -27,3 +27,4 @@ ca.crt
 ca.key
 cert.crt
 dev-dist
+docker/scrapped/

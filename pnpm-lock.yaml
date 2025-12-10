@@ -35,9 +35,6 @@ importers:
       '@jop-software/astro-cookieconsent':
         specifier: 3.0.1
         version: 3.0.1(vanilla-cookieconsent@3.1.0)
-      '@pagefind/default-ui':
-        specifier: ^1.2.0
-        version: 1.4.0
       '@playform/compress':
         specifier: 0.2.0
         version: 0.2.0(@types/node@24.10.1)(jiti@2.6.1)(rollup@2.79.2)(sass@1.94.2)(typescript@5.9.3)(yaml@2.8.2)
@@ -68,9 +65,6 @@ importers:
       clsx:
         specifier: 2.1.1
         version: 2.1.1
-      pagefind:
-        specifier: ^1.2.0
-        version: 1.4.0
       punycode:
         specifier: 2.3.1
         version: 2.3.1
