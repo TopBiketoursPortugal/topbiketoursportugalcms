@@ -543,6 +543,9 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
+      title: 
+        type: markdown
+        cascade: true
       language:
         type: select
         options:
