@@ -13,6 +13,12 @@
           "href": "/bike-tours-in-portugal/"
         },
         {
+          "text": "Day tours",
+          "page": null,
+          "href": "https://topbiketoursportugal.com/bike-tours-porto-portugal/",
+          "enabled": false
+        },
+        {
           "text": "Reviews",
           "page": "",
           "href": "/testimonials/"
