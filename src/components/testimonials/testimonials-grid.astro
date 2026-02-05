@@ -25,7 +25,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 <Stack as="section" class="border-solid sm:p-6" layout="vertical">
   {
     carousel ? (
-      <div class="carousel-container relative">
+      <div class="grid-carousel-container relative">
         <button
           class="nav-btn prev absolute top-1/2 -left-4 z-50 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-50 sm:-left-6 dark:bg-black/50 dark:hover:bg-black/80"
           aria-label="Previous slide"
@@ -71,52 +71,55 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 
 <script>
   function initCarousel() {
-    document.querySelectorAll('.carousel-container').forEach((container) => {
-      const scrollContainer = container.querySelector('.scroll-container');
-      const prevBtn = container.querySelector<HTMLButtonElement>('.prev');
-      const nextBtn = container.querySelector<HTMLButtonElement>('.next');
+    document
+      .querySelectorAll('.grid-carousel-container')
+      .forEach((container) => {
+        if (container.hasAttribute('data-carousel-init')) return;
+        container.setAttribute('data-carousel-init', 'true');
 
-      if (!scrollContainer || !prevBtn || !nextBtn) return;
+        const scrollContainer = container.querySelector('.scroll-container');
+        const prevBtn = container.querySelector<HTMLButtonElement>('.prev');
+        const nextBtn = container.querySelector<HTMLButtonElement>('.next');
 
-      const scrollAmount = () => {
-        // Approximate slide width: take first item width + gap (1.5rem = 24px)
-        const item = scrollContainer.querySelector('.carousel-item');
-        return item ? item.getBoundingClientRect().width + 24 : 300;
-      };
+        if (!scrollContainer || !prevBtn || !nextBtn) return;
 
-      const updateButtons = () => {
-        prevBtn.disabled = scrollContainer.scrollLeft <= 10;
-        nextBtn.disabled =
-          scrollContainer.scrollLeft >=
-          scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
-      };
+        const scrollAmount = () => {
+          // Approximate slide width: take first item width + gap (1.5rem = 24px)
+          const item = scrollContainer.querySelector('.carousel-item');
+          return item ? item.getBoundingClientRect().width + 24 : 300;
+        };
 
-      prevBtn.addEventListener('click', () => {
-        scrollContainer.scrollBy({
-          left: -scrollAmount(),
-          behavior: 'smooth'
+        const updateButtons = () => {
+          prevBtn.disabled = scrollContainer.scrollLeft <= 10;
+          nextBtn.disabled =
+            scrollContainer.scrollLeft >=
+            scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
+        };
+
+        prevBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: -scrollAmount(),
+            behavior: 'smooth'
+          });
         });
-      });
 
-      nextBtn.addEventListener('click', () => {
-        scrollContainer.scrollBy({
-          left: scrollAmount(),
-          behavior: 'smooth'
+        nextBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: scrollAmount(),
+            behavior: 'smooth'
+          });
         });
-      });
 
-      scrollContainer.addEventListener('scroll', updateButtons);
-      // Initial check
-      updateButtons();
-      // Wait for layout
-      setTimeout(updateButtons, 100);
-    });
+        scrollContainer.addEventListener('scroll', updateButtons);
+        // Initial check
+        updateButtons();
+        // Wait for layout
+        setTimeout(updateButtons, 100);
+      });
   }
-  initCarousel();
 
-  document.addEventListener('astro:after-swap', () => {
-    initCarousel();
-  });
+  // Initialize on page load and view transitions
+  document.addEventListener('astro:page-load', initCarousel);
 </script>
 
 <style define:vars={{ desktopSlideWidth: `calc(${slideWidthRaw})` }}>
