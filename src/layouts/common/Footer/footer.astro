@@ -10,7 +10,9 @@ import type { LanguageCodes } from 'src/schemas/language';
 import Logo from 'src/layouts/common/Logo.astro';
 import type { CollectionEntry } from 'astro:content';
 import TourRegionsCard from 'src/components/collection/tour-regions-card.astro';
-
+import { Image } from 'astro:assets';
+import BARRA_LOGOS_02 from 'src/assets/images/BARRA_LOGOS-02.png';
+import BARRA_LOGOS_03 from 'src/assets/images/BARRA_LOGOS-03.png';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
 const { links } = footer;
@@ -59,17 +61,6 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
         ))
       }
     </div>
-    <div class="flex flex-col gap-2">
-      <span class="text-sm font-bold">{t('Footer.PaymentTitle', language)}</span
-      >
-      <span class="text-xs">{t('Footer.PaymentDescription', language)}</span>
-      <div class="flex gap-2">
-        <i class="icon-[logos--mastercard] h-8 w-8"></i><i
-          class="icon-[logos--visa] h-8 w-8"></i><i
-          class="icon-[logos--amex] h-8 w-8"></i><i
-          class="icon-[logos--jcb] h-8 w-8"></i>
-      </div>
-    </div>
   </div>
 
   <div class="grid grid-cols-4 gap-4 self-start sm:grid-cols-3">
@@ -90,6 +81,22 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   <Stack layout="vertical" spacing="small">
     <FooterContact language={language} />
   </Stack>
+  <div class="col-span-full flex flex-col sm:flex-row">
+    <div class="flex flex-1 flex-col gap-2">
+      <span class="text-sm font-bold">{t('Footer.PaymentTitle', language)}</span
+      >
+      <span class="text-xs">{t('Footer.PaymentDescription', language)}</span>
+      <div class="flex gap-2">
+        <i class="icon-[logos--mastercard] h-8 w-8"></i><i
+          class="icon-[logos--visa] h-8 w-8"></i><i
+          class="icon-[logos--amex] h-8 w-8"></i><i
+          class="icon-[logos--jcb] h-8 w-8"></i>
+      </div>
+    </div>
+    <div class="flex-1">
+      <Image src={BARRA_LOGOS_03} alt="PRR" />
+    </div>
+  </div>
 </footer>
 <ul
   class="flex w-full flex-wrap justify-center gap-1 bg-gray-50 p-3 dark:bg-gray-800 dark:text-gray-400"

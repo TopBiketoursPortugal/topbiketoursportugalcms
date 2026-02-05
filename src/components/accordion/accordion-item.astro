@@ -15,7 +15,7 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
 <details
   open={open}
   class={clsx(
-    'group overflow-hidden border border-gray-200 dark:border-gray-900',
+    'group accordion-item overflow-hidden border border-gray-200 dark:border-gray-900',
     className
   )}
   id={id}
@@ -23,7 +23,7 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
   <summary
     class="w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden"
     aria-controls={`${id}-content`}
-    aria-expanded="false"
+    aria-expanded={open}
   >
     <slot name="header">
       <div
@@ -47,13 +47,58 @@ const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`
     </slot>
   </summary>
   <div
-    id={`${id}-content`}
-    class="max-h-0 origin-top scale-y-95 transform bg-white opacity-0 transition-all duration-500 ease-in-out group-open:max-h-200 group-open:scale-y-100 group-open:opacity-100 dark:bg-black"
-    role="region"
-    aria-labelledby={`${id}-heading`}
+    class="grid grid-rows-[0fr] group-open:grid-rows-[1fr] group-[.is-closing]:grid-rows-[0fr] motion-safe:transition-[grid-template-rows] motion-safe:duration-300 motion-safe:ease-in-out"
   >
-    <div class="p-4">
-      <slot />
+    <div class="overflow-hidden">
+      <div
+        id={`${id}-content`}
+        class="bg-white dark:bg-black"
+        role="region"
+        aria-labelledby={`${id}-heading`}
+      >
+        <div class="p-4">
+          <slot />
+        </div>
+      </div>
     </div>
   </div>
 </details>
+
+<script>
+  const setupAccordion = () => {
+    document
+      .querySelectorAll('details.accordion-item summary')
+      .forEach((summary) => {
+        const details = summary.closest('details');
+        if (!details || details.dataset.initialized) return;
+        details.dataset.initialized = 'true';
+
+        summary.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          const isOpen = details.hasAttribute('open');
+          const isReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+          ).matches;
+          const duration = isReducedMotion ? 0 : 300;
+
+          if (isOpen) {
+            // Closing animation
+            details.classList.add('is-closing');
+            setTimeout(() => {
+              details.removeAttribute('open');
+              details.classList.remove('is-closing');
+            }, duration);
+          } else {
+            // Opening animation
+            details.setAttribute('open', '');
+            // Small delay to ensure browser acknowledges open state before transition?
+            // Usually not needed for grid-template-rows on details, but safer to just let it flow.
+          }
+        });
+      });
+  };
+
+  setupAccordion();
+  document.addEventListener('astro:page-load', setupAccordion);
+</script>
