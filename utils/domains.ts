@@ -7,22 +7,21 @@ export function getSocialDomains(): string[] {
                 if (item.href) {
                     return new URL(item.href).hostname;
                 }
-                return '';
-            } catch {
+            } finally {
                 return '';
             }
         })
         .filter((domain) => domain !== '');
 }
 
-export function getInternalDomains(): string[] {
-    return ['topbiketoursportugal.com', 'topwalkingtoursportugal.com', ...getSocialDomains()];
+export function getInternalDomains(includeSocialDomains: boolean = true): string[] {
+    return ['topbiketoursportugal.com', 'topwalkingtoursportugal.com', ...(includeSocialDomains ? getSocialDomains() : [])];
 }
 
 export function isInternalDomain(url: string): boolean {
     try {
         const hostname = new URL(url).hostname;
-        return getInternalDomains().some((domain) => hostname.includes(domain));
+        return getInternalDomains(false).some((domain) => hostname.includes(domain));
     } catch {
         return false;
     }

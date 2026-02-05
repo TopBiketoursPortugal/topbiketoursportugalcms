@@ -60,9 +60,11 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
   import { run } from 'vanilla-cookieconsent';
   import { config } from './CookieConsentConfig';
 
-  // toggle custom black theme
-  document.body.classList.add('cc--elegant-black');
+  document.addEventListener('astro:page-load', () => {
+    // toggle custom black theme
+    document.body.classList.add('cc--elegant-black');
 
-  // Initialize cookie consent
-  run(config);
+    // Initialize cookie consent
+    run(config);
+  });
 </script>

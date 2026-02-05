@@ -5,7 +5,8 @@
         {
           "text": "Home",
           "page": "",
-          "href": "/"
+          "href": "/",
+          "enabled": false
         },
         {
           "text": "Bike tours",
@@ -16,7 +17,7 @@
           "text": "Day tours",
           "page": null,
           "href": "/bike-tours-porto-portugal/",
-          "enabled": true
+          "enabled": false
         },
         {
           "text": "Reviews",
@@ -58,7 +59,8 @@
           "links": [
             {
               "text": "Home",
-              "href": "/"
+              "href": "/",
+              "enabled": false
             },
             {
               "text": "Bike tours",

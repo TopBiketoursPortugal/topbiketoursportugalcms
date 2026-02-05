@@ -80,8 +80,11 @@ export const config: CookieConsentConfig = {
       readOnly: true
     },
     marketing: {},
-    functionality: {},
+    functionality: {
+      enabled: true
+    },
     analytics: {
+      enabled: true,
       services: {
         ga4: {
           label:
@@ -106,13 +109,11 @@ export const config: CookieConsentConfig = {
           description:
             'This website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.',
           acceptAllBtn: 'Accept all',
-          acceptNecessaryBtn: 'Reject all',
           showPreferencesBtn: 'Manage Individual preferences'
         },
         preferencesModal: {
           title: 'Manage cookie preferences',
           acceptAllBtn: 'Accept all',
-          acceptNecessaryBtn: 'Reject all',
           savePreferencesBtn: 'Accept current selection',
           closeIconLabel: 'Close modal',
           sections: [
@@ -189,13 +190,11 @@ export const config: CookieConsentConfig = {
           description:
             'Este website utiliza cookies essenciais para garantir o seu correto funcionamento e cookies de rastreamento para compreender como interage com o mesmo. Estes últimos só serão definidos após consentimento.',
           acceptAllBtn: 'Aceitar todas',
-          acceptNecessaryBtn: 'Rejeitar todas',
           showPreferencesBtn: 'Gerir preferências individuais'
         },
         preferencesModal: {
           title: 'Gerir preferências de cookies',
           acceptAllBtn: 'Aceitar todas',
-          acceptNecessaryBtn: 'Rejeitar todas',
           savePreferencesBtn: 'Aceitar seleção atual',
           closeIconLabel: 'Fechar modal',
           sections: [
