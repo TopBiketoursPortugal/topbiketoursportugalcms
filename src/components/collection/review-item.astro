@@ -7,6 +7,8 @@ import { getImageByPath } from 'utils/get-image';
 import Prose from '../typography/prose.astro';
 import { getCountryCode } from 'utils/get-country-code';
 import { cn } from '@utils/cn';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 
 type Props = {
@@ -38,8 +40,8 @@ const countryFlagIcon = countryCode
   ? `icon-[circle-flags--${countryCode.toLowerCase()}]`
   : 'icon-[ph--user-circle-light]';
 
-const uniqueId = `review-expand-${Math.random().toString(36).substr(2, 9)}`;
-const excerpt = getMarkdownExcerpt(content, 250);
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const excerpt = getMarkdownExcerpt(content, 200);
 ---
 
 <div class="flex flex-col gap-6">
@@ -65,23 +67,32 @@ const excerpt = getMarkdownExcerpt(content, 250);
   {
     expand_behavior === 'button' ? (
       <>
-        <input type="checkbox" id={uniqueId} class="peer hidden" />
-        <span class="inline text-neutral-600 dark:text-neutral-300">
-          <i class="icon-[ph--quotes-fill]" />
-          <div class="excerpt block transition-all duration-500 will-change-[max-height]">
-            <p>{excerpt}...</p>
-          </div>
-          <div class="full hidden transition-all duration-500 will-change-[max-height]">
-            <Prose markdown={content} />
-          </div>
-        </span>
-        <label
-          for={uniqueId}
-          class="text-primary-600 dark:text-primary-400 cursor-pointer font-bold hover:underline"
+        <span
+          class="review-clickable inline cursor-pointer text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+          title={t('Tour.Section.Reviews.ViewDetail', language)}
         >
-          <span class="inline peer-checked:hidden">Read more</span>
-          <span class="hidden peer-checked:inline">Read less</span>
-        </label>
+          <i class="icon-[ph--quotes-fill]" />
+          <p>{excerpt}</p>
+        </span>
+        <dialog class="review-dialog m-auto rounded-lg p-0 shadow-2xl backdrop:bg-black/50 max-w-2xl w-[calc(100%-2rem)] dark:bg-gray-800">
+          <div class="flex flex-col gap-6 p-6 sm:p-8">
+            <div class="flex items-center justify-between">
+              <p class="text-xl font-semibold">{name} - {country}</p>
+              <button
+                class="review-dialog-close flex h-8 w-8 shrink-0 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-gray-700"
+                type="button"
+                aria-label={t('Tour.Section.Reviews.Close', language)}
+              >
+                <i class="icon-[ph--x-bold] text-lg" />
+              </button>
+            </div>
+            <Rating rating={rating} />
+            <div class="text-neutral-600 dark:text-neutral-300">
+              <i class="icon-[ph--quotes-fill]" />
+              <Prose markdown={content} />
+            </div>
+          </div>
+        </dialog>
       </>
     ) : (
       <span class="inline text-neutral-600 dark:text-neutral-300">
@@ -100,17 +111,46 @@ const excerpt = getMarkdownExcerpt(content, 250);
   <Rating rating={rating} />
 </div>
 
+<script>
+  function initReviewDialogs() {
+    document.querySelectorAll('.review-clickable').forEach((clickable) => {
+      if (clickable.hasAttribute('data-dialog-init')) return;
+      clickable.setAttribute('data-dialog-init', 'true');
+
+      const dialog = clickable.nextElementSibling as HTMLDialogElement | null;
+      if (!dialog || dialog.tagName !== 'DIALOG') return;
+
+      clickable.addEventListener('click', () => {
+        dialog.showModal();
+      });
+
+      const closeBtn = dialog.querySelector('.review-dialog-close');
+      closeBtn?.addEventListener('click', () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initReviewDialogs);
+</script>
+
 <style is:global>
   .truncate-text {
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Limits text to 5 lines */
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .truncate-text p {
-    margin-bottom: 0.5em; /* Add some spacing between paragraphs */
+    margin-bottom: 0.5em;
   }
 
   .truncate-text.expand-hover:hover {
@@ -118,11 +158,7 @@ const excerpt = getMarkdownExcerpt(content, 250);
     overflow: visible;
   }
 
-  /* CSS Hack for Button Expansion */
-  input.peer:checked ~ span .excerpt {
-    display: none;
-  }
-  input.peer:checked ~ span .full {
-    display: block;
+  .review-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
   }
 </style>
