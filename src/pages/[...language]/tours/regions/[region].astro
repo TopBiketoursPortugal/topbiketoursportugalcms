@@ -136,6 +136,7 @@ const breadcrumbs = [
     }
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
+  <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
   {
     regionData.data.before_content ? (
       <div class="px-6">
@@ -145,13 +146,13 @@ const breadcrumbs = [
   }
   {
     packageTours.length > 0 ? (
-      <Heading as="h1" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
+      <Heading as="h2" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
       <TourList items={packageTours} language={language} />
     ) : null
   }
   {
     dayTours.length > 0 ? (
-      <Heading as={packageTours.length > 0 ?"h2":"h1"}  class="px-6">{t("Tours.Regions.DayTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
+      <Heading as="h2"  class="px-6">{t("Tours.Regions.DayTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
       <TourList items={dayTours} language={language} />
     ) : null
   }
