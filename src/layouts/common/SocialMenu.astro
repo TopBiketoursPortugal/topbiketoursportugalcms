@@ -14,7 +14,9 @@ const socialNetworks = keys.map((k) => network[k]).filter((n) => n !== null);
         <a
           href={network.href}
           title={network.alt}
+          aria-label={network.alt}
           target="_blank"
+          rel="noopener noreferrer"
           class="group flex min-w-6 items-center justify-center text-lg transition-transform duration-150 hover:scale-125"
         >
           {network && network.icon && (
