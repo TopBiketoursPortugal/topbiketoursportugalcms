@@ -4,6 +4,7 @@ import PageHelper from '../shared/astro/page.astro';
 import Layout, { type LayoutProps } from './Layout.astro';
 import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
 
 type Props = {
@@ -14,13 +15,17 @@ type Props = {
   class?: string;
   showPageTitle?: boolean;
   hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+  isHomePage?: boolean;
 };
 
 const {
   frontmatter,
   class: className,
   showPageTitle = false,
-  hrefs = []
+  hrefs = [],
+  breadcrumbs = [],
+  isHomePage = false
 } = Astro.props;
 
 if (!frontmatter) {
@@ -32,7 +37,7 @@ const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
-<Layout {...frontmatter} class={className} hrefLangs={hrefs}>
+<Layout {...frontmatter} class={className} hrefLangs={hrefs} breadcrumbs={breadcrumbs} isHomePage={isHomePage}>
   <slot name="head" slot="head">
     {
       defaultHref ? (

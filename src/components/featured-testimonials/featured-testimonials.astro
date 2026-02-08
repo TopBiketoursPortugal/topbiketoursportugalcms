@@ -44,15 +44,18 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 <Stack as="section" class="border-solid sm:p-6" layout="vertical">
   {
     carousel ? (
-      <div class="featured-carousel-container relative">
+      <div
+        class="featured-carousel-container relative max-w-full overflow-x-clip"
+        style="box-sizing: border-box;"
+      >
         <button
-          class="nav-btn prev absolute top-1/2 -left-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 dark:bg-black/50 dark:hover:bg-black/80"
+          class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
           aria-label="Previous slide"
         >
           <i class="icon-[ph--caret-left-bold] text-xl" />
         </button>
         <button
-          class="nav-btn next absolute top-1/2 -right-4 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 dark:bg-black/50 dark:hover:bg-black/80"
+          class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
           aria-label="Next slide"
         >
           <i class="icon-[ph--caret-right-bold] text-xl" />
@@ -175,7 +178,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     }
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 1024px) {
     .carousel-item {
       width: var(--desktop-slide-width);
     }

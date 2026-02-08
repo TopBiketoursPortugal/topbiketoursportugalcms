@@ -1,0 +1,48 @@
+---
+import SiteData from 'src/../data/site.json';
+import ContactData from 'src/../data/contact.json';
+import SocialData from 'src/../data/social.json';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = { language: LanguageCodes };
+
+const { language } = Astro.props;
+const site = SiteData[language];
+const contact = ContactData[language];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${site.site.url}#organization`,
+  'name': site.site.name,
+  'url': site.site.url,
+  'telephone': contact.cellPhone,
+  'email': contact.email,
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': contact.address.street,
+    'addressLocality': contact.address.city,
+    'addressRegion': contact.address.state,
+    'postalCode': contact.address.postalCode,
+    'addressCountry': contact.address.country
+  },
+  'geo': {
+    '@type': 'GeoCoordinates',
+    'latitude': parseFloat(contact.address.latitude),
+    'longitude': parseFloat(contact.address.longitude)
+  },
+  'sameAs': [
+    SocialData.facebook.href,
+    SocialData.instagram.href,
+    SocialData.tripadvisor.href,
+    SocialData.twitter.href
+  ]
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

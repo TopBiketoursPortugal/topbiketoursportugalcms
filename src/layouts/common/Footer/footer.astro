@@ -13,6 +13,8 @@ import TourRegionsCard from 'src/components/collection/tour-regions-card.astro';
 import { Image } from 'astro:assets';
 import BARRA_LOGOS_02 from 'src/assets/images/BARRA_LOGOS-02.png';
 import BARRA_LOGOS_03 from 'src/assets/images/BARRA_LOGOS-03.png';
+import BiosphereLogo from 'src/assets/images/biosphere-logo.svg';
+import AttaLogo from 'src/assets/images/atta-logo.svg';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { footer } = NavigationData[language];
 const { links } = footer;
@@ -43,15 +45,15 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
 ---
 
 <footer
-  class="mt-16 grid grid-cols-1 gap-8 bg-gray-100 p-10 text-gray-600 sm:grid-cols-3 dark:bg-gray-950 dark:text-gray-400"
+  class="footer-animate mt-16 grid grid-cols-1 gap-8 bg-gray-100 px-4 py-10 text-gray-600 sm:grid-cols-3 sm:px-6 lg:px-8 dark:bg-gray-950 dark:text-gray-400 intersect:opacity-100 intersect-once"
 >
   <div class="flex flex-col gap-5">
     <Logo class="max-h-12" />
     <div class="flex justify-evenly gap-2">
       {
         links.map(({ text, links = [] }) => (
-          <div class="flex w-full flex-col gap-1">
-            <h4 class="w-full text-xl font-bold">{text}</h4>
+          <div class="flex w-full min-w-0 flex-col gap-1">
+            <h4 class="w-full text-xl font-bold dark:text-gray-100">{text}</h4>
             {links.map(({ href, text }) => (
               <a class="text-lg" href={href.toLowerCase()}>
                 {text}
@@ -63,8 +65,8 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
     </div>
   </div>
 
-  <div class="grid grid-cols-4 gap-4 self-start sm:grid-cols-3">
-    <Text as="strong" class="col-span-full" size="xlarge" weight="bold"
+  <div class="grid grid-cols-2 gap-4 self-start sm:grid-cols-3">
+    <Text as="strong" class="col-span-full dark:text-gray-100" size="xlarge" weight="bold"
       >{t('Footer.TourRegionsTitle', language)}</Text
     >
     {
@@ -83,7 +85,7 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
   </Stack>
   <div class="col-span-full flex flex-col sm:flex-row">
     <div class="flex flex-1 flex-col gap-2">
-      <span class="text-sm font-bold">{t('Footer.PaymentTitle', language)}</span
+      <span class="text-sm font-bold dark:text-gray-200">{t('Footer.PaymentTitle', language)}</span
       >
       <span class="text-xs">{t('Footer.PaymentDescription', language)}</span>
       <div class="flex gap-2">
@@ -93,8 +95,22 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
           class="icon-[logos--jcb] h-8 w-8"></i>
       </div>
     </div>
-    <div class="flex-1">
-      <Image src={BARRA_LOGOS_03} alt="PRR" />
+    <div class="flex flex-1 flex-wrap items-center gap-4">
+      <a target="_blank" title="PRR" href={
+        language === 'en'
+          ? '/blog/vouchers-for-startups/'
+          : '/pt/blog/vouchers-for-startups/'
+      }><Image
+        src={BARRA_LOGOS_03}
+        alt="PRR"
+        class="h-12 w-auto object-contain"
+      /></a>
+      <a href="https://membership.adventuretravel.biz/directory/9ac4776b417c0a3becf7e58e69c58eef" target="_blank" rel="noopener noreferrer" title="Adventure Travel Trade Association">
+        <Image src={AttaLogo} alt="Adventure Travel Trade Association Member" class="h-12 w-auto object-contain dark:invert" />
+      </a>
+      <a href="https://www.biospheresustainable.com/en/community/top-biketours-portugal/8112" target="_blank" rel="noopener noreferrer" title="Biosphere Sustainable">
+        <Image src={BiosphereLogo} alt="Biosphere Sustainable" class="h-16 w-auto object-contain" />
+      </a>
     </div>
   </div>
 </footer>
@@ -115,3 +131,14 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
     >
   </li>
 </ul>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .footer-animate {
+      transition: opacity 0.7s ease;
+    }
+    .footer-animate[no-intersect] {
+      opacity: 0;
+    }
+  }
+</style>

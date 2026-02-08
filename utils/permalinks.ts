@@ -70,10 +70,10 @@ export function getTourTagPath(
 }
 
 export function getBlogTagPath(
-  tag: string,
+  tag: CollectionEntry<'postTags'>,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}blog/tags/${slugify(tag, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}blog/tags/${slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
@@ -231,6 +231,26 @@ export async function getTourTagLanguagesAlternates(
       `${site}${alternateTourTag.language === 'en' ? '' : alternateTourTag.language + '/'}${PermalinkData.tours[alternateTourTag.language ?? 'en']}/tags/${slugify(alternateTourTag.path ?? alternateTourTag.name ?? alternateTourTag.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
     ),
     hreflang: alternateTourTag.language
+  }));
+}
+
+export async function getBlogTagLanguagesAlternates(
+  postTag: CollectionEntry<'postTags'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = postTag.filePath?.split('/').at(-1)!;
+  const alternatePostTags =
+    (await getCollection(
+      'postTags',
+      (t) =>
+        t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternatePostTags.map(({ data: alternatePostTag }) => ({
+    href: sanitizeUrl(
+      `${site}${alternatePostTag.language === 'en' ? '' : alternatePostTag.language + '/'}blog/tags/${slugify(alternatePostTag.path ?? alternatePostTag.name ?? alternatePostTag.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternatePostTag.language
   }));
 }
 

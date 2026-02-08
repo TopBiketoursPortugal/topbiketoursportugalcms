@@ -10,9 +10,10 @@ import Grid from 'src/components/grid/grid.astro';
 import CardMedia from 'src/components/card/CardMedia.astro';
 import CardContent from 'src/components/card/CardContent.astro';
 import Stack from 'src/components/stack/stack.astro';
-import { trailingSlash, getTeamLanguagesAlternates } from 'utils/permalinks';
-import { languageCodes } from 'src/schemas/language';
+import { trailingSlash, getTeamLanguagesAlternates, getTeamMemberPath } from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import LanguageData from 'src/../data/languages.json';
+import { getHomeCrumb, getAboutCrumb } from 'utils/breadcrumbs';
 
 export async function getStaticPaths() {
   const team = await getCollection('team');
@@ -63,9 +64,14 @@ const schema = {
 const hrefs = await getTeamLanguagesAlternates(teamMember, Astro.site);
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const breadcrumbs = [
+  getHomeCrumb(language as LanguageCodes),
+  getAboutCrumb(language as LanguageCodes),
+  { name: title, url: getTeamMemberPath(title, language as LanguageCodes) }
+];
 ---
 
-<Layout title={title} seo={seo} hrefLangs={hrefs}>
+<Layout title={title} seo={seo} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot slot="head">
     {
       defaultHref ? (

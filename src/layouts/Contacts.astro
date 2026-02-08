@@ -9,6 +9,7 @@ import ContactForm from './common/contact-form.astro';
 import PageHelper from '../shared/astro/page.astro';
 import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
 import { t } from 'utils/i18n';
 
@@ -19,6 +20,7 @@ export type ContactProps = {
   class?: string;
   showPageTitle?: boolean;
   hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
 };
 
 type Props = ContactProps;
@@ -28,13 +30,14 @@ const {
   content_blocks = [],
   content_blocks_after = [],
   frontmatter,
-  hrefs = []
+  hrefs = [],
+  breadcrumbs = []
 } = Astro.props;
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 ---
 
-<Layout {...frontmatter} hrefLangs={hrefs}>
+<Layout {...frontmatter} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot name="head" slot="head">
     {
       defaultHref ? (

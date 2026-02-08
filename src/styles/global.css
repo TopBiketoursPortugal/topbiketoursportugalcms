@@ -1,12 +1,12 @@
-@import "tailwindcss";
-@import "./ccElegantBlack.css";
-@import "./page-find.css";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import './ccElegantBlack.css';
+@import './page-find.css';
+@import 'tw-animate-css';
 
 /* Typography Plugin */
-@plugin "@tailwindcss/typography";
-@plugin "@iconify/tailwind4" {
-  prefixes: "ph", "fa", "circle-flags", "logos";
+@plugin '@tailwindcss/typography';
+@plugin '@iconify/tailwind4' {
+  prefixes: 'ph', 'fa', 'circle-flags', 'logos';
 }
 
 /* Theme Configuration */
@@ -25,12 +25,20 @@
 
 /* Dark Mode Configuration with Nightwind-style Color Inversion */
 * {
-  transition: background-color .2s, color .2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 :root {
   --pageContainer: 1280px;
   --pagePadding: 2rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 /* Custom Styles */
@@ -218,4 +226,3 @@ body {
   font-weight: 500;
   margin-right: 1rem;
 } */
-

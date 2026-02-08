@@ -9,10 +9,12 @@ import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import Stack from 'src/components/stack/stack.astro';
 import Heading from 'src/components/typography/heading.astro';
 import Text from 'src/components/typography/text.astro';
+import Prose from 'src/components/typography/prose.astro';
 import LanguageData from 'src/../data/languages.json';
 import SiteData from 'src/../data/site.json';
 import { getImage } from 'astro:assets';
 import { t } from 'utils/i18n';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
@@ -109,9 +111,14 @@ const frontmatter = {
 const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  { name: regionData.data.name ?? regionData.data.title, url: getTourRegionsPath(regionData, language) }
+];
 ---
 
-<Layout class="mb-16 px-8" {...frontmatter} hrefLangs={hrefs}>
+<Layout class="mb-16 px-8" {...frontmatter} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot slot="head">
       {
       defaultHref ? (
@@ -129,6 +136,13 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     }
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
+  {
+    regionData.data.before_content ? (
+      <div class="px-6">
+        <Prose markdown={regionData.data.before_content} />
+      </div>
+    ) : null
+  }
   {
     packageTours.length > 0 ? (
       <Heading as="h1" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
@@ -148,6 +162,13 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
         <Text size="large">{t("Tours.Regions.NoResults.AlternateTags.Title", language)}</Text>
         <ul class="list-disc pl-8">{tourRegions.filter((r) => r.data.id !== regionData.data.id)
                         .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={regionSeoTitle} class="underline">{regionSeoTitle}</a></li>))}</u>
+      </div>
+    ) : null
+  }
+  {
+    regionData.data.after_content ? (
+      <div class="px-6">
+        <Prose markdown={regionData.data.after_content} />
       </div>
     ) : null
   }

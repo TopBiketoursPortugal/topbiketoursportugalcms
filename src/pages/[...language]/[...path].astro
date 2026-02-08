@@ -3,6 +3,8 @@ import PageLayout from 'src/layouts/Page.astro';
 import ContactLayout from 'src/layouts/Contacts.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getPageLanguagesAlternates, getPagePath } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getHomeCrumb, type BreadcrumbItem } from 'utils/breadcrumbs';
 
 export interface Props {
   page: CollectionEntry<'pages'>;
@@ -29,15 +31,24 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 const template = (page.data as any).template ?? '~/layouts/Page.astro';
 const hrefs = await getPageLanguagesAlternates(page, Astro.site);
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const pagePath = getPagePath(page);
+const isHomePage = !pagePath || pagePath === '/' || pagePath === '/pt/';
+const breadcrumbs: BreadcrumbItem[] = isHomePage
+  ? []
+  : [
+      getHomeCrumb(language),
+      { name: page.data.title, url: pagePath }
+    ];
 ---
 
 {
   template === '~/layouts/Contacts.astro' ? (
-    <ContactLayout frontmatter={page.data as any} hrefs={hrefs} />
+    <ContactLayout frontmatter={page.data as any} hrefs={hrefs} breadcrumbs={breadcrumbs} />
   ) : null
 }
 {
   template === '~/layouts/Page.astro' ? (
-    <PageLayout frontmatter={page.data as any} hrefs={hrefs} />
+    <PageLayout frontmatter={page.data as any} hrefs={hrefs} breadcrumbs={breadcrumbs} isHomePage={isHomePage} />
   ) : null
 }

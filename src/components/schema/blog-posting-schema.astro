@@ -1,0 +1,41 @@
+---
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = {
+  title: string;
+  date: string | Date;
+  author?: string | null;
+  image?: string;
+  wordCount?: number;
+  language: LanguageCodes;
+  url: string;
+};
+
+const { title, date, author, image, wordCount, language, url } = Astro.props;
+const site = SiteData[language];
+const baseUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  'headline': title,
+  'datePublished': new Date(date).toISOString(),
+  'url': `${baseUrl}${url}`,
+  ...(author ? { author: { '@type': 'Person', 'name': author } } : {}),
+  ...(image ? { image: image.startsWith('http') ? image : `${baseUrl}${image}` } : {}),
+  ...(wordCount ? { wordCount } : {}),
+  'publisher': {
+    '@type': 'Organization',
+    '@id': `${site.site.url}#organization`,
+    'name': site.site.name
+  }
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

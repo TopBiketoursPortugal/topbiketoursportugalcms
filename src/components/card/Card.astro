@@ -9,7 +9,7 @@ const cardVariants = tv({
     layout: {
       vertical: 'flex flex-col',
       horizontal:
-        'flex flex-col md:flex md:flex-col lg:grid lg:grid-cols-[33%_minmax(66%,_1fr)]'
+        'flex flex-col md:flex md:flex-col lg:grid lg:grid-cols-[33%_minmax(66%,1fr)]'
     },
     variant: {
       primary: 'text-primary bg-transparent',
@@ -95,7 +95,7 @@ const { href, title } = Astro.props satisfies Props;
       <a
         href={href}
         title={title}
-        class="text- -indent- absolute inset-0 bottom-0 left-0 right-0 top-0 z-10 -indent-[9999px]"
+        class="text- -indent- absolute inset-0 bottom-0 left-0 right-0 top-0 z-10 -indent-2499.75"
       >
         {title}
       </a>

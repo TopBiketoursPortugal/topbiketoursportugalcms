@@ -8,10 +8,13 @@ import { getTourTagLanguagesAlternates, getTourTagPath, trailingSlash } from 'ut
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import Heading from 'src/components/typography/heading.astro';
 import Text from 'src/components/typography/text.astro';
+import Stack from 'src/components/stack/stack.astro';
+import Prose from 'src/components/typography/prose.astro';
 import LanguageData from 'src/../data/languages.json';
 import SiteData from 'src/../data/site.json';
 import { getImage } from 'astro:assets';
 import { t } from 'utils/i18n';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
   const tours = await getCollection('tours');
@@ -110,11 +113,16 @@ const frontmatter = {
 const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  { name: tagData.data.name ?? tagData.data.title, url: getTourTagPath(tagData, language) }
+];
 ---
 
-<Layout class="mb-16 px-8 pt-8"
+<Layout class="mb-16 px-8"
   {...frontmatter}
-  title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} class="px-10" hrefLangs={hrefs}>
+  title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot slot="head">
       {
       defaultHref ? (
@@ -131,6 +139,14 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
       ))
     }
   </slot>
+<Stack spacing="large" layout="vertical" class="pt-6">
+  {
+    tagData.data.before_content ? (
+      <div class="px-6">
+        <Prose markdown={tagData.data.before_content} />
+      </div>
+    ) : null
+  }
   {
     packageTours.length > 0 ? (
       <Heading as="h1" class="px-6">{t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)}</Heading>
@@ -149,9 +165,16 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
         <Text size="xlarge">{t("Tours.Tags.NoResults.Title", language).replace("$1",tagData.data.name?? tagData.data.title)}</Text>
         <Text size="large">{t("Tours.Tags.NoResults.AlternateTags.Title", language)}</Text>
         <ul class="list-disc pl-8">{tourTags.filter((r) => r.data.id !== tagData.data.id)
-                        .map((r) => (<li class="pl-2"><a href={getTourTagPath(r,language)} title={r.data.name ?? r.data.title} class="underline">{r.data.name ?? r.data.title}</a></li>))}</u>
+                        .map((r) => (<li class="pl-2"><a href={getTourTagPath(r,language)} title={r.data.name ?? r.data.title} class="underline">{r.data.name ?? r.data.title}</a></li>))}</ul>
       </div>
     ) : null
   }
-  </Stack>
+  {
+    tagData.data.after_content ? (
+      <div class="px-6">
+        <Prose markdown={tagData.data.after_content} />
+      </div>
+    ) : null
+  }
+</Stack>
 </Layout>

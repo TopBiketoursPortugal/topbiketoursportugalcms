@@ -9,6 +9,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
 import { t } from 'utils/i18n';
+import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
@@ -106,9 +107,13 @@ const hrefs = (
   ...p,
   href: p.href + (pageNumber === 1 ? '' : pageNumber + '/')
 }));
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getBlogCrumb(language)
+];
 ---
 
-<PaginatedLayout frontmatter={frontmatter} hrefs={hrefs}>
+<PaginatedLayout frontmatter={frontmatter} hrefs={hrefs} breadcrumbs={breadcrumbs}>
   <section class="blog-index mx-auto flex flex-col justify-center">
     <BlogList posts={posts} />
     <BlogPagination pagination={pagination} />

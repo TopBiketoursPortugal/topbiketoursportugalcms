@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from '../utility/markdown.astro';
+import { getDarkEquivalent, getDarkTextEquivalent } from '../../utils/dark-color';
 
 interface Props {
   background_color: string;
@@ -74,15 +75,15 @@ const getHeadingSizeComponent = (size: string) => {
 const Heading = getHeadingSizeComponent(heading_size);
 ---
 
-<section class={block.class} style={`background-color: ${background_color};`}>
+<section class={block.class} style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}>
   <div class="hero-container">
-    <div class="content flex flex-col gap-4">
+    <div class="content flex flex-col gap-4 intersect:opacity-100 intersect-once">
       {
         heading?.heading_text ? (
           <Heading class="heading pb-3">{heading?.heading_text}</Heading>
         ) : null
       }
-      <div class="subheading-text" style={`color: ${block.subheading.color};`}>
+      <div class="subheading-text" style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}>
         <Markdown content={subheading.markdown_content} />
       </div>
       <div class="buttons">
@@ -96,7 +97,7 @@ const Heading = getHeadingSizeComponent(heading_size);
         }
       </div>
     </div>
-    <div class="blob">
+    <div class="blob intersect:opacity-100 intersect-once">
       {
         imageSrc && (
           <Image
@@ -112,18 +113,11 @@ const Heading = getHeadingSizeComponent(heading_size);
 </section>
 <style define:vars={{ headingGradientColor }}>
   section {
-    background-color: var(--bg-color, #ffffff);
+    background-color: var(--cms-bg, #ffffff);
   }
 
-  /* Dark mode support */
   :global(.dark) section {
-    background-color: var(--bg-color-dark, #1e293b);
-  }
-
-  /* If background is white or very light, use dark background in dark mode */
-  :global(.dark) section[style*='#ffffff'],
-  :global(.dark) section[style*='rgb(255, 255, 255)'] {
-    background-color: #1e293b !important;
+    background-color: var(--cms-bg-dark, #1e293b) !important;
   }
 
   .hero-container {
@@ -137,6 +131,7 @@ const Heading = getHeadingSizeComponent(heading_size);
     max-width: var(--pageContainer);
     margin-inline: auto;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .content h1 {
@@ -153,8 +148,23 @@ const Heading = getHeadingSizeComponent(heading_size);
     -webkit-text-fill-color: transparent;
   }
 
+  :global(.dark) .content h1 {
+    background: linear-gradient(
+      to left,
+      var(--headingGradientColor) 50%,
+      #ffffff
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
   .subheading-text {
     margin-top: 1rem;
+    color: var(--cms-text);
+  }
+
+  :global(.dark) .subheading-text {
+    color: var(--cms-text-dark) !important;
   }
 
   .buttons {
@@ -255,6 +265,24 @@ const Heading = getHeadingSizeComponent(heading_size);
     }
     50% {
       border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  /* Scroll-triggered animations */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .content {
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .content[no-intersect] {
+      opacity: 0;
+      transform: translateX(-2rem);
+    }
+    .blob {
+      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+    }
+    .blob[no-intersect] {
+      opacity: 0;
+      transform: translateX(2rem);
     }
   }
 </style>

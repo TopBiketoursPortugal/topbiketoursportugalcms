@@ -106,7 +106,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         aria-hidden="true"
                       />
                     </button>
-                    <ul class="dropdown-menu rounded pl-4 font-medium text-black drop-shadow-xl md:absolute md:hidden md:min-w-[200px] md:pl-0 md:backdrop-blur-md">
+                    <ul class="dropdown-menu rounded pl-4 font-medium text-black drop-shadow-xl md:absolute md:hidden md:min-w-50 md:pl-0 md:backdrop-blur-md">
                       {links.map(({ text: text2, href: href2 }) => (
                         <li>
                           <a

@@ -544,8 +544,18 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
-      title: 
+      title:
         type: markdown
+        cascade: true
+      before_content:
+        type: markdown
+        options:
+          allow_resize: true
+        cascade: true
+      after_content:
+        type: markdown
+        options:
+          allow_resize: true
         cascade: true
       language:
         type: select
@@ -603,6 +613,16 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
+      before_content:
+        type: markdown
+        options:
+          allow_resize: true
+        cascade: true
+      after_content:
+        type: markdown
+        options:
+          allow_resize: true
+        cascade: true
       language:
         type: select
         options:
@@ -658,6 +678,16 @@ collections_config:
         type: auto
         instance_value: UUID
         hidden: true
+        cascade: true
+      before_content:
+        type: markdown
+        options:
+          allow_resize: true
+        cascade: true
+      after_content:
+        type: markdown
+        options:
+          allow_resize: true
         cascade: true
       language:
         type: select

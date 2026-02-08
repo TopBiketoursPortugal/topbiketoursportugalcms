@@ -9,6 +9,8 @@ const postTagsSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
   name: z.string().optional(),
+  before_content: z.string().optional(),
+  after_content: z.string().optional(),
   seo: seoSchema.optional()
 });
 

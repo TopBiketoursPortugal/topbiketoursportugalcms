@@ -1,0 +1,23 @@
+---
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = { language: LanguageCodes };
+
+const { language } = Astro.props;
+const site = SiteData[language];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  'name': site.site.name,
+  'url': site.site.url
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

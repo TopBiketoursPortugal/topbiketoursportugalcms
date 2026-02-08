@@ -34,6 +34,7 @@
     "Footer.PaymentDescription": "The payment is encrypted and transmitted securely with an SSL protocol.",
     "Footer.PaymentTitle": "Pay Safely With Us",
     "Footer.TourRegionsTitle": "Tours",
+    "Footer.PartnersTitle": "Partners",
     "PrivacyPolicy": "Privacy Policy",
     "TermsAndConditions": "Terms And Conditions",
     "Tour.Form.Button.Text": "Book now",
@@ -102,7 +103,11 @@
     "Tours.Tags.NoResults.AlternateTags.Title": "Could try other tags:",
     "Tours.Tags.NoResults.Title": "No tours yet for tag $1",
     "Tours.Tags.PackageTour.Title": "Tour list tag $1",
-    "Tour.Badge.New": "NEW"
+    "Tour.Badge.New": "NEW",
+    "Breadcrumb.Home": "Home",
+    "Breadcrumb.Tours": "Tours",
+    "Breadcrumb.Blog": "Blog",
+    "Breadcrumb.About": "About"
   },
   "pt": {
     "Blog.Paged.Description": "Blog página $1",
@@ -139,6 +144,7 @@
     "Footer.PaymentDescription": "O pagamento é encriptado e transmitido de forma segura através de um protocolo SSL.",
     "Footer.PaymentTitle": "Pague em Segurança Connosco",
     "Footer.TourRegionsTitle": "Viagens",
+    "Footer.PartnersTitle": "Parceiros",
     "PrivacyPolicy": "Política de Privacidade",
     "TermsAndConditions": "Termos e Condições",
     "Tour.Form.Button.Text": "Reserve agora",
@@ -207,6 +213,10 @@
     "Tours.Tags.NoResults.AlternateTags.Title": "Pode experimentar outras etiquetas:",
     "Tours.Tags.NoResults.Title": "Ainda não há tours para a etiqueta $1",
     "Tours.Tags.PackageTour.Title": "Etiqueta de lista de tours $1",
-    "Tour.Badge.New": "NOVO"
+    "Tour.Badge.New": "NOVO",
+    "Breadcrumb.Home": "Inicio",
+    "Breadcrumb.Tours": "Tours",
+    "Breadcrumb.Blog": "Blog",
+    "Breadcrumb.About": "Sobre"
   }
 }

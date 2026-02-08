@@ -4,7 +4,9 @@ import { getCollection, render } from 'astro:content';
 import TourPage from 'src/components/tours/tour-page.astro';
 import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
-import { getTourLanguagesAlternates, trailingSlash } from 'utils/permalinks';
+import { getTourLanguagesAlternates, getTourPath, trailingSlash } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
 
 export async function getStaticPaths() {
@@ -45,9 +47,15 @@ const seo = {
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  { name: tour.data.title, url: getTourPath(tour.data, language) }
+];
 ---
 
-<Layout title={tour.data.title} seo={seo} hrefLangs={hrefs}>
+<Layout title={tour.data.title} seo={seo} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot slot="head">
     {
       defaultHref ? (
