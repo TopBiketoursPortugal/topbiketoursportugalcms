@@ -2,6 +2,7 @@
 import slugify from 'slugify';
 import BlogList from 'src/components/blog/list.astro';
 import BlogPagination from 'src/components/blog/pagination.astro';
+import InfiniteScroll from 'src/components/blog/infinite-scroll.astro';
 import Layout from 'src/layouts/Layout.astro';
 import Prose from 'src/components/typography/prose.astro';
 import { getCollection } from 'astro:content';
@@ -121,6 +122,7 @@ const breadcrumbs = [
     <section class="blog-index mx-auto">
       <BlogList posts={filteredPosts} />
       <BlogPagination pagination={pagination} />
+      <InfiniteScroll />
     </section>
     {
       tagData.data.after_content ? (
