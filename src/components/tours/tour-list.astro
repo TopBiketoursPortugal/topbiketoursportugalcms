@@ -30,3 +30,14 @@ const { items, contentDisplay = 'inline', language } = Astro.props;
   </Grid>
 </Stack>
 <TourListSchema items={items} language={language} />
+
+<style>
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    :global(.tour-card-anim:nth-child(3n + 2)) {
+      transition-delay: 0.1s;
+    }
+    :global(.tour-card-anim:nth-child(3n + 3)) {
+      transition-delay: 0.2s;
+    }
+  }
+</style>

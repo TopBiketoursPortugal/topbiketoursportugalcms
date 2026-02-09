@@ -1,0 +1,75 @@
+---
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = {
+  name: string;
+  description?: string;
+  image?: string;
+  url: string;
+  price?: number;
+  promoPrice?: number;
+  currency?: string;
+  ratingAverage?: number;
+  ratingCount?: number;
+  language: LanguageCodes;
+};
+
+const {
+  name,
+  description,
+  image,
+  url,
+  price = 0,
+  promoPrice = 0,
+  currency = 'EUR',
+  ratingAverage = 0,
+  ratingCount = 0,
+  language
+} = Astro.props;
+
+const site = SiteData[language];
+const baseUrl = Astro.site ?? site.site.url;
+const effectivePrice = promoPrice > 0 ? promoPrice : price;
+
+const schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  'name': name,
+  'url': `${baseUrl}${url.startsWith('/') ? url.substring(1) : url}`,
+  'provider': {
+    '@type': 'Organization',
+    '@id': `${site.site.url}#organization`
+  }
+};
+
+if (description) schema.description = description;
+if (image) schema.image = image;
+
+if (effectivePrice > 0) {
+  schema.offers = {
+    '@type': 'Offer',
+    'price': effectivePrice,
+    'priceCurrency': currency,
+    'availability': 'https://schema.org/InStock'
+  };
+}
+
+if (ratingCount > 0 && ratingAverage > 0) {
+  schema.aggregateRating = {
+    '@type': 'AggregateRating',
+    'ratingValue': ratingAverage.toFixed(1),
+    'reviewCount': ratingCount,
+    'bestRating': 5,
+    'worstRating': 1
+  };
+}
+---
+
+<script
+  is:inline
+  async
+  defer
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

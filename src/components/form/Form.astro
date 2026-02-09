@@ -44,3 +44,95 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
 </script>
 <script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
 ></script>
+<script is:inline>
+  function _hasAnalyticsConsent() {
+    try {
+      var cookie = document.cookie
+        .split('; ')
+        .find(function (row) {
+          return row.startsWith('cc_cookie=');
+        });
+      if (!cookie) return false;
+      var value = JSON.parse(decodeURIComponent(cookie.split('=')[1]));
+      return value && value.categories && value.categories.indexOf('analytics') !== -1;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _initFormTracking() {
+    document.querySelectorAll('form.validate-form').forEach(function (form) {
+      if (form.hasAttribute('data-tracking-init')) return;
+      form.setAttribute('data-tracking-init', 'true');
+
+      var getParam = function (key) {
+        try {
+          return sessionStorage.getItem('_track_' + key) || '';
+        } catch (e) {
+          return '';
+        }
+      };
+
+      // Inject hidden fields with tracking params into the form (sent to Formspree)
+      var fields = {
+        keyword: getParam('utm_term') || getParam('keyword'),
+        cost: getParam('cost'),
+        'utm-source': getParam('utm_source'),
+        'utm-medium': getParam('utm_medium'),
+        'utm-campaign': getParam('utm_campaign')
+      };
+      for (var name in fields) {
+        if (fields[name]) {
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = fields[name];
+          form.appendChild(input);
+        }
+      }
+
+      form.addEventListener('submit', function (e) {
+        // Only fire analytics events if user has granted consent
+        if (!_hasAnalyticsConsent()) return;
+
+        var keyword = getParam('utm_term') || getParam('keyword');
+        var cost = getParam('cost');
+        var formId = form.id || '';
+        var productCodeEl = form.querySelector('[name="product-code"]');
+        var productTitleEl = form.querySelector('[name="product-title"]');
+        var isContactForm = form.classList.contains('contact-form');
+
+        // Push event to dataLayer for GTM
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'form_submission',
+          form_id: formId,
+          form_type: isContactForm ? 'contact' : 'tour_booking',
+          keyword: keyword,
+          cost: cost,
+          utm_source: getParam('utm_source'),
+          utm_medium: getParam('utm_medium'),
+          utm_campaign: getParam('utm_campaign'),
+          product_code: productCodeEl ? productCodeEl.value : '',
+          product_title: productTitleEl ? productTitleEl.value : ''
+        });
+
+        // Fire GA4 generate_lead event
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            currency: 'EUR',
+            value: cost ? parseFloat(cost) : 0
+          });
+        }
+
+        // Brief delay to allow tracking events to fire before navigation
+        e.preventDefault();
+        setTimeout(function () {
+          form.submit();
+        }, 150);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', _initFormTracking);
+</script>

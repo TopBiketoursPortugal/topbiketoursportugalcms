@@ -1,14 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
 import type { VisuallyEditable } from 'src/types';
-import { getTourPath, getTourTagPath } from 'utils/permalinks';
-import Logo from 'src/assets/icons/logo.svg';
 import type { LanguageCodes } from 'src/schemas/language';
-import { t } from 'utils/i18n';
+import TourCard from '../tours/tour-card.astro';
 import Prose from '../typography/prose.astro';
-import Text from 'src/components/typography/text.astro';
 
 type Props = {
   title?: string;
@@ -18,10 +13,6 @@ type Props = {
 } & VisuallyEditable;
 
 const block = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
 
 const feature_tours = block.feature_tours ?? [];
 const main_feature = block.main_feature ?? feature_tours[0];
@@ -35,141 +26,37 @@ const allTours = await getCollection(
     tour.data.language === language
 );
 
-const tourTags = await getCollection('tourTags');
+const mainTour = allTours.find((tour) => tour.data.id === main_feature);
+const otherTours = allTours.filter((tour) =>
+  feature_list?.includes(tour.data.id)
+);
 ---
 
 <section class="flex flex-col gap-6 py-12">
   {block.title ? <Prose markdown={block.title} class="px-6" /> : null}
-  <div class="flex flex-col gap-6 lg:flex-row">
+  <div
+    class="featured-tours-grid grid grid-cols-1 gap-6 md:grid-cols-2"
+  >
     {
-      allTours
-        .filter((tour) => main_feature === tour.data.id)
-        .map((tour) => {
-          const featuredTourURL = getTourPath(tour.data);
-          const imageSrc =
-            (tour.data.image?.src
-              ? images[tour.data.image?.src]?.default
-              : null) ?? Logo;
-          const tags = tourTags.filter(
-            (t) =>
-              tour.data.tags?.includes(t.data.id) &&
-              t.data.language === language
-          );
-          return (
-            <div class="lg:w-3/4">
-              <div class="relative">
-                <a href={featuredTourURL}>
-                  <Image
-                    class="aspect-video w-full rounded-sm object-cover"
-                    alt={tour.data.image?.alt ?? 'Top Bike Tours Portugal'}
-                    widths={[320, 500, 640, 960, 1280]}
-                    sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
-                    src={imageSrc}
-                  />
-                </a>
-                {tour.data.isNewTour ? (
-                  <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
-                    {t('Tour.Badge.New', language)}
-                  </span>
-                ) : null}
-              </div>
-              {tags ? (
-                <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                  {tags.map((tag) => {
-                    return (
-                      <a href={getTourTagPath(tag, language)}>
-                        <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                          {tag.data.name ?? tag.data.title}
-                        </span>
-                      </a>
-                    );
-                  })}
-                </div>
-              ) : null}
-
-              <a href={featuredTourURL}>
-                <h3 class="py-2 text-3xl font-semibold">{tour.data.title}</h3>
-                <Text
-                  as="p"
-                  class="line-clamp-3 text-gray-600 dark:text-gray-400"
-                >
-                  {tour.data.seo?.page_description || tour.data.description}
-                </Text>
-              </a>
-            </div>
-          );
-        })
+      mainTour && (
+        <div class="featured-main md:col-span-2">
+          <TourCard
+            tour={mainTour.data}
+            contentDisplay="inline"
+            language={language}
+          />
+        </div>
+      )
     }
-    <div
-      class="non-featured-posts flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
-    >
-      {
-        allTours
-          .filter((tour) => feature_list?.includes(tour.data.id))
-          .map((tour) => {
-            const featuredTourURL = getTourPath(tour.data);
-            const imageSrc =
-              (tour.data.image?.src
-                ? images[tour.data.image?.src]?.default
-                : null) ?? Logo;
-            const tags = tourTags.filter(
-              (t) =>
-                tour.data.tags?.includes(t.data.id) &&
-                t.data.language === language
-            );
-
-            return (
-              <div>
-                <div class="relative">
-                  <a href={featuredTourURL}>
-                    <Image
-                      class="aspect-video w-full rounded-sm object-cover"
-                      alt={tour.data.image?.src ?? 'Top Bike Tours Portugal'}
-                      widths={[320, 500, 640]}
-                      sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
-                      src={imageSrc}
-                    />
-                  </a>
-                  {tour.data.isNewTour ? (
-                    <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
-                      {t('Tour.Badge.New', language)}
-                    </span>
-                  ) : null}
-                </div>
-                <div>
-                  {tags ? (
-                    <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                      {tags.map((tag) => {
-                        return (
-                          <a href={getTourTagPath(tag, language)}>
-                            <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                              {tag.data.name ?? tag.data.title}
-                            </span>
-                          </a>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    ''
-                  )}
-                  <a href={featuredTourURL}>
-                    <h3 class="py-1 text-2xl font-semibold">
-                      {tour.data.title}
-                      <Text
-                        as="p"
-                        class="line-clamp-3 text-gray-600 dark:text-gray-400"
-                      >
-                        {tour.data.seo?.page_description ||
-                          tour.data.description}
-                      </Text>
-                    </h3>
-                  </a>
-                </div>
-              </div>
-            );
-          })
-      }
-    </div>
+    {
+      otherTours.map((tour) => (
+        <TourCard
+          tour={tour.data}
+          contentDisplay="inline"
+          language={language}
+        />
+      ))
+    }
   </div>
 </section>
 
@@ -181,8 +68,38 @@ const tourTags = await getCollection('tourTags');
     padding-block: 24px;
   }
 
-  .non-featured-posts {
-    padding-inline: var(--pagePadding);
-    margin-inline: auto;
+  /* All cards fill their grid cell */
+  .featured-tours-grid :global(.tour-card-anim),
+  .featured-tours-grid :global(.tour-card-anim > div) {
+    height: 100%;
+  }
+
+  /* Main featured card fills its cell */
+  .featured-main {
+    height: 100%;
+  }
+
+  /* Main card: switch to horizontal layout (image left, content right) on md+ */
+  @media (min-width: 768px) {
+    .featured-main :global(.tour-card-anim > div) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .featured-main :global(.tour-card-anim > div > div:first-child) {
+      height: 100%;
+    }
+
+    .featured-main :global(.tour-card-anim > div > div:first-child img) {
+      aspect-ratio: auto;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* Side cards: truncate excerpt to 2 lines */
+  .featured-tours-grid > :global(.tour-card-anim .line-clamp-5) {
+    -webkit-line-clamp: 2;
   }
 </style>

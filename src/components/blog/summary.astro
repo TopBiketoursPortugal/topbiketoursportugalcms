@@ -24,7 +24,7 @@ const postTags = tags?.length
   : [];
 ---
 
-<div class="block">
+<div class="blog-card intersect:opacity-100 intersect-once block transition-transform duration-200 hover:-translate-y-1">
   <a href={getBlogPermalink(Astro.props)}>
     <Image
       class="aspect-video w-full rounded-sm"
@@ -64,3 +64,15 @@ const postTags = tags?.length
     </p>
   </div>
 </div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .blog-card {
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .blog-card[no-intersect] {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+</style>
