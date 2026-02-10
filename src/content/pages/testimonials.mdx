@@ -18,9 +18,8 @@ seo:
   metas: []
   keywords: testimonials bicycle tours, reviews bike tours
 content_blocks:
-  - _bookshop_name: collection
-    type: reviews
-    title: >-
+  - _bookshop_name: text
+    text: >-
       # **Top Bike Tours Portugal Reviews**
 
 
@@ -35,7 +34,14 @@ content_blocks:
       rel="noopener">Google My Bussiness</a> and <a
       href="https://www.tripadvisor.com/Attraction_Review-g189180-d4105907-Reviews-Top_Bike_Tours_Portugal-Porto_Porto_District_Northern_Portugal.html"
       target="_blank" rel="noopener">Trispadvisor</a> partner webpages.
-    frame: ligth
+
+
+      &nbsp;
+    style:
+      container: centered
+      padding: normal
+      align: centered
+      tailwind:
   - _bookshop_name: youtube
     videoId: zO2uuYBtgt4
     width: 100%
@@ -44,6 +50,10 @@ content_blocks:
     allowFullscreen: false
     loading:
     className: ''
+  - _bookshop_name: collection
+    type: reviews
+    title: '#'
+    frame: ligth
 template: ~/layouts/Page.astro
 draft: false
 ---
