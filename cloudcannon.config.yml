@@ -545,7 +545,7 @@ collections_config:
         hidden: true
         cascade: true
       title:
-        type: markdown
+        type: text
         cascade: true
       before_content:
         type: markdown
