@@ -9,7 +9,7 @@ import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import Heading from 'src/components/typography/heading.astro';
 import Text from 'src/components/typography/text.astro';
 import Stack from 'src/components/stack/stack.astro';
-import Prose from 'src/components/typography/prose.astro';
+import PageHelper from 'src/shared/astro/page.astro';
 import LanguageData from 'src/../data/languages.json';
 import SiteData from 'src/../data/site.json';
 import { getImage } from 'astro:assets';
@@ -141,13 +141,7 @@ const breadcrumbs = [
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
   <Heading as="h1" class="px-6">{tagData.data.title ?? tagData.data.seo?.page_title}</Heading>
-  {
-    tagData.data.before_content ? (
-      <div class="px-6">
-        <Prose markdown={tagData.data.before_content} />
-      </div>
-    ) : null
-  }
+  <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks ?? []} />
   {
     packageTours.length > 0 ? (
       <Heading as="h2" class="px-6">{t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)}</Heading>
@@ -170,12 +164,6 @@ const breadcrumbs = [
       </div>
     ) : null
   }
-  {
-    tagData.data.after_content ? (
-      <div class="px-6">
-        <Prose markdown={tagData.data.after_content} />
-      </div>
-    ) : null
-  }
+  <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks_after ?? []} />
 </Stack>
 </Layout>

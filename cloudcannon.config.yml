@@ -537,6 +537,8 @@ collections_config:
       image:
         - key: seo.featured_image
     _enabled_editors:
+      - visual
+      - data
       - content
     _inputs:
       id:
@@ -546,16 +548,6 @@ collections_config:
         cascade: true
       title:
         type: text
-        cascade: true
-      before_content:
-        type: markdown
-        options:
-          allow_resize: true
-        cascade: true
-      after_content:
-        type: markdown
-        options:
-          allow_resize: true
         cascade: true
       language:
         type: select
@@ -570,11 +562,16 @@ collections_config:
         hidden: true
         cascade: true
     add_options:
-      - name: New Tour Region
+      - name: New Tour Region English
         icon: language
         editor: visual
         base_path: ''
         schema: default
+      - name: New Tour Region Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
@@ -587,7 +584,15 @@ collections_config:
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewTourRegionMember
+        name: New Tour Region
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
         icon: pedal_bike
   tourTags:
     path: src/content/tour-tags
@@ -606,22 +611,14 @@ collections_config:
       image:
         - key: seo.featured_image
     _enabled_editors:
+      - visual
+      - data
       - content
     _inputs:
       id:
         type: auto
         instance_value: UUID
         hidden: true
-        cascade: true
-      before_content:
-        type: markdown
-        options:
-          allow_resize: true
-        cascade: true
-      after_content:
-        type: markdown
-        options:
-          allow_resize: true
         cascade: true
       language:
         type: select
@@ -636,11 +633,16 @@ collections_config:
         hidden: true
         cascade: true
     add_options:
-      - name: New Tour tag
+      - name: New Tour Tag English
         icon: language
         editor: visual
         base_path: ''
         schema: default
+      - name: New Tour Tag Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
@@ -653,7 +655,15 @@ collections_config:
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewTourTagMember
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
         icon: pedal_bike
   postTags:
     path: src/content/blog-tags
@@ -672,22 +682,14 @@ collections_config:
       image:
         - key: seo.featured_image
     _enabled_editors:
+      - visual
+      - data
       - content
     _inputs:
       id:
         type: auto
         instance_value: UUID
         hidden: true
-        cascade: true
-      before_content:
-        type: markdown
-        options:
-          allow_resize: true
-        cascade: true
-      after_content:
-        type: markdown
-        options:
-          allow_resize: true
         cascade: true
       language:
         type: select
@@ -702,11 +704,16 @@ collections_config:
         hidden: true
         cascade: true
     add_options:
-      - name: New Post tag
+      - name: New Post Tag English
         icon: language
         editor: visual
         base_path: ''
         schema: default
+      - name: New Post Tag Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
@@ -719,7 +726,15 @@ collections_config:
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewPostTagMember
+        name: New Post Tag
+        icon: newspaper
+      defaultPT:
+        path: schemas/pt/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
         icon: newspaper
 collection_groups:
   - heading: Pages

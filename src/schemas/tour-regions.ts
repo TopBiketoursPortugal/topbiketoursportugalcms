@@ -9,8 +9,8 @@ const tourRegionSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
   name: z.string().optional(),
-  before_content: z.string().optional(),
-  after_content: z.string().optional(),
+  content_blocks: z.array(z.any()).optional().default([]),
+  content_blocks_after: z.array(z.any()).optional().default([]),
   seo: seoSchema.optional()
 });
 

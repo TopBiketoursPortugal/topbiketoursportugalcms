@@ -4,7 +4,7 @@ import BlogList from 'src/components/blog/list.astro';
 import BlogPagination from 'src/components/blog/pagination.astro';
 import InfiniteScroll from 'src/components/blog/infinite-scroll.astro';
 import Layout from 'src/layouts/Layout.astro';
-import Prose from 'src/components/typography/prose.astro';
+import PageHelper from 'src/shared/astro/page.astro';
 import { getCollection } from 'astro:content';
 import { getBlogIndexPage, getBlogTagLanguagesAlternates, getBlogTagPath, trailingSlash } from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
@@ -107,13 +107,7 @@ const breadcrumbs = [
     }
   </slot>
   <div class="py-24">
-    {
-      tagData.data.before_content ? (
-        <div class="mx-auto max-w-4xl px-6 pb-8">
-          <Prose markdown={tagData.data.before_content} />
-        </div>
-      ) : null
-    }
+    <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks ?? []} />
     <h1
       class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"
     >
@@ -124,12 +118,6 @@ const breadcrumbs = [
       <BlogPagination pagination={pagination} />
       <InfiniteScroll />
     </section>
-    {
-      tagData.data.after_content ? (
-        <div class="mx-auto max-w-4xl px-6 pt-8">
-          <Prose markdown={tagData.data.after_content} />
-        </div>
-      ) : null
-    }
+    <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks_after ?? []} />
   </div>
 </Layout>
