@@ -10,8 +10,9 @@ import type { LanguageCodes } from 'src/schemas/language';
 import Logo from 'src/layouts/common/Logo.astro';
 import type { CollectionEntry } from 'astro:content';
 import TourRegionsCard from 'src/components/collection/tour-regions-card.astro';
+import { getTourTagPath, getTourTagsListingPath, getRiderLevelPath, getRiderLevelsListingPath } from 'utils/permalinks';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
 import { Image } from 'astro:assets';
-import BARRA_LOGOS_02 from 'src/assets/images/BARRA_LOGOS-02.png';
 import BARRA_LOGOS_03 from 'src/assets/images/BARRA_LOGOS-03.png';
 import BiosphereLogo from 'src/assets/images/biosphere-logo.svg';
 import AttaLogo from 'src/assets/images/atta-logo.svg';
@@ -23,6 +24,16 @@ const year = new Date().getFullYear();
 const regions = await getCollection(
   'tourRegions',
   (r) => r.data.language === language
+);
+
+const tourTags = await getCollection(
+  'tourTags',
+  (t) => t.data.language === language
+);
+
+const riderLevels = await getCollection(
+  'tourRiderLevels',
+  (t) => t.data.language === language
 );
 
 const termsPageSelector = (p: CollectionEntry<'pages'>) =>
@@ -77,6 +88,34 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
           layout="overlay"
           imageWidths={[200]}
         />
+      ))
+    }
+    <Text as="strong" class="col-span-full mt-4 dark:text-gray-100" size="xlarge" weight="bold">
+      <a href={getTourTagsListingPath(language)}>{t('Footer.TourTagsTitle', language)}</a>
+    </Text>
+    {
+      tourTags.map((tag) => (
+        <a
+          href={getTourTagPath(tag, language)}
+          class="flex items-center gap-1.5 text-sm transition-colors hover:text-green-600 dark:hover:text-green-400"
+        >
+          <i class:list={[getTagIconClass(tag.data.icon), 'h-4 w-4 shrink-0']} aria-hidden="true" />
+          <span>{tag.data.name ?? tag.data.title}</span>
+        </a>
+      ))
+    }
+    <Text as="strong" class="col-span-full mt-4 dark:text-gray-100" size="xlarge" weight="bold">
+      <a href={getRiderLevelsListingPath(language)}>{t('Footer.TourRiderLevelsTitle', language)}</a>
+    </Text>
+    {
+      riderLevels.map((level) => (
+        <a
+          href={getRiderLevelPath(level, language)}
+          class="flex items-center gap-1.5 text-sm transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+        >
+          <i class:list={[getTagIconClass(level.data.icon), 'h-4 w-4 shrink-0']} aria-hidden="true" />
+          <span>{level.data.name ?? level.data.title}</span>
+        </a>
       ))
     }
   </div>

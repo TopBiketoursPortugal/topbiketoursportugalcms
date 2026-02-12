@@ -81,6 +81,14 @@
             {
               "text": "Testimonials",
               "href": "/testimonials/"
+            },
+            {
+              "text": "Tour Categories",
+              "href": "/tours/tags/"
+            },
+            {
+              "text": "Rider Levels",
+              "href": "/tours/rider-levels/"
             }
           ]
         },
@@ -202,6 +210,14 @@
             {
               "text": "Testemunhos",
               "href": "/pt/testemunhos/"
+            },
+            {
+              "text": "Categorias de Tours",
+              "href": "/pt/tours/tags/"
+            },
+            {
+              "text": "Nível de Ciclista",
+              "href": "/pt/tours/rider-levels/"
             }
           ]
         },

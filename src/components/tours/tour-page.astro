@@ -28,6 +28,8 @@ import { getAuthorName } from '@utils/get-author-name';
 import ReviewItem from '@components/collection/review-item.astro';
 import TourProductSchema from '@components/schema/tour-product-schema.astro';
 import { getTourPath } from 'utils/permalinks';
+import TourTagBadge from './tour-tag-badge.astro';
+import RiderLevelBadge from './rider-level-badge.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -86,6 +88,14 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
+const tourTags = await getCollection(
+  'tourTags',
+  (t) => (tour.tags ?? []).includes(t.data.id) && t.data.language === language
+);
+const tourRiderLevels = await getCollection(
+  'tourRiderLevels',
+  (t) => (tour.riderLevels ?? []).includes(t.data.id) && t.data.language === language
+);
 const enableFaqs = true;
 const cards_per_row = 3;
 const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
@@ -259,6 +269,18 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         }
       </ul>
     </div>
+    {
+      (tourRiderLevels?.length > 0 || tourTags?.length > 0) && (
+        <div class="flex flex-wrap gap-2">
+          {tourRiderLevels.map((level) => (
+            <RiderLevelBadge level={level} language={language} size="md" />
+          ))}
+          {tourTags.map((tag) => (
+            <TourTagBadge tag={tag} language={language} size="md" />
+          ))}
+        </div>
+      )
+    }
     <Separator />
     <Prose markdown={tour.content ?? ''} />
     <slot />

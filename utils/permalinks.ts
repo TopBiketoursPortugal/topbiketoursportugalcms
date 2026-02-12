@@ -69,6 +69,52 @@ export function getTourTagPath(
   return sanitizeUrl(path);
 }
 
+export function getTourTagsListingPath(
+  language: LanguageCodes = 'en'
+): string {
+  const tourPermalink = PermalinkData.tours[language];
+  return sanitizeUrl(
+    `${getBasePath(language)}${tourPermalink}/tags${trailingSlash}`
+  );
+}
+
+export function getRiderLevelPath(
+  level: CollectionEntry<'tourRiderLevels'>,
+  language: LanguageCodes = 'en'
+): string {
+  const tourPermalink = PermalinkData.tours[language];
+  const path = `${getBasePath(language)}${tourPermalink}/rider-levels/${slugify(level.data.path ?? level.data.name ?? level.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  return sanitizeUrl(path);
+}
+
+export function getRiderLevelsListingPath(
+  language: LanguageCodes = 'en'
+): string {
+  const tourPermalink = PermalinkData.tours[language];
+  return sanitizeUrl(
+    `${getBasePath(language)}${tourPermalink}/rider-levels${trailingSlash}`
+  );
+}
+
+export async function getRiderLevelLanguagesAlternates(
+  riderLevel: CollectionEntry<'tourRiderLevels'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = riderLevel.filePath?.split('/').at(-1)!;
+  const alternateRiderLevels =
+    (await getCollection(
+      'tourRiderLevels',
+      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternateRiderLevels.map(({ data: alternate }) => ({
+    href: sanitizeUrl(
+      `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${PermalinkData.tours[alternate.language ?? 'en']}/rider-levels/${slugify(alternate.path ?? alternate.name ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternate.language
+  }));
+}
+
 export function getBlogTagPath(
   tag: CollectionEntry<'postTags'>,
   language: LanguageCodes = 'en'

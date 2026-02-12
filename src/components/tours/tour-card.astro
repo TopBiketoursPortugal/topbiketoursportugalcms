@@ -1,6 +1,6 @@
 ---
 import CardMedia from '../card/CardMedia.astro';
-import { getTourPath, getTourTagPath } from 'utils/permalinks';
+import { getTourPath } from 'utils/permalinks';
 import CardContent, { type CardContentProps } from '../card/CardContent.astro';
 import Card from '../card/Card.astro';
 import Languages from 'src/../data/languages.json';
@@ -10,7 +10,8 @@ import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
 import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
-import LinkButton from '../linkbutton/linkbutton.astro';
+import TourTagBadge from './tour-tag-badge.astro';
+import RiderLevelBadge from './rider-level-badge.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
@@ -29,6 +30,7 @@ const {
   duration,
   difficulty,
   tags = [],
+  riderLevels = [],
   language,
   packages = [],
   tourtype,
@@ -62,6 +64,10 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
 const tourTags = await getCollection(
   'tourTags',
   (t) => tags?.includes(t.data.id) && t.data.language === language
+);
+const tourRiderLevels = await getCollection(
+  'tourRiderLevels',
+  (t) => riderLevels?.includes(t.data.id) && t.data.language === language
 );
 ---
 
@@ -159,22 +165,15 @@ const tourTags = await getCollection(
     <Separator weight="thin" color="neutral" />
 
     {
-      tourTags && tourTags.length > 0 && (
-        <Stack spacing="small" alignment="center" class="flex-wrap">
-          <i
-            class="icon-[ph--bookmark-simple-light] h-5 w-5"
-            aria-hidden="true"
-          />
-          {tourTags.map((t) => (
-            <LinkButton
-              variant="link"
-              class="z-20"
-              href={getTourTagPath(t, language)}
-            >
-              {t.data.name ?? t.data.title}
-            </LinkButton>
+      (tourTags?.length > 0 || tourRiderLevels?.length > 0) && (
+        <div class="z-20 flex flex-wrap gap-1.5">
+          {tourRiderLevels.map((level) => (
+            <RiderLevelBadge level={level} language={language} size="sm" />
           ))}
-        </Stack>
+          {tourTags.map((tag) => (
+            <TourTagBadge tag={tag} language={language} size="sm" />
+          ))}
+        </div>
       )
     }
   </CardContent>

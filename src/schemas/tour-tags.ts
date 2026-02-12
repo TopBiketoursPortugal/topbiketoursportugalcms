@@ -9,6 +9,7 @@ const tourTagSchema = z.object({
   id: z.string().uuid(),
   title: z.string(),
   name: z.string().optional(),
+  icon: z.string().optional().nullable(),
   content_blocks: z.array(z.any()).optional().default([]),
   content_blocks_after: z.array(z.any()).optional().default([]),
   seo: seoSchema.optional()

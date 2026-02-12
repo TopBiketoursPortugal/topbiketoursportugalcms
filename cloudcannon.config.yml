@@ -310,6 +310,22 @@ collections_config:
               - key: seo.featured_image
           empty_type: array
         cascade: true
+      riderLevels:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.tourRiderLevels
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
+          empty_type: array
+        comment: Select rider levels for this tour (Beginner, Intermediate, Advanced)
+        cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -632,6 +648,31 @@ collections_config:
               value: en
         hidden: true
         cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Wine
+              value: ph--wine-light
+            - name: Gastronomy (Fork & Knife)
+              value: ph--fork-knife-light
+            - name: Cultural & Heritage (Bank)
+              value: ph--bank-light
+            - name: Coastal (Waves)
+              value: ph--waves-light
+            - name: Pilgrimage (Church)
+              value: ph--church-light
+            - name: Nature (Tree)
+              value: ph--tree-light
+            - name: City Tours (Buildings)
+              value: ph--buildings-light
+            - name: Mountain (Mountains)
+              value: ph--mountains-light
+            - name: Families (Users)
+              value: ph--users-light
+        cascade: true
     add_options:
       - name: New Tour Tag English
         icon: language
@@ -665,6 +706,90 @@ collections_config:
         remove_extra_inputs: false
         name: New Tour Tag
         icon: pedal_bike
+  tourRiderLevels:
+    path: src/content/tour-rider-levels
+    glob:
+      - '**/*.md*'
+    name: Tour Rider Levels
+    singular_name: Tour Rider Level
+    icon: fitness_center
+    url: >-
+      /[relative_base_path]/tours/rider-levels/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Beginner (Baby)
+              value: ph--baby-light
+            - name: Intermediate (Cyclist)
+              value: ph--person-simple-bike-light
+            - name: Advanced (Trophy)
+              value: ph--trophy-light
+        cascade: true
+    add_options:
+      - name: New Rider Level English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+      - name: New Rider Level Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      defaultPT:
+        path: schemas/pt/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
   postTags:
     path: src/content/blog-tags
     glob:
@@ -745,6 +870,7 @@ collection_groups:
       - tours
       - tourRegions
       - tourTags
+      - tourRiderLevels
       - team
       - testimonials
   - heading: Data

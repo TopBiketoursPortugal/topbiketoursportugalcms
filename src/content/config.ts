@@ -7,6 +7,7 @@ import { teamCollection } from 'src/schemas/team';
 import { testimonialCollection } from 'src/schemas/testimonal';
 import { tourRegionsCollection } from 'src/schemas/tour-regions';
 import { tourTagsCollection } from 'src/schemas/tour-tags';
+import { tourRiderLevelsCollection } from 'src/schemas/tour-rider-levels';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
@@ -75,6 +76,7 @@ export const collections = {
   pages: pagesCollection,
   tours: tourCollection,
   tourTags: tourTagsCollection,
+  tourRiderLevels: tourRiderLevelsCollection,
   tourRegions: tourRegionsCollection,
   team: teamCollection,
   testimonials: testimonialCollection

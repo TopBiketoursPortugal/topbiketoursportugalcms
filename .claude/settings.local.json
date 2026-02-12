@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd /c \"where pnpm\")",
+      "Bash(cmd /c \"pnpm build\")",
+      "Bash(export PATH:*)",
+      "Bash(npx pnpm build)"
+    ]
+  }
+}
