@@ -11,7 +11,8 @@
         {
           "text": "Bike tours",
           "page": "",
-          "href": "/bike-tours-in-portugal/"
+          "href": "/bike-tours-in-portugal/",
+          "megaMenu": true
         },
         {
           "text": "Day tours",
@@ -125,8 +126,8 @@
           "text": "Bicycle Types",
           "links": [
             {
-              "text": "Calendar",
-              "href": "https://topbiketoursportugal.com/guided-bike-tours-calendar-portugal/"
+              "text": "Our Bicycles",
+              "href": "/rent-bike-porto-portugal/"
             }
           ]
         }
@@ -139,12 +140,15 @@
         {
           "text": "Home",
           "page": "",
-          "href": "/pt/"
+          "href": "/pt/",
+          "enabled": false
+
         },
         {
           "text": "Bike Tours",
           "page": "",
-          "href": "/pt/passeios-de-bicicleta-portugal/"
+          "href": "/pt/passeios-de-bicicleta-portugal/",
+          "megaMenu": true
         },
         {
           "text": "Testemunhos",

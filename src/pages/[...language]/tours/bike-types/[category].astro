@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import slugify from 'slugify';
+import Layout from 'src/layouts/Layout.astro';
+import TourList from 'src/components/tours/tour-list.astro';
+import BikesCard from 'src/components/collection/bikes-card.astro';
+import { getBikeCategoryLanguagesAlternates, getBikeCategoryPath, getBikeCategoriesListingPath, trailingSlash } from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Heading from 'src/components/typography/heading.astro';
+import Text from 'src/components/typography/text.astro';
+import Stack from 'src/components/stack/stack.astro';
+import PageHelper from 'src/shared/astro/page.astro';
+import LanguageData from 'src/../data/languages.json';
+
+import { getImage } from 'astro:assets';
+import { t } from 'utils/i18n';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
+
+export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
+  const tours = await getCollection('tours');
+  const bikeCategories = await getCollection('bikeCategories');
+  const bikes = await getCollection('bikes');
+
+  return languageCodes.flatMap((language) => {
+    return bikeCategories
+      .filter((bc) => bc.data.language === language)
+      .map((category) => ({
+        params: {
+          language: language === 'en' ? undefined : language,
+          category:
+            slugify(category.data.path ?? category.data.name ?? category.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
+        },
+        props: {
+          categoryData: category,
+          tours:
+            tours.filter(
+              (tour) =>
+                (tour.data.bikeCategories ?? []).includes(category.data.id) &&
+                tour.data.language === language
+            ) ?? [],
+          bikes:
+            bikes.filter(
+              (bike) =>
+                bike.data.category === category.data.id &&
+                bike.data.language === language
+            ).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+        }
+      }));
+  });
+}
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { tours, categoryData, bikes } = Astro.props;
+
+const packageTours = tours.filter((t) => t.data.tourtype === 'PackageTour');
+const dayTours = tours.filter((t) => t.data.tourtype === 'DayTour');
+
+const bikeCategories = await getCollection(
+  'bikeCategories',
+  (f) => f.data.language === language
+);
+
+const allRegions = await getCollection('tourRegions', (f) => f.data.language === language);
+const allRiderLevels = await getCollection('tourRiderLevels', (f) => f.data.language === language);
+const allTags = await getCollection('tourTags', (f) => f.data.language === language);
+
+const tourRegionIds = new Set(tours.map((t) => t.data.region).filter(Boolean));
+const tourRiderLevelIds = new Set(tours.flatMap((t) => t.data.riderLevels ?? []));
+const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
+
+const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
+const relevantRiderLevels = allRiderLevels.filter((l) => tourRiderLevelIds.has(l.data.id));
+const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
+
+const baseUrl = Astro.site;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
+  { eager: true }
+);
+
+const image = categoryData.data.seo?.featured_image ? await getImage({
+  src: images[categoryData.data.seo?.featured_image].default,
+  format: 'png'
+}) : null;
+
+const imageSrc = image?.src?.startsWith('/') ? image.src?.substring(1) : image?.src;
+const displayName = categoryData.data.name ?? categoryData.data.title;
+const iconClass = getTagIconClass(categoryData.data.icon);
+
+const categorySeoTitle = categoryData.data.seo?.page_title ?? categoryData.data.title;
+const categorySeoDescription = categoryData.data.seo?.page_description ?? categoryData.data.title;
+const frontmatter = {
+  title: categoryData.data.title ?? categoryData.data.seo?.page_title,
+  page_size: 6,
+  seo: {
+    page_title: categorySeoTitle,
+    page_description: categorySeoDescription,
+    featured_image: categoryData.data.seo?.featured_image,
+    featured_image_alt: categoryData.data.seo?.featured_image_alt ?? categorySeoTitle,
+    canonical_url: categoryData.data.seo?.canonical_url,
+    open_graph_type: categoryData.data.seo?.open_graph_type,
+    author_twitter_handle: categoryData.data.seo?.author_twitter_handle,
+    no_index: false
+  }
+};
+const hrefs = await getBikeCategoryLanguagesAlternates(categoryData, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  { name: t('Tour.BikeCategoriesTitle', language), url: getBikeCategoriesListingPath(language) },
+  { name: displayName, url: getBikeCategoryPath(categoryData, language) }
+];
+---
+
+<Layout class="mb-16 px-8"
+  {...frontmatter}
+  title={categoryData.data.title} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  <slot slot="head">
+      {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+<Stack spacing="large" layout="vertical" class="pt-6">
+  <div class="flex items-center gap-3 px-6">
+    <i class:list={[iconClass, 'h-8 w-8 text-amber-600 dark:text-amber-400']} aria-hidden="true" />
+    <Heading as="h1">{categoryData.data.title ?? categoryData.data.seo?.page_title}</Heading>
+  </div>
+  <PageHelper bookshop:live contentBlocks={categoryData.data.content_blocks ?? []} />
+  {
+    bikes.length > 0 ? (
+      <div class="px-6">
+        <Heading as="h2">{t("Tours.BikeCategories.BikesTitle", language).replace("$1", displayName)}</Heading>
+        <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {bikes.map((bike) => (
+            <BikesCard bike={bike} language={language} imageWidths={[400]} />
+          ))}
+        </div>
+      </div>
+    ) : null
+  }
+  <div data-tour-filter-container>
+    <TourFilterBar
+      language={language}
+      totalCount={tours.length}
+      showRegion={relevantRegions.length > 0}
+      showRiderLevel={relevantRiderLevels.length > 0}
+      showTag={relevantTags.length > 0}
+      regions={relevantRegions.map((r) => ({ id: r.data.id, name: r.data.name ?? r.data.title }))}
+      riderLevels={relevantRiderLevels.map((l) => ({ id: l.data.id, name: l.data.name ?? l.data.title }))}
+      tags={relevantTags.map((tg) => ({ id: tg.data.id, name: tg.data.name ?? tg.data.title }))}
+    />
+    {
+      packageTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">{t("Tours.BikeCategories.PackageTour.Title", language).replace("$1", displayName)}</Heading>
+          <TourList items={packageTours} language={language} />
+        </div>
+      ) : null
+    }
+    {
+      dayTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">{t("Tours.BikeCategories.DayTour.Title", language).replace("$1", displayName)}</Heading>
+          <TourList items={dayTours} language={language} />
+        </div>
+      ) : null
+    }
+  </div>
+  {
+    packageTours.length == 0 && dayTours.length === 0 ? (
+      <div class="flex flex-col px-6 gap-2">
+        <Text size="xlarge">{t("Tours.BikeCategories.NoResults.Title", language).replace("$1", displayName)}</Text>
+        <Text size="large">{t("Tours.BikeCategories.NoResults.AlternateTitle", language)}</Text>
+        <ul class="list-disc pl-8">{bikeCategories.filter((c) => c.data.id !== categoryData.data.id)
+                        .map((c) => (<li class="pl-2"><a href={getBikeCategoryPath(c, language)} title={c.data.name ?? c.data.title} class="underline">{c.data.name ?? c.data.title}</a></li>))}</ul>
+      </div>
+    ) : null
+  }
+  <PageHelper bookshop:live contentBlocks={categoryData.data.content_blocks_after ?? []} />
+</Stack>
+</Layout>

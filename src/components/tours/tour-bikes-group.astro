@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import BikesCard from 'src/components/collection/bikes-card.astro';
+import Heading from '../typography/heading.astro';
+import { getBikeCategoryPath } from 'utils/permalinks';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+
+type Props = {
+  category: CollectionEntry<'bikeCategories'>;
+  bikes: CollectionEntry<'bikes'>[];
+  language: LanguageCodes;
+};
+
+const { category, bikes, language } = Astro.props;
+const iconClass = getTagIconClass(category.data.icon);
+---
+
+<div class="flex flex-col gap-4">
+  <a href={getBikeCategoryPath(category, language)} class="flex items-center gap-2 transition-colors hover:text-amber-600 dark:hover:text-amber-400">
+    <i class:list={[iconClass, 'h-6 w-6 text-amber-600 dark:text-amber-400']} aria-hidden="true" />
+    <Heading as="h3">{category.data.name ?? category.data.title}</Heading>
+  </a>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {bikes.map((bike) => (
+      <BikesCard bike={bike} language={language} imageWidths={[400]} />
+    ))}
+  </div>
+</div>

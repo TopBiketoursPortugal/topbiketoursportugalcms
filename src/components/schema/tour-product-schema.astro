@@ -37,9 +37,9 @@ const schema: Record<string, any> = {
   '@type': 'Product',
   'name': name,
   'url': `${baseUrl}${url.startsWith('/') ? url.substring(1) : url}`,
-  'provider': {
-    '@type': 'Organization',
-    '@id': `${site.site.url}#organization`
+  'brand': {
+    '@type': 'Brand',
+    'name': site.site.name
   }
 };
 
@@ -51,7 +51,25 @@ if (effectivePrice > 0) {
     '@type': 'Offer',
     'price': effectivePrice,
     'priceCurrency': currency,
-    'availability': 'https://schema.org/InStock'
+    'availability': 'https://schema.org/InStock',
+    'hasMerchantReturnPolicy': {
+      '@type': 'MerchantReturnPolicy',
+      'applicableCountry': 'PT',
+      'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      'merchantReturnDays': 14
+    },
+    'shippingDetails': {
+      '@type': 'OfferShippingDetails',
+      'shippingRate': {
+        '@type': 'MonetaryAmount',
+        'value': 0,
+        'currency': currency
+      },
+      'shippingDestination': {
+        '@type': 'DefinedRegion',
+        'addressCountry': 'PT'
+      }
+    }
   };
 }
 

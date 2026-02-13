@@ -1,19 +1,24 @@
 ---
 import SocialMenu from './SocialMenu.astro';
+import LanguageMenu from './LanguageMenu.astro';
+import ToggleTheme from './ToggleTheme.astro';
 import Contact from 'src/../data/contact.json';
 import type { LanguageCodes } from 'src/schemas/language';
+import type { HrefLang } from 'src/types/hreflang';
 import { cleanPhoneNumberFormatting } from 'utils/clean-phone-number-formatting';
 
 type Props = {
   language: LanguageCodes;
+  hrefLangs?: ReadonlyArray<HrefLang>;
+  showRssFeed?: boolean;
 };
 
-const { language = 'en' } = Astro.props;
+const { language = 'en', hrefLangs, showRssFeed = false } = Astro.props;
 const { cellPhone, email } = Contact[language];
 ---
 
 <div
-  class="relative hidden justify-between gap-1 overflow-hidden bg-black px-3 py-2 text-sm text-ellipsis whitespace-nowrap text-gray-300 md:flex dark:border-b dark:border-slate-800 dark:bg-slate-950 dark:bg-transparent"
+  class="relative hidden justify-between gap-1 overflow-hidden bg-black px-3 py-2 text-sm text-ellipsis whitespace-nowrap text-gray-300 md:flex dark:border-b dark:border-slate-800 dark:bg-slate-950"
 >
   <div class="flex gap-4 text-white dark:text-slate-400">
     <a
@@ -32,5 +37,29 @@ const { cellPhone, email } = Contact[language];
       <span class="whitespace-nowrap">{email}</span>
     </a>
   </div>
-  <SocialMenu class:list="flex" />
+  <div class="flex items-center gap-3">
+    <SocialMenu class:list="flex" />
+    <span class="mx-1 h-4 w-px bg-gray-600" aria-hidden="true"></span>
+    <LanguageMenu
+      localizedUrls={hrefLangs?.map((l) => ({
+        code: l.hreflang,
+        path: l.href
+      }))}
+    />
+    <ToggleTheme iconClass="w-5 h-5" />
+    {
+      showRssFeed && (
+        <a
+          class="text-gray-300 inline-flex items-center rounded-lg p-1 text-sm hover:text-white focus:ring-4 focus:ring-gray-200 focus:outline-none"
+          aria-label="RSS Feed"
+          href="/feed.xml"
+        >
+          <i
+            class="icon-[ph--rss-light] h-5 w-5 transition-transform duration-150 hover:scale-125"
+            aria-hidden="true"
+          />
+        </a>
+      )
+    }
+  </div>
 </div>

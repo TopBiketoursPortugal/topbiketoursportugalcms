@@ -1,8 +1,7 @@
 ---
 import type { Page } from 'astro';
 import BlogList from 'src/components/blog/list.astro';
-import BlogPagination from 'src/components/blog/pagination.astro';
-import InfiniteScroll from 'src/components/blog/infinite-scroll.astro';
+import BlogFilterBar from 'src/components/blog/blog-filter-bar.astro';
 import PaginatedLayout, {
   type PaginatedProps
 } from 'src/layouts/Paginated.astro';
@@ -11,6 +10,8 @@ import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
+import { getBlogPermalink } from 'utils/permalinks';
+import SiteData from 'src/../data/site.json';
 
 type Props = {
   page: Page<CollectionEntry<'blog'>>;
@@ -59,15 +60,13 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       filteredPosts.sort((a, b) => {
         const dateA = new Date(a.data.date).getTime();
         const dateB = new Date(b.data.date).getTime();
-        return dateB - dateA; // For descending order (newest first)
+        return dateB - dateA;
       }),
       {
         params: {
-          // blog: 'blog',
           language: language === 'en' ? undefined : language
         },
-        pageSize:
-          page?.data && 'page_size' in page.data ? page.data.page_size : 6
+        pageSize: 9999
       }
     );
   });
@@ -77,47 +76,67 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const page = await getBlogIndexPage(language);
 let frontmatter = page?.data as PaginatedProps['frontmatter'];
 
-const { page: pageNumberStr } = Astro.params;
-const pageNumber = parseInt(pageNumberStr ?? 1, 10);
-
-const blogPageTitle = pageNumberStr
-  ? t('Blog.Paged.Title', language).replace('$1', pageNumberStr)
-  : page.data.title;
-const blogPageDescription = t('Blog.Paged.Description', language).replace(
-  '$1',
-  pageNumberStr
-);
-
 frontmatter = {
   ...frontmatter,
-  title: blogPageTitle,
+  title: page.data.title,
   seo: {
     ...frontmatter.seo,
-    page_title: blogPageTitle,
-    page_description: blogPageDescription
+    page_title: page.data.title,
+    page_description: frontmatter.seo?.page_description
   }
 };
 
-console.log(frontmatter);
-
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
-const hrefs = (
-  page ? await getPageLanguagesAlternates(page, Astro.site) : []
-).map((p) => ({
-  ...p,
-  href: p.href + (pageNumber === 1 ? '' : pageNumber + '/')
-}));
+const hrefs = page ? await getPageLanguagesAlternates(page, Astro.site) : [];
 const breadcrumbs = [
   getHomeCrumb(language),
   getBlogCrumb(language)
 ];
+
+// Collect all tag UUIDs used by posts in this language
+const usedTagIds = new Set<string>();
+posts.forEach((p) => {
+  (p.data.tags ?? []).forEach((id: string) => usedTagIds.add(id));
+});
+
+// Fetch only the tags that are actually used
+const allPostTags = await getCollection('postTags', (t) =>
+  t.data.language === language && usedTagIds.has(t.data.id)
+);
+const tagOptions = allPostTags
+  .map((t) => ({ id: t.data.id, name: t.data.name ?? t.data.title }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+// CollectionPage structured data
+const site = SiteData[language];
+const baseUrl = (Astro.site ?? site.site.url).toString().replace(/\/$/, '');
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': page.data.title,
+  'description': frontmatter.seo?.page_description ?? '',
+  'url': `${baseUrl}${language === 'en' ? '/blog/' : `/${language}/blog/`}`,
+  'isPartOf': {
+    '@type': 'WebSite',
+    '@id': `${baseUrl}/#website`
+  },
+  'mainEntity': {
+    '@type': 'ItemList',
+    'numberOfItems': posts.length,
+    'itemListElement': posts.slice(0, 10).map((post, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'url': `${baseUrl}${getBlogPermalink(post)}`
+    }))
+  }
+};
 ---
 
 <PaginatedLayout frontmatter={frontmatter} hrefs={hrefs} breadcrumbs={breadcrumbs}>
-  <section class="blog-index mx-auto flex flex-col justify-center">
+  <script is:inline async type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  <section data-blog-filter-container class="blog-index mx-auto flex flex-col justify-center">
+    <BlogFilterBar language={language} totalCount={posts.length} tags={tagOptions} />
     <BlogList posts={posts} />
-    <BlogPagination pagination={pagination} />
-    <InfiniteScroll />
   </section>
 </PaginatedLayout>

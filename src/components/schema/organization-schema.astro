@@ -10,14 +10,24 @@ const { language } = Astro.props;
 const site = SiteData[language];
 const contact = ContactData[language];
 
+const baseUrl = site.site.url.replace(/\/$/, '');
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': `${site.site.url}#organization`,
+  '@id': `${baseUrl}/#organization`,
   'name': site.site.name,
-  'url': site.site.url,
+  'url': baseUrl,
+  'description': language === 'pt'
+    ? 'Empresa líder em passeios de bicicleta guiados e autoguiados em Portugal. Descubra o Douro, o Minho, o Alentejo e muito mais sobre duas rodas.'
+    : 'Leading guided and self-guided bike tour company in Portugal. Discover the Douro Valley, Minho, Alentejo and more on two wheels.',
   'telephone': contact.cellPhone,
   'email': contact.email,
+  'logo': `${baseUrl}/logo.svg`,
+  'image': `${baseUrl}/src/assets/images/guided-bike-tour-in-douro-valley.jpg`,
+  'priceRange': '€€',
+  'currenciesAccepted': 'EUR',
+  'paymentAccepted': 'Credit Card, Bank Transfer',
   'address': {
     '@type': 'PostalAddress',
     'streetAddress': contact.address.street,
@@ -31,6 +41,20 @@ const schema = {
     'latitude': parseFloat(contact.address.latitude),
     'longitude': parseFloat(contact.address.longitude)
   },
+  'openingHoursSpecification': [
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      'opens': '09:00',
+      'closes': '18:00'
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': 'Saturday',
+      'opens': '09:00',
+      'closes': '13:00'
+    }
+  ],
   'sameAs': [
     SocialData.facebook.href,
     SocialData.instagram.href,

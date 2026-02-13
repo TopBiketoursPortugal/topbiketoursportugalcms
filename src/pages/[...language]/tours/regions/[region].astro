@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import slugify from 'slugify';
-import type { SEOProps } from 'astro-seo';
 import Layout from 'src/layouts/Layout.astro';
 import TourList from 'src/components/tours/tour-list.astro';
 import { getTourRegionLanguagesAlternates, getTourRegionsPath, trailingSlash } from 'utils/permalinks';
@@ -11,10 +10,12 @@ import Heading from 'src/components/typography/heading.astro';
 import Text from 'src/components/typography/text.astro';
 import PageHelper from 'src/shared/astro/page.astro';
 import LanguageData from 'src/../data/languages.json';
-import SiteData from 'src/../data/site.json';
+
 import { getImage } from 'astro:assets';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import PlaceSchema from 'src/components/schema/place-schema.astro';
+import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
 
 export async function getStaticPaths() {
   const tours = await getCollection('tours');
@@ -57,8 +58,18 @@ const tourRegions = await getCollection(
   (f) => f.data.language === language
 );
 
+const allRiderLevels = await getCollection('tourRiderLevels', (f) => f.data.language === language);
+const allTags = await getCollection('tourTags', (f) => f.data.language === language);
+const allBikeCategories = await getCollection('bikeCategories', (f) => f.data.language === language);
 
-const siteData = SiteData[language];
+const tourRiderLevelIds = new Set(tours.flatMap((t) => t.data.riderLevels ?? []));
+const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
+const tourBikeCategoryIds = new Set(tours.flatMap((t) => t.data.bikeCategories ?? []));
+
+const relevantRiderLevels = allRiderLevels.filter((l) => tourRiderLevelIds.has(l.data.id));
+const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
+const relevantBikeCategories = allBikeCategories.filter((c) => tourBikeCategoryIds.has(c.data.id));
+
 const baseUrl = Astro.site;
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -77,36 +88,15 @@ const frontmatter = {
   title: regionData.data.title,
   page_size: 6,
   seo: {
-    noindex: false,
-    title:  regionSeoTitle,
-    description: regionSeoDescription,
-    canonical: regionData.data.seo?.canonical_url ? new URL(regionData.data.seo?.canonical_url) : "",
-    openGraph: {
-      basic: {
-        title: regionSeoTitle,
-        url: baseUrl,
-        type: `${regionData.data.seo?.open_graph_type || 'website'}`,
-        image: `${baseUrl}${imageSrc}`
-      },
-      optional: {
-        description: regionData.data.seo?.page_description ?? regionSeoDescription,
-      },
-      image: {
-        url: `${baseUrl}${imageSrc}`,
-        alt: regionData.data.seo?.featured_image_alt ?? regionSeoTitle
-      }
-    },
-    twitter: {
-      creator: `${regionData.data.seo?.author_twitter_handle || siteData.twitter_site}`,
-      site: `${siteData.twitter_site}`,
-      card: 'summary_large_image'
-    }
-
+    page_title: regionSeoTitle,
+    page_description: regionSeoDescription,
+    featured_image: regionData.data.seo?.featured_image,
+    featured_image_alt: regionData.data.seo?.featured_image_alt ?? regionSeoTitle,
+    canonical_url: regionData.data.seo?.canonical_url,
+    open_graph_type: regionData.data.seo?.open_graph_type,
+    author_twitter_handle: regionData.data.seo?.author_twitter_handle,
+    no_index: false
   }
-} satisfies {
-  title: string;
-  page_size?: number;
-  seo?: SEOProps;
 };
 const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
 const defaultLocale = LanguageData.en;
@@ -134,22 +124,45 @@ const breadcrumbs = [
         />
       ))
     }
+    <PlaceSchema
+      name={regionData.data.name ?? regionData.data.title}
+      description={regionSeoDescription}
+      image={`${baseUrl}${imageSrc}`}
+      url={getTourRegionsPath(regionData, language)}
+      language={language}
+    />
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
   <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
   <PageHelper bookshop:live contentBlocks={regionData.data.content_blocks ?? []} />
-  {
-    packageTours.length > 0 ? (
-      <Heading as="h2" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
-      <TourList items={packageTours} language={language} />
-    ) : null
-  }
-  {
-    dayTours.length > 0 ? (
-      <Heading as="h2"  class="px-6">{t("Tours.Regions.DayTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
-      <TourList items={dayTours} language={language} />
-    ) : null
-  }
+  <div data-tour-filter-container>
+    <TourFilterBar
+      language={language}
+      totalCount={tours.length}
+      showRiderLevel={relevantRiderLevels.length > 0}
+      showTag={relevantTags.length > 0}
+      showBikeCategory={relevantBikeCategories.length > 0}
+      riderLevels={relevantRiderLevels.map((l) => ({ id: l.data.id, name: l.data.name ?? l.data.title }))}
+      tags={relevantTags.map((tg) => ({ id: tg.data.id, name: tg.data.name ?? tg.data.title }))}
+      bikeCategories={relevantBikeCategories.map((c) => ({ id: c.data.id, name: c.data.name ?? c.data.title }))}
+    />
+    {
+      packageTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
+          <TourList items={packageTours} language={language} />
+        </div>
+      ) : null
+    }
+    {
+      dayTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">{t("Tours.Regions.DayTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
+          <TourList items={dayTours} language={language} />
+        </div>
+      ) : null
+    }
+  </div>
   {
     packageTours.length == 0 && dayTours.length === 0 ? (
       <div class="flex flex-col px-6 gap-2">

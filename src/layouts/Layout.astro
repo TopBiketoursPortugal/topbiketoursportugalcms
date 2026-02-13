@@ -134,15 +134,14 @@ const seoProps = await getPageSeo(
     class="text-default flex min-h-screen flex-col overflow-x-hidden overflow-y-scroll tracking-tight antialiased dark:bg-slate-900 dark:text-white"
   >
     <BasicScripts />
-    <slot name="announcement">
-      <Announcement language={language} />
-    </slot>
-    <Header
-      {...Navigation[language].header}
-      isSticky
-      showRssFeed
-      hrefLangs={Astro.props.hrefLangs}
-    />
+      <slot name="announcement">
+        <Announcement language={language} hrefLangs={Astro.props.hrefLangs} showRssFeed />
+      </slot>
+      <Header
+        {...Navigation[language].header}
+        isSticky
+        hrefLangs={Astro.props.hrefLangs}
+      />
     <main class={cn('h-full w-full flex-1 max-w-7xl mx-auto', className)}>
       {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
       <slot />

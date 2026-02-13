@@ -8,6 +8,8 @@ import { testimonialCollection } from 'src/schemas/testimonal';
 import { tourRegionsCollection } from 'src/schemas/tour-regions';
 import { tourTagsCollection } from 'src/schemas/tour-tags';
 import { tourRiderLevelsCollection } from 'src/schemas/tour-rider-levels';
+import { bikeCategoriesCollection } from 'src/schemas/bike-categories';
+import { bikesCollection } from 'src/schemas/bikes';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
@@ -79,5 +81,7 @@ export const collections = {
   tourRiderLevels: tourRiderLevelsCollection,
   tourRegions: tourRegionsCollection,
   team: teamCollection,
-  testimonials: testimonialCollection
+  testimonials: testimonialCollection,
+  bikeCategories: bikeCategoriesCollection,
+  bikes: bikesCollection
 };

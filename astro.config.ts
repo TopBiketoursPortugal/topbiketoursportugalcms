@@ -11,7 +11,7 @@ import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
-// import pagefind from 'astro-pagefind';
+import pagefind from 'astro-pagefind';
 
 import { isInternalDomain } from './utils/domains';
 
@@ -216,7 +216,7 @@ export default defineConfig({
         }
       }
     }),
-    // pagefind()
+    pagefind()
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]

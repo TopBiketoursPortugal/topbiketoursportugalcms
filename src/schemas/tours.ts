@@ -138,6 +138,7 @@ const tourSchema = z.object({
   seo: seoSchema.optional(),
   tags: z.array(z.string().uuid()).optional().default([]),
   riderLevels: z.array(z.string().uuid()).optional().default([]),
+  bikeCategories: z.array(z.string().uuid()).optional().default([]),
   duration: z.number().optional().nullable(),
   distance: z.number().optional(),
   difficulty: z.number().min(1).max(5).optional(),

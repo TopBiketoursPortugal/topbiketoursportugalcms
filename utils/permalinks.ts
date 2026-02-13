@@ -115,6 +115,43 @@ export async function getRiderLevelLanguagesAlternates(
   }));
 }
 
+export function getBikeCategoryPath(
+  category: CollectionEntry<'bikeCategories'>,
+  language: LanguageCodes = 'en'
+): string {
+  const tourPermalink = PermalinkData.tours[language];
+  const path = `${getBasePath(language)}${tourPermalink}/bike-types/${slugify(category.data.path ?? category.data.name ?? category.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  return sanitizeUrl(path);
+}
+
+export function getBikeCategoriesListingPath(
+  language: LanguageCodes = 'en'
+): string {
+  const tourPermalink = PermalinkData.tours[language];
+  return sanitizeUrl(
+    `${getBasePath(language)}${tourPermalink}/bike-types${trailingSlash}`
+  );
+}
+
+export async function getBikeCategoryLanguagesAlternates(
+  bikeCategory: CollectionEntry<'bikeCategories'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+) {
+  const alternateEntryName = bikeCategory.filePath?.split('/').at(-1)!;
+  const alternateCategories =
+    (await getCollection(
+      'bikeCategories',
+      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
+    )) ?? [];
+
+  return alternateCategories.map(({ data: alternate }) => ({
+    href: sanitizeUrl(
+      `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}${PermalinkData.tours[alternate.language ?? 'en']}/bike-types/${slugify(alternate.path ?? alternate.name ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+    ),
+    hreflang: alternate.language
+  }));
+}
+
 export function getBlogTagPath(
   tag: CollectionEntry<'postTags'>,
   language: LanguageCodes = 'en'

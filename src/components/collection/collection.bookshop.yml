@@ -37,3 +37,6 @@ _inputs:
         - reviews
         - team
         - bikes
+        - bike-categories
+        - tour-tags
+        - tour-rider-levels

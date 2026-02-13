@@ -1,11 +1,8 @@
 ---
 import Address from './address.astro';
-import SocialMenu from '../SocialMenu.astro';
 import type { ContactSchema } from 'src/schemas/contact';
 import contacts from 'src/../data/contact.json';
-import { t } from 'utils/i18n';
 import type { LanguageCodes } from 'src/schemas/language';
-import Text from 'src/components/typography/text.astro';
 import Stack from 'src/components/stack/stack.astro';
 import { cleanPhoneNumberFormatting } from 'utils/clean-phone-number-formatting';
 type Props = {
@@ -16,10 +13,6 @@ const { language = 'en' } = Astro.props;
 
 const contact = contacts[language] satisfies ContactSchema;
 ---
-
-<Text as="strong" class="col-span-full" size="xlarge" weight="bold"
-  >{t('Footer.ContactInfoTitle', language)}</Text
->
 
 {contact && contact.address && <Address address={contact.address} />}
 <Stack layout="vertical" spacing="small">
@@ -48,10 +41,11 @@ const contact = contacts[language] satisfies ContactSchema;
       <a
         href={'https://wa.me/' + cleanPhoneNumberFormatting(contact.cellPhone)}
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
         class="flex items-center gap-1"
       >
-        <span>whatsapp</span>
+        <span>WhatsApp</span>
       </a>
     )
   }
@@ -66,4 +60,3 @@ const contact = contacts[language] satisfies ContactSchema;
     )
   }
 </Stack>
-<SocialMenu language={language} />

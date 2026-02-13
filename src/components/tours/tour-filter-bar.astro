@@ -1,0 +1,312 @@
+---
+import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
+
+type FilterOption = { id: string; name: string };
+type Props = {
+  language: LanguageCodes;
+  totalCount: number;
+  showRegion?: boolean;
+  showRiderLevel?: boolean;
+  showTag?: boolean;
+  showBikeCategory?: boolean;
+  regions?: FilterOption[];
+  riderLevels?: FilterOption[];
+  tags?: FilterOption[];
+  bikeCategories?: FilterOption[];
+};
+
+const {
+  language,
+  totalCount,
+  showRegion = false,
+  showRiderLevel = false,
+  showTag = false,
+  showBikeCategory = false,
+  regions = [],
+  riderLevels = [],
+  tags = [],
+  bikeCategories = []
+} = Astro.props;
+
+const resultCountTemplate = t('Tours.Filter.ResultCount', language);
+const clearLabel = t('Tours.Filter.Clear', language);
+const searchPlaceholder = t('Tours.Filter.SearchPlaceholder', language);
+const noResultsText = t('Tours.Filter.NoResults', language);
+---
+
+<div
+  data-filter-bar
+  data-total-count={totalCount}
+  data-result-template={resultCountTemplate}
+  class="sticky top-16 z-30 border-b border-gray-200 bg-white/80 px-6 py-3 backdrop-blur-md dark:border-gray-700 dark:bg-gray-900/80"
+>
+  <div class="flex flex-wrap items-center gap-3">
+    <!-- Search input -->
+    <div class="relative min-w-50 flex-1">
+      <i class="icon-[ph--magnifying-glass] absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" aria-hidden="true" />
+      <input
+        type="search"
+        data-filter-search
+        placeholder={searchPlaceholder}
+        aria-label={searchPlaceholder}
+        class="w-full rounded-lg border border-gray-300 bg-white py-2 pr-3 pl-9 text-sm outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-amber-400 dark:focus:ring-amber-400"
+      />
+    </div>
+
+    <!-- Region dropdown -->
+    {showRegion && regions.length > 0 && (
+      <select
+        data-filter-select="region"
+        aria-label={t('Tours.Filter.Region', language)}
+        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-amber-400 dark:focus:ring-amber-400"
+      >
+        <option value="">{t('Tours.Filter.Region', language)}</option>
+        {regions.map((r) => (
+          <option value={r.id}>{r.name}</option>
+        ))}
+      </select>
+    )}
+
+    <!-- Rider Level dropdown -->
+    {showRiderLevel && riderLevels.length > 0 && (
+      <select
+        data-filter-select="riderLevel"
+        aria-label={t('Tours.Filter.RiderLevel', language)}
+        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-amber-400 dark:focus:ring-amber-400"
+      >
+        <option value="">{t('Tours.Filter.RiderLevel', language)}</option>
+        {riderLevels.map((l) => (
+          <option value={l.id}>{l.name}</option>
+        ))}
+      </select>
+    )}
+
+    <!-- Tag dropdown -->
+    {showTag && tags.length > 0 && (
+      <select
+        data-filter-select="tag"
+        aria-label={t('Tours.Filter.Tag', language)}
+        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-amber-400 dark:focus:ring-amber-400"
+      >
+        <option value="">{t('Tours.Filter.Tag', language)}</option>
+        {tags.map((tg) => (
+          <option value={tg.id}>{tg.name}</option>
+        ))}
+      </select>
+    )}
+
+    <!-- Bike Category dropdown -->
+    {showBikeCategory && bikeCategories.length > 0 && (
+      <select
+        data-filter-select="bikeCategory"
+        aria-label={t('Tours.Filter.BikeType', language)}
+        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-amber-400 dark:focus:ring-amber-400"
+      >
+        <option value="">{t('Tours.Filter.BikeType', language)}</option>
+        {bikeCategories.map((c) => (
+          <option value={c.id}>{c.name}</option>
+        ))}
+      </select>
+    )}
+
+    <!-- Result count -->
+    <span data-filter-count class="text-sm text-gray-500 dark:text-gray-400" />
+
+    <!-- Clear filters button -->
+    <button
+      data-filter-clear
+      class="hidden rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+      {clearLabel}
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <p
+    data-filter-empty
+    class="mt-3 hidden text-center text-sm text-gray-500 dark:text-gray-400"
+  >
+    {noResultsText}
+  </p>
+</div>
+
+<script>
+  function initTourFilter() {
+    document.querySelectorAll<HTMLElement>('[data-filter-bar]').forEach((bar) => {
+      if (bar.dataset.filterInitialized) return;
+      bar.dataset.filterInitialized = 'true';
+
+      const container = bar.closest('[data-tour-filter-container]');
+      if (!container) return;
+
+      const searchInput = bar.querySelector<HTMLInputElement>('[data-filter-search]');
+      const selects = bar.querySelectorAll<HTMLSelectElement>('[data-filter-select]');
+      const countEl = bar.querySelector<HTMLElement>('[data-filter-count]');
+      const clearBtn = bar.querySelector<HTMLButtonElement>('[data-filter-clear]');
+      const emptyEl = bar.querySelector<HTMLElement>('[data-filter-empty]');
+      const totalCount = parseInt(bar.dataset.totalCount ?? '0', 10);
+      const resultTemplate = bar.dataset.resultTemplate ?? 'Showing $1 of $2 tours';
+
+      const cards = () => container.querySelectorAll<HTMLElement>('.tour-card-filterable');
+      const sections = () => container.querySelectorAll<HTMLElement>('[data-tour-section]');
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Map select types to data attribute names
+      const selectAttrMap: Record<string, string> = {
+        region: 'data-tour-region',
+        riderLevel: 'data-tour-rider-levels',
+        tag: 'data-tour-tags',
+        bikeCategory: 'data-tour-bike-categories'
+      };
+
+      function applyFilters() {
+        const query = (searchInput?.value ?? '').toLowerCase().trim();
+        const activeSelects: { attr: string; value: string }[] = [];
+
+        selects.forEach((sel) => {
+          const type = sel.dataset.filterSelect ?? '';
+          const val = sel.value;
+          if (val && selectAttrMap[type]) {
+            activeSelects.push({ attr: selectAttrMap[type], value: val });
+          }
+        });
+
+        const hasActiveFilters = query.length > 0 || activeSelects.length > 0;
+        let visibleIndex = 0;
+
+        cards().forEach((card) => {
+          const title = card.getAttribute('data-tour-title') ?? '';
+          const matchesSearch = !query || title.includes(query);
+
+          const matchesSelects = activeSelects.every(({ attr, value }) => {
+            const attrVal = card.getAttribute(attr) ?? '';
+            // For region, exact match; for others, check space-separated list
+            if (attr === 'data-tour-region') return attrVal === value;
+            return attrVal.split(' ').includes(value);
+          });
+
+          const visible = matchesSearch && matchesSelects;
+
+          if (visible) {
+            showCard(card, visibleIndex);
+            visibleIndex++;
+          } else {
+            hideCard(card);
+          }
+        });
+
+        // Update count
+        if (countEl) {
+          if (hasActiveFilters) {
+            countEl.textContent = resultTemplate
+              .replace('$1', String(visibleIndex))
+              .replace('$2', String(totalCount));
+          } else {
+            countEl.textContent = '';
+          }
+        }
+
+        // Toggle clear button
+        if (clearBtn) {
+          clearBtn.classList.toggle('hidden', !hasActiveFilters);
+        }
+
+        // Toggle global empty state
+        if (emptyEl) {
+          emptyEl.classList.toggle('hidden', visibleIndex > 0 || !hasActiveFilters);
+        }
+
+        // Per-section visibility
+        sections().forEach((section) => {
+          const sectionCards = section.querySelectorAll<HTMLElement>('.tour-card-filterable');
+          const hasVisible = Array.from(sectionCards).some((c) => !c.hasAttribute('data-filter-hidden'));
+          section.style.display = hasVisible ? '' : 'none';
+        });
+      }
+
+      function hideCard(card: HTMLElement) {
+        if (card.hasAttribute('data-filter-hidden')) return;
+
+        if (prefersReducedMotion) {
+          card.setAttribute('data-filter-hidden', '');
+          card.style.display = 'none';
+          return;
+        }
+
+        card.setAttribute('data-filter-hidden', '');
+        card.style.transitionDelay = '';
+
+        const onEnd = () => {
+          card.removeEventListener('transitionend', onEnd);
+          if (card.hasAttribute('data-filter-hidden')) {
+            card.style.display = 'none';
+          }
+        };
+        card.addEventListener('transitionend', onEnd, { once: true });
+
+        // Fallback in case transitionend doesn't fire
+        setTimeout(() => {
+          if (card.hasAttribute('data-filter-hidden')) {
+            card.style.display = 'none';
+          }
+        }, 400);
+      }
+
+      function showCard(card: HTMLElement, index: number) {
+        if (!card.hasAttribute('data-filter-hidden') && card.style.display !== 'none') {
+          card.style.transitionDelay = '';
+          return;
+        }
+
+        if (prefersReducedMotion) {
+          card.removeAttribute('data-filter-hidden');
+          card.style.display = '';
+          card.style.transitionDelay = '';
+          return;
+        }
+
+        card.style.display = '';
+        // Force reflow
+        void card.offsetHeight;
+        card.style.transitionDelay = `${index * 0.05}s`;
+        card.removeAttribute('data-filter-hidden');
+
+        // Clean up delay after animation
+        const onEnd = () => {
+          card.removeEventListener('transitionend', onEnd);
+          card.style.transitionDelay = '';
+        };
+        card.addEventListener('transitionend', onEnd, { once: true });
+
+        setTimeout(() => {
+          card.style.transitionDelay = '';
+        }, 400 + index * 50);
+      }
+
+      // Debounced search
+      let searchTimeout: ReturnType<typeof setTimeout>;
+      searchInput?.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(applyFilters, 200);
+      });
+
+      // Dropdown change
+      selects.forEach((sel) => {
+        sel.addEventListener('change', applyFilters);
+      });
+
+      // Clear button
+      clearBtn?.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        selects.forEach((sel) => { sel.value = ''; });
+        applyFilters();
+      });
+    });
+  }
+
+  // Init on first load and view transitions
+  initTourFilter();
+  document.addEventListener('astro:page-load', initTourFilter);
+</script>

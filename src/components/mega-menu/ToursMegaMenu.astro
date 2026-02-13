@@ -1,0 +1,415 @@
+---
+import { getCollection } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
+import {
+  getTourPath,
+  getTourRegionsPath,
+  getTourTagsListingPath,
+  getRiderLevelsListingPath,
+  getBikeCategoriesListingPath
+} from 'utils/permalinks';
+import MegaMenuTourCard from './MegaMenuTourCard.astro';
+
+type Props = {
+  text: string;
+  href: string;
+  language: LanguageCodes;
+  isActive: boolean;
+};
+
+const { text, href, language, isActive } = Astro.props;
+
+const MAX_CARDS = 8;
+
+// Fetch tours & regions at build time
+const allTours = await getCollection(
+  'tours',
+  (tour) => tour.data.language === language && tour.data.tourtype === 'PackageTour'
+);
+const allRegions = await getCollection(
+  'tourRegions',
+  (r) => r.data.language === language
+);
+
+// Group tours by region UUID
+const toursByRegion = new Map<string, typeof allTours>();
+for (const tour of allTours) {
+  const regionId = tour.data.region;
+  if (!regionId) continue;
+  const existing = toursByRegion.get(regionId) ?? [];
+  existing.push(tour);
+  toursByRegion.set(regionId, existing);
+}
+
+// Pre-compute all display data as plain objects to avoid Bookshop path resolution issues
+type RegionDisplay = {
+  id: string;
+  name: string;
+  count: number;
+  viewAllHref: string;
+  cards: {
+    title: string;
+    href: string;
+    imageSrc: string;
+    imageAlt: string;
+    duration: number | null | undefined;
+    difficulty: number | undefined;
+    minPrice: number;
+    currency: string;
+    tourtype: string;
+  }[];
+};
+
+const regionDisplays: RegionDisplay[] = allRegions
+  .filter((r) => toursByRegion.has(r.data.id))
+  .sort((a, b) => (toursByRegion.get(b.data.id)?.length ?? 0) - (toursByRegion.get(a.data.id)?.length ?? 0))
+  .map((region) => {
+    const tours = toursByRegion.get(region.data.id) ?? [];
+    const displayTours = tours
+      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+      .slice(0, MAX_CARDS);
+
+    return {
+      id: region.data.id,
+      name: region.data.name ?? region.data.title,
+      count: tours.length,
+      viewAllHref: getTourRegionsPath(region, language),
+      cards: displayTours.map((tour) => {
+        const packages = tour.data.packages ?? [];
+        const minPrice = packages.length > 0
+          ? Math.min(...packages.map((p) => p.price?.price ?? 0))
+          : 0;
+        const currency = packages[0]?.price?.currency ?? 'EUR';
+        return {
+          title: tour.data.title,
+          href: getTourPath(tour.data, language),
+          imageSrc: tour.data.image?.src ?? '',
+          imageAlt: tour.data.image?.alt ?? tour.data.title,
+          duration: tour.data.duration,
+          difficulty: tour.data.difficulty,
+          minPrice,
+          currency,
+          tourtype: tour.data.tourtype
+        };
+      })
+    };
+  });
+---
+
+<li class="relative" id="mega-menu-wrapper" data-mega-menu>
+  <a
+    class:list={[
+      'hover:text-link flex items-center gap-1 px-4 py-3 text-2xl whitespace-nowrap',
+      { 'aw-link-active': isActive }
+    ]}
+    href={href}
+    id="mega-menu-trigger"
+  >
+    {text}
+    <i
+      class="icon-[ph--caret-down-light] hidden h-4 w-4 transition-transform duration-200 md:inline"
+      aria-hidden="true"
+    />
+  </a>
+
+  <!-- Mega menu panel (desktop only) -->
+  <div
+    class="mega-panel m-0 w-screen border-0 bg-transparent p-0"
+    popover="auto"
+    id="mega-panel"
+  >
+    <div class="pointer-events-auto border-t border-slate-200 bg-white shadow-2xl dark:border-slate-700 dark:bg-slate-900">
+      <div class="mx-auto flex max-w-7xl">
+        {/* Region sidebar */}
+        <nav
+          class="flex w-55 shrink-0 flex-col border-r border-slate-100 py-4 dark:border-slate-800"
+          aria-label={t('MegaMenu.Regions', language)}
+        >
+          <span class="mb-2 px-4 text-xs font-semibold tracking-wider text-slate-400 uppercase dark:text-slate-500">
+            {t('MegaMenu.Regions', language)}
+          </span>
+          {regionDisplays.map((rd, idx) => (
+            <button
+              type="button"
+              class:list={[
+                'mega-region-btn flex items-center gap-2 px-4 py-2 text-left text-sm transition-colors hover:bg-slate-50 focus:bg-slate-50 focus:outline-none dark:hover:bg-slate-800 dark:focus:bg-slate-800',
+                idx === 0 ? 'bg-slate-50 font-semibold text-slate-900 dark:bg-slate-800 dark:text-white' : 'text-slate-600 dark:text-slate-400'
+              ]}
+              data-region-id={rd.id}
+              aria-pressed={idx === 0 ? 'true' : 'false'}
+            >
+              <i class="icon-[ph--map-pin-light] h-4 w-4 shrink-0" aria-hidden="true" />
+              <span class="flex-1 truncate">{rd.name}</span>
+              <span class="text-xs text-slate-400 dark:text-slate-500">({rd.count})</span>
+            </button>
+          ))}
+        </nav>
+
+        {/* Tour cards area */}
+        <div class="flex-1 overflow-hidden py-4 pl-6 pr-4">
+          {regionDisplays.map((rd, rIdx) => (
+            <div
+              class:list={[
+                'mega-region-panel',
+                rIdx !== 0 ? 'hidden' : ''
+              ]}
+              data-region-panel={rd.id}
+            >
+              <div class="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4">
+                {rd.cards.map((card, tIdx) => (
+                  <MegaMenuTourCard
+                    title={card.title}
+                    href={card.href}
+                    imageSrc={card.imageSrc}
+                    imageAlt={card.imageAlt}
+                    duration={card.duration}
+                    difficulty={card.difficulty}
+                    minPrice={card.minPrice}
+                    currency={card.currency}
+                    tourtype={card.tourtype}
+                    language={language}
+                    index={tIdx}
+                  />
+                ))}
+              </div>
+              {rd.count > MAX_CARDS && (
+                <a
+                  href={rd.viewAllHref}
+                  class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  {t('MegaMenu.ViewAllRegion', language).replace('$1', rd.name)}
+                  <i class="icon-[ph--arrow-right-light] h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick links bar */}
+      <div class="border-t border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
+        <nav
+          class="mx-auto flex max-w-7xl items-center gap-6 px-6 py-3"
+          aria-label={t('MegaMenu.QuickLinks', language)}
+        >
+          <a
+            href={href}
+            class="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
+          >
+            <i class="icon-[ph--bicycle-light] h-4 w-4" aria-hidden="true" />
+            {t('MegaMenu.AllTours', language)}
+          </a>
+          <a
+            href={getRiderLevelsListingPath(language)}
+            class="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
+          >
+            <i class="icon-[ph--ranking-light] h-4 w-4" aria-hidden="true" />
+            {t('MegaMenu.ByRiderLevel', language)}
+          </a>
+          <a
+            href={getTourTagsListingPath(language)}
+            class="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
+          >
+            <i class="icon-[ph--tag-light] h-4 w-4" aria-hidden="true" />
+            {t('MegaMenu.ByCategory', language)}
+          </a>
+          <a
+            href={getBikeCategoriesListingPath(language)}
+            class="flex items-center gap-1.5 text-sm font-medium text-slate-700 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
+          >
+            <i class="icon-[ph--bicycle-light] h-4 w-4" aria-hidden="true" />
+            {t('MegaMenu.ByBikeType', language)}
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</li>
+
+<style>
+  /* Anchor positioning (supported browsers) */
+  @supports (anchor-name: --header) {
+    .mega-panel {
+      position: fixed;
+      position-anchor: --header;
+      top: anchor(--header bottom);
+      left: 0;
+    }
+  }
+
+  /* Fallback for browsers without anchor positioning */
+  @supports not (anchor-name: --header) {
+    .mega-panel {
+      position: fixed;
+      left: 0;
+      top: var(--header-height, 64px);
+    }
+  }
+
+  /* Popover transitions (entry + exit) */
+  .mega-panel {
+    opacity: 0;
+    transition:
+      opacity 350ms ease-in-out,
+      overlay 350ms ease-in-out allow-discrete,
+      display 350ms ease-in-out allow-discrete;
+  }
+
+  .mega-panel:popover-open {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .mega-panel:popover-open {
+      opacity: 0;
+    }
+  }
+
+  /* Caret rotation when open */
+  #mega-menu-wrapper:has(.mega-panel:popover-open) .icon-\[ph--caret-down-light\] {
+    transform: rotate(180deg);
+  }
+
+  /* Card stagger animation */
+  @keyframes megamenu-card-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mega-region-panel:not(.hidden) :global(.mega-menu-card) {
+    animation: megamenu-card-enter 0.45s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    animation-delay: calc(var(--card-index, 0) * 45ms);
+  }
+</style>
+
+<script>
+  function initMegaMenu() {
+    const panel = document.getElementById('mega-panel') as HTMLElement | null;
+    const trigger = document.getElementById('mega-menu-trigger');
+    if (!panel || !trigger) return;
+
+    const desktop = matchMedia('(min-width: 768px)');
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function show() {
+      if (!desktop.matches) return;
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      try { panel!.showPopover(); } catch {}
+    }
+
+    function hide() {
+      closeTimer = setTimeout(() => {
+        try { panel!.hidePopover(); } catch {}
+      }, 300);
+    }
+
+    // Hover/focus on trigger
+    trigger.addEventListener('mouseenter', show);
+    trigger.addEventListener('mouseleave', hide);
+    trigger.addEventListener('focus', show);
+
+    // Hover on panel (top-layer, so separate from trigger)
+    panel.addEventListener('mouseenter', () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    });
+    panel.addEventListener('mouseleave', hide);
+
+    // Close on focusout if focus leaves panel entirely
+    panel.addEventListener('focusout', (e: FocusEvent) => {
+      if (!panel.contains(e.relatedTarget as Node)) hide();
+    });
+
+    // Region switching
+    const buttons = panel.querySelectorAll<HTMLButtonElement>('.mega-region-btn');
+    const regionPanels = panel.querySelectorAll<HTMLElement>('.mega-region-panel');
+    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function switchRegion(regionId: string) {
+      buttons.forEach((btn) => {
+        const isActive = btn.dataset.regionId === regionId;
+        btn.classList.toggle('bg-slate-50', isActive);
+        btn.classList.toggle('dark:bg-slate-800', isActive);
+        btn.classList.toggle('font-semibold', isActive);
+        btn.classList.toggle('text-slate-900', isActive);
+        btn.classList.toggle('dark:text-white', isActive);
+        btn.classList.toggle('text-slate-600', !isActive);
+        btn.classList.toggle('dark:text-slate-400', !isActive);
+        btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      regionPanels.forEach((rp) => {
+        const isTarget = rp.dataset.regionPanel === regionId;
+        rp.classList.toggle('hidden', !isTarget);
+        if (isTarget) {
+          const cards = rp.querySelectorAll<HTMLElement>('.mega-menu-card');
+          cards.forEach((card) => {
+            card.style.animation = 'none';
+            card.offsetHeight; // Force reflow
+            card.style.animation = '';
+          });
+        }
+      });
+    }
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('mouseenter', () => {
+        const regionId = btn.dataset.regionId;
+        if (!regionId) return;
+        if (debounceTimer) clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => switchRegion(regionId), 80);
+      });
+
+      btn.addEventListener('focus', () => {
+        const regionId = btn.dataset.regionId;
+        if (!regionId) return;
+        if (debounceTimer) clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => switchRegion(regionId), 80);
+      });
+    });
+
+    // Arrow key navigation for region buttons
+    const btnArray = Array.from(buttons);
+    btnArray.forEach((btn, idx) => {
+      btn.addEventListener('keydown', (e: KeyboardEvent) => {
+        let nextIdx = -1;
+        if (e.key === 'ArrowDown') {
+          nextIdx = (idx + 1) % btnArray.length;
+        } else if (e.key === 'ArrowUp') {
+          nextIdx = (idx - 1 + btnArray.length) % btnArray.length;
+        }
+        if (nextIdx >= 0) {
+          e.preventDefault();
+          btnArray[nextIdx].focus();
+        }
+      });
+    });
+
+    // Anchor positioning fallback
+    if (!CSS.supports('anchor-name', '--header')) {
+      const header = document.getElementById('header');
+      if (header) {
+        const updateHeight = () => {
+          if (panel.matches(':popover-open')) return;
+          const bottom = header.getBoundingClientRect().bottom;
+          document.documentElement.style.setProperty(
+            '--header-height',
+            Math.max(0, bottom) + 'px'
+          );
+        };
+        updateHeight();
+        window.addEventListener('resize', updateHeight);
+        window.addEventListener('scroll', updateHeight, { passive: true });
+      }
+    }
+  }
+
+  initMegaMenu();
+  document.addEventListener('astro:after-swap', initMegaMenu);
+</script>

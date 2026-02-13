@@ -24,7 +24,11 @@ const postTags = tags?.length
   : [];
 ---
 
-<div class="blog-card intersect:opacity-100 intersect-once block transition-transform duration-200 hover:-translate-y-1">
+<div
+  class="blog-card blog-card-filterable intersect:opacity-100 intersect-once block transition-transform duration-200 hover:-translate-y-1"
+  data-blog-title={title.toLowerCase()}
+  data-blog-tags={(tags ?? []).join(' ')}
+>
   <a href={getBlogPermalink(Astro.props)}>
     <Image
       class="aspect-video w-full rounded-sm"
@@ -74,5 +78,13 @@ const postTags = tags?.length
       opacity: 0;
       transform: translateY(1rem);
     }
+  }
+  .blog-card-filterable {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .blog-card-filterable[data-filter-hidden] {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
   }
 </style>

@@ -436,6 +436,146 @@
       "status": 301
     },
     {
+      "from": "/blog/2/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/3/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/4/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/5/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/6/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/7/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/8/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/9/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/10/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/11/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/12/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/13/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/14/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/blog/15/",
+      "destination": "/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/2/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/3/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/4/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/5/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/6/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/7/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/8/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/9/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/10/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/11/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/12/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/13/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/14/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
+      "from": "/pt/blog/15/",
+      "destination": "/pt/blog/",
+      "status": 301
+    },
+    {
       "from": "/static/94f3639374d100379659db7564b01b2c/416b2/kit-for-cycling -holidays.jpg",
       "destination": "/bike-tours-in-portugal/",
       "status": 301

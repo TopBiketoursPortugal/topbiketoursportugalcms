@@ -30,3 +30,5 @@ dev-dist
 docker/scrapped/
 nul
 skills
+.claude/
+.claude/settings.local.json

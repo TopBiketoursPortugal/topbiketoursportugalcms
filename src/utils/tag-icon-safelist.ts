@@ -14,7 +14,14 @@ export const tagIconClasses = [
   'icon-[ph--users-light]',
   'icon-[ph--baby-light]',
   'icon-[ph--person-simple-bike-light]',
-  'icon-[ph--trophy-light]'
+  'icon-[ph--trophy-light]',
+  'icon-[ph--bicycle-light]',
+  'icon-[ph--lightning-light]',
+  'icon-[ph--road-horizon-light]',
+  'icon-[ph--path-light]',
+  'icon-[ph--map-pin-light]',
+  'icon-[ph--ranking-light]',
+  'icon-[ph--arrow-right-light]'
 ] as const;
 
 export function getTagIconClass(icon: string | null | undefined): string {

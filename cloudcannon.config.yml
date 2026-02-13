@@ -326,6 +326,20 @@ collections_config:
           empty_type: array
         comment: Select rider levels for this tour (Beginner, Intermediate, Advanced)
         cascade: true
+      bikeCategories:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.bikeCategories
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+          empty_type: array
+        comment: Select bicycle types available for this tour
+        cascade: true
       id:
         type: auto
         instance_value: UUID
@@ -790,6 +804,181 @@ collections_config:
         remove_extra_inputs: false
         name: New Rider Level
         icon: fitness_center
+  bikeCategories:
+    path: src/content/bike-categories
+    glob:
+      - '**/*.md*'
+    name: Bike Categories
+    singular_name: Bike Category
+    icon: pedal_bike
+    disable_url: false
+    preview:
+      text:
+        - key: title
+    _enabled_editors:
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Touring (Bicycle)
+              value: ph--bicycle-light
+            - name: Mountain (Mountains)
+              value: ph--mountains-light
+            - name: E-Bike (Lightning)
+              value: ph--lightning-light
+            - name: Road (Road Horizon)
+              value: ph--road-horizon-light
+            - name: Gravel (Path)
+              value: ph--path-light
+        cascade: true
+    add_options:
+      - name: New Bike Category English
+        icon: language
+        editor: data
+        base_path: ''
+        schema: default
+      - name: New Bike Category Portuguese
+        icon: language
+        editor: data
+        base_path: /pt/
+        schema: defaultPT
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+  bikes:
+    path: src/content/bikes
+    glob:
+      - '**/*.md*'
+    name: Bikes
+    singular_name: Bike
+    icon: directions_bike
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: brand
+      image:
+        - key: image.src
+    _enabled_editors:
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      category:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values: collections.bikeCategories
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+        comment: Select the bike category
+        cascade: true
+      specs:
+        type: markdown
+        cascade: true
+      infoUrl:
+        type: url
+        cascade: true
+      order:
+        type: number
+        comment: Display order within the category (lower = first)
+        cascade: true
+    add_options:
+      - name: New Bike English
+        icon: language
+        editor: data
+        base_path: ''
+        schema: default
+      - name: New Bike Portuguese
+        icon: language
+        editor: data
+        base_path: /pt/
+        schema: defaultPT
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultPT:
+        path: schemas/pt/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
   postTags:
     path: src/content/blog-tags
     glob:
@@ -871,6 +1060,8 @@ collection_groups:
       - tourRegions
       - tourTags
       - tourRiderLevels
+      - bikeCategories
+      - bikes
       - team
       - testimonials
   - heading: Data

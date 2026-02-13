@@ -9,7 +9,6 @@ import { t } from 'utils/i18n';
 import { getTourTagsListingPath, trailingSlash } from 'utils/permalinks';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
-import SiteData from 'src/../data/site.json';
 
 export async function getStaticPaths() {
   return languageCodes.map((language) => ({

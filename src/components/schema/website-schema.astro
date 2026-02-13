@@ -7,11 +7,19 @@ type Props = { language: LanguageCodes };
 const { language } = Astro.props;
 const site = SiteData[language];
 
+const baseUrl = site.site.url.replace(/\/$/, '');
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${baseUrl}/#website`,
   'name': site.site.name,
-  'url': site.site.url
+  'url': baseUrl,
+  'description': site.description,
+  'inLanguage': language === 'pt' ? 'pt-PT' : 'en-US',
+  'publisher': {
+    '@id': `${baseUrl}/#organization`
+  }
 };
 ---
 
