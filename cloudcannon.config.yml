@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/CloudCannon/configuration-types/main/cloudcannon-config.schema.json
 paths:
   uploads: src/assets/images
   static: ''
@@ -97,9 +98,11 @@ collections_config:
         hidden: true
         cascade: true
       title:
-        type: auto
+        type: text
         options:
           empty_type: string
+          required: true
+          required_message: Blog post title is required
         cascade: true
       image:
         type: image
@@ -116,6 +119,8 @@ collections_config:
             uploads: src/assets/images
             static: ''
           empty_type: string
+          required: true
+          required_message: A thumbnail image is required
         cascade: true
       image_alt:
         type: auto
@@ -193,6 +198,40 @@ collections_config:
     description: ''
     _enabled_editors:
     _inputs:
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Tour name is required
+        cascade: true
+      code:
+        type: text
+        options:
+          required: true
+          required_message: Tour code is required (e.g. CT 01)
+        cascade: true
+      difficulty:
+        type: range
+        options:
+          min: 1
+          max: 5
+          step: 1
+        comment: Tour difficulty (1 = easy, 5 = hard)
+        cascade: true
+      distance:
+        type: number
+        options:
+          min: 1
+          min_message: Distance must be at least 1 km
+        comment: Tour distance in kilometers
+        cascade: true
+      duration:
+        type: number
+        options:
+          min: 1
+          min_message: Duration must be at least 1 day
+        comment: Tour duration in days
+        cascade: true
       type:
         type: select
         options:
@@ -432,9 +471,15 @@ collections_config:
         cascade: true
       title:
         type: text
+        options:
+          required: true
+          required_message: Testimonial title is required
         cascade: true
       quote:
         type: markdown
+        options:
+          required: true
+          required_message: Review quote text is required
         cascade: true
       reviewSource:
         type: url
@@ -523,6 +568,12 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Team member name is required
+        cascade: true
       language:
         type: select
         options:
@@ -578,6 +629,15 @@ collections_config:
         cascade: true
       title:
         type: text
+        options:
+          required: true
+          required_message: Region name is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Region display name is required
         cascade: true
       language:
         type: select
@@ -649,6 +709,18 @@ collections_config:
         type: auto
         instance_value: UUID
         hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Tag title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Tag display name is required
         cascade: true
       language:
         type: select
@@ -746,6 +818,18 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Rider level title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Rider level display name is required
+        cascade: true
       language:
         type: select
         options:
@@ -823,6 +907,12 @@ collections_config:
         type: auto
         instance_value: UUID
         hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Bike category name is required
         cascade: true
       language:
         type: select
@@ -910,6 +1000,12 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Bike model name is required
+        cascade: true
       language:
         type: select
         options:
@@ -934,6 +1030,8 @@ collections_config:
               - key: title
             subtext:
               - key: language
+          required: true
+          required_message: Bike category is required
         comment: Select the bike category
         cascade: true
       specs:
@@ -1004,6 +1102,18 @@ collections_config:
         type: auto
         instance_value: UUID
         hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Post tag title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Post tag display name is required
         cascade: true
       language:
         type: select
@@ -1375,20 +1485,40 @@ _inputs:
     comment: Automatically prefixed with the current year
     cascade: true
   page_title:
-    type: auto
-    comment: Defaults to the description set in the Site SEO data file
+    type: text
+    comment: Recommended 50–60 characters for optimal search engine display
+    options:
+      required: true
+      required_message: A page title is required for SEO
+      max_length: 70
+      max_length_message: Keep under 70 characters for search results
     cascade: true
   page_description:
-    type: auto
-    comment: Defaults to the description set in the Site SEO data file
+    type: textarea
+    comment: Recommended 150–160 characters for search engine snippets
+    options:
+      required: true
+      required_message: A meta description is required for SEO
+      max_length: 160
+      max_length_message: Keep under 160 characters for search snippets
     cascade: true
   canonical_url:
     type: auto
     comment: Defaults to the pages url
     cascade: true
   featured_image:
-    type: auto
+    type: image
     comment: Defaults to the image set in the Site SEO data file
+    options:
+      paths:
+        uploads: src/assets/images
+    cascade: true
+  featured_image_alt:
+    type: text
+    comment: Describe the image for accessibility (max 125 characters)
+    options:
+      max_length: 125
+      max_length_message: Alt text should be under 125 characters
     cascade: true
   open_graph_type:
     type: select
