@@ -82,7 +82,7 @@ frontmatter = {
   seo: {
     ...frontmatter.seo,
     page_title: page.data.title,
-    page_description: frontmatter.seo?.page_description
+    page_description: frontmatter.seo?.page_description ?? null
   }
 };
 

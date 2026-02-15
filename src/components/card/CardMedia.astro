@@ -13,7 +13,7 @@ const { class: className, ...props } = Astro.props;
   <ResponsiveImage
     {...props}
     class={cn(
-      'aspect-video h-full transition-all duration-700 group-hover:scale-110 group-hover:opacity-50',
+      'aspect-video h-full transition-[transform,opacity] duration-700 group-hover:scale-110 group-hover:opacity-50',
       className
     )}
   />

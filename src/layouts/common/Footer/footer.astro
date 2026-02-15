@@ -101,7 +101,7 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
       }
 
       {/* Regions column — small card grid */}
-      <div>
+      <div class="col-span-2 sm:col-auto">
         <h3 class="mb-3 text-sm font-bold uppercase tracking-wider text-white">{t('Footer.TourRegionsTitle', language)}</h3>
         <div class="grid grid-cols-2 gap-1.5">
           {
