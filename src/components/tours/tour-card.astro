@@ -1,17 +1,16 @@
 ---
 import CardMedia from '../card/CardMedia.astro';
-import { getTourPath } from 'utils/permalinks';
+import { getTourPath, getTourTagPath } from 'utils/permalinks';
 import CardContent, { type CardContentProps } from '../card/CardContent.astro';
 import Card from '../card/Card.astro';
 import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getCollection, type InferEntrySchema } from 'astro:content';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Stack from '../stack/stack.astro';
 import Rating from '../rating/rating.astro';
 import Separator from '../separator/separator.astro';
-import TourTagBadge from './tour-tag-badge.astro';
-import RiderLevelBadge from './rider-level-badge.astro';
-import BikeCategoryBadge from './bike-category-badge.astro';
+import LinkButton from '../linkbutton/linkbutton.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
@@ -30,8 +29,6 @@ const {
   duration,
   difficulty,
   tags = [],
-  riderLevels = [],
-  bikeCategories: bikeCategoriIds = [],
   language,
   packages = [],
   tourtype,
@@ -66,34 +63,9 @@ const tourTags = await getCollection(
   'tourTags',
   (t) => tags?.includes(t.data.id) && t.data.language === language
 );
-const tourRiderLevels = await getCollection(
-  'tourRiderLevels',
-  (t) => riderLevels?.includes(t.data.id) && t.data.language === language
-);
-const tourBikeCategories = await getCollection(
-  'bikeCategories',
-  (c) => bikeCategoriIds?.includes(c.data.id) && c.data.language === language
-);
-
-const allBadges = [...tourRiderLevels, ...tourTags, ...tourBikeCategories];
-const maxVisibleBadges = 3;
-const overflowCount = allBadges.length - maxVisibleBadges;
-
-const searchTitle = data.title.toLowerCase();
-const regionId = data.region ?? '';
-const tagIds = (tags ?? []).join(' ');
-const riderLevelIds = (riderLevels ?? []).join(' ');
-const bikeCategoryIds = (bikeCategoriIds ?? []).join(' ');
 ---
 
-<article
-  class="tour-card-anim tour-card-filterable intersect:opacity-100 intersect-once transition-transform duration-200 hover:-translate-y-1"
-  data-tour-title={searchTitle}
-  data-tour-region={regionId}
-  data-tour-tags={tagIds}
-  data-tour-rider-levels={riderLevelIds}
-  data-tour-bike-categories={bikeCategoryIds}
->
+<div class="tour-card-anim intersect:opacity-100 intersect-once transition-transform duration-200 hover:-translate-y-1">
 <Card href={getTourPath(data, language)} frame="light" {...data}>
   {
     image && (
@@ -104,88 +76,110 @@ const bikeCategoryIds = (bikeCategoriIds ?? []).join(' ');
             {t('Tour.Badge.New', language)}
           </span>
         ) : null}
-        {minPrice > 0 || minPromoPrice > 0 ? (
-          <span class="absolute right-3 bottom-3 rounded-lg bg-black/60 px-3 py-1.5 text-sm font-bold text-white backdrop-blur-sm">
-            {t('Tour.Form.FromPrice', language)}{' '}
-            {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
-          </span>
-        ) : null}
       </div>
     )
   }
   <CardContent display={contentDisplay} class="p-6 sm:max-xl:p-4">
-    <h3 class="font-oswald line-clamp-2 text-xl font-bold text-pretty">
+    <h3 class="font-oswald line-clamp-2 text-xl font-bold">
       {data.title}
     </h3>
-    <p class="line-clamp-3 text-base/relaxed text-gray-600 dark:text-gray-400">
-      {getMarkdownExcerpt(content ?? '', 150)}
+    <p class="line-clamp-5 text-lg/relaxed text-gray-600">
+      {getMarkdownExcerpt(content ?? '', 300)}
     </p>
 
-    {(duration && duration > 0) || (difficulty && difficulty > 0) || (distance && distance > 0) ? (
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
-        {duration && duration > 0 ? (
-          <span class="flex items-center gap-1">
-            <i class="icon-[ph--clock-countdown-light] h-4 w-4" aria-hidden="true" />
-            {duration} {t('Tour.Info.Duration.Unit.Days', language)}
+    <Stack spacing="medium" layout="vertical" class="w-full">
+      {
+        duration && duration > 0 ? (
+          <span class="flex gap-2 text-gray-600">
+            <i
+              class="icon-[ph--clock-countdown-light] h-5 w-5"
+              aria-hidden="true"
+            />{' '}
+            {duration} {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
+            {duration - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
           </span>
-        ) : null}
-        {duration && duration > 0 && difficulty && difficulty > 0 ? (
-          <span aria-hidden="true" class="text-gray-300 dark:text-gray-600">|</span>
-        ) : null}
-        {difficulty && difficulty > 0 ? (
-          <span class="flex items-center gap-1">
+        ) : null
+      }
+      {
+        difficulty && difficulty > 0 && (
+          <span class="flex gap-2 text-gray-600">
             {tourtype !== 'PackageTour' ? (
-              <i class="icon-[ph--person-simple-walk-light] h-4 w-4" aria-hidden="true" />
+              <i
+                class="icon-[ph--person-simple-walk-light] h-5 w-5"
+                aria-hidden="true"
+              />
             ) : (
-              <i class="icon-[ph--person-simple-bike-light] h-4 w-4" aria-hidden="true" />
+              <i
+                class="icon-[ph--person-simple-bike-light] h-5 w-5"
+                aria-hidden="true"
+              />
             )}
-            {difficulty}/5
+            {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
           </span>
-        ) : null}
-        {((duration && duration > 0) || (difficulty && difficulty > 0)) && distance && distance > 0 ? (
-          <span aria-hidden="true" class="text-gray-300 dark:text-gray-600">|</span>
-        ) : null}
-        {distance && distance > 0 ? (
-          <span class="flex items-center gap-1">
-            <i class="icon-[ph--map-trifold-light] h-4 w-4" aria-hidden="true" />
-            {distance} km
-          </span>
-        ) : null}
+        )
+      }
+      {
+        distance && distance > 0 ? (
+          <div class="flex items-center gap-2">
+            <i
+              class="icon-[ph--map-trifold-light] h-5 w-5"
+              aria-hidden="true"
+            />
+            <span>
+              {t('Tour.Info.Distance.Label', language)}: {distance} km
+            </span>
+          </div>
+        ) : null
+      }
+      <div class="flex gap-3">
+        <Rating rating={average} class="text-orange-500" />
+        <span class="text-neutral-700"
+          >({count} {t('Tour.Info.Reviews.Unit', language)})</span
+        >
       </div>
-    ) : null}
-
-    <div class="flex items-center gap-3">
-      <Rating rating={average} class="text-orange-500" />
-      <span class="text-sm text-neutral-700 dark:text-neutral-300"
-        >({count} {t('Tour.Info.Reviews.Unit', language)})</span
-      >
-    </div>
+      {
+        minPromoPrice > 0 || minPromoPrice > 0 ? (
+          <Stack
+            spacing="small"
+            alignment="trailing"
+            layout="vertical"
+            class="w-full"
+          >
+            {minPromoPrice > 0 && (
+              <span class="line-through">{priceFormat.format(minPrice)}</span>
+            )}
+            <span class="text-xl font-bold">
+              {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
+            </span>
+          </Stack>
+        ) : null
+      }
+    </Stack>
 
     <Separator weight="thin" color="neutral" />
 
     {
-      allBadges.length > 0 && (
-        <div class="z-20 flex flex-wrap gap-1.5">
-          {tourRiderLevels.slice(0, maxVisibleBadges).map((level) => (
-            <RiderLevelBadge level={level} language={language} size="sm" />
+      tourTags && tourTags.length > 0 && (
+        <Stack spacing="small" alignment="center" class="flex-wrap">
+          <i
+            class="icon-[ph--bookmark-simple-light] h-5 w-5"
+            aria-hidden="true"
+          />
+          {tourTags.map((t) => (
+            <LinkButton
+              variant="link"
+              class="z-20"
+              href={getTourTagPath(t, language)}
+            >
+              {t.data.name ?? t.data.title}
+            </LinkButton>
           ))}
-          {tourTags.slice(0, Math.max(0, maxVisibleBadges - tourRiderLevels.length)).map((tag) => (
-            <TourTagBadge tag={tag} language={language} size="sm" />
-          ))}
-          {tourBikeCategories.slice(0, Math.max(0, maxVisibleBadges - tourRiderLevels.length - tourTags.length)).map((cat) => (
-            <BikeCategoryBadge category={cat} language={language} size="sm" />
-          ))}
-          {overflowCount > 0 && (
-            <span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
-              +{overflowCount}
-            </span>
-          )}
-        </div>
+        </Stack>
       )
     }
   </CardContent>
 </Card>
-</article>
+</div>
 
 <style>
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
@@ -195,21 +189,6 @@ const bikeCategoryIds = (bikeCategoriIds ?? []).join(' ');
     .tour-card-anim[no-intersect] {
       opacity: 0;
       transform: translateY(1rem);
-    }
-  }
-
-  /* Filter animation — separate from scroll entrance animation */
-  .tour-card-filterable {
-    transition: opacity 0.35s ease, transform 0.35s ease;
-  }
-  .tour-card-filterable[data-filter-hidden] {
-    opacity: 0;
-    transform: scale(0.95);
-    pointer-events: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .tour-card-filterable[data-filter-hidden] {
-      display: none;
     }
   }
 </style>
