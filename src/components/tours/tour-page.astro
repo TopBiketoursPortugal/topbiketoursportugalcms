@@ -302,7 +302,7 @@ if (count > 0 && average > 0) {
     )
   }
   <div
-    class="line-container mx-auto grid w-full max-w-full grid-cols-1 justify-between gap-10 scroll-smooth md:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
+    class="line-container mx-auto grid w-full max-w-full grid-cols-1 justify-between gap-10 overflow-x-hidden scroll-smooth md:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
   >
     <nav
       aria-label={t('Tour.Nav.Label', language)}
@@ -349,7 +349,7 @@ if (count > 0 && average > 0) {
     </nav>
     <aside
       aria-label={t('Tour.Sidebar.Label', language)}
-      class="tour-sidebar intersect:opacity-100 intersect-once z-10 order-first md:row-span-4 mx-auto -mt-24 flex w-full max-w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg border-l-4 border-green-600 bg-white p-6 shadow-lg md:order-0 md:col-auto dark:border-green-500 dark:bg-gray-800"
+      class="tour-sidebar intersect:opacity-100 intersect-once z-10 order-first mx-auto -mt-24 flex w-full max-w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg border-l-4 border-green-600 bg-white p-6 shadow-lg md:order-0 md:col-auto md:row-span-4 dark:border-green-500 dark:bg-gray-800"
     >
       {
         minPrice > 0 || minPromoPrice > 0 ? (
@@ -679,17 +679,17 @@ if (count > 0 && average > 0) {
             </div>
 
             <div
-              class="reviews-carousel-container relative max-w-full"
+              class="reviews-carousel-container relative max-w-full overflow-hidden"
               style="box-sizing: border-box;"
             >
               <button
-                class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+                class="nav-btn prev absolute top-1/2 left-0 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none disabled:opacity-0 sm:left-2 sm:block dark:bg-black/50 dark:hover:bg-black/80"
                 aria-label="Previous slide"
               >
                 <i class="icon-[ph--caret-left-bold] text-xl" />
               </button>
               <button
-                class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+                class="nav-btn next absolute top-1/2 right-0 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:outline-none disabled:opacity-0 sm:right-2 sm:block dark:bg-black/50 dark:hover:bg-black/80"
                 aria-label="Next slide"
               >
                 <i class="icon-[ph--caret-right-bold] text-xl" />
