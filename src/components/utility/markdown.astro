@@ -2,7 +2,7 @@
 import markdownit from 'markdown-it';
 import markdownItExternalLinks from 'markdown-it-external-links';
 import Prose from '../typography/prose.astro';
-import { externalLinksConfig } from 'utils/permalinks';
+import { externalLinksConfig } from 'utils/external-links';
 
 const md = markdownit({ html: true });
 md.use(markdownItExternalLinks, externalLinksConfig);
