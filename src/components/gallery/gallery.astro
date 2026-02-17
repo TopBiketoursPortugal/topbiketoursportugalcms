@@ -33,7 +33,7 @@ const imagesWithImageOptimization=images.map(i=>({...i,srcOptimized:imagesGlob[i
 
 ---
 
-<div class={cn('masonary', "grid grid-cols-2 items-start md:grid-cols-3 lg:grid-cols-4 gap-4")}>
+<div class={cn('masonary', "grid grid-cols-1 items-start sm:grid-cols-3 lg:grid-cols-4 gap-4")}>
   {
     imagesWithImageOptimization.map(({srcOptimized, alt=''}, index) => {
       const { prevImageTarget, nextImageTarget } = getNavigation(
@@ -51,7 +51,7 @@ const imagesWithImageOptimization=images.map(i=>({...i,srcOptimized:imagesGlob[i
             alt={alt}
              widths={[320, 500, 640, 840, 1024, 2048]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-            class="cursor-pointer rounded-lg shadow-lg hover:scale-105 ease transition-transform duration-300 object-cover w-full h-full"
+            class="cursor-pointer rounded-lg shadow-lg hover:scale-105 ease transition-all duration-300 object-cover w-full h-full"
           />
         </a>
         <div
