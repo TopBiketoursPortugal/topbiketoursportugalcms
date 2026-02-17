@@ -45,9 +45,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 
 const imageSrc = images[block.image.image_path]?.default;
 
-if (!imageSrc) {
-  console.error(JSON.stringify(block));
-}
+if (!imageSrc) return;
 ---
 
 <div class="left-right" style={`--cms-bg: ${block.background_color}; --cms-bg-dark: ${getDarkEquivalent(block.background_color)};`}>
