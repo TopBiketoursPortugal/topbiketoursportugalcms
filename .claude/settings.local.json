@@ -4,7 +4,12 @@
       "Bash(cmd /c \"where pnpm\")",
       "Bash(cmd /c \"pnpm build\")",
       "Bash(export PATH:*)",
-      "Bash(npx pnpm build)"
+      "Bash(npx pnpm build)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(npx @modelcontextprotocol/inspector:*)",
+      "Bash(kill:*)",
+      "Bash(xargs:*)"
     ]
   }
 }
