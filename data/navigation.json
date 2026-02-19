@@ -113,8 +113,8 @@
               "href": "/faqs/"
             },
             {
-              "text": "Terms & Conditions",
-              "href": "/terms-and-Conditions/"
+              "text": "Cancellation Policy",
+              "href": "/cancellation-policy/"
             },
             {
               "text": "Privacy Policy",
@@ -142,7 +142,6 @@
           "page": "",
           "href": "/pt/",
           "enabled": false
-
         },
         {
           "text": "Bike Tours",
@@ -245,8 +244,8 @@
               "href": "/pt/perguntas-frequentes/"
             },
             {
-              "text": "Termos e Condições",
-              "href": "/pt/termos-condicoes/"
+              "text": "Política de Cancelamento",
+              "href": "/pt/politica-de-cancelamento/"
             },
             {
               "text": "Política de Privacidade",
