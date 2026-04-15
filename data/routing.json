@@ -579,6 +579,56 @@
       "from": "/static/94f3639374d100379659db7564b01b2c/416b2/kit-for-cycling -holidays.jpg",
       "destination": "/bike-tours-in-portugal/",
       "status": 301
+    },
+    {
+      "from": "/pt/blog/algarve-em-gravel-voltas-tranquilas-pelo-interior-a-partir-de-tavira-silves-e-monchique/",
+      "destination": "/algarve-em-bicicleta-gravel/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/e-bikes/2/",
+      "destination": "/blog/tags/e-bikes/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/cycling-tips/2/",
+      "destination": "/blog/tags/cycling-tips/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/camino-de-santiago/2/",
+      "destination": "/blog/tags/camino-de-santiago/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/camino-de-santiago/3/",
+      "destination": "/blog/tags/camino-de-santiago/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/coastal-routes/2/",
+      "destination": "/blog/tags/coastal-routes/",
+      "status": 301
+    },
+    {
+      "from": "/tours/tags/cultural-heritage/",
+      "destination": "/tours/tags/cultural-and-heritage/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/gastronomy-culture/",
+      "destination": "/blog/tags/gastronomy-and-culture/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/porto-city-cycling/",
+      "destination": "/blog/tags/porto-and-city-cycling/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tags/wine-douro-valley/",
+      "destination": "/blog/tags/wine-and-douro-valley/",
+      "status": 301
     }
   ]
 }
