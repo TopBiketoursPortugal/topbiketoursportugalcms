@@ -629,6 +629,11 @@
       "from": "/blog/tags/wine-douro-valley/",
       "destination": "/blog/tags/wine-and-douro-valley/",
       "status": 301
+    },
+    {
+      "from": "/blog/style-of-top-bike-tours-in-portugal/",
+      "destination": "/blog/style-of-top-guided-bike-tours-in-portugal/",
+      "status": 301
     }
   ]
 }
