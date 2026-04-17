@@ -634,6 +634,16 @@
       "from": "/blog/style-of-top-bike-tours-in-portugal/",
       "destination": "/blog/style-of-top-guided-bike-tours-in-portugal/",
       "status": 301
+    },
+    {
+      "from": "/tours/alentejo-wine-heritage-bicycle-tour/",
+      "destination": "/tours/biketour-in-alentejo-wine-country-and-castles/",
+      "status": 301
+    },
+    {
+      "from": "/blog/the-camino-de-santiago-by-bike-complete-guide/",
+      "destination": "/blog/Overview-of-the-Camino-de-Santiago/",
+      "status": 301
     }
   ]
 }
