@@ -644,6 +644,11 @@
       "from": "/blog/the-camino-de-santiago-by-bike-complete-guide/",
       "destination": "/blog/Overview-of-the-Camino-de-Santiago/",
       "status": 301
+    },
+    {
+      "from": "/tours/porto-to-lisbon-cycling-tour-en/",
+      "destination": "/tours/porto-to-lisbon-bike-tour/",
+      "status": 301
     }
   ]
 }
