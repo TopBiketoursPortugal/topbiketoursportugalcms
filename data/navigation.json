@@ -150,6 +150,12 @@
           "megaMenu": true
         },
         {
+          "text": "Tours Diários",
+          "page": "0195c501-07d7-74f9-bcf9-fd55594a710b",
+          "href": "",
+          "enabled": false
+        },
+        {
           "text": "Testemunhos",
           "page": "",
           "href": "/pt/testemunhos/"
