@@ -38,6 +38,7 @@ for (const level of levels) {
 }
 
 const pageTitle = t('Tour.RiderLevelsPageTitle', language);
+const pageDescription = t('Tour.RiderLevelsPageDescription', language);
 
 const hrefs = languageCodes.map((lang) => ({
   href: `${Astro.site}${lang === 'en' ? '' : lang + '/'}tours/rider-levels${trailingSlash}`,
@@ -56,6 +57,7 @@ const breadcrumbs = [
 <Layout
   class="mb-16 px-8"
   title={pageTitle}
+  seo={{ page_title: pageTitle, page_description: pageDescription }}
   hrefLangs={hrefs}
   breadcrumbs={breadcrumbs}
 >

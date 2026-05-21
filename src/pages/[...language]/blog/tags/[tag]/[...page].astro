@@ -64,7 +64,10 @@ const blogTagPageTitle = pageNumberStr
       .replace('$1', tagName)
       .replace('$2', '1');
 
-const blogTagPageDescription = tagData.data.seo?.page_description ?? blogTagPageTitle;
+const pageNumber = pageNumberStr ? parseInt(pageNumberStr) : 1;
+const blogTagPageDescription = pageNumber > 1
+  ? `${tagData.data.seo?.page_description ?? tagName} - ${t('Blog.Tags.Paged.Page', language)} ${pageNumber}`
+  : (tagData.data.seo?.page_description ?? blogTagPageTitle);
 
 const seo = {
   page_title: blogTagPageTitle,

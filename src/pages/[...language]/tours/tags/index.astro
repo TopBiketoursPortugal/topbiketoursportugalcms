@@ -40,6 +40,7 @@ for (const tag of tags) {
 const visibleTags = tags.filter((t) => (tagCounts.get(t.data.id) ?? 0) > 0);
 
 const pageTitle = t('Tour.TagsPageTitle', language);
+const pageDescription = t('Tour.TagsPageDescription', language);
 
 const hrefs = languageCodes.map((lang) => ({
   href: `${Astro.site}${lang === 'en' ? '' : lang + '/'}tours/tags${trailingSlash}`,
@@ -58,6 +59,7 @@ const breadcrumbs = [
 <Layout
   class="mb-16 px-8"
   title={pageTitle}
+  seo={{ page_title: pageTitle, page_description: pageDescription }}
   hrefLangs={hrefs}
   breadcrumbs={breadcrumbs}
 >

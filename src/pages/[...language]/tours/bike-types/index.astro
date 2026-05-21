@@ -38,6 +38,7 @@ for (const category of categories) {
 }
 
 const pageTitle = t('Tour.BikeCategoriesPageTitle', language);
+const pageDescription = t('Tour.BikeCategoriesPageDescription', language);
 
 const hrefs = languageCodes.map((lang) => ({
   href: `${Astro.site}${lang === 'en' ? '' : lang + '/'}tours/bike-types${trailingSlash}`,
@@ -56,6 +57,7 @@ const breadcrumbs = [
 <Layout
   class="mb-16 px-8"
   title={pageTitle}
+  seo={{ page_title: pageTitle, page_description: pageDescription }}
   hrefLangs={hrefs}
   breadcrumbs={breadcrumbs}
 >
