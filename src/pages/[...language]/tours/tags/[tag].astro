@@ -99,8 +99,12 @@ const frontmatter = {
   }
 };
 const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);
+const currentPageUrl = Astro.url.href;
+const hrefsWithSelf = hrefs.some((h) => h.hreflang === language)
+  ? hrefs.map((h) => (h.hreflang === language ? { ...h, href: currentPageUrl } : h))
+  : [...hrefs, { href: currentPageUrl, hreflang: language }];
 const defaultLocale = LanguageData.en;
-const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const defaultHref = hrefsWithSelf.filter((h) => h.hreflang === defaultLocale.code)[0];
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
@@ -111,7 +115,7 @@ const breadcrumbs = [
 
 <Layout class="mb-16 px-8"
   {...frontmatter}
-  title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  title={t("Tours.Tags.PackageTour.Title", language).replace("$1",tagData.data.name ?? tagData.data.title)} hrefLangs={hrefsWithSelf} breadcrumbs={breadcrumbs}>
   <slot slot="head">
       {
       defaultHref ? (
@@ -119,7 +123,7 @@ const breadcrumbs = [
       ) : null
     }
     {
-      hrefs.map(({ href, hreflang }) => (
+      hrefsWithSelf.map(({ href, hreflang }) => (
         <link
           rel="alternate"
           href={href}

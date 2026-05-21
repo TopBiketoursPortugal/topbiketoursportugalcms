@@ -75,8 +75,12 @@ const pagination = Astro.props.page;
 const filteredPosts = pagination.data;
 
 const hrefs = await getBlogTagLanguagesAlternates(tagData, Astro.site);
+const currentPageUrl = Astro.url.href;
+const hrefsWithSelf = hrefs.some((h) => h.hreflang === language)
+  ? hrefs.map((h) => (h.hreflang === language ? { ...h, href: currentPageUrl } : h))
+  : [...hrefs, { href: currentPageUrl, hreflang: language }];
 const defaultLocale = LanguageData.en;
-const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const defaultHref = hrefsWithSelf.filter((h) => h.hreflang === defaultLocale.code)[0];
 const breadcrumbs = [
   getHomeCrumb(language),
   getBlogCrumb(language),
@@ -87,7 +91,7 @@ const breadcrumbs = [
 <Layout
   title={blogTagPageTitle}
   seo={seo}
-  hrefLangs={hrefs}
+  hrefLangs={hrefsWithSelf}
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
@@ -97,7 +101,7 @@ const breadcrumbs = [
       ) : null
     }
     {
-      hrefs.map(({ href, hreflang }) => (
+      hrefsWithSelf.map(({ href, hreflang }) => (
         <link
           rel="alternate"
           href={href}
