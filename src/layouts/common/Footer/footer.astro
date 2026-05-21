@@ -51,7 +51,7 @@ const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
           <div class="flex w-full flex-col gap-1">
             <h4 class="w-full text-xl font-bold">{text}</h4>
             {links.map(({ href, text }) => (
-              <a class="text-lg" href={href.toLowerCase()}>
+              <a class="text-lg" href={href?.toLowerCase()}>
                 {text}
               </a>
             ))}

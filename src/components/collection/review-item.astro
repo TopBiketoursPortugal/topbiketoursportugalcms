@@ -26,7 +26,7 @@ const imageOptimized = photo
 const countryCode = getCountryCode(country ?? '');
 
 const countryFlagIcon = countryCode
-  ? `circle-flags:${countryCode.toLowerCase()}`
+  ? `circle-flags:${countryCode?.toLowerCase()}`
   : 'ph:user-circle-light';
 ---
 
