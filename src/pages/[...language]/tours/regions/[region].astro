@@ -169,7 +169,7 @@ const breadcrumbs = [
         <Text size="xlarge">{t("Tours.Regions.NoResults.Title", language).replace("$1",regionData.data.name ?? "")}</Text>
         <Text size="large">{t("Tours.Regions.NoResults.AlternateTags.Title", language)}</Text>
         <ul class="list-disc pl-8">{tourRegions.filter((r) => r.data.id !== regionData.data.id)
-                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={regionSeoTitle} class="underline">{regionSeoTitle}</a></li>))}</u>
+                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={regionSeoTitle} class="underline">{regionSeoTitle}</a></li>))}</ul>
       </div>
     ) : null
   }

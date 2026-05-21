@@ -366,6 +366,45 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
           ))}
         </div>
       </div>
+      ) : (
+        <div>{t('Tour.Section.Reviews.Empty', language)}</div>
+      )
+    }
+  </section>
+  {
+    relatedTours.length > 0 ? (
+      <section id="related" class="col-span-full mb-8 flex flex-col gap-4 tour-section intersect:opacity-100 intersect-once">
+        <Heading as="h2" class="mb-6">
+          {t('Tour.Section.RelatedTours.Title', language)}
+        </Heading>
+        <TourRelated language={language} related={relatedTours} />
+      </section>
+    ) : null
+  }
+  {
+    feature?.bokunLink ? (
+      <script
+        is:inline
+        async
+        defer
+        type="text/javascript"
+        src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
+      />
+    ) : null
+  }
+  <TourProductSchema
+    name={tour.title}
+    description={tour.description}
+    image={image?.src}
+    url={getTourPath(tour, language)}
+    price={minPrice}
+    promoPrice={minPromoPrice}
+    currency={(packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'}
+    ratingAverage={average}
+    ratingCount={count}
+    language={language}
+  />
+</div>
 
 <script>
   const initCarousel = () => {
@@ -462,42 +501,3 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     }
   }
 </style>
-      ) : (
-        <div>{t('Tour.Section.Reviews.Empty', language)}</div>
-      )
-    }
-  </section>
-  {
-    relatedTours.length > 0 ? (
-      <section id="related" class="col-span-full mb-8 flex flex-col gap-4 tour-section intersect:opacity-100 intersect-once">
-        <Heading as="h2" class="mb-6">
-          {t('Tour.Section.RelatedTours.Title', language)}
-        </Heading>
-        <TourRelated language={language} related={relatedTours} />
-      </section>
-    ) : null
-  }
-  {
-    feature?.bokunLink ? (
-      <script
-        is:inline
-        async
-        defer
-        type="text/javascript"
-        src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
-      />
-    ) : null
-  }
-  <TourProductSchema
-    name={tour.title}
-    description={tour.description}
-    image={image?.src}
-    url={getTourPath(tour, language)}
-    price={minPrice}
-    promoPrice={minPromoPrice}
-    currency={(packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'}
-    ratingAverage={average}
-    ratingCount={count}
-    language={language}
-  />
-</div>
