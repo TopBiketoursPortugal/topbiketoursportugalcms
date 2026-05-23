@@ -36,8 +36,8 @@ const { Content } = await render(tour);
 
 const seo = {
   no_index: false,
-  page_title: tour.data.title ?? tour.data.seo?.page_title,
-  page_description: tour.data.description ?? tour.data.title,
+  page_title: tour.data.seo?.page_title ?? tour.data.title,
+  page_description: tour.data.seo?.page_description ?? tour.data.description ?? tour.data.title,
   open_graph_type: 'product',
   author_twitter_handle: null,
   featured_image: tour.data.image?.src ?? defaultImage.src,

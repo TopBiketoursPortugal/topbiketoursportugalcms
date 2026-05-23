@@ -41,7 +41,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
         params: {
           language: language === 'en' ? undefined : language,
           tag:
-            slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true }) +
+            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true }) +
             trailingSlash
         },
         props: { tagData: tag },

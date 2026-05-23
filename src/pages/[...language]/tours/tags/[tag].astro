@@ -28,7 +28,7 @@ export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
           language: language === 'en' ? undefined : language,
           // toursType: PermalinkData.tours[language],
           tag:
-            slugify(tag.data.name??tag.data.title, {
+            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
               lower: true,
               strict: true,
               trim: true

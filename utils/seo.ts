@@ -13,7 +13,13 @@ export async function getPageSeo(
   const { seo } = page;
   const pageTitle = page.seo?.page_title ?? page.title;
   const siteData = SiteData[language];
-  const title = pageTitle ? pageTitle : siteData.site_title;
+  const siteName = siteData.site.name;
+  const titleTemplate = siteData.metadata.title.template;
+  const title = pageTitle
+    ? pageTitle.includes(siteName)
+      ? pageTitle
+      : titleTemplate.replace('%s', pageTitle)
+    : siteData.site_title;
 
   const baseUrl = site ?? import.meta.env.BASE_URL;
   const description = seo?.page_description ?? siteData.description;

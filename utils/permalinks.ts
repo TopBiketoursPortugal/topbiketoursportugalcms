@@ -55,7 +55,7 @@ export function getTourTagPath(
 ): string {
   const tourPermalink = PermalinkData.tours[language];
 
-  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}${tourPermalink}/tags/${slugify(tag.data.path ?? tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
@@ -146,7 +146,7 @@ export function getBlogTagPath(
   tag: CollectionEntry<'postTags'>,
   language: LanguageCodes = 'en'
 ): string {
-  const path = `${getBasePath(language)}blog/tags/${slugify(tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
+  const path = `${getBasePath(language)}blog/tags/${slugify(tag.data.path ?? tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
 }
 
