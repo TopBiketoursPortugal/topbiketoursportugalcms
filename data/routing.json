@@ -649,6 +649,11 @@
       "from": "/tours/porto-to-lisbon-cycling-tour-en/",
       "destination": "/tours/porto-to-lisbon-bike-tour/",
       "status": 301
+    },
+    {
+      "from": "/tours/from-coimbra-to-lisbon-bike-tour/",
+      "destination": "/tours/atlantic-coast-to-lisbon-bike-tour/",
+      "status": 301
     }
   ]
 }
