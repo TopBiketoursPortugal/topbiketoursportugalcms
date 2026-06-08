@@ -659,6 +659,11 @@
       "from": "/tours/porto-santiago-compostela-bike-tour/",
       "destination": "/tours/porto-santiago-compostela-bike-tour-coastal-way/",
       "status": 301
+    },
+    {
+      "from": "/tours/santiago-de-compostela/",
+      "destination": "/tours/santiago-de-compostela-central-way/",
+      "status": 0
     }
   ]
 }
