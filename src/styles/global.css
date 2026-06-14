@@ -103,9 +103,25 @@
   line-height: 1.55;
 }
 
+/*
+ * @tailwindcss/typography ships heavy heading top margins (h2 ~2em, h3 ~1.6em,
+ * h4 ~1.5em) measured against the already-large prose-lg/xl heading sizes, so
+ * headings float in a sea of whitespace. Pull them back to one standard, calmer
+ * top rhythm (~1.25em) while keeping a comfortable bottom gap; re-zero the first
+ * heading's top margin since this override would otherwise reinstate it.
+ */
 .prose
   :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
   line-height: 1.25;
+  margin-top: 1.25em;
+  margin-bottom: 0.6em;
+}
+
+.prose
+  :where(h1, h2, h3, h4, h5, h6):first-child:not(
+    :where([class~='not-prose'] *)
+  ) {
+  margin-top: 0;
 }
 
 /*
