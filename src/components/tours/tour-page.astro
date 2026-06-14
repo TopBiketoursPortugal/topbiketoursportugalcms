@@ -127,9 +127,12 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   )
 }
 <div
-  class="line-container mx-auto grid w-full px-4 sm:px-6 lg:px-8 grid-cols-1 justify-between gap-10 scroll-smooth sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
+  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
-  <div class="sticky top-[68px] md:top-34.25 z-40 overflow-auto bg-white dark:bg-slate-950">
+  <div
+    id="tour-tabs-container"
+    class="sticky top-17 z-40 overflow-auto bg-white md:top-34.25 dark:bg-slate-950"
+  >
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
       {
@@ -148,18 +151,17 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         ) : null
       }
       <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
-
-      <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
       {
         enableFaqs ? (
           <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
         ) : null
       }
+      <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
     </Tabs>
   </div>
   <section
     id="tour-booking"
-    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:order-0 sm:sticky sm:top-36 sm:self-start dark:bg-gray-800"
+    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:sticky sm:top-36 sm:order-0 sm:max-h-[calc(100vh-10rem)] sm:self-start sm:overflow-x-hidden sm:overflow-y-auto dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
@@ -206,7 +208,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   </section>
   <section
     id="detail"
-    class="tour-section intersect:opacity-100 intersect-once col-end-2 mb-8 flex w-full scroll-mt-36 flex-col gap-4"
+    class="tour-section intersect:opacity-100 intersect-once col-end-2 flex w-full scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
   >
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
@@ -295,11 +297,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     mapUrl.length > 0 ? (
       <section
         id="map"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
       >
-        <Heading as="h2">
-          {t('Tour.Section.Map.Title', language)}
-        </Heading>
+        <Heading as="h2">{t('Tour.Section.Map.Title', language)}</Heading>
         <div class="w-full select-none">
           <iframe
             title="tour"
@@ -318,11 +318,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     itinerary.length > 0 ? (
       <section
         id="itinerary"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
       >
-        <Heading as="h2">
-          {t('Tour.Section.Itinerary.Title', language)}
-        </Heading>
+        <Heading as="h2">{t('Tour.Section.Itinerary.Title', language)}</Heading>
         <TourItinerary itinerary={itinerary} />
       </section>
     ) : null
@@ -331,11 +329,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     pricingTables.length > 0 ? (
       <section
         id="packages"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
       >
-        <Heading as="h2">
-          {t('Tour.Section.Packages.Title', language)}
-        </Heading>
+        <Heading as="h2">{t('Tour.Section.Packages.Title', language)}</Heading>
 
         <div class="col-span-full flex flex-col gap-12">
           {pricingTables.map((table) => (
@@ -345,7 +341,11 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
                   {table.title}
                 </Heading>
               ) : null}
-              <TourPricing language={language} packages={table.packages} tour={tour} />
+              <TourPricing
+                language={language}
+                packages={table.packages}
+                tour={tour}
+              />
               <div class="mt-6 flex justify-center">
                 <div class="w-full max-w-xs">
                   <TourBookNow
@@ -368,11 +368,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   }
   <section
     id="photos"
-    class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+    class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
   >
-    <Heading as="h2"
-      >{t('Tour.Section.Photos.Title', language)}</Heading
-    >
+    <Heading as="h2">{t('Tour.Section.Photos.Title', language)}</Heading>
     <Gallery images={tour.images ?? []} />
   </section>
 
@@ -380,22 +378,18 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     enableFaqs ? (
       <section
         id="faqs"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
       >
-        <Heading as="h2">
-          {t('Tour.Section.Faq.Title', language)}
-        </Heading>
+        <Heading as="h2">{t('Tour.Section.Faq.Title', language)}</Heading>
         <TourFaqs faqs={faqs} language={language} />
       </section>
     ) : null
   }
   <section
     id="reviews"
-    class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-6"
+    class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
   >
-    <Heading as="h2"
-      >{t('Tour.Section.Reviews.Title', language)}</Heading
-    >
+    <Heading as="h2">{t('Tour.Section.Reviews.Title', language)}</Heading>
     {
       reviews.length > 0 ? (
         <div
@@ -441,7 +435,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     relatedTours.length > 0 ? (
       <section
         id="related"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex flex-col gap-4"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full flex flex-col gap-4"
       >
         <Heading as="h2">
           {t('Tour.Section.RelatedTours.Title', language)}
@@ -531,8 +525,81 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       });
   };
 
+  const initScrollspy = () => {
+    const sections = document.querySelectorAll('.tour-section[id]');
+    const tabsContainer = document.getElementById('tour-tabs-container');
+    if (!sections.length || !tabsContainer) return;
+    const tabs = tabsContainer.querySelectorAll('a[href^="#"]');
+
+    const updateTabs = () => {
+      let currentId = '';
+      // The sticky header + tabs can be up to 200px on desktop.
+      // We set the hit line generously at 250px to ensure the section is captured
+      // right when it appears below the sticky tabs.
+      const hitLine = 250;
+
+      // Iterate backwards to find the deepest section that has crossed the hit line
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const rect = sections[i].getBoundingClientRect();
+        if (rect.top <= hitLine) {
+          currentId = sections[i].getAttribute('id') || '';
+          break;
+        }
+      }
+
+      // Fallback: if we are at the very bottom of the page, force the last section
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 10
+      ) {
+        currentId = sections[sections.length - 1].getAttribute('id') || '';
+      }
+
+      if (currentId) {
+        tabs.forEach((tab) => {
+          if (tab.getAttribute('href') === `#${currentId}`) {
+            tab.classList.add('bg-gray-100', 'dark:bg-gray-700');
+            tab.setAttribute('aria-selected', 'true');
+            // Auto-scroll the tab container horizontally if the tab is hidden
+            const tabRect = tab.getBoundingClientRect();
+            const containerRect = tabsContainer.getBoundingClientRect();
+            if (
+              tabRect.left < containerRect.left ||
+              tabRect.right > containerRect.right
+            ) {
+              tabsContainer.scrollBy({
+                left: tabRect.left - containerRect.left - 20,
+                behavior: 'smooth'
+              });
+            }
+          } else {
+            tab.classList.remove('bg-gray-100', 'dark:bg-gray-700');
+            tab.setAttribute('aria-selected', 'false');
+          }
+        });
+      }
+    };
+
+    window.addEventListener('scroll', updateTabs, { passive: true });
+
+    // Initial check
+    updateTabs();
+
+    // Cleanup when Astro view transitions unloads the page
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        window.removeEventListener('scroll', updateTabs);
+      },
+      { once: true }
+    );
+  };
+
   // Initialize on page load and view transitions
-  document.addEventListener('astro:page-load', initCarousel);
+  document.addEventListener('astro:page-load', () => {
+    initCarousel();
+    initScrollspy();
+  });
 </script>
 
 <style>
