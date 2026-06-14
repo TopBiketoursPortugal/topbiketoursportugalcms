@@ -127,9 +127,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   )
 }
 <div
-  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
+  class="line-container mx-auto grid w-full px-4 sm:px-6 lg:px-8 grid-cols-1 justify-between gap-10 scroll-smooth sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
 >
-  <div class="sticky top-34.25 z-40 overflow-auto bg-white dark:bg-slate-950">
+  <div class="sticky top-[68px] md:top-34.25 z-40 overflow-auto bg-white dark:bg-slate-950">
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
       {
@@ -200,7 +200,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       ) : null
     }
     {minPrice > 0 || minPromoPrice > 0 ? <Separator /> : null}
-    {!hasWetravel ? <strong>{t('Tour.Form.Title', language)}</strong> : null}
+    <strong>{t('Tour.Form.Title', language)}</strong>
 
     <TourBookNow tour={tour} language={language} variant="panel" />
   </section>

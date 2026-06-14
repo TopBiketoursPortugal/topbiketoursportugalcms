@@ -116,15 +116,18 @@ const { code, title } = Astro.props;
     </label>
   </div>
 
-  <!-- Submit Button -->
-  <div>
+  <!-- Actions -->
+  <div class="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-stretch w-full">
     <button
       slot="submit"
       type="submit"
-      class="tour-booking-button w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
+      class="tour-booking-button w-full sm:w-1/2 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
     >
       {t('Tour.Form.Submit.Text', language)}
     </button>
+    <div class="w-full sm:w-1/2 flex flex-col justify-center">
+      <slot />
+    </div>
   </div>
 </Form>
 
