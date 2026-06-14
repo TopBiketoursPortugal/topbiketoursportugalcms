@@ -6,9 +6,9 @@ import Stack from 'src/components/stack/stack.astro';
 import Heading from 'src/components/typography/heading.astro';
 
 export type TourRegionsCollectionProps = {
-    layout?: 'overlay' | 'hstack';
-    title?: string;
-    imageWidths?: number[];
+  layout?: 'overlay' | 'hstack';
+  title?: string;
+  imageWidths?: number[];
 };
 
 type Props = TourRegionsCollectionProps;
@@ -17,34 +17,39 @@ const { layout = 'hstack', title, imageWidths = [300] } = Astro.props;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 
 const regions = await getCollection(
-    'tourRegions',
-    (r) => r.data.language === language
+  'tourRegions',
+  (r) => r.data.language === language
 );
 ---
 
 <Stack layout="vertical" spacing="large" class="w-full">
-    {
-        title ? (
-            <Heading as="h2" class="px-6">
-                {title}
-            </Heading>
-        ) : null
-    }
+  {
+    title ? (
+      <Heading
+        as="h2"
+        class="reveal-up intersect:opacity-100 intersect-once px-6"
+      >
+        {title}
+      </Heading>
+    ) : null
+  }
 
-    <div
-        class={layout === 'overlay'
-            ? 'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'
-            : 'flex flex-col gap-4'}
-    >
-        {
-            regions.map((region) => (
-                <TourRegionsCard
-                    region={region}
-                    language={language}
-                    layout={layout}
-                    imageWidths={imageWidths}
-                />
-            ))
-        }
-    </div>
+  <div
+    class={`reveal-stagger intersect:opacity-100 intersect-once ${
+      layout === 'overlay'
+        ? 'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'
+        : 'flex flex-col gap-4'
+    }`}
+  >
+    {
+      regions.map((region) => (
+        <TourRegionsCard
+          region={region}
+          language={language}
+          layout={layout}
+          imageWidths={imageWidths}
+        />
+      ))
+    }
+  </div>
 </Stack>

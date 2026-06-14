@@ -12,7 +12,10 @@ const { site_title } = (SiteData as any)[Astro.currentLocale ?? 'en'];
 
 <svg
   class={cn(
-    'h-28 w-80 fill-black text-black dark:fill-white dark:text-white',
+    // Compact, natural-aspect logo on mobile (the art is ~5.7:1, so a fixed
+    // h-28/w-80 box left ~56px of dead vertical space and a 137px header);
+    // restore the larger desktop size at md+.
+    'h-10 w-auto fill-black text-black md:h-28 md:w-80 dark:fill-white dark:text-white',
     className
   )}
   xmlns="http://www.w3.org/2000/svg"

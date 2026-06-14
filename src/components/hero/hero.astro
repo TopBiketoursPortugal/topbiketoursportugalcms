@@ -2,7 +2,10 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from '../utility/markdown.astro';
-import { getDarkEquivalent, getDarkTextEquivalent } from '../../utils/dark-color';
+import {
+  getDarkEquivalent,
+  getDarkTextEquivalent
+} from '../../utils/dark-color';
 
 interface Props {
   background_color: string;
@@ -75,15 +78,23 @@ const getHeadingSizeComponent = (size: string) => {
 const Heading = getHeadingSizeComponent(heading_size);
 ---
 
-<section class={block.class} style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}>
+<section
+  class={block.class}
+  style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}
+>
   <div class="hero-container">
-    <div class="content flex flex-col gap-4 intersect:opacity-100 intersect-once">
+    <div
+      class="content reveal-stagger intersect:opacity-100 intersect-once flex flex-col gap-4"
+    >
       {
         heading?.heading_text ? (
           <Heading class="heading pb-3">{heading?.heading_text}</Heading>
         ) : null
       }
-      <div class="subheading-text" style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}>
+      <div
+        class="subheading-text"
+        style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
+      >
         <Markdown content={subheading.markdown_content} />
       </div>
       <div class="buttons">
@@ -97,7 +108,9 @@ const Heading = getHeadingSizeComponent(heading_size);
         }
       </div>
     </div>
-    <div class="blob intersect:opacity-100 intersect-once">
+    <div
+      class="blob reveal-right reveal-delay-2 intersect:opacity-100 intersect-once"
+    >
       {
         imageSrc && (
           <Image
@@ -135,9 +148,10 @@ const Heading = getHeadingSizeComponent(heading_size);
   }
 
   .content h1 {
-    font-size: 2.5rem;
-    line-height: 1em;
-    font-weight: 700;
+    font-size: clamp(2.5rem, 4vw + 1.25rem, 4.25rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     background: -webkit-linear-gradient(to left, #eee 50%, #333);
     background: linear-gradient(
       to left,
@@ -161,6 +175,9 @@ const Heading = getHeadingSizeComponent(heading_size);
   .subheading-text {
     margin-top: 1rem;
     color: var(--cms-text);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 56ch;
   }
 
   :global(.dark) .subheading-text {
@@ -215,6 +232,20 @@ const Heading = getHeadingSizeComponent(heading_size);
     width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+  }
+  .blob::before {
+    content: '';
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--headingGradientColor) 35%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    pointer-events: none;
   }
   .blob > img {
     max-width: 600px;
@@ -223,8 +254,19 @@ const Heading = getHeadingSizeComponent(heading_size);
     -webkit-background-position: center;
     background-position: center center;
     margin: 20px;
-    animation: animate 10s ease-in-out infinite;
+    animation:
+      animate 10s ease-in-out infinite,
+      blob-float 7s ease-in-out infinite alternate;
     transition: all 1s ease-in-out;
+  }
+
+  @keyframes blob-float {
+    from {
+      translate: 0 -8px;
+    }
+    to {
+      translate: 0 10px;
+    }
   }
 
   @media only screen and (min-width: 400px) {
@@ -268,21 +310,5 @@ const Heading = getHeadingSizeComponent(heading_size);
     }
   }
 
-  /* Scroll-triggered animations */
-  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
-    .content {
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .content[no-intersect] {
-      opacity: 0;
-      transform: translateX(-2rem);
-    }
-    .blob {
-      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
-    }
-    .blob[no-intersect] {
-      opacity: 0;
-      transform: translateX(2rem);
-    }
-  }
+  /* Scroll-reveal handled by global .reveal-stagger / .reveal-right utilities */
 </style>

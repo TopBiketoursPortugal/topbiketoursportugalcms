@@ -92,7 +92,18 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 // mapa, itenerario, preço
 ---
 
-{image && <ResponsiveImage {...image} class="max-h-72" />}
+{
+  image && (
+    <div data-tour-hero class="overflow-clip">
+      <ResponsiveImage
+        {...image}
+        class="max-h-72"
+        loading="eager"
+        fetchPriority="high"
+      />
+    </div>
+  )
+}
 <div
   class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
 >
@@ -125,7 +136,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     </Tabs>
   </div>
   <section
-    class="tour-sidebar z-10 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg sm:order-0 intersect:opacity-100 intersect-once dark:bg-gray-800"
+    class="tour-sidebar intersect:opacity-100 intersect-once z-10 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg sm:order-0 dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
@@ -181,7 +192,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       )
     }
   </section>
-  <section id="detail" class="col-end-2 mb-8 flex w-full flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+  <section
+    id="detail"
+    class="tour-section intersect:opacity-100 intersect-once col-end-2 mb-8 flex w-full scroll-mt-36 flex-col gap-4"
+  >
     <div class="flex gap-3">
       <Rating rating={average} class="text-orange-500" />
       <span class="text-neutral-700 dark:text-neutral-300"
@@ -189,7 +203,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       >
     </div>
     <div>
-      <ul class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul
+        class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3"
+      >
         {
           tour.duration ? (
             <li class="flex items-center gap-3">
@@ -265,7 +281,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   </section>
   {
     mapUrl.length > 0 ? (
-      <section id="map" class="col-span-full mb-8 flex flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+      <section
+        id="map"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-4"
+      >
         <Heading as="h2" class="mb-6">
           {t('Tour.Section.Map.Title', language)}
         </Heading>
@@ -285,7 +304,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   }
   {
     itinerary.length > 0 ? (
-      <section id="itinerary" class="col-span-full mb-8 flex flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+      <section
+        id="itinerary"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-4"
+      >
         <Heading as="h2" class="mb-6">
           {t('Tour.Section.Itinerary.Title', language)}
         </Heading>
@@ -295,7 +317,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   }
   {
     packages?.length > 0 ? (
-      <section id="packages" class="col-span-full mb-8 flex flex-col gap-10 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+      <section
+        id="packages"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-10"
+      >
         <Heading as="h2" class="mb-6">
           {t('Tour.Section.Packages.Title', language)}
         </Heading>
@@ -311,7 +336,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       </section>
     ) : null
   }
-  <section id="photos" class="col-span-full mb-8 flex flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+  <section
+    id="photos"
+    class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-4"
+  >
     <Heading as="h2" class="mb-6"
       >{t('Tour.Section.Photos.Title', language)}</Heading
     >
@@ -320,7 +348,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 
   {
     enableFaqs ? (
-      <section id="faqs" class="col-span-full mb-8 flex flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+      <section
+        id="faqs"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-4"
+      >
         <Heading as="h2" class="mb-6">
           {t('Tour.Section.Faq.Title', language)}
         </Heading>
@@ -328,44 +359,49 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       </section>
     ) : null
   }
-  <section id="reviews" class="col-span-full mb-8 flex flex-col gap-4 scroll-mt-36 tour-section intersect:opacity-100 intersect-once">
+  <section
+    id="reviews"
+    class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-4"
+  >
     <Heading as="h2" class="mb-6"
       >{t('Tour.Section.Reviews.Title', language)}</Heading
     >
     {
       reviews.length > 0 ? (
-    
-      <div class="reviews-carousel-container relative max-w-full" style="box-sizing: border-box;">
-        <button
-          class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label="Previous slide"
-        >
-          <i class="icon-[ph--caret-left-bold] text-xl" />
-        </button>
-        <button
-          class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label="Next slide"
-        >
-          <i class="icon-[ph--caret-right-bold] text-xl" />
-        </button>
-
         <div
-          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
-          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+          class="reviews-carousel-container relative max-w-full"
+          style="box-sizing: border-box;"
         >
-          {reviews.map((review) => (
-            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
-              <ReviewItem
-                name={getAuthorName(review)}
-                country={review.author?.country}
-                content={review.content}
-                rating={review.rating}
-                expand_behavior="button"
-              />
-            </div>
-          ))}
+          <button
+            class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+            aria-label="Previous slide"
+          >
+            <i class="icon-[ph--caret-left-bold] text-xl" />
+          </button>
+          <button
+            class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+            aria-label="Next slide"
+          >
+            <i class="icon-[ph--caret-right-bold] text-xl" />
+          </button>
+
+          <div
+            class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+            style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+          >
+            {reviews.map((review) => (
+              <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+                <ReviewItem
+                  name={getAuthorName(review)}
+                  country={review.author?.country}
+                  content={review.content}
+                  rating={review.rating}
+                  expand_behavior="button"
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
       ) : (
         <div>{t('Tour.Section.Reviews.Empty', language)}</div>
       )
@@ -373,7 +409,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   </section>
   {
     relatedTours.length > 0 ? (
-      <section id="related" class="col-span-full mb-8 flex flex-col gap-4 tour-section intersect:opacity-100 intersect-once">
+      <section
+        id="related"
+        class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex flex-col gap-4"
+      >
         <Heading as="h2" class="mb-6">
           {t('Tour.Section.RelatedTours.Title', language)}
         </Heading>
@@ -399,7 +438,8 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     url={getTourPath(tour, language)}
     price={minPrice}
     promoPrice={minPromoPrice}
-    currency={(packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'}
+    currency={(packages.length > 0 ? packages[0].price?.currency : null) ??
+      'EUR'}
     ratingAverage={average}
     ratingCount={count}
     language={language}
@@ -408,44 +448,56 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 
 <script>
   const initCarousel = () => {
-    document.querySelectorAll('.reviews-carousel-container').forEach((container) => {
-      // Prevent double initialization
-      if (container.hasAttribute('data-carousel-init')) return;
-      container.setAttribute('data-carousel-init', 'true');
+    document
+      .querySelectorAll('.reviews-carousel-container')
+      .forEach((container) => {
+        // Prevent double initialization
+        if (container.hasAttribute('data-carousel-init')) return;
+        container.setAttribute('data-carousel-init', 'true');
 
-      const scrollContainer = container.querySelector('.scroll-container');
-      const prevBtn = container.querySelector('.prev') as HTMLButtonElement | null;
-      const nextBtn = container.querySelector('.next') as HTMLButtonElement | null;
+        const scrollContainer = container.querySelector('.scroll-container');
+        const prevBtn = container.querySelector(
+          '.prev'
+        ) as HTMLButtonElement | null;
+        const nextBtn = container.querySelector(
+          '.next'
+        ) as HTMLButtonElement | null;
 
-      if (!scrollContainer || !prevBtn || !nextBtn) return;
+        if (!scrollContainer || !prevBtn || !nextBtn) return;
 
-      const scrollAmount = () => {
-        // Approximate slide width: take first item width + gap (1.5rem = 24px)
-        const item = scrollContainer.querySelector('.carousel-item');
-        return item ? item.getBoundingClientRect().width + 24 : 300;
-      };
+        const scrollAmount = () => {
+          // Approximate slide width: take first item width + gap (1.5rem = 24px)
+          const item = scrollContainer.querySelector('.carousel-item');
+          return item ? item.getBoundingClientRect().width + 24 : 300;
+        };
 
-      const updateButtons = () => {
-        prevBtn.disabled = scrollContainer.scrollLeft <= 10;
-        nextBtn.disabled =
-          scrollContainer.scrollLeft >=
-          scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
-      };
+        const updateButtons = () => {
+          prevBtn.disabled = scrollContainer.scrollLeft <= 10;
+          nextBtn.disabled =
+            scrollContainer.scrollLeft >=
+            scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
+        };
 
-      prevBtn.addEventListener('click', () => {
-        scrollContainer.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+        prevBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: -scrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+
+        nextBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: scrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+
+        scrollContainer.addEventListener('scroll', updateButtons);
+        // Initial check
+        updateButtons();
+        // Wait for layout
+        setTimeout(updateButtons, 100);
       });
-
-      nextBtn.addEventListener('click', () => {
-        scrollContainer.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
-      });
-
-      scrollContainer.addEventListener('scroll', updateButtons);
-      // Initial check
-      updateButtons();
-      // Wait for layout
-      setTimeout(updateButtons, 100);
-    });
   };
 
   // Initialize on page load and view transitions
@@ -486,14 +538,18 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .tour-section {
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
     }
     .tour-section[no-intersect] {
       opacity: 0;
       transform: translateY(1rem);
     }
     .tour-sidebar {
-      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+      transition:
+        opacity 0.7s ease 0.2s,
+        transform 0.7s ease 0.2s;
     }
     .tour-sidebar[no-intersect] {
       opacity: 0;

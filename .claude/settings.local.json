@@ -9,7 +9,27 @@
       "Bash(curl:*)",
       "Bash(npx @modelcontextprotocol/inspector:*)",
       "Bash(kill:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(CLAUDECODE= claude mcp add chrome-devtools --scope user npx chrome-devtools-mcp@latest)",
+      "Bash(pnpm build:*)",
+      "Bash(npx astro build)",
+      "Bash(where:*)",
+      "Bash(echo:*)",
+      "Bash(node --version:*)",
+      "Bash(pnpm --version:*)",
+      "Bash(npm --version:*)",
+      "Bash(npx @bookshop/generate@3.17.1)",
+      "Bash(ls:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.indexnow.org)",
+      "Bash(npx:*)",
+      "Bash(npm install:*)",
+      "Bash(grep -E \"\\\\.mdx?$\")"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "chrome-devtools"
+  ],
+  "enableAllProjectMcpServers": true
 }

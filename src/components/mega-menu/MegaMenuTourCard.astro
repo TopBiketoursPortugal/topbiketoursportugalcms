@@ -42,47 +42,64 @@ const priceFormat = new Intl.NumberFormat(
   class="mega-menu-card group/card flex flex-col overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-slate-800"
   style={`--card-index: ${index}`}
 >
-  <div class="relative aspect-4/3 overflow-hidden">
+  <div class="zoom-frame relative aspect-4/3">
     <ResponsiveImage
       src={imageSrc}
       alt={imageAlt}
       widths={[240, 360]}
       loading="lazy"
-      class="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-105"
+      class="h-full w-full object-cover"
       paralax={false}
     />
-    {minPrice > 0 && (
-      <span class="absolute right-2 bottom-2 rounded bg-black/60 px-2 py-0.5 text-xs font-semibold text-white backdrop-blur-sm">
-        {t('Tour.Form.FromPrice', language)} {priceFormat.format(minPrice)}
-      </span>
-    )}
+    {
+      minPrice > 0 && (
+        <span class="absolute right-2 bottom-2 rounded bg-black/60 px-2 py-0.5 text-xs font-semibold text-white backdrop-blur-sm">
+          {t('Tour.Form.FromPrice', language)} {priceFormat.format(minPrice)}
+        </span>
+      )
+    }
   </div>
   <div class="flex flex-1 flex-col gap-1 p-2.5">
-    <h4 class="line-clamp-2 text-sm leading-tight font-semibold text-slate-900 dark:text-slate-100">
+    <h4
+      class="line-clamp-2 text-sm leading-tight font-semibold text-slate-900 dark:text-slate-100"
+    >
       {title}
     </h4>
-    {(duration && duration > 0) || (difficulty && difficulty > 0) ? (
-      <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-        {duration && duration > 0 && (
-          <span class="flex items-center gap-0.5">
-            <i class="icon-[ph--clock-countdown-light] h-3.5 w-3.5" aria-hidden="true" />
-            {duration} {t('Tour.Info.Duration.Unit.Days', language)}
-          </span>
-        )}
-        {duration && duration > 0 && difficulty && difficulty > 0 && (
-          <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">|</span>
-        )}
-        {difficulty && difficulty > 0 && (
-          <span class="flex items-center gap-0.5">
-            {tourtype !== 'PackageTour' ? (
-              <i class="icon-[ph--person-simple-walk-light] h-3.5 w-3.5" aria-hidden="true" />
-            ) : (
-              <i class="icon-[ph--person-simple-bike-light] h-3.5 w-3.5" aria-hidden="true" />
-            )}
-            {difficulty}/5
-          </span>
-        )}
-      </div>
-    ) : null}
+    {
+      (duration && duration > 0) || (difficulty && difficulty > 0) ? (
+        <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+          {duration && duration > 0 && (
+            <span class="flex items-center gap-0.5">
+              <i
+                class="icon-[ph--clock-countdown-light] h-3.5 w-3.5"
+                aria-hidden="true"
+              />
+              {duration} {t('Tour.Info.Duration.Unit.Days', language)}
+            </span>
+          )}
+          {duration && duration > 0 && difficulty && difficulty > 0 && (
+            <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">
+              |
+            </span>
+          )}
+          {difficulty && difficulty > 0 && (
+            <span class="flex items-center gap-0.5">
+              {tourtype !== 'PackageTour' ? (
+                <i
+                  class="icon-[ph--person-simple-walk-light] h-3.5 w-3.5"
+                  aria-hidden="true"
+                />
+              ) : (
+                <i
+                  class="icon-[ph--person-simple-bike-light] h-3.5 w-3.5"
+                  aria-hidden="true"
+                />
+              )}
+              {difficulty}/5
+            </span>
+          )}
+        </div>
+      ) : null
+    }
   </div>
 </a>

@@ -76,11 +76,15 @@ const Button2 = column2?.button
 ---
 
 <div class={twoColumnVariants({ padding, fullwidth })}>
-  <div class="flex flex-col gap-4">
+  <div
+    class="reveal-left intersect:opacity-100 intersect-once flex flex-col gap-4"
+  >
     <Prose markdown={column1?.text ?? ''} />
     {column1?.button && Button1 && <Button1 {...column1.button} />}
   </div>
-  <div class="flex flex-col gap-4">
+  <div
+    class="reveal-right reveal-delay-1 intersect:opacity-100 intersect-once flex flex-col gap-4"
+  >
     <Prose markdown={column2?.text ?? ''} />
     {column2?.button && Button2 && <Button2 {...column2.button} />}
   </div>

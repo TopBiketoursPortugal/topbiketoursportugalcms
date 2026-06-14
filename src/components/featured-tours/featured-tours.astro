@@ -33,9 +33,16 @@ const otherTours = allTours.filter((tour) =>
 ---
 
 <section class="flex flex-col gap-6 py-12">
-  {block.title ? <Prose markdown={block.title} class="px-6" /> : null}
+  {
+    block.title ? (
+      <Prose
+        markdown={block.title}
+        class="reveal-up intersect:opacity-100 intersect-once px-6"
+      />
+    ) : null
+  }
   <div
-    class="featured-tours-grid grid grid-cols-1 gap-6 md:grid-cols-2"
+    class="featured-tours-grid reveal-stagger intersect:opacity-100 intersect-once grid grid-cols-1 gap-6 md:grid-cols-2"
   >
     {
       mainTour && (
@@ -69,8 +76,8 @@ const otherTours = allTours.filter((tour) =>
   }
 
   /* All cards fill their grid cell */
-  .featured-tours-grid :global(.tour-card-anim),
-  .featured-tours-grid :global(.tour-card-anim > div) {
+  .featured-tours-grid :global(.tour-card),
+  .featured-tours-grid :global(.tour-card > div) {
     height: 100%;
   }
 
@@ -81,16 +88,16 @@ const otherTours = allTours.filter((tour) =>
 
   /* Main card: switch to horizontal layout (image left, content right) on md+ */
   @media (min-width: 768px) {
-    .featured-main :global(.tour-card-anim > div) {
+    .featured-main :global(.tour-card > div) {
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
 
-    .featured-main :global(.tour-card-anim > div > div:first-child) {
+    .featured-main :global(.tour-card > div > div:first-child) {
       height: 100%;
     }
 
-    .featured-main :global(.tour-card-anim > div > div:first-child img) {
+    .featured-main :global(.tour-card > div > div:first-child img) {
       aspect-ratio: auto;
       height: 100%;
       width: 100%;
@@ -99,7 +106,7 @@ const otherTours = allTours.filter((tour) =>
   }
 
   /* Side cards: truncate excerpt to 2 lines */
-  .featured-tours-grid > :global(.tour-card-anim .line-clamp-5) {
+  .featured-tours-grid > :global(.tour-card .line-clamp-5) {
     -webkit-line-clamp: 2;
   }
 </style>

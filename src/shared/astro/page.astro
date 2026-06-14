@@ -21,11 +21,103 @@ Object.entries(componentImports).forEach(([path, obj]) => {
 });
 
 const { contentBlocks } = Astro.props;
+
+/**
+ * Per-block presentation props, settable in the CMS on any content block:
+ *   enter:   fade | slide-up | slide-left | slide-right | zoom | wipe | blur | none
+ *   surface: default | sand | soft | forest | white
+ *
+ * Every block animates on enter. Where the browser supports CSS
+ * scroll-driven animations (animation-timeline: view()), each block scrubs
+ * from hidden to visible as it scrolls into view (see global.css
+ * `.block-enter`); otherwise it falls back to the intersection-observer
+ * reveal. Blocks that animate their own children get a gentle opacity-only
+ * `fade` so the wrapper entrance never fights their internal transforms; the
+ * first block (typically the above-the-fold hero) is left untouched. All
+ * other blocks cycle through a varied set so consecutive sections enter
+ * differently with no content changes — and any block can override via `enter`.
+ *
+ * Setting `enter: none` explicitly in the CMS is the per-block off switch: it
+ * drops the wrapper entrance AND silences every internal reveal/stagger inside
+ * that block (via the `.anim-off` class below), so a single prop fully disables
+ * a block's scroll animations. (All motion is also globally disabled for users
+ * with `prefers-reduced-motion`, handled in global.css.)
+ */
+const ENTER_CLASS: Record<string, string> = {
+  'fade': 'reveal',
+  'slide-up': 'reveal-up',
+  'slide-left': 'reveal-left',
+  'slide-right': 'reveal-right',
+  'zoom': 'reveal-zoom',
+  'wipe': 'reveal-wipe',
+  'blur': 'reveal-blur',
+  'none': ''
+};
+
+// Deliberate per-type entrances. Most content blocks share one refined
+// slide-up so the page reads with a single, consistent cadence; the few
+// exceptions are chosen to suit the block, not for novelty.
+const BLOCK_ENTER: Record<string, string> = {
+  // Self-animating blocks already move their own children, so the wrapper
+  // only adds a soft opacity fade that won't fight those internal transforms.
+  'hero': 'fade',
+  'left-right': 'fade',
+  'featured-tours': 'fade',
+  'featured-testimonials': 'fade',
+  'featured-posts': 'fade',
+  'two-column-markdown': 'fade',
+  'testimonials': 'fade',
+  'collection': 'fade',
+  'timeline': 'fade',
+  'item-grid': 'fade',
+  'features': 'fade',
+  // A photo wall reads beautifully easing up from a hair of scale.
+  'gallery': 'zoom'
+};
+
+const SURFACES = new Set(['sand', 'soft', 'forest', 'white']);
+
+function resolveEnter(block: any, index: number): string {
+  if (block.enter && block.enter in ENTER_CLASS) return block.enter;
+  // First block is usually the above-the-fold hero — leave it un-wrapped so
+  // it paints immediately with no entrance.
+  if (index === 0) return 'none';
+  // Everything else rises gently into place — one cohesive motion language.
+  return BLOCK_ENTER[block._bookshop_name] ?? 'slide-up';
+}
+
+function resolveSurface(block: any): string | null {
+  return SURFACES.has(block.surface) ? block.surface : null;
+}
+
+function resolveBleed(block: any, surface: string | null): boolean {
+  if (typeof block.bleed === 'boolean') return block.bleed;
+  return surface !== null;
+}
 ---
 
 {
   contentBlocks.map((block, i) => {
     const Component = components[block._bookshop_name];
-    return <Component {...block} key={i} />;
+    const enter = resolveEnter(block, i);
+    const enterClass = ENTER_CLASS[enter];
+    // An explicit `enter: none` (not the index-0 default) is a deliberate
+    // request to turn this block's motion off — also kill its inner reveals.
+    const animOff = block.enter === 'none';
+    const surface = resolveSurface(block);
+    const bleed = resolveBleed(block, surface);
+    return (
+      <div
+        class:list={[
+          enterClass,
+          enterClass && 'block-enter intersect:opacity-100 intersect-once',
+          animOff && 'anim-off',
+          surface && `surface-${surface}`,
+          { 'dark': surface === 'forest', 'block-bleed': bleed }
+        ]}
+      >
+        <Component {...block} key={i} />
+      </div>
+    );
   })
 }

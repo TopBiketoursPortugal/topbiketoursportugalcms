@@ -65,130 +65,120 @@ const tourTags = await getCollection(
 );
 ---
 
-<div class="tour-card-anim intersect:opacity-100 intersect-once transition-transform duration-200 hover:-translate-y-1">
-<Card href={getTourPath(data, language)} frame="light" {...data}>
-  {
-    image && (
-      <div class="relative">
-        <CardMedia {...image} />
-        {isNewTour ? (
-          <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
-            {t('Tour.Badge.New', language)}
-          </span>
-        ) : null}
-      </div>
-    )
-  }
-  <CardContent display={contentDisplay} class="p-6 sm:max-xl:p-4">
-    <h3 class="font-oswald line-clamp-2 text-xl font-bold">
-      {data.title}
-    </h3>
-    <p class="line-clamp-5 text-lg/relaxed text-gray-600">
-      {getMarkdownExcerpt(content ?? '', 300)}
-    </p>
-
-    <Stack spacing="medium" layout="vertical" class="w-full">
-      {
-        duration && duration > 0 ? (
-          <span class="flex gap-2 text-gray-600">
-            <i
-              class="icon-[ph--clock-countdown-light] h-5 w-5"
-              aria-hidden="true"
-            />{' '}
-            {duration} {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
-            {duration - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
-          </span>
-        ) : null
-      }
-      {
-        difficulty && difficulty > 0 && (
-          <span class="flex gap-2 text-gray-600">
-            {tourtype !== 'PackageTour' ? (
-              <i
-                class="icon-[ph--person-simple-walk-light] h-5 w-5"
-                aria-hidden="true"
-              />
-            ) : (
-              <i
-                class="icon-[ph--person-simple-bike-light] h-5 w-5"
-                aria-hidden="true"
-              />
-            )}
-            {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
-          </span>
-        )
-      }
-      {
-        distance && distance > 0 ? (
-          <div class="flex items-center gap-2">
-            <i
-              class="icon-[ph--map-trifold-light] h-5 w-5"
-              aria-hidden="true"
-            />
-            <span>
-              {t('Tour.Info.Distance.Label', language)}: {distance} km
-            </span>
-          </div>
-        ) : null
-      }
-      <div class="flex gap-3">
-        <Rating rating={average} class="text-orange-500" />
-        <span class="text-neutral-700"
-          >({count} {t('Tour.Info.Reviews.Unit', language)})</span
-        >
-      </div>
-      {
-        minPromoPrice > 0 || minPromoPrice > 0 ? (
-          <Stack
-            spacing="small"
-            alignment="trailing"
-            layout="vertical"
-            class="w-full"
-          >
-            {minPromoPrice > 0 && (
-              <span class="line-through">{priceFormat.format(minPrice)}</span>
-            )}
-            <span class="text-xl font-bold">
-              {priceFormat.format(minPromoPrice > 0 ? minPromoPrice : minPrice)}
-            </span>
-          </Stack>
-        ) : null
-      }
-    </Stack>
-
-    <Separator weight="thin" color="neutral" />
-
+<div class="tour-card reveal-up intersect:opacity-100 intersect-once">
+  <Card href={getTourPath(data, language)} frame="light" radius="xl" {...data}>
     {
-      tourTags && tourTags.length > 0 && (
-        <Stack spacing="small" alignment="center" class="flex-wrap">
-          <i
-            class="icon-[ph--bookmark-simple-light] h-5 w-5"
-            aria-hidden="true"
-          />
-          {tourTags.map((t) => (
-            <LinkButton
-              variant="link"
-              class="z-20"
-              href={getTourTagPath(t, language)}
-            >
-              {t.data.name ?? t.data.title}
-            </LinkButton>
-          ))}
-        </Stack>
+      image && (
+        <div class="relative">
+          <CardMedia {...image} />
+          {isNewTour ? (
+            <span class="absolute top-3 left-3 rounded-md bg-green-600 px-3 py-1 text-sm font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+              {t('Tour.Badge.New', language)}
+            </span>
+          ) : null}
+        </div>
       )
     }
-  </CardContent>
-</Card>
-</div>
+    <CardContent display={contentDisplay} class="p-6 sm:max-xl:p-4">
+      <h3 class="font-oswald line-clamp-2 text-xl font-bold">
+        {data.title}
+      </h3>
+      <p class="line-clamp-5 text-lg/relaxed text-gray-600">
+        {getMarkdownExcerpt(content ?? '', 300)}
+      </p>
 
-<style>
-  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
-    .tour-card-anim {
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .tour-card-anim[no-intersect] {
-      opacity: 0;
-      transform: translateY(1rem);
-    }
-  }
-</style>
+      <Stack spacing="medium" layout="vertical" class="w-full">
+        {
+          duration && duration > 0 ? (
+            <span class="flex gap-2 text-gray-600">
+              <i
+                class="icon-[ph--clock-countdown-light] h-5 w-5"
+                aria-hidden="true"
+              />{' '}
+              {duration} {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
+              {duration - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
+            </span>
+          ) : null
+        }
+        {
+          difficulty && difficulty > 0 && (
+            <span class="flex gap-2 text-gray-600">
+              {tourtype !== 'PackageTour' ? (
+                <i
+                  class="icon-[ph--person-simple-walk-light] h-5 w-5"
+                  aria-hidden="true"
+                />
+              ) : (
+                <i
+                  class="icon-[ph--person-simple-bike-light] h-5 w-5"
+                  aria-hidden="true"
+                />
+              )}
+              {t('Tour.Info.Difficulty.Label', language)} : {difficulty}/5
+            </span>
+          )
+        }
+        {
+          distance && distance > 0 ? (
+            <div class="flex items-center gap-2">
+              <i
+                class="icon-[ph--map-trifold-light] h-5 w-5"
+                aria-hidden="true"
+              />
+              <span>
+                {t('Tour.Info.Distance.Label', language)}: {distance} km
+              </span>
+            </div>
+          ) : null
+        }
+        <div class="flex gap-3">
+          <Rating rating={average} class="text-orange-500" />
+          <span class="text-neutral-700"
+            >({count} {t('Tour.Info.Reviews.Unit', language)})</span
+          >
+        </div>
+        {
+          minPromoPrice > 0 || minPromoPrice > 0 ? (
+            <Stack
+              spacing="small"
+              alignment="trailing"
+              layout="vertical"
+              class="w-full"
+            >
+              {minPromoPrice > 0 && (
+                <span class="line-through">{priceFormat.format(minPrice)}</span>
+              )}
+              <span class="text-xl font-bold">
+                {priceFormat.format(
+                  minPromoPrice > 0 ? minPromoPrice : minPrice
+                )}
+              </span>
+            </Stack>
+          ) : null
+        }
+      </Stack>
+
+      <Separator weight="thin" color="neutral" />
+
+      {
+        tourTags && tourTags.length > 0 && (
+          <Stack spacing="small" alignment="center" class="flex-wrap">
+            <i
+              class="icon-[ph--bookmark-simple-light] h-5 w-5"
+              aria-hidden="true"
+            />
+            {tourTags.map((t) => (
+              <LinkButton
+                variant="link"
+                class="z-20"
+                href={getTourTagPath(t, language)}
+              >
+                {t.data.name ?? t.data.title}
+              </LinkButton>
+            ))}
+          </Stack>
+        )
+      }
+    </CardContent>
+  </Card>
+</div>

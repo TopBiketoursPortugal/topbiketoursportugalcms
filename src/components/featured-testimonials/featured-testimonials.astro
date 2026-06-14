@@ -79,7 +79,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         </div>
       </div>
     ) : (
-      <Grid cols={cards_per_row as 1 | 2 | 3 | 4}>
+      <Grid
+        cols={cards_per_row as 1 | 2 | 3 | 4}
+        class="reveal-stagger intersect:opacity-100 intersect-once"
+      >
         {items.map((review) => (
           <ReviewItem
             name={getAuthorName(review)}

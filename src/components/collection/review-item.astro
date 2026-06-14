@@ -44,7 +44,9 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const excerpt = getMarkdownExcerpt(content, 200);
 ---
 
-<div class="flex flex-col gap-6">
+<div
+  class="flex h-full flex-col gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-md shadow-slate-900/5 dark:border-slate-700 dark:bg-slate-800"
+>
   <div class="flex justify-center">
     {
       imageOptimized ? (
@@ -59,7 +61,7 @@ const excerpt = getMarkdownExcerpt(content, 200);
           class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
         />
       ) : (
-        <i class={cn('mb-6 h-12 w-12', countryFlagIcon)} />
+        <i class={cn('mb-2 h-12 w-12', countryFlagIcon)} />
       )
     }
   </div>
@@ -74,10 +76,12 @@ const excerpt = getMarkdownExcerpt(content, 200);
           <i class="icon-[ph--quotes-fill]" />
           <p>{excerpt}</p>
         </span>
-        <dialog class="review-dialog m-auto rounded-lg p-0 shadow-2xl backdrop:bg-black/50 max-w-2xl w-[calc(100%-2rem)] dark:bg-gray-800">
+        <dialog class="review-dialog m-auto w-[calc(100%-2rem)] max-w-2xl rounded-lg p-0 shadow-2xl backdrop:bg-black/50 dark:bg-gray-800">
           <div class="flex flex-col gap-6 p-6 sm:p-8">
             <div class="flex items-center justify-between">
-              <p class="text-xl font-semibold">{name} - {country}</p>
+              <p class="text-xl font-semibold">
+                {name} - {country}
+              </p>
               <button
                 class="review-dialog-close flex h-8 w-8 shrink-0 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-gray-700"
                 type="button"
@@ -86,7 +90,7 @@ const excerpt = getMarkdownExcerpt(content, 200);
                 <i class="icon-[ph--x-bold] text-lg" />
               </button>
             </div>
-            <Rating rating={rating} />
+            <Rating rating={rating} class="text-orange-500" />
             <div class="text-neutral-600 dark:text-neutral-300">
               <i class="icon-[ph--quotes-fill]" />
               <Prose markdown={content} />
@@ -108,7 +112,9 @@ const excerpt = getMarkdownExcerpt(content, 200);
       </span>
     )
   }
-  <Rating rating={rating} />
+  <div class="mt-auto">
+    <Rating rating={rating} class="text-orange-500" />
+  </div>
 </div>
 
 <script>

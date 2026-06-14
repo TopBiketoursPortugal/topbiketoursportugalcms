@@ -9,12 +9,6 @@ type Props = ResponsiveImageProps & { class?: string };
 const { class: className, ...props } = Astro.props;
 ---
 
-<div class="bg-primary overflow-clip">
-  <ResponsiveImage
-    {...props}
-    class={cn(
-      'aspect-video h-full transition-all duration-700 group-hover:scale-110 group-hover:opacity-50',
-      className
-    )}
-  />
+<div class="bg-primary parallax-media overflow-clip">
+  <ResponsiveImage {...props} class={cn('aspect-video h-full', className)} />
 </div>

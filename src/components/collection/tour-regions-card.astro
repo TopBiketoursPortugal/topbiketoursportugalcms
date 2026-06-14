@@ -5,19 +5,19 @@ import { getTourRegionsPath } from 'utils/permalinks';
 import ResponsiveImage from 'src/components/responsive-image/ResponsiveImage.astro';
 
 export type TourRegionCardProps = {
-    region: CollectionEntry<'tourRegions'>;
-    language: LanguageCodes;
-    layout?: 'overlay' | 'hstack';
-    imageWidths?: number[];
+  region: CollectionEntry<'tourRegions'>;
+  language: LanguageCodes;
+  layout?: 'overlay' | 'hstack';
+  imageWidths?: number[];
 };
 
 type Props = TourRegionCardProps;
 
 const {
-    region,
-    language,
-    layout = 'overlay',
-    imageWidths = [200]
+  region,
+  language,
+  layout = 'overlay',
+  imageWidths = [200]
 } = Astro.props;
 const { data } = region;
 const { title, name, seo } = data;
@@ -25,43 +25,46 @@ const regionPath = getTourRegionsPath(region, language);
 ---
 
 {
-    layout === 'overlay' ? (
-        <div class="group relative cursor-pointer overflow-clip">
-            {seo?.featured_image ? (
-                <ResponsiveImage
-                    src={seo?.featured_image}
-                    alt={seo?.featured_image_alt ?? title}
-                    widths={imageWidths}
-                    paralax={false}
-                    class="animate-ease-in-out-out animate-duration-200 transition-transform group-hover:scale-150"
-                />
-            ) : null}
-            <a
-                href={regionPath}
-                class="absolute top-0 right-0 bottom-0 left-0 hidden h-full w-full items-center justify-center text-center text-xl font-bold text-white capitalize opacity-0 group-hover:flex group-hover:opacity-90"
-            >
-                {name}
-            </a>
+  layout === 'overlay' ? (
+    <a
+      href={regionPath}
+      class="group zoom-frame relative block rounded-xl shadow-md shadow-slate-900/10"
+    >
+      {seo?.featured_image ? (
+        <ResponsiveImage
+          src={seo?.featured_image}
+          alt={seo?.featured_image_alt ?? title}
+          widths={imageWidths}
+          paralax={false}
+        />
+      ) : null}
+      <span
+        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"
+        aria-hidden="true"
+      />
+      <span class="font-heading absolute inset-x-0 bottom-0 p-3 text-center text-lg font-bold text-white capitalize drop-shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+        {name}
+      </span>
+    </a>
+  ) : (
+    <a
+      href={regionPath}
+      class="group flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-3 transition-all hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-600"
+    >
+      {seo?.featured_image ? (
+        <div class="zoom-frame h-16 w-16 shrink-0 rounded-md">
+          <ResponsiveImage
+            src={seo?.featured_image}
+            alt={seo?.featured_image_alt ?? title}
+            widths={imageWidths}
+            paralax={false}
+            class="h-full w-full object-cover"
+          />
         </div>
-    ) : (
-        <a
-            href={regionPath}
-            class="group flex items-center gap-4 rounded-lg border border-gray-200 bg-white p-3 transition-all hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-600"
-        >
-            {seo?.featured_image ? (
-                <div class="h-16 w-16 shrink-0 overflow-hidden rounded-md">
-                    <ResponsiveImage
-                        src={seo?.featured_image}
-                        alt={seo?.featured_image_alt ?? title}
-                        widths={imageWidths}
-                        paralax={false}
-                        class="h-full w-full object-cover transition-transform group-hover:scale-110"
-                    />
-                </div>
-            ) : null}
-            <h3 class="text-lg font-semibold text-gray-900 capitalize dark:text-gray-100">
-                {name}
-            </h3>
-        </a>
-    )
+      ) : null}
+      <h3 class="text-lg font-semibold text-gray-900 capitalize dark:text-gray-100">
+        {name}
+      </h3>
+    </a>
+  )
 }
