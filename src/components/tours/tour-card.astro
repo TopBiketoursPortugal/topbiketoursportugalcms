@@ -14,6 +14,7 @@ import LinkButton from '../linkbutton/linkbutton.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
+import WeTravelButton from '../wetravel-button/wetravel-button.astro';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -144,25 +145,40 @@ const tourTags = await getCollection(
             >({count} {t('Tour.Info.Reviews.Unit', language)})</span
           >
         </div>
-        {
-          minPromoPrice > 0 || minPromoPrice > 0 ? (
-            <Stack
-              spacing="small"
-              alignment="trailing"
-              layout="vertical"
-              class="w-full"
-            >
-              {minPromoPrice > 0 && (
-                <span class="line-through">{priceFormat.format(minPrice)}</span>
-              )}
-              <span class="text-xl font-bold">
-                {priceFormat.format(
-                  minPromoPrice > 0 ? minPromoPrice : minPrice
+        <div class="flex items-center justify-between w-full pt-2">
+          {
+            minPrice > 0 || minPromoPrice > 0 ? (
+              <Stack
+                spacing="none"
+                alignment="leading"
+                layout="vertical"
+              >
+                {minPromoPrice > 0 && (
+                  <span class="line-through text-sm text-gray-500">{priceFormat.format(minPrice)}</span>
                 )}
-              </span>
-            </Stack>
-          ) : null
-        }
+                <span class="text-xl font-bold">
+                  {priceFormat.format(
+                    minPromoPrice > 0 ? minPromoPrice : minPrice
+                  )}
+                </span>
+              </Stack>
+            ) : <div />
+          }
+          {
+            data.wetravel?.guidedUuid || data.wetravel?.selfGuidedUuid ? (
+              <WeTravelButton
+                uuid={(data.wetravel.guidedUuid || data.wetravel.selfGuidedUuid) as string}
+                uid={data.wetravel.uid}
+                label={t('Tour.Form.Button.Text', language)}
+                class="z-20 h-10 w-fit px-4 py-2 text-sm font-medium"
+              />
+            ) : (
+              <LinkButton href={getTourPath(data, language)} variant="default" class="z-20">
+                {t('Tour.Form.Button.Text', language)}
+              </LinkButton>
+            )
+          }
+        </div>
       </Stack>
 
       <Separator weight="thin" color="neutral" />
