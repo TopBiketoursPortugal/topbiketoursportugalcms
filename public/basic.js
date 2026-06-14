@@ -144,19 +144,18 @@
       // Elevation/compact state once scrolled past the top.
       header.classList.toggle('scroll', y > 60);
 
-      // Effect #9 — appears-on-scroll: hide when scrolling DOWN past a
-      // threshold, reveal when scrolling UP or near the top. Never hide
-      // while the mobile menu is open.
-      const menuOpen = document
-        .querySelector('[data-aw-toggle-menu]')
-        ?.classList.contains('expanded');
-      if (!menuOpen) {
-        if (y > prevScrollPosition && y > 240) {
-          header.classList.add('nav-hidden');
-        } else if (y < prevScrollPosition || y <= 240) {
-          header.classList.remove('nav-hidden');
-        }
-      }
+      // Effect #9 — appears-on-scroll logic has been disabled so the header
+      // remains fixed while scrolling.
+      // const menuOpen = document
+      //   .querySelector('[data-aw-toggle-menu]')
+      //   ?.classList.contains('expanded');
+      // if (!menuOpen) {
+      //   if (y > prevScrollPosition && y > 240) {
+      //     header.classList.add('nav-hidden');
+      //   } else if (y < prevScrollPosition || y <= 240) {
+      //     header.classList.remove('nav-hidden');
+      //   }
+      // }
       prevScrollPosition = y;
       ticking = false;
     }

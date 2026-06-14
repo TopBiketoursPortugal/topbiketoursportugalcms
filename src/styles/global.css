@@ -42,8 +42,8 @@
 }
 
 /* Custom Variants */
-@variant intersect (&:not([no-intersect]));
-@variant dark (&:where(.dark, .dark *));
+@custom-variant intersect (&:not([no-intersect]));
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Dark Mode Configuration with Nightwind-style Color Inversion */
 * {
@@ -92,8 +92,8 @@
   .reveal-right,
   .reveal-zoom {
     transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 2s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 2s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0s);
   }
 
@@ -125,8 +125,8 @@
   /* Editorial wipe: content un-masks from a slightly inset frame */
   .reveal-wipe {
     transition:
-      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+      clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0s);
     clip-path: inset(0 0 0 0);
   }
@@ -138,9 +138,9 @@
   /* Soft-focus rise: blurred and slightly low, settles into focus */
   .reveal-blur {
     transition:
-      opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: var(--reveal-delay, 0s);
   }
   .reveal-blur[no-intersect] {
@@ -153,8 +153,8 @@
      container; direct children fade-rise in sequence. */
   .reveal-stagger > * {
     transition:
-      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .reveal-stagger[no-intersect] > * {
     opacity: 0;
@@ -247,7 +247,7 @@
       animation-timeline: view();
       /* Begins just after the block peeks in, finishes once it's comfortably
          within view — uniform across every block for a cohesive cadence. */
-      animation-range: entry 8% cover 22%;
+      animation-range: entry 8% cover 36%;
     }
   }
 

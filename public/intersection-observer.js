@@ -51,7 +51,7 @@ const Observer = {
                         return;
                     }
 
-                    if (intersectionRatio >= threshold) {
+                    if (entry.isIntersecting && intersectionRatio >= threshold) {
                         if (!target.hasAttribute('data-animated')) {
                             target.removeAttribute('no-intersect');
                             target.setAttribute('data-animated', 'true');
