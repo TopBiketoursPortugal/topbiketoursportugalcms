@@ -65,7 +65,14 @@ const tourTags = await getCollection(
 );
 ---
 
-<div class="tour-card reveal-up intersect:opacity-100 intersect-once">
+<div
+  class="tour-card tour-card-filterable reveal-up intersect:opacity-100 intersect-once"
+  data-tour-title={data.title?.toLowerCase() || ''}
+  data-tour-region={data.region || ''}
+  data-tour-rider-levels={data.riderLevels?.join(' ') || ''}
+  data-tour-tags={data.tags?.join(' ') || ''}
+  data-tour-bike-categories={data.bikeCategories?.join(' ') || ''}
+>
   <Card href={getTourPath(data, language)} frame="light" radius="xl" {...data}>
     {
       image && (
