@@ -5,10 +5,17 @@ import type { TourPackageSchema } from 'src/schemas/tours';
 import languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import PricingColumn from '../pricing-table/pricing-column.astro';
+import { t } from 'utils/i18n';
+import type { InferEntrySchema } from 'astro:content';
+import TourBookNow from './tour-book-now.astro';
 
-type Props = { packages?: TourPackageSchema[]; language?: LanguageCodes };
+type Props = { 
+  packages?: TourPackageSchema[]; 
+  language?: LanguageCodes;
+  tour?: InferEntrySchema<'tours'>;
+};
 
-const { packages = [], language = 'en' } = Astro.props;
+const { packages = [], language = 'en', tour } = Astro.props;
 
 const currency =
   (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
@@ -44,6 +51,16 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
             period={duration}
             popular={popular}
           >
+            { tour && (
+              <div slot="action" class="flex justify-center">
+                <TourBookNow 
+                  tour={tour} 
+                  language={language} 
+                  variant="column" 
+                  buttonClass="mb-2 w-auto h-auto min-h-0 rounded-full px-4 py-1 text-sm font-semibold transition-colors bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200" 
+                />
+              </div>
+            )}
             {(included ?? []).map((feature, featureIndex) => {
               const {
                 description,

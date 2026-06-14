@@ -17,6 +17,7 @@ type Props = {
   label?: string;
   guidedLabel?: string;
   selfGuidedLabel?: string;
+  buttonClass?: string;
 };
 
 const {
@@ -25,7 +26,8 @@ const {
   uid = '2317568',
   label = 'Book Now',
   guidedLabel = 'Guided',
-  selfGuidedLabel = 'Self-guided'
+  selfGuidedLabel = 'Self-guided',
+  buttonClass
 } = Astro.props;
 
 const hasGuided = !!guidedUuid;
@@ -63,14 +65,14 @@ const both = hasGuided && hasSelf;
   {
     hasGuided ? (
       <div data-wt-pane="guided">
-        <WeTravelButton uuid={guidedUuid!} uid={uid} label={label} />
+        <WeTravelButton uuid={guidedUuid!} uid={uid} label={label} class={buttonClass} />
       </div>
     ) : null
   }
   {
     hasSelf ? (
       <div data-wt-pane="self" hidden={both}>
-        <WeTravelButton uuid={selfGuidedUuid!} uid={uid} label={label} />
+        <WeTravelButton uuid={selfGuidedUuid!} uid={uid} label={label} class={buttonClass} />
       </div>
     ) : null
   }

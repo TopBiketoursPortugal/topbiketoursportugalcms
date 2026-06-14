@@ -345,7 +345,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
                   {table.title}
                 </Heading>
               ) : null}
-              <TourPricing language={language} packages={table.packages} />
+              <TourPricing language={language} packages={table.packages} tour={tour} />
               <div class="mt-6 flex justify-center">
                 <div class="w-full max-w-xs">
                   <TourBookNow

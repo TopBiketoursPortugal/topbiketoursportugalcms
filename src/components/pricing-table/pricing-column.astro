@@ -4,9 +4,10 @@ type Props = {
   price: string;
   period: string;
   popular?: boolean;
+  bookLabel?: string;
 };
 
-const { title, price, period, popular = false } = Astro.props;
+const { title, price, period, popular = false, bookLabel } = Astro.props;
 ---
 
 <div
@@ -24,10 +25,11 @@ const { title, price, period, popular = false } = Astro.props;
   >
     <h3 class="tracking-widest">{title}</h3>
     <h2
-      class="mb-4 mt-2 text-5xl font-medium leading-none text-gray-900 dark:text-white"
+      class="mb-2 mt-2 text-5xl font-medium leading-none text-gray-900 dark:text-white"
     >
       {price}
     </h2>
+    <slot name="action" />
     {
       period ? (
         <span class="text-sm text-gray-600 dark:text-gray-400">{period}</span>
