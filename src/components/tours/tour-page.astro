@@ -1,7 +1,6 @@
 ---
 /** @jsxImportSource astro */
 
-import TourForm from 'src/components/tours/tour-form.astro';
 import TourPricing from 'src/components/tours/tour-pricing.astro';
 import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
@@ -22,7 +21,7 @@ import TourRelated from './tour-related.astro';
 import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
 import Heading from '../typography/heading.astro';
-import Linkbutton from '../linkbutton/linkbutton.astro';
+import TourBookNow from './tour-book-now.astro';
 import type { ReviewSchema } from 'src/schemas/tours';
 import { getAuthorName } from '@utils/get-author-name';
 import ReviewItem from '@components/collection/review-item.astro';
@@ -47,8 +46,13 @@ const {
   relatedTours = [],
   mapUrl = '',
   image,
-  feature
+  feature,
+  wetravel
 } = tour;
+
+// WeTravel takes priority over FareHarbor/Bokun and the enquiry form when a
+// guided and/or self-guided trip UUID is configured.
+const hasWetravel = !!(wetravel?.guidedUuid || wetravel?.selfGuidedUuid);
 
 // Up to 3 distinct pricing tables, each with an optional heading.
 // Only non-empty tables are rendered.
@@ -154,7 +158,8 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     </Tabs>
   </div>
   <section
-    class="tour-sidebar intersect:opacity-100 intersect-once z-10 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 self-baseline rounded-lg bg-white p-4 shadow-lg sm:order-0 dark:bg-gray-800"
+    id="tour-booking"
+    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:order-0 sm:sticky sm:top-36 sm:self-start dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
@@ -195,20 +200,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       ) : null
     }
     {minPrice > 0 || minPromoPrice > 0 ? <Separator /> : null}
-    <strong>{t('Tour.Form.Title', language)}</strong>
+    {!hasWetravel ? <strong>{t('Tour.Form.Title', language)}</strong> : null}
 
-    {
-      feature?.bokunLink ? (
-        <Linkbutton
-          href={feature?.bokunLink}
-          title={t('Tour.Form.Button.Text', language)}
-        >
-          {t('Tour.Form.Button.Text', language)}
-        </Linkbutton>
-      ) : (
-        <TourForm code={tour.code} title={tour.title} />
-      )
-    }
+    <TourBookNow tour={tour} language={language} variant="panel" />
   </section>
   <section
     id="detail"
@@ -352,6 +346,15 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
                 </Heading>
               ) : null}
               <TourPricing language={language} packages={table.packages} />
+              <div class="mt-6 flex justify-center">
+                <div class="w-full max-w-xs">
+                  <TourBookNow
+                    tour={tour}
+                    language={language}
+                    variant="inline"
+                  />
+                </div>
+              </div>
             </div>
           ))}
 
@@ -448,7 +451,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     ) : null
   }
   {
-    feature?.bokunLink ? (
+    !hasWetravel && feature?.bokunLink ? (
       <script
         is:inline
         async

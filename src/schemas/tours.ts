@@ -161,6 +161,14 @@ const tourSchema = z.object({
   faqs: z.array(faqsSchema).optional().default([]),
   relatedTours: z.array(z.string().uuid()).optional().default([]),
   feature: featureSchema.optional().nullable(),
+  wetravel: z
+    .object({
+      uid: z.string().optional().default('2317568'),
+      guidedUuid: z.string().optional().nullable(),
+      selfGuidedUuid: z.string().optional().nullable()
+    })
+    .optional()
+    .nullable(),
   closestAirport: z.string().optional().nullable(),
   isNewTour: z.boolean().optional().nullable().default(false)
 });
