@@ -248,6 +248,44 @@ collections_config:
       packages[*].description:
         type: markdown
         cascade: true
+      packagesTitle:
+        type: text
+        comment: Optional heading shown above the first pricing table
+        cascade: true
+      packages2:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.tour_packages
+        comment: Optional second pricing table
+        cascade: true
+      packages2Title:
+        type: text
+        comment: Optional heading shown above the second pricing table
+        cascade: true
+      packages2[*].title:
+        type: markdown
+        cascade: true
+      packages2[*].description:
+        type: markdown
+        cascade: true
+      packages3:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.tour_packages
+        comment: Optional third pricing table
+        cascade: true
+      packages3Title:
+        type: text
+        comment: Optional heading shown above the third pricing table
+        cascade: true
+      packages3[*].title:
+        type: markdown
+        cascade: true
+      packages3[*].description:
+        type: markdown
+        cascade: true
       included[*].title:
         type: markdown
         cascade: true
@@ -1565,6 +1603,25 @@ _structures:
             country: pt
             region: ''
             city: ''
+  tour_packages:
+    style: select
+    values:
+      - label: Tour Package
+        icon: card_travel
+        value:
+          title: ''
+          description: ''
+          duration: ''
+          popular: false
+          price:
+            price: 0
+            promo:
+            currency: EUR
+            bestValue: false
+          included: []
+        preview:
+          text:
+            - key: title
   tags:
     style: select
     values:

@@ -36,6 +36,11 @@ const { tour } = Astro.props;
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const {
   packages = [],
+  packagesTitle,
+  packages2,
+  packages2Title,
+  packages3,
+  packages3Title,
   itinerary = [],
   faqs,
   reviews: initialReviews = [],
@@ -44,6 +49,18 @@ const {
   image,
   feature
 } = tour;
+
+// Up to 3 distinct pricing tables, each with an optional heading.
+// Only non-empty tables are rendered.
+const pricingTables = [
+  { title: packagesTitle, packages },
+  { title: packages2Title, packages: packages2 ?? [] },
+  { title: packages3Title, packages: packages3 ?? [] }
+].filter((table) => (table.packages?.length ?? 0) > 0);
+
+// Aggregate every package across all tables for the sidebar "from price"
+// and the SEO product schema.
+const allPackages = pricingTables.flatMap((table) => table.packages);
 
 const testimonials = (
   (await getCollection(
@@ -74,16 +91,17 @@ const reviews = initialReviews.concat(testimonials);
 
 const { average, count } = getAggregatedReviews(reviews);
 const minPrice =
-  packages.length > 0
-    ? Math.min(...packages.map((p) => p.price?.price ?? 0))
+  allPackages.length > 0
+    ? Math.min(...allPackages.map((p) => p.price?.price ?? 0))
     : 0;
 const minPromoPrice =
-  packages.length > 0
-    ? Math.max(...packages.map((p) => p.price?.promo ?? 0))
+  allPackages.length > 0
+    ? Math.max(...allPackages.map((p) => p.price?.promo ?? 0))
     : 0;
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
-  currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR'
+  currency:
+    (allPackages.length > 0 ? allPackages[0].price?.currency : null) ?? 'EUR'
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = true;
@@ -121,7 +139,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         ) : null
       }
       {
-        packages?.length > 0 ? (
+        pricingTables.length > 0 ? (
           <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
         ) : null
       }
@@ -316,7 +334,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     ) : null
   }
   {
-    packages?.length > 0 ? (
+    pricingTables.length > 0 ? (
       <section
         id="packages"
         class="tour-section intersect:opacity-100 intersect-once col-span-full mb-8 flex scroll-mt-36 flex-col gap-10"
@@ -325,8 +343,17 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
           {t('Tour.Section.Packages.Title', language)}
         </Heading>
 
-        <div class="col-span-full">
-          <TourPricing language={language} packages={tour.packages} />
+        <div class="col-span-full flex flex-col gap-12">
+          {pricingTables.map((table) => (
+            <div class="col-span-full">
+              {table.title ? (
+                <Heading as="h3" class="mb-6">
+                  {table.title}
+                </Heading>
+              ) : null}
+              <TourPricing language={language} packages={table.packages} />
+            </div>
+          ))}
 
           <Prose
             markdown={tour.afterPricing ?? ''}
@@ -438,8 +465,9 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     url={getTourPath(tour, language)}
     price={minPrice}
     promoPrice={minPromoPrice}
-    currency={(packages.length > 0 ? packages[0].price?.currency : null) ??
-      'EUR'}
+    currency={(allPackages.length > 0
+      ? allPackages[0].price?.currency
+      : null) ?? 'EUR'}
     ratingAverage={average}
     ratingCount={count}
     language={language}

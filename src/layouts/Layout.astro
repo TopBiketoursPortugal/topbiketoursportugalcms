@@ -9,7 +9,6 @@ import Navigation from 'src/../data/navigation.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import Announcement from './common/Announcement.astro';
 import Header from './common/Header.astro';
-import ScrollTop from './common/ScrollTop.astro';
 import BasicScripts from './common/BasicScripts.astro';
 import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
@@ -162,7 +161,6 @@ if (INDEX === 'false') {
       <slot />
     </main>
     <Footer language={language} />
-    <ScrollTop />
     <script>
       // Shared-element morph between tour cards and the tour detail hero.
       // Forward: name the clicked card's media so it morphs into the detail

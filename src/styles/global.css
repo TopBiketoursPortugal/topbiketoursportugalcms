@@ -70,11 +70,42 @@
   h6 {
     font-family: var(--font-heading);
     text-wrap: balance;
+    line-height: 1.25;
+  }
+
+  body,
+  p {
+    line-height: 1.65;
+  }
+
+  li {
+    line-height: 1.55;
   }
 
   ::selection {
     background-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
   }
+}
+
+/*
+ * Tighten reading rhythm. @tailwindcss/typography (prose-lg / prose-xl)
+ * ships paragraph line-height ~1.78–1.8 and list-item ~1.71–1.78, which
+ * reads as "floating" on long tour descriptions. Pull back to 1.65 / 1.55
+ * (NN/g + WCAG comfortable range) while keeping headings compact at 1.25.
+ * .prose is a class, so it out-specifies the base element rules above —
+ * override it explicitly here.
+ */
+.prose :where(p, li):not(:where([class~='not-prose'] *)) {
+  line-height: 1.65;
+}
+
+.prose :where(li):not(:where([class~='not-prose'] *)) {
+  line-height: 1.55;
+}
+
+.prose
+  :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
+  line-height: 1.25;
 }
 
 /*
