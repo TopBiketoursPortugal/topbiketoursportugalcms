@@ -1658,7 +1658,7 @@ _structures:
         value:
           title: ''
           description: ''
-          duration: ''
+          duration: 1
           popular: false
           price:
             price: 0
