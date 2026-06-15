@@ -1662,10 +1662,19 @@ _structures:
           popular: false
           price:
             price: 0
-            promo:
+            promo: 0
             currency: EUR
             bestValue: false
           included: []
+        _inputs:
+          duration:
+            type: text
+            comment: Duration of this package (e.g. "3 days")
+          included:
+            type: array
+            options:
+              empty_type: array
+              structures: _structures.included_features
         preview:
           text:
             - key: title
