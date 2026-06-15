@@ -945,19 +945,19 @@ collections_config:
         icon: language
         editor: visual
         base_path: ''
-        schema: default
+        schema: riderLevel
       - name: New Rider Level Portuguese
         icon: language
         editor: visual
         base_path: /pt/
-        schema: defaultPT
+        schema: riderLevelPT
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
     schemas:
-      default:
+      riderLevel:
         path: schemas/tour-rider-level.mdx
         reorder_inputs: true
         hide_extra_inputs: false
@@ -965,7 +965,7 @@ collections_config:
         remove_extra_inputs: false
         name: New Rider Level
         icon: fitness_center
-      defaultPT:
+      riderLevelPT:
         path: schemas/pt/tour-rider-level.mdx
         reorder_inputs: true
         hide_extra_inputs: false
