@@ -663,7 +663,47 @@
     {
       "from": "/tours/santiago-de-compostela/",
       "destination": "/tours/santiago-de-compostela-central-way/",
-      "status": 0
+      "status": 301
+    },
+    {
+      "from": "/oportos-downtown-tour-portugal/",
+      "destination": "/tours/bike-tour-sightseeing-porto/",
+      "status": 301
+    },
+    {
+      "from": "/static/bd2cfac5b62702762b141e113e773c00/a2510/bike-tours-in-portugal.jpg/",
+      "destination": "/tours/santiago-de-compostela-central-way/",
+      "status": 301
+    },
+    {
+      "from": "/img/mapa_final_novologo_-04-100-pixeis-1-.png/",
+      "destination": "/tours/santiago-de-compostela-central-way/",
+      "status": 301
+    },
+    {
+      "from": "/static/94f3639374d100379659db7564b01b2c/416b2/kit-for-cycling-holidays.jpg/",
+      "destination": "/tours/santiago-de-compostela-central-way/",
+      "status": 301
+    },
+    {
+      "from": "/static/08dcb6f80b7741cb41cc6028723d39ed/c9466/furadouro-forest-in-a-bicycle.jpg/",
+      "destination": "/tours/porto-to-coimbra-biketour/#image-2/",
+      "status": 301
+    },
+    {
+      "from": "/_astro/norte.CEqqV8cJ_1gJiRF.jpg/",
+      "destination": "/tours/porto-to-coimbra-biketour/#image-2/",
+      "status": 301
+    },
+    {
+      "from": "/static/97c7f99891d93d2ca6203996cd70ba00/27d3a/the-way-of-st.-james-bike-tour-fold-n-visit-cycling-holidays-3582-1280x853-1-.jpg/",
+      "destination": "/tours/porto-to-coimbra-biketour/#image-2/",
+      "status": 301
+    },
+    {
+      "from": "/bike-tours-portugal-silver-coast/",
+      "destination": "/tours/porto-to-coimbra-biketour/",
+      "status": 301
     }
   ]
 }
