@@ -1634,6 +1634,59 @@ _inputs:
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
     cascade: true
+  enter:
+    type: select
+    label: Entrance animation
+    options:
+      allow_empty: true
+      values:
+        - label: Slide up
+          value: slide-up
+        - label: Fade
+          value: fade
+        - label: Slide left
+          value: slide-left
+        - label: Slide right
+          value: slide-right
+        - label: Zoom
+          value: zoom
+        - label: Wipe
+          value: wipe
+        - label: Blur
+          value: blur
+        - label: None (disable this block's animations)
+          value: none
+      value_key: value
+    comment: >-
+      How this block animates into view. Leave empty for the smart default
+      (gentle slide-up for most blocks); 'none' also silences inner reveals.
+    cascade: true
+  surface:
+    type: select
+    label: Background surface
+    options:
+      allow_empty: true
+      values:
+        - label: Sand (cream)
+          value: sand
+        - label: Soft
+          value: soft
+        - label: Forest (dark green)
+          value: forest
+        - label: White
+          value: white
+      value_key: value
+    comment: >-
+      Optional full-width background band behind this block. Leave empty for the
+      default page background. Forest flips inner text to light automatically.
+    cascade: true
+  bleed:
+    type: switch
+    label: Full-width background
+    comment: >-
+      Let the background span the full viewport width. Defaults to on when a
+      surface is set, off otherwise.
+    cascade: true
 _structures:
   relatedPosts:
     style: select

@@ -21,11 +21,6 @@
           "enabled": true
         },
         {
-          "text": "Reviews",
-          "page": "",
-          "href": "/testimonials/"
-        },
-        {
           "text": "Calendar",
           "page": "",
           "href": "/guided-bike-tours-calendar-portugal/"
@@ -36,14 +31,19 @@
           "href": "/blog/"
         },
         {
-          "text": "Contacts",
-          "page": "",
-          "href": "/contacts/"
-        },
-        {
           "text": "About us",
           "page": "",
-          "href": "/about-us-biking-travel/"
+          "href": "/about-us-biking-travel/",
+          "links": [
+            {
+              "text": "Contacts",
+              "href": "/contacts/"
+            },
+            {
+              "text": "Reviews",
+              "href": "/testimonials/"
+            }
+          ]
         },
         {
           "text": "Widgets",
@@ -156,11 +156,6 @@
           "enabled": false
         },
         {
-          "text": "Testemunhos",
-          "page": "",
-          "href": "/pt/testemunhos/"
-        },
-        {
           "text": "Calendário",
           "page": "",
           "href": "/pt/calendario-tours/"
@@ -171,14 +166,19 @@
           "href": "/pt/blog/"
         },
         {
-          "text": "Contatos",
-          "page": "",
-          "href": "/pt/contactos/"
-        },
-        {
           "text": "Sobre nós",
           "page": "",
-          "href": "/pt/sobre-nos/"
+          "href": "/pt/sobre-nos/",
+          "links": [
+            {
+              "text": "Contatos",
+              "href": "/pt/contactos/"
+            },
+            {
+              "text": "Testemunhos",
+              "href": "/pt/testemunhos/"
+            }
+          ]
         },
         {
           "text": "Widgets",
