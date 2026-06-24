@@ -1,21 +1,28 @@
 ---
-import PricingTable from '../pricing-table/pricing-table.astro';
-import PricingFeatureRow from '../pricing-table/pricing-feature-row.astro';
 import type { TourPackageSchema } from 'src/schemas/tours';
 import languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import PricingColumn from '../pricing-table/pricing-column.astro';
-import { t } from 'utils/i18n';
 import type { InferEntrySchema } from 'astro:content';
 import TourBookNow from './tour-book-now.astro';
 
-type Props = { 
-  packages?: TourPackageSchema[]; 
+type Props = {
+  packages?: TourPackageSchema[];
   language?: LanguageCodes;
   tour?: InferEntrySchema<'tours'>;
+  // 'pricing' = first table (shows price + book button);
+  // 'matrix'  = seasons / add-ons tables (rows only, no price header).
+  variant?: 'pricing' | 'matrix';
 };
 
-const { packages = [], language = 'en', tour } = Astro.props;
+const {
+  packages = [],
+  language = 'en',
+  tour,
+  variant = 'pricing'
+} = Astro.props;
+
+const showPrice = variant === 'pricing';
 
 const currency =
   (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
@@ -26,62 +33,75 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
 });
 ---
 
-<PricingTable>
-  <slot slot="features">
-    {
-      [
-        ...new Set(packages.flatMap((p) => p.included).map((i) => i?.title))
-      ].map((feature, index) => (
-        <PricingFeatureRow
-          feature={feature}
-          alternate={index % 2 === 0}
-          included={false}
-          distribute="trailing"
-        />
-      ))
-    }
-  </slot>
-  <slot slot="packages">
-    {
-      packages.map(
-        ({ title, duration, popular, included = [], price = { price: 0 } }) => (
-          <PricingColumn
-            title={title}
-            price={priceFormat.format(price?.price ?? 0)}
-            period={duration}
-            popular={popular}
-          >
-            { tour && (
-              <div slot="action" class="flex justify-center">
-                <TourBookNow 
-                  tour={tour} 
-                  language={language} 
-                  variant="column" 
-                  buttonClass="mb-2 w-auto h-auto min-h-0 rounded-full px-4 py-1 text-sm font-semibold transition-colors bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200" 
-                />
+<div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    packages.map(
+      ({ title, duration, popular, included = [], price = { price: 0 } }) => (
+        <PricingColumn
+          title={title}
+          price={showPrice ? priceFormat.format(price?.price ?? 0) : ''}
+          promo={
+            showPrice && price?.promo ? priceFormat.format(price.promo) : ''
+          }
+          period={showPrice ? duration : ''}
+          popular={popular}
+          bestValue={price?.bestValue ?? false}
+          showPrice={showPrice}
+        >
+          {showPrice && tour && (
+            <div slot="action" class="mt-3 flex justify-center">
+              <TourBookNow
+                tour={tour}
+                language={language}
+                variant="column"
+                buttonClass="mb-2 w-auto h-auto min-h-0 rounded-full px-4 py-1 text-sm font-semibold transition-colors bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+              />
+            </div>
+          )}
+          {(included ?? []).map((feature) => {
+            const {
+              description,
+              included: isIncluded,
+              title: featureTitle = '',
+              info = ''
+            } = feature;
+            const isBoolean = description === 'Yes' || description === 'No';
+            const isYes = isIncluded || description === 'Yes';
+            return (
+              <div class="flex items-center justify-between gap-3 border-b border-gray-100 py-2 text-sm last:border-0 dark:border-gray-800">
+                <span class="text-gray-600 dark:text-gray-400">
+                  {featureTitle}
+                </span>
+                <span
+                  class="flex shrink-0 items-center gap-1 text-right font-medium text-gray-900 dark:text-gray-100"
+                  title={info}
+                >
+                  {isBoolean ? (
+                    isYes ? (
+                      <i
+                        class="icon-[ph--check-circle-fill] h-5 w-5 text-green-600"
+                        title="Included in price."
+                        aria-label="Included"
+                      />
+                    ) : (
+                      <i
+                        class="icon-[ph--x-circle-fill] h-5 w-5 text-red-500"
+                        title="Not included in price."
+                        aria-label="Not included"
+                      />
+                    )
+                  ) : (
+                    description
+                  )}
+                  {info ? (
+                    <i class="icon-[ph--info-light] h-4 w-4 text-gray-400" />
+                  ) : null}
+                </span>
               </div>
-            )}
-            {(included ?? []).map((feature, featureIndex) => {
-              const {
-                description,
-                included,
-                title: featureTitle = ''
-              } = feature;
-              const isFeatureDescriptionBoolean =
-                description === 'Yes' || description === 'No';
-              return (
-                <PricingFeatureRow
-                  feature={isFeatureDescriptionBoolean ? '' : description}
-                  icon={isFeatureDescriptionBoolean}
-                  included={included || description === 'Yes'}
-                  description={featureTitle}
-                  alternate={featureIndex % 2 === 0}
-                />
-              );
-            })}
-          </PricingColumn>
-        )
+            );
+          })}
+        </PricingColumn>
       )
-    }
-  </slot>
-</PricingTable>
+    )
+  }
+</div>

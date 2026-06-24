@@ -54,17 +54,36 @@ const {
 // guided and/or self-guided trip UUID is configured.
 const hasWetravel = !!(wetravel?.guidedUuid || wetravel?.selfGuidedUuid);
 
-// Up to 3 distinct pricing tables, each with an optional heading.
-// Only non-empty tables are rendered.
+// Up to 3 distinct pricing tables. Table 1 = included packages (priced cards),
+// table 2 = seasonal prices, table 3 = add-ons. Tables 2/3 use the 'matrix'
+// variant (rows only, no price/book button). Each table has a default heading
+// (i18n) used when the CMS title is empty. Only non-empty tables are rendered.
 const pricingTables = [
-  { title: packagesTitle, packages },
-  { title: packages2Title, packages: packages2 ?? [] },
-  { title: packages3Title, packages: packages3 ?? [] }
+  {
+    title: packagesTitle,
+    defaultTitle: t('Tour.Section.Packages.Included', language),
+    packages,
+    variant: 'pricing' as const
+  },
+  {
+    title: packages2Title,
+    defaultTitle: t('Tour.Section.Packages.Seasons', language),
+    packages: packages2 ?? [],
+    variant: 'matrix' as const
+  },
+  {
+    title: packages3Title,
+    defaultTitle: t('Tour.Section.Packages.Addons', language),
+    packages: packages3 ?? [],
+    variant: 'matrix' as const
+  }
 ].filter((table) => (table.packages?.length ?? 0) > 0);
 
-// Aggregate every package across all tables for the sidebar "from price"
-// and the SEO product schema.
-const allPackages = pricingTables.flatMap((table) => table.packages);
+// The sidebar "from price" and the SEO product schema derive ONLY from the
+// first table (`packages` = the real priced packages). Seasons/add-ons tables
+// (packages2/packages3) carry zero-priced columns, so including them would drag
+// Math.min down to 0.
+const pricedPackages = packages;
 
 const testimonials = (
   (await getCollection(
@@ -95,17 +114,18 @@ const reviews = initialReviews.concat(testimonials);
 
 const { average, count } = getAggregatedReviews(reviews);
 const minPrice =
-  allPackages.length > 0
-    ? Math.min(...allPackages.map((p) => p.price?.price ?? 0))
+  pricedPackages.length > 0
+    ? Math.min(...pricedPackages.map((p) => p.price?.price ?? 0))
     : 0;
 const minPromoPrice =
-  allPackages.length > 0
-    ? Math.max(...allPackages.map((p) => p.price?.promo ?? 0))
+  pricedPackages.length > 0
+    ? Math.max(...pricedPackages.map((p) => p.price?.promo ?? 0))
     : 0;
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency:
-    (allPackages.length > 0 ? allPackages[0].price?.currency : null) ?? 'EUR'
+    (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
+    'EUR'
 });
 const isPromotional = minPromoPrice > 0;
 const enableFaqs = true;
@@ -116,14 +136,33 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 
 {
   image && (
-    <div data-tour-hero class="overflow-clip">
-      <ResponsiveImage
-        {...image}
-        class="max-h-72"
-        loading="eager"
-        fetchPriority="high"
+    <header class="relative isolate">
+      <div data-tour-hero class="overflow-clip">
+        <ResponsiveImage
+          {...image}
+          class="max-h-72 w-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
+      {/* contrast scrim — flat darken + center-weighted vignette */}
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-black/25 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45),transparent_70%)]"
       />
-    </div>
+      {/* centered title overlay — tw-animate-css "enter" on load, delayed
+          past the 0.4s tour-hero morph; motion-safe so reduced-motion skips it */}
+      <div class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
+        <h1 class="font-heading motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 motion-safe:blur-in-[6px] motion-safe:fill-mode-both text-3xl font-bold text-balance text-white drop-shadow-lg motion-safe:delay-300 motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl md:text-5xl">
+          {tour.title}
+        </h1>
+        {tour.subTitle && (
+          <p class="motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 motion-safe:blur-in-[6px] motion-safe:fill-mode-both mt-3 max-w-2xl text-balance text-white/90 drop-shadow-md motion-safe:delay-500 motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-lg">
+            {tour.subTitle}
+          </p>
+        )}
+      </div>
+    </header>
   )
 }
 <div
@@ -161,7 +200,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   </div>
   <section
     id="tour-booking"
-    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:sticky sm:top-36 sm:order-0 sm:max-h-[calc(100vh-10rem)] sm:self-start sm:overflow-x-hidden sm:overflow-y-auto dark:bg-gray-800"
+    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto -mt-24 flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:order-0 sm:self-start dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
@@ -336,25 +375,26 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         <div class="col-span-full flex flex-col gap-12">
           {pricingTables.map((table) => (
             <div class="col-span-full">
-              {table.title ? (
-                <Heading as="h3" class="mb-6">
-                  {table.title}
-                </Heading>
-              ) : null}
+              <Heading as="h3" class="mb-6">
+                {table.title || table.defaultTitle}
+              </Heading>
               <TourPricing
                 language={language}
                 packages={table.packages}
                 tour={tour}
+                variant={table.variant}
               />
-              <div class="mt-6 flex justify-center">
-                <div class="w-full max-w-xs">
-                  <TourBookNow
-                    tour={tour}
-                    language={language}
-                    variant="inline"
-                  />
+              {table.variant === 'pricing' ? (
+                <div class="mt-6 flex justify-center">
+                  <div class="w-full max-w-xs">
+                    <TourBookNow
+                      tour={tour}
+                      language={language}
+                      variant="inline"
+                    />
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           ))}
 
@@ -462,8 +502,8 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     url={getTourPath(tour, language)}
     price={minPrice}
     promoPrice={minPromoPrice}
-    currency={(allPackages.length > 0
-      ? allPackages[0].price?.currency
+    currency={(pricedPackages.length > 0
+      ? pricedPackages[0].price?.currency
       : null) ?? 'EUR'}
     ratingAverage={average}
     ratingCount={count}

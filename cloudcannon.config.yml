@@ -268,11 +268,13 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.tour_packages
-        comment: Optional second pricing table
+        comment: >-
+          Seasons table — one column per package (same as the first table), with
+          each season as a row (e.g. Low / Regular / High / Summer)
         cascade: true
       packages2Title:
         type: text
-        comment: Optional heading shown above the second pricing table
+        comment: Heading for the seasons table (defaults to "Seasonal prices")
         cascade: true
       packages2[*].title:
         type: markdown
@@ -289,11 +291,13 @@ collections_config:
         options:
           empty_type: array
           structures: _structures.tour_packages
-        comment: Optional third pricing table
+        comment: >-
+          Add-ons table — one column per package (same as the first table), with
+          each optional paid extra as a row (e.g. Bike rent, Half-board, Jersey)
         cascade: true
       packages3Title:
         type: text
-        comment: Optional heading shown above the third pricing table
+        comment: Heading for the add-ons table (defaults to "Add-ons & extras")
         cascade: true
       packages3[*].title:
         type: markdown
@@ -315,13 +319,15 @@ collections_config:
         type: array
         options:
           empty_type: array
-          structures: _structures.included_features
+          structures: _structures.season_features
+        comment: Season rows (e.g. "Low season" → price/supplement)
         cascade: true
       packages3[*].included:
         type: array
         options:
           empty_type: array
-          structures: _structures.included_features
+          structures: _structures.addon_features
+        comment: Add-on rows (e.g. "Bike rent" → "+270€")
         cascade: true
       included:
         type: array
@@ -1688,6 +1694,42 @@ _structures:
           description: ''
           included: true
           info: ''
+        preview:
+          text:
+            - key: title
+  season_features:
+    style: select
+    values:
+      - label: Season row
+        icon: calendar_month
+        value:
+          title: ''
+          description: ''
+          included: true
+          info: ''
+        _inputs:
+          title:
+            comment: Season name (e.g. "Low season", "High Season")
+          description:
+            comment: Price or supplement for this season (e.g. "1.608€", "+360€")
+        preview:
+          text:
+            - key: title
+  addon_features:
+    style: select
+    values:
+      - label: Add-on row
+        icon: add_shopping_cart
+        value:
+          title: ''
+          description: ''
+          included: false
+          info: ''
+        _inputs:
+          title:
+            comment: Add-on name (e.g. "Bike rent", "Half-board")
+          description:
+            comment: Price for this add-on (e.g. "+270€", "extra 350€")
         preview:
           text:
             - key: title
