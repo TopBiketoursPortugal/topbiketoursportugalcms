@@ -506,6 +506,35 @@ collections_config:
           Mark this tour as new to display a green "NEW" badge over the tour
           image
         cascade: true
+      wetravel:
+        type: object
+        options:
+          preview:
+            text:
+              - WeTravel booking
+            subtext:
+              - Set the trip UUIDs that power the Book Now buttons
+            icon: event_available
+        comment: >-
+          Controls the "Book Now" buttons on this tour. Set the guided and/or
+          self-guided trip UUID (the value after ?uuid= in the WeTravel checkout
+          URL). Leave both empty to fall back to the enquiry form.
+        cascade: true
+      wetravel.guidedUuid:
+        type: text
+        label: Guided trip UUID
+        comment: UUID for the guided / group-departure WeTravel trip (optional).
+        cascade: true
+      wetravel.selfGuidedUuid:
+        type: text
+        label: Self-guided trip UUID
+        comment: UUID for the self-guided WeTravel trip (optional).
+        cascade: true
+      wetravel.uid:
+        type: text
+        label: WeTravel Account ID
+        comment: Usually 2317568 — leave as-is unless told otherwise.
+        cascade: true
     add_options:
       - name: New Tour English
         icon: language

@@ -34,7 +34,7 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
   {...props}
   hrefLangs={hrefs}
   breadcrumbs={breadcrumbs}
-  class={cn('flex flex-col gap-3 p-3 sm:gap-10 sm:p-16', className)}
+  class={cn('flex flex-col gap-3 px-3 py-1 sm:gap-4 sm:p-3', className)}
 >
   <slot name="head" slot="head">
     {
