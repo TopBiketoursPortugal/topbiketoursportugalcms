@@ -1,4 +1,4 @@
-import { defineConfig, envField, passthroughImageService } from 'astro/config';
+import { defineConfig, envField, passthroughImageService, svgoOptimizer } from 'astro/config';
 import react from '@astrojs/react';
 import bookshop from '@bookshop/astro-bookshop';
 import mdx from '@astrojs/mdx';
@@ -274,14 +274,18 @@ export default defineConfig({
     locales: ['en', 'pt'],
     defaultLocale: 'en',
     routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: true
+      // v6: `redirectToDefaultLocale` only applies when `prefixDefaultLocale` is true.
+      // With prefixDefaultLocale:false the default locale has no prefix, so there is
+      // nothing to redirect — the option is dropped to satisfy v6 validation.
+      prefixDefaultLocale: false
     }
   },
   trailingSlash: 'ignore',
 
   experimental: {
-    svgo: true,
+    // v6.2+: SVGO optimization moved from `svgo: true` to a pluggable optimizer.
+    // Optimizes SVGs imported as Astro components (e.g. Footer's biosphere/atta logos).
+    svgOptimizer: svgoOptimizer(),
     // csp: {
     //   // change the default algorithm
     //   algorithm: "SHA-512",
