@@ -381,8 +381,8 @@
       "status": 301
     },
     {
-      "from": "/tours/porto-to-lisbon-cycling-tour-the-green-coast-and-the-silver-coast/",
-      "destination": "/tours/porto-to-lisbon-cycling-tour-en/",
+      "from": "/porto-to-lisbon-cycling-tour--en/",
+      "destination": "/tours/porto-to-lisbon-cycling-tour-the-green-coast-and-the-silver-coast/",
       "status": 301
     },
     {
@@ -646,7 +646,7 @@
       "status": 301
     },
     {
-      "from": "/tours/porto-to-lisbon-cycling-tour-en/",
+      "from": "/porto-to-lisbon-cycling-tour--en/",
       "destination": "/tours/porto-to-lisbon-bike-tour/",
       "status": 301
     },
