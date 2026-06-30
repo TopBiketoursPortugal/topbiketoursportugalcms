@@ -12,7 +12,6 @@ import Stack from 'src/components/stack/stack.astro';
 import PageHelper from 'src/shared/astro/page.astro';
 import LanguageData from 'src/../data/languages.json';
 
-import { getImage } from 'astro:assets';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import { getTagIconClass } from 'src/utils/tag-icon-safelist';
@@ -77,19 +76,6 @@ const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
 const relevantRiderLevels = allRiderLevels.filter((l) => tourRiderLevelIds.has(l.data.id));
 const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
 
-const baseUrl = Astro.site;
-
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
-
-const image = categoryData.data.seo?.featured_image ? await getImage({
-  src: images[categoryData.data.seo?.featured_image].default,
-  format: 'png'
-}) : null;
-
-const imageSrc = image?.src?.startsWith('/') ? image.src?.substring(1) : image?.src;
 const displayName = categoryData.data.name ?? categoryData.data.title;
 const iconClass = getTagIconClass(categoryData.data.icon);
 

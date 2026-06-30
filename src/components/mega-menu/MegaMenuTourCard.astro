@@ -8,7 +8,7 @@ type Props = {
   href: string;
   imageSrc: string;
   imageAlt: string;
-  duration?: number | null;
+  duration?: string | null;
   difficulty?: number | null;
   minPrice: number;
   currency: string;
@@ -30,6 +30,8 @@ const {
   language,
   index
 } = Astro.props;
+
+const durationDays = duration ? Number(duration) : 0;
 
 const priceFormat = new Intl.NumberFormat(
   language === 'pt' ? 'pt-PT' : 'en-US',
@@ -66,9 +68,9 @@ const priceFormat = new Intl.NumberFormat(
       {title}
     </h4>
     {
-      (duration && duration > 0) || (difficulty && difficulty > 0) ? (
+      durationDays > 0 || (difficulty && difficulty > 0) ? (
         <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-          {duration && duration > 0 && (
+          {durationDays > 0 && (
             <span class="flex items-center gap-0.5">
               <i
                 class="icon-[ph--clock-countdown-light] h-3.5 w-3.5"
@@ -77,7 +79,7 @@ const priceFormat = new Intl.NumberFormat(
               {duration} {t('Tour.Info.Duration.Unit.Days', language)}
             </span>
           )}
-          {duration && duration > 0 && difficulty && difficulty > 0 && (
+          {durationDays > 0 && difficulty && difficulty > 0 && (
             <span aria-hidden="true" class="text-slate-300 dark:text-slate-600">
               |
             </span>

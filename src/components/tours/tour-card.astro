@@ -38,6 +38,8 @@ const {
   isNewTour = false
 } = data;
 
+const durationDays = duration ? Number(duration) : 0;
+
 const testimonials = (
   (await getCollection(
     'testimonials',
@@ -97,14 +99,14 @@ const tourTags = await getCollection(
 
       <Stack spacing="medium" layout="vertical" class="w-full">
         {
-          duration && duration > 0 ? (
+          durationDays > 0 ? (
             <span class="flex gap-2 text-gray-600">
               <i
                 class="icon-[ph--clock-countdown-light] h-5 w-5"
                 aria-hidden="true"
               />{' '}
               {duration} {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
-              {duration - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
+              {durationDays - 1} {t('Tour.Info.Duration.Unit.Nights', language)}
             </span>
           ) : null
         }

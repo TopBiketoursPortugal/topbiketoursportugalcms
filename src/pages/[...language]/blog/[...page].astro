@@ -8,7 +8,6 @@ import PaginatedLayout, {
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
-import { t } from 'utils/i18n';
 import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
 import { getBlogPermalink } from 'utils/permalinks';
 import SiteData from 'src/../data/site.json';
@@ -48,14 +47,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 
   const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
 
-  const pageIndex = await Promise.all(
-    Object.entries(postPerLanguage).map(([language]) =>
-      getBlogIndexPage(language as LanguageCodes)
-    )
-  );
-
   return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
-    const page = pageIndex.filter((p) => p.data.language === language)[0];
     return paginate(
       filteredPosts.sort((a, b) => {
         const dateA = new Date(a.data.date).getTime();
@@ -82,7 +74,7 @@ frontmatter = {
   seo: {
     ...frontmatter.seo,
     page_title: page.data.title,
-    page_description: frontmatter.seo?.page_description
+    page_description: frontmatter.seo?.page_description ?? null
   }
 };
 

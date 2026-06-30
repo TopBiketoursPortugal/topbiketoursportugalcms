@@ -11,7 +11,6 @@ import Stack from 'src/components/stack/stack.astro';
 import PageHelper from 'src/shared/astro/page.astro';
 import LanguageData from 'src/../data/languages.json';
 
-import { getImage } from 'astro:assets';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
@@ -68,19 +67,6 @@ const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
 const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
 const relevantBikeCategories = allBikeCategories.filter((c) => tourBikeCategoryIds.has(c.data.id));
 
-const baseUrl = Astro.site;
-
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
-
-const image = levelData.data.seo?.featured_image ? await getImage({
-  src: images[levelData.data.seo?.featured_image].default,
-  format: 'png'
-}) : null;
-
-const imageSrc = image?.src?.startsWith('/') ? image.src?.substring(1) : image?.src;
 const levelSeoTitle = levelData.data.seo?.page_title ?? levelData.data.title;
 const levelSeoDescription = levelData.data.seo?.page_description ?? levelData.data.title;
 const frontmatter = {

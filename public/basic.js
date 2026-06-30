@@ -19,7 +19,6 @@
 
   const onLoad = function () {
     let lastKnownScrollPosition = window.scrollY;
-    let prevScrollPosition = window.scrollY;
     let ticking = true;
 
     attachEvent('#header nav', 'click', function () {
@@ -156,12 +155,9 @@
       //     header.classList.remove('nav-hidden');
       //   }
       // }
-      prevScrollPosition = y;
       ticking = false;
     }
-    // Reset the direction baseline for the freshly loaded/swapped page,
-    // then apply the initial header state.
-    prevScrollPosition = window.scrollY;
+    // Apply the initial header state for the freshly loaded/swapped page.
     applyHeaderStylesOnScroll();
 
     // onLoad runs again on every Astro page-swap; the scroll listener lives
