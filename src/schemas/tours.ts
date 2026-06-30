@@ -49,7 +49,7 @@ const tourPackageSchema = z.object({
   description: z.string().optional(),
   price: priceSchema,
   popular: z.boolean().default(false),
-  duration: z.string().default(''),
+  duration: z.coerce.string().default(''),
   included: z
     .array(
       z.object({

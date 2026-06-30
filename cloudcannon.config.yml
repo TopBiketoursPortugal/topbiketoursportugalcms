@@ -1746,7 +1746,7 @@ _structures:
         value:
           title: ''
           description: ''
-          duration: 1
+          duration: ''
           popular: false
           price:
             price: 0

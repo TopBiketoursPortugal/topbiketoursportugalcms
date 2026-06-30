@@ -78,7 +78,7 @@ function emptyPriced(pkg, currency) {
   return {
     title: pkg.title ?? '',
     popular: pkg.popular ?? false,
-    duration: '',
+    duration: '1',
     price: { price: 0, promo: 0, currency, bestValue: false }
   };
 }
