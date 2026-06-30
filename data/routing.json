@@ -651,12 +651,12 @@
       "status": 301
     },
     {
-      "from": "/tours/from-coimbra-to-lisbon-bike-tour/",
+      "from": "/from-coimbra-to-lisbon-bike-tour/",
       "destination": "/tours/atlantic-coast-to-lisbon-bike-tour/",
       "status": 301
     },
     {
-      "from": "/tours/porto-santiago-compostela-bike-tour/",
+      "from": "/porto-santiago-compostela-bike-tour/",
       "destination": "/tours/porto-santiago-compostela-bike-tour-coastal-way/",
       "status": 301
     },
