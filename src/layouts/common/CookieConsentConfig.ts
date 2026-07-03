@@ -20,6 +20,7 @@ declare global {
     dataLayer: Record<string, any>[];
     gtag: (...args: any[]) => void;
     _gtmLoaded?: boolean;
+    _wcLoaded?: boolean;
   }
 }
 
@@ -38,22 +39,43 @@ function loadGTM() {
   })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
 }
 
+// WhatConverts lead-source tracker. Sets attribution cookies, so unlike GTM
+// (advanced consent mode, cookieless until granted) it only loads AFTER
+// analytics consent.
+function loadWhatConverts() {
+  if (window._wcLoaded) return;
+  window._wcLoaded = true;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+  script.src = '//s.ksrndkehqnwntyxlhgto.com/137152.js';
+  document.head.appendChild(script);
+}
+
 function updateGtagConsent(cookie: CookieConsent.CookieValue) {
   const hasAnalytics = cookie.categories?.includes(CAT_ANALYTICS);
   const hasMarketing = cookie.categories?.includes(CAT_MARKETING);
   const hasFunctionality = cookie.categories?.includes(CAT_FUNCTIONALITY);
 
+  window.gtag?.('set', 'ads_data_redaction', !hasMarketing);
   window.gtag?.('consent', 'update', {
     [SERVICE_AD_STORAGE]: hasMarketing ? 'granted' : 'denied',
     [SERVICE_AD_USER_DATA]: hasMarketing ? 'granted' : 'denied',
     [SERVICE_AD_PERSONALIZATION]: hasMarketing ? 'granted' : 'denied',
     [SERVICE_ANALYTICS_STORAGE]: hasAnalytics ? 'granted' : 'denied',
-    [SERVICE_PERSONALIZATION_STORAGE]: hasFunctionality ? 'granted' : 'denied'
+    [SERVICE_FUNCTIONALITY_STORAGE]: hasFunctionality ? 'granted' : 'denied',
+    [SERVICE_PERSONALIZATION_STORAGE]: hasFunctionality ? 'granted' : 'denied',
+    [SERVICE_SECURITY_STORAGE]: 'granted'
   });
 
-  // Load GTM if analytics consent is granted
+  // Advanced consent mode: GTM is normally loaded by the inline script in
+  // CookieConsent.astro regardless of consent; this is only a fallback
+  // (both paths are guarded by window._gtmLoaded).
+  loadGTM();
+
   if (hasAnalytics) {
-    loadGTM();
+    loadWhatConverts();
   }
 }
 
@@ -146,14 +168,14 @@ export const config: CookieConsentConfig = {
                     domain: 'Google Analytics',
                     description:
                       'Cookie set by <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
-                    expiration: 'Expires after 12 days'
+                    expiration: 'Expires after 2 years'
                   },
                   {
-                    name: '_gid',
+                    name: '_ga_*',
                     domain: 'Google Analytics',
                     description:
-                      'Cookie set by <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
-                    expiration: 'Session'
+                      'Cookie set by <a href="https://business.safety.google/adscookies/">Google Analytics</a> to persist session state',
+                    expiration: 'Expires after 2 years'
                   }
                 ]
               }
@@ -227,14 +249,14 @@ export const config: CookieConsentConfig = {
                     domain: 'Google Analytics',
                     description:
                       'Cookie definido pelo <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
-                    expiration: 'Expira após 12 dias'
+                    expiration: 'Expira após 2 anos'
                   },
                   {
-                    name: '_gid',
+                    name: '_ga_*',
                     domain: 'Google Analytics',
                     description:
-                      'Cookie definido pelo <a href="https://business.safety.google/adscookies/">Google Analytics</a>',
-                    expiration: 'Sessão'
+                      'Cookie definido pelo <a href="https://business.safety.google/adscookies/">Google Analytics</a> para manter o estado da sessão',
+                    expiration: 'Expira após 2 anos'
                   }
                 ]
               }

@@ -124,8 +124,9 @@ if (INDEX === 'false') {
     {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
     <script src="/src/pwa.ts"></script>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
-    <script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
-    ></script>
+    <!-- WhatConverts bootstrap: snapshots landing URL/referrer for attribution.
+         No cookies, no network — the tracker itself (137152.js) is loaded by
+         CookieConsent only after analytics consent. -->
     <script is:inline>
       var $wc_load = function (a) {
           return JSON.parse(JSON.stringify(a));

@@ -1,8 +1,9 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
+import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 ---
 
-<script is:inline>
+<script is:inline define:vars={{ gtmId: GOOGLE_TAG_MANAGER_ID }}>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
@@ -32,17 +33,29 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
   const hasFunctionality =
     consentCookieValue?.categories?.includes('functionality');
 
-  // Set default consent mode
+  // Consent Mode v2 (advanced): defaults must be set BEFORE gtm.js loads.
+  // wait_for_update gives the CMP (which runs after astro:page-load) a
+  // window to push a consent update before the first tags are processed.
   gtag('consent', 'default', {
     ad_storage: hasMarketing ? 'granted' : 'denied',
     ad_user_data: hasMarketing ? 'granted' : 'denied',
     ad_personalization: hasMarketing ? 'granted' : 'denied',
     analytics_storage: hasAnalytics ? 'granted' : 'denied',
-    personalization_storage: hasFunctionality ? 'granted' : 'denied'
+    functionality_storage: hasFunctionality ? 'granted' : 'denied',
+    personalization_storage: hasFunctionality ? 'granted' : 'denied',
+    security_storage: 'granted',
+    wait_for_update: 500
   });
+  gtag('set', 'ads_data_redaction', !hasMarketing);
+  gtag('set', 'url_passthrough', true);
 
-  // Load GTM only if we already have consent (returning visitor)
-  if (consentCookieValue && hasAnalytics) {
+  // Advanced consent mode: always load GTM. With everything defaulted to
+  // denied, Google tags send only cookieless pings until consent is granted,
+  // which lets GA4 model the visitors who never interact with the banner.
+  // The _gtmLoaded guard keeps loadGTM() in CookieConsentConfig.ts from
+  // injecting the container a second time (double container = duplicate hits).
+  if (gtmId && !window._gtmLoaded) {
+    window._gtmLoaded = true;
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
       w[l].push({ 'gtm.start': new Date().getTime(), 'event': 'gtm.js' });
@@ -52,7 +65,19 @@ import 'vanilla-cookieconsent/dist/cookieconsent.css';
       j.async = true;
       j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
       f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
+    })(window, document, 'script', 'dataLayer', gtmId);
+  }
+
+  // WhatConverts (lead-source attribution) stays consent-gated: load it early
+  // only for returning visitors who already granted analytics. First-time
+  // grants are handled by loadWhatConverts() in CookieConsentConfig.ts.
+  if (consentCookieValue && hasAnalytics && !window._wcLoaded) {
+    window._wcLoaded = true;
+    var wc = document.createElement('script');
+    wc.async = true;
+    wc.defer = true;
+    wc.src = '//s.ksrndkehqnwntyxlhgto.com/137152.js';
+    document.head.appendChild(wc);
   }
 </script>
 
