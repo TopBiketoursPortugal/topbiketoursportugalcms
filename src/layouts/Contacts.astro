@@ -85,5 +85,5 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     loading="lazy"
     allowfullscreen></iframe>
   <slot />
-  <PageHelper contentBlocks={content_blocks_after ?? []} />
+  <PageHelper contentBlocks={content_blocks_after ?? []} sectionsKey="content_blocks_after" />
 </Layout>

@@ -59,7 +59,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     ) : (
       <Grid cols={cards_per_row as 1 | 2 | 3 | 4} data-editable="array" data-prop="items">
         {items.map((review) => (
-          <div style="display: contents" data-editable="array-item">
+          <div class="h-full" data-editable="array-item">
             <ReviewItem
               name={getAuthorName(review)}
               country={review.author?.country}

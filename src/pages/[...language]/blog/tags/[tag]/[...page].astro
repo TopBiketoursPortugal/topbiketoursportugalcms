@@ -125,6 +125,6 @@ const breadcrumbs = [
       <BlogPagination pagination={pagination} />
       <InfiniteScroll />
     </section>
-    <PageHelper contentBlocks={tagData.data.content_blocks_after ?? []} />
+    <PageHelper contentBlocks={tagData.data.content_blocks_after ?? []} sectionsKey="content_blocks_after" />
   </div>
 </Layout>

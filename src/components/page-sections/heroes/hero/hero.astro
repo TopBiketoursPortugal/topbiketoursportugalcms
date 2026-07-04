@@ -109,7 +109,7 @@ const Heading = getHeadingSizeComponent(heading_size);
             const Component = (buttonComponents[filePath] as any)?.default;
             if (!Component) return null;
             return (
-              <div data-editable="array-item" style="display: contents;">
+              <div data-editable="array-item">
                 <Component {...button} />
               </div>
             );

@@ -41,7 +41,7 @@ const imagesWithImageOptimization=images.map(i=>({...i,srcOptimized:imagesGlob[i
         imagesWithImageOptimization.length
       );
       return (
-        <div style="display: contents" data-editable="array-item">
+        <div data-editable="array-item">
           <a
             href={`#image-${index}`}
             id={`image-${index}`}
