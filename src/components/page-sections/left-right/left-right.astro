@@ -1,0 +1,208 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Markdown from 'src/components/building-blocks/utility/markdown.astro';
+import {
+  getDarkEquivalent,
+  getDarkTextEquivalent
+} from 'src/utils/dark-color';
+
+type Props = {
+  background_color: string;
+  flipped: boolean;
+  heading: {
+    heading_text: string;
+    color: string;
+  };
+  text: {
+    markdown_content: string;
+    color: string;
+  };
+  image: {
+    image_path: string;
+    alt_text: string;
+  };
+  button: {
+    _component?: string;
+    _bookshop_name?: string;
+    button_text: string;
+    button_icon: string;
+    button_link: string;
+    background_color?: string;
+    hover_brightness: number;
+    text_color: string;
+  };
+};
+
+const block = Astro.props;
+const buttons = import.meta.glob('/src/components/building-blocks/buttons/**/*.astro', {
+  eager: true
+});
+const buttonName = (block.button?._component ?? block.button?._bookshop_name)
+  ?.split('/')
+  .reverse()[0];
+const buttonFilePath = `/src/components/building-blocks/buttons/${buttonName}/${buttonName}.astro`;
+const Button = (buttons[buttonFilePath] as any)?.default;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpeg,jpg,png,gif,svg,avif,webp}',
+  { eager: true }
+);
+
+const imageSrc = images[block.image.image_path]?.default;
+
+if (!imageSrc) return;
+---
+
+<div
+  class="left-right"
+  style={`--cms-bg: ${block.background_color}; --cms-bg-dark: ${getDarkEquivalent(block.background_color)};`}
+>
+  {
+    block.flipped ? (
+      <div class="left-right__wrapper left-right--flipped">
+        {imageSrc && (
+          <Image
+            class="left-right__image parallax-drift reveal-left intersect:opacity-100 intersect-once order-2 md:order-1"
+            alt={block.image.alt_text ?? 'Left Right Top Bike Tours Portugal'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
+          />
+        )}
+        <div class="left-right__text reveal-right reveal-delay-1 intersect:opacity-100 intersect-once order-1 md:order-2">
+          {block.heading?.heading_text ? (
+            <h2
+              class="text-4xl"
+              style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
+              data-editable="text" data-prop="heading.heading_text"
+            >
+              {block.heading?.heading_text}
+            </h2>
+          ) : null}
+          <div
+            class="left-right__body mb-4"
+            style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+            data-editable="text" data-type="block" data-prop="text.markdown_content"
+          >
+            <Markdown content={block.text.markdown_content ?? ''} />
+          </div>
+          {block.button && <Button {...block.button} />}
+        </div>
+      </div>
+    ) : (
+      <div class="left-right__wrapper">
+        <div class="left-right__text reveal-left intersect:opacity-100 intersect-once">
+          {block.heading?.heading_text ? (
+            <h2
+              class="text-4xl"
+              style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
+              data-editable="text" data-prop="heading.heading_text"
+            >
+              {block.heading?.heading_text}
+            </h2>
+          ) : null}
+          <div
+            class="left-right__body mb-4"
+            style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+            data-editable="text" data-type="block" data-prop="text.markdown_content"
+          >
+            <Markdown content={block.text.markdown_content} />
+          </div>
+          {block.button && <Button {...block.button} />}
+        </div>
+        {imageSrc && (
+          <Image
+            class="left-right__image parallax-drift reveal-right reveal-delay-1 intersect:opacity-100 intersect-once"
+            alt={block.image.alt_text ?? 'Left right Top Bike Tours Portugal'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
+          />
+        )}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .left-right {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: var(--cms-bg, #ffffff);
+  }
+
+  :global(.dark) .left-right {
+    background-color: var(--cms-bg-dark, #1e293b) !important;
+  }
+
+  .left-right__wrapper {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 24px;
+    padding-inline: 16px;
+    box-sizing: border-box;
+  }
+  .left-right__wrapper img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1.25rem;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.18);
+  }
+  .left-right__wrapper .left-right__text {
+  }
+  @media only screen and (min-width: 768px) {
+    .left-right__wrapper {
+      flex-direction: row;
+      gap: 4rem;
+      padding-block: 48px;
+    }
+    .left-right__wrapper img {
+      width: 50%;
+    }
+    .left-right__wrapper .left-right__text {
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    .left-right__wrapper {
+      padding-block: 48px;
+      gap: 6rem;
+    }
+  }
+
+  .left-right__wrapper img {
+    margin-top: 32px;
+  }
+
+  h2 {
+    max-width: 620px;
+    margin-block: 30px;
+    color: var(--cms-heading);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  :global(.dark) h2 {
+    color: var(--cms-heading-dark) !important;
+  }
+
+  .left-right__body {
+    color: var(--cms-text);
+  }
+
+  :global(.dark) .left-right__body {
+    color: var(--cms-text-dark) !important;
+  }
+
+  /* Scroll-reveal handled by global .reveal-left / .reveal-right utilities */
+</style>

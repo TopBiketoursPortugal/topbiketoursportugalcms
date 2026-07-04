@@ -1,0 +1,324 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import Markdown from 'src/components/building-blocks/utility/markdown.astro';
+import {
+  getDarkEquivalent,
+  getDarkTextEquivalent
+} from 'src/utils/dark-color';
+
+interface Props {
+  background_color: string;
+  heading: {
+    heading_text: string;
+    heading_gradient_color: string;
+    heading_size: string;
+  };
+  subheading: {
+    markdown_content: string;
+    color: string;
+  };
+  image: {
+    image_path: string;
+    alt_text: string;
+  };
+  buttons: [
+    {
+      _component?: string;
+      _bookshop_name?: string;
+      text: string;
+      icon: string;
+      link: string;
+      background_color?: string;
+      hover_brightness: number;
+      text_color: string;
+    }
+  ];
+  class?: string;
+}
+
+const block = Astro.props;
+const buttonComponents = import.meta.glob(
+  '/src/components/building-blocks/buttons/**/*.astro',
+  {
+    eager: true
+  }
+);
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
+  { eager: true }
+);
+
+const imageSrc =
+  images[block.image?.image_path]?.default ?? block.image?.image_path;
+
+const headingGradientColor = block.heading?.heading_gradient_color ?? '#a0a2ff';
+
+const { background_color, buttons = [], heading, subheading } = block;
+
+const heading_size = heading?.heading_size ?? 'h1';
+
+const getHeadingSizeComponent = (size: string) => {
+  switch (size) {
+    case 'h1':
+      return 'h1';
+    case 'h2':
+      return 'h2';
+    case 'h3':
+      return 'h3';
+    case 'h4':
+      return 'h4';
+    case 'h5':
+      return 'h5';
+    case 'h6':
+      return 'h6';
+    default:
+      return 'h1';
+  }
+};
+const Heading = getHeadingSizeComponent(heading_size);
+---
+
+<section
+  class={block.class}
+  style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}
+>
+  <div class="hero-container">
+    <div
+      class="content reveal-stagger intersect:opacity-100 intersect-once flex flex-col gap-4"
+    >
+      {
+        heading?.heading_text ? (
+          <Heading class="heading pb-3" data-editable="text" data-prop="heading.heading_text">{heading?.heading_text}</Heading>
+        ) : null
+      }
+      <div
+        class="subheading-text"
+        style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
+        data-editable="text" data-type="block" data-prop="subheading.markdown_content"
+      >
+        <Markdown content={subheading.markdown_content} />
+      </div>
+      <div class="buttons" data-editable="array" data-prop="buttons">
+        {
+          buttons.map((button) => {
+            const name = (button._component ?? button._bookshop_name)
+              ?.split('/')
+              .reverse()[0];
+            const filePath = `/src/components/building-blocks/buttons/${name}/${name}.astro`;
+            const Component = (buttonComponents[filePath] as any)?.default;
+            if (!Component) return null;
+            return (
+              <div data-editable="array-item" style="display: contents;">
+                <Component {...button} />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+    <div
+      class="blob reveal-right reveal-delay-2 intersect:opacity-100 intersect-once"
+    >
+      {
+        imageSrc && (
+          <Image
+            alt={block.image.alt_text ?? 'Top waking tours portugal'}
+            widths={[320, 500, 640]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
+          />
+        )
+      }
+    </div>
+  </div>
+</section>
+<style define:vars={{ headingGradientColor }}>
+  section {
+    background-color: var(--cms-bg, #ffffff);
+  }
+
+  :global(.dark) section {
+    background-color: var(--cms-bg-dark, #1e293b) !important;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 24px;
+    padding-inline: var(--pagePadding);
+    max-width: var(--pageContainer);
+    margin-inline: auto;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .content h1 {
+    font-size: clamp(2.5rem, 4vw + 1.25rem, 4.25rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: -webkit-linear-gradient(to left, #eee 50%, #333);
+    background: linear-gradient(
+      to left,
+      var(--headingGradientColor) 50%,
+      #000000
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  :global(.dark) .content h1 {
+    background: linear-gradient(
+      to left,
+      var(--headingGradientColor) 50%,
+      #ffffff
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subheading-text {
+    margin-top: 1rem;
+    color: var(--cms-text);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 56ch;
+  }
+
+  :global(.dark) .subheading-text {
+    color: var(--cms-text-dark) !important;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: fit-content;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  button {
+    padding: 0.75rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1.25em;
+    cursor: pointer;
+    transition: all ease-in-out 0.15s;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn {
+    background: #4384e6;
+    color: #fff;
+    border: none;
+    display: flex;
+    gap: 8px;
+    padding: 1rem;
+  }
+  .btn svg {
+    width: 1rem;
+  }
+
+  .btn:hover {
+    background: #0066ff;
+  }
+
+  .btn-outline {
+    border: 1px solid #0d6efd;
+    background: transparent;
+    color: #0d6efd;
+    margin-left: 5px;
+  }
+
+  button i {
+    font-size: 0.78em;
+  }
+
+  .blob {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .blob::before {
+    content: '';
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--headingGradientColor) 35%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .blob > img {
+    max-width: 600px;
+    width: 100%;
+    background-size: cover;
+    -webkit-background-position: center;
+    background-position: center center;
+    margin: 20px;
+    animation:
+      animate 10s ease-in-out infinite,
+      blob-float 7s ease-in-out infinite alternate;
+    transition: all 1s ease-in-out;
+  }
+
+  @keyframes blob-float {
+    from {
+      translate: 0 -8px;
+    }
+    to {
+      translate: 0 10px;
+    }
+  }
+
+  @media only screen and (min-width: 400px) {
+    .buttons {
+      flex-direction: row;
+      margin-top: 2rem;
+    }
+    .content h1 {
+      font-size: 3.8rem;
+    }
+  }
+  @media only screen and (min-width: 960px) {
+    .hero-container {
+      flex-direction: row;
+      padding-block: 48px;
+    }
+    .content {
+      width: 50%;
+    }
+
+    .blob {
+      width: 50%;
+    }
+    .buttons {
+      flex-direction: column;
+    }
+  }
+  @media only screen and (min-width: 1280px) {
+    .buttons {
+      flex-direction: row;
+    }
+  }
+
+  @keyframes animate {
+    0%,
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  /* Scroll-reveal handled by global .reveal-stagger / .reveal-right utilities */
+</style>

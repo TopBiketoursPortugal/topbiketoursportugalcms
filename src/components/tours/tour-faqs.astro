@@ -2,9 +2,9 @@
 import type { InferEntrySchema } from 'astro:content';
 import AllFaqs from 'src/../data/faqs.json';
 import type { LanguageCodes } from 'src/schemas/language';
-import AccordionItem from '../accordion/accordion-item.astro';
-import Accordion from '../accordion/accordion.astro';
-import Prose from '../typography/prose.astro';
+import AccordionItem from 'src/components/page-sections/accordion/accordion-item.astro';
+import Accordion from 'src/components/page-sections/accordion/accordion.astro';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
 
 type Props = {
   language: LanguageCodes;

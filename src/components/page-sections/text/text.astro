@@ -1,0 +1,62 @@
+---
+import markdownit from 'markdown-it'; // or your preferred Markdown component
+import markdownItExternalLinks from 'markdown-it-external-links';
+
+import { tv, type VariantProps } from 'tailwind-variants';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+import { externalLinksConfig } from 'utils/external-links';
+
+export type TextProps = {
+  text: string;
+  tailwind?: string;
+  style: VariantProps<typeof textVariants>;
+};
+
+type Props = TextProps;
+
+const textVariants = tv({
+  base: 'flex flex-col break-all whitespace-normal',
+  variants: {
+    padding: {
+      none: { container: 'p-0' },
+      loose: { container: 'px-6 md:px-8' },
+      normal: { container: 'px-4 md:px-5' },
+      tight: { container: 'px-2 md:px-4' }
+    },
+    container: {
+      fluid: { container: 'max-w-none' },
+      centered: { container: 'mx-auto max-w-7xl' }
+    },
+    align: {
+      leading: { text: 'flex items-start text-left' },
+      trailing: { text: 'flex items-end text-right' },
+      centered: { text: 'flex items-center text-center' }
+    }
+  },
+  slots: {
+    container: '',
+    text: ''
+  },
+  defaultVariants: {
+    padding: 'normal',
+    container: 'centered',
+    align: 'leading'
+  }
+});
+
+const { text, style } = Astro.props;
+const { padding, align, container } = style;
+
+const md = markdownit({ html: true });
+md.use(markdownItExternalLinks, externalLinksConfig);
+const textHTML = md.render(text ?? '');
+const { container: containerStyle, text: textStyle } = textVariants({
+  padding,
+  container,
+  align
+});
+---
+
+<div class={containerStyle()}>
+  <Prose class={textStyle()} set:html={textHTML} />
+</div>

@@ -3,4 +3,4 @@ buttons:
   id_key: _component
   style: select
   values_from_glob:
-    - /src/components/buttons/*/*.cloudcannon.structure-value.yml
+    - /src/components/building-blocks/buttons/*/*.cloudcannon.structure-value.yml

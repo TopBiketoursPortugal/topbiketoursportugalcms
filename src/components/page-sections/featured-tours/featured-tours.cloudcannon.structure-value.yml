@@ -1,0 +1,15 @@
+label: Featured Tours
+icon: directions_bike
+description: Featured tours grid
+value:
+  _component: page-sections/featured-tours
+  feature_tours: []
+preview:
+  text:
+    - Featured Tours
+  icon: directions_bike
+picker_preview:
+  text: Featured Tours
+  subtext: Featured tours grid
+_inputs_from_glob:
+  - /src/components/page-sections/featured-tours/featured-tours.cloudcannon.inputs.yml

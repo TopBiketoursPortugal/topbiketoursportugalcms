@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import Layout from 'src/layouts/Layout.astro';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
-import Heading from 'src/components/typography/heading.astro';
-import Stack from 'src/components/stack/stack.astro';
-import TourTagsCard from 'src/components/collection/tour-tags-card.astro';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import TourTagsCard from 'src/components/page-sections/collection/tour-tags-card.astro';
 import { t } from 'utils/i18n';
 import { getTourTagsListingPath, trailingSlash } from 'utils/permalinks';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';

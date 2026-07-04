@@ -338,6 +338,13 @@ export default defineConfig({
       // Aliases used by the components imported from CloudCannon's
       // astro-component-starter (mirrors that repo's alias map).
       alias: {
+        // astro-icon → @iconify/utils imports the CJS `debug` package, which
+        // the dev server serves raw ("does not provide an export named
+        // 'default'") when reached from client code — the editor-only
+        // registerComponents bundle does exactly that, and the failure
+        // disables ALL visual editing in dev. `debug` is just a logger;
+        // shim it.
+        debug: path.resolve('./src/cloudcannon/debug-shim.mjs'),
         '@components': path.resolve('./src/components'),
         '@component-utils': path.resolve('./src/components/utils'),
         '@core-elements': path.resolve('./src/components/building-blocks/core-elements'),

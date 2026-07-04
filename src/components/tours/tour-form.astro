@@ -1,9 +1,9 @@
 ---
 import type { LanguageCodes } from 'src/schemas/language';
-import Form from '../form/Form.astro';
-import FormField from '../form/FormField.astro';
+import Form from 'src/components/building-blocks/form/Form.astro';
+import FormField from 'src/components/building-blocks/form/FormField.astro';
 import { t } from 'utils/i18n';
-import Prose from '../typography/prose.astro';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
 import FormData from 'src/../data/forms.json';
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 type Props = {

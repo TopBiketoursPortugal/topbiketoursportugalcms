@@ -68,19 +68,19 @@ const ENTER_CLASS: Record<string, string> = {
 const BLOCK_ENTER: Record<string, string> = {
   // Self-animating blocks already move their own children, so the wrapper
   // only adds a soft opacity fade that won't fight those internal transforms.
-  'hero': 'fade',
-  'left-right': 'fade',
-  'featured-tours': 'fade',
-  'featured-testimonials': 'fade',
-  'featured-posts': 'fade',
-  'two-column-markdown': 'fade',
-  'testimonials': 'fade',
-  'collection': 'fade',
-  'timeline': 'fade',
-  'item-grid': 'fade',
-  'features': 'fade',
+  'page-sections/heroes/hero': 'fade',
+  'page-sections/left-right': 'fade',
+  'page-sections/featured-tours': 'fade',
+  'page-sections/featured-testimonials': 'fade',
+  'page-sections/featured-posts': 'fade',
+  'page-sections/two-column-markdown': 'fade',
+  'building-blocks/testimonials': 'fade',
+  'page-sections/collection': 'fade',
+  'page-sections/timeline': 'fade',
+  'building-blocks/item-grid': 'fade',
+  'page-sections/features': 'fade',
   // A photo wall reads beautifully easing up from a hair of scale.
-  'gallery': 'zoom'
+  'page-sections/gallery': 'zoom'
 };
 
 const SURFACES = new Set(['sand', 'soft', 'forest', 'white']);

@@ -1,20 +1,20 @@
 ---
-import CardMedia from '../card/CardMedia.astro';
+import CardMedia from 'src/components/building-blocks/card/CardMedia.astro';
 import { getTourPath, getTourTagPath } from 'utils/permalinks';
-import CardContent, { type CardContentProps } from '../card/CardContent.astro';
-import Card from '../card/Card.astro';
+import CardContent, { type CardContentProps } from 'src/components/building-blocks/card/CardContent.astro';
+import Card from 'src/components/building-blocks/card/Card.astro';
 import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getCollection, type InferEntrySchema } from 'astro:content';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
-import Stack from '../stack/stack.astro';
-import Rating from '../rating/rating.astro';
-import Separator from '../separator/separator.astro';
-import LinkButton from '../linkbutton/linkbutton.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import Rating from 'src/components/building-blocks/rating/rating.astro';
+import Separator from 'src/components/building-blocks/separator/separator.astro';
+import LinkButton from 'src/components/building-blocks/linkbutton/linkbutton.astro';
 import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
-import WeTravelButton from '../wetravel-button/wetravel-button.astro';
+import WeTravelButton from 'src/components/page-sections/wetravel-button/wetravel-button.astro';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;

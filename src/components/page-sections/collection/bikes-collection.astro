@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+import { getBikeCategoryPath } from 'utils/permalinks';
+import BikesCard from './bikes-card.astro';
+
+export type BikesCollectionProps = {
+  title?: string;
+  imageWidths?: number[];
+};
+
+type Props = BikesCollectionProps;
+
+const { title, imageWidths = [400] } = Astro.props;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+
+const categories = await getCollection(
+  'bikeCategories',
+  (c) => c.data.language === language
+);
+
+const allBikes = await getCollection(
+  'bikes',
+  (b) => b.data.language === language
+);
+
+const groupedBikes = categories.map((cat) => ({
+  category: cat,
+  items: allBikes
+    .filter((b) => b.data.category === cat.data.id)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+})).filter((g) => g.items.length > 0);
+---
+
+<Stack layout="vertical" spacing="large" class="w-full">
+  {title ? <Heading as="h2" class="px-6">{title}</Heading> : null}
+  {groupedBikes.map((group) => (
+    <section class="flex flex-col gap-6">
+      <a href={getBikeCategoryPath(group.category, language)} class="flex items-center gap-3 px-6 transition-colors hover:text-amber-600 dark:hover:text-amber-400">
+        <i class:list={[getTagIconClass(group.category.data.icon), 'h-7 w-7 text-amber-600 dark:text-amber-400']} aria-hidden="true" />
+        <Heading as="h3">{group.category.data.name ?? group.category.data.title}</Heading>
+      </a>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {group.items.map((bike) => (
+          <BikesCard bike={bike} language={language} imageWidths={imageWidths} />
+        ))}
+      </div>
+    </section>
+  ))}
+</Stack>

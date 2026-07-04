@@ -1,0 +1,18 @@
+label: Primary Button
+icon: touch_app
+description: Background color
+value:
+  _component: building-blocks/buttons/primary
+  button_text: null
+  button_icon: null
+  button_link: ""
+  background_color: ""
+  hover_brightness: 0.85
+  text_color: ""
+preview:
+  text:
+    - Primary Button
+  icon: touch_app
+picker_preview:
+  text: Primary Button
+  subtext: Background color
