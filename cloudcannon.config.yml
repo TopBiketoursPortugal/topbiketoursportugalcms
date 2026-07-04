@@ -50,6 +50,15 @@ collections_config:
         remove_extra_inputs: false
         name: Paginated collection
         icon: pages
+      page:
+        path: schemas/page.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: Page
+        icon: home
+        new_preview_url: /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/
   blog:
     path: src/content/blog
     glob:
@@ -699,6 +708,15 @@ collections_config:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
+    schemas:
+      default:
+        path: schemas/team-member.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Team Member
+        icon: person
   tourRegions:
     path: src/content/tour-regions
     glob:
