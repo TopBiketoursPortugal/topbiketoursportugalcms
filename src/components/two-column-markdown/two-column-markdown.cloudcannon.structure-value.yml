@@ -1,0 +1,37 @@
+label: Two Column Markdown
+icon: view_column
+description: Displays content in two columns using Markdown.
+value:
+  _component: two-column-markdown
+  column1:
+    text: |
+      ## Column 1
+
+      Enter your Markdown content here.
+    button: null
+  column2:
+    text: |
+      ## Column 1
+
+      Enter your Markdown content here.
+    button: null
+  padding: normal
+  fullwidth: true
+preview:
+  text:
+    - Two Column Markdown
+  icon: view_column
+picker_preview:
+  text: Two Column Markdown
+  subtext: Displays content in two columns using Markdown.
+_inputs_from_glob:
+  - /src/components/two-column-markdown/two-column-markdown.cloudcannon.inputs.yml
+_inputs:
+  column1.button:
+    type: object
+    options:
+      structures: _structures.buttons
+  column2.button:
+    type: object
+    options:
+      structures: _structures.buttons

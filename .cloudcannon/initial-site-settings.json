@@ -6,8 +6,6 @@
     "build_command": "pnpm build",
     "output_path": "dist",
     "preserved_paths": "node_modules",
-    "preserveOutput": false,
-    "includeGit": true,
     "environment_variables": [],
     "manually_configure_urls": false,
     "hugo_version": "0.128.1",

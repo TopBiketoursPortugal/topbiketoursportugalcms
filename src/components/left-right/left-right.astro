@@ -23,7 +23,8 @@ type Props = {
     alt_text: string;
   };
   button: {
-    _bookshop_name: string;
+    _component?: string;
+    _bookshop_name?: string;
     button_text: string;
     button_icon: string;
     button_link: string;
@@ -37,7 +38,9 @@ const block = Astro.props;
 const buttons = import.meta.glob('/src/components/buttons/**/*.astro', {
   eager: true
 });
-const buttonName = block.button?._bookshop_name.split('/').reverse()[0];
+const buttonName = (block.button?._component ?? block.button?._bookshop_name)
+  ?.split('/')
+  .reverse()[0];
 const buttonFilePath = `/src/components/buttons/${buttonName}/${buttonName}.astro`;
 const Button = (buttons[buttonFilePath] as any)?.default;
 
@@ -65,6 +68,7 @@ if (!imageSrc) return;
             widths={[320, 500, 640]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
           />
         )}
         <div class="left-right__text reveal-right reveal-delay-1 intersect:opacity-100 intersect-once order-1 md:order-2">
@@ -72,6 +76,7 @@ if (!imageSrc) return;
             <h2
               class="text-4xl"
               style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
+              data-editable="text" data-prop="heading.heading_text"
             >
               {block.heading?.heading_text}
             </h2>
@@ -79,6 +84,7 @@ if (!imageSrc) return;
           <div
             class="left-right__body mb-4"
             style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+            data-editable="text" data-type="block" data-prop="text.markdown_content"
           >
             <Markdown content={block.text.markdown_content ?? ''} />
           </div>
@@ -92,6 +98,7 @@ if (!imageSrc) return;
             <h2
               class="text-4xl"
               style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
+              data-editable="text" data-prop="heading.heading_text"
             >
               {block.heading?.heading_text}
             </h2>
@@ -99,6 +106,7 @@ if (!imageSrc) return;
           <div
             class="left-right__body mb-4"
             style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+            data-editable="text" data-type="block" data-prop="text.markdown_content"
           >
             <Markdown content={block.text.markdown_content} />
           </div>
@@ -111,6 +119,7 @@ if (!imageSrc) return;
             widths={[320, 500, 640]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
           />
         )}
       </div>

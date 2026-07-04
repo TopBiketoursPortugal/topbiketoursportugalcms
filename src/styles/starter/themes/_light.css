@@ -1,0 +1,50 @@
+/* Light theme */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --cc-color-brand: var(--gray-12);
+  --cc-color-brand-muted: var(--gray-9);
+  --cc-color-brand-subtle: var(--gray-7);
+  --cc-color-brand-on: var(--gray-0);
+
+  --cc-color-text: var(--gray-10);
+  --cc-color-text-strong: var(--gray-12);
+  --cc-color-text-muted: var(--gray-8);
+  --cc-color-text-on-muted: var(--gray-12);
+  --cc-color-text-on-brand: var(--gray-0);
+  --cc-color-text-inverse: var(--gray-0);
+  --cc-color-link: blue;
+  --cc-color-link-hover: darkblue;
+
+  --cc-color-bg: var(--gray-0);
+  --cc-color-bg-surface: var(--gray-1);
+  --cc-color-bg-muted: var(--gray-2);
+  --cc-color-bg-accent: #d5fdff;
+  --cc-color-bg-highlight: #fff9d6;
+  --cc-color-bg-brand: var(--cc-color-brand);
+  --cc-color-bg-brand-muted: var(--cc-color-brand-muted);
+  --cc-color-bg-inverse: var(--gray-12);
+
+  --cc-color-border: var(--gray-4);
+  --cc-color-border-inputs: var(--gray-7);
+  --cc-color-border-strong: var(--gray-10);
+  --cc-color-border-subtle: var(--gray-1);
+
+  --cc-color-state-hover: rgba(0, 0, 0, 0.04);
+  --cc-color-state-active: rgba(0, 0, 0, 0.08);
+  --cc-color-overlay: rgba(0, 0, 0, 0.5);
+
+  --cc-color-focus-ring: rgba(0, 87, 255, 0.4);
+
+  --cc-color-danger: #dc2626;
+  --cc-color-danger-hover: #b91c1c;
+  --cc-color-danger-bg-subtle: #fef2f2;
+  --cc-color-danger-border-subtle: #fca5a5;
+  --cc-color-info: #2563eb;
+  --cc-color-info-bg-subtle: #eff6ff;
+  --cc-color-info-border-subtle: #bfdbfe;
+  --cc-color-success: #16a34a;
+  --cc-color-success-bg-subtle: #dcfce7;
+  --cc-color-error: var(--cc-color-danger);
+}

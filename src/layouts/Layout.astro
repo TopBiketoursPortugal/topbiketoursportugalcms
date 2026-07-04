@@ -235,5 +235,17 @@ if (INDEX === 'false') {
         });
       </script>
     </div>
+    <script>
+      if ((window as any).inEditorMode) {
+        import("../cloudcannon/registerComponents").catch((error) => {
+          console.warn("Failed to load CloudCannon component registration:", error);
+        });
+        // Re-initialises script-driven components (Embla carousels, bento
+        // spans) after editable-regions re-renders strip inline scripts.
+        import("../cloudcannon/editorLiveSync").catch((error) => {
+          console.warn("Failed to load CloudCannon editor live sync:", error);
+        });
+      }
+    </script>
   </body>
 </html>

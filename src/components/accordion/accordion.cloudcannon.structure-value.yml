@@ -1,0 +1,25 @@
+label: Accordion
+icon: notes
+description: Displays expandable content.
+value:
+  _component: accordion
+  container: full
+  expansionType: plus
+  padding: normal
+  type: ""
+  items:
+    - header:
+        text: Q1
+      content: A1
+    - header:
+        text: Q2
+      content: A2
+preview:
+  text:
+    - Accordion
+  icon: notes
+picker_preview:
+  text: Accordion
+  subtext: Displays expandable content.
+_inputs_from_glob:
+  - /src/components/accordion/accordion.cloudcannon.inputs.yml

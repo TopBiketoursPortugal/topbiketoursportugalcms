@@ -1,6 +1,7 @@
 import { defineConfig, envField, passthroughImageService, svgoOptimizer } from 'astro/config';
 import react from '@astrojs/react';
-import bookshop from '@bookshop/astro-bookshop';
+import icon from 'astro-icon';
+import editableRegions from '@cloudcannon/editable-regions/astro-integration';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import AstroPWA from '@vite-pwa/astro';
@@ -115,7 +116,9 @@ export default defineConfig({
     // spotlightjs(),
     // astroMetaTags(),
     react(),
-    bookshop(),
+    editableRegions(),
+    // Heroicons SVG set in src/icons, used by the starter components' <Icon>.
+    icon(),
     // svgs({
     //   input: [
     //     'src/assets/icons/ph/light',
@@ -177,6 +180,10 @@ export default defineConfig({
         navigateFallback: '/404/',
         navigateFallbackDenylist: redirectDenylist,
         globPatterns: ['**/*.{css,js,html,avif,ico}'],
+        // The CloudCannon editor-only registration bundle (eager glob of every
+        // component) is ~14 MB and only loads inside the Visual Editor —
+        // never precache it. Keep the node_modules default when overriding.
+        globIgnores: ['**/node_modules/**/*', '**/registerComponents.*.js'],
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.mode === 'navigate',
@@ -327,5 +334,19 @@ export default defineConfig({
     plugins: [
       tailwindcss() as any,
     ],
+    resolve: {
+      // Aliases used by the components imported from CloudCannon's
+      // astro-component-starter (mirrors that repo's alias map).
+      alias: {
+        '@components': path.resolve('./src/components'),
+        '@component-utils': path.resolve('./src/components/utils'),
+        '@core-elements': path.resolve('./src/components/building-blocks/core-elements'),
+        '@forms': path.resolve('./src/components/building-blocks/forms'),
+        '@wrappers': path.resolve('./src/components/building-blocks/wrappers'),
+        '@page-sections': path.resolve('./src/components/page-sections'),
+        '@builders': path.resolve('./src/components/page-sections/builders'),
+        '@features': path.resolve('./src/components/page-sections/features')
+      }
+    }
   }
 });

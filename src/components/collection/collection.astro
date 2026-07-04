@@ -35,6 +35,10 @@ const CollectionComponent = (collectionComponentImports[componentName] as any)
 ---
 
 <div class="flex flex-col gap-3 px-3 py-1 sm:gap-4 sm:py-3">
-  {title ? <Prose markdown={title} /> : null}
+  {title ? (
+    <div data-editable="text" data-type="block" data-prop="title">
+      <Prose markdown={title} />
+    </div>
+  ) : null}
   <CollectionComponent {...data} />
 </div>

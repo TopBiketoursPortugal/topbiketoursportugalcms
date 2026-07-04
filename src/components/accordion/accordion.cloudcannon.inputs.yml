@@ -1,0 +1,18 @@
+type:
+  type: select
+  hidden: false
+  options:
+    allow_empty: true
+    values:
+      - faq
+  comment: The schema type for the accordion.
+container:
+  hidden: true
+expansionType:
+  hidden: true
+padding:
+  hidden: true
+header.text:
+  type: markdown
+content:
+  type: markdown

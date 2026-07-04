@@ -1,0 +1,22 @@
+label: Timeline
+icon: notes
+description: Timeline
+value:
+  _component: timeline
+  dates:
+    - date: 2015-01-01
+      title: New date for guided tour title
+      subtitle: New date for guided tour title
+      description: New date for guided tour description
+  style:
+    container: centered
+    padding: normal
+preview:
+  text:
+    - Timeline
+  icon: notes
+picker_preview:
+  text: Timeline
+  subtext: Timeline
+_inputs_from_glob:
+  - /src/components/timeline/timeline.cloudcannon.inputs.yml

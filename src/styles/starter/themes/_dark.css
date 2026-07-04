@@ -1,0 +1,50 @@
+/* Dark theme */
+html.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --cc-color-brand: var(--gray-0);
+  --cc-color-brand-muted: var(--gray-3);
+  --cc-color-brand-subtle: var(--gray-5);
+  --cc-color-brand-on: var(--gray-12);
+
+  --cc-color-text: var(--gray-1);
+  --cc-color-text-strong: var(--gray-0);
+  --cc-color-text-muted: var(--gray-0);
+  --cc-color-text-on-muted: var(--gray-0);
+  --cc-color-text-on-brand: var(--gray-12);
+  --cc-color-text-inverse: var(--gray-12);
+  --cc-color-link: #60a5fa;
+  --cc-color-link-hover: #93c5fd;
+
+  --cc-color-bg: var(--gray-12);
+  --cc-color-bg-surface: var(--gray-11);
+  --cc-color-bg-muted: var(--gray-10);
+  --cc-color-bg-accent: rgb(35, 54, 98);
+  --cc-color-bg-highlight: rgb(94, 65, 28);
+  --cc-color-bg-brand: var(--cc-color-brand);
+  --cc-color-bg-brand-muted: var(--cc-color-brand-muted);
+  --cc-color-bg-inverse: var(--gray-1);
+
+  --cc-color-border: var(--gray-8);
+  --cc-color-border-inputs: var(--gray-6);
+  --cc-color-border-strong: var(--gray-4);
+  --cc-color-border-subtle: var(--gray-8);
+
+  --cc-color-state-hover: rgba(255, 255, 255, 0.04);
+  --cc-color-state-active: rgba(255, 255, 255, 0.08);
+  --cc-color-overlay: rgba(0, 0, 0, 0.7);
+
+  --cc-color-focus-ring: rgba(0, 122, 255, 0.4);
+
+  --cc-color-danger: #f87171;
+  --cc-color-danger-hover: #ef4444;
+  --cc-color-danger-bg-subtle: rgba(239, 68, 68, 0.12);
+  --cc-color-danger-border-subtle: rgba(239, 68, 68, 0.4);
+  --cc-color-info: #60a5fa;
+  --cc-color-info-bg-subtle: rgba(59, 130, 246, 0.12);
+  --cc-color-info-border-subtle: rgba(59, 130, 246, 0.4);
+  --cc-color-success: #4ade80;
+  --cc-color-success-bg-subtle: rgba(16, 185, 129, 0.15);
+  --cc-color-error: var(--cc-color-danger);
+}

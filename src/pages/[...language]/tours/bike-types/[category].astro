@@ -130,7 +130,7 @@ const breadcrumbs = [
     <i class:list={[iconClass, 'h-8 w-8 text-amber-600 dark:text-amber-400']} aria-hidden="true" />
     <Heading as="h1">{categoryData.data.title ?? categoryData.data.seo?.page_title}</Heading>
   </div>
-  <PageHelper bookshop:live contentBlocks={categoryData.data.content_blocks ?? []} />
+  <PageHelper contentBlocks={categoryData.data.content_blocks ?? []} />
   {
     bikes.length > 0 ? (
       <div class="px-6">
@@ -181,6 +181,6 @@ const breadcrumbs = [
       </div>
     ) : null
   }
-  <PageHelper bookshop:live contentBlocks={categoryData.data.content_blocks_after ?? []} />
+  <PageHelper contentBlocks={categoryData.data.content_blocks_after ?? []} />
 </Stack>
 </Layout>

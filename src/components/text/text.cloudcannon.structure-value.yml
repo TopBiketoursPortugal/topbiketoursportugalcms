@@ -1,0 +1,23 @@
+label: Text Markdown
+icon: notes
+description: Displays content Markdown.
+value:
+  _component: text
+  text: |
+    ## Column 1
+
+    Enter your Markdown content here.
+  style:
+    container: full
+    padding: normal
+    align: centered
+    tailwind: null
+preview:
+  text:
+    - Text Markdown
+  icon: notes
+picker_preview:
+  text: Text Markdown
+  subtext: Displays content Markdown.
+_inputs_from_glob:
+  - /src/components/text/text.cloudcannon.inputs.yml

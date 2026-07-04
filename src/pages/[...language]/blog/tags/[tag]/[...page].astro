@@ -114,7 +114,7 @@ const breadcrumbs = [
     }
   </slot>
   <div class="py-24">
-    <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks ?? []} />
+    <PageHelper contentBlocks={tagData.data.content_blocks ?? []} />
     <h1
       class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"
     >
@@ -125,6 +125,6 @@ const breadcrumbs = [
       <BlogPagination pagination={pagination} />
       <InfiniteScroll />
     </section>
-    <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks_after ?? []} />
+    <PageHelper contentBlocks={tagData.data.content_blocks_after ?? []} />
   </div>
 </Layout>

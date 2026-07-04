@@ -1,6 +1,14 @@
+/*
+ * Cascade-layer order. Declared before any @import so the starter components'
+ * layers (`components`, `page-sections`) slot in BEFORE Tailwind's
+ * `utilities` — utility classes must still win over imported component CSS.
+ */
+@layer theme, base, components, page-sections, utilities;
+
 @import 'tailwindcss';
 @import './ccElegantBlack.css';
 @import './page-find.css';
+@import './starter/index.css';
 @import 'tw-animate-css';
 @import '@fontsource-variable/figtree';
 @import '@fontsource-variable/bricolage-grotesque';

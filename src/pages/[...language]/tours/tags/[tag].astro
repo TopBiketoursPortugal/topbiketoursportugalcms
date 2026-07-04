@@ -120,7 +120,7 @@ const breadcrumbs = [
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
   <Heading as="h1" class="px-6">{tagData.data.title ?? tagData.data.seo?.page_title}</Heading>
-  <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks ?? []} />
+  <PageHelper contentBlocks={tagData.data.content_blocks ?? []} />
   <div data-tour-filter-container>
     <TourFilterBar
       language={language}
@@ -159,6 +159,6 @@ const breadcrumbs = [
       </div>
     ) : null
   }
-  <PageHelper bookshop:live contentBlocks={tagData.data.content_blocks_after ?? []} />
+  <PageHelper contentBlocks={tagData.data.content_blocks_after ?? []} />
 </Stack>
 </Layout>

@@ -1,5 +1,6 @@
 ---
 import type { VisuallyEditable } from 'src/types';
+import { pascalToKebab } from '../../components/utils/pascalToKebab';
 
 type SharePageProps = {
   contentBlocks: any[];
@@ -7,17 +8,24 @@ type SharePageProps = {
 
 type Props = SharePageProps & VisuallyEditable;
 
+// Component map keyed by kebab path with the filename collapsed when it
+// matches its folder (hero/hero.astro → "hero", page-sections/heroes/
+// hero-split/HeroSplit.astro → "page-sections/heroes/hero-split"). Must stay
+// in sync with registerComponents.ts and renderBlock.astro so `_component`
+// resolves identically in builds and in the Visual Editor.
 const components: Record<string, Function> = {};
 const componentImports = import.meta.glob('../../components/**/*.{jsx,astro}', {
   eager: true
 });
 Object.entries(componentImports).forEach(([path, obj]) => {
   const parts = path.replace('../../components/', '').split('.')[0].split('/');
-  if (parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2]) {
+  const kebabFilename = pascalToKebab(parts[parts.length - 1]);
+  if (parts.length > 1 && kebabFilename === pascalToKebab(parts[parts.length - 2])) {
     parts.pop();
+  } else {
+    parts[parts.length - 1] = kebabFilename;
   }
-  const bookshopName = parts.join('/');
-  components[bookshopName] = (obj as any).default;
+  components[parts.join('/')] = (obj as any).default;
 });
 
 const { contentBlocks } = Astro.props;
@@ -83,7 +91,7 @@ function resolveEnter(block: any, index: number): string {
   // it paints immediately with no entrance.
   if (index === 0) return 'none';
   // Everything else rises gently into place — one cohesive motion language.
-  return BLOCK_ENTER[block._bookshop_name] ?? 'slide-up';
+  return BLOCK_ENTER[block._component || block._type || block._bookshop_name] ?? 'slide-up';
 }
 
 function resolveSurface(block: any): string | null {
@@ -98,7 +106,11 @@ function resolveBleed(block: any, surface: string | null): boolean {
 
 {
   contentBlocks.map((block, i) => {
-    const Component = components[block._bookshop_name];
+    // `_component` is the current discriminator (starter convention);
+    // `_type`/`_bookshop_name` are accepted for not-yet-migrated content.
+    const typeName = block._component || block._type || block._bookshop_name;
+    const Component = components[typeName];
+    if (!Component) return null;
     const enter = resolveEnter(block, i);
     const enterClass = ENTER_CLASS[enter];
     // An explicit `enter: none` (not the index-0 default) is a deliberate
@@ -106,7 +118,7 @@ function resolveBleed(block: any, surface: string | null): boolean {
     const animOff = block.enter === 'none';
     const surface = resolveSurface(block);
     const bleed = resolveBleed(block, surface);
-    return (
+    const content = (
       <div
         class:list={[
           enterClass,
@@ -116,8 +128,15 @@ function resolveBleed(block: any, surface: string | null): boolean {
           { 'dark': surface === 'forest', 'block-bleed': bleed }
         ]}
       >
-        <Component {...block} key={i} />
+        <Component {...block} />
       </div>
+    );
+    
+    // Wrap with editable-component for CloudCannon visual editing
+    return (
+      <editable-component data-component={typeName} data-prop={`content_blocks[${i}]`}>
+        {content}
+      </editable-component>
     );
   })
 }

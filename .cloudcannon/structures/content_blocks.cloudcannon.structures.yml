@@ -1,0 +1,11 @@
+# The page-builder picker for `content_blocks` arrays in page frontmatter.
+# Composed at CloudCannon build time from each component's
+# *.cloudcannon.structure-value.yml (astro-component-starter pattern).
+content_blocks:
+  id_key: _component
+  style: modal
+  values_from_glob:
+    # Site blocks (flat directories under src/components).
+    - /src/components/*/*.cloudcannon.structure-value.yml
+    # Page sections imported from the astro-component-starter.
+    - /src/components/page-sections/**/*.cloudcannon.structure-value.yml

@@ -1,0 +1,18 @@
+label: Featured testimonials/reviews
+icon: chat
+description: Featured testimonials grid
+value:
+  _component: featured-testimonials
+  feature_testimonials: []
+  carousel: false
+  cards_per_row: 3
+  expand_behavior: hover
+preview:
+  text:
+    - Featured testimonials/reviews
+  icon: chat
+picker_preview:
+  text: Featured testimonials/reviews
+  subtext: Featured testimonials grid
+_inputs_from_glob:
+  - /src/components/featured-testimonials/featured-testimonials.cloudcannon.inputs.yml

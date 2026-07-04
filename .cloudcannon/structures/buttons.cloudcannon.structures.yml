@@ -1,0 +1,6 @@
+# Button choices for block fields like hero.buttons and left-right.button.
+buttons:
+  id_key: _component
+  style: select
+  values_from_glob:
+    - /src/components/buttons/*/*.cloudcannon.structure-value.yml

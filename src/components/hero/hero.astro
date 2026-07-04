@@ -24,7 +24,8 @@ interface Props {
   };
   buttons: [
     {
-      _bookshop_name: string;
+      _component?: string;
+      _bookshop_name?: string;
       text: string;
       icon: string;
       link: string;
@@ -88,22 +89,30 @@ const Heading = getHeadingSizeComponent(heading_size);
     >
       {
         heading?.heading_text ? (
-          <Heading class="heading pb-3">{heading?.heading_text}</Heading>
+          <Heading class="heading pb-3" data-editable="text" data-prop="heading.heading_text">{heading?.heading_text}</Heading>
         ) : null
       }
       <div
         class="subheading-text"
         style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
+        data-editable="text" data-type="block" data-prop="subheading.markdown_content"
       >
         <Markdown content={subheading.markdown_content} />
       </div>
-      <div class="buttons">
+      <div class="buttons" data-editable="array" data-prop="buttons">
         {
           buttons.map((button) => {
-            const name = button._bookshop_name.split('/').reverse()[0];
+            const name = (button._component ?? button._bookshop_name)
+              ?.split('/')
+              .reverse()[0];
             const filePath = `/src/components/buttons/${name}/${name}.astro`;
             const Component = (buttonComponents[filePath] as any)?.default;
-            return <Component {...button} />;
+            if (!Component) return null;
+            return (
+              <div data-editable="array-item" style="display: contents;">
+                <Component {...button} />
+              </div>
+            );
           })
         }
       </div>
@@ -118,6 +127,7 @@ const Heading = getHeadingSizeComponent(heading_size);
             widths={[320, 500, 640]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
+            data-editable="image" data-prop="image.image_path"
           />
         )
       }

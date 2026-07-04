@@ -37,8 +37,25 @@ const breadcrumbs = [
   getBlogCrumb(language),
   { name: post.data.title, url: getBlogPermalink(post) }
 ];
+import SnippetsAccordion from 'src/components/snippets/Accordion.astro';
+import SnippetsAlert from 'src/components/snippets/Alert.astro';
+import SnippetsAstroImage from 'src/components/snippets/AstroImage.astro';
+import SnippetsFile from 'src/components/snippets/File.astro';
+import SnippetsTint from 'src/components/snippets/Tint.astro';
+import SnippetsVideo from 'src/components/snippets/Video.astro';
+import SnippetsYoutube from 'src/components/snippets/Youtube.astro';
+
+const snippetComponents = {
+  SnippetsAccordion,
+  SnippetsAlert,
+  SnippetsAstroImage,
+  SnippetsFile,
+  SnippetsTint,
+  SnippetsVideo,
+  SnippetsYoutube
+};
 ---
 
 <PostLayout {...post.data} body={post.body} language={language} breadcrumbs={breadcrumbs}>
-  <Content />
+  <Content components={snippetComponents} />
 </PostLayout>

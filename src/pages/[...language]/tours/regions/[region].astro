@@ -134,7 +134,7 @@ const breadcrumbs = [
   </slot>
 <Stack spacing="large" layout="vertical" class="pt-6">
   <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
-  <PageHelper bookshop:live contentBlocks={regionData.data.content_blocks ?? []} />
+  <PageHelper contentBlocks={regionData.data.content_blocks ?? []} />
   <div data-tour-filter-container>
     <TourFilterBar
       language={language}
@@ -173,6 +173,6 @@ const breadcrumbs = [
       </div>
     ) : null
   }
-  <PageHelper bookshop:live contentBlocks={regionData.data.content_blocks_after ?? []} />
+  <PageHelper contentBlocks={regionData.data.content_blocks_after ?? []} />
   </Stack>
 </Layout>

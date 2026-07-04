@@ -43,13 +43,13 @@ const container = containerVariants({ ...style });
 ---
 
 <div class={container}>
-  <div class="max-w-full px-4 sm:px-12">
+  <div class="max-w-full px-4 sm:px-12" data-editable="array" data-prop="dates">
     {
       dates.map(({ date, title, subtitle, description }) => {
         return (
-          <div class="reveal-up group intersect:opacity-100 intersect-once relative py-6 pl-8 sm:pl-32">
+          <div class="reveal-up group intersect:opacity-100 intersect-once relative py-6 pl-8 sm:pl-32" data-editable="array-item">
             {title ? (
-              <div class="font-caveat text-secondary mb-1 text-2xl font-medium sm:mb-0 dark:text-amber-400">
+              <div class="font-caveat text-secondary mb-1 text-2xl font-medium sm:mb-0 dark:text-amber-400" data-editable="text" data-type="block" data-prop="title">
                 <Prose markdown={title} />
               </div>
             ) : null}
@@ -58,13 +58,14 @@ const container = containerVariants({ ...style });
                 <time
                   data-time={date}
                   class="bg-primary-soft text-primary mb-3 inline-flex h-6 w-32 min-w-fit translate-y-0.5 items-center justify-center rounded-full px-3 text-xs font-semibold uppercase sm:absolute sm:-left-4 sm:mb-0 sm:-ml-5 dark:bg-emerald-900 dark:text-emerald-300"
+                  data-editable="text" data-prop="date"
                 >
                   {dateTimeFormatter.format(new Date(date ?? ''))}
                 </time>
               ) : null}
-              {subtitle ? <Prose markdown={subtitle} /> : null}
+              {subtitle ? <div data-editable="text" data-type="block" data-prop="subtitle"><Prose markdown={subtitle} /></div> : null}
             </div>
-            {description ? <Prose markdown={description} /> : null}
+            {description ? <div data-editable="text" data-type="block" data-prop="description"><Prose markdown={description} /></div> : null}
           </div>
         );
       })

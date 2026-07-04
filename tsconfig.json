@@ -10,7 +10,14 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@component-utils/*": ["src/components/utils/*"],
+      "@core-elements/*": ["src/components/building-blocks/core-elements/*"],
+      "@forms/*": ["src/components/building-blocks/forms/*"],
+      "@wrappers/*": ["src/components/building-blocks/wrappers/*"],
+      "@page-sections/*": ["src/components/page-sections/*"],
+      "@builders/*": ["src/components/page-sections/builders/*"],
+      "@features/*": ["src/components/page-sections/features/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react",

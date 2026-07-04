@@ -44,6 +44,7 @@ const {
         }`,
         containerClass
       )}
+      data-editable="array" data-prop="items"
     >
       {items.map(
         ({
@@ -53,7 +54,7 @@ const {
           callToAction,
           classes: itemClasses = {}
         }) => (
-          <div>
+          <div data-editable="array-item">
             <div
               class={twMerge(
                 'flex max-w-md flex-row',
@@ -82,6 +83,7 @@ const {
                       titleClass,
                       itemClasses?.title
                     )}
+                    data-editable="text" data-prop="title"
                   >
                     {title}
                   </h3>
@@ -94,6 +96,7 @@ const {
                       itemClasses?.description
                     )}
                     set:html={description}
+                    data-editable="text" data-type="block" data-prop="description"
                   />
                 )}
                 {callToAction && (
