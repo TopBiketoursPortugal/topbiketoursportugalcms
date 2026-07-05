@@ -97,16 +97,22 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
             alt={alt ?? title}
             loading="lazy"
             data-pagefind-meta="image[src], image_alt[alt]"
+            data-editable="image"
+            data-prop-src="image.src"
+            data-prop-alt="image.alt"
           />
           <h1
             class="py-4 text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
+            data-editable="text"
+            data-prop="title"
+            data-type="span"
           >
             {title}
           </h1>
           <div
             class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
           >
-            <p class="post-data-list-item">
+            <p class="post-data-list-item" data-editable="text" data-prop="author" data-type="span">
               {author}
             </p>
 
@@ -125,9 +131,11 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
               <p>{readingTime}<span> minutes</span></p>
             </div>
           </div>
-          <Prose class="markdown-text" data-cms-edit="content">
-            <slot />
-          </Prose>
+          <div data-editable="text" data-prop="@content" data-type="block">
+            <Prose class="markdown-text">
+              <slot />
+            </Prose>
+          </div>
         </article>
         {
           filterdRelatedPosts.length > 0 ? (

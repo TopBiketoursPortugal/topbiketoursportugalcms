@@ -1197,7 +1197,7 @@ collections_config:
     name: Post Tags
     singular_name: Post Tag
     icon: tag
-    url: /[relative_base_path]/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/blog/tags/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ""
     preview:
