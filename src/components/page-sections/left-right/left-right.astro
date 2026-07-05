@@ -68,7 +68,7 @@ if (!imageSrc) return;
             widths={[320, 500, 640]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
-            data-editable="image" data-prop="image.image_path"
+            data-editable="image" data-prop-src="image.image_path" data-prop-alt="image.alt_text"
           />
         )}
         <div class="left-right__text reveal-right reveal-delay-1 intersect:opacity-100 intersect-once order-1 md:order-2">
@@ -119,7 +119,7 @@ if (!imageSrc) return;
             widths={[320, 500, 640]}
             sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
             src={imageSrc}
-            data-editable="image" data-prop="image.image_path"
+            data-editable="image" data-prop-src="image.image_path" data-prop-alt="image.alt_text"
           />
         )}
       </div>

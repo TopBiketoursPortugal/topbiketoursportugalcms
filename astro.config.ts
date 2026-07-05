@@ -1,4 +1,5 @@
 import { defineConfig, envField, passthroughImageService, svgoOptimizer } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import react from '@astrojs/react';
 import icon from 'astro-icon';
 import editableRegions from '@cloudcannon/editable-regions/astro-integration';
@@ -129,9 +130,9 @@ export default defineConfig({
     //   ]
     // }),
 
-    mdx({
-      rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
-    }),
+    // v7: markdown/MDX plugins now live on `markdown.processor` (unified());
+    // MDX inherits them via extendMarkdownConfig, so `mdx()` takes no plugins.
+    mdx(),
     AstroPWA({
       mode: 'production',
       base: '/',
@@ -226,7 +227,12 @@ export default defineConfig({
     pagefind()
   ],
   markdown: {
-    rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
+    // v7: the Rust "Satteri" markdown processor is the default, and top-level
+    // `rehypePlugins` no-op under it. Opt back into the unified pipeline so
+    // rehype-external-links keeps running on both .md and (inherited) MDX.
+    processor: unified({
+      rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
+    })
   },
   // redirects: convertJson(
   //   RouteData as {

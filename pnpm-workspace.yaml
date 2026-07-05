@@ -4,23 +4,23 @@ allowBuilds:
   lefthook: true
   sharp: true
 minimumReleaseAgeExclude:
-  - '@astrojs/compiler-binding-darwin-arm64@0.2.1'
-  - '@astrojs/compiler-binding-darwin-x64@0.2.1'
-  - '@astrojs/compiler-binding-linux-arm64-gnu@0.2.1'
-  - '@astrojs/compiler-binding-linux-arm64-musl@0.2.1'
-  - '@astrojs/compiler-binding-linux-x64-gnu@0.2.1'
-  - '@astrojs/compiler-binding-linux-x64-musl@0.2.1'
-  - '@astrojs/compiler-binding-wasm32-wasi@0.2.1'
-  - '@astrojs/compiler-binding-win32-arm64-msvc@0.2.1'
-  - '@astrojs/compiler-binding-win32-x64-msvc@0.2.1'
-  - '@astrojs/compiler-binding@0.2.1'
-  - '@astrojs/compiler-rs@0.2.1'
+  - '@astrojs/compiler-binding-darwin-arm64@0.3.0'
+  - '@astrojs/compiler-binding-darwin-x64@0.3.0'
+  - '@astrojs/compiler-binding-linux-arm64-gnu@0.3.0'
+  - '@astrojs/compiler-binding-linux-arm64-musl@0.3.0'
+  - '@astrojs/compiler-binding-linux-x64-gnu@0.3.0'
+  - '@astrojs/compiler-binding-linux-x64-musl@0.3.0'
+  - '@astrojs/compiler-binding-wasm32-wasi@0.3.0'
+  - '@astrojs/compiler-binding-win32-arm64-msvc@0.3.0'
+  - '@astrojs/compiler-binding-win32-x64-msvc@0.3.0'
+  - '@astrojs/compiler-binding@0.3.0'
+  - '@astrojs/compiler-rs@0.3.0'
   - esbuild@0.24.3
   - svelte@5.51.5
   - svelte@5.53.5
   - svelte@5.55.7
   - esbuild@0.28.1
-  - astro@6.4.8
+  - astro@7.0.6
   - '@astrojs/rss@4.0.19'
 # Security overrides for `pnpm audit` advisories.
 # Ranged keys keep every package within its currently-installed major to avoid
@@ -55,12 +55,10 @@ overrides:
   '@babel/plugin-transform-modules-systemjs@>=7.0.0 <7.29.4': ^7.29.4
   rollup@>=2.0.0 <2.80.0: ^2.80.0
   rollup@>=4.0.0 <4.59.0: ^4.59.0
-  # @astrojs/react@6 bundles @vitejs/plugin-react@5, which floats vite to 8.x
-  # (rolldown). @tailwindcss/vite@4.3.0 breaks under vite 8 ("Missing field
-  # tsconfigPaths"), so pin the whole tree to the v7 line (also covers the vite
-  # security advisory floor, >=7.3.5). astro 6.4.8, plugin-react 5 and the PWA
-  # plugin all support vite ^7, so this unifies on a single resolved vite.
-  vite: ^7.3.6
+  # Astro 7 requires Vite 8 (Rolldown). The former `vite: ^7.3.6` pin existed
+  # because @tailwindcss/vite@4.3.0 broke under Vite 8 ("Missing field
+  # tsconfigPaths"); @tailwindcss/vite@4.3.2 now peer-supports vite ^8, so the
+  # pin is removed and the whole tree resolves onto Vite 8.
   minimatch@<3.1.4: ^3.1.4
   minimatch@>=5.0.0 <5.1.8: ^5.1.8
   brace-expansion@<1.1.13: ^1.1.13
