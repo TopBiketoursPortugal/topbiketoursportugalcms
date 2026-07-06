@@ -25,5 +25,5 @@ const content = (markdown ? md.render(markdown ?? '') : markdown) ?? '';
     className
   ])}
 >
-  <slot set:html={content} />
+  {content ? <Fragment set:html={content} /> : <slot />}
 </Stack>
