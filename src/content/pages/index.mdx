@@ -3,21 +3,23 @@ _schema: page
 id: be794899-5f2b-407f-bc55-271859465a78
 title: 'Top Bike Tours Portugal: Cycling Holidays'
 language: en
+showPageTitle: true
 path:
 seo:
   page_title: Top Bike Tours Portugal | Cycling Trips Portugal
   page_description: >-
     Explore Portugal on a bike tour! Guided & self-guided biking holidays with
     luxury stays, scenic routes & full support. Book your cycling trip today!
-  keywords: >-
-    portugal bike tours,cycling holidays portugal,biketours portugal,bike tours
-    porto,cycling portugal
   canonical_url:
   featured_image: /src/assets/images/bike-tours-in-portugal.jpg
   featured_image_alt: bike tours portugal
   author_twitter_handle: FoldNVisit
   open_graph_type:
   no_index: false
+  metas: []
+  keywords: >-
+    portugal bike tours,cycling holidays portugal,biketours portugal,bike tours
+    porto,cycling portugal
 content_blocks:
   - _component: page-sections/heroes/hero
     background_color: '#ffffff'
@@ -75,8 +77,6 @@ content_blocks:
       - c96a2bcb-443b-4d17-806c-287cc9afeb98
     title: '## Popular Guided and Self-Guided Bike Routes in Portugal'
   - _component: page-sections/text
-    surface: sand
-    enter: slide-up
     text: >-
       ## What people say about us
 
@@ -94,8 +94,9 @@ content_blocks:
       padding: loose
       align: centered
       tailwind:
-  - _component: page-sections/featured-testimonials
     surface: sand
+    enter: slide-up
+  - _component: page-sections/featured-testimonials
     feature_testimonials:
       - 445e20b1-0016-4994-aa8e-8a48d34a3f58
       - 305aa673-5233-401a-a557-680105687935
@@ -106,8 +107,8 @@ content_blocks:
     carousel: true
     cards_per_row: 3
     expand_behavior: button
+    surface: sand
   - _component: page-sections/collection
-    enter: wipe
     type: tour-regions
     title: >-
       ## **Explore our Portugal Bike Tours Regions**
@@ -125,6 +126,7 @@ content_blocks:
       At **Top Bike Tours Portugal**, we create **bike tours** for all types of
       cyclists. Our routes cover many places, from the Atlantic coast to the
       mountains. We explore nature reserves and lively cities.
+    enter: wipe
     layout: overlay
     imageWidths:
       - 300
@@ -191,8 +193,6 @@ content_blocks:
     padding: normal
     fullwidth: true
   - _component: page-sections/text
-    surface: soft
-    enter: slide-up
     text: >-
       &nbsp;
 
@@ -223,6 +223,8 @@ content_blocks:
       padding: normal
       align: leading
       tailwind:
+    surface: soft
+    enter: slide-up
   - _component: page-sections/left-right
     background_color: '#f2f2f2'
     heading:
@@ -385,8 +387,6 @@ content_blocks:
         hover_brightness: 0.85
         text_color: '#ffffff'
   - _component: page-sections/text
-    surface: sand
-    enter: slide-up
     text: >-
       ## New Portugal Bike Tours Blog Posts
 
@@ -405,12 +405,14 @@ content_blocks:
       padding: normal
       align: centered
       tailwind:
-  - _component: page-sections/featured-posts
     surface: sand
-    main_feature: de06c6e2-ea04-4987-b1a7-fef776d9d014
+    enter: slide-up
+  - _component: page-sections/featured-posts
+    main_feature: 8f30be61-438e-4b18-b314-aca396eb070c
     feature_list:
       - 612f560a-7e40-4b27-a1b1-87529d07ed74
       - 87334a76-0b81-4c32-9abc-8045b7a2bf5d
+    surface: sand
   - _component: page-sections/left-right
     background_color: '#ffffff'
     heading:
