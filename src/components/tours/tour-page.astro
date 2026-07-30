@@ -50,6 +50,8 @@ const {
   wetravel
 } = tour;
 
+const durationDays = Number(tour.duration) || 0;
+
 // WeTravel takes priority over FareHarbor/Bokun and the enquiry form when a
 // guided and/or self-guided trip UUID is configured.
 const hasWetravel = !!(wetravel?.guidedUuid || wetravel?.selfGuidedUuid);
@@ -260,16 +262,20 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3"
       >
         {
-          tour.duration ? (
+          durationDays > 0 ? (
             <li class="flex items-center gap-3">
               <i
                 class="icon-[ph--clock-countdown-light] h-5 w-5"
                 aria-hidden="true"
               />
-              {tour.duration}
-              {t('Tour.Info.Duration.Unit.Days', language)} /{' '}
-              {Number(tour.duration ?? 0) - 1}
-              {t('Tour.Info.Duration.Unit.Nights', language)}
+              {durationDays} {t('Tour.Info.Duration.Unit.Days', language)}
+              {durationDays > 1 ? (
+                <>
+                  {' / '}
+                  {durationDays - 1}{' '}
+                  {t('Tour.Info.Duration.Unit.Nights', language)}
+                </>
+              ) : null}
             </li>
           ) : null
         }
