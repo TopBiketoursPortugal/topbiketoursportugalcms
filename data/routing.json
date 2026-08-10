@@ -719,6 +719,16 @@
       "from": "/tours/from-coimbra-to-lisbon-bike-tour/",
       "destination": "/tours/atlantic-coast-to-lisbon-bike-tour/",
       "status": 301
+    },
+    {
+      "from": "/tours/best-porto-to-lisbon-bike-tour/",
+      "destination": "/tours/best-porto-to-lisbon-cycling-holiday/",
+      "status": 301
+    },
+    {
+      "from": "/tours/Best-Foods-on-a-Porto-to-Lisbon-Bike-Tour/",
+      "destination": "/tours/Best-Foods-on-a-Porto-to-Lisbon-cycling-tour-week/",
+      "status": 301
     }
   ]
 }
