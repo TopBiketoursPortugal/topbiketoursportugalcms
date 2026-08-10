@@ -729,6 +729,11 @@
       "from": "/tours/Best-Foods-on-a-Porto-to-Lisbon-Bike-Tour/",
       "destination": "/tours/Best-Foods-on-a-Porto-to-Lisbon-cycling-tour-week/",
       "status": 301
+    },
+    {
+      "from": "/blog/cycling-porto-to-lisbon-bike-tour-guide/",
+      "destination": "/blog/cycling-porto-to-lisbon-cycling-tour-guide/",
+      "status": 301
     }
   ]
 }
