@@ -8,7 +8,7 @@
     "server": "caddy run --config ./caddyfile",
     "start": "pnpm build --site:https://localhost && pnpm server",
     "start:prod": "pnpm build:prod && pnpm server",
-    "build": "astro build",
+    "build": "astro build && pnpm seo:check",
     "build:prod": "astro build --site:https://localhost",
     "build:prod:extra": "astro build && pnpm dlx @divriots/jampack ./dist",
     "preview": "astro preview",
@@ -21,7 +21,9 @@
     "prepare": "lefthook install",
     "mdx-clone": "node ./tools/mdx-clone.mjs",
     "deps": "pnpx npm-check-updates -i",
-    "icons:update": "pwsh ./tools/update-icons.ps1"
+    "icons:update": "pwsh ./tools/update-icons.ps1",
+    "seo:urls": "node tools/seo/url-history.mjs",
+    "seo:check": "node tools/seo/check-urls.mjs"
   },
   "dependencies": {
     "@astrojs/compiler-rs": "0.3.2",
@@ -109,5 +111,5 @@
   "engines": {
     "node": "^24.x"
   },
-  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
+  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }

@@ -1,8 +1,14 @@
 pre-commit:
   commands:
     prettier:
-      glob: "*.{js,ts,astro,json,md,css}"
+      glob: '*.{js,ts,astro,json,md,css}'
       run: pnpm prettier --write {staged_files} && git add {staged_files}
     eslint:
-      glob: "*.{js,ts,astro}"
+      glob: '*.{js,ts,astro}'
       run: pnpm eslint --fix {staged_files} && git add {staged_files}
+    # A slug edit must ship with the 301 that preserves its old URL. Regenerate
+    # and stage it rather than failing — the redirect is derivable, so there is
+    # nothing for the committer to decide.
+    seo-url-history:
+      glob: 'src/content/**/*.{md,mdx}'
+      run: pnpm seo:urls && git add data/url-history.json
