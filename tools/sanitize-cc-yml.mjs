@@ -11,7 +11,6 @@
  *  - icon names not in the Material Symbols enum → mapped/nearest fallback
  */
 import fs from 'fs/promises';
-import path from 'path';
 import { glob } from 'node:fs/promises';
 import yaml from 'yaml';
 

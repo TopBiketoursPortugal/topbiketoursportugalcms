@@ -85,7 +85,7 @@ const hrefAttr: Record<string, string> = {
     // libraries' DOMContentLoaded listeners needlessly.
     const anyUnbound = Array.prototype.some.call(
       btns,
-      (b) => !(b as any).isTracked
+      (b) => !(b as Element & { isTracked?: boolean }).isTracked
     );
     if (!anyUnbound) return;
     document.dispatchEvent(new Event('DOMContentLoaded'));

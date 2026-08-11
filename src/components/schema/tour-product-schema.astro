@@ -1,6 +1,7 @@
 ---
 import SiteData from 'src/../data/site.json';
 import type { LanguageCodes } from 'src/schemas/language';
+import { resolveSchemaImage } from 'utils/schema-image';
 
 type Props = {
   name: string;
@@ -32,6 +33,11 @@ const site = SiteData[language];
 const baseUrl = Astro.site ?? site.site.url;
 const effectivePrice = promoPrice > 0 ? promoPrice : price;
 
+// `image` arrives as the raw frontmatter path (/src/assets/images/foo.jpg),
+// which 404s in production — an unfetchable image makes the Product
+// ineligible for a rich result.
+const imageUrl = await resolveSchemaImage(image, Astro.site);
+
 const schema: Record<string, any> = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -44,7 +50,7 @@ const schema: Record<string, any> = {
 };
 
 if (description) schema.description = description;
-if (image) schema.image = image;
+if (imageUrl) schema.image = imageUrl;
 
 if (effectivePrice > 0) {
   schema.offers = {
@@ -55,7 +61,8 @@ if (effectivePrice > 0) {
     'hasMerchantReturnPolicy': {
       '@type': 'MerchantReturnPolicy',
       'applicableCountry': 'PT',
-      'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
+      'returnPolicyCategory':
+        'https://schema.org/MerchantReturnFiniteReturnWindow',
       'merchantReturnDays': 14
     },
     'shippingDetails': {

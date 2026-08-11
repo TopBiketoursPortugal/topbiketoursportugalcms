@@ -1,6 +1,7 @@
 ---
 import SiteData from 'src/../data/site.json';
 import type { LanguageCodes } from 'src/schemas/language';
+import { resolveSchemaImage } from 'utils/schema-image';
 
 type Props = {
   title: string;
@@ -15,6 +16,7 @@ type Props = {
 const { title, date, author, image, wordCount, language, url } = Astro.props;
 const site = SiteData[language];
 const baseUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const imageUrl = await resolveSchemaImage(image, Astro.site);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -23,7 +25,7 @@ const schema = {
   'datePublished': new Date(date).toISOString(),
   'url': `${baseUrl}${url}`,
   ...(author ? { author: { '@type': 'Person', 'name': author } } : {}),
-  ...(image ? { image: image.startsWith('http') ? image : `${baseUrl}${image}` } : {}),
+  ...(imageUrl ? { image: imageUrl } : {}),
   ...(wordCount ? { wordCount } : {}),
   'publisher': {
     '@type': 'Organization',

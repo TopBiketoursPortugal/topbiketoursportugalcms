@@ -5,8 +5,8 @@ import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
 
 <script is:inline define:vars={{ gtmId: GOOGLE_TAG_MANAGER_ID }}>
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
+  function gtag(...args) {
+    dataLayer.push(args);
   }
 
   function getCookieJson(name) {
@@ -59,9 +59,9 @@ import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
       w[l].push({ 'gtm.start': new Date().getTime(), 'event': 'gtm.js' });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s),
-        dl = l != 'dataLayer' ? '&l=' + l : '';
+      const f = d.getElementsByTagName(s)[0];
+      const j = d.createElement(s);
+      const dl = l != 'dataLayer' ? '&l=' + l : '';
       j.async = true;
       j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
       f.parentNode.insertBefore(j, f);
@@ -73,7 +73,7 @@ import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
   // grants are handled by loadWhatConverts() in CookieConsentConfig.ts.
   if (consentCookieValue && hasAnalytics && !window._wcLoaded) {
     window._wcLoaded = true;
-    var wc = document.createElement('script');
+    const wc = document.createElement('script');
     wc.async = true;
     wc.defer = true;
     wc.src = '//s.ksrndkehqnwntyxlhgto.com/137152.js';

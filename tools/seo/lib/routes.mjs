@@ -112,7 +112,9 @@ export function readFrontmatter(source, label = '<memory>') {
   try {
     return parseYaml(match[1]) ?? {};
   } catch (error) {
-    throw new Error(`Invalid YAML frontmatter in ${label}: ${error.message}`);
+    throw new Error(`Invalid YAML frontmatter in ${label}: ${error.message}`, {
+      cause: error
+    });
   }
 }
 

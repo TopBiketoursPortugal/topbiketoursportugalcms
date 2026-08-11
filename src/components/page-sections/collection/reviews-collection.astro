@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Stack from 'src/components/building-blocks/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import Grid from 'src/components/building-blocks/grid/grid.astro';
-import ReviewListSchema from './review-list-schema.astro';
 import ReviewItem from './review-item.astro';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 import { getAuthorName } from '@utils/get-author-name';
@@ -48,4 +47,3 @@ const items = (tours.flatMap((t) => t.data.reviews ?? []) ?? [])
     }
   </Grid>
 </Stack>
-<ReviewListSchema items={tours} />

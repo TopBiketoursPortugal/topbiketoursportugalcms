@@ -6,7 +6,12 @@ import InfiniteScroll from 'src/components/blog/infinite-scroll.astro';
 import Layout from 'src/layouts/Layout.astro';
 import PageHelper from 'src/shared/astro/page.astro';
 import { getCollection } from 'astro:content';
-import { getBlogIndexPage, getBlogTagLanguagesAlternates, getBlogTagPath, trailingSlash } from 'utils/permalinks';
+import {
+  getBlogIndexPage,
+  getBlogTagLanguagesAlternates,
+  getBlogTagPath,
+  trailingSlash
+} from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import LanguageData from 'src/../data/languages.json';
 import { t } from 'utils/i18n';
@@ -25,8 +30,9 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
     const langTags = postTags.filter((t) => t.data.language === language);
 
     const page = pageIndex.filter((p) => p.data.language === language)[0];
+    const pageData = page?.data;
     const pageSize =
-      page?.data && 'page_size' in page?.data ? page?.data.page_size : 6;
+      pageData && 'page_size' in pageData ? pageData.page_size : 6;
 
     return langTags.flatMap((tag) => {
       const tagPosts = filteredPosts
@@ -41,8 +47,11 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
         params: {
           language: language === 'en' ? undefined : language,
           tag:
-            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true }) +
-            trailingSlash
+            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
         },
         props: { tagData: tag },
         pageSize
@@ -65,9 +74,10 @@ const blogTagPageTitle = pageNumberStr
       .replace('$2', '1');
 
 const pageNumber = pageNumberStr ? parseInt(pageNumberStr) : 1;
-const blogTagPageDescription = pageNumber > 1
-  ? `${tagData.data.seo?.page_description ?? tagName} - ${t('Blog.Tags.Paged.Page', language)} ${pageNumber}`
-  : (tagData.data.seo?.page_description ?? blogTagPageTitle);
+const blogTagPageDescription =
+  pageNumber > 1
+    ? `${tagData.data.seo?.page_description ?? tagName} - ${t('Blog.Tags.Paged.Page', language)} ${pageNumber}`
+    : (tagData.data.seo?.page_description ?? blogTagPageTitle);
 
 const seo = {
   page_title: blogTagPageTitle,
@@ -80,10 +90,14 @@ const filteredPosts = pagination.data;
 const hrefs = await getBlogTagLanguagesAlternates(tagData, Astro.site);
 const currentPageUrl = Astro.url.href;
 const hrefsWithSelf = hrefs.some((h) => h.hreflang === language)
-  ? hrefs.map((h) => (h.hreflang === language ? { ...h, href: currentPageUrl } : h))
+  ? hrefs.map((h) =>
+      h.hreflang === language ? { ...h, href: currentPageUrl } : h
+    )
   : [...hrefs, { href: currentPageUrl, hreflang: language }];
 const defaultLocale = LanguageData.en;
-const defaultHref = hrefsWithSelf.filter((h) => h.hreflang === defaultLocale.code)[0];
+const defaultHref = hrefsWithSelf.filter(
+  (h) => h.hreflang === defaultLocale.code
+)[0];
 const breadcrumbs = [
   getHomeCrumb(language),
   getBlogCrumb(language),
@@ -128,6 +142,9 @@ const breadcrumbs = [
       <BlogPagination pagination={pagination} />
       <InfiniteScroll />
     </section>
-    <PageHelper contentBlocks={tagData.data.content_blocks_after ?? []} sectionsKey="content_blocks_after" />
+    <PageHelper
+      contentBlocks={tagData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
+    />
   </div>
 </Layout>

@@ -59,9 +59,7 @@ export function getTourTagPath(
   return sanitizeUrl(path);
 }
 
-export function getTourTagsListingPath(
-  language: LanguageCodes = 'en'
-): string {
+export function getTourTagsListingPath(language: LanguageCodes = 'en'): string {
   const tourPermalink = PermalinkData.tours[language];
   return sanitizeUrl(
     `${getBasePath(language)}${tourPermalink}/tags${trailingSlash}`
@@ -90,7 +88,7 @@ export async function getRiderLevelLanguagesAlternates(
   riderLevel: CollectionEntry<'tourRiderLevels'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = riderLevel.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(riderLevel.filePath);
   const alternateRiderLevels =
     (await getCollection(
       'tourRiderLevels',
@@ -127,7 +125,7 @@ export async function getBikeCategoryLanguagesAlternates(
   bikeCategory: CollectionEntry<'bikeCategories'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = bikeCategory.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(bikeCategory.filePath);
   const alternateCategories =
     (await getCollection(
       'bikeCategories',
@@ -148,6 +146,23 @@ export function getBlogTagPath(
 ): string {
   const path = `${getBasePath(language)}blog/tags/${slugify(tag.data.path ?? tag.data.name ?? tag.data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`;
   return sanitizeUrl(path);
+}
+
+/**
+ * Basename of a collection entry's source file, used to match the same
+ * logical entry across per-language content folders when building hreflang
+ * alternates. Every entry these collections load carries a `filePath`; one
+ * missing it is a content bug — fail loudly rather than silently produce
+ * wrong (or missing) alternates for it.
+ */
+function entryFileKey(filePath: string | undefined): string {
+  const key = filePath?.split('/').at(-1);
+  if (!key) {
+    throw new Error(
+      `Collection entry is missing a filePath — cannot resolve its language alternates`
+    );
+  }
+  return key;
 }
 
 function trim(str = '', ch?: string): string {
@@ -205,7 +220,7 @@ export async function getTeamLanguagesAlternates(
   pageEntry: CollectionEntry<'team'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(pageEntry.filePath);
   const alternatePages =
     (await getCollection(
       'team',
@@ -229,7 +244,7 @@ export async function getPageLanguagesAlternates(
   pageEntry: CollectionEntry<'pages'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = pageEntry.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(pageEntry.filePath);
   const alternatePages =
     (await getCollection(
       'pages',
@@ -266,7 +281,7 @@ export async function getPostLanguagesAlternates(
   post: CollectionEntry<'blog'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = post.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(post.filePath);
   const alternatePosts =
     (await getCollection(
       'blog',
@@ -290,7 +305,7 @@ export async function getTourTagLanguagesAlternates(
   tourTag: CollectionEntry<'tourTags'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = tourTag.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(tourTag.filePath);
   const alternateTourTags =
     (await getCollection(
       'tourTags',
@@ -311,12 +326,11 @@ export async function getBlogTagLanguagesAlternates(
   postTag: CollectionEntry<'postTags'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = postTag.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(postTag.filePath);
   const alternatePostTags =
     (await getCollection(
       'postTags',
-      (t) =>
-        t.filePath?.split('/').at(-1) === alternateEntryName
+      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
     )) ?? [];
 
   return alternatePostTags.map(({ data: alternatePostTag }) => ({
@@ -331,7 +345,7 @@ export async function getTourRegionLanguagesAlternates(
   tourRegion: CollectionEntry<'tourRegions'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = tourRegion.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(tourRegion.filePath);
   const alternateTourRegions =
     (await getCollection(
       'tourRegions',
@@ -352,7 +366,7 @@ export async function getTourLanguagesAlternates(
   tour: CollectionEntry<'tours'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = tour.filePath?.split('/').at(-1)!;
+  const alternateEntryName = entryFileKey(tour.filePath);
   const alternateTours =
     (await getCollection(
       'tours',

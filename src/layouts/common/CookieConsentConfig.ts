@@ -17,7 +17,9 @@ export const SERVICE_SECURITY_STORAGE = 'security_storage';
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataLayer: Record<string, any>[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag: (...args: any[]) => void;
     _gtmLoaded?: boolean;
     _wcLoaded?: boolean;
@@ -29,14 +31,18 @@ function loadGTM() {
   if (window._gtmLoaded) return;
   window._gtmLoaded = true;
 
-  (function (w: any, d: Document, s: string, l: string, i: string) {
-    w[l] = w[l] || []; w[l].push({
-      'gtm.start':
-        new Date().getTime(), event: 'gtm.js'
-    }); var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s) as HTMLScriptElement, dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f?.parentNode?.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    'event': 'gtm.js'
+  });
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src =
+    'https://www.googletagmanager.com/gtm.js?id=' + GOOGLE_TAG_MANAGER_ID;
+  const firstScript = document.getElementsByTagName('script')[0];
+  firstScript?.parentNode?.insertBefore(script, firstScript);
 }
 
 // WhatConverts lead-source tracker. Sets attribution cookies, so unlike GTM
@@ -153,7 +159,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Analytics',
               description:
-                'Cookies used for analytics help collect data that allows services to understand how users interact with a particular service. These insights allow services both to improve content and to build better features that improve the user\'s experience.',
+                "Cookies used for analytics help collect data that allows services to understand how users interact with a particular service. These insights allow services both to improve content and to build better features that improve the user's experience.",
               linkedCategory: CAT_ANALYTICS,
               cookieTable: {
                 headers: {
@@ -195,7 +201,7 @@ export const config: CookieConsentConfig = {
             {
               title: 'Functionality',
               description:
-                'Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user\'s choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user\'s session, such as the content of a shopping cart.',
+                "Cookies used for functionality allow users to interact with a service or site to access features that are fundamental to that service. Things considered fundamental to the service include preferences like the user's choice of language, product optimizations that help maintain and improve a service, and maintaining information relating to a user's session, such as the content of a shopping cart.",
               linkedCategory: CAT_FUNCTIONALITY
             },
             {

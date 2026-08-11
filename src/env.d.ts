@@ -14,7 +14,11 @@ declare module '@bookshop/astro-bookshop' {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataLayer: Record<string, any>[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag: (...args: any[]) => void;
+    // Set by CloudCannon's editor bundle when the Visual Editor is active.
+    inEditorMode?: boolean;
   }
 }

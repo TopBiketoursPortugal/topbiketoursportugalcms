@@ -39,22 +39,26 @@ import { registerAstroComponent } from "@cloudcannon/editable-regions/astro";
   for (const file of bookshopFiles) {
     const content = await fs.readFile(file, 'utf8');
     const doc = yaml.parse(content);
-    
+
     // Determine the component name
     const compDir = path.dirname(file);
     const compName = path.basename(compDir); // e.g., 'youtube'
     const astroFile = path.join(compDir, `${compName}.astro`);
-    
+
     let hasAstro = false;
     try {
       await fs.access(astroFile);
       hasAstro = true;
-    } catch {}
+    } catch {
+      // No .astro file for this component; hasAstro stays false.
+    }
 
     if (hasAstro) {
       // e.g. import Youtube from "@/components/youtube/youtube.astro";
       const importName = compName.replace(/[^a-zA-Z0-9]/g, '');
-      const relPath = path.relative(path.join(rootDir, 'src', 'cloudcannon'), astroFile).replace(/\\/g, '/');
+      const relPath = path
+        .relative(path.join(rootDir, 'src', 'cloudcannon'), astroFile)
+        .replace(/\\/g, '/');
       registerTsContent += `\nimport ${importName} from "${relPath}";\n`;
       registerTsContent += `registerAstroComponent("${compName}", ${importName});\n`;
     }
@@ -66,9 +70,11 @@ import { registerAstroComponent } from "@cloudcannon/editable-regions/astro";
         _type: compName,
         ...blueprint
       },
-      ...((doc.spec && doc.spec.label) ? { label: doc.spec.label } : {}),
-      ...((doc.spec && doc.spec.icon) ? { icon: doc.spec.icon } : {}),
-      ...((doc.spec && doc.spec.description) ? { description: doc.spec.description } : {}),
+      ...(doc.spec && doc.spec.label ? { label: doc.spec.label } : {}),
+      ...(doc.spec && doc.spec.icon ? { icon: doc.spec.icon } : {}),
+      ...(doc.spec && doc.spec.description
+        ? { description: doc.spec.description }
+        : {})
     };
     if (doc._inputs) {
       structures[compName]._inputs = doc._inputs;
@@ -76,11 +82,17 @@ import { registerAstroComponent } from "@cloudcannon/editable-regions/astro";
   }
 
   // Write registerComponents.ts
-  await fs.writeFile(path.join(rootDir, 'src/cloudcannon/registerComponents.ts'), registerTsContent);
+  await fs.writeFile(
+    path.join(rootDir, 'src/cloudcannon/registerComponents.ts'),
+    registerTsContent
+  );
   console.log('Wrote registerComponents.ts');
 
   // We write the structures to a JSON file so we can paste it into cloudcannon.config.yml manually or automatically.
-  await fs.writeFile(path.join(schemasDir, 'migrated-structures.json'), JSON.stringify(structures, null, 2));
+  await fs.writeFile(
+    path.join(schemasDir, 'migrated-structures.json'),
+    JSON.stringify(structures, null, 2)
+  );
   console.log('Wrote migrated-structures.json');
 }
 

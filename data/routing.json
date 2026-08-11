@@ -664,6 +664,16 @@
       "from": "/blog/cycling-porto-to-lisbon-bike-tour-guide/",
       "destination": "/blog/cycling-porto-to-lisbon-cycling-tour-guide/",
       "status": 301
+    },
+    {
+      "from": "/tours/",
+      "destination": "/bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/tours/",
+      "destination": "/pt/passeios-de-bicicleta-portugal/",
+      "status": 301
     }
   ]
 }

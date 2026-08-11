@@ -31,7 +31,7 @@ function replaceGuidInFile(file) {
 
   // Regex to match "id: GUID" (where GUID is a placeholder, not a real GUID)
   const updatedContent = content.replace(
-    /(id\: ['"]?)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(['"]?)/gis,
+    /(id: ['"]?)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(['"]?)/gis,
     `$1${newGuid}$2`
   );
 

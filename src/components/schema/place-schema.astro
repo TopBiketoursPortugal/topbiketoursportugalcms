@@ -1,6 +1,7 @@
 ---
 import SiteData from 'src/../data/site.json';
-import type { LanguageCodes } from 'src/schemas/language';
+import { type LanguageCodes } from 'src/schemas/language';
+import { resolveSchemaImage } from 'utils/schema-image';
 
 type Props = {
   name: string;
@@ -29,7 +30,8 @@ const schema: Record<string, any> = {
 };
 
 if (description) schema.description = description;
-if (image) schema.image = image;
+const imageUrl = await resolveSchemaImage(image, Astro.site);
+if (imageUrl) schema.image = imageUrl;
 ---
 
 <script

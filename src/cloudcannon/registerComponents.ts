@@ -14,9 +14,10 @@ import { registerAstroComponent } from '@cloudcannon/editable-regions/astro';
 import '@cloudcannon/editable-regions/astro-react-renderer';
 import { pascalToKebab } from '../components/utils/pascalToKebab';
 
-const componentModules = import.meta.glob('../components/**/*.astro', {
-  eager: true
-});
+const componentModules = import.meta.glob<{ default: unknown }>(
+  '../components/**/*.astro',
+  { eager: true }
+);
 
 for (const [path, module] of Object.entries(componentModules)) {
   const match = path.match(/\.\.\/components\/(.+)\.astro$/);
@@ -31,10 +32,7 @@ for (const [path, module] of Object.entries(componentModules)) {
   const registrationPath =
     kebabFilename === kebabParent
       ? parts.slice(0, -1).join('/')
-      : parts
-          .slice(0, -1)
-          .concat(kebabFilename)
-          .join('/');
+      : parts.slice(0, -1).concat(kebabFilename).join('/');
 
-  registerAstroComponent(registrationPath, (module as any).default);
+  registerAstroComponent(registrationPath, module.default);
 }

@@ -4,7 +4,12 @@ import { getCollection, render } from 'astro:content';
 import TourPage from 'src/components/tours/tour-page.astro';
 import Layout, { type SEOProps } from 'src/layouts/Layout.astro';
 import defaultImage from 'src/assets/images/team/sergio-marques.jpg';
-import { getTourLanguagesAlternates, getTourPath, getTourRegionsPath, trailingSlash } from 'utils/permalinks';
+import {
+  getTourLanguagesAlternates,
+  getTourPath,
+  getTourRegionsPath,
+  trailingSlash
+} from 'utils/permalinks';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
@@ -37,11 +42,14 @@ const { Content } = await render(tour);
 const seo = {
   no_index: false,
   page_title: tour.data.seo?.page_title ?? tour.data.title,
-  page_description: tour.data.seo?.page_description ?? tour.data.description ?? tour.data.title,
+  page_description:
+    tour.data.seo?.page_description ?? tour.data.description ?? tour.data.title,
   open_graph_type: 'product',
   author_twitter_handle: null,
   featured_image: tour.data.image?.src ?? defaultImage.src,
-  featured_image_alt: tour.data.image?.src ?? tour.data.title,
+  // Alt text, not the file path — this was publishing og:image:alt as
+  // "/src/assets/images/pinhao3.jpg".
+  featured_image_alt: tour.data.image?.alt ?? tour.data.title,
   canonical_url: null
 } satisfies SEOProps;
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
@@ -49,17 +57,34 @@ const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const tourRegion = tour.data.region
-  ? (await getCollection('tourRegions', (r) => r.data.id === tour.data.region && r.data.language === language))[0]
+  ? (
+      await getCollection(
+        'tourRegions',
+        (r) => r.data.id === tour.data.region && r.data.language === language
+      )
+    )[0]
   : null;
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
-  ...(tourRegion ? [{ name: tourRegion.data.name ?? tourRegion.data.title, url: getTourRegionsPath(tourRegion, language) }] : []),
+  ...(tourRegion
+    ? [
+        {
+          name: tourRegion.data.name ?? tourRegion.data.title,
+          url: getTourRegionsPath(tourRegion, language)
+        }
+      ]
+    : []),
   { name: tour.data.title, url: getTourPath(tour.data, language) }
 ];
 ---
 
-<Layout title={tour.data.title} seo={seo} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+<Layout
+  title={tour.data.title}
+  seo={seo}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
   <slot slot="head">
     {
       defaultHref ? (

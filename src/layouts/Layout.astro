@@ -128,17 +128,19 @@ if (INDEX === 'false') {
          No cookies, no network — the tracker itself (137152.js) is loaded by
          CookieConsent only after analytics consent. -->
     <script is:inline>
-      var $wc_load = function (a) {
-          return JSON.parse(JSON.stringify(a));
-        },
-        $wc_leads = $wc_leads || {
-          doc: {
-            url: $wc_load(document.URL),
-            ref: $wc_load(document.referrer),
-            search: $wc_load(location.search),
-            hash: $wc_load(location.hash)
-          }
-        };
+      window.$wc_load = function (a) {
+        return JSON.parse(JSON.stringify(a));
+      };
+      // The `|| {...}` guards against this bootstrap running twice on the
+      // same page (e.g. if the layout is ever nested/duplicated).
+      window.$wc_leads = window.$wc_leads || {
+        doc: {
+          url: window.$wc_load(document.URL),
+          ref: window.$wc_load(document.referrer),
+          search: window.$wc_load(location.search),
+          hash: window.$wc_load(location.hash)
+        }
+      };
     </script>
   </head>
   <body
@@ -186,7 +188,7 @@ if (INDEX === 'false') {
             '.tour-card [style*="view-transition-name"]'
           )
           .forEach((el) => (el.style.viewTransitionName = ''));
-        const source = (event as any).sourceElement;
+        const source = event.sourceElement;
         const link =
           source instanceof Element ? source.closest('a[href]') : null;
         // Only the card's main overlay link, not tag links inside the card
@@ -197,7 +199,7 @@ if (INDEX === 'false') {
 
       document.addEventListener('astro:before-swap', (event) => {
         if (reduceMotion.matches) return;
-        const newDocument = (event as any).newDocument as Document;
+        const newDocument = event.newDocument;
         // Clear stale inline names; duplicates abort the whole transition.
         newDocument
           .querySelectorAll<HTMLElement>(
@@ -206,8 +208,7 @@ if (INDEX === 'false') {
           .forEach((el) => (el.style.viewTransitionName = ''));
         // Leaving a detail page: morph the hero back into its list card.
         if (!document.querySelector('[data-tour-hero]')) return;
-        const path = ((event as any).from?.pathname ??
-          location.pathname) as string;
+        const path = event.from?.pathname ?? location.pathname;
         const link =
           newDocument.querySelector(`.tour-card a[href="${path}"]`) ??
           newDocument.querySelector(
@@ -236,14 +237,17 @@ if (INDEX === 'false') {
       </script>
     </div>
     <script>
-      if ((window as any).inEditorMode) {
-        import("../cloudcannon/registerComponents").catch((error) => {
-          console.warn("Failed to load CloudCannon component registration:", error);
+      if (window.inEditorMode) {
+        import('../cloudcannon/registerComponents').catch((error) => {
+          console.warn(
+            'Failed to load CloudCannon component registration:',
+            error
+          );
         });
         // Re-initialises script-driven components (Embla carousels, bento
         // spans) after editable-regions re-renders strip inline scripts.
-        import("../cloudcannon/editorLiveSync").catch((error) => {
-          console.warn("Failed to load CloudCannon editor live sync:", error);
+        import('../cloudcannon/editorLiveSync').catch((error) => {
+          console.warn('Failed to load CloudCannon editor live sync:', error);
         });
       }
     </script>
