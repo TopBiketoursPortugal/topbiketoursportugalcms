@@ -1,4 +1,8 @@
-import { getCollection, type CollectionEntry } from 'astro:content';
+import {
+  getCollection,
+  type CollectionEntry,
+  type CollectionKey
+} from 'astro:content';
 import slugify from 'slugify';
 import { type LanguageCodes } from 'src/schemas/language';
 import type { TourSchema } from 'src/schemas/tours';
@@ -88,12 +92,10 @@ export async function getRiderLevelLanguagesAlternates(
   riderLevel: CollectionEntry<'tourRiderLevels'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(riderLevel.filePath);
-  const alternateRiderLevels =
-    (await getCollection(
-      'tourRiderLevels',
-      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternateRiderLevels = await languageAlternates(
+    'tourRiderLevels',
+    riderLevel.filePath
+  );
 
   return alternateRiderLevels.map(({ data: alternate }) => ({
     href: sanitizeUrl(
@@ -125,12 +127,10 @@ export async function getBikeCategoryLanguagesAlternates(
   bikeCategory: CollectionEntry<'bikeCategories'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(bikeCategory.filePath);
-  const alternateCategories =
-    (await getCollection(
-      'bikeCategories',
-      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternateCategories = await languageAlternates(
+    'bikeCategories',
+    bikeCategory.filePath
+  );
 
   return alternateCategories.map(({ data: alternate }) => ({
     href: sanitizeUrl(
@@ -163,6 +163,44 @@ function entryFileKey(filePath: string | undefined): string {
     );
   }
   return key;
+}
+
+/**
+ * CloudCannon's default name for a new entry, `new-<collection>-<n>`. It
+ * numbers each language folder independently, so two files sharing one of
+ * these names are different items rather than a translation pair — pairing on
+ * it would tell Google that unrelated posts are translations of each other.
+ *
+ * Mirrors tools/seo/lib/alternates.mjs, which applies the same rule to the
+ * sitemap; tools/seo/audit-dist.mjs fails the build if the two disagree.
+ */
+const UNNAMED_ENTRY = /^new-[a-z]+(-\d+)?$/;
+
+function isUnnamedEntry(fileKey: string): boolean {
+  return UNNAMED_ENTRY.test(fileKey.replace(/\.mdx?$/, ''));
+}
+
+/**
+ * Every entry that is the same logical item as `filePath` in some language,
+ * including that entry itself — hreflang annotations must be self-referencing.
+ *
+ * Returns nothing unless at least two languages are present. A page that
+ * points only at itself is not a translation set: Google ignores it, and
+ * emitting one would put the page's markup at odds with the sitemap, which
+ * leaves those URLs unannotated.
+ */
+async function languageAlternates<C extends CollectionKey>(
+  collection: C,
+  filePath: string | undefined
+): Promise<CollectionEntry<C>[]> {
+  const fileKey = entryFileKey(filePath);
+  if (isUnnamedEntry(fileKey)) return [];
+
+  const entries = await getCollection(
+    collection,
+    (entry: CollectionEntry<C>) => entry.filePath?.split('/').at(-1) === fileKey
+  );
+  return (entries ?? []).length > 1 ? entries : [];
 }
 
 function trim(str = '', ch?: string): string {
@@ -220,14 +258,7 @@ export async function getTeamLanguagesAlternates(
   pageEntry: CollectionEntry<'team'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(pageEntry.filePath);
-  const alternatePages =
-    (await getCollection(
-      'team',
-      (t) =>
-        // t.data.language !== pageEntry.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternatePages = await languageAlternates('team', pageEntry.filePath);
 
   return alternatePages.map((page) => {
     const { data: alternate } = page;
@@ -244,14 +275,7 @@ export async function getPageLanguagesAlternates(
   pageEntry: CollectionEntry<'pages'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = entryFileKey(pageEntry.filePath);
-  const alternatePages =
-    (await getCollection(
-      'pages',
-      (t) =>
-        // t.data.language !== pageEntry.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternatePages = await languageAlternates('pages', pageEntry.filePath);
 
   return alternatePages.map((page) => {
     const { data: alternate } = page;
@@ -281,20 +305,15 @@ export async function getPostLanguagesAlternates(
   post: CollectionEntry<'blog'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = entryFileKey(post.filePath);
-  const alternatePosts =
-    (await getCollection(
-      'blog',
-      (t) =>
-        // t.data.language !== post.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternatePosts = await languageAlternates('blog', post.filePath);
 
   return alternatePosts.map((alternatePost) => {
     const { data: alternate } = alternatePost;
     return {
+      // `blog/`, not `posts/` — this built URLs the site has never served.
+      // Nothing caught it because no page passed these alternates to a layout.
       href: sanitizeUrl(
-        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}posts/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}blog/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
       ),
       hreflang: alternate.language
     };
@@ -305,14 +324,10 @@ export async function getTourTagLanguagesAlternates(
   tourTag: CollectionEntry<'tourTags'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(tourTag.filePath);
-  const alternateTourTags =
-    (await getCollection(
-      'tourTags',
-      (t) =>
-        // t.data.language !== tourTag.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternateTourTags = await languageAlternates(
+    'tourTags',
+    tourTag.filePath
+  );
 
   return alternateTourTags.map(({ data: alternateTourTag }) => ({
     href: sanitizeUrl(
@@ -326,12 +341,10 @@ export async function getBlogTagLanguagesAlternates(
   postTag: CollectionEntry<'postTags'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(postTag.filePath);
-  const alternatePostTags =
-    (await getCollection(
-      'postTags',
-      (t) => t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternatePostTags = await languageAlternates(
+    'postTags',
+    postTag.filePath
+  );
 
   return alternatePostTags.map(({ data: alternatePostTag }) => ({
     href: sanitizeUrl(
@@ -345,14 +358,10 @@ export async function getTourRegionLanguagesAlternates(
   tourRegion: CollectionEntry<'tourRegions'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ) {
-  const alternateEntryName = entryFileKey(tourRegion.filePath);
-  const alternateTourRegions =
-    (await getCollection(
-      'tourRegions',
-      (t) =>
-        // t.data.language !== tourRegion.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternateTourRegions = await languageAlternates(
+    'tourRegions',
+    tourRegion.filePath
+  );
 
   return alternateTourRegions.map(({ data: alternateTourRegion }) => ({
     href: sanitizeUrl(
@@ -366,14 +375,7 @@ export async function getTourLanguagesAlternates(
   tour: CollectionEntry<'tours'>,
   site: URL = new URL('https://topwalkingtoursportual.com')
 ): Promise<ReadonlyArray<HrefLang>> {
-  const alternateEntryName = entryFileKey(tour.filePath);
-  const alternateTours =
-    (await getCollection(
-      'tours',
-      (t) =>
-        // t.data.language !== tour.data.language &&
-        t.filePath?.split('/').at(-1) === alternateEntryName
-    )) ?? [];
+  const alternateTours = await languageAlternates('tours', tour.filePath);
 
   return alternateTours.map(({ data: alternateTour }) => ({
     href: sanitizeUrl(

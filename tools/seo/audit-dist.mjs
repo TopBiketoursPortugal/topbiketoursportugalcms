@@ -252,6 +252,36 @@ if (missingAlternates > 0) {
   );
 }
 
+// The sitemap builds its alternates from the content tree (tools/seo/lib/
+// alternates.mjs) while the pages build theirs from the content collections
+// (utils/permalinks.ts). Two sources for one signal drift silently, and Google
+// treats a page whose markup and sitemap disagree as unresolved. Diff them.
+const canonicalSet = (links) =>
+  [...new Set(links.map(({ lang, href }) => `${lang} ${href}`))].sort().join();
+
+for (const [loc, expected] of alternates) {
+  const path = new URL(loc).pathname;
+  const file = `${path.replace(/^\//, '')}${path.endsWith('/') ? '' : '/'}index.html`;
+  if (!distPaths.has(file)) continue; // already reported as sitemap-404
+
+  const html = readFileSync(join(DIST, file), 'utf8');
+  const onPage = [...html.matchAll(/<link\b[^>]*\brel="alternate"[^>]*>/g)]
+    .map(([tag]) => ({
+      lang: /\bhreflang="([^"]+)"/.exec(tag)?.[1],
+      href: /\bhref="([^"]+)"/.exec(tag)?.[1]
+    }))
+    // rel="alternate" is also how the RSS feed is linked; only hreflang counts.
+    .filter((link) => link.lang);
+
+  if (canonicalSet(onPage) !== canonicalSet(expected)) {
+    fail(
+      'hreflang-mismatch',
+      path,
+      `page markup and sitemap disagree — page has ${onPage.length} alternate(s), sitemap has ${expected.length}`
+    );
+  }
+}
+
 if (missingLastmod > 0) {
   const rule = missingLastmod === sitemapUrls ? fail : warn;
   rule(

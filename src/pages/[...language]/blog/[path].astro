@@ -3,7 +3,11 @@ import type { LanguageCodes } from 'src/schemas/language';
 import PostLayout from 'src/layouts/Post.astro';
 import { getCollection, render } from 'astro:content';
 import slugify from 'slugify';
-import { getBlogPermalink, trailingSlash } from 'utils/permalinks';
+import {
+  getBlogPermalink,
+  getPostLanguagesAlternates,
+  trailingSlash
+} from 'utils/permalinks';
 import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
 
 export async function getStaticPaths() {
@@ -32,6 +36,7 @@ if (!post) {
 }
 const { Content } = await render(post);
 const language = Astro.currentLocale as LanguageCodes;
+const hrefs = await getPostLanguagesAlternates(post, Astro.site);
 const breadcrumbs = [
   getHomeCrumb(language),
   getBlogCrumb(language),
@@ -56,6 +61,12 @@ const snippetComponents = {
 };
 ---
 
-<PostLayout {...post.data} body={post.body} language={language} breadcrumbs={breadcrumbs}>
+<PostLayout
+  {...post.data}
+  body={post.body}
+  language={language}
+  hrefs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
   <Content components={snippetComponents} />
 </PostLayout>

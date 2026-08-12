@@ -89,13 +89,26 @@ const filteredPosts = pagination.data;
 
 const hrefs = await getBlogTagLanguagesAlternates(tagData, Astro.site);
 const currentPageUrl = Astro.url.href;
-const hrefsWithSelf = hrefs.some((h) => h.hreflang === language)
-  ? hrefs.map((h) =>
-      h.hreflang === language ? { ...h, href: currentPageUrl } : h
-    )
-  : [...hrefs, { href: currentPageUrl, hreflang: language }];
+// No alternates means this tag has no translation, so there is nothing to
+// annotate — manufacturing a self entry here would emit a set of one, which
+// Google ignores and which the sitemap does not list.
+const hrefsWithSelf =
+  hrefs.length === 0
+    ? []
+    : hrefs.some((h) => h.hreflang === language)
+      ? hrefs.map((h) =>
+          h.hreflang === language ? { ...h, href: currentPageUrl } : h
+        )
+      : [...hrefs, { href: currentPageUrl, hreflang: language }];
 const defaultLocale = LanguageData.en;
-const defaultHref = hrefsWithSelf.filter(
+// The language switcher keeps every translation (landing on the tag's first
+// page is the right destination for a click), but page 2+ is annotated with
+// nothing: the translations run to different numbers of pages, so the other
+// language has no equivalent page. Pointing page 5 at its page 1 is not
+// reciprocated from there, and hreflang without a return link is discarded —
+// so the sitemap leaves these unannotated too (tools/seo/lib/alternates.mjs).
+const hrefLangTags = pageNumber === 1 ? hrefsWithSelf : [];
+const defaultHref = hrefLangTags.filter(
   (h) => h.hreflang === defaultLocale.code
 )[0];
 const breadcrumbs = [
@@ -118,7 +131,7 @@ const breadcrumbs = [
       ) : null
     }
     {
-      hrefsWithSelf.map(({ href, hreflang }) => (
+      hrefLangTags.map(({ href, hreflang }) => (
         <link
           rel="alternate"
           href={href}
