@@ -25,6 +25,7 @@ import {
   liveUrlSet,
   normalisePath
 } from './lib/routes.mjs';
+import { isUnnamed } from './lib/alternates.mjs';
 
 const DIST = join(REPO_ROOT, 'dist');
 const failures = [];
@@ -40,6 +41,19 @@ const warn = (rule, message, detail) =>
 const { routes, problems } = collectRoutes();
 for (const problem of problems) {
   fail('content', `${problem.file}: ${problem.reason}`);
+}
+
+// A file still carrying CloudCannon's `new-<collection>-<n>` name cannot be
+// matched to its translation — the numbering runs per language folder, so the
+// English and Portuguese file with the same number are unrelated entries. Such
+// a page ships without hreflang, so it competes with its own translation.
+const unnamed = [...routes.values()].filter((route) => isUnnamed(route.file));
+if (unnamed.length) {
+  warn(
+    'unnamed-content',
+    `${unnamed.length} file(s) still have CloudCannon's default name, so their translations cannot be paired for hreflang`,
+    unnamed.slice(0, 5).map((route) => `${route.file} — ${route.url}`)
+  );
 }
 
 const usingDist = existsSync(DIST) && statSync(DIST).isDirectory();

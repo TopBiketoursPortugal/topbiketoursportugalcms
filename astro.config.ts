@@ -19,6 +19,11 @@ import RouteData from './data/routing.json';
 // URL. Hand-written rules in routing.json are applied last and win on conflict.
 import UrlHistory from './data/url-history.json';
 import { lastmodFor } from './tools/seo/lib/lastmod.mjs';
+import {
+  alternatesFor,
+  LOCALES,
+  DEFAULT_LOCALE
+} from './tools/seo/lib/alternates.mjs';
 import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
@@ -244,14 +249,20 @@ export default defineConfig({
       // in the SERP long after the rewrite.
       serialize(item) {
         const lastmod = lastmodFor(item.url);
-        return lastmod ? { ...item, lastmod } : item;
+        // `i18n` below pairs translations by path, which only works for the
+        // routes with no translated slug. Every content-backed URL is paired
+        // by source file instead — see tools/seo/lib/alternates.mjs. `links`
+        // is assigned unconditionally: it has to be able to clear what `i18n`
+        // matched, not only add to it.
+        return {
+          ...item,
+          links: alternatesFor(item.url, item.links),
+          ...(lastmod ? { lastmod } : {})
+        };
       },
       i18n: {
-        defaultLocale: 'en', // All urls that don't contain `es` or `fr` after `https://stargazers.club/` will be treated as default locale, i.e. `en`
-        locales: {
-          en: 'en-US', // The `defaultLocale` value must present in `locales` keys
-          pt: 'pt-PT'
-        }
+        defaultLocale: DEFAULT_LOCALE, // All urls that don't contain `pt` after `https://topbiketoursportugal.com/` will be treated as default locale, i.e. `en`
+        locales: LOCALES // The `defaultLocale` value must be present in `locales` keys
       }
     }),
     pagefind()

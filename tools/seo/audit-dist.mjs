@@ -191,6 +191,9 @@ const sitemaps = globSync('sitemap-*.xml', { cwd: DIST }).filter(
 );
 let sitemapUrls = 0;
 let missingLastmod = 0;
+let missingAlternates = 0;
+/** sitemap URL -> its hreflang alternates, for the reciprocity check below. */
+const alternates = new Map();
 
 for (const file of sitemaps) {
   const xml = readFileSync(join(DIST, file), 'utf8');
@@ -204,7 +207,49 @@ for (const file of sitemaps) {
       fail('sitemap-404', path, 'listed in the sitemap but not built');
     }
     if (!entry.includes('<lastmod>')) missingLastmod++;
+
+    const links = [
+      ...entry.matchAll(
+        /<xhtml:link[^>]*hreflang="([^"]+)"[^>]*href="([^"]+)"/g
+      )
+    ].map(([, lang, href]) => ({ lang, href }));
+    alternates.set(loc, links);
+    if (!links.length) missingAlternates++;
   }
+}
+
+// Google discards a translation set that is not fully connected: every URL in
+// it must list every other one, and list itself. A one-way annotation is not a
+// harmless extra — it is the whole set going unused.
+for (const [loc, links] of alternates) {
+  if (!links.length) continue;
+
+  const translations = links.filter((link) => link.lang !== 'x-default');
+  if (!translations.some((link) => link.href === loc)) {
+    fail('hreflang-no-self', loc, 'its alternates do not include itself');
+  }
+
+  for (const { lang, href } of links) {
+    if (!assetExists(href)) {
+      fail('hreflang-404', loc, `${lang} alternate does not resolve: ${href}`);
+      continue;
+    }
+    if (lang === 'x-default') continue;
+    const back = alternates.get(href);
+    if (!back) {
+      fail('hreflang-unlisted', loc, `${lang} alternate is not in the sitemap`);
+    } else if (!back.some((link) => link.href === loc)) {
+      fail('hreflang-no-return', loc, `${href} does not link back`);
+    }
+  }
+}
+
+if (missingAlternates > 0) {
+  warn(
+    'hreflang-missing',
+    'sitemap',
+    `${missingAlternates} of ${sitemapUrls} URLs have no hreflang alternates — expected only for untranslated pages`
+  );
 }
 
 if (missingLastmod > 0) {
