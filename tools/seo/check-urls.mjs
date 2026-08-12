@@ -56,6 +56,24 @@ if (unnamed.length) {
   );
 }
 
+// Translation stubs waiting on a translator. These publish nothing, so they
+// are not a problem to fix — but left unreported they are invisible, and the
+// point of creating them automatically is that the backlog stays visible.
+const pending = globSync('src/content/**/pt/**/*.{md,mdx}', {
+  cwd: REPO_ROOT
+}).filter((file) =>
+  /^draft:\s*true\s*$/m.test(
+    readFileSync(join(REPO_ROOT, file), 'utf8').split(/^---$/m)[1] ?? ''
+  )
+);
+if (pending.length) {
+  warn(
+    'pending-translation',
+    `${pending.length} Portuguese stub(s) awaiting translation — unpublished until their \`draft\` line is removed`,
+    pending.slice(0, 5).map((file) => file.split(/[\\/]/).join('/'))
+  );
+}
+
 const usingDist = existsSync(DIST) && statSync(DIST).isDirectory();
 
 /** URLs served by the built site, from the emitted index.html files. */

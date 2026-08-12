@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 
 import { languageSchema } from './language';
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { seoSchema } from './seo';
 
 // Schema for individual image objects
@@ -178,6 +178,9 @@ export type TourSchema = z.infer<typeof tourSchema>;
 export type TourPackageSchema = z.infer<typeof tourPackageSchema>;
 export type ReviewSchema = z.infer<typeof reviewSchema>;
 export const tourCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/tours' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/tours'
+  }),
   schema: tourSchema
 });

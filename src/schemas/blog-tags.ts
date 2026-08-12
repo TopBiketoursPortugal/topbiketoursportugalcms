@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { seoSchema } from './seo';
@@ -16,6 +16,9 @@ const postTagsSchema = z.object({
 });
 
 export const postTagsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/blog-tags' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/blog-tags'
+  }),
   schema: postTagsSchema
 });

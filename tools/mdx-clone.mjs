@@ -24,20 +24,36 @@ async function getNewMdxFiles() {
   return newFiles;
 }
 
-// Function to replace "id: GUID" with a new GUID
-function replaceGuidInFile(file) {
+/**
+ * Turn a verbatim copy of an English entry into an unpublished Portuguese
+ * stub. Three edits, each load-bearing:
+ *
+ *   id       a fresh one, or the copy collides with the entry it came from
+ *   language `pt`, or the copy resolves to its original's URL — routes.mjs
+ *            trusts frontmatter over the folder, so a stub left at `en` fails
+ *            the build with a duplicate-url error
+ *   draft    keeps it out of the collections until someone translates it
+ *            (src/schemas/published-glob.ts)
+ *
+ * `path` is deliberately left alone: the `/pt/` prefix already makes the URL
+ * unique, and the English slug is the right placeholder until a translator
+ * picks a Portuguese one.
+ */
+function prepareStub(file) {
   const content = readFileSync(file, 'utf8');
-  const newGuid = uuidv7(); // Generate a new GUID
+  const newGuid = uuidv7();
 
-  // Regex to match "id: GUID" (where GUID is a placeholder, not a real GUID)
-  const updatedContent = content.replace(
+  let updated = content.replace(
     /(id: ['"]?)[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(['"]?)/gis,
     `$1${newGuid}$2`
   );
+  updated = updated.replace(/^language:.*$/m, 'language: pt');
+  if (!/^draft:/m.test(updated)) {
+    updated = updated.replace(/^---\r?\n/, '---\ndraft: true\n');
+  }
 
-  // Write the updated content back to the file
-  writeFileSync(file, updatedContent, 'utf8');
-  console.log(`Updated GUID in: ${file}`);
+  writeFileSync(file, updated, 'utf8');
+  console.log(`Prepared Portuguese stub: ${file}`);
 }
 
 // Function to create a clone of the file in the /pt subfolder
@@ -88,11 +104,9 @@ async function main() {
         const ptFilePath = await cloneFileToPt(file);
 
         if (existsSync(ptFilePath)) {
-          console.log(ptFilePath);
-          // Replace "id: GUID" with a new GUID in the original file
-          replaceGuidInFile(ptFilePath);
+          prepareStub(ptFilePath);
 
-          // Stage the original file (since it was modified)
+          // Stage it, so the stub lands in the same commit as its original.
           await git.add(ptFilePath);
         } else {
           console.warn(`File PT does not exist: ${ptFilePath}`);

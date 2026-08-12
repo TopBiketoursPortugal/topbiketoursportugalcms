@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { seoSchema } from './seo';
@@ -17,6 +17,9 @@ const tourRiderLevelSchema = z.object({
 });
 
 export const tourRiderLevelsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/tour-rider-levels' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/tour-rider-levels'
+  }),
   schema: tourRiderLevelSchema
 });

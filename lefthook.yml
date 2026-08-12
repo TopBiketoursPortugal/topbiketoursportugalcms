@@ -6,6 +6,14 @@ pre-commit:
     eslint:
       glob: '*.{js,ts,astro}'
       run: pnpm eslint --fix {staged_files} && git add {staged_files}
+    # A new English entry gets a Portuguese stub beside it, so a translation is
+    # never simply forgotten. The stub is created `draft: true` and stays out of
+    # the build until someone translates it — see src/schemas/published-glob.ts.
+    # Runs before seo-url-history, which must see the stub to account for it.
+    mdx-clone:
+      glob: 'src/content/**/*.mdx'
+      run: pnpm mdx-clone
+
     # A slug edit must ship with the 301 that preserves its old URL. Regenerate
     # and stage it rather than failing — the redirect is derivable, so there is
     # nothing for the committer to decide.

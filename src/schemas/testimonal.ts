@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { languageSchema } from './language';
@@ -33,6 +33,9 @@ const testimonial = z.object({
 });
 
 export const testimonialCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/testimonials' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/testimonials'
+  }),
   schema: testimonial
 });

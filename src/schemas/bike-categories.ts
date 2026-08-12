@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { seoSchema } from './seo';
@@ -17,6 +17,9 @@ const bikeCategorySchema = z.object({
 });
 
 export const bikeCategoriesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/bike-categories' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/bike-categories'
+  }),
   schema: bikeCategorySchema
 });

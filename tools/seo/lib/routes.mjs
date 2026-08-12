@@ -160,6 +160,10 @@ export function collectRoutes(root = REPO_ROOT) {
         continue;
       }
 
+      // Unpublished translation stubs produce no route — src/schemas/
+      // published-glob.ts drops them from the collections for the same reason.
+      if (frontmatter.draft === true) continue;
+
       const language = frontmatter.language ?? languageFromPath(relativePath);
       const url = config.url(frontmatter, language, relativePath);
       const id = frontmatter.id;

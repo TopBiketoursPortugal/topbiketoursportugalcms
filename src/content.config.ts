@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { languageSchema } from 'src/schemas/language';
@@ -14,7 +14,10 @@ import { bikesCollection } from 'src/schemas/bikes';
 import { tourCollection } from 'src/schemas/tours';
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  loader: publishedGlob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/blog'
+  }),
   schema: z.object({
     id: z.string().uuid(),
     path: z.string().optional().nullable(),
@@ -66,7 +69,7 @@ const paginatedCollectionSchema = z.object({
 });
 
 const pagesCollection = defineCollection({
-  loader: glob({
+  loader: publishedGlob({
     pattern: ['./*.{md,mdx}', './pt/*.{md,mdx}'],
     base: './src/content/pages'
   }),
