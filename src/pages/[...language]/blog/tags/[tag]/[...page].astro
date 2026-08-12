@@ -9,8 +9,7 @@ import { getCollection } from 'astro:content';
 import {
   getBlogIndexPage,
   getBlogTagLanguagesAlternates,
-  getBlogTagPath,
-  trailingSlash
+  getBlogTagPath
 } from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import LanguageData from 'src/../data/languages.json';
@@ -46,12 +45,15 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
       return paginate(tagPosts, {
         params: {
           language: language === 'en' ? undefined : language,
-          tag:
-            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
-              lower: true,
-              strict: true,
-              trim: true
-            }) + trailingSlash
+          // No trailing slash: this param is followed by the [...page]
+          // segment, so appending one made Astro's own page.url.prev/next
+          // emit /blog/tags/<tag>//2 — a 404. The emitted directory is
+          // unchanged either way (trailingSlash: 'ignore').
+          tag: slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
+            lower: true,
+            strict: true,
+            trim: true
+          })
         },
         props: { tagData: tag },
         pageSize
@@ -152,7 +154,10 @@ const breadcrumbs = [
     </h1>
     <section class="blog-index mx-auto">
       <BlogList posts={filteredPosts} />
-      <BlogPagination pagination={pagination} />
+      <BlogPagination
+        pagination={pagination}
+        basePath={getBlogTagPath(tagData, language)}
+      />
       <InfiniteScroll />
     </section>
     <PageHelper

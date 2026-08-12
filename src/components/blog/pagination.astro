@@ -15,9 +15,16 @@ export interface Pagination {
 
 interface Props {
   pagination: Pagination;
+  /**
+   * Root of the listing being paged, with a trailing slash — page 2 is
+   * `${basePath}2/`. Defaults to the blog index. Tag listings MUST pass their
+   * own: without it every numbered link on /blog/tags/<tag>/ pointed at
+   * /blog/<n>/, which does not exist and 301s to /blog/.
+   */
+  basePath?: string;
 }
 
-const { pagination } = Astro.props;
+const { pagination, basePath } = Astro.props;
 const {
   currentPage,
   lastPage,
@@ -28,6 +35,13 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 
 // Generate page links array
 const pageLinks = Array.from({ length: lastPage }, (_, i) => i + 1);
+
+const hrefFor = (pageNum: number) =>
+  basePath
+    ? pageNum === 1
+      ? basePath
+      : `${basePath}${pageNum}/`
+    : getBlogPagePath(pageNum, language, Astro.site);
 
 const pager = tv({
   base: '',
@@ -91,7 +105,7 @@ const { link, container, item, icon } = pager();
           <li class={cn('page-item', item())}>
             <a
               class={cn('page-link', link({ active: pageNum === currentPage }))}
-              href={getBlogPagePath(pageNum, language, Astro.site)}
+              href={hrefFor(pageNum)}
               aria-label={`Page ${currentPage}`}
             >
               {pageNum}
