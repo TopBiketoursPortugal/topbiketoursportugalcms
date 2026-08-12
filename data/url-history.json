@@ -58,8 +58,28 @@
       "status": 301
     },
     {
+      "from": "/blog/5-reasons-to-visit-the-costa-vicentina-top-walking-tours/",
+      "destination": "/blog/is-portugal-bike-tours-worth-it-pros-cons-tips/",
+      "status": 301
+    },
+    {
+      "from": "/blog/5-reasons-to-walk-after-50-or-top-walking-tours/",
+      "destination": "/blog/algarve-or-douro-valley-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/blog/7-incredible-cities-to-visit-in-portugal/",
+      "destination": "/blog/algarve-cycling-seasons-guide/",
+      "status": 301
+    },
+    {
       "from": "/blog/7-reasons-to-take-a-bike-tour-from-porto-to-lisbon/",
       "destination": "/blog/7-reasons-bike-tour-porto-lisbon/",
+      "status": 301
+    },
+    {
+      "from": "/blog/8-benefits-of-hiking/",
+      "destination": "/blog/biking-from-porto-to-santiago-guide/",
       "status": 301
     },
     {
@@ -203,6 +223,11 @@
       "status": 301
     },
     {
+      "from": "/blog/creative-summer-date-ideas-top-walking-tours/",
+      "destination": "/blog/guided-bike-tours-portugal-guide/",
+      "status": 301
+    },
+    {
       "from": "/blog/cycling-and-gastronomy-porto-bike-tours-in-portugal/",
       "destination": "/blog/cycling-and-gastronomy-beauty-of-porto-top-bike-tours/",
       "status": 301
@@ -298,6 +323,11 @@
       "status": 301
     },
     {
+      "from": "/blog/discover-the-hidden-treasures-of-this-enchanting-country/",
+      "destination": "/blog/electric-bike-vs-road-bike-cycling-tours-portugal/",
+      "status": 301
+    },
+    {
       "from": "/blog/discover-unique-experiences-with-guided-bike-tours/",
       "destination": "/blog/unique-experiences-with-guided-bike-tours/",
       "status": 301
@@ -389,7 +419,7 @@
     },
     {
       "from": "/blog/greater/",
-      "destination": "/blog/cycling-portuguese-camino-porto-to-santiago/",
+      "destination": "/blog/multi-day-cycling-tours-atlantic-coast-portugal/",
       "status": 301
     },
     {
@@ -548,6 +578,11 @@
       "status": 301
     },
     {
+      "from": "/blog/porto-vacation-discover-the-best-restaurants-and-flavors/",
+      "destination": "/blog/algarve-cycling-tour-five-highlights/",
+      "status": 301
+    },
+    {
       "from": "/blog/portugal-by-gravel-algarve-bike-tours/",
       "destination": "/blog/algarve-by-gravel-quiet-inland-loops/",
       "status": 301
@@ -640,6 +675,11 @@
     {
       "from": "/blog/safety-tips-for-cycling-with-a-child/",
       "destination": "/blog/safety-tips-cycling-child/",
+      "status": 301
+    },
+    {
+      "from": "/blog/safety-tips-for-hiking-on-isolated-trails/",
+      "destination": "/blog/family-porto-to-santiago-by-bike/",
       "status": 301
     },
     {
@@ -753,6 +793,11 @@
       "status": 301
     },
     {
+      "from": "/blog/the-7-best-outdoor-activities-to-do-in-summer/",
+      "destination": "/blog/cycling-camino-de-santiago-french-way/",
+      "status": 301
+    },
+    {
       "from": "/blog/the-art-of-creating-cycling-routes-tips-and-strategies/",
       "destination": "/blog/creating-bike-routes-strategies/",
       "status": 301
@@ -760,6 +805,11 @@
     {
       "from": "/blog/the-best-bike-tours-in-portugal-discover-the-country-on-two-wheels/",
       "destination": "/blog/best-bike-tours-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/blog/the-best-family-tours-in-lisbon/",
+      "destination": "/blog/bike-tour-packing-guide-portugal/",
       "status": 301
     },
     {
@@ -820,6 +870,11 @@
     {
       "from": "/blog/unique-experiences-in-nature-culture-and-gastronomy/",
       "destination": "/blog/cycling-with-kids-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/blog/unmissable-itineraries-places-to-visit-in-portugal/",
+      "destination": "/blog/cycling-douro-valley-guide/",
       "status": 301
     },
     {
