@@ -22,11 +22,14 @@ const { text, href, language, isActive } = Astro.props;
 
 const MAX_CARDS = 8;
 
-// Fetch tours & regions at build time
+// Fetch tours & regions at build time.
+// Every tour type belongs here. Filtering to PackageTour left the six day
+// tours with ~8 internal links each against ~233 for the multi-day tours,
+// because this menu is in the header of every page and nothing else links
+// sitewide to a tour.
 const allTours = await getCollection(
   'tours',
-  (tour) =>
-    tour.data.language === language && tour.data.tourtype === 'PackageTour'
+  (tour) => tour.data.language === language
 );
 const allRegions = await getCollection(
   'tourRegions',
@@ -71,8 +74,16 @@ const regionDisplays: RegionDisplay[] = allRegions
   )
   .map((region) => {
     const tours = toursByRegion.get(region.data.id) ?? [];
+    // Multi-day tours lead, day tours follow, each by its own `order`. Sorting
+    // on `order` alone would interleave them, since the two sets number
+    // themselves independently.
     const displayTours = tours
-      .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+      .sort(
+        (a, b) =>
+          Number(a.data.tourtype !== 'PackageTour') -
+            Number(b.data.tourtype !== 'PackageTour') ||
+          (a.data.order ?? 99) - (b.data.order ?? 99)
+      )
       .slice(0, MAX_CARDS);
 
     return {
