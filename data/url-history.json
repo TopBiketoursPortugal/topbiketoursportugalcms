@@ -2918,6 +2918,11 @@
       "status": 301
     },
     {
+      "from": "/tours/camino-de-santiago-bike-tour-from-leon-french-way/",
+      "destination": "/tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
+      "status": 301
+    },
+    {
       "from": "/tours/camino-de-santiago-bike-tour-or-top-bike-tours-portugal/",
       "destination": "/tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
       "status": 301
@@ -3023,6 +3028,11 @@
       "status": 301
     },
     {
+      "from": "/tours/full-french-way-bike-tour-camino-de-santiago-from-the-pyrenees/",
+      "destination": "/tours/french-way-to-santiago-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/tours/gentle-trail-biking-tour-coimbra-to-aveiro/",
       "destination": "/tours/electric-biking-coimbra-to-aveiro-loop/",
       "status": 301
@@ -3100,6 +3110,11 @@
     {
       "from": "/tours/portugal-atlantic-coast-bike-tour/",
       "destination": "/tours/atlantic-coast-to-lisbon-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/tours/portuguese-central-way-bike-tour-camino-de-santiago-from-porto/",
+      "destination": "/tours/santiago-de-compostela-central-way/",
       "status": 301
     },
     {
