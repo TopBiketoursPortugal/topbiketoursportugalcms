@@ -3,7 +3,11 @@ import { getCollection } from 'astro:content';
 import slugify from 'slugify';
 import Layout from 'src/layouts/Layout.astro';
 import TourList from 'src/components/tours/tour-list.astro';
-import { getTourRegionLanguagesAlternates, getTourRegionsPath, trailingSlash } from 'utils/permalinks';
+import {
+  getTourRegionLanguagesAlternates,
+  getTourRegionsPath,
+  trailingSlash
+} from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import Stack from 'src/components/building-blocks/stack/stack.astro';
 import Heading from 'src/components/building-blocks/typography/heading.astro';
@@ -58,17 +62,34 @@ const tourRegions = await getCollection(
   (f) => f.data.language === language
 );
 
-const allRiderLevels = await getCollection('tourRiderLevels', (f) => f.data.language === language);
-const allTags = await getCollection('tourTags', (f) => f.data.language === language);
-const allBikeCategories = await getCollection('bikeCategories', (f) => f.data.language === language);
+const allRiderLevels = await getCollection(
+  'tourRiderLevels',
+  (f) => f.data.language === language
+);
+const allTags = await getCollection(
+  'tourTags',
+  (f) => f.data.language === language
+);
+const allBikeCategories = await getCollection(
+  'bikeCategories',
+  (f) => f.data.language === language
+);
 
-const tourRiderLevelIds = new Set(tours.flatMap((t) => t.data.riderLevels ?? []));
+const tourRiderLevelIds = new Set(
+  tours.flatMap((t) => t.data.riderLevels ?? [])
+);
 const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
-const tourBikeCategoryIds = new Set(tours.flatMap((t) => t.data.bikeCategories ?? []));
+const tourBikeCategoryIds = new Set(
+  tours.flatMap((t) => t.data.bikeCategories ?? [])
+);
 
-const relevantRiderLevels = allRiderLevels.filter((l) => tourRiderLevelIds.has(l.data.id));
+const relevantRiderLevels = allRiderLevels.filter((l) =>
+  tourRiderLevelIds.has(l.data.id)
+);
 const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
-const relevantBikeCategories = allBikeCategories.filter((c) => tourBikeCategoryIds.has(c.data.id));
+const relevantBikeCategories = allBikeCategories.filter((c) =>
+  tourBikeCategoryIds.has(c.data.id)
+);
 
 const baseUrl = Astro.site;
 
@@ -77,12 +98,27 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-const image = await getImage({src: images[regionData.data.seo?.featured_image!].default, format: 'avif'});
+const image = await getImage({
+  src: images[regionData.data.seo?.featured_image!].default,
+  format: 'avif'
+});
 
-const imageSrc = image.src.startsWith("/") ? image.src.substring(1) : image.src;
+const imageSrc = image.src.startsWith('/') ? image.src.substring(1) : image.src;
 
-const regionSeoTitle = t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"") ?? regionData.data.seo?.page_title ?? regionData.data.title;
-const regionSeoDescription = regionData.data.seo?.page_description ?? regionSeoTitle;
+// Authored title first. `t(...).replace(...)` always returns a string, so
+// putting it at the head of this `??` chain made the two fallbacks after it
+// dead code: all twelve region pages shipped as "Tour list region <name>" and
+// the titles written in the CMS were silently discarded. Every other taxonomy
+// template (tags, rider-levels, bike-types) already reads seo.page_title first.
+const regionSeoTitle =
+  regionData.data.seo?.page_title ??
+  t('Tours.Regions.PackageTour.Title', language).replace(
+    '$1',
+    regionData.data.name ?? ''
+  ) ??
+  regionData.data.title;
+const regionSeoDescription =
+  regionData.data.seo?.page_description ?? regionSeoTitle;
 
 const frontmatter = {
   title: regionData.data.title,
@@ -91,7 +127,8 @@ const frontmatter = {
     page_title: regionSeoTitle,
     page_description: regionSeoDescription,
     featured_image: regionData.data.seo?.featured_image,
-    featured_image_alt: regionData.data.seo?.featured_image_alt ?? regionSeoTitle,
+    featured_image_alt:
+      regionData.data.seo?.featured_image_alt ?? regionSeoTitle,
     canonical_url: regionData.data.seo?.canonical_url,
     open_graph_type: regionData.data.seo?.open_graph_type,
     author_twitter_handle: regionData.data.seo?.author_twitter_handle,
@@ -104,13 +141,21 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
-  { name: regionData.data.name ?? regionData.data.title, url: getTourRegionsPath(regionData, language) }
+  {
+    name: regionData.data.name ?? regionData.data.title,
+    url: getTourRegionsPath(regionData, language)
+  }
 ];
 ---
 
-<Layout class="mb-16 px-8" {...frontmatter} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+<Layout
+  class="mb-16 px-8"
+  {...frontmatter}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
   <slot slot="head">
-      {
+    {
       defaultHref ? (
         <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
       ) : null
@@ -132,47 +177,89 @@ const breadcrumbs = [
       language={language}
     />
   </slot>
-<Stack spacing="large" layout="vertical" class="pt-6">
-  <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
-  <PageHelper contentBlocks={regionData.data.content_blocks ?? []} />
-  <div data-tour-filter-container>
-    <TourFilterBar
-      language={language}
-      totalCount={tours.length}
-      showRiderLevel={relevantRiderLevels.length > 0}
-      showTag={relevantTags.length > 0}
-      showBikeCategory={relevantBikeCategories.length > 0}
-      riderLevels={relevantRiderLevels.map((l) => ({ id: l.data.id, name: l.data.name ?? l.data.title }))}
-      tags={relevantTags.map((tg) => ({ id: tg.data.id, name: tg.data.name ?? tg.data.title }))}
-      bikeCategories={relevantBikeCategories.map((c) => ({ id: c.data.id, name: c.data.name ?? c.data.title }))}
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
+    <PageHelper contentBlocks={regionData.data.content_blocks ?? []} />
+    <div data-tour-filter-container>
+      <TourFilterBar
+        language={language}
+        totalCount={tours.length}
+        showRiderLevel={relevantRiderLevels.length > 0}
+        showTag={relevantTags.length > 0}
+        showBikeCategory={relevantBikeCategories.length > 0}
+        riderLevels={relevantRiderLevels.map((l) => ({
+          id: l.data.id,
+          name: l.data.name ?? l.data.title
+        }))}
+        tags={relevantTags.map((tg) => ({
+          id: tg.data.id,
+          name: tg.data.name ?? tg.data.title
+        }))}
+        bikeCategories={relevantBikeCategories.map((c) => ({
+          id: c.data.id,
+          name: c.data.name ?? c.data.title
+        }))}
+      />
+      {
+        packageTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Regions.PackageTour.Title', language).replace(
+                '$1',
+                regionData.data.name ?? ''
+              )}
+            </Heading>
+            <TourList items={packageTours} language={language} />
+          </div>
+        ) : null
+      }
+      {
+        dayTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Regions.DayTour.Title', language).replace(
+                '$1',
+                regionData.data.name ?? ''
+              )}
+            </Heading>
+            <TourList items={dayTours} language={language} />
+          </div>
+        ) : null
+      }
+    </div>
+    {
+      packageTours.length == 0 && dayTours.length === 0 ? (
+        <div class="flex flex-col gap-2 px-6">
+          <Text size="xlarge">
+            {t('Tours.Regions.NoResults.Title', language).replace(
+              '$1',
+              regionData.data.name ?? ''
+            )}
+          </Text>
+          <Text size="large">
+            {t('Tours.Regions.NoResults.AlternateTags.Title', language)}
+          </Text>
+          <ul class="list-disc pl-8">
+            {tourRegions
+              .filter((r) => r.data.id !== regionData.data.id)
+              .map((r) => (
+                <li class="pl-2">
+                  <a
+                    href={getTourRegionsPath(r, language)}
+                    title={regionSeoTitle}
+                    class="underline"
+                  >
+                    {regionSeoTitle}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ) : null
+    }
+    <PageHelper
+      contentBlocks={regionData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
     />
-    {
-      packageTours.length > 0 ? (
-        <div data-tour-section>
-          <Heading as="h2" class="px-6">{t("Tours.Regions.PackageTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
-          <TourList items={packageTours} language={language} />
-        </div>
-      ) : null
-    }
-    {
-      dayTours.length > 0 ? (
-        <div data-tour-section>
-          <Heading as="h2" class="px-6">{t("Tours.Regions.DayTour.Title", language).replace("$1",regionData.data.name??"")}</Heading>
-          <TourList items={dayTours} language={language} />
-        </div>
-      ) : null
-    }
-  </div>
-  {
-    packageTours.length == 0 && dayTours.length === 0 ? (
-      <div class="flex flex-col px-6 gap-2">
-        <Text size="xlarge">{t("Tours.Regions.NoResults.Title", language).replace("$1",regionData.data.name ?? "")}</Text>
-        <Text size="large">{t("Tours.Regions.NoResults.AlternateTags.Title", language)}</Text>
-        <ul class="list-disc pl-8">{tourRegions.filter((r) => r.data.id !== regionData.data.id)
-                        .map((r) => (<li class="pl-2"><a href={getTourRegionsPath(r,language)} title={regionSeoTitle} class="underline">{regionSeoTitle}</a></li>))}</ul>
-      </div>
-    ) : null
-  }
-  <PageHelper contentBlocks={regionData.data.content_blocks_after ?? []} sectionsKey="content_blocks_after" />
   </Stack>
 </Layout>
