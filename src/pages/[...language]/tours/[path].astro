@@ -50,6 +50,12 @@ const seo = {
   // Alt text, not the file path — this was publishing og:image:alt as
   // "/src/assets/images/pinhao3.jpg".
   featured_image_alt: tour.data.image?.alt ?? tour.data.title,
+  // Deliberately NOT `tour.data.seo?.canonical_url`, unlike the taxonomy
+  // templates. Four tours carry a canonical pointing at a *different* tour
+  // (e.g. bike-tours-douro-valley-easy -> bike-tours-douro-valley). Honouring
+  // those would drop four live, indexed product pages out of Google. If that
+  // consolidation is ever wanted, clear the frontmatter first and decide it
+  // deliberately — do not make it a side effect of wiring this field up.
   canonical_url: null
 } satisfies SEOProps;
 const hrefs = await getTourLanguagesAlternates(tour, Astro.site);
