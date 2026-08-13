@@ -32,3 +32,6 @@ nul
 skills
 .claude/
 .claude/settings.local.json
+DataForSeo/
+.gitignore
+google-cloud-sdk/
