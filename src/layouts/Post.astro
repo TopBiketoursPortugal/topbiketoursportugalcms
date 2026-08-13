@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import PostSummary from '../components/blog/summary.astro';
+import TourCard from '../components/tours/tour-card.astro';
 import SidebarPost from '../components/blog/sidebar-post.astro';
 import { getCollection } from 'astro:content';
 import type { MarkdownLayoutProps } from 'astro';
@@ -20,7 +21,10 @@ function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
   return props?.rawContent;
 }
 
-type PostProps = InferEntrySchema<'blog'> & { hrefs?: ReadonlyArray<HrefLang>; breadcrumbs?: BreadcrumbItem[] };
+type PostProps = InferEntrySchema<'blog'> & {
+  hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+};
 
 type Props = (PostProps & { body?: string }) | MarkdownLayoutProps<PostProps>;
 
@@ -30,7 +34,15 @@ const content = isMarkdown(Astro.props)
   ? Astro.props.rawContent()
   : Astro.props.body;
 
-const { title, date, author, hrefs = [], relatedPosts = [], breadcrumbs = [] } = props;
+const {
+  title,
+  date,
+  author,
+  hrefs = [],
+  relatedPosts = [],
+  relatedTours = [],
+  breadcrumbs = []
+} = props;
 const { src, alt } = props.image;
 const wordCount = content?.split(' ')?.length ?? 0;
 const readingTime = Math.floor(wordCount / 183);
@@ -46,6 +58,18 @@ const filterdRelatedPosts = await getCollection(
     relatedPosts.includes(post.data.id)
 );
 
+// Tours the article discusses. Ordered as listed in the frontmatter rather
+// than by collection order, so the first one named is the one offered first.
+const articleTours = (
+  await getCollection(
+    'tours',
+    (tour) =>
+      tour.data.language === language && relatedTours.includes(tour.data.id)
+  )
+).sort(
+  (a, b) => relatedTours.indexOf(a.data.id) - relatedTours.indexOf(b.data.id)
+);
+
 const images = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
   { eager: true }
@@ -55,9 +79,19 @@ const imageSrc = images[src]?.default ?? src;
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 
-const allTags = await getCollection('postTags', (tag) => tag.data.language === language);
-const latestPosts = (await getCollection('blog', (p) => p.data.language === language && p.data.title !== title))
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+const allTags = await getCollection(
+  'postTags',
+  (tag) => tag.data.language === language
+);
+const latestPosts = (
+  await getCollection(
+    'blog',
+    (p) => p.data.language === language && p.data.title !== title
+  )
+)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  )
   .slice(0, 3);
 ---
 
@@ -88,9 +122,14 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
     />
   </slot>
   <main class="mx-auto max-w-6xl px-8 py-12 md:py-10">
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]">
+    <div
+      class="grid grid-cols-1 gap-10 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
+    >
       <div>
-        <article data-pagefind-body data-pagefind-filter={`language:${language}`}>
+        <article
+          data-pagefind-body
+          data-pagefind-filter={`language:${language}`}
+        >
           <Image
             class="aspect-video rounded-lg"
             src={imageSrc}
@@ -112,11 +151,19 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
           <div
             class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
           >
-            <p class="post-data-list-item" data-editable="text" data-prop="author" data-type="span">
+            <p
+              class="post-data-list-item"
+              data-editable="text"
+              data-prop="author"
+              data-type="span"
+            >
               {author}
             </p>
 
-            <p class="post-data-list-item" data-pagefind-meta={`date:${dateObj.toISOString()}`}>
+            <p
+              class="post-data-list-item"
+              data-pagefind-meta={`date:${dateObj.toISOString()}`}
+            >
               {
                 dateObj.toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -138,9 +185,37 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
           </div>
         </article>
         {
+          articleTours.length > 0 ? (
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedTours', language)}
+              </h2>
+              <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {articleTours.slice(0, 4).map((tour) => (
+                  <div class="max-w-105">
+                    <TourCard
+                      tour={tour.data}
+                      language={language}
+                      contentDisplay="inline"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+        {
           filterdRelatedPosts.length > 0 ? (
-            <section class="flex flex-col items-center pt-12" data-pagefind-ignore>
-              <h2 class="text-2xl">{t("Blog.Detail.RelatedPosts", language)}</h2>
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedPosts', language)}
+              </h2>
               <div class="mt-5 grid gap-5 sm:grid-cols-2">
                 {filterdRelatedPosts.slice(0, 2).map((post) => (
                   <div class="max-w-105">
@@ -152,27 +227,43 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
           ) : null
         }
       </div>
-      <aside class="blog-sidebar sm:sticky sm:top-24 sm:self-start flex flex-col gap-8 intersect:opacity-100 intersect-once" data-pagefind-ignore>
-        {allTags.length > 0 && (
-          <div>
-            <h2 class="text-lg font-semibold mb-3">{t("Blog.Sidebar.Tags", language)}</h2>
-            <div class="flex flex-wrap gap-2">
-              {allTags.map((tag) => (
-                <a href={getBlogTagPath(tag, language)} class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800">
-                  {tag.data.name ?? tag.data.title}
-                </a>
-              ))}
+      <aside
+        class="blog-sidebar intersect:opacity-100 intersect-once flex flex-col gap-8 sm:sticky sm:top-24 sm:self-start"
+        data-pagefind-ignore
+      >
+        {
+          allTags.length > 0 && (
+            <div>
+              <h2 class="mb-3 text-lg font-semibold">
+                {t('Blog.Sidebar.Tags', language)}
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <a
+                    href={getBlogTagPath(tag, language)}
+                    class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800"
+                  >
+                    {tag.data.name ?? tag.data.title}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
-        {latestPosts.length > 0 && (
-          <div>
-            <h2 class="text-lg font-semibold mb-3">{t("Blog.Sidebar.LatestPosts", language)}</h2>
-            <div class="flex flex-col gap-4">
-              {latestPosts.map((post) => <SidebarPost {...post} />)}
+          )
+        }
+        {
+          latestPosts.length > 0 && (
+            <div>
+              <h2 class="mb-3 text-lg font-semibold">
+                {t('Blog.Sidebar.LatestPosts', language)}
+              </h2>
+              <div class="flex flex-col gap-4">
+                {latestPosts.map((post) => (
+                  <SidebarPost {...post} />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )
+        }
       </aside>
     </div>
   </main>
@@ -181,7 +272,9 @@ const latestPosts = (await getCollection('blog', (p) => p.data.language === lang
 <style>
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .blog-sidebar {
-      transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+      transition:
+        opacity 0.7s ease 0.2s,
+        transform 0.7s ease 0.2s;
     }
     .blog-sidebar[no-intersect] {
       opacity: 0;

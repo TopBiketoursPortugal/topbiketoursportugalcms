@@ -2,6 +2,7 @@
   "en": {
     "Blog.Paged.Description": "Blog page $1",
     "Blog.Detail.RelatedPosts": "Related posts",
+    "Blog.Detail.RelatedTours": "Tours in this article",
     "Blog.Paged.Title": "Blog page $1",
     "Blog.Tags.Paged.Description": "Blog tag $1 page $2",
     "Blog.Tags.Paged.Title": "Blog tag $1 page $2",
@@ -185,6 +186,7 @@
   "pt": {
     "Blog.Paged.Description": "Blog página $1",
     "Blog.Detail.RelatedPosts": "Posts relacionados",
+    "Blog.Detail.RelatedTours": "Tours neste artigo",
     "Blog.Paged.Title": "Blog página $1",
     "Blog.Tags.Paged.Description": "Blog tag $1 página $2",
     "Blog.Tags.Paged.Title": "Blog tag $1 página $2",

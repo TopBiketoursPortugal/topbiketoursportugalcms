@@ -29,6 +29,10 @@ const blogCollection = defineCollection({
     thumb_image_alt: z.string(),
     language: languageSchema,
     relatedPosts: z.array(z.string().uuid()).optional().default([]),
+    // Tours this article actually discusses. Rendered under the post, and the
+    // only structured way to link a post to a tour — 38 posts covered these
+    // routes in prose while linking none of them.
+    relatedTours: z.array(z.string().uuid()).optional().default([]),
     image: z.object({
       src: z.string(),
       alt: z.string()
