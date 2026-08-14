@@ -35,5 +35,5 @@ skills
 DataForSeo/
 .gitignore
 google-cloud-sdk/
-# Audit screenshots are large binaries; the written reports are tracked.
-topbiketoursportugal.com-audit/screenshots/
+# SEO audit output — kept locally for reference, not tracked (see DataForSeo/).
+topbiketoursportugal.com-audit/
