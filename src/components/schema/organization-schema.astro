@@ -14,6 +14,13 @@ const contact = ContactData[language];
 
 const baseUrl = site.site.url.replace(/\/$/, '');
 
+// The company is one entity in both languages. Deriving the `@id` from the
+// current locale's base URL published `/#organization` on English pages and
+// `/pt/#organization` on Portuguese ones, so Google was handed two businesses
+// sharing a name, address and phone number. `url` still varies by locale —
+// that is the localised homepage — but the identity does not.
+const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization`;
+
 // Both of these used to point at paths that 404 in production — `/logo.svg`
 // was never in public/, and `/src/assets/...` is a source path that only
 // exists at build time.
@@ -23,7 +30,7 @@ const logoUrl = await resolveSchemaImage(logo.src, Astro.site);
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': `${baseUrl}/#organization`,
+  '@id': organisationId,
   'name': site.site.name,
   'url': baseUrl,
   'description':

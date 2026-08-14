@@ -9,6 +9,10 @@ const site = SiteData[language];
 
 const baseUrl = site.site.url.replace(/\/$/, '');
 
+// The site is one per locale, but the publisher behind it is not — see the
+// note in organization-schema.astro.
+const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization`;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -18,7 +22,7 @@ const schema = {
   'description': site.description,
   'inLanguage': language === 'pt' ? 'pt-PT' : 'en-US',
   'publisher': {
-    '@id': `${baseUrl}/#organization`
+    '@id': organisationId
   }
 };
 ---
