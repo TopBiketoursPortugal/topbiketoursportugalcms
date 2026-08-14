@@ -185,6 +185,15 @@ export function collectRoutes(root = REPO_ROOT) {
         continue;
       }
 
+      // Which frontmatter field actually supplied the slug. The templates use
+      // `fm.path ?? fm.title`, so a field that is present but blank still wins
+      // the `??` and yields an empty slug — treat blank as absent here so the
+      // reported source matches what a reader would call the source.
+      const slugField =
+        config.slugFrom.find(
+          (field) => String(frontmatter[field] ?? '').trim() !== ''
+        ) ?? null;
+
       routes.set(key, {
         key,
         collection,
@@ -192,7 +201,9 @@ export function collectRoutes(root = REPO_ROOT) {
         language,
         url,
         file: relativePath,
-        title: frontmatter.title ?? null
+        title: frontmatter.title ?? null,
+        slugField,
+        slugPreferred: config.slugFrom[0]
       });
     }
   }

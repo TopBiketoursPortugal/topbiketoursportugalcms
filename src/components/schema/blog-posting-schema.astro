@@ -1,7 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import SiteData from 'src/../data/site.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import { resolveSchemaImage } from 'utils/schema-image';
+import { resolveSchemaAuthor, parseByline } from 'utils/schema-author';
+import { getTeamMemberPath } from 'utils/permalinks';
 
 type Props = {
   title: string;
@@ -18,18 +21,42 @@ const site = SiteData[language];
 const baseUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const imageUrl = await resolveSchemaImage(image, Astro.site);
 
+// One organisation, not one per locale. `SiteData.pt.site.url` carries the
+// /pt/ prefix, so deriving the id from the current language published two
+// competing `#organization` entities and split the brand across them.
+const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization`;
+
+// If the byline names someone with a team page, point at it — the pages exist
+// and ranked, but nothing linked them to the posts they wrote.
+const teamMembers = await getCollection(
+  'team',
+  (member) => member.data.language === language
+);
+const knownNames = teamMembers.map((member) => member.data.title ?? '');
+const bylineName = author ? parseByline(author, knownNames).name : null;
+const teamMatch = bylineName
+  ? teamMembers.find(
+      (member) =>
+        (member.data.title ?? '').trim().toLowerCase() ===
+        bylineName.trim().toLowerCase()
+    )
+  : undefined;
+const teamUrl = teamMatch
+  ? `${baseUrl}${getTeamMemberPath(teamMatch.data.title ?? '', language)}`
+  : undefined;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   'headline': title,
   'datePublished': new Date(date).toISOString(),
   'url': `${baseUrl}${url}`,
-  ...(author ? { author: { '@type': 'Person', 'name': author } } : {}),
+  'author': resolveSchemaAuthor(author, organisationId, teamUrl, knownNames),
   ...(imageUrl ? { image: imageUrl } : {}),
   ...(wordCount ? { wordCount } : {}),
   'publisher': {
     '@type': 'Organization',
-    '@id': `${site.site.url}#organization`,
+    '@id': organisationId,
     'name': site.site.name
   }
 };

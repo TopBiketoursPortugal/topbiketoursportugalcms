@@ -56,6 +56,33 @@ if (unnamed.length) {
   );
 }
 
+// `path` is the URL; `title` is a display name that marketing changes freely.
+// Every routable collection but `team` prefers `path` and falls back to the
+// title, so an entry with a missing or blank `path` has its URL wired to its
+// heading — rename the tour in CloudCannon and the URL moves with it. Worse,
+// a blank (rather than absent) `path` still satisfies the `??` in the template
+// and slugifies to nothing, collapsing the route onto the collection index.
+// Fail here so neither can reach a build.
+// A language root (`/`, `/pt/`) is not slugged from anything — pages/index.mdx
+// is special-cased by the route table — so it is exempt.
+const isLanguageRoot = (url) => /^\/([a-z]{2}\/)?$/.test(url);
+const titleDerived = [...routes.values()].filter(
+  (route) =>
+    route.slugPreferred === 'path' &&
+    route.slugField !== 'path' &&
+    !isLanguageRoot(route.url)
+);
+if (titleDerived.length) {
+  fail(
+    'url-from-title',
+    `${titleDerived.length} entr(ies) have no usable \`path\`, so their URL is derived from a field that is safe to rename`,
+    titleDerived.map(
+      (route) =>
+        `${route.file} — ${route.url} (from \`${route.slugField ?? 'nothing'}\`)`
+    )
+  );
+}
+
 // Translation stubs waiting on a translator. These publish nothing, so they
 // are not a problem to fix — but left unreported they are invisible, and the
 // point of creating them automatically is that the backlog stays visible.
