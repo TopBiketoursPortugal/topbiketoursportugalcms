@@ -35,3 +35,5 @@ skills
 DataForSeo/
 .gitignore
 google-cloud-sdk/
+# Audit screenshots are large binaries; the written reports are tracked.
+topbiketoursportugal.com-audit/screenshots/
