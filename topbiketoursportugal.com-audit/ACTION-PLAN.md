@@ -7,10 +7,11 @@ bottom rather than quietly dropped.
 
 ---
 
-## Phase 0 — Nothing from this session is live yet
+## Phase 0 — Deploy before measuring anything
 
-The branch is **3 commits ahead of `origin`** and unpushed, so every fix made
-today exists only locally. Verified against production:
+At the time of the audit nothing from this session was live: the work sat
+unpushed on a local branch. It is now proposed in this PR. Production state as
+measured on 2026-08-13, before the push:
 
 | URL                           | live status                     | expected after deploy                 |
 | ----------------------------- | ------------------------------- | ------------------------------------- |
