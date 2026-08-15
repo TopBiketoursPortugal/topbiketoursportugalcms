@@ -1,2 +1,43 @@
 [build.processing.html]
     pretty_urls = true
+
+# Security headers.
+#
+# Before this, the only header the site sent was HSTS, which Netlify adds. The
+# four below are enforcing because none of them can break a working page: they
+# restrict framing, MIME sniffing, referrer leakage and unused browser features.
+#
+# HSTS is deliberately left as Netlify sets it (`max-age=31536000`, no
+# `includeSubDomains`). Adding `includeSubDomains` commits *every* subdomain to
+# valid HTTPS for a year and is not safely reversible, so it needs an audit of
+# what subdomains exist before it goes on.
+[[headers]]
+    for = "/*"
+
+    [headers.values]
+        X-Frame-Options = "SAMEORIGIN"
+        X-Content-Type-Options = "nosniff"
+        Referrer-Policy = "strict-origin-when-cross-origin"
+        Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+        # Report-only on purpose. The site loads Google Tag Manager, Google
+        # Analytics, Microsoft Clarity, WeTravel (the booking flow), Formspree
+        # and two smaller trackers. A blocking policy shipped without watching
+        # what it catches first would take the booking form down, so this
+        # reports violations to the browser console and enforces nothing.
+        #
+        # To promote it: watch the console on a tour page and the checkout for a
+        # release or two, fold in whatever legitimate origin it flags, then
+        # rename the header to `Content-Security-Policy`.
+        Content-Security-Policy-Report-Only = """
+        default-src 'self'; \
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://*.wetravel.com https://*.iconnode.com https://*.doubleclick.net; \
+        style-src 'self' 'unsafe-inline'; \
+        img-src 'self' data: blob: https:; \
+        font-src 'self' data:; \
+        connect-src 'self' https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://*.wetravel.com https://formspree.io https://*.doubleclick.net; \
+        frame-src 'self' https://*.wetravel.com https://*.googletagmanager.com https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com; \
+        form-action 'self' https://formspree.io https://*.wetravel.com; \
+        frame-ancestors 'self'; \
+        base-uri 'self'; \
+        object-src 'none'"""
