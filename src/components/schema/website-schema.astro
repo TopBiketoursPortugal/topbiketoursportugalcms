@@ -1,5 +1,6 @@
 ---
 import SiteData from 'src/../data/site.json';
+import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = { language: LanguageCodes };
@@ -20,7 +21,7 @@ const schema = {
   'name': site.site.name,
   'url': baseUrl,
   'description': site.description,
-  'inLanguage': language === 'pt' ? 'pt-PT' : 'en-US',
+  'inLanguage': Languages[language].locale,
   'publisher': {
     '@id': organisationId
   }

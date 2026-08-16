@@ -1,18 +1,34 @@
 {
   "tours": {
     "en": "tours",
-    "pt": "tours"
+    "pt": "tours",
+    "de": "tours",
+    "es": "tours",
+    "fr": "tours",
+    "nl": "tours"
   },
   "blog": {
     "en": "blog",
-    "pt": "blog"
+    "pt": "blog",
+    "de": "blog",
+    "es": "blog",
+    "fr": "blog",
+    "nl": "blog"
   },
   "blogTags": {
     "en": "tags",
-    "pt": "tags"
+    "pt": "tags",
+    "de": "tags",
+    "es": "tags",
+    "fr": "tags",
+    "nl": "tags"
   },
   "team": {
     "en": "team",
-    "pt": "team"
+    "pt": "team",
+    "de": "team",
+    "es": "team",
+    "fr": "team",
+    "nl": "team"
   }
 }

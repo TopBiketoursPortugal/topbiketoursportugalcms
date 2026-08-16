@@ -1,4 +1,5 @@
 ---
+import { t } from 'utils/i18n';
 import SiteData from 'src/../data/site.json';
 import ContactData from 'src/../data/contact.json';
 import SocialData from 'src/../data/social.json';
@@ -33,10 +34,7 @@ const schema = {
   '@id': organisationId,
   'name': site.site.name,
   'url': baseUrl,
-  'description':
-    language === 'pt'
-      ? 'Empresa líder em passeios de bicicleta guiados e autoguiados em Portugal. Descubra o Douro, o Minho, o Alentejo e muito mais sobre duas rodas.'
-      : 'Leading guided and self-guided bike tour company in Portugal. Discover the Douro Valley, Minho, Alentejo and more on two wheels.',
+  'description': t('Organization.Description', language),
   'telephone': contact.cellPhone,
   'email': contact.email,
   'logo': logoUrl,

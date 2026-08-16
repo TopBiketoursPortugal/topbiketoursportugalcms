@@ -7,6 +7,7 @@ import Stack from 'src/components/building-blocks/stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import { getAuthorName } from '@utils/get-author-name';
 import { MapTestimonialToReview } from '@utils/map-testimonial-to-review';
+import { getTestimonialsFor } from 'utils/testimonials';
 import { t } from 'utils/i18n';
 
 type Props = {
@@ -30,11 +31,8 @@ const reviews =
     .filter((item) => feature_testimonials?.includes(item.id ?? '')) ?? [];
 const items = reviews.concat(
   (
-    await getCollection(
-      'testimonials',
-      (item) =>
-        feature_testimonials?.includes(item.data.id) &&
-        item.data.language === language
+    await getTestimonialsFor(language, (item) =>
+      feature_testimonials?.includes(item.data.id)
     )
   ).map(MapTestimonialToReview)
 );

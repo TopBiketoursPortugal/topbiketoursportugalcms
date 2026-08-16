@@ -6,13 +6,14 @@ import type { Loader } from 'astro/loaders';
 /**
  * The glob loader, minus entries whose frontmatter carries `draft: true`.
  *
- * A draft here is a translation stub: tools/mdx-clone.mjs drops one into the
- * sibling `pt/` folder whenever an English entry is added, so an editor has
+ * A draft here is a translation stub: tools/mdx-clone.mjs drops one into each
+ * sibling language folder (`pt/`, `de/`, …) whenever an English entry is
+ * added, so an editor has
  * somewhere to write the translation instead of having to remember to create
  * the file. Until that happens the stub still holds English prose, and
- * publishing it would put English text on a Portuguese URL and — since pages
- * and sitemap pair translations by filename — declare it the Portuguese
- * translation of its own original.
+ * publishing it would put English text on a translated URL and — since pages
+ * and sitemap pair translations by filename — declare it the translation of
+ * its own original.
  *
  * Dropping the entry here is what prevents that: it is then absent from every
  * getCollection call in the project, so it produces no route, appears in no

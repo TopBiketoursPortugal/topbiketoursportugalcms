@@ -261,5 +261,545 @@
         }
       ]
     }
+  },
+  "de": {
+    "header": {
+      "links": [
+        {
+          "text": "Startseite",
+          "page": "",
+          "href": "/de/",
+          "enabled": false
+        },
+        {
+          "text": "Radtouren",
+          "page": "",
+          "href": "/de/radtouren-portugal/",
+          "megaMenu": true
+        },
+        {
+          "text": "Tagestouren",
+          "page": "84a6b8e1-fd96-40ea-b947-47c8ae325192",
+          "href": "/de/tagestouren-porto/",
+          "enabled": true
+        },
+        {
+          "text": "Kalender",
+          "page": "",
+          "href": "/de/tourkalender/"
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/de/blog/"
+        },
+        {
+          "text": "Über uns",
+          "page": "",
+          "href": "/de/ueber-uns/",
+          "links": [
+            {
+              "text": "Kontakt",
+              "href": "/de/kontakt/"
+            },
+            {
+              "text": "Bewertungen",
+              "href": "/de/bewertungen/"
+            }
+          ]
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/de/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Hauptseiten",
+          "links": [
+            {
+              "text": "Startseite",
+              "href": "/de/",
+              "enabled": false
+            },
+            {
+              "text": "Radtouren",
+              "href": "/de/radtouren-portugal/"
+            },
+            {
+              "text": "Tagestouren",
+              "href": "/de/tagestouren-porto/"
+            },
+            {
+              "text": "Kalender",
+              "href": "/de/tourkalender/"
+            },
+            {
+              "text": "Blog",
+              "href": "/de/blog/"
+            },
+            {
+              "text": "Bewertungen",
+              "href": "/de/bewertungen/"
+            },
+            {
+              "text": "Tourkategorien",
+              "href": "/de/tours/tags/"
+            },
+            {
+              "text": "Fahrniveaus",
+              "href": "/de/tours/rider-levels/"
+            }
+          ]
+        },
+        {
+          "text": "Service",
+          "links": [
+            {
+              "text": "Über uns",
+              "href": "/de/ueber-uns/"
+            },
+            {
+              "text": "Kontakt",
+              "href": "/de/kontakt/"
+            },
+            {
+              "text": "Fahrräder",
+              "href": "/de/fahrraeder/"
+            },
+            {
+              "text": "Häufige Fragen",
+              "href": "/de/haeufige-fragen/"
+            },
+            {
+              "text": "Stornierungsbedingungen",
+              "href": "/de/stornierungsbedingungen/"
+            },
+            {
+              "text": "Datenschutzerklärung",
+              "href": "/de/datenschutz/"
+            }
+          ]
+        },
+        {
+          "text": "Fahrradtypen",
+          "links": [
+            {
+              "text": "Unsere Fahrräder",
+              "href": "/de/fahrraeder/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "es": {
+    "header": {
+      "links": [
+        {
+          "text": "Inicio",
+          "page": "",
+          "href": "/es/",
+          "enabled": false
+        },
+        {
+          "text": "Tours en bicicleta",
+          "page": "",
+          "href": "/es/rutas-en-bicicleta-portugal/",
+          "megaMenu": true
+        },
+        {
+          "text": "Tours de un día",
+          "page": "84a6b8e1-fd96-40ea-b947-47c8ae325192",
+          "href": "/es/tours-de-un-dia-porto/",
+          "enabled": true
+        },
+        {
+          "text": "Calendario",
+          "page": "",
+          "href": "/es/calendario-tours/"
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/es/blog/"
+        },
+        {
+          "text": "Sobre nosotros",
+          "page": "",
+          "href": "/es/sobre-nosotros/",
+          "links": [
+            {
+              "text": "Contacto",
+              "href": "/es/contacto/"
+            },
+            {
+              "text": "Opiniones",
+              "href": "/es/opiniones/"
+            }
+          ]
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/es/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Páginas principales",
+          "links": [
+            {
+              "text": "Inicio",
+              "href": "/es/",
+              "enabled": false
+            },
+            {
+              "text": "Tours en bicicleta",
+              "href": "/es/rutas-en-bicicleta-portugal/"
+            },
+            {
+              "text": "Tours de un día",
+              "href": "/es/tours-de-un-dia-porto/"
+            },
+            {
+              "text": "Calendario",
+              "href": "/es/calendario-tours/"
+            },
+            {
+              "text": "Blog",
+              "href": "/es/blog/"
+            },
+            {
+              "text": "Opiniones",
+              "href": "/es/opiniones/"
+            },
+            {
+              "text": "Categorías de tours",
+              "href": "/es/tours/tags/"
+            },
+            {
+              "text": "Niveles de ciclista",
+              "href": "/es/tours/rider-levels/"
+            }
+          ]
+        },
+        {
+          "text": "Ayuda",
+          "links": [
+            {
+              "text": "Sobre nosotros",
+              "href": "/es/sobre-nosotros/"
+            },
+            {
+              "text": "Contacto",
+              "href": "/es/contacto/"
+            },
+            {
+              "text": "Bicicletas",
+              "href": "/es/bicicletas/"
+            },
+            {
+              "text": "Preguntas frecuentes",
+              "href": "/es/preguntas-frecuentes/"
+            },
+            {
+              "text": "Política de cancelación",
+              "href": "/es/politica-de-cancelacion/"
+            },
+            {
+              "text": "Política de privacidad",
+              "href": "/es/politica-de-privacidad/"
+            }
+          ]
+        },
+        {
+          "text": "Tipos de bicicleta",
+          "links": [
+            {
+              "text": "Nuestras bicicletas",
+              "href": "/es/bicicletas/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "fr": {
+    "header": {
+      "links": [
+        {
+          "text": "Accueil",
+          "page": "",
+          "href": "/fr/",
+          "enabled": false
+        },
+        {
+          "text": "Séjours à vélo",
+          "page": "",
+          "href": "/fr/voyages-a-velo-portugal/",
+          "megaMenu": true
+        },
+        {
+          "text": "Excursions à la journée",
+          "page": "84a6b8e1-fd96-40ea-b947-47c8ae325192",
+          "href": "/fr/excursions-velo-porto/",
+          "enabled": true
+        },
+        {
+          "text": "Calendrier",
+          "page": "",
+          "href": "/fr/calendrier-des-tours/"
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/fr/blog/"
+        },
+        {
+          "text": "À propos",
+          "page": "",
+          "href": "/fr/a-propos/",
+          "links": [
+            {
+              "text": "Contact",
+              "href": "/fr/contact/"
+            },
+            {
+              "text": "Avis",
+              "href": "/fr/avis/"
+            }
+          ]
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/fr/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Pages principales",
+          "links": [
+            {
+              "text": "Accueil",
+              "href": "/fr/",
+              "enabled": false
+            },
+            {
+              "text": "Séjours à vélo",
+              "href": "/fr/voyages-a-velo-portugal/"
+            },
+            {
+              "text": "Excursions à la journée",
+              "href": "/fr/excursions-velo-porto/"
+            },
+            {
+              "text": "Calendrier",
+              "href": "/fr/calendrier-des-tours/"
+            },
+            {
+              "text": "Blog",
+              "href": "/fr/blog/"
+            },
+            {
+              "text": "Avis",
+              "href": "/fr/avis/"
+            },
+            {
+              "text": "Catégories de circuits",
+              "href": "/fr/tours/tags/"
+            },
+            {
+              "text": "Niveaux de cycliste",
+              "href": "/fr/tours/rider-levels/"
+            }
+          ]
+        },
+        {
+          "text": "Informations",
+          "links": [
+            {
+              "text": "À propos",
+              "href": "/fr/a-propos/"
+            },
+            {
+              "text": "Contact",
+              "href": "/fr/contact/"
+            },
+            {
+              "text": "Vélos",
+              "href": "/fr/velos/"
+            },
+            {
+              "text": "Questions fréquentes",
+              "href": "/fr/faq/"
+            },
+            {
+              "text": "Politique d'annulation",
+              "href": "/fr/politique-d-annulation/"
+            },
+            {
+              "text": "Politique de confidentialité",
+              "href": "/fr/politique-de-confidentialite/"
+            }
+          ]
+        },
+        {
+          "text": "Types de vélo",
+          "links": [
+            {
+              "text": "Nos vélos",
+              "href": "/fr/velos/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "nl": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/nl/",
+          "enabled": false
+        },
+        {
+          "text": "Fietstochten",
+          "page": "",
+          "href": "/nl/fietsvakanties-portugal/",
+          "megaMenu": true
+        },
+        {
+          "text": "Dagtochten",
+          "page": "84a6b8e1-fd96-40ea-b947-47c8ae325192",
+          "href": "/nl/dagtochten-porto/",
+          "enabled": true
+        },
+        {
+          "text": "Kalender",
+          "page": "",
+          "href": "/nl/tourkalender/"
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/nl/blog/"
+        },
+        {
+          "text": "Over ons",
+          "page": "",
+          "href": "/nl/over-ons/",
+          "links": [
+            {
+              "text": "Contact",
+              "href": "/nl/contact/"
+            },
+            {
+              "text": "Beoordelingen",
+              "href": "/nl/beoordelingen/"
+            }
+          ]
+        },
+        {
+          "text": "Widgets",
+          "page": "",
+          "href": "/nl/widgets/",
+          "enabled": false
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Belangrijkste pagina's",
+          "links": [
+            {
+              "text": "Home",
+              "href": "/nl/",
+              "enabled": false
+            },
+            {
+              "text": "Fietstochten",
+              "href": "/nl/fietsvakanties-portugal/"
+            },
+            {
+              "text": "Dagtochten",
+              "href": "/nl/dagtochten-porto/"
+            },
+            {
+              "text": "Kalender",
+              "href": "/nl/tourkalender/"
+            },
+            {
+              "text": "Blog",
+              "href": "/nl/blog/"
+            },
+            {
+              "text": "Beoordelingen",
+              "href": "/nl/beoordelingen/"
+            },
+            {
+              "text": "Tourcategorieën",
+              "href": "/nl/tours/tags/"
+            },
+            {
+              "text": "Fietsniveaus",
+              "href": "/nl/tours/rider-levels/"
+            }
+          ]
+        },
+        {
+          "text": "Service",
+          "links": [
+            {
+              "text": "Over ons",
+              "href": "/nl/over-ons/"
+            },
+            {
+              "text": "Contact",
+              "href": "/nl/contact/"
+            },
+            {
+              "text": "Fietsen",
+              "href": "/nl/fietsen/"
+            },
+            {
+              "text": "Veelgestelde vragen",
+              "href": "/nl/veelgestelde-vragen/"
+            },
+            {
+              "text": "Annuleringsvoorwaarden",
+              "href": "/nl/annuleringsvoorwaarden/"
+            },
+            {
+              "text": "Privacybeleid",
+              "href": "/nl/privacybeleid/"
+            }
+          ]
+        },
+        {
+          "text": "Fietstypes",
+          "links": [
+            {
+              "text": "Onze fietsen",
+              "href": "/nl/fietsen/"
+            }
+          ]
+        }
+      ]
+    }
   }
 }

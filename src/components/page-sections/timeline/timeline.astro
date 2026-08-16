@@ -1,6 +1,8 @@
 ---
 import { tv, type VariantProps } from 'tailwind-variants';
 import Prose from 'src/components/building-blocks/typography/prose.astro';
+import Languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = {
   style: VariantProps<typeof containerVariants>;
@@ -31,7 +33,8 @@ const containerVariants = tv({
   }
 });
 
-const culture = Astro.currentLocale === 'en' ? 'en-US' : 'pt-PT';
+const culture =
+  Languages[(Astro.currentLocale ?? 'en') as LanguageCodes].locale;
 
 const dateTimeFormatter = new Intl.DateTimeFormat(culture, {
   dateStyle: 'long'
@@ -47,9 +50,17 @@ const container = containerVariants({ ...style });
     {
       dates.map(({ date, title, subtitle, description }) => {
         return (
-          <div class="reveal-up group intersect:opacity-100 intersect-once relative py-6 pl-8 sm:pl-32" data-editable="array-item">
+          <div
+            class="reveal-up group intersect:opacity-100 intersect-once relative py-6 pl-8 sm:pl-32"
+            data-editable="array-item"
+          >
             {title ? (
-              <div class="font-caveat text-secondary mb-1 text-2xl font-medium sm:mb-0 dark:text-amber-400" data-editable="text" data-type="block" data-prop="title">
+              <div
+                class="font-caveat text-secondary mb-1 text-2xl font-medium sm:mb-0 dark:text-amber-400"
+                data-editable="text"
+                data-type="block"
+                data-prop="title"
+              >
                 <Prose markdown={title} />
               </div>
             ) : null}
@@ -58,14 +69,31 @@ const container = containerVariants({ ...style });
                 <time
                   data-time={date}
                   class="bg-primary-soft text-primary mb-3 inline-flex h-6 w-32 min-w-fit translate-y-0.5 items-center justify-center rounded-full px-3 text-xs font-semibold uppercase sm:absolute sm:-left-4 sm:mb-0 sm:-ml-5 dark:bg-emerald-900 dark:text-emerald-300"
-                  data-editable="text" data-prop="date"
+                  data-editable="text"
+                  data-prop="date"
                 >
                   {dateTimeFormatter.format(new Date(date ?? ''))}
                 </time>
               ) : null}
-              {subtitle ? <div data-editable="text" data-type="block" data-prop="subtitle"><Prose markdown={subtitle} /></div> : null}
+              {subtitle ? (
+                <div
+                  data-editable="text"
+                  data-type="block"
+                  data-prop="subtitle"
+                >
+                  <Prose markdown={subtitle} />
+                </div>
+              ) : null}
             </div>
-            {description ? <div data-editable="text" data-type="block" data-prop="description"><Prose markdown={description} /></div> : null}
+            {description ? (
+              <div
+                data-editable="text"
+                data-type="block"
+                data-prop="description"
+              >
+                <Prose markdown={description} />
+              </div>
+            ) : null}
           </div>
         );
       })

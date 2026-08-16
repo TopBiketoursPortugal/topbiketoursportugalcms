@@ -28,7 +28,11 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
     const filteredPosts = posts.filter((p) => p.data.language === language);
     const langTags = postTags.filter((t) => t.data.language === language);
 
-    const page = pageIndex.filter((p) => p.data.language === language)[0];
+    // A language whose pages/blog.mdx is still an untranslated (draft) stub
+    // contributes `undefined` here — getBlogIndexPage found nothing published.
+    // Filtering on p?.data keeps that language on the default page_size of 6
+    // instead of crashing the whole build over one missing index page.
+    const page = pageIndex.filter((p) => p?.data.language === language)[0];
     const pageData = page?.data;
     const pageSize =
       pageData && 'page_size' in pageData ? pageData.page_size : 6;

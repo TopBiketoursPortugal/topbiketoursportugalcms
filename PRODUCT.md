@@ -22,8 +22,12 @@ different urgency: short consideration, mobile-first, low price, no logistics to
 resolve.
 
 Portuguese-speaking riders are served by a full `/pt/` locale, but were not
-confirmed as a distinct audience with its own demand. B2B agencies and resellers
-were not selected as an audience.
+confirmed as a distinct audience with its own demand. German (`/de/`), Spanish
+(`/es/`), French (`/fr/`) and Dutch (`/nl/`) locales were added in August 2026
+for the highest per-capita cycling-holiday spenders among the markets already
+reaching the site (DE/CH/AT, NL/BE, FR + Québec, ES); pages, taxonomies and
+tours are translated, blog posts are unpublished stubs awaiting translation. B2B
+agencies and resellers were not selected as an audience.
 
 ## Product Purpose
 

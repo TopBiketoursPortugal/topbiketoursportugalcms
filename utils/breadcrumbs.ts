@@ -7,14 +7,24 @@ export type BreadcrumbItem = {
   url: string;
 };
 
+// Slugs of pages/bike-hollidays.mdx and pages/about-us.mdx per language folder.
+// Keep in step with the `path` frontmatter of those files.
 const toursPagePaths: Record<LanguageCodes, string> = {
   en: '/bike-tours-in-portugal/',
-  pt: '/pt/passeios-de-bicicleta-portugal/'
+  pt: '/pt/passeios-de-bicicleta-portugal/',
+  de: '/de/radtouren-portugal/',
+  es: '/es/rutas-en-bicicleta-portugal/',
+  fr: '/fr/voyages-a-velo-portugal/',
+  nl: '/nl/fietsvakanties-portugal/'
 };
 
 const aboutPagePaths: Record<LanguageCodes, string> = {
   en: '/about-us-biking-travel/',
-  pt: '/pt/sobre-nos/'
+  pt: '/pt/sobre-nos/',
+  de: '/de/ueber-uns/',
+  es: '/es/sobre-nosotros/',
+  fr: '/fr/a-propos/',
+  nl: '/nl/over-ons/'
 };
 
 export function getHomeCrumb(language: LanguageCodes): BreadcrumbItem {

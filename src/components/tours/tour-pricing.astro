@@ -5,6 +5,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 import PricingColumn from 'src/components/building-blocks/pricing-table/pricing-column.astro';
 import type { InferEntrySchema } from 'astro:content';
 import TourBookNow from './tour-book-now.astro';
+import { isAffirmative, isInclusionFlag } from 'utils/inclusion-flag';
 
 type Props = {
   packages?: TourPackageSchema[];
@@ -65,8 +66,8 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
               title: featureTitle = '',
               info = ''
             } = feature;
-            const isBoolean = description === 'Yes' || description === 'No';
-            const isYes = isIncluded || description === 'Yes';
+            const isBoolean = isInclusionFlag(description);
+            const isYes = isIncluded || isAffirmative(description);
             return (
               <div class="flex items-center justify-between gap-3 border-b border-gray-100 py-2 text-sm last:border-0 dark:border-gray-800">
                 <span class="text-gray-600 dark:text-gray-400">

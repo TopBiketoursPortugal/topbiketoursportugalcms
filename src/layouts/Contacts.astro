@@ -12,6 +12,7 @@ import type { HrefLang } from 'src/types/hreflang';
 import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
 import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
 
 export type ContactProps = {
   frontmatter: Except<LayoutProps, 'class'>;
@@ -25,7 +26,7 @@ export type ContactProps = {
 
 type Props = ContactProps;
 
-const language = 'en';
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const {
   content_blocks = [],
   content_blocks_after = [],
@@ -71,7 +72,7 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
         >{t('Contact.Form.Subtitle', language)}</Text
       >
     </Stack>
-    <Separator class="max-w-14 container mx-auto" weight="heavy" />
+    <Separator class="container mx-auto max-w-14" weight="heavy" />
     <Stack class="mx-auto max-w-3xl justify-center">
       <ContactForm />
     </Stack>
@@ -85,5 +86,8 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     loading="lazy"
     allowfullscreen></iframe>
   <slot />
-  <PageHelper contentBlocks={content_blocks_after ?? []} sectionsKey="content_blocks_after" />
+  <PageHelper
+    contentBlocks={content_blocks_after ?? []}
+    sectionsKey="content_blocks_after"
+  />
 </Layout>

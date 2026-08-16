@@ -1,11 +1,12 @@
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 import { seoSchema } from './seo';
+import { languageSchema } from './language';
 import { publishedGlob } from 'src/schemas/published-glob';
 
 const teamMemberSchema = z.object({
   id: z.string().uuid(),
-  language: z.enum(['en', 'pt']),
+  language: languageSchema,
   title: z.string(),
   memberType: z.string().optional(),
   path: z.string().optional().nullable(),

@@ -21,6 +21,7 @@ import { readFileSync, existsSync, globSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   REPO_ROOT,
+  LANGUAGES,
   collectRoutes,
   liveUrlSet,
   normalisePath
@@ -86,9 +87,12 @@ if (titleDerived.length) {
 // Translation stubs waiting on a translator. These publish nothing, so they
 // are not a problem to fix — but left unreported they are invisible, and the
 // point of creating them automatically is that the backlog stays visible.
-const pending = globSync('src/content/**/pt/**/*.{md,mdx}', {
-  cwd: REPO_ROOT
-}).filter((file) =>
+const pending = globSync(
+  `src/content/**/{${LANGUAGES.filter((l) => l !== 'en').join(',')}}/**/*.{md,mdx}`,
+  {
+    cwd: REPO_ROOT
+  }
+).filter((file) =>
   /^draft:\s*true\s*$/m.test(
     readFileSync(join(REPO_ROOT, file), 'utf8').split(/^---$/m)[1] ?? ''
   )
@@ -96,7 +100,7 @@ const pending = globSync('src/content/**/pt/**/*.{md,mdx}', {
 if (pending.length) {
   warn(
     'pending-translation',
-    `${pending.length} Portuguese stub(s) awaiting translation — unpublished until their \`draft\` line is removed`,
+    `${pending.length} translation stub(s) awaiting translation — unpublished until their \`draft\` line is removed`,
     pending.slice(0, 5).map((file) => file.split(/[\\/]/).join('/'))
   );
 }
@@ -121,11 +125,11 @@ const live = usingDist ? urlsFromDist() : liveUrlSet(routes);
 // /blog/tags/<slug>/ are real content entries, and matching them here would
 // make every tag URL look like it exists.
 const NON_CONTENT_ROUTES = [
-  /^\/(pt\/)?$/,
+  /^\/([a-z]{2}\/)?$/,
   /^\/404\/$/,
-  /^\/(pt\/)?tours\/(tags|rider-levels|bike-types)\/$/,
-  /^\/(pt\/)?blog\/\d+\/$/,
-  /^\/(pt\/)?blog\/tags\/[^/]+\/\d+\/$/
+  /^\/([a-z]{2}\/)?tours\/(tags|rider-levels|bike-types)\/$/,
+  /^\/([a-z]{2}\/)?blog\/\d+\/$/,
+  /^\/([a-z]{2}\/)?blog\/tags\/[^/]+\/\d+\/$/
 ];
 
 const exists = (url) =>

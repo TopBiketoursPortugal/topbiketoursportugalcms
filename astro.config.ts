@@ -325,7 +325,7 @@ export default defineConfig({
     }
   },
   i18n: {
-    locales: ['en', 'pt'],
+    locales: Object.keys(LOCALES),
     defaultLocale: 'en',
     routing: {
       // v6: `redirectToDefaultLocale` only applies when `prefixDefaultLocale` is true.

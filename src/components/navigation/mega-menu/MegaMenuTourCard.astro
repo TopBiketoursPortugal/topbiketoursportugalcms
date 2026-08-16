@@ -1,6 +1,7 @@
 ---
 import ResponsiveImage from 'src/components/building-blocks/responsive-image/ResponsiveImage.astro';
 import { t } from 'utils/i18n';
+import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 
 type Props = {
@@ -33,10 +34,10 @@ const {
 
 const durationDays = duration ? Number(duration) : 0;
 
-const priceFormat = new Intl.NumberFormat(
-  language === 'pt' ? 'pt-PT' : 'en-US',
-  { style: 'currency', currency: currency || 'EUR' }
-);
+const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
+  style: 'currency',
+  currency: currency || 'EUR'
+});
 ---
 
 <a

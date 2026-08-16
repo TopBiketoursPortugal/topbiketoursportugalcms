@@ -32,9 +32,10 @@ const fail = (rule, page, message) => failures.push({ rule, page, message });
 const warn = (rule, page, message) => warnings.push({ rule, page, message });
 
 /** A page whose subject is one tour: /tours/<slug>/ but not a taxonomy folder. */
-const TAXONOMY = /^\/(pt\/)?tours\/(tags|regions|rider-levels|bike-types)\//;
+const TAXONOMY =
+  /^\/([a-z]{2}\/)?tours\/(tags|regions|rider-levels|bike-types)\//;
 const isTourDetail = (url) =>
-  /^\/(pt\/)?tours\/[^/]+\/$/.test(url) && !TAXONOMY.test(url);
+  /^\/([a-z]{2}\/)?tours\/[^/]+\/$/.test(url) && !TAXONOMY.test(url);
 
 const htmlFiles = globSync('**/*.html', { cwd: DIST });
 const distPaths = new Set(htmlFiles.map((f) => f.split(/[\\/]/).join('/')));

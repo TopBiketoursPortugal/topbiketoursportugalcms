@@ -21,7 +21,14 @@ const PERMALINKS = JSON.parse(
   readFileSync(join(REPO_ROOT, 'data/permalinks.json'), 'utf8')
 );
 
-export const LANGUAGES = ['en', 'pt'];
+/** data/languages.json — code, hreflang locale, display name per language. */
+export const LANGUAGES_DATA = JSON.parse(
+  readFileSync(join(REPO_ROOT, 'data/languages.json'), 'utf8')
+);
+
+export const LANGUAGES = Object.keys(LANGUAGES_DATA);
+export const DEFAULT_LANGUAGE =
+  Object.values(LANGUAGES_DATA).find((l) => l.isDefault)?.code ?? 'en';
 
 /** The exact slugify options every getStaticPaths() in src/pages uses. */
 export const slug = (value) =>
@@ -32,7 +39,7 @@ const toursSeg = (language) => PERMALINKS.tours[language] ?? 'tours';
 
 /**
  * Route definitions, keyed by collection. `dir` is relative to src/content;
- * Portuguese entries live in a `pt/` subdirectory of the same folder.
+ * translated entries live in a `<lang>/` subdirectory of the same folder.
  *
  * `url(fm, language)` returns the public path, always with a trailing slash.
  * `slugFrom` lists the frontmatter fields consulted, in precedence order —
@@ -118,7 +125,7 @@ export function readFrontmatter(source, label = '<memory>') {
   }
 }
 
-/** Language implied by a content path: src/content/<dir>/pt/... is Portuguese. */
+/** Language implied by a content path: src/content/<dir>/<lang>/... */
 export function languageFromPath(relativePath) {
   const segments = relativePath.split('/');
   const found = segments.find((segment) => LANGUAGES.includes(segment));

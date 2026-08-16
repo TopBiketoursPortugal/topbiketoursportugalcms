@@ -16,10 +16,12 @@
  * the SEO tooling, so a drift shows up in tools/seo/check-urls.mjs.
  */
 
-import { collectRoutes } from './routes.mjs';
+import { collectRoutes, LANGUAGES_DATA } from './routes.mjs';
 
 /** Locale code -> hreflang value. Mirrors the sitemap `i18n.locales` map. */
-export const LOCALES = { en: 'en-US', pt: 'pt-PT' };
+export const LOCALES = Object.fromEntries(
+  Object.values(LANGUAGES_DATA).map((l) => [l.code, l.locale])
+);
 
 export const DEFAULT_LOCALE = 'en';
 

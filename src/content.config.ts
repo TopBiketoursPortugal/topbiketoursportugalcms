@@ -1,7 +1,7 @@
 import { publishedGlob } from 'src/schemas/published-glob';
 import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
-import { languageSchema } from 'src/schemas/language';
+import { languageSchema, languageCodes } from 'src/schemas/language';
 import { postTagsCollection } from 'src/schemas/blog-tags';
 import { seoSchema } from 'src/schemas/seo';
 import { teamCollection } from 'src/schemas/team';
@@ -74,7 +74,12 @@ const paginatedCollectionSchema = z.object({
 
 const pagesCollection = defineCollection({
   loader: publishedGlob({
-    pattern: ['./*.{md,mdx}', './pt/*.{md,mdx}'],
+    // One folder per non-default language, no deeper — a stray subfolder
+    // must not turn into a page.
+    pattern: [
+      './*.{md,mdx}',
+      ...languageCodes.filter((l) => l !== 'en').map((l) => `./${l}/*.{md,mdx}`)
+    ],
     base: './src/content/pages'
   }),
   schema: z.union([paginatedCollectionSchema, pageSchema])

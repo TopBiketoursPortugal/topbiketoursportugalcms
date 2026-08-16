@@ -16,5 +16,41 @@
     "locale": "pt-PT",
     "textDirection": "ltr",
     "icon": "icon-[circle-flags--pt]"
+  },
+  "de": {
+    "code": "de",
+    "name": "German",
+    "display": "Deutsch",
+    "isDefault": false,
+    "locale": "de-DE",
+    "textDirection": "ltr",
+    "icon": "icon-[circle-flags--de]"
+  },
+  "es": {
+    "code": "es",
+    "name": "Spanish",
+    "display": "Español",
+    "isDefault": false,
+    "locale": "es-ES",
+    "textDirection": "ltr",
+    "icon": "icon-[circle-flags--es]"
+  },
+  "fr": {
+    "code": "fr",
+    "name": "French",
+    "display": "Français",
+    "isDefault": false,
+    "locale": "fr-FR",
+    "textDirection": "ltr",
+    "icon": "icon-[circle-flags--fr]"
+  },
+  "nl": {
+    "code": "nl",
+    "name": "Dutch",
+    "display": "Nederlands",
+    "isDefault": false,
+    "locale": "nl-NL",
+    "textDirection": "ltr",
+    "icon": "icon-[circle-flags--nl]"
   }
 }

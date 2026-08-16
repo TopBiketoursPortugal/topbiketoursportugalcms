@@ -82,5 +82,165 @@
         "cardType": "summary_large_image"
       }
     }
+  },
+  "de": {
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
+      "alt": "Top Bike Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Bike Tours Portugal",
+      "url": "https://topbiketoursportugal.com/de/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
+      },
+      "description": "Top Bike Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Bike Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
+  },
+  "es": {
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
+      "alt": "Top Bike Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Bike Tours Portugal",
+      "url": "https://topbiketoursportugal.com/es/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
+      },
+      "description": "Top Bike Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Bike Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
+  },
+  "fr": {
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
+      "alt": "Top Bike Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Bike Tours Portugal",
+      "url": "https://topbiketoursportugal.com/fr/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
+      },
+      "description": "Top Bike Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Bike Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
+  },
+  "nl": {
+    "site_title": "Top Bike Tours Portugal",
+    "description": "Top Bike Tours Portugal",
+    "twitter_site": "",
+    "image": {
+      "src": "/src/assets/images/guided-bike-tour-in-douro-valley.jpg",
+      "alt": "Top Bike Tours Portugal logo"
+    },
+    "site": {
+      "name": "Top Bike Tours Portugal",
+      "url": "https://topbiketoursportugal.com/nl/"
+    },
+    "metadata": {
+      "title": {
+        "default": "Top Bike Tours Portugal",
+        "template": "%s — Top Bike Tours Portugal"
+      },
+      "description": "Top Bike Tours Portugal",
+      "robots": {
+        "index": true,
+        "follow": true
+      },
+      "openGraph": {
+        "site_name": "Top Bike Tours Portugal",
+        "images": [
+          {
+            "url": "/src/assets/images/default.png",
+            "width": 1200,
+            "height": 628
+          }
+        ],
+        "type": "website"
+      },
+      "twitter": {
+        "handle": "@onwidget",
+        "site": "@onwidget",
+        "cardType": "summary_large_image"
+      }
+    }
   }
 }
