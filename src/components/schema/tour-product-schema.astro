@@ -52,46 +52,20 @@ const schema: Record<string, any> = {
 if (description) schema.description = description;
 if (imageUrl) schema.image = imageUrl;
 
+// A tour is an intangible service, so the Offer carries no `shippingDetails`
+// or `hasMerchantReturnPolicy`. Those two properties are what made Google
+// classify these pages as Merchant listings — an experience meant for physical
+// goods shipped to a buyer — and they declared a 0-day transit time for a
+// multi-day cycling holiday, which describes nothing real.
+//
+// `Product` itself stays: TouristTrip has no Google rich-result support, and
+// the review-star snippet these pages already earn depends on Product.
 if (effectivePrice > 0) {
   schema.offers = {
     '@type': 'Offer',
     'price': effectivePrice,
     'priceCurrency': currency,
-    'availability': 'https://schema.org/InStock',
-    'hasMerchantReturnPolicy': {
-      '@type': 'MerchantReturnPolicy',
-      'applicableCountry': 'PT',
-      'returnPolicyCategory':
-        'https://schema.org/MerchantReturnFiniteReturnWindow',
-      'merchantReturnDays': 14
-    },
-    'shippingDetails': {
-      '@type': 'OfferShippingDetails',
-      'shippingRate': {
-        '@type': 'MonetaryAmount',
-        'value': 0,
-        'currency': currency
-      },
-      'shippingDestination': {
-        '@type': 'DefinedRegion',
-        'addressCountry': 'PT'
-      },
-      'deliveryTime': {
-        '@type': 'ShippingDeliveryTime',
-        'handlingTime': {
-          '@type': 'QuantitativeValue',
-          'minValue': 0,
-          'maxValue': 1,
-          'unitCode': 'DAY'
-        },
-        'transitTime': {
-          '@type': 'QuantitativeValue',
-          'minValue': 0,
-          'maxValue': 0,
-          'unitCode': 'DAY'
-        }
-      }
-    }
+    'availability': 'https://schema.org/InStock'
   };
 }
 

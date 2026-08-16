@@ -14,6 +14,22 @@ export type ResponsiveImageProps = {
   formats?: ImageOutputFormat[];
   widths?: number[];
   paralax?: boolean;
+  /**
+   * Force jampack's above-the-fold verdict for this image.
+   *
+   * The deploy runs `pnpm dlx @divriots/jampack ./dist` after the Astro build,
+   * and jampack decides "above the fold" by byte offset — `<main>.startIndex +
+   * 5000` — not by layout. Anything it judges above the fold has its
+   * `loading="lazy"` stripped and `fetchpriority="high"` set.
+   *
+   * That heuristic misreads any markup that sits early in the document but is
+   * not actually visible, which on this site means the mega-menu: it renders 24
+   * tour cards into the <header> of every page, ~190 KB before <main> begins.
+   *
+   * Pass `false` for images inside collapsed or offscreen UI. Jampack reads the
+   * resulting `data-abovethefold="0"` and removes the attribute from its output.
+   */
+  aboveTheFold?: boolean;
 };
 
 type Props = ResponsiveImageProps;
@@ -27,8 +43,14 @@ const {
   formats = ['avif'],
   widths = [480, 768, 1024, 1920],
   paralax = true,
+  aboveTheFold,
   class: className
 } = Astro.props;
+
+const foldAttributes =
+  aboveTheFold === undefined
+    ? {}
+    : { 'data-abovethefold': aboveTheFold ? '1' : '0' };
 
 const twclass = cn([
   'aspect-video w-full object-cover',
@@ -53,6 +75,7 @@ const imageOptimized = getImageByPath(src) satisfies Promise<{
       src={imageOptimized}
       widths={widths}
       quality={quality}
+      {...foldAttributes}
     />
   )
 }
