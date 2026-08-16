@@ -190,6 +190,21 @@ for (const file of htmlFiles) {
 const sitemaps = globSync('sitemap-*.xml', { cwd: DIST }).filter(
   (f) => !f.includes('index')
 );
+
+// No sitemap means every check below this line silently has nothing to read,
+// and the audit ends with a clean bill of health for a build it never looked
+// at — the failure mode that matters, because it looks exactly like a pass.
+// @astrojs/sitemap writes on `astro:build:done`, so this is what an interrupted
+// or partial `dist/` looks like: plenty of HTML, no sitemap. Refuse to grade it.
+if (!sitemaps.length) {
+  fail(
+    'sitemap-missing',
+    'dist/',
+    'no sitemap-*.xml — run a full `astro build` before auditing; ' +
+      'the sitemap, hreflang and lastmod checks cannot run without one'
+  );
+}
+
 let sitemapUrls = 0;
 let missingLastmod = 0;
 let missingAlternates = 0;

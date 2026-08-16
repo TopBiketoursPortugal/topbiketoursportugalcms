@@ -37,6 +37,17 @@ export const DEFAULT_LOCALE = 'en';
  */
 const UNNAMED = /^new-[a-z]+(-\d+)?$/;
 
+/**
+ * Page 2+ of a paginated listing: `/blog/3/`, `/pt/blog/tags/algarve/2/`.
+ *
+ * Page 1 has no number, so a trailing numeric segment is always a later page.
+ * The shape is pinned to the blog listing routes rather than "ends in a digit"
+ * because plenty of real slugs do (`costa-da-prata-2`, `trek-dual-sport-1`) —
+ * those are content-backed and return from `byUrl` above, but only while their
+ * entry is published, and a rule this cheap should not depend on that.
+ */
+const PAGINATED = /^\/(?:[a-z]{2}\/)?blog\/(?:tags\/[^/]+\/)?\d+\/$/;
+
 export const isUnnamed = (filePath) =>
   UNNAMED.test(
     filePath
@@ -116,7 +127,9 @@ function index() {
  * different numbers of pages (English cycling-tips has five, Portuguese has
  * two), so there is no equivalent page to point at. Pointing page 5 at the
  * translation's page 1 would not be reciprocated from that page, and hreflang
- * without a return link is discarded.
+ * without a return link is discarded. `[...page].astro` applies the same rule
+ * to the markup it emits (`pageNumber === 1 ? hrefsWithSelf : []`), and the two
+ * have to agree or tools/seo/audit-dist.mjs reports the pair as a mismatch.
  */
 export function alternatesFor(absoluteUrl, pathPaired) {
   const { origin, pathname } = new URL(absoluteUrl);
@@ -131,7 +144,8 @@ export function alternatesFor(absoluteUrl, pathPaired) {
     }));
   }
 
-  if (unnamed.has(path) || !pathPaired?.length) return undefined;
+  if (unnamed.has(path) || PAGINATED.test(path)) return undefined;
+  if (!pathPaired?.length) return undefined;
   if (pathPaired.some((link) => link.lang === 'x-default')) return pathPaired;
 
   const fallback = pathPaired.find(
