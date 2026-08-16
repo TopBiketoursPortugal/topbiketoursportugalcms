@@ -133,7 +133,7 @@ function prepareStub(file, language) {
     updated = updated.replace(/^---\r?\n/, `---\nlanguage: ${language}\n`);
   }
   if (!/^draft:/m.test(updated)) {
-    updated = updated.replace(/^---\r?\n/, '---\ndraft: true\n');
+    updated = updated.replace(/^---\r?\n/, '---\ndraft: false\n');
   }
   updated = remapReferences(updated, map);
 

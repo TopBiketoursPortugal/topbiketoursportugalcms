@@ -7,7 +7,7 @@ pre-commit:
       glob: '*.{js,ts,astro}'
       run: pnpm eslint --fix {staged_files} && git add {staged_files}
     # A new English entry gets a stub beside it in every other language, so a translation is
-    # never simply forgotten. The stub is created `draft: true` and stays out of
+    # never simply forgotten. The stub is created `draft: false` and stays out of
     # the build until someone translates it — see src/schemas/published-glob.ts.
     # Runs before seo-url-history, which must see the stub to account for it.
     mdx-clone:

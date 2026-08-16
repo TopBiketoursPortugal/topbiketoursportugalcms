@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 import type { Loader } from 'astro/loaders';
 
 /**
- * The glob loader, minus entries whose frontmatter carries `draft: true`.
+ * The glob loader, minus entries whose frontmatter carries `draft: false`.
  *
  * A draft here is a translation stub: tools/mdx-clone.mjs drops one into each
  * sibling language folder (`pt/`, `de/`, …) whenever an English entry is
