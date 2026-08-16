@@ -42,6 +42,9 @@ const countryFlagIcon = countryCode
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const excerpt = getMarkdownExcerpt(content, 200);
+// Reviews arrive from TripAdvisor exports, so either half can be blank —
+// don't render a dangling "Name - " or " - Country".
+const attribution = [name?.trim(), country?.trim()].filter(Boolean).join(' — ');
 ---
 
 <div
@@ -57,7 +60,7 @@ const excerpt = getMarkdownExcerpt(content, 200);
           fetchpriority="auto"
           decoding="async"
           loading="lazy"
-          alt={name ?? country ?? 'Review Top waling tours portugal'}
+          alt={name ?? country ?? ''}
           class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
         />
       ) : (
@@ -65,23 +68,33 @@ const excerpt = getMarkdownExcerpt(content, 200);
       )
     }
   </div>
-  <p class="text-xl font-semibold">{name} - {country}</p>
+  <p class="text-xl font-semibold">{attribution}</p>
   {
     expand_behavior === 'button' ? (
       <>
-        <span
-          class="review-clickable inline cursor-pointer text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
-          title={t('Tour.Section.Reviews.ViewDetail', language)}
+        {/*
+          A real <button>, not a click-handled <span>: this is the only route to
+          the full review, so it has to be reachable by keyboard and announced
+          as a control. Text stays left-aligned since the button wraps prose.
+        */}
+        <button
+          type="button"
+          class="review-clickable block cursor-pointer text-left text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+          aria-haspopup="dialog"
         >
-          <i class="icon-[ph--quotes-fill]" />
-          <p>{excerpt}</p>
-        </span>
+          <i class="icon-[ph--quotes-fill]" aria-hidden="true" />
+          <span class="block">{excerpt}</span>
+          {/* The excerpt stays the accessible name — it is what the reader is
+              choosing between — with the action appended rather than replacing
+              it, which an aria-label here would do. */}
+          <span class="sr-only">
+            {t('Tour.Section.Reviews.ViewDetail', language)}
+          </span>
+        </button>
         <dialog class="review-dialog m-auto w-[calc(100%-2rem)] max-w-2xl rounded-lg p-0 shadow-2xl backdrop:bg-black/50 dark:bg-gray-800">
           <div class="flex flex-col gap-6 p-6 sm:p-8">
             <div class="flex items-center justify-between">
-              <p class="text-xl font-semibold">
-                {name} - {country}
-              </p>
+              <p class="text-xl font-semibold">{attribution}</p>
               <button
                 class="review-dialog-close flex h-8 w-8 shrink-0 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-gray-700"
                 type="button"
@@ -99,8 +112,8 @@ const excerpt = getMarkdownExcerpt(content, 200);
         </dialog>
       </>
     ) : (
-      <span class="inline text-neutral-600 dark:text-neutral-300">
-        <i class="icon-[ph--quotes-fill]" />
+      <div class="text-neutral-600 dark:text-neutral-300">
+        <i class="icon-[ph--quotes-fill]" aria-hidden="true" />
         <div
           class={cn(
             'truncate-text',
@@ -109,7 +122,7 @@ const excerpt = getMarkdownExcerpt(content, 200);
         >
           <Prose markdown={content} />
         </div>
-      </span>
+      </div>
     )
   }
   <div class="mt-auto">

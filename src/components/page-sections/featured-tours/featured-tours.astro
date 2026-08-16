@@ -32,7 +32,11 @@ const otherTours = allTours.filter((tour) =>
 );
 ---
 
-<section class="flex flex-col gap-6 py-12">
+{
+  /* Vertical padding is owned by the scoped `section` rule below; a `py-12`
+    here only looked like it applied — the element selector outranks it. */
+}
+<section class="flex flex-col gap-6">
   {
     block.title ? (
       <div data-editable="text" data-type="block" data-prop="title">
@@ -97,6 +101,19 @@ const otherTours = allTours.filter((tour) =>
 
     .featured-main :global(.tour-card > div > div:first-child) {
       height: 100%;
+    }
+
+    /*
+     * The media wrapper is taken out of flow so it inherits the row height set
+     * by the text column. Without this it is content-sized, `height: 100%` on
+     * the image below resolves against nothing, and the image lays out 0px
+     * tall — which also means a lazy image never intersects the viewport and
+     * so never loads at all. The card rendered with an empty left half.
+     */
+    .featured-main
+      :global(.tour-card > div > div:first-child > .parallax-media) {
+      position: absolute;
+      inset: 0;
     }
 
     .featured-main :global(.tour-card > div > div:first-child img) {

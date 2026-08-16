@@ -15,7 +15,9 @@ export type TextProps = {
 type Props = TextProps;
 
 const textVariants = tv({
-  base: 'flex flex-col break-all whitespace-normal',
+  // No `base` here: tailwind-variants ignores a root `base` once `slots` is
+  // declared, so the old value (which included `break-all`, a mid-word
+  // character break) never reached the DOM. Slot defaults live on the slots.
   variants: {
     padding: {
       none: { container: 'p-0' },
@@ -23,8 +25,15 @@ const textVariants = tv({
       normal: { container: 'px-4 md:px-5' },
       tight: { container: 'px-2 md:px-4' }
     },
+    // `full` is authored in the CMS (data-driven pages set it) but had no
+    // matching variant, so it resolved to no class at all: the block spanned
+    // the viewport and Prose's own `max-w-full` removed the typographic
+    // measure with it, giving ~180 characters per line on a wide monitor.
+    // It now means what it reads like — a full-bleed band with the copy still
+    // held to a readable measure inside it.
     container: {
       fluid: { container: 'max-w-none' },
+      full: { container: 'max-w-none', text: 'mx-auto w-full max-w-[72ch]' },
       centered: { container: 'mx-auto max-w-7xl' }
     },
     align: {

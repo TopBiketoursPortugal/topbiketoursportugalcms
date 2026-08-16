@@ -43,8 +43,12 @@ const twoColumnVariants = tv({
       tight: 'px-4 py-8 md:px-8 md:py-16',
       normal: 'px-6 py-10 md:px-10 md:py-16'
     },
+    // `true` used to be a literal `max-w-none`, so on a wide monitor each of
+    // the two prose columns ran past 120 characters per line. It still reads
+    // as the wide option next to `false`, but now stops at a measure a person
+    // can actually track across.
     fullwidth: {
-      true: 'max-w-none',
+      true: 'mx-auto max-w-screen-2xl',
       false: 'mx-auto max-w-screen-xl'
     }
   },
@@ -71,10 +75,14 @@ const getButtonComponent = (buttonName: string | undefined) => {
 };
 
 const Button1 = column1?.button
-  ? getButtonComponent(column1.button._component ?? column1.button._bookshop_name)
+  ? getButtonComponent(
+      column1.button._component ?? column1.button._bookshop_name
+    )
   : null;
 const Button2 = column2?.button
-  ? getButtonComponent(column2.button._component ?? column2.button._bookshop_name)
+  ? getButtonComponent(
+      column2.button._component ?? column2.button._bookshop_name
+    )
   : null;
 ---
 

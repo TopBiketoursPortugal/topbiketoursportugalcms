@@ -2,10 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from 'src/components/building-blocks/utility/markdown.astro';
-import {
-  getDarkEquivalent,
-  getDarkTextEquivalent
-} from 'src/utils/dark-color';
+import { getDarkEquivalent, getDarkTextEquivalent } from 'src/utils/dark-color';
 
 interface Props {
   background_color: string;
@@ -89,13 +86,21 @@ const Heading = getHeadingSizeComponent(heading_size);
     >
       {
         heading?.heading_text ? (
-          <Heading class="heading pb-3" data-editable="text" data-prop="heading.heading_text">{heading?.heading_text}</Heading>
+          <Heading
+            class="heading pb-3"
+            data-editable="text"
+            data-prop="heading.heading_text"
+          >
+            {heading?.heading_text}
+          </Heading>
         ) : null
       }
       <div
         class="subheading-text"
         style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
-        data-editable="text" data-type="block" data-prop="subheading.markdown_content"
+        data-editable="text"
+        data-type="block"
+        data-prop="subheading.markdown_content"
       >
         <Markdown content={subheading.markdown_content} />
       </div>
@@ -123,11 +128,13 @@ const Heading = getHeadingSizeComponent(heading_size);
       {
         imageSrc && (
           <Image
-            alt={block.image.alt_text ?? 'Top waking tours portugal'}
-            widths={[320, 500, 640]}
-            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
+            alt={block.image.alt_text ?? ''}
+            widths={[320, 500, 640, 900, 1200]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 600px`}
             src={imageSrc}
-            data-editable="image" data-prop-src="image.image_path" data-prop-alt="image.alt_text"
+            data-editable="image"
+            data-prop-src="image.image_path"
+            data-prop-alt="image.alt_text"
           />
         )
       }
@@ -157,29 +164,50 @@ const Heading = getHeadingSizeComponent(heading_size);
     box-sizing: border-box;
   }
 
+  /*
+   * The accent half of the gradient is real text, so it has to clear the 3:1
+   * large-text contrast floor on its own. Editors pick `heading_gradient_color`
+   * freely in CloudCannon and a mid-tone like #FF785A lands at 2.6:1 on white,
+   * so the light-theme stop is mixed toward black rather than trusted raw —
+   * the floor holds for whatever colour the CMS supplies. On the dark surface
+   * the same hue already clears 5:1, so it is used as authored.
+   */
   .content h1 {
     font-size: clamp(2.5rem, 4vw + 1.25rem, 4.25rem);
     line-height: 1.05;
     font-weight: 800;
     letter-spacing: -0.02em;
-    background: -webkit-linear-gradient(to left, #eee 50%, #333);
+    /* Fallback for engines without background-clip: text — never invisible. */
+    color: #000000;
+    /* And a solid paint under the gradient: background-clip:text shipped well
+       before color-mix() (Safari 14 vs 16.2), so an engine that clips to text
+       but cannot parse the gradient would otherwise clip to nothing and leave
+       the headline blank. Solid black is the floor it lands on instead. */
+    background: #000000;
     background: linear-gradient(
       to left,
-      var(--headingGradientColor) 50%,
+      color-mix(in srgb, var(--headingGradientColor) 80%, #000) 50%,
       #000000
     );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 
   :global(.dark) .content h1 {
+    color: #ffffff;
+    background: #ffffff;
     background: linear-gradient(
       to left,
       var(--headingGradientColor) 50%,
       #ffffff
     );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  }
+
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    .content h1,
+    :global(.dark) .content h1 {
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
 
   .subheading-text {
@@ -202,42 +230,6 @@ const Heading = getHeadingSizeComponent(heading_size);
     justify-content: center;
     margin-top: 1rem;
   }
-  button {
-    padding: 0.75rem 1.2rem;
-    border-radius: 20px;
-    font-size: 1.25em;
-    cursor: pointer;
-    transition: all ease-in-out 0.15s;
-    align-items: center;
-    justify-content: center;
-  }
-  .btn {
-    background: #4384e6;
-    color: #fff;
-    border: none;
-    display: flex;
-    gap: 8px;
-    padding: 1rem;
-  }
-  .btn svg {
-    width: 1rem;
-  }
-
-  .btn:hover {
-    background: #0066ff;
-  }
-
-  .btn-outline {
-    border: 1px solid #0d6efd;
-    background: transparent;
-    color: #0d6efd;
-    margin-left: 5px;
-  }
-
-  button i {
-    font-size: 0.78em;
-  }
-
   .blob {
     width: 100%;
     display: flex;
@@ -264,10 +256,21 @@ const Heading = getHeadingSizeComponent(heading_size);
     -webkit-background-position: center;
     background-position: center center;
     margin: 20px;
-    animation:
-      animate 10s ease-in-out infinite,
-      blob-float 7s ease-in-out infinite alternate;
-    transition: all 1s ease-in-out;
+    /* Resting shape — the animation below only plays when motion is welcome. */
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  /*
+   * Two perpetual animations on the above-the-fold image. They are the hero's
+   * signature, but they never stop, so they stay behind a reduced-motion
+   * guard — this is the one place on the page that animates indefinitely.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    .blob > img {
+      animation:
+        animate 10s ease-in-out infinite,
+        blob-float 7s ease-in-out infinite alternate;
+    }
   }
 
   @keyframes blob-float {

@@ -1,7 +1,9 @@
 ---
 import CardMedia from 'src/components/building-blocks/card/CardMedia.astro';
 import { getTourPath, getTourTagPath } from 'utils/permalinks';
-import CardContent, { type CardContentProps } from 'src/components/building-blocks/card/CardContent.astro';
+import CardContent, {
+  type CardContentProps
+} from 'src/components/building-blocks/card/CardContent.astro';
 import Card from 'src/components/building-blocks/card/Card.astro';
 import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -90,17 +92,28 @@ const tourTags = await getCollection(
       )
     }
     <CardContent display={contentDisplay} class="p-6 sm:max-xl:p-4">
-      <h3 class="font-oswald line-clamp-2 text-xl font-bold">
+      {
+        /*
+        Card text inherits `text-primary` (#296a3f) from <Card color="primary">,
+        which is a white-background green: on the dark surface it measures
+        2.74:1, under the 3:1 floor. The greys below were likewise declared
+        light-only. Each colour here carries its dark counterpart — emerald-300
+        matches the primary-on-dark pairing already used in timeline.astro.
+      */
+      }
+      <h3
+        class="font-oswald line-clamp-2 text-xl font-bold dark:text-emerald-300"
+      >
         {data.title}
       </h3>
-      <p class="line-clamp-5 text-lg/relaxed text-gray-600">
+      <p class="line-clamp-5 text-lg/relaxed text-gray-600 dark:text-gray-300">
         {getMarkdownExcerpt(content ?? '', 300)}
       </p>
 
       <Stack spacing="medium" layout="vertical" class="w-full">
         {
           durationDays > 0 ? (
-            <span class="flex gap-2 text-gray-600">
+            <span class="flex gap-2 text-gray-600 dark:text-gray-300">
               <i
                 class="icon-[ph--clock-countdown-light] h-5 w-5"
                 aria-hidden="true"
@@ -118,7 +131,7 @@ const tourTags = await getCollection(
         }
         {
           difficulty && difficulty > 0 && (
-            <span class="flex gap-2 text-gray-600">
+            <span class="flex gap-2 text-gray-600 dark:text-gray-300">
               {tourtype !== 'PackageTour' ? (
                 <i
                   class="icon-[ph--person-simple-walk-light] h-5 w-5"
@@ -136,7 +149,7 @@ const tourTags = await getCollection(
         }
         {
           distance && distance > 0 ? (
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 dark:text-emerald-300">
               <i
                 class="icon-[ph--map-trifold-light] h-5 w-5"
                 aria-hidden="true"
@@ -149,39 +162,46 @@ const tourTags = await getCollection(
         }
         <div class="flex gap-3">
           <Rating rating={average} class="text-orange-500" />
-          <span class="text-neutral-700"
+          <span class="text-neutral-700 dark:text-neutral-300"
             >({count} {t('Tour.Info.Reviews.Unit', language)})</span
           >
         </div>
-        <div class="flex items-center justify-between w-full pt-2">
+        <div class="flex w-full items-center justify-between pt-2">
           {
             minPrice > 0 || minPromoPrice > 0 ? (
-              <Stack
-                spacing="none"
-                alignment="leading"
-                layout="vertical"
-              >
+              <Stack spacing="none" alignment="leading" layout="vertical">
                 {minPromoPrice > 0 && (
-                  <span class="line-through text-sm text-gray-500">{priceFormat.format(minPrice)}</span>
+                  <span class="text-sm text-gray-500 line-through dark:text-gray-400">
+                    {priceFormat.format(minPrice)}
+                  </span>
                 )}
-                <span class="text-xl font-bold">
+                <span class="text-xl font-bold dark:text-emerald-300">
                   {priceFormat.format(
                     minPromoPrice > 0 ? minPromoPrice : minPrice
                   )}
                 </span>
               </Stack>
-            ) : <div />
+            ) : (
+              <div />
+            )
           }
           {
             data.wetravel?.guidedUuid || data.wetravel?.selfGuidedUuid ? (
               <WeTravelButton
-                uuid={(data.wetravel.guidedUuid || data.wetravel.selfGuidedUuid) as string}
+                uuid={
+                  (data.wetravel.guidedUuid ||
+                    data.wetravel.selfGuidedUuid) as string
+                }
                 uid={data.wetravel.uid}
                 label={t('Tour.Form.Button.Text', language)}
                 class="z-20 h-10 w-fit px-4 py-2 text-sm font-medium"
               />
             ) : (
-              <LinkButton href={getTourPath(data, language)} variant="default" class="z-20">
+              <LinkButton
+                href={getTourPath(data, language)}
+                variant="default"
+                class="z-20"
+              >
                 {t('Tour.Form.Button.Text', language)}
               </LinkButton>
             )

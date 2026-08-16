@@ -32,7 +32,10 @@ const componentImports = import.meta.glob('../**/*.{jsx,astro}', {
 Object.entries(componentImports).forEach(([path, obj]) => {
   const parts = path.replace('../', '').split('.')[0].split('/');
   const kebabFilename = pascalToKebab(parts[parts.length - 1]);
-  if (parts.length > 1 && kebabFilename === pascalToKebab(parts[parts.length - 2])) {
+  if (
+    parts.length > 1 &&
+    kebabFilename === pascalToKebab(parts[parts.length - 2])
+  ) {
     parts.pop();
   } else {
     parts[parts.length - 1] = kebabFilename;
@@ -60,8 +63,11 @@ const { sections = [] } = Astro.props;
  * Setting `enter: none` explicitly in the CMS is the per-block off switch: it
  * drops the wrapper entrance AND silences every internal reveal/stagger inside
  * that block (via the `.anim-off` class below), so a single prop fully disables
- * a block's scroll animations. (All motion is also globally disabled for users
- * with `prefers-reduced-motion`, handled in global.css.)
+ * a block's scroll animations. (There is no blanket motion kill-switch in
+ * global.css: the reveal utilities are declared *inside* `prefers-reduced-
+ * motion: no-preference`, so reduced-motion users simply get the finished
+ * state with no transition. Keyframes authored anywhere else — a component's
+ * own scoped `<style>`, say — must carry their own guard.)
  */
 const ENTER_CLASS: Record<string, string> = {
   'fade': 'reveal',
@@ -103,7 +109,10 @@ function resolveEnter(block: any, index: number): string {
   // it paints immediately with no entrance.
   if (index === 0) return 'none';
   // Everything else rises gently into place — one cohesive motion language.
-  return BLOCK_ENTER[block._component || block._type || block._bookshop_name] ?? 'slide-up';
+  return (
+    BLOCK_ENTER[block._component || block._type || block._bookshop_name] ??
+    'slide-up'
+  );
 }
 
 function resolveSurface(block: any): string | null {

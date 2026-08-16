@@ -13,6 +13,14 @@ export type ResponsiveImageProps = {
   quality?: ImageQualityPreset | number;
   formats?: ImageOutputFormat[];
   widths?: number[];
+  /**
+   * The slot this image actually occupies, as a CSS `sizes` list. Without it
+   * Astro falls back to `100vw`, so the browser shops for a viewport-wide
+   * candidate and settles for the largest available — which is how a card
+   * image can be served at 300w into a 400px slot and look soft on any
+   * retina screen. Pass the real measurement wherever the slot is known.
+   */
+  sizes?: string;
   paralax?: boolean;
   /**
    * Force jampack's above-the-fold verdict for this image.
@@ -42,6 +50,7 @@ const {
   quality = 'max',
   formats = ['avif'],
   widths = [480, 768, 1024, 1920],
+  sizes,
   paralax = true,
   aboveTheFold,
   class: className
@@ -74,6 +83,7 @@ const imageOptimized = getImageByPath(src) satisfies Promise<{
       loading={loading}
       src={imageOptimized}
       widths={widths}
+      {...(sizes ? { sizes } : {})}
       quality={quality}
       {...foldAttributes}
     />

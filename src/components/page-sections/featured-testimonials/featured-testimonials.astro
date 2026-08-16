@@ -7,6 +7,7 @@ import Stack from 'src/components/building-blocks/stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import { getAuthorName } from '@utils/get-author-name';
 import { MapTestimonialToReview } from '@utils/map-testimonial-to-review';
+import { t } from 'utils/i18n';
 
 type Props = {
   feature_testimonials: readonly string[];
@@ -49,21 +50,31 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         style="box-sizing: border-box;"
       >
         <button
+          type="button"
           class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label="Previous slide"
+          aria-label={t('Carousel.Previous', language)}
         >
-          <i class="icon-[ph--caret-left-bold] text-xl" />
+          <i class="icon-[ph--caret-left-bold] text-xl" aria-hidden="true" />
         </button>
         <button
+          type="button"
           class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label="Next slide"
+          aria-label={t('Carousel.Next', language)}
         >
-          <i class="icon-[ph--caret-right-bold] text-xl" />
+          <i class="icon-[ph--caret-right-bold] text-xl" aria-hidden="true" />
         </button>
 
+        {/*
+          tabindex + a group role make the overflow strip reachable by keyboard:
+          the arrows are hidden below `sm`, so without this the only way through
+          the reviews on a keyboard is a mouse-style drag that never arrives.
+        */}
         <div
           class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
           style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+          tabindex="0"
+          role="group"
+          aria-label={t('Carousel.Reviews.Label', language)}
         >
           {items.map((review) => (
             <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
@@ -158,12 +169,26 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 <style>
   .carousel-item {
     width: calc(100% - 2rem); /* Mobile: almost full width with some peek */
-    view-timeline-name: --carousel-item;
-    view-timeline-axis: inline;
-    animation: linear scale-up both;
-    animation-timeline: --carousel-item;
-    animation-range: entry 0% contain 0% exit 0% exit 100%; /* Fallback */
-    animation-range: entry 25% contain 25% exit 25% exit 75%; /* Refined range */
+  }
+
+  /*
+   * Scroll-driven de-emphasis of the off-centre cards. Double-guarded on
+   * purpose: without @supports, engines that don't know named view timelines
+   * keep `animation: linear scale-up both` on the document timeline — a 0s
+   * animation whose `both` fill pins every card at the closing keyframe
+   * (opacity .5, scale .9). Correctness there must not depend on whether the
+   * minifier happens to fold the two declarations into one shorthand.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .carousel-item {
+        view-timeline-name: --carousel-item;
+        view-timeline-axis: inline;
+        animation: linear scale-up both;
+        animation-timeline: --carousel-item;
+        animation-range: entry 25% contain 25% exit 25% exit 75%;
+      }
+    }
   }
 
   @keyframes scale-up {
