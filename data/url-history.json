@@ -988,6 +988,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/10-gesundheitliche-vorteile-des-regelmassigen-radfahrens/",
+      "destination": "/de/blog/10-health-benefits-of-cycling-regularly/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/3-tips-to-safely-view-a-solar-eclipse-in-spain/",
       "destination": "/de/blog/3-tips-for-solar-eclipse/",
       "status": 301
@@ -1013,6 +1018,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/algarve-oder-douro-tal-welche-radtour-in-portugal-passt-zu-ihnen/",
+      "destination": "/de/blog/algarve-or-douro-valley-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/algarve-tour-vs-douro-valley-best-portugal-bike-tour-for-you/",
       "destination": "/de/blog/algarve-or-douro-valley-bike-tour/",
       "status": 301
@@ -1020,6 +1030,11 @@
     {
       "from": "/de/blog/are-electric-bikes-cheating-debunking-the-myths-of-e-bike-touring/",
       "destination": "/de/blog/are-electric-bikes-cheating/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/bekanntmachung-der-forderung-durch-das-iefp/",
+      "destination": "/de/blog/disclosure-iefp/",
       "status": 301
     },
     {
@@ -1078,6 +1093,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/carmen-paz-und-fernando-auf-dem-weg-nach-santiago/",
+      "destination": "/de/blog/camino-de-santiago-starting-in-porto-city-brazil-couple/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/central-portugal-bike-tours-silver-coast-coimbra-and-hidden-countryside/",
       "destination": "/de/blog/central-portugal-bike-tours/",
       "status": 301
@@ -1085,6 +1105,11 @@
     {
       "from": "/de/blog/challenging-bike-routes-in-portugal-for-experienced-cyclists-seeking-more/",
       "destination": "/de/blog/challenging-bike-routes-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/clean-and-safe-diese-anforderungen-erfullen-wir/",
+      "destination": "/de/blog/covid-19-requirements-to-comply-with/",
       "status": 301
     },
     {
@@ -1168,6 +1193,36 @@
       "status": 301
     },
     {
+      "from": "/de/blog/das-douro-tal-mit-dem-rad-wein-ausblicke-and-stille-strassen/",
+      "destination": "/de/blog/cycling-douro-valley-guide/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/der-komplette-ratgeber-so-finden-sie-das-richtige-fahrrad/",
+      "destination": "/de/blog/complete-guide-how-to-choose-the-right-bike-for-you/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/der-schonste-radurlaub-von-porto-nach-lissabon-in-portugal/",
+      "destination": "/de/blog/best-porto-to-lisbon-cycling-holiday/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/die-beste-zeit-zum-radfahren-in-portugal-wann-fahren-und-was-erwartet-sie/",
+      "destination": "/de/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/die-besten-spezialitaten-auf-einer-radwoche-von-porto-nach-lissabon/",
+      "destination": "/de/blog/best-foods-on-a-porto-to-lisbon-cycling-tour-week/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/die-vorteile-unserer-radreisen-fur-begeisterte-radfahrer/",
+      "destination": "/de/blog/benefits-of-your-first-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/disclosure-of-support-from-iefp/",
       "destination": "/de/blog/disclosure-iefp/",
       "status": 301
@@ -1193,6 +1248,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/e-bikes-nachhaltige-mobilitat-in-reichweite/",
+      "destination": "/de/blog/electric-bikes-sustainability/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/easy-praking-in-uk-airports-top-bike-tours-portugal/",
       "destination": "/de/blog/save-on-airport-parking-in-the-uk/",
       "status": 301
@@ -1203,6 +1263,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/einzigartige-erlebnisse-auf-gefuhrten-radtouren-entdecken/",
+      "destination": "/de/blog/unique-experiences-with-guided-bike-tours/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/electric-bicycles-sustainable-mobility-at-your-fingertips/",
       "destination": "/de/blog/electric-bikes-sustainability/",
       "status": 301
@@ -1210,6 +1275,11 @@
     {
       "from": "/de/blog/equipa-juma-or-top-bike-tours-portugal/",
       "destination": "/de/blog/juma-team-from-brasil-blog-in-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/erfahrungsbericht-zu-einer-radtour-auf-dem-jakobsweg/",
+      "destination": "/de/blog/article-porto-to-santiago-de-compostela-darren-alff/",
       "status": 301
     },
     {
@@ -1238,13 +1308,18 @@
       "status": 301
     },
     {
+      "from": "/de/blog/gefuhrte-radtouren-in-portugal-der-komplette-guide-2026/",
+      "destination": "/de/blog/guided-bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/gravel-bike-in-portugal-complete-guide/",
       "destination": "/de/blog/gravel-bike-in-portugal/",
       "status": 301
     },
     {
-      "from": "/de/blog/greater/",
-      "destination": "/de/blog/where-you-stay-on-an-alentejo-bike-tour/",
+      "from": "/de/blog/gravelbike-in-portugal-der-komplette-guide/",
+      "destination": "/de/blog/gravel-bike-in-portugal/",
       "status": 301
     },
     {
@@ -1308,6 +1383,16 @@
       "status": 301
     },
     {
+      "from": "/de/blog/mit-dem-rad-von-porto-nach-lissabon-kustenrouten-tipps-and-touren/",
+      "destination": "/de/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/mit-dem-rad-von-porto-nach-santiago-was-sie-erwartet/",
+      "destination": "/de/blog/biking-from-porto-to-santiago-guide/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/mountain-bike-in-portugal-complete-guide/",
       "destination": "/de/blog/mountain-bike-in-portugal/",
       "status": 301
@@ -1330,6 +1415,11 @@
     {
       "from": "/de/blog/northern-portugal-bike-tours-porto-douro-valley-and-camino-de-santiago/",
       "destination": "/de/blog/northern-portugal-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/partner-von-top-biketours-portugal/",
+      "destination": "/de/blog/partners-links/",
       "status": 301
     },
     {
@@ -1363,8 +1453,28 @@
       "status": 301
     },
     {
+      "from": "/de/blog/portugal-per-gravelbike-radtouren-an-der-algarve/",
+      "destination": "/de/blog/algarve-by-gravel-quiet-inland-loops/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/portugals-wunder-entdecken-mit-dem-rad-durch-das-douro-tal/",
+      "destination": "/de/blog/discover-the-wonders-of-portugal-with-bike-rides-through-the-douro-valley/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/portuguese-camino-vs-french-camino-is-the-camino-landscape-changing/",
       "destination": "/de/blog/portuguese-camino-vs-french-camino/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/radfahren-in-lissabon-ein-abenteuer-das-sie-nicht-verpassen-sollten/",
+      "destination": "/de/blog/cycling-in-lisbon-an-adventure-not-to-be-missed/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/radfahren-klima-und-geografie-portugals/",
+      "destination": "/de/blog/climate-and-geography-in-portugal-for-cycling/",
       "status": 301
     },
     {
@@ -1405,6 +1515,11 @@
     {
       "from": "/de/blog/southern-portugal-bike-tours-algarve-and-alentejo-cycling-experiences/",
       "destination": "/de/blog/southern-portugal-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/steile-anstiege-mit-dem-mountainbike-techniken-and-tipps/",
+      "destination": "/de/blog/steep-mountain-bike-climbs-techniques/",
       "status": 301
     },
     {
@@ -1523,6 +1638,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/team-juma-or-top-bike-tours-portugal/",
+      "destination": "/de/blog/juma-team-from-brasil-blog-in-douro-valley/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/the-art-of-creating-cycling-routes-tips-and-strategies/",
       "destination": "/de/blog/creating-bike-routes-strategies/",
       "status": 301
@@ -1558,6 +1678,11 @@
       "status": 301
     },
     {
+      "from": "/de/blog/tourenrad-in-portugal-der-komplette-guide/",
+      "destination": "/de/blog/touring-bike-in-portugal/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/touring-bike-in-portugal-complete-guide/",
       "destination": "/de/blog/touring-bike-in-portugal/",
       "status": 301
@@ -1568,8 +1693,18 @@
       "status": 301
     },
     {
+      "from": "/de/blog/vouchers-for-startups-neue-grune-und-digitale-produkte/",
+      "destination": "/de/blog/vouchers-for-startups/",
+      "status": 301
+    },
+    {
       "from": "/de/blog/vouchers-for-startups-new-green-and-digital-products/",
       "destination": "/de/blog/vouchers-for-startups/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/warum-eine-gefuhrte-radtour-wahlen/",
+      "destination": "/de/blog/guided-bicycle-tour/",
       "status": 301
     },
     {
@@ -1615,6 +1750,11 @@
     {
       "from": "/de/blog/wine-bike-tours-in-portugal-explore-douro-and-alentejo/",
       "destination": "/de/blog/portugal-wine-bike-tours-douro-alentejo/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/wo-sie-auf-einer-radtour-durch-nordportugal-ubernachten/",
+      "destination": "/de/blog/where-you-stay-on-a-north-of-portugal-bike-tour/",
       "status": 301
     },
     {
@@ -2013,6 +2153,11 @@
       "status": 301
     },
     {
+      "from": "/es/blog/10-beneficios-de-montar-en-bici-con-regularidad-para-la-salud/",
+      "destination": "/es/blog/10-health-benefits-of-cycling-regularly/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/3-tips-to-safely-view-a-solar-eclipse-in-spain/",
       "destination": "/es/blog/3-tips-for-solar-eclipse/",
       "status": 301
@@ -2038,6 +2183,11 @@
       "status": 301
     },
     {
+      "from": "/es/blog/algarve-o-valle-del-duero-que-tour-en-bicicleta-por-portugal-elegir/",
+      "destination": "/es/blog/algarve-or-douro-valley-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/algarve-tour-vs-douro-valley-best-portugal-bike-tour-for-you/",
       "destination": "/es/blog/algarve-or-douro-valley-bike-tour/",
       "status": 301
@@ -2060,6 +2210,21 @@
     {
       "from": "/es/blog/best-time-to-cycle-in-portugal-when-to-go-and-what-to-expect/",
       "destination": "/es/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/bicicleta-de-cicloturismo-en-portugal-guia-completa/",
+      "destination": "/es/blog/touring-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/bicicleta-de-gravel-en-portugal-guia-completa/",
+      "destination": "/es/blog/gravel-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/bicicletas-electricas-movilidad-sostenible-al-alcance-de-la-mano/",
+      "destination": "/es/blog/electric-bikes-sustainability/",
       "status": 301
     },
     {
@@ -2103,6 +2268,11 @@
       "status": 301
     },
     {
+      "from": "/es/blog/carmen-paz-y-fernando-en-el-camino-de-santiago/",
+      "destination": "/es/blog/camino-de-santiago-starting-in-porto-city-brazil-couple/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/central-portugal-bike-tours-silver-coast-coimbra-and-hidden-countryside/",
       "destination": "/es/blog/central-portugal-bike-tours/",
       "status": 301
@@ -2113,8 +2283,28 @@
       "status": 301
     },
     {
+      "from": "/es/blog/cicloturismo-clima-y-geografia-de-portugal/",
+      "destination": "/es/blog/climate-and-geography-in-portugal-for-cycling/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/clean-and-safe-los-requisitos-que-cumplimos/",
+      "destination": "/es/blog/covid-19-requirements-to-comply-with/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/clean-and-safe-requirements-to-comply-with/",
       "destination": "/es/blog/covid-19-requirements-to-comply-with/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/colaboradores-de-top-bike-tours-portugal/",
+      "destination": "/es/blog/partners-links/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/como-subir-cuestas-empinadas-en-bicicleta-de-montana-tecnica-y-consejos/",
+      "destination": "/es/blog/steep-mountain-bike-climbs-techniques/",
       "status": 301
     },
     {
@@ -2125,6 +2315,16 @@
     {
       "from": "/es/blog/conquer-challenging-routes-with-e-bikes/",
       "destination": "/es/blog/conquer-challenging-routes-with-e-bikes-top-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/consejos-para-descubrir-las-aldeas-historicas-de-portugal-en-bicicleta/",
+      "destination": "/es/blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/cuanta-autonomia-tiene-una-e-bike-carga-terreno-y-consejos-de-bateria/",
+      "destination": "/es/blog/how-far-can-an-e-bike-go-portugal/",
       "status": 301
     },
     {
@@ -2193,6 +2393,36 @@
       "status": 301
     },
     {
+      "from": "/es/blog/de-oporto-a-lisboa-en-bicicleta-rutas-de-costa-consejos-y-tours/",
+      "destination": "/es/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/de-oporto-a-santiago-en-bici-en-familia/",
+      "destination": "/es/blog/family-porto-to-santiago-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/de-oporto-a-santiago-en-bici-que-te-vas-a-encontrar/",
+      "destination": "/es/blog/biking-from-porto-to-santiago-guide/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/descubre-el-valle-del-duero-en-bici-vino-vistas-y-carreteras-tranquilas/",
+      "destination": "/es/blog/cycling-douro-valley-guide/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/descubre-experiencias-unicas-con-nuestros-tours-en-bicicleta-con-guia/",
+      "destination": "/es/blog/unique-experiences-with-guided-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/descubre-las-maravillas-de-portugal-pedaleando-por-el-valle-del-duero/",
+      "destination": "/es/blog/discover-the-wonders-of-portugal-with-bike-rides-through-the-douro-valley/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/disclosure-of-support-from-iefp/",
       "destination": "/es/blog/disclosure-iefp/",
       "status": 301
@@ -2208,8 +2438,23 @@
       "status": 301
     },
     {
+      "from": "/es/blog/divulgacion-del-apoyo-del-iefp/",
+      "destination": "/es/blog/disclosure-iefp/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/donde-te-alojas-en-el-tour-en-bicicleta-por-el-norte-de-portugal/",
+      "destination": "/es/blog/where-you-stay-on-a-north-of-portugal-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/douro-valley-bike-tour-the-complete-guide-for-cycling-experience-in-portugal/",
       "destination": "/es/blog/douro-valley-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/e-bike-o-bicicleta-de-carretera-cual-es-mejor-para-pedalear-en-portugal/",
+      "destination": "/es/blog/electric-bike-vs-road-bike-cycling-tours-portugal/",
       "status": 301
     },
     {
@@ -2273,6 +2518,11 @@
       "status": 301
     },
     {
+      "from": "/es/blog/guia-completa-como-elegir-la-bicicleta-adecuada-para-ti/",
+      "destination": "/es/blog/complete-guide-how-to-choose-the-right-bike-for-you/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/guided-bike-tours-in-portugal-complete-guide-2026/",
       "destination": "/es/blog/guided-bike-tours-in-portugal/",
       "status": 301
@@ -2323,8 +2573,23 @@
       "status": 301
     },
     {
+      "from": "/es/blog/las-ventajas-de-nuestros-tours-en-bicicleta/",
+      "destination": "/es/blog/benefits-of-your-first-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/lisboa-en-bicicleta-una-aventura-que-no-te-puedes-perder/",
+      "destination": "/es/blog/cycling-in-lisbon-an-adventure-not-to-be-missed/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/mark-mander-and-friends/",
       "destination": "/es/blog/porto-to-santiago-de-compostela-mark-mander-group/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/mejor-epoca-para-ir-en-bici-por-portugal-cuando-ir-y-que-esperar/",
+      "destination": "/es/blog/best-time-to-cycle-in-portugal/",
       "status": 301
     },
     {
@@ -2358,8 +2623,18 @@
       "status": 301
     },
     {
+      "from": "/es/blog/opinion-sobre-un-tour-en-bicicleta-por-el-camino-de-santiago/",
+      "destination": "/es/blog/article-porto-to-santiago-de-compostela-darren-alff/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/partners-of-top-biketours-portugal/",
       "destination": "/es/blog/partners-links/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/por-que-elegir-un-tour-en-bicicleta-con-guia/",
+      "destination": "/es/blog/guided-bicycle-tour/",
       "status": 301
     },
     {
@@ -2388,8 +2663,18 @@
       "status": 301
     },
     {
+      "from": "/es/blog/portugal-en-gravel-tours-en-bicicleta-por-el-algarve/",
+      "destination": "/es/blog/algarve-by-gravel-quiet-inland-loops/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/portuguese-camino-vs-french-camino-is-the-camino-landscape-changing/",
       "destination": "/es/blog/portuguese-camino-vs-french-camino/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/que-comer-durante-una-semana-pedaleando-de-oporto-a-lisboa/",
+      "destination": "/es/blog/best-foods-on-a-porto-to-lisbon-cycling-tour-week/",
       "status": 301
     },
     {
@@ -2578,8 +2863,23 @@
       "status": 301
     },
     {
+      "from": "/es/blog/tour-de-oporto-a-santiago-de-compostela-ruta-en-e-bike-y-consejos/",
+      "destination": "/es/blog/porto-to-santiago-de-compostela-tour-5-day-coastal-e-bike-itinerary/",
+      "status": 301
+    },
+    {
       "from": "/es/blog/touring-bike-in-portugal-complete-guide/",
       "destination": "/es/blog/touring-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/tours-en-bicicleta-con-guia-por-portugal-guia-completa-2026/",
+      "destination": "/es/blog/guided-bike-tours-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/tours-en-bicicleta-por-portugal-con-ninos/",
+      "destination": "/es/blog/portugal-bike-tours-with-kids/",
       "status": 301
     },
     {
@@ -2589,6 +2889,11 @@
     },
     {
       "from": "/es/blog/vouchers-for-startups-new-green-and-digital-products/",
+      "destination": "/es/blog/vouchers-for-startups/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/vouchers-para-startups-novos-produtos-verdes-e-digitais/",
       "destination": "/es/blog/vouchers-for-startups/",
       "status": 301
     },
@@ -3038,6 +3343,11 @@
       "status": 301
     },
     {
+      "from": "/fr/blog/avis-sur-un-sejour-a-velo-sur-le-chemin-de-saint-jacques/",
+      "destination": "/fr/blog/article-porto-to-santiago-de-compostela-darren-alff/",
+      "status": 301
+    },
+    {
       "from": "/fr/blog/benefits-of-our-avid-bike-tours/",
       "destination": "/fr/blog/benefits-of-your-first-bike-tour/",
       "status": 301
@@ -3093,6 +3403,11 @@
       "status": 301
     },
     {
+      "from": "/fr/blog/carmen-paz-et-fernando-sur-le-chemin-de-saint-jacques/",
+      "destination": "/fr/blog/camino-de-santiago-starting-in-porto-city-brazil-couple/",
+      "status": 301
+    },
+    {
       "from": "/fr/blog/central-portugal-bike-tours-silver-coast-coimbra-and-hidden-countryside/",
       "destination": "/fr/blog/central-portugal-bike-tours/",
       "status": 301
@@ -3115,6 +3430,11 @@
     {
       "from": "/fr/blog/conquer-challenging-routes-with-e-bikes/",
       "destination": "/fr/blog/conquer-challenging-routes-with-e-bikes-top-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/conseils-pour-decouvrir-les-villages-historiques-du-portugal-a-velo/",
+      "destination": "/fr/blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
       "status": 301
     },
     {
@@ -3180,6 +3500,26 @@
     {
       "from": "/fr/blog/cycling-with-kids-in-portugal-family-tour-ideas-and-safety-tips/",
       "destination": "/fr/blog/cycling-with-kids-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/de-porto-a-lisbonne-a-velo-itineraires-cotiers-conseils-et-circuits/",
+      "destination": "/fr/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/de-porto-a-saint-jacques-a-velo-a-quoi-sattendre/",
+      "destination": "/fr/blog/biking-from-porto-to-santiago-guide/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/de-porto-a-saint-jacques-a-velo-en-famille/",
+      "destination": "/fr/blog/family-porto-to-santiago-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/decouvrir-les-regions-viticoles-du-portugal-a-velo-circuits-dans-la-vallee-du-douro/",
+      "destination": "/fr/blog/cycling-tours-in-the-douro-valley/",
       "status": 301
     },
     {
@@ -3313,6 +3653,36 @@
       "status": 301
     },
     {
+      "from": "/fr/blog/la-vallee-du-douro-a-velo-vin-panoramas-et-routes-tranquilles/",
+      "destination": "/fr/blog/cycling-douro-valley-guide/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/le-gravel-au-portugal-guide-complet/",
+      "destination": "/fr/blog/gravel-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/le-portugal-elu-meilleure-destination-du-monde-2019/",
+      "destination": "/fr/blog/portugal-wins-worlds-leading-destination-2019/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/le-velo-a-lisbonne-une-aventure-a-ne-pas-manquer/",
+      "destination": "/fr/blog/cycling-in-lisbon-an-adventure-not-to-be-missed/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/le-velo-de-randonnee-au-portugal-guide-complet/",
+      "destination": "/fr/blog/touring-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/les-bienfaits-de-nos-circuits-a-velo/",
+      "destination": "/fr/blog/benefits-of-your-first-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/fr/blog/mark-mander-and-friends/",
       "destination": "/fr/blog/porto-to-santiago-de-compostela-mark-mander-group/",
       "status": 301
@@ -3345,6 +3715,26 @@
     {
       "from": "/fr/blog/northern-portugal-bike-tours-porto-douro-valley-and-camino-de-santiago/",
       "destination": "/fr/blog/northern-portugal-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/ou-vous-logez-lors-dun-sejour-a-velo-dans-le-nord-du-portugal/",
+      "destination": "/fr/blog/where-you-stay-on-a-north-of-portugal-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/ou-vous-logez-lors-dun-sejour-a-velo-en-algarve-aventure-sur-la-cote-vicentine/",
+      "destination": "/fr/blog/where-you-stay-on-an-algarve-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/parcours-a-velo-exigeants-au-portugal-pour-les-cyclistes-experimentes-en-quete-de-defi/",
+      "destination": "/fr/blog/challenging-bike-routes-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/partenaires-de-top-biketours-portugal/",
+      "destination": "/fr/blog/partners-links/",
       "status": 301
     },
     {
@@ -3383,6 +3773,21 @@
       "status": 301
     },
     {
+      "from": "/fr/blog/quand-faire-du-velo-au-portugal-la-meilleure-periode-saison-par-saison/",
+      "destination": "/fr/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/que-manger-pendant-une-semaine-a-velo-de-porto-a-lisbonne/",
+      "destination": "/fr/blog/best-foods-on-a-porto-to-lisbon-cycling-tour-week/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/quelle-autonomie-pour-un-velo-electrique-recharge-relief-et-batterie/",
+      "destination": "/fr/blog/how-far-can-an-e-bike-go-portugal/",
+      "status": 301
+    },
+    {
       "from": "/fr/blog/review-of-a-bike-tour-the-way-of-st-james/",
       "destination": "/fr/blog/article-porto-to-santiago-de-compostela-darren-alff/",
       "status": 301
@@ -3400,6 +3805,11 @@
     {
       "from": "/fr/blog/safety-tips-cycling-with-a-child-top-bike-tours/",
       "destination": "/fr/blog/safety-tips-cycling-child/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/sejours-a-velo-en-famille-au-portugal/",
+      "destination": "/fr/blog/portugal-bike-tours-with-kids/",
       "status": 301
     },
     {
@@ -3585,6 +3995,26 @@
     {
       "from": "/fr/blog/ultimate-packing-list-for-a-bike-tour-in-portugal-plus-whats-included/",
       "destination": "/fr/blog/ultimate-packing-list-for-a-bike-tour-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/velo-climat-et-geographie-du-portugal/",
+      "destination": "/fr/blog/climate-and-geography-in-portugal-for-cycling/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/velo-electrique-ou-velo-de-route-que-choisir-au-portugal/",
+      "destination": "/fr/blog/electric-bike-vs-road-bike-cycling-tours-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/velos-electriques-la-mobilite-durable-a-portee-de-pedale/",
+      "destination": "/fr/blog/electric-bikes-sustainability/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/vivez-des-experiences-uniques-avec-nos-circuits-a-velo-guides/",
+      "destination": "/fr/blog/unique-experiences-with-guided-bike-tours/",
       "status": 301
     },
     {
@@ -4058,6 +4488,11 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/algarve-of-douro-vallei-welke-fietstour-in-portugal-past-bij-jou/",
+      "destination": "/nl/blog/algarve-or-douro-valley-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/algarve-tour-vs-douro-valley-best-portugal-bike-tour-for-you/",
       "destination": "/nl/blog/algarve-or-douro-valley-bike-tour/",
       "status": 301
@@ -4065,6 +4500,11 @@
     {
       "from": "/nl/blog/are-electric-bikes-cheating-debunking-the-myths-of-e-bike-touring/",
       "destination": "/nl/blog/are-electric-bikes-cheating/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/bekendmaking-van-de-steun-van-het-iefp/",
+      "destination": "/nl/blog/disclosure-iefp/",
       "status": 301
     },
     {
@@ -4079,6 +4519,11 @@
     },
     {
       "from": "/nl/blog/best-time-to-cycle-in-portugal-when-to-go-and-what-to-expect/",
+      "destination": "/nl/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/beste-tijd-om-te-fietsen-in-portugal-wanneer-gaan-en-wat-te-verwachten/",
       "destination": "/nl/blog/best-time-to-cycle-in-portugal/",
       "status": 301
     },
@@ -4123,6 +4568,11 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/carmen-paz-en-fernando-op-weg-naar-santiago/",
+      "destination": "/nl/blog/camino-de-santiago-starting-in-porto-city-brazil-couple/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/central-portugal-bike-tours-silver-coast-coimbra-and-hidden-countryside/",
       "destination": "/nl/blog/central-portugal-bike-tours/",
       "status": 301
@@ -4133,8 +4583,18 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/clean-and-safe-aan-welke-eisen-we-voldoen/",
+      "destination": "/nl/blog/covid-19-requirements-to-comply-with/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/clean-and-safe-requirements-to-comply-with/",
       "destination": "/nl/blog/covid-19-requirements-to-comply-with/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/complete-gids-zo-kies-je-de-juiste-fiets-voor-jou/",
+      "destination": "/nl/blog/complete-guide-how-to-choose-the-right-bike-for-you/",
       "status": 301
     },
     {
@@ -4213,6 +4673,11 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/de-voordelen-van-onze-fietsvakanties/",
+      "destination": "/nl/blog/benefits-of-your-first-bike-tour/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/disclosure-of-support-from-iefp/",
       "destination": "/nl/blog/disclosure-iefp/",
       "status": 301
@@ -4233,6 +4698,11 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/e-bike-of-racefiets-wat-is-beter-voor-een-fietsvakantie-in-portugal/",
+      "destination": "/nl/blog/electric-bike-vs-road-bike-cycling-tours-portugal/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/e-bike-vs-road-bike-which-is-better-for-touring-in-portugal/",
       "destination": "/nl/blog/electric-bike-vs-road-bike-cycling-tours-portugal/",
       "status": 301
@@ -4249,6 +4719,11 @@
     },
     {
       "from": "/nl/blog/electric-bicycles-sustainable-mobility-at-your-fingertips/",
+      "destination": "/nl/blog/electric-bikes-sustainability/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/elektrische-fietsen-duurzame-mobiliteit-binnen-handbereik/",
       "destination": "/nl/blog/electric-bikes-sustainability/",
       "status": 301
     },
@@ -4273,6 +4748,26 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/fietsen-in-lissabon-een-avontuur-dat-je-niet-mag-missen/",
+      "destination": "/nl/blog/cycling-in-lisbon-an-adventure-not-to-be-missed/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/fietsen-klimaat-en-landschap-van-portugal/",
+      "destination": "/nl/blog/climate-and-geography-in-portugal-for-cycling/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/fietsen-van-porto-naar-lissabon-kustroutes-tips-and-tours/",
+      "destination": "/nl/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/fietsen-van-porto-naar-santiago-wat-je-kunt-verwachten/",
+      "destination": "/nl/blog/biking-from-porto-to-santiago-guide/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/first-cycling-vacation-tips-avoid-these-7-common-mistakes/",
       "destination": "/nl/blog/first-cycling-holiday-tips-mistakes-to-avoid/",
       "status": 301
@@ -4284,6 +4779,11 @@
     },
     {
       "from": "/nl/blog/gravel-bike-in-portugal-complete-guide/",
+      "destination": "/nl/blog/gravel-bike-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/gravelbike-in-portugal-complete-gids/",
       "destination": "/nl/blog/gravel-bike-in-portugal/",
       "status": 301
     },
@@ -4305,6 +4805,16 @@
     {
       "from": "/nl/blog/gustavo-cabral-pictures-and-movies/",
       "destination": "/nl/blog/gustavo-e-nicole-way-of-saint-james/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/het-lekkerste-eten-tijdens-een-fietsweek-van-porto-naar-lissabon/",
+      "destination": "/nl/blog/best-foods-on-a-porto-to-lisbon-cycling-tour-week/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/hoe-ver-komt-een-e-bike-tips-over-opladen-terrein-and-actieradius/",
+      "destination": "/nl/blog/how-far-can-an-e-bike-go-portugal/",
       "status": 301
     },
     {
@@ -4348,6 +4858,11 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/met-het-gezin-van-porto-naar-santiago-op-de-fiets/",
+      "destination": "/nl/blog/family-porto-to-santiago-by-bike/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/minho-vs-douro-cycling-which-one-should-you-choose/",
       "destination": "/nl/blog/minho-vs-douro-cycling/",
       "status": 301
@@ -4378,7 +4893,27 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/ontdek-de-douro-vallei-op-de-fiets-wijn-uitzichten-and-rustige-wegen/",
+      "destination": "/nl/blog/cycling-douro-valley-guide/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/ontdek-de-wonderen-van-portugal-met-fietstochten-door-de-douro-vallei/",
+      "destination": "/nl/blog/discover-the-wonders-of-portugal-with-bike-rides-through-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/ontdek-unieke-belevenissen-met-begeleide-fietstochten/",
+      "destination": "/nl/blog/unique-experiences-with-guided-bike-tours/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/partners-of-top-biketours-portugal/",
+      "destination": "/nl/blog/partners-links/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/partners-van-top-biketours-portugal/",
       "destination": "/nl/blog/partners-links/",
       "status": 301
     },
@@ -4408,12 +4943,22 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/portugal-op-gravel-fietstours-door-de-algarve/",
+      "destination": "/nl/blog/algarve-by-gravel-quiet-inland-loops/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/portuguese-camino-vs-french-camino-is-the-camino-landscape-changing/",
       "destination": "/nl/blog/portuguese-camino-vs-french-camino/",
       "status": 301
     },
     {
       "from": "/nl/blog/review-of-a-bike-tour-the-way-of-st-james/",
+      "destination": "/nl/blog/article-porto-to-santiago-de-compostela-darren-alff/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/review-van-een-fietsreis-over-de-jacobsroute/",
       "destination": "/nl/blog/article-porto-to-santiago-de-compostela-darren-alff/",
       "status": 301
     },
@@ -4450,6 +4995,11 @@
     {
       "from": "/nl/blog/southern-portugal-bike-tours-algarve-and-alentejo-cycling-experiences/",
       "destination": "/nl/blog/southern-portugal-bike-tours/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/steile-hellingen-beklimmen-met-de-mountainbike-technieken-and-tips/",
+      "destination": "/nl/blog/steep-mountain-bike-climbs-techniques/",
       "status": 301
     },
     {
@@ -4593,6 +5143,16 @@
       "status": 301
     },
     {
+      "from": "/nl/blog/tips-om-de-historische-dorpen-van-portugal-per-fiets-te-ontdekken/",
+      "destination": "/nl/blog/tips-for-exploring-portugal-historic-villages-by-bicycle/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/toerfiets-in-portugal-complete-gids/",
+      "destination": "/nl/blog/touring-bike-in-portugal/",
+      "status": 301
+    },
+    {
       "from": "/nl/blog/top-5-scenic-bicycle-routes-in-portugal-for-an-unforgettable-ride/",
       "destination": "/nl/blog/top-5-bike-routes-in-portugal/",
       "status": 301
@@ -4610,6 +5170,21 @@
     {
       "from": "/nl/blog/vouchers-for-startups-new-green-and-digital-products/",
       "destination": "/nl/blog/vouchers-for-startups/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/vouchers-voor-start-ups-nieuwe-groene-en-digitale-producten/",
+      "destination": "/nl/blog/vouchers-for-startups/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/waar-je-overnacht-tijdens-een-fietsreis-door-noord-portugal/",
+      "destination": "/nl/blog/where-you-stay-on-a-north-of-portugal-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/waarom-kiezen-voor-een-begeleide-fietstour/",
+      "destination": "/nl/blog/guided-bicycle-tour/",
       "status": 301
     },
     {
