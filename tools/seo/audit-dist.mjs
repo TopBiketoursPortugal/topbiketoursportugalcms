@@ -16,7 +16,7 @@
 
 import { readFileSync, existsSync, globSync } from 'node:fs';
 import { join } from 'node:path';
-import { REPO_ROOT } from './lib/routes.mjs';
+import { REPO_ROOT, PAGINATED } from './lib/routes.mjs';
 
 const DIST = join(REPO_ROOT, 'dist');
 const SITE = 'https://topbiketoursportugal.com';
@@ -230,7 +230,13 @@ for (const file of sitemaps) {
       )
     ].map(([, lang, href]) => ({ lang, href }));
     alternates.set(loc, links);
-    if (!links.length) missingAlternates++;
+    // Page 2+ of a listing carries no hreflang by design — the translations
+    // run to different page counts, so there is no equivalent page to point
+    // at and a one-way annotation would be discarded anyway (see
+    // tools/seo/lib/alternates.mjs). Counting those made the warning fire on
+    // every build for a deliberate choice, which is how a real regression
+    // would have gone unnoticed in the noise.
+    if (!links.length && !PAGINATED.test(path)) missingAlternates++;
   }
 }
 

@@ -1,8 +1,8 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from 'src/components/building-blocks/utility/markdown.astro';
 import { getDarkEquivalent, getDarkTextEquivalent } from 'src/utils/dark-color';
+import { resolveImageSrc } from 'utils/get-image';
 
 interface Props {
   background_color: string;
@@ -41,13 +41,7 @@ const buttonComponents = import.meta.glob(
     eager: true
   }
 );
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
-
-const imageSrc =
-  images[block.image?.image_path]?.default ?? block.image?.image_path;
+const imageSrc = await resolveImageSrc(block.image?.image_path);
 
 const headingGradientColor = block.heading?.heading_gradient_color ?? '#a0a2ff';
 

@@ -13,17 +13,24 @@ export interface Props {
 
 export async function getStaticPaths() {
   const pagesCollection = await getCollection('pages');
-  var pages = pagesCollection.map((page) => {
-    const path = getPagePath(page);
-    // console.log(path);
-    return {
-      params: {
-        path: path.replace(/^\/[a-z]{2}\//, '/'),
-        language: page.data.language === 'en' ? undefined : page.data.language
-      },
-      props: { page, language: page.data.language, path }
-    };
-  });
+  var pages = pagesCollection
+    // The blog index (blog.mdx and its locale copies) is `_schema: paginated`
+    // — it only carries SEO/page-size config for `blog/[...page].astro`,
+    // which owns the `/blog` route via `paginate()`. Rendering it here too
+    // produces a duplicate `/blog` path that always loses to that route's
+    // higher priority, so Astro warns and drops it on every build.
+    .filter((page) => !('page_size' in page.data))
+    .map((page) => {
+      const path = getPagePath(page);
+      // console.log(path);
+      return {
+        params: {
+          path: path.replace(/^\/[a-z]{2}\//, '/'),
+          language: page.data.language === 'en' ? undefined : page.data.language
+        },
+        props: { page, language: page.data.language, path }
+      };
+    });
 
   return pages;
 }

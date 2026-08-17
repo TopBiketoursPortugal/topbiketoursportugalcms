@@ -5,7 +5,6 @@ import ContactData from 'src/../data/contact.json';
 import SocialData from 'src/../data/social.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import { resolveSchemaImage } from 'utils/schema-image';
-import logo from 'src/assets/images/logo.png';
 
 type Props = { language: LanguageCodes };
 
@@ -26,7 +25,10 @@ const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization
 // was never in public/, and `/src/assets/...` is a source path that only
 // exists at build time.
 const imageUrl = await resolveSchemaImage(site.image.src, Astro.site);
-const logoUrl = await resolveSchemaImage(logo.src, Astro.site);
+const logoUrl = await resolveSchemaImage(
+  '/src/assets/images/logo.png',
+  Astro.site
+);
 
 const schema = {
   '@context': 'https://schema.org',

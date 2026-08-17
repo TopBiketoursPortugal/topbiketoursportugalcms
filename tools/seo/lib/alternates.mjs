@@ -16,7 +16,7 @@
  * the SEO tooling, so a drift shows up in tools/seo/check-urls.mjs.
  */
 
-import { collectRoutes, LANGUAGES_DATA } from './routes.mjs';
+import { collectRoutes, LANGUAGES_DATA, PAGINATED } from './routes.mjs';
 
 /** Locale code -> hreflang value. Mirrors the sitemap `i18n.locales` map. */
 export const LOCALES = Object.fromEntries(
@@ -36,17 +36,6 @@ export const DEFAULT_LOCALE = 'en';
  * Renaming a pair to a shared descriptive name is what opts it back in.
  */
 const UNNAMED = /^new-[a-z]+(-\d+)?$/;
-
-/**
- * Page 2+ of a paginated listing: `/blog/3/`, `/pt/blog/tags/algarve/2/`.
- *
- * Page 1 has no number, so a trailing numeric segment is always a later page.
- * The shape is pinned to the blog listing routes rather than "ends in a digit"
- * because plenty of real slugs do (`costa-da-prata-2`, `trek-dual-sport-1`) —
- * those are content-backed and return from `byUrl` above, but only while their
- * entry is published, and a rule this cheap should not depend on that.
- */
-const PAGINATED = /^\/(?:[a-z]{2}\/)?blog\/(?:tags\/[^/]+\/)?\d+\/$/;
 
 export const isUnnamed = (filePath) =>
   UNNAMED.test(

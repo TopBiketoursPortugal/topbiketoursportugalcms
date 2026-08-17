@@ -1,8 +1,8 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import Markdown from 'src/components/building-blocks/utility/markdown.astro';
 import { getDarkEquivalent, getDarkTextEquivalent } from 'src/utils/dark-color';
+import { getImageByPath } from 'utils/get-image';
 
 type Props = {
   background_color: string;
@@ -44,12 +44,9 @@ const buttonName = (block.button?._component ?? block.button?._bookshop_name)
 const buttonFilePath = `/src/components/building-blocks/buttons/${buttonName}/${buttonName}.astro`;
 const Button = (buttons[buttonFilePath] as any)?.default;
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,svg,avif,webp}',
-  { eager: true }
-);
-
-const imageSrc = images[block.image.image_path]?.default;
+const imageSrc = await getImageByPath(block.image.image_path)
+  .then((image) => image.default)
+  .catch(() => undefined);
 
 if (!imageSrc) return;
 ---

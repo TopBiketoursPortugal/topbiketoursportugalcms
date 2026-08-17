@@ -1,8 +1,8 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { getBlogPermalink } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
 
 type Props = CollectionEntry<'blog'>;
 
@@ -10,11 +10,7 @@ const { data } = Astro.props;
 const { thumb_image_path, thumb_image_alt, title, date } = data;
 
 const dateObj = new Date(date);
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
-const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
+const imageSrc = await resolveImageSrc(thumb_image_path);
 ---
 
 <a href={getBlogPermalink(Astro.props)} class="sidebar-post group flex gap-3">
@@ -26,9 +22,17 @@ const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
     loading="lazy"
   />
   <div class="flex flex-col">
-    <p class="text-sm font-medium leading-snug group-hover:underline">{title}</p>
+    <p class="text-sm leading-snug font-medium group-hover:underline">
+      {title}
+    </p>
     <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-      {dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+      {
+        dateObj.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })
+      }
     </p>
   </div>
 </a>

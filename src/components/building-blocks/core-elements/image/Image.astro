@@ -1,71 +1,76 @@
 ---
-import { Picture } from "astro:assets";
-import { prepareImageData } from "../../../utils/image";
+import { Picture } from 'astro:assets';
+import { prepareImageData } from '../../../utils/image';
 
 const {
   source,
   alternateSource = null,
   alt,
-  sizes = "(max-width: 1280px) 100vw, 1280px",
+  sizes = '(max-width: 1280px) 100vw, 1280px',
   widths = [640, 1280, 2560],
   rounded = false,
   priority = false,
   aspectRatio = null,
   width,
   height,
-  positionVertical = "center",
-  positionHorizontal = "center",
+  positionVertical = 'center',
+  positionHorizontal = 'center',
   background = false,
   useDefaultEditableBinding = false,
-  class: className,
-  "data-prop-src": customDataPropSrc,
-  "data-prop-alt": customDataPropAlt,
+  'class': className,
+  'data-prop-src': customDataPropSrc,
+  'data-prop-alt': customDataPropAlt,
   imageElementAttributes = {},
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const hasValidSrc = source && typeof source === "string" && source.trim() !== "";
+const hasValidSrc =
+  source && typeof source === 'string' && source.trim() !== '';
 
 if (!_component && !hasValidSrc) {
   return;
 }
 
-const normalizedAlt = alt || "";
+const normalizedAlt = alt || '';
 const isEditable =
-  useDefaultEditableBinding || customDataPropSrc != null || customDataPropAlt != null;
+  useDefaultEditableBinding ||
+  customDataPropSrc != null ||
+  customDataPropAlt != null;
 const dataAttributes = isEditable
   ? {
-      "data-editable": "image",
-      "data-prop-src": customDataPropSrc || "source",
-      "data-prop-alt": customDataPropAlt || "alt",
+      'data-editable': 'image',
+      'data-prop-src': customDataPropSrc || 'source',
+      'data-prop-alt': customDataPropAlt || 'alt'
     }
   : {};
 
 const positionClass = `position-${positionVertical}-${positionHorizontal}`;
-const preparedImage = prepareImageData({
+const preparedImage = await prepareImageData({
   source,
   width,
   height,
   widths,
   aspectRatio,
   positionVertical,
-  positionHorizontal,
+  positionHorizontal
 });
 
 const effectiveSizes = priority ? sizes : `auto, ${sizes}`;
 
 const hasAlternate =
-  alternateSource && typeof alternateSource === "string" && alternateSource.trim() !== "";
+  alternateSource &&
+  typeof alternateSource === 'string' &&
+  alternateSource.trim() !== '';
 const preparedAlternate = hasAlternate
-  ? prepareImageData({
+  ? await prepareImageData({
       source: alternateSource,
       width,
       height,
       widths,
       aspectRatio,
       positionVertical,
-      positionHorizontal,
+      positionHorizontal
     })
   : null;
 
@@ -73,31 +78,28 @@ const imageEntries = [
   {
     prepared: preparedImage,
     attrs: { ...dataAttributes, ...imageElementAttributes },
-    wrapperClass: hasAlternate ? "image-primary" : null,
-  },
+    wrapperClass: hasAlternate ? 'image-primary' : null
+  }
 ];
 
 if (hasAlternate) {
   imageEntries.push({
     prepared: preparedAlternate!,
     attrs: { ...imageElementAttributes },
-    wrapperClass: "image-alternate",
+    wrapperClass: 'image-alternate'
   });
 }
 ---
 
-<div
-  class:list={["image", className]}
-  {...htmlAttributes}
->
+<div class:list={['image', className]} {...htmlAttributes}>
   <div
     class:list={[
-      "image-inner",
-      aspectRatio && "ratio",
+      'image-inner',
+      aspectRatio && 'ratio',
       aspectRatio && `ratio-${aspectRatio}`,
       positionClass,
-      rounded && "rounded",
-      background && "background",
+      rounded && 'rounded',
+      background && 'background'
     ]}
   >
     {
@@ -108,14 +110,14 @@ if (hasAlternate) {
             alt={normalizedAlt}
             widths={prepared.filteredWidths}
             sizes={effectiveSizes}
-            formats={["webp"]}
+            formats={['webp']}
             width={prepared.finalWidth}
             height={prepared.finalHeight}
             fit={prepared.useFit}
             position={prepared.usePosition}
-            loading={priority ? "eager" : "lazy"}
-            decoding={priority ? "sync" : "async"}
-            fetchpriority={priority ? "high" : undefined}
+            loading={priority ? 'eager' : 'lazy'}
+            decoding={priority ? 'sync' : 'async'}
+            fetchpriority={priority ? 'high' : undefined}
             {...attrs}
           />
         ) : (
@@ -123,9 +125,9 @@ if (hasAlternate) {
             <img
               src={prepared.imageSrc}
               alt={normalizedAlt}
-              loading={priority ? "eager" : "lazy"}
-              decoding={priority ? "sync" : "async"}
-              fetchpriority={priority ? "high" : undefined}
+              loading={priority ? 'eager' : 'lazy'}
+              decoding={priority ? 'sync' : 'async'}
+              fetchpriority={priority ? 'high' : undefined}
               width={prepared.imageWidth}
               height={prepared.imageHeight}
               {...attrs}

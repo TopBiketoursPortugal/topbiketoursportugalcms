@@ -1,19 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import type { VisuallyEditable } from 'src/types';
 import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
 import type { LanguageCodes } from 'src/schemas/language';
 import type { FeaturedPost } from 'src/content.config';
 
 type Props = FeaturedPost & VisuallyEditable;
 
 const block = Astro.props;
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
 const allPosts = await getCollection(
   'blog',
   (post) =>
@@ -27,6 +23,17 @@ const allPostTags = await getCollection(
   (t) => t.data.language === language
 );
 const tagMap = new Map(allPostTags.map((t) => [t.data.id, t]));
+
+const uniqueThumbPaths = [
+  ...new Set(allPosts.map((post) => post.data.thumb_image_path))
+];
+const thumbImageMap = new Map(
+  await Promise.all(
+    uniqueThumbPaths.map(
+      async (path) => [path, await resolveImageSrc(path)] as const
+    )
+  )
+);
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
   dateStyle: 'long',
@@ -47,9 +54,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
         const featuredPostURL = getBlogPermalink(post);
         const date = new Date(post.data.date);
         const formattedDate = dateTimeFormatter.format(date);
-        const imageSrc =
-          images[post.data.thumb_image_path]?.default ??
-          post.data.thumb_image_path;
+        const imageSrc = thumbImageMap.get(post.data.thumb_image_path);
         const resolvedTags = (post.data.tags ?? [])
           .map((id) => tagMap.get(id))
           .filter(Boolean);
@@ -105,9 +110,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
           const featuredPostURL = getBlogPermalink(post);
           const date = new Date(post.data.date);
           const formattedDate = dateTimeFormatter.format(date);
-          const imageSrc =
-            images[post.data.thumb_image_path]?.default ??
-            post.data.thumb_image_path;
+          const imageSrc = thumbImageMap.get(post.data.thumb_image_path);
           const resolvedTags = (post.data.tags ?? [])
             .map((id) => tagMap.get(id))
             .filter(Boolean);

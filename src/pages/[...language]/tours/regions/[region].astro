@@ -16,6 +16,7 @@ import PageHelper from 'src/shared/astro/page.astro';
 import LanguageData from 'src/../data/languages.json';
 
 import { getImage } from 'astro:assets';
+import { getImageByPath } from 'utils/get-image';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import PlaceSchema from 'src/components/schema/place-schema.astro';
@@ -93,13 +94,8 @@ const relevantBikeCategories = allBikeCategories.filter((c) =>
 
 const baseUrl = Astro.site;
 
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
-
 const image = await getImage({
-  src: images[regionData.data.seo?.featured_image!].default,
+  src: (await getImageByPath(regionData.data.seo?.featured_image!)).default,
   format: 'avif'
 });
 

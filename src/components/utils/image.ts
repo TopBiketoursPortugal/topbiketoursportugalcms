@@ -1,34 +1,40 @@
-import type { ImageMetadata } from "astro";
-import { getImage } from "astro:assets";
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
 
 const VIDEO_POSTER_MAX_WIDTH = 1920;
 const VIDEO_POSTER_MAX_HEIGHT = 1080;
 
 type ImageModule = string | ImageMetadata;
 
-const imageFiles = import.meta.glob("/src/assets/images/**/*", {
-  import: "default",
-  eager: true,
-}) as Record<string, ImageModule>;
+// Lazy (non-eager) so Vite can code-split each asset instead of bundling
+// every file under src/assets/images into every component that imports this
+// module — an eager glob here previously collided with the dynamic glob in
+// utils/get-image.ts and tripped Vite's INEFFECTIVE_DYNAMIC_IMPORT warning
+// for effectively every image on the site.
+const imageFiles = import.meta.glob('/src/assets/images/**/*', {
+  import: 'default'
+}) as Record<string, () => Promise<ImageModule>>;
+
+const imageCache = new Map<string, Promise<ImageModule>>();
 
 const ASPECT_RATIO_MAP: Record<string, number> = {
-  square: 1,
-  landscape: 4 / 3,
-  portrait: 3 / 4,
-  widescreen: 16 / 9,
-  "horizontal-strip": 16 / 5,
+  'square': 1,
+  'landscape': 4 / 3,
+  'portrait': 3 / 4,
+  'widescreen': 16 / 9,
+  'horizontal-strip': 16 / 5
 };
 
 const POSITION_MAP: Record<string, string> = {
-  "top-left": "northwest",
-  "top-center": "north",
-  "top-right": "northeast",
-  "center-left": "west",
-  "center-center": "center",
-  "center-right": "east",
-  "bottom-left": "southwest",
-  "bottom-center": "south",
-  "bottom-right": "southeast",
+  'top-left': 'northwest',
+  'top-center': 'north',
+  'top-right': 'northeast',
+  'center-left': 'west',
+  'center-center': 'center',
+  'center-right': 'east',
+  'bottom-left': 'southwest',
+  'bottom-center': 'south',
+  'bottom-right': 'southeast'
 };
 
 interface BasePreparedImageData {
@@ -37,7 +43,7 @@ interface BasePreparedImageData {
   finalWidth: number | undefined;
   finalHeight: number | undefined;
   filteredWidths: number[];
-  useFit: "cover" | undefined;
+  useFit: 'cover' | undefined;
   usePosition: string | undefined;
 }
 
@@ -51,7 +57,8 @@ interface StandardPreparedImageData extends BasePreparedImageData {
   shouldRenderOptimizedPicture: false;
 }
 
-export type PreparedImageData = OptimizedPreparedImageData | StandardPreparedImageData;
+export type PreparedImageData =
+  OptimizedPreparedImageData | StandardPreparedImageData;
 
 interface PrepareImageOptions {
   source?: string;
@@ -63,10 +70,20 @@ interface PrepareImageOptions {
   positionHorizontal?: string;
 }
 
-const getLocalImageAsset = (source: string) => {
+const getLocalImageAsset = async (
+  source: string
+): Promise<ImageModule | null> => {
   const imageKey = Object.keys(imageFiles).find((key) => key.endsWith(source));
 
-  return imageKey ? imageFiles[imageKey] : null;
+  if (!imageKey) return null;
+
+  if (imageCache.has(imageKey)) {
+    return imageCache.get(imageKey)!;
+  }
+
+  const promise = imageFiles[imageKey]();
+  imageCache.set(imageKey, promise);
+  return promise;
 };
 
 const getResponsiveWidths = (candidates: unknown, maxWidth?: number) => {
@@ -77,7 +94,7 @@ const getResponsiveWidths = (candidates: unknown, maxWidth?: number) => {
             .map((value) => Number(value))
             .filter((value) => Number.isFinite(value) && value > 0)
             .map((value) => Math.round(value))
-        ),
+        )
       ].sort((a, b) => a - b)
     : [];
 
@@ -93,38 +110,40 @@ const getResponsiveWidths = (candidates: unknown, maxWidth?: number) => {
   return filteredWidths.length > 0 ? filteredWidths : [maxCandidateWidth];
 };
 
-export function resolveImageSource(source: string) {
-  if (!source.startsWith("/src/")) {
+export async function resolveImageSource(source: string) {
+  if (!source.startsWith('/src/')) {
     return source;
   }
 
-  const resolvedImage = getLocalImageAsset(source);
+  const resolvedImage = await getLocalImageAsset(source);
 
   if (!resolvedImage) {
     return source;
   }
 
-  return typeof resolvedImage === "string" ? resolvedImage : resolvedImage.src;
+  return typeof resolvedImage === 'string' ? resolvedImage : resolvedImage.src;
 }
 
-export async function resolveVideoPosterSource(source: string): Promise<string> {
+export async function resolveVideoPosterSource(
+  source: string
+): Promise<string> {
   const trimmed = source.trim();
 
-  if (!trimmed.startsWith("/src/")) {
+  if (!trimmed.startsWith('/src/')) {
     return trimmed;
   }
 
-  const resolvedImage = getLocalImageAsset(trimmed);
+  const resolvedImage = await getLocalImageAsset(trimmed);
 
   if (!resolvedImage) {
     return trimmed;
   }
 
-  if (typeof resolvedImage === "string") {
+  if (typeof resolvedImage === 'string') {
     return resolvedImage;
   }
 
-  if (trimmed.toLowerCase().endsWith(".svg")) {
+  if (trimmed.toLowerCase().endsWith('.svg')) {
     return resolvedImage.src;
   }
 
@@ -134,36 +153,42 @@ export async function resolveVideoPosterSource(source: string): Promise<string> 
   if (!w || !h) {
     const { src } = await getImage({
       src: resolvedImage,
-      width: VIDEO_POSTER_MAX_WIDTH,
+      width: VIDEO_POSTER_MAX_WIDTH
     });
 
     return src;
   }
 
-  const scale = Math.min(1, VIDEO_POSTER_MAX_WIDTH / w, VIDEO_POSTER_MAX_HEIGHT / h);
+  const scale = Math.min(
+    1,
+    VIDEO_POSTER_MAX_WIDTH / w,
+    VIDEO_POSTER_MAX_HEIGHT / h
+  );
   const outW = Math.max(1, Math.round(w * scale));
   const outH = Math.max(1, Math.round(h * scale));
 
   const { src } = await getImage({
     src: resolvedImage,
     width: outW,
-    height: outH,
+    height: outH
   });
 
   return src;
 }
 
-export function prepareImageData({
+export async function prepareImageData({
   source,
   width,
   height,
   widths,
   aspectRatio,
-  positionVertical = "center",
-  positionHorizontal = "center",
-}: PrepareImageOptions): PreparedImageData {
-  const isLocalSource = typeof source === "string" && source.startsWith("/src/");
-  const isSvg = typeof source === "string" && source.toLowerCase().endsWith(".svg");
+  positionVertical = 'center',
+  positionHorizontal = 'center'
+}: PrepareImageOptions): Promise<PreparedImageData> {
+  const isLocalSource =
+    typeof source === 'string' && source.startsWith('/src/');
+  const isSvg =
+    typeof source === 'string' && source.toLowerCase().endsWith('.svg');
 
   let imageSrc = source;
   let imageWidth = width;
@@ -171,10 +196,10 @@ export function prepareImageData({
   let shouldRenderOptimizedPicture = false;
 
   if (isLocalSource && source) {
-    const resolvedImage = getLocalImageAsset(source);
+    const resolvedImage = await getLocalImageAsset(source);
 
     if (resolvedImage) {
-      if (typeof resolvedImage === "string") {
+      if (typeof resolvedImage === 'string') {
         imageSrc = resolvedImage;
       } else if (isSvg) {
         imageSrc = resolvedImage.src;
@@ -193,12 +218,12 @@ export function prepareImageData({
 
   let finalWidth = imageWidth;
   let finalHeight = imageHeight;
-  let useFit: "cover" | undefined;
+  let useFit: 'cover' | undefined;
   let usePosition: string | undefined;
 
   if (
     aspectRatio &&
-    aspectRatio !== "none" &&
+    aspectRatio !== 'none' &&
     shouldRenderOptimizedPicture &&
     imageSrc &&
     imageWidth
@@ -231,11 +256,11 @@ export function prepareImageData({
 
       finalWidth = maxWidth;
       finalHeight = maxHeight;
-      useFit = "cover";
+      useFit = 'cover';
 
       const positionKey = `${positionVertical}-${positionHorizontal}`;
 
-      usePosition = POSITION_MAP[positionKey] || "center";
+      usePosition = POSITION_MAP[positionKey] || 'center';
     }
   }
 
@@ -244,7 +269,7 @@ export function prepareImageData({
       ? getResponsiveWidths(widths, finalWidth)
       : getResponsiveWidths(widths);
 
-  if (shouldRenderOptimizedPicture && typeof imageSrc !== "string") {
+  if (shouldRenderOptimizedPicture && typeof imageSrc !== 'string') {
     return {
       imageSrc,
       imageWidth,
@@ -254,12 +279,12 @@ export function prepareImageData({
       filteredWidths,
       shouldRenderOptimizedPicture: true,
       useFit,
-      usePosition,
+      usePosition
     };
   }
 
   return {
-    imageSrc: typeof imageSrc === "string" ? imageSrc : imageSrc?.src,
+    imageSrc: typeof imageSrc === 'string' ? imageSrc : imageSrc?.src,
     imageWidth,
     imageHeight,
     finalWidth,
@@ -267,6 +292,6 @@ export function prepareImageData({
     filteredWidths,
     shouldRenderOptimizedPicture: false,
     useFit,
-    usePosition,
+    usePosition
   };
 }

@@ -1,9 +1,9 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
 
 type Props = CollectionEntry<'blog'>;
 
@@ -12,15 +12,14 @@ const { data } = Astro.props;
 const { thumb_image_path, thumb_image_alt, title, date, tags } = data;
 
 const dateObj = new Date(date);
-const images = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/assets/**/*.{jpeg,jpg,png,gif,avif,webp}',
-  { eager: true }
-);
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
-const imageSrc = images[thumb_image_path]?.default ?? thumb_image_path;
+const imageSrc = await resolveImageSrc(thumb_image_path);
 
 const postTags = tags?.length
-  ? await getCollection('postTags', (t) => tags.includes(t.data.id) && t.data.language === language)
+  ? await getCollection(
+      'postTags',
+      (t) => tags.includes(t.data.id) && t.data.language === language
+    )
   : [];
 ---
 
@@ -72,7 +71,9 @@ const postTags = tags?.length
 <style>
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .blog-card {
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
     }
     .blog-card[no-intersect] {
       opacity: 0;
@@ -80,7 +81,9 @@ const postTags = tags?.length
     }
   }
   .blog-card-filterable {
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .blog-card-filterable[data-filter-hidden] {
     opacity: 0;

@@ -37,6 +37,26 @@ export const slug = (value) =>
 const base = (language) => (language === 'en' ? '/' : `/${language}/`);
 const toursSeg = (language) => PERMALINKS.tours[language] ?? 'tours';
 
+/** Every locale's tours segment, for matching a built URL back to a route. */
+export const TOURS_SEGMENTS = [
+  ...new Set(LANGUAGES.map((language) => toursSeg(language)))
+];
+
+/**
+ * Page 2+ of a paginated listing: `/blog/3/`, `/pt/blog/tags/algarve/2/`.
+ *
+ * Page 1 has no number, so a trailing numeric segment is always a later page.
+ * The shape is pinned to the blog listing routes rather than "ends in a digit"
+ * because plenty of real slugs do (`costa-da-prata-2`, `trek-dual-sport-1`).
+ *
+ * Shared because two SEO signals key off it: these pages carry no hreflang
+ * (tools/seo/lib/alternates.mjs — the translations run to different page
+ * counts, so there is no equivalent page to point at) and they take their
+ * lastmod from page 1 (tools/seo/lib/lastmod.mjs — no content entry backs
+ * them). One definition so the two cannot disagree about what page 2 is.
+ */
+export const PAGINATED = /^\/(?:[a-z]{2}\/)?blog\/(?:tags\/[^/]+\/)?\d+\/$/;
+
 /**
  * Route definitions, keyed by collection. `dir` is relative to src/content;
  * translated entries live in a `<lang>/` subdirectory of the same folder.
