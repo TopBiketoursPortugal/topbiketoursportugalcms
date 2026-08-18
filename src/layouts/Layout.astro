@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SEO } from 'astro-seo';
+import { Font } from 'astro:assets';
 import { ClientRouter } from 'astro:transitions';
 import SiteVerification from './common/SiteVerification.astro';
 
@@ -71,6 +72,21 @@ if (INDEX === 'false') {
   class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth"
 >
   <head>
+    <meta name="title" content={seoProps.title} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <SEO {...seoProps} />
+    {
+      /*
+    Emits each family's @font-face plus, where `preload` is set, a
+    `<link rel="preload" as="font">`. Body and heading faces are preloaded
+    because they are on the critical path for first paint; Caveat is
+    decorative and used well below the fold, so it is left to load normally
+    rather than competing for early bandwidth.
+  */
+    }
+    <Font cssVariable="--font-figtree" preload />
+    <Font cssVariable="--font-bricolage" preload />
+    <Font cssVariable="--font-caveat-family" />
     <script is:inline>
       // Initialize theme
       const getTheme = () => {
@@ -105,9 +121,6 @@ if (INDEX === 'false') {
 
     <SiteVerification />
     <ClientRouter fallback="swap" />
-    <meta name="title" content={seoProps.title} />
-    {keywords ? <meta name="keywords" content={keywords} /> : null}
-    <SEO {...seoProps} />
     <slot name="head" />
     <OrganizationSchema language={language} />
     {isHomePage && <WebSiteSchema language={language} />}

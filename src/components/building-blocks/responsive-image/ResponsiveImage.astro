@@ -47,7 +47,13 @@ const {
   src,
   loading = 'lazy',
   fetchPriority = 'auto',
-  quality = 'max',
+  // `'max'` is quality 100, which for AVIF is close to lossless and the reason
+  // these averaged 238 KB each. AVIF at 80 is visually indistinguishable for
+  // photographic content at a fraction of the bytes; the preset is used rather
+  // than a number so it keeps tracking Astro's table. Per-image `quality` wins
+  // over `image.service.config` in astro.config.ts, so this default — not the
+  // config — is what actually governs these images.
+  quality = 'high',
   formats = ['avif'],
   widths = [480, 768, 1024, 1920],
   sizes,

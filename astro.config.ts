@@ -1,10 +1,11 @@
 import {
   defineConfig,
   envField,
+  fontProviders,
   passthroughImageService,
   svgoOptimizer
 } from 'astro/config';
-import { unified } from '@astrojs/markdown-remark';
+import { satteri } from '@astrojs/markdown-satteri';
 import react from '@astrojs/react';
 import icon from 'astro-icon';
 import editableRegions from '@cloudcannon/editable-regions/astro-integration';
@@ -24,31 +25,12 @@ import {
   LOCALES,
   DEFAULT_LOCALE
 } from './tools/seo/lib/alternates.mjs';
-import rehypeExternalLinks, { type Options } from 'rehype-external-links';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
 import pagefind from 'astro-pagefind';
 
-import { isInternalDomain } from './utils/domains';
-
-// Matches the shape `hast-util-is-element` passes rehype-external-links'
-// `test` callback — narrower than importing hast's `Element` type just for
-// the one field this check needs.
-type LinkTestNode = { properties?: { href?: unknown } };
-
-const externalLinksConfig = {
-  target: '_blank',
-  rel: ['nofollow', 'noopener', 'noreferrer'],
-  test: (node: LinkTestNode) => {
-    try {
-      const url = node.properties?.href;
-      return typeof url === 'string' && !isInternalDomain(url);
-    } catch {
-      return false;
-    }
-  }
-} satisfies Options;
+import { satteriExternalLinks } from './utils/satteri-external-links';
 
 type RedirectRule = {
   from: string;
@@ -230,7 +212,6 @@ export default defineConfig({
         enabled: false
       }
     }),
-    // shield({}),
     // playformInline()
     // min()
     // playformCompress({
@@ -268,11 +249,14 @@ export default defineConfig({
     pagefind()
   ],
   markdown: {
-    // v7: the Rust "Satteri" markdown processor is the default, and top-level
-    // `rehypePlugins` no-op under it. Opt back into the unified pipeline so
-    // rehype-external-links keeps running on both .md and (inherited) MDX.
-    processor: unified({
-      rehypePlugins: [[rehypeExternalLinks, externalLinksConfig]]
+    // Sätteri, Astro's native (Rust) pipeline and the v7 default. The config
+    // previously opted back into `unified()` purely because top-level
+    // `rehypePlugins` no-op under Sätteri, so rehype-external-links stopped
+    // running. Sätteri exposes the same hast via `hastPlugins`, so that rule
+    // now lives in utils/satteri-external-links.ts and the site runs on the
+    // faster processor instead of paying for the JS pipeline to keep it.
+    processor: satteri({
+      hastPlugins: [satteriExternalLinks()]
     })
   },
   // redirects: convertJson(
@@ -336,42 +320,105 @@ export default defineConfig({
   },
   trailingSlash: 'ignore',
 
+  // Self-hosted via the same @fontsource-variable packages as before, but
+  // routed through Astro so it can emit `<link rel="preload">` and generate
+  // metric-matched fallbacks. Previously these were plain CSS `@import`s, which
+  // meant no page carried a single font preload: the browser found the woff2
+  // only after fetching a ~294 KB render-blocking stylesheet, and the
+  // hand-guessed fallback stack shifted layout on swap.
+  //
+  // `npm({ remote: false })` resolves from the locally installed packages, so
+  // the build stays offline and reproducible — no CDN fetch at build time.
+  //
+  // `weights` MUST be the variable range, not a single value: it defaults to
+  // [400] only, which would silently synthesise bold headings instead of using
+  // the real upper masters. Ranges below match each package's own metadata.
+  // `styles` is normal-only — the codebase uses no italics — which also drops
+  // Figtree's unused italic files.
+  fonts: [
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Figtree Variable',
+      cssVariable: '--font-figtree',
+      weights: ['300 900'],
+      styles: ['normal'],
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif']
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Bricolage Grotesque Variable',
+      cssVariable: '--font-bricolage',
+      weights: ['200 800'],
+      styles: ['normal'],
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif']
+    },
+    {
+      provider: fontProviders.npm({ remote: false }),
+      name: 'Caveat Variable',
+      cssVariable: '--font-caveat-family',
+      weights: ['400 700'],
+      styles: ['normal'],
+      // Latin only: the package also ships Cyrillic masters, ~116 KB that no
+      // locale on this site (en/pt/de/es/fr/nl) can use.
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['Comic Sans MS', 'cursive']
+    }
+  ],
+
+  // Two routes generating the same URL is a silent content bug, not a style
+  // question: the loser is dropped and its page simply never ships. That is how
+  // `/blog` was lost for six locales — the catch-all `[...path]` route mapped
+  // the whole `pages` collection, including the paginated blog index that
+  // `blog/[...page]` already owns, and the warning scrolled past on every
+  // build. The catch-all still maps a CMS-authored collection, so an editor can
+  // recreate the collision from CloudCannon without touching code; `error`
+  // makes that a failed build instead of a quietly missing page. Also applies
+  // to duplicate content-collection entry IDs, which matters across 540
+  // translated posts.
+  prerenderConflictBehavior: 'error',
+
   experimental: {
     // v6.2+: SVGO optimization moved from `svgo: true` to a pluggable optimizer.
     // Optimizes SVGs imported as Astro components (e.g. Footer's biosphere/atta logos).
     svgOptimizer: svgoOptimizer()
-    // csp: {
-    //   // change the default algorithm
-    //   algorithm: "SHA-512",
-    //   // insert additional directives
-    //   directives: [
-    //     "default-src: 'self'",
-    //   ],
-    //   // add more information to the `style-src` directive
-    //   styleDirective: {
-    //     hashes: [
-    //       "sha384-somehash" // hash generated for some external style e.g. white label, etc.
-    //     ],
-    //     // **Override** default resources
-    //     resources: ["self"]
-    //   },
-
-    //   // add more information to the `style-src` directive
-    //   scriptDirective: {
-    //     hashes: [
-    //       "sha384-somehash" // hash generated for some external script e.g. analytics, jQuery, etc.
-    //     ],
-    //     // **Override** default resources
-    //     resources: ["self"],
-    //     // Toggle the keyword `strict-dynamic`
-    //     strictDynamic: true
-    //   }
-    // }
+    // NB: CSP is NOT an experimental option — it moved to top-level
+    // `security.csp` in v6, and `experimental` is a strict schema, so putting
+    // a `csp` key here fails config validation rather than being ignored.
+    // Native CSP is also a poor fit for this site: it is unsupported alongside
+    // `<ClientRouter />` (used in Layout.astro) without warning, it cannot hash
+    // the 25 `is:inline` scripts (GTM, cookie consent, forms, JSON-LD), and
+    // jampack rewrites the HTML after the hashes are computed. The
+    // report-only header in netlify.toml is the supported path here.
   },
   image: {
     service:
       process.env.NODE_ENV === 'production'
-        ? { entrypoint: 'astro/assets/services/sharp' }
+        ? {
+            entrypoint: 'astro/assets/services/sharp',
+            // Encoder defaults for images that do not pass their own `quality`
+            // — chiefly core-elements/image/Image.astro, which is the bulk of
+            // the build (~1300 webp). A per-image `quality` prop still wins
+            // over anything here, which is why the AVIF fix lives in
+            // ResponsiveImage.astro instead of in this block.
+            //
+            // `effort` is deliberately left at sharp's default: raising it to 6
+            // roughly doubled a single AVIF encode for ~3% fewer bytes, which
+            // across the image set costs far more build time than it is worth.
+            config: {
+              avif: { quality: 80 },
+              webp: { quality: 80 },
+              // `mozjpeg: true` was measured and dropped: it applies to only
+              // 187 transformed JPEGs totalling ~21 MB, and cost roughly a
+              // 10x slowdown per encode for a fraction of that. `progressive`
+              // is free and improves perceived load.
+              jpeg: { quality: 80, progressive: true },
+              // Default compressionLevel is 6; 9 is a solid win on the
+              // screenshot-style PNGs and only 36 files take this path.
+              png: { compressionLevel: 9 }
+            }
+          }
         : passthroughImageService()
   },
 

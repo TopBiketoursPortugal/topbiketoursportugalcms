@@ -10,9 +10,13 @@
 @import './page-find.css';
 @import './starter/index.css';
 @import 'tw-animate-css';
-@import '@fontsource-variable/figtree';
-@import '@fontsource-variable/bricolage-grotesque';
-@import '@fontsource-variable/caveat';
+/*
+  Font faces are no longer imported here. Astro's `fonts` config (astro.config.ts)
+  owns them now, so it can preload the critical faces and generate
+  metric-matched fallbacks; the families below resolve through the
+  `--font-*` variables it exposes. Re-adding a Fontsource @import would load
+  every face a second time.
+*/
 
 /* Typography Plugin */
 @plugin '@tailwindcss/typography';
@@ -29,14 +33,12 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 
-  /* Typography */
-  --font-sans:
-    'Figtree Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-heading:
-    'Bricolage Grotesque Variable', 'Figtree Variable', ui-sans-serif,
-    system-ui, sans-serif;
+  /* Typography — families come from Astro's `fonts` config, which appends its
+     own metric-matched fallbacks to each `--font-*` variable. */
+  --font-sans: var(--font-figtree);
+  --font-heading: var(--font-bricolage), var(--font-figtree);
   --font-oswald: var(--font-heading);
-  --font-caveat: 'Caveat Variable', 'Comic Sans MS', cursive;
+  --font-caveat: var(--font-caveat-family);
 
   /* Brand palette — pine green core, sunset orange accent */
   --color-primary: #296a3f;
@@ -118,8 +120,7 @@
  * top rhythm (~1.25em) while keeping a comfortable bottom gap; re-zero the first
  * heading's top margin since this override would otherwise reinstate it.
  */
-.prose
-  :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
   line-height: 1.25;
   margin-top: 1.25em;
   margin-bottom: 0.6em;

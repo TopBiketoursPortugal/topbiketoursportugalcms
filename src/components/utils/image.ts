@@ -6,16 +6,16 @@ const VIDEO_POSTER_MAX_HEIGHT = 1080;
 
 type ImageModule = string | ImageMetadata;
 
-// Lazy (non-eager) so Vite can code-split each asset instead of bundling
-// every file under src/assets/images into every component that imports this
-// module — an eager glob here previously collided with the dynamic glob in
-// utils/get-image.ts and tripped Vite's INEFFECTIVE_DYNAMIC_IMPORT warning
-// for effectively every image on the site.
+// Eager, matching utils/get-image.ts — see the rationale there. A lazy glob
+// emits one JS chunk per image, and the resulting chunk count is what makes
+// Astro's `Rearranging server assets` step race prerendering and fail the
+// build with ERR_MODULE_NOT_FOUND on a random chunk. Because nothing imports
+// these dynamically any more, the INEFFECTIVE_DYNAMIC_IMPORT warning that
+// originally pushed this glob lazy can no longer occur either.
 const imageFiles = import.meta.glob('/src/assets/images/**/*', {
-  import: 'default'
-}) as Record<string, () => Promise<ImageModule>>;
-
-const imageCache = new Map<string, Promise<ImageModule>>();
+  import: 'default',
+  eager: true
+}) as Record<string, ImageModule>;
 
 const ASPECT_RATIO_MAP: Record<string, number> = {
   'square': 1,
@@ -70,20 +70,10 @@ interface PrepareImageOptions {
   positionHorizontal?: string;
 }
 
-const getLocalImageAsset = async (
-  source: string
-): Promise<ImageModule | null> => {
+const getLocalImageAsset = (source: string): ImageModule | null => {
   const imageKey = Object.keys(imageFiles).find((key) => key.endsWith(source));
 
-  if (!imageKey) return null;
-
-  if (imageCache.has(imageKey)) {
-    return imageCache.get(imageKey)!;
-  }
-
-  const promise = imageFiles[imageKey]();
-  imageCache.set(imageKey, promise);
-  return promise;
+  return imageKey ? imageFiles[imageKey] : null;
 };
 
 const getResponsiveWidths = (candidates: unknown, maxWidth?: number) => {
@@ -115,7 +105,7 @@ export async function resolveImageSource(source: string) {
     return source;
   }
 
-  const resolvedImage = await getLocalImageAsset(source);
+  const resolvedImage = getLocalImageAsset(source);
 
   if (!resolvedImage) {
     return source;
@@ -133,7 +123,7 @@ export async function resolveVideoPosterSource(
     return trimmed;
   }
 
-  const resolvedImage = await getLocalImageAsset(trimmed);
+  const resolvedImage = getLocalImageAsset(trimmed);
 
   if (!resolvedImage) {
     return trimmed;
@@ -196,7 +186,7 @@ export async function prepareImageData({
   let shouldRenderOptimizedPicture = false;
 
   if (isLocalSource && source) {
-    const resolvedImage = await getLocalImageAsset(source);
+    const resolvedImage = getLocalImageAsset(source);
 
     if (resolvedImage) {
       if (typeof resolvedImage === 'string') {
