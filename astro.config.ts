@@ -187,7 +187,13 @@ export default defineConfig({
         ]
       },
       workbox: {
-        navigateFallback: '/404/',
+        // No trailing slash: @vite-pwa/astro rewrites `404.html` in the
+        // precache manifest to `404` + (trailingSlash === 'always' ? '/' : ''),
+        // and this site is `trailingSlash: 'ignore'`. Asking for '/404/' looked
+        // up a key that is not in the manifest, so `createHandlerBoundToURL`
+        // threw `non-precached-url` while sw.js was still evaluating — which
+        // aborted the rest of the service worker setup, not just the fallback.
+        navigateFallback: '/404',
         navigateFallbackDenylist: redirectDenylist,
         globPatterns: ['**/*.{css,js,html,avif,ico}'],
         // The CloudCannon editor-only registration bundle (eager glob of every
