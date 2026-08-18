@@ -33,6 +33,12 @@ const {
 } = Astro.props;
 
 const durationDays = duration ? Number(duration) : 0;
+// Only packages reach this menu, so `1` is not expected — but the label picks
+// itself rather than relying on that staying true.
+const dayUnit =
+  durationDays === 1
+    ? ('Tour.Info.Duration.Unit.Day' as const)
+    : ('Tour.Info.Duration.Unit.Days' as const);
 
 const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
@@ -78,7 +84,7 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
                 class="icon-[ph--clock-countdown-light] h-3.5 w-3.5"
                 aria-hidden="true"
               />
-              {duration} {t('Tour.Info.Duration.Unit.Days', language)}
+              {duration} {t(dayUnit, language)}
             </span>
           )}
           {durationDays > 0 && difficulty && difficulty > 0 && (

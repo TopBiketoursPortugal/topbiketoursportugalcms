@@ -41,6 +41,21 @@ const {
 } = data;
 
 const durationDays = Number(duration) || 0;
+// Only package tours are sold as stays, so only they carry a night count.
+// A day tour spans at most two calendar days with no accommodation, and
+// `durationDays - 1` would advertise a night that is not part of the trip.
+const isMultiDay = tourtype === 'PackageTour';
+// Day tours are all `duration: 1`, so the plural label is now reachable with a
+// count of one — "1 Days" — on every locale. Nights follow the same rule for
+// the shortest packages.
+const dayUnit =
+  durationDays === 1
+    ? ('Tour.Info.Duration.Unit.Day' as const)
+    : ('Tour.Info.Duration.Unit.Days' as const);
+const nightUnit =
+  durationDays === 2
+    ? ('Tour.Info.Duration.Unit.Night' as const)
+    : ('Tour.Info.Duration.Unit.Nights' as const);
 
 const testimonials = (
   (await getCollection(
@@ -118,12 +133,11 @@ const tourTags = await getCollection(
                 class="icon-[ph--clock-countdown-light] h-5 w-5"
                 aria-hidden="true"
               />{' '}
-              {durationDays} {t('Tour.Info.Duration.Unit.Days', language)}
-              {durationDays > 1 ? (
+              {durationDays} {t(dayUnit, language)}
+              {isMultiDay && durationDays > 1 ? (
                 <>
                   {' / '}
-                  {durationDays - 1}{' '}
-                  {t('Tour.Info.Duration.Unit.Nights', language)}
+                  {durationDays - 1} {t(nightUnit, language)}
                 </>
               ) : null}
             </span>

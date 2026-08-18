@@ -51,6 +51,17 @@ const {
 } = tour;
 
 const durationDays = Number(tour.duration) || 0;
+// See tour-card.astro: nights are a package-tour concept only.
+const isMultiDay = tour.tourtype === 'PackageTour';
+// See tour-card.astro for why the singular labels are needed.
+const dayUnit =
+  durationDays === 1
+    ? ('Tour.Info.Duration.Unit.Day' as const)
+    : ('Tour.Info.Duration.Unit.Days' as const);
+const nightUnit =
+  durationDays === 2
+    ? ('Tour.Info.Duration.Unit.Night' as const)
+    : ('Tour.Info.Duration.Unit.Nights' as const);
 
 // WeTravel takes priority over FareHarbor/Bokun and the enquiry form when a
 // guided and/or self-guided trip UUID is configured.
@@ -268,12 +279,11 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
                 class="icon-[ph--clock-countdown-light] h-5 w-5"
                 aria-hidden="true"
               />
-              {durationDays} {t('Tour.Info.Duration.Unit.Days', language)}
-              {durationDays > 1 ? (
+              {durationDays} {t(dayUnit, language)}
+              {isMultiDay && durationDays > 1 ? (
                 <>
                   {' / '}
-                  {durationDays - 1}{' '}
-                  {t('Tour.Info.Duration.Unit.Nights', language)}
+                  {durationDays - 1} {t(nightUnit, language)}
                 </>
               ) : null}
             </li>
