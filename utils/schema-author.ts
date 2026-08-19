@@ -20,19 +20,47 @@
  * into several distinct persons in the entity graph.
  */
 
-/** Not people: groups, and CMS placeholders. Matched against the whole value. */
+/**
+ * Not people: groups, and CMS placeholders. Matched against the whole value.
+ *
+ * The house byline is written in the language of the post, so the English
+ * "Editorial Team" alone missed the German, Spanish, French and Dutch forms
+ * and turned each of them into a `Person` named after a department.
+ */
 const NON_PERSON_AUTHORS = [
   /editorial\s*team/i,
+  /redaktionsteam/i,
+  /equipo\s+editorial/i,
+  /[ée]quipe\s+[ée]ditoriale/i,
+  /redactie(team)?\s+van/i,
+  /^redactie(team)?$/i,
   /^top bike tours portugal$/i,
   /^admin(istrator)?$/i,
   /^author$/i
 ];
 
-/** Byline lead-ins, English and Portuguese. */
-const BYLINE_PREFIX = /^(written by|escrito por|by|por)\s*/i;
+/**
+ * Byline lead-ins, in every language the site publishes.
+ *
+ * Without the German, French and Dutch forms the prefix stayed glued to the
+ * name: French posts published `Person.name = "Par Sérgio Marques"` and Dutch
+ * ones `"Geschreven door Sérgio Marques"`. Because that string then matched no
+ * team member, those posts also lost the `url` back to the author page — so
+ * the locales with the most posts had the weakest author entity.
+ */
+const BYLINE_PREFIX =
+  /^(written by|escrito por|geschreven door|[ée]crit par|von|par|by|por|door)\s+/i;
 
 /** The employer, which is already the `publisher`. */
 const EMPLOYER = /^top bike tours portugal$/i;
+
+/**
+ * A role can end with the connector that introduced the employer — "fundador y
+ * diseñador de rutas **de** Top Bike Tours Portugal" leaves a trailing "de"
+ * once the employer is stripped. Dangling prepositions read as typos in the
+ * knowledge panel.
+ */
+const TRAILING_CONNECTOR = /[\s,]+(of|de|da|do|du|van|von|bei|chez|di)$/i;
 
 export type SchemaAuthor =
   | { '@type': 'Organization'; '@id': string }
@@ -67,8 +95,11 @@ export function parseByline(
     const role = cleaned
       .slice(match.length)
       .replace(/^[\s,;–-]+/, '')
-      .replace(/,?\s*top bike tours portugal\s*$/i, '')
-      .replace(/\s*of\s*$/i, '')
+      .replace(
+        /[\s,]*(?:de|da|do|du|van|von|of)?\s*top bike tours portugal\s*$/i,
+        ''
+      )
+      .replace(TRAILING_CONNECTOR, '')
       .trim();
     return role ? { name: match, jobTitle: role } : { name: match };
   }
@@ -78,7 +109,15 @@ export function parseByline(
     .map((part) => part.trim())
     .filter(Boolean);
   const [name, ...rest] = parts;
-  const role = rest.filter((part) => !EMPLOYER.test(part)).join(', ');
+  const role = rest
+    .filter((part) => !EMPLOYER.test(part))
+    .join(', ')
+    .replace(
+      /[\s,]*(?:de|da|do|du|van|von|of)?\s*top bike tours portugal\s*$/i,
+      ''
+    )
+    .replace(TRAILING_CONNECTOR, '')
+    .trim();
 
   return role ? { name, jobTitle: role } : { name: name ?? cleaned };
 }

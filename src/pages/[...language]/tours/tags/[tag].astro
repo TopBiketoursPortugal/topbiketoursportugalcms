@@ -104,7 +104,11 @@ const frontmatter = {
     canonical_url: tagData.data.seo?.canonical_url,
     open_graph_type: tagData.data.seo?.open_graph_type,
     author_twitter_handle: tagData.data.seo?.author_twitter_handle,
-    no_index: false
+    // Honour the entry's own `seo.no_index` instead of forcing every
+    // taxonomy term to be indexable. A thin term (one tour, or none) is
+    // worth excluding, and the flag was already set on some entries but
+    // silently discarded here.
+    no_index: tagData.data.seo?.no_index === true
   }
 };
 const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);

@@ -160,7 +160,7 @@ const latestPosts = (
               data-pagefind-meta={`date:${dateObj.toISOString()}`}
             >
               {
-                dateObj.toLocaleDateString('en-US', {
+                dateObj.toLocaleDateString(LanguageData[language].locale, {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric'
@@ -169,8 +169,10 @@ const latestPosts = (
             </p>
 
             <div class="flex gap-3">
-              <p>{wordCount}<span> words</span></p>
-              <p>{readingTime}<span> minutes</span></p>
+              <p>{wordCount}<span> {t('Blog.Detail.Words', language)}</span></p>
+              <p>
+                {readingTime}<span> {t('Blog.Detail.Minutes', language)}</span>
+              </p>
             </div>
           </div>
           <div data-editable="text" data-prop="@content" data-type="block">

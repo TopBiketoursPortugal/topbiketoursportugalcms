@@ -3,7 +3,12 @@ import { getCollection } from 'astro:content';
 import slugify from 'slugify';
 import Layout from 'src/layouts/Layout.astro';
 import TourList from 'src/components/tours/tour-list.astro';
-import { getRiderLevelLanguagesAlternates, getRiderLevelPath, getRiderLevelsListingPath, trailingSlash } from 'utils/permalinks';
+import {
+  getRiderLevelLanguagesAlternates,
+  getRiderLevelPath,
+  getRiderLevelsListingPath,
+  trailingSlash
+} from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import Heading from 'src/components/building-blocks/typography/heading.astro';
 import Text from 'src/components/building-blocks/typography/text.astro';
@@ -55,20 +60,34 @@ const riderLevels = await getCollection(
   (f) => f.data.language === language
 );
 
-const allRegions = await getCollection('tourRegions', (f) => f.data.language === language);
-const allTags = await getCollection('tourTags', (f) => f.data.language === language);
-const allBikeCategories = await getCollection('bikeCategories', (f) => f.data.language === language);
+const allRegions = await getCollection(
+  'tourRegions',
+  (f) => f.data.language === language
+);
+const allTags = await getCollection(
+  'tourTags',
+  (f) => f.data.language === language
+);
+const allBikeCategories = await getCollection(
+  'bikeCategories',
+  (f) => f.data.language === language
+);
 
 const tourRegionIds = new Set(tours.map((t) => t.data.region).filter(Boolean));
 const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
-const tourBikeCategoryIds = new Set(tours.flatMap((t) => t.data.bikeCategories ?? []));
+const tourBikeCategoryIds = new Set(
+  tours.flatMap((t) => t.data.bikeCategories ?? [])
+);
 
 const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
 const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
-const relevantBikeCategories = allBikeCategories.filter((c) => tourBikeCategoryIds.has(c.data.id));
+const relevantBikeCategories = allBikeCategories.filter((c) =>
+  tourBikeCategoryIds.has(c.data.id)
+);
 
 const levelSeoTitle = levelData.data.seo?.page_title ?? levelData.data.title;
-const levelSeoDescription = levelData.data.seo?.page_description ?? levelData.data.title;
+const levelSeoDescription =
+  levelData.data.seo?.page_description ?? levelData.data.title;
 const frontmatter = {
   title: levelData.data.title ?? levelData.data.seo?.page_title,
   page_size: 6,
@@ -80,7 +99,11 @@ const frontmatter = {
     canonical_url: levelData.data.seo?.canonical_url,
     open_graph_type: levelData.data.seo?.open_graph_type,
     author_twitter_handle: levelData.data.seo?.author_twitter_handle,
-    no_index: false
+    // Honour the entry's own `seo.no_index` instead of forcing every
+    // taxonomy term to be indexable. A thin term (one tour, or none) is
+    // worth excluding, and the flag was already set on some entries but
+    // silently discarded here.
+    no_index: levelData.data.seo?.no_index === true
   }
 };
 const hrefs = await getRiderLevelLanguagesAlternates(levelData, Astro.site);
@@ -89,16 +112,29 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
-  { name: t('Tour.RiderLevelsTitle', language), url: getRiderLevelsListingPath(language) },
-  { name: levelData.data.name ?? levelData.data.title, url: getRiderLevelPath(levelData, language) }
+  {
+    name: t('Tour.RiderLevelsTitle', language),
+    url: getRiderLevelsListingPath(language)
+  },
+  {
+    name: levelData.data.name ?? levelData.data.title,
+    url: getRiderLevelPath(levelData, language)
+  }
 ];
 ---
 
-<Layout class="mb-16 px-8"
+<Layout
+  class="mb-16 px-8"
   {...frontmatter}
-  title={t("Tours.RiderLevels.PackageTour.Title", language).replace("$1", levelData.data.name ?? levelData.data.title)} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  title={t('Tours.RiderLevels.PackageTour.Title', language).replace(
+    '$1',
+    levelData.data.name ?? levelData.data.title
+  )}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
   <slot slot="head">
-      {
+    {
       defaultHref ? (
         <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
       ) : null
@@ -113,47 +149,91 @@ const breadcrumbs = [
       ))
     }
   </slot>
-<Stack spacing="large" layout="vertical" class="pt-6">
-  <Heading as="h1" class="px-6">{levelData.data.title ?? levelData.data.seo?.page_title}</Heading>
-  <PageHelper contentBlocks={levelData.data.content_blocks ?? []} />
-  <div data-tour-filter-container>
-    <TourFilterBar
-      language={language}
-      totalCount={tours.length}
-      showRegion={relevantRegions.length > 0}
-      showTag={relevantTags.length > 0}
-      showBikeCategory={relevantBikeCategories.length > 0}
-      regions={relevantRegions.map((r) => ({ id: r.data.id, name: r.data.name ?? r.data.title }))}
-      tags={relevantTags.map((tg) => ({ id: tg.data.id, name: tg.data.name ?? tg.data.title }))}
-      bikeCategories={relevantBikeCategories.map((c) => ({ id: c.data.id, name: c.data.name ?? c.data.title }))}
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6"
+      >{levelData.data.title ?? levelData.data.seo?.page_title}</Heading
+    >
+    <PageHelper contentBlocks={levelData.data.content_blocks ?? []} />
+    <div data-tour-filter-container>
+      <TourFilterBar
+        language={language}
+        totalCount={tours.length}
+        showRegion={relevantRegions.length > 0}
+        showTag={relevantTags.length > 0}
+        showBikeCategory={relevantBikeCategories.length > 0}
+        regions={relevantRegions.map((r) => ({
+          id: r.data.id,
+          name: r.data.name ?? r.data.title
+        }))}
+        tags={relevantTags.map((tg) => ({
+          id: tg.data.id,
+          name: tg.data.name ?? tg.data.title
+        }))}
+        bikeCategories={relevantBikeCategories.map((c) => ({
+          id: c.data.id,
+          name: c.data.name ?? c.data.title
+        }))}
+      />
+      {
+        packageTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.RiderLevels.PackageTour.Title', language).replace(
+                '$1',
+                levelData.data.name ?? levelData.data.title
+              )}
+            </Heading>
+            <TourList items={packageTours} language={language} />
+          </div>
+        ) : null
+      }
+      {
+        dayTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.RiderLevels.DayTour.Title', language).replace(
+                '$1',
+                levelData.data.name ?? levelData.data.title
+              )}
+            </Heading>
+            <TourList items={dayTours} language={language} />
+          </div>
+        ) : null
+      }
+    </div>
+    {
+      packageTours.length == 0 && dayTours.length === 0 ? (
+        <div class="flex flex-col gap-2 px-6">
+          <Text size="xlarge">
+            {t('Tours.RiderLevels.NoResults.Title', language).replace(
+              '$1',
+              levelData.data.name ?? levelData.data.title
+            )}
+          </Text>
+          <Text size="large">
+            {t('Tours.RiderLevels.NoResults.AlternateTitle', language)}
+          </Text>
+          <ul class="list-disc pl-8">
+            {riderLevels
+              .filter((r) => r.data.id !== levelData.data.id)
+              .map((r) => (
+                <li class="pl-2">
+                  <a
+                    href={getRiderLevelPath(r, language)}
+                    title={r.data.name ?? r.data.title}
+                    class="underline"
+                  >
+                    {r.data.name ?? r.data.title}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ) : null
+    }
+    <PageHelper
+      contentBlocks={levelData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
     />
-    {
-      packageTours.length > 0 ? (
-        <div data-tour-section>
-          <Heading as="h2" class="px-6">{t("Tours.RiderLevels.PackageTour.Title", language).replace("$1", levelData.data.name ?? levelData.data.title)}</Heading>
-          <TourList items={packageTours} language={language} />
-        </div>
-      ) : null
-    }
-    {
-      dayTours.length > 0 ? (
-        <div data-tour-section>
-          <Heading as="h2" class="px-6">{t("Tours.RiderLevels.DayTour.Title", language).replace("$1", levelData.data.name ?? levelData.data.title)}</Heading>
-          <TourList items={dayTours} language={language} />
-        </div>
-      ) : null
-    }
-  </div>
-  {
-    packageTours.length == 0 && dayTours.length === 0 ? (
-      <div class="flex flex-col px-6 gap-2">
-        <Text size="xlarge">{t("Tours.RiderLevels.NoResults.Title", language).replace("$1", levelData.data.name ?? levelData.data.title)}</Text>
-        <Text size="large">{t("Tours.RiderLevels.NoResults.AlternateTitle", language)}</Text>
-        <ul class="list-disc pl-8">{riderLevels.filter((r) => r.data.id !== levelData.data.id)
-                        .map((r) => (<li class="pl-2"><a href={getRiderLevelPath(r, language)} title={r.data.name ?? r.data.title} class="underline">{r.data.name ?? r.data.title}</a></li>))}</ul>
-      </div>
-    ) : null
-  }
-  <PageHelper contentBlocks={levelData.data.content_blocks_after ?? []} sectionsKey="content_blocks_after" />
-</Stack>
+  </Stack>
 </Layout>

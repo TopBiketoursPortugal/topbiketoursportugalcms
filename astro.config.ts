@@ -25,6 +25,7 @@ import {
   LOCALES,
   DEFAULT_LOCALE
 } from './tools/seo/lib/alternates.mjs';
+import { noindexPathSet } from './tools/seo/lib/routes.mjs';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
@@ -37,6 +38,12 @@ type RedirectRule = {
   destination: string;
   status: ValidRedirectStatus;
 };
+
+/**
+ * Paths whose page renders `noindex`, read once from content frontmatter and
+ * used by the sitemap filter below.
+ */
+const NOINDEX_PATHS: Set<string> = noindexPathSet();
 
 /**
  * Netlify applies the first matching rule in _redirects, so precedence is
@@ -229,7 +236,15 @@ export default defineConfig({
     //   Logger: 0
     // })
     sitemap({
-      // filter: (page) => !redirects.has(page),
+      // Keep noindex URLs out of the sitemap. Advertising a URL for crawling
+      // while its own page says `noindex` is a contradictory signal;
+      // `/thank-you-page/` shipped both for months. Derived from
+      // `seo.no_index` in the content rather than hand-listed, so a page that
+      // gets the flag later drops out of the sitemap on the next build.
+      filter: (page) => {
+        const { pathname } = new URL(page);
+        return !NOINDEX_PATHS.has(pathname);
+      },
       // Stamp each content-backed URL with the date of the commit that last
       // touched it. Without this Google has no reason to recrawl a page it
       // indexed months ago — which is why renamed tours kept their old titles

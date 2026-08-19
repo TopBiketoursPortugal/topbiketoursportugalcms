@@ -5,6 +5,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 import { resolveSchemaImage } from 'utils/schema-image';
 import { resolveSchemaAuthor, parseByline } from 'utils/schema-author';
 import { getTeamMemberPath } from 'utils/permalinks';
+import { lastmodFor } from '../../../tools/seo/lib/lastmod.mjs';
 
 type Props = {
   title: string;
@@ -45,12 +46,27 @@ const teamUrl = teamMatch
   ? `${baseUrl}${getTeamMemberPath(teamMatch.data.title ?? '', language)}`
   : undefined;
 
+const publishedAt = new Date(date);
+
+// Freshness, from the commit that last touched the post — the same signal the
+// sitemap's `lastmod` uses, so the two cannot disagree. Emitted only when it is
+// genuinely later than the publish date: several posts are backdated, and a
+// `dateModified` before `datePublished` is worse than none at all.
+const modifiedRaw = lastmodFor(`${baseUrl}${url}`);
+const modifiedAt = modifiedRaw ? new Date(modifiedRaw) : null;
+const dateModified =
+  modifiedAt && modifiedAt > publishedAt ? modifiedAt.toISOString() : null;
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   'headline': title,
-  'datePublished': new Date(date).toISOString(),
+  'datePublished': publishedAt.toISOString(),
+  ...(dateModified ? { dateModified } : {}),
   'url': `${baseUrl}${url}`,
+  // Ties the article node to the page it lives on rather than leaving Google to
+  // infer it — the pairing Google's own Article guidance asks for.
+  'mainEntityOfPage': { '@type': 'WebPage', '@id': `${baseUrl}${url}` },
   'author': resolveSchemaAuthor(author, organisationId, teamUrl, knownNames),
   ...(imageUrl ? { image: imageUrl } : {}),
   ...(wordCount ? { wordCount } : {}),

@@ -128,7 +128,11 @@ const frontmatter = {
     canonical_url: regionData.data.seo?.canonical_url,
     open_graph_type: regionData.data.seo?.open_graph_type,
     author_twitter_handle: regionData.data.seo?.author_twitter_handle,
-    no_index: false
+    // Honour the entry's own `seo.no_index` instead of forcing every
+    // taxonomy term to be indexable. A thin term (one tour, or none) is
+    // worth excluding, and the flag was already set on some entries but
+    // silently discarded here.
+    no_index: regionData.data.seo?.no_index === true
   }
 };
 const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);

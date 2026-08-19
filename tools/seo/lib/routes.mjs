@@ -229,6 +229,10 @@ export function collectRoutes(root = REPO_ROOT) {
         url,
         file: relativePath,
         title: frontmatter.title ?? null,
+        // `seo.no_index` drives the robots meta tag on the page. A URL that
+        // tells Google not to index it has no business being advertised in
+        // the sitemap — see noindexUrlSet below.
+        noIndex: frontmatter.seo?.no_index === true,
         slugField,
         slugPreferred: config.slugFrom[0]
       });
@@ -241,6 +245,21 @@ export function collectRoutes(root = REPO_ROOT) {
 /** The set of URLs currently served, for collision checks. */
 export function liveUrlSet(routes) {
   return new Set([...routes.values()].map((route) => route.url));
+}
+
+/**
+ * Paths whose page renders `<meta name="robots" content="noindex">`.
+ *
+ * Listing a noindex URL in the sitemap is a contradictory signal: the sitemap
+ * asks Google to crawl and index it, the page says not to. `/thank-you-page/`
+ * shipped both for months. Paths (not absolute URLs) because that is what the
+ * sitemap integration's `filter` is easiest to compare against.
+ */
+export function noindexPathSet(root = REPO_ROOT) {
+  const { routes } = collectRoutes(root);
+  return new Set(
+    [...routes.values()].filter((route) => route.noIndex).map((r) => r.url)
+  );
 }
 
 /** Normalise a routing.json path for comparison (always one trailing slash). */
