@@ -51,6 +51,26 @@
   --color-info: #0e7490;
 }
 
+/*
+ * Motion scale.
+ *
+ * Entrance reveals used to run for 2s (wipe 1.8s, blur 1.6s, stagger 1.2s with
+ * delays to 540ms). At those numbers content is still arriving long after the
+ * reader's eye has reached it — a fast scroll catches most of a page mid-fade,
+ * and the page reads as sluggish rather than considered. An entrance wants
+ * 200–400ms. Travel shrinks alongside duration: the same 1.25rem rise over
+ * 320ms would read as a jerk, so it drops to 12px. The curve is unchanged —
+ * it was already the right one.
+ */
+:root {
+  --reveal-duration: 320ms;
+  --reveal-duration-slow: 420ms;
+  --reveal-stagger-duration: 260ms;
+  --reveal-step: 40ms;
+  --reveal-travel: 12px;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 /* Custom Variants */
 @custom-variant intersect (&:not([no-intersect]));
 @custom-variant dark (&:where(.dark, .dark *));
@@ -148,8 +168,8 @@
   .reveal-right,
   .reveal-zoom {
     transition:
-      opacity 2s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 2s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--reveal-duration) var(--reveal-ease),
+      transform var(--reveal-duration) var(--reveal-ease);
     transition-delay: var(--reveal-delay, 0s);
   }
 
@@ -163,26 +183,26 @@
   }
 
   .reveal-up[no-intersect] {
-    transform: translateY(1.25rem);
+    transform: translateY(var(--reveal-travel));
   }
   .reveal-down[no-intersect] {
-    transform: translateY(-1.25rem);
+    transform: translateY(calc(var(--reveal-travel) * -1));
   }
   .reveal-left[no-intersect] {
-    transform: translateX(-2rem);
+    transform: translateX(calc(var(--reveal-travel) * -1.5));
   }
   .reveal-right[no-intersect] {
-    transform: translateX(2rem);
+    transform: translateX(calc(var(--reveal-travel) * 1.5));
   }
   .reveal-zoom[no-intersect] {
-    transform: scale(0.96);
+    transform: scale(0.98);
   }
 
   /* Editorial wipe: content un-masks from a slightly inset frame */
   .reveal-wipe {
     transition:
-      opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-      clip-path 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--reveal-duration-slow) var(--reveal-ease),
+      clip-path var(--reveal-duration-slow) var(--reveal-ease);
     transition-delay: var(--reveal-delay, 0s);
     clip-path: inset(0 0 0 0);
   }
@@ -194,58 +214,51 @@
   /* Soft-focus rise: blurred and slightly low, settles into focus */
   .reveal-blur {
     transition:
-      opacity 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--reveal-duration-slow) var(--reveal-ease),
+      filter var(--reveal-duration-slow) var(--reveal-ease),
+      transform var(--reveal-duration-slow) var(--reveal-ease);
     transition-delay: var(--reveal-delay, 0s);
   }
   .reveal-blur[no-intersect] {
     opacity: 0;
-    filter: blur(10px);
-    transform: translateY(0.75rem);
+    filter: blur(6px);
+    transform: translateY(calc(var(--reveal-travel) * 0.75));
   }
 
   /* Parent-driven stagger: put reveal-stagger + intersect classes on the
      container; direct children fade-rise in sequence. */
   .reveal-stagger > * {
     transition:
-      opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity var(--reveal-stagger-duration) var(--reveal-ease),
+      transform var(--reveal-stagger-duration) var(--reveal-ease);
   }
   .reveal-stagger[no-intersect] > * {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(var(--reveal-travel));
   }
+  /* The cascade flattens after the fourth child: a stagger that keeps adding
+     delay past ~160ms stops reading as sequence and starts reading as lag. */
   .reveal-stagger > :nth-child(2) {
-    transition-delay: 90ms;
+    transition-delay: var(--reveal-step);
   }
   .reveal-stagger > :nth-child(3) {
-    transition-delay: 180ms;
+    transition-delay: calc(var(--reveal-step) * 2);
   }
-  .reveal-stagger > :nth-child(4) {
-    transition-delay: 270ms;
-  }
-  .reveal-stagger > :nth-child(5) {
-    transition-delay: 360ms;
-  }
-  .reveal-stagger > :nth-child(6) {
-    transition-delay: 450ms;
-  }
-  .reveal-stagger > :nth-child(n + 7) {
-    transition-delay: 540ms;
+  .reveal-stagger > :nth-child(n + 4) {
+    transition-delay: calc(var(--reveal-step) * 3);
   }
 
   .reveal-delay-1 {
-    --reveal-delay: 0.1s;
+    --reveal-delay: var(--reveal-step);
   }
   .reveal-delay-2 {
-    --reveal-delay: 0.2s;
+    --reveal-delay: calc(var(--reveal-step) * 2);
   }
   .reveal-delay-3 {
-    --reveal-delay: 0.3s;
+    --reveal-delay: calc(var(--reveal-step) * 3);
   }
   .reveal-delay-4 {
-    --reveal-delay: 0.4s;
+    --reveal-delay: calc(var(--reveal-step) * 4);
   }
 
   /*
@@ -318,7 +331,7 @@
   @keyframes sd-up {
     from {
       opacity: 0;
-      transform: translateY(1.25rem);
+      transform: translateY(var(--reveal-travel));
     }
     to {
       opacity: 1;
@@ -328,7 +341,7 @@
   @keyframes sd-down {
     from {
       opacity: 0;
-      transform: translateY(-1.25rem);
+      transform: translateY(calc(var(--reveal-travel) * -1));
     }
     to {
       opacity: 1;
@@ -338,7 +351,7 @@
   @keyframes sd-left {
     from {
       opacity: 0;
-      transform: translateX(-2rem);
+      transform: translateX(calc(var(--reveal-travel) * -1.5));
     }
     to {
       opacity: 1;
@@ -348,7 +361,7 @@
   @keyframes sd-right {
     from {
       opacity: 0;
-      transform: translateX(2rem);
+      transform: translateX(calc(var(--reveal-travel) * 1.5));
     }
     to {
       opacity: 1;
@@ -358,7 +371,7 @@
   @keyframes sd-zoom {
     from {
       opacity: 0;
-      transform: scale(0.96);
+      transform: scale(0.98);
     }
     to {
       opacity: 1;
@@ -368,8 +381,8 @@
   @keyframes sd-blur {
     from {
       opacity: 0;
-      filter: blur(10px);
-      transform: translateY(0.75rem);
+      filter: blur(6px);
+      transform: translateY(calc(var(--reveal-travel) * 0.75));
     }
     to {
       opacity: 1;
@@ -433,9 +446,13 @@
     .parallax-media {
       overflow: clip;
     }
+    /* scale was 1.18 with a ±7% drift — enough overscan to visibly soften a
+       thumbnail, and applied to every media frame on the page it turned
+       ambient motion into the site's dominant one. 1.08 / ±4% still reads as
+       depth on a full-bleed image and disappears politely on a card. */
     .parallax-media > :is(img, picture, video),
     .parallax-media picture > img {
-      scale: 1.18;
+      scale: 1.08;
       animation: parallax-y linear both;
       animation-timeline: view();
     }
@@ -456,18 +473,18 @@
 
   @keyframes parallax-y {
     from {
-      translate: 0 7%;
+      translate: 0 4%;
     }
     to {
-      translate: 0 -7%;
+      translate: 0 -4%;
     }
   }
   @keyframes parallax-drift {
     from {
-      translate: 0 22px;
+      translate: 0 14px;
     }
     to {
-      translate: 0 -22px;
+      translate: 0 -14px;
     }
   }
   @keyframes header-elevate {
@@ -555,20 +572,51 @@
 }
 
 /*
- * GetYourGuide-style card hover: the card stays put, only the photo zooms
- * (scale 1.2 over 0.3s ease-in-out inside the clipped frame). Uses
- * `transform` so it composes with the parallax `scale`/`translate`
- * properties instead of overriding them.
+ * Carousels drive themselves with snap points and their own prev/next
+ * buttons, so the native horizontal scrollbar underneath them is chrome the
+ * design never asked for — a grey bar sitting under every testimonial row and
+ * review strip. Hiding it does not remove the scroll: touch, trackpad, and
+ * keyboard all still work, and the arrow buttons remain the visible affordance
+ * on pointer devices.
+ */
+.scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Card hover: the card stays put, only the photo eases forward inside the
+ * clipped frame. Uses `transform` so it composes with the parallax
+ * `scale`/`translate` properties instead of overriding them.
+ *
+ * This was scale(1.2) over 0.3s ease-in-out. A fifth of the image's width is a
+ * lurch rather than a response, and it visibly softens the photograph at the
+ * zoomed size. 1.045 over 400ms on an ease-out curve reads as the image
+ * leaning in; the paired shadow lift is what makes it read as depth — the
+ * zoom alone, at any scale, reads as a glitch.
  */
 @media (prefers-reduced-motion: no-preference) {
   .group .parallax-media img,
   .zoom-frame img {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 400ms var(--reveal-ease);
   }
   .group:hover .parallax-media img,
   :is(a, .group):hover .zoom-frame img,
   .zoom-frame:hover img {
-    transform: scale(1.2);
+    transform: scale(1.045);
+  }
+
+  .zoom-frame,
+  .group .parallax-media {
+    transition: box-shadow 400ms var(--reveal-ease);
+  }
+  :is(a, .group):hover .zoom-frame,
+  .zoom-frame:hover,
+  .group:hover .parallax-media {
+    box-shadow: 0 12px 32px -14px rgb(15 35 25 / 0.35);
   }
 }
 

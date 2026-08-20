@@ -70,11 +70,20 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
     }
   </div>
   <div class="flex flex-1 flex-col gap-1 p-2.5">
-    <h4
+    {
+      /*
+      Was an <h4>. The mega-menu renders fifteen of these in the site header,
+      so every page's document outline opened with fifteen h4s before its own
+      h1 — which is what a screen reader's heading navigation and any
+      outline-based crawl see first. These are navigation labels, not document
+      structure.
+    */
+    }
+    <span
       class="line-clamp-2 text-sm leading-tight font-semibold text-slate-900 dark:text-slate-100"
     >
       {title}
-    </h4>
+    </span>
     {
       durationDays > 0 || (difficulty && difficulty > 0) ? (
         <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">

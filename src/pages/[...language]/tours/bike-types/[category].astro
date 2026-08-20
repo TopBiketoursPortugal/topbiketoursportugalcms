@@ -200,15 +200,18 @@ const breadcrumbs = [
         showTag={relevantTags.length > 0}
         regions={relevantRegions.map((r) => ({
           id: r.data.id,
-          name: r.data.name ?? r.data.title
+          name: r.data.name ?? r.data.title,
+          slug: r.data.path
         }))}
         riderLevels={relevantRiderLevels.map((l) => ({
           id: l.data.id,
-          name: l.data.name ?? l.data.title
+          name: l.data.name ?? l.data.title,
+          slug: l.data.path
         }))}
         tags={relevantTags.map((tg) => ({
           id: tg.data.id,
-          name: tg.data.name ?? tg.data.title
+          name: tg.data.name ?? tg.data.title,
+          slug: tg.data.path
         }))}
       />
       {

@@ -1,23 +1,67 @@
 ---
 import { getCollection } from 'astro:content';
-import Grid from 'src/components/building-blocks/grid/grid.astro';
 import TourCard from './tour-card.astro';
 import type { LanguageCodes } from 'src/schemas/language';
+import type { TourSchema } from 'src/schemas/tours';
 
-type Props = { related: string[]; language: LanguageCodes };
+type Props = {
+  related: string[];
+  language: LanguageCodes;
+  /** The tour being viewed, used to rank what "related" means. */
+  current?: TourSchema;
+};
 
-const { related, language } = Astro.props;
+const { related, language, current } = Astro.props;
 
 const tours = await getCollection(
   'tours',
   (t) => related.indexOf(t.data.id) !== -1 && t.data.language === language
 );
+
+/*
+ * The CMS `relatedTours` list is hand-picked and has drifted: a 13-day,
+ * €1,596 Porto→Lisbon holiday was recommending a €35 three-hour Porto city
+ * tour. Someone comparing multi-day holidays is not cross-shopping a city
+ * ride, so the list is constrained to the same kind of trip and then ranked by
+ * how comparable each one actually is.
+ */
+const candidates = current
+  ? tours.filter((t) => t.data.tourtype === current.tourtype)
+  : tours;
+
+// If the hand-picked list contains nothing of the same type, showing a badly
+// matched tour still beats an empty section.
+const pool = candidates.length > 0 ? candidates : tours;
+
+const scored = current
+  ? pool
+      .map((tour) => {
+        const sameRegion = tour.data.region === current.region ? 2 : 0;
+        const difficultyGap = Math.abs(
+          (tour.data.difficulty ?? 0) - (current.difficulty ?? 0)
+        );
+        // Adjacent difficulty is a genuine alternative; three steps away is a
+        // different holiday.
+        const closeDifficulty =
+          difficultyGap <= 1 ? 2 : difficultyGap <= 2 ? 1 : 0;
+        const sharedTags = (tour.data.tags ?? []).filter((tag) =>
+          (current.tags ?? []).includes(tag)
+        ).length;
+        return { tour, score: sameRegion + closeDifficulty + sharedTags };
+      })
+      .sort((a, b) => b.score - a.score)
+      .map(({ tour }) => tour)
+  : pool;
+
+// Three is a row on every breakpoint this grid uses; more turns a closing
+// nudge into another list to work through.
+const items = scored.slice(0, 3);
 ---
 
-<Grid cols={3}>
+<div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
   {
-    tours.map((tour) => (
+    items.map((tour) => (
       <TourCard language={language} tour={tour.data} contentDisplay="inline" />
     ))
   }
-</Grid>
+</div>

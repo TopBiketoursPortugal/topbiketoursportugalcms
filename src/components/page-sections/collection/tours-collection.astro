@@ -1,7 +1,5 @@
 ---
 import { getCollection } from 'astro:content';
-import Grid from 'src/components/building-blocks/grid/grid.astro';
-import Stack from 'src/components/building-blocks/stack/stack.astro';
 import type { LanguageCodes } from 'src/schemas/language';
 import TourListSchema from 'src/components/tours/tour-list-schema.astro';
 import TourCard from 'src/components/tours/tour-card.astro';
@@ -36,20 +34,40 @@ const tours = await getCollection(
 const items =
   tours.sort((a, b) => (a?.data?.order ?? 0) - (b?.data?.order ?? 0)) ?? [];
 
-const allRegions = await getCollection('tourRegions', (f) => f.data.language === language);
-const allRiderLevels = await getCollection('tourRiderLevels', (f) => f.data.language === language);
-const allTags = await getCollection('tourTags', (f) => f.data.language === language);
-const allBikeCategories = await getCollection('bikeCategories', (f) => f.data.language === language);
+const allRegions = await getCollection(
+  'tourRegions',
+  (f) => f.data.language === language
+);
+const allRiderLevels = await getCollection(
+  'tourRiderLevels',
+  (f) => f.data.language === language
+);
+const allTags = await getCollection(
+  'tourTags',
+  (f) => f.data.language === language
+);
+const allBikeCategories = await getCollection(
+  'bikeCategories',
+  (f) => f.data.language === language
+);
 
 const tourRegionIds = new Set(items.map((i) => i.data.region).filter(Boolean));
-const tourRiderLevelIds = new Set(items.flatMap((i) => i.data.riderLevels ?? []));
+const tourRiderLevelIds = new Set(
+  items.flatMap((i) => i.data.riderLevels ?? [])
+);
 const tourTagIds = new Set(items.flatMap((i) => i.data.tags ?? []));
-const tourBikeCategoryIds = new Set(items.flatMap((i) => i.data.bikeCategories ?? []));
+const tourBikeCategoryIds = new Set(
+  items.flatMap((i) => i.data.bikeCategories ?? [])
+);
 
 const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
-const relevantRiderLevels = allRiderLevels.filter((l) => tourRiderLevelIds.has(l.data.id));
+const relevantRiderLevels = allRiderLevels.filter((l) =>
+  tourRiderLevelIds.has(l.data.id)
+);
 const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
-const relevantBikeCategories = allBikeCategories.filter((c) => tourBikeCategoryIds.has(c.data.id));
+const relevantBikeCategories = allBikeCategories.filter((c) =>
+  tourBikeCategoryIds.has(c.data.id)
+);
 
 const site = SiteData[language];
 const baseUrl = Astro.site ?? site.site.url;
@@ -76,36 +94,58 @@ const itemListSchema = {
       showRiderLevel={relevantRiderLevels.length > 0}
       showTag={relevantTags.length > 0}
       showBikeCategory={relevantBikeCategories.length > 0}
-      regions={relevantRegions.map((r) => ({ id: r.data.id, name: r.data.name ?? r.data.title }))}
-      riderLevels={relevantRiderLevels.map((l) => ({ id: l.data.id, name: l.data.name ?? l.data.title }))}
-      tags={relevantTags.map((tg) => ({ id: tg.data.id, name: tg.data.name ?? tg.data.title }))}
-      bikeCategories={relevantBikeCategories.map((c) => ({ id: c.data.id, name: c.data.name ?? c.data.title }))}
+      regions={relevantRegions.map((r) => ({
+        id: r.data.id,
+        name: r.data.name ?? r.data.title,
+        slug: r.data.path
+      }))}
+      riderLevels={relevantRiderLevels.map((l) => ({
+        id: l.data.id,
+        name: l.data.name ?? l.data.title,
+        slug: l.data.path
+      }))}
+      tags={relevantTags.map((tg) => ({
+        id: tg.data.id,
+        name: tg.data.name ?? tg.data.title,
+        slug: tg.data.path
+      }))}
+      bikeCategories={relevantBikeCategories.map((c) => ({
+        id: c.data.id,
+        name: c.data.name ?? c.data.title,
+        slug: c.data.path
+      }))}
     />
 
-    {items.length > 0 ? (
-      <div data-tour-section>
-        <Stack class="sm:p-6" layout="vertical">
-          <Grid cols={3}>
-            {
-              items.map(({ data }) => (
+    {
+      items.length > 0 ? (
+        <div data-tour-section>
+          {/* Two columns from 640px: the shared <Grid cols={3}> stays single-column
+            until 1024px, which is why a phone or tablet browsed this list one
+            very tall card at a time. */}
+          <div class="px-4 py-6 sm:px-6">
+            <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {items.map(({ data }) => (
                 <TourCard
                   tour={data}
                   contentDisplay={contentDisplay}
                   language={language}
                 />
-              ))
-            }
-          </Grid>
-        </Stack>
-      </div>
-    ) : (
-      <div class="flex flex-col items-center justify-center py-16 text-center">
-        <i class="icon-[ph--map-trifold-light] mb-4 h-12 w-12 text-gray-300 dark:text-gray-600" aria-hidden="true" />
-        <p class="text-lg text-gray-500 dark:text-gray-400">
-          {t('Tours.Collection.NoResults', language)}
-        </p>
-      </div>
-    )}
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="flex flex-col items-center justify-center py-16 text-center">
+          <i
+            class="icon-[ph--map-trifold-light] mb-4 h-12 w-12 text-gray-300 dark:text-gray-600"
+            aria-hidden="true"
+          />
+          <p class="text-lg text-gray-500 dark:text-gray-400">
+            {t('Tours.Collection.NoResults', language)}
+          </p>
+        </div>
+      )
+    }
   </div>
 </section>
 <TourListSchema items={items} language={language} />

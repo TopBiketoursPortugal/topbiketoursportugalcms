@@ -13,138 +13,211 @@ type Props = {
 const { code, title } = Astro.props;
 ---
 
-<Form
-  action={FormData.packageTours ?? 'https://formspree.io/xzbalqpw'}
-  method="post"
-  id="tour-booking-enquiry-form"
-  class="tour-booking-enquiry-form [&_:is(input,textarea,select):invalid:focus]:border-red-500 [&_:is(input,textarea,select):invalid:focus]:ring-2 [&_:is(input,textarea,select):invalid:focus]:ring-red-500/20"
->
-  <input type="hidden" name="product-code" value={code} />
-  <input type="hidden" name="product-title" value={title} />
-  <FormField
-    as="input"
-    name="full-name"
-    required
-    placeholder={t('Tour.Form.Name.Placeholder', language)}
-    label={t('Tour.Form.Name.Label', language)}
-  />
-  <FormField
-    as="input"
-    name="email-address"
-    type="email"
-    required
-    placeholder={t('Tour.Form.EmailAddress.Placeholder', language)}
-    label={t('Tour.Form.EmailAddress.Label', language)}
-  />
-  <FormField
-    as="input"
-    name="tel"
-    required
-    type="phone"
-    placeholder={t('Tour.Form.Phone.Placeholder', language)}
-    label={t('Tour.Form.Phone.Label', language)}
-  />
-  <FormField
-    as="input"
-    type="date"
-    name="tour-date"
-    required
-    label={t('Tour.Form.TourDate.Label', language)}
-  />
-  <FormField
-    as="textarea"
-    name="your-enquiry"
-    required
-    label={t('Tour.Form.YourEnquiry', language)}
-  />
-  <FormField
-    as="textarea"
-    rows="2"
-    name="found"
-    label={t('Tour.Form.Found.Label', language)}
-    placeholder={t('Tour.Form.Found.Placeholder', language)}
-  />
+{
+  /*
+  The enquiry form used to be the sidebar's default state: eight fields, a
+  checkbox and two equally-weighted primary buttons, all above the fold before
+  the reader had seen a single fact about the trip. It is now behind one
+  primary action.
 
-  <FormField
-    as="select"
-    options={[
-      t('Tour.Form.TourType.OptionGuided', language),
-      t('Tour.Form.TourType.OptionUnguided', language)
-    ]}
-    name="package"
-    label={t('Tour.Form.TourType.Label', language)}
-    placeholder={t('Tour.Form.TourType.Placeholder', language)}
-  />
+  <details>/<summary> rather than a JS disclosure: it works before hydration,
+  it is keyboard- and screen-reader-correct for free, and deep links that land
+  on #tour-booking still reach a panel the reader can open in one press.
+*/
+}
+<details class="tour-enquiry group w-full" name="tour-cta" data-tour-enquiry>
+  <summary
+    class="bg-accent flex w-full cursor-pointer list-none items-center justify-center gap-2 rounded-md px-4 py-3 text-sm font-semibold text-white transition-[filter,box-shadow] hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 [&::-webkit-details-marker]:hidden"
+  >
+    <i class="icon-[ph--envelope-simple] h-4 w-4 shrink-0" aria-hidden="true"
+    ></i>
+    <span class="group-open:hidden">
+      {t('Tour.Sidebar.Enquire', language)}
+    </span>
+    <span class="hidden group-open:inline">
+      {t('Tour.Sidebar.CloseForm', language)}
+    </span>
+  </summary>
 
-  <FormField
-    as="input"
-    name="person"
-    type="number"
-    min="1"
-    max="10"
-    label={t('Tour.Form.NumberPersons', language)}
-  />
-
-  <FormField
-    as="input"
-    name="country"
-    type="text"
-    label={t('Tour.Form.Country.Label', language)}
-    placeholder={t('Tour.Form.Country.Placeholder', language)}
-  />
-
-  <!-- Terms Checkbox with Modal Trigger -->
-  <div class="flex items-center">
-    <input
-      type="checkbox"
-      id="terms"
-      name="terms"
+  <Form
+    action={FormData.packageTours ?? 'https://formspree.io/xzbalqpw'}
+    method="post"
+    id="tour-booking-enquiry-form"
+    class="tour-booking-enquiry-form mt-4 [&_:is(input,textarea,select):invalid:focus]:border-red-500 [&_:is(input,textarea,select):invalid:focus]:ring-2 [&_:is(input,textarea,select):invalid:focus]:ring-red-500/20"
+  >
+    <input type="hidden" name="product-code" value={code} />
+    <input type="hidden" name="product-title" value={title} />
+    <FormField
+      as="input"
+      name="full-name"
       required
-      aria-required="true"
-      class="peer h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700"
+      placeholder={t('Tour.Form.Name.Placeholder', language)}
+      label={t('Tour.Form.Name.Label', language)}
     />
-    <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-200">
-      {t('Tour.Form.Terms.Text', language)}
-      <label
-        for="terms-toggle"
-        class="cursor-pointer text-blue-600 hover:underline dark:text-blue-400"
-      >
-        {t('Tour.Form.Terms.LinkText', language)}
-      </label>
-      <span aria-hidden="true">*</span>
-      <span class="sr-only">{t('Tour.Form.Terms.Required', language)}</span>
-    </label>
-  </div>
+    <FormField
+      as="input"
+      name="email-address"
+      type="email"
+      required
+      placeholder={t('Tour.Form.EmailAddress.Placeholder', language)}
+      label={t('Tour.Form.EmailAddress.Label', language)}
+    />
+    <FormField
+      as="input"
+      name="tel"
+      required
+      type="phone"
+      placeholder={t('Tour.Form.Phone.Placeholder', language)}
+      label={t('Tour.Form.Phone.Label', language)}
+    />
+    {
+      /*
+      `type="month"`, not `type="date"`. Two reasons: the day input rendered
+      mm/dd/yyyy for an audience that is overwhelmingly German, Dutch, French,
+      Spanish and Portuguese, and an enquiry sent months ahead of a 13-day
+      holiday means "June 2027", not a specific Tuesday. The label was also
+      "Tour data" in all six locales — a typo for date, fixed in i18n.json.
+    */
+    }
+    <FormField
+      as="input"
+      type="month"
+      name="tour-date"
+      required
+      label={t('Tour.Form.TourDate.Label', language)}
+    />
+    <FormField
+      as="textarea"
+      name="your-enquiry"
+      required
+      label={t('Tour.Form.YourEnquiry', language)}
+    />
 
-  <!-- Actions -->
-  <div class="mt-6 flex flex-col gap-4 w-full">
-    <button
-      slot="submit"
-      type="submit"
-      class="tour-booking-button w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
-    >
-      {t('Tour.Form.Submit.Text', language)}
-    </button>
-    <div class="w-full flex flex-col justify-center">
-      <slot />
+    <FormField
+      as="select"
+      options={[
+        t('Tour.Form.TourType.OptionGuided', language),
+        t('Tour.Form.TourType.OptionUnguided', language)
+      ]}
+      name="package"
+      label={t('Tour.Form.TourType.Label', language)}
+      placeholder={t('Tour.Form.TourType.Placeholder', language)}
+    />
+
+    {
+      /*
+      Group size, country and "where did you find us" are useful to the office
+      and irrelevant to the person deciding whether to write at all. Optional
+      fields behind an optional disclosure: same data, three fewer things to
+      read before pressing send.
+    */
+    }
+    <details class="tour-enquiry-extra">
+      <summary
+        class="text-primary cursor-pointer text-sm font-medium dark:text-emerald-300"
+      >
+        {t('Tour.Form.Found.Label', language)}
+      </summary>
+      <div class="mt-3 flex flex-col gap-4">
+        <FormField
+          as="input"
+          name="person"
+          type="number"
+          min="1"
+          max="10"
+          label={t('Tour.Form.NumberPersons', language)}
+        />
+        <FormField
+          as="input"
+          name="country"
+          type="text"
+          label={t('Tour.Form.Country.Label', language)}
+          placeholder={t('Tour.Form.Country.Placeholder', language)}
+        />
+        <FormField
+          as="textarea"
+          rows="2"
+          name="found"
+          label={t('Tour.Form.Found.Label', language)}
+          placeholder={t('Tour.Form.Found.Placeholder', language)}
+        />
+      </div>
+    </details>
+
+    <!-- Terms Checkbox with Modal Trigger -->
+    <div class="flex items-center">
+      <input
+        type="checkbox"
+        id="terms"
+        name="terms"
+        required
+        aria-required="true"
+        class="accent-accent peer h-4 w-4 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+      />
+      <label for="terms" class="ml-2 text-sm text-gray-700 dark:text-gray-200">
+        {t('Tour.Form.Terms.Text', language)}
+        <label
+          for="terms-toggle"
+          class="text-primary cursor-pointer hover:underline dark:text-emerald-300"
+        >
+          {t('Tour.Form.Terms.LinkText', language)}
+        </label>
+        <span aria-hidden="true">*</span>
+        <span class="sr-only">{t('Tour.Form.Terms.Required', language)}</span>
+      </label>
     </div>
-  </div>
-</Form>
+
+    <!-- Actions -->
+    <div class="mt-6 flex w-full flex-col gap-3">
+      {
+        /*
+        The submit button was `bg-blue-600` — a colour that belongs to no part
+        of a brand built on forest green and sunset orange — and it sat the
+        same size and weight as the green "Book Now" beneath it. Two equal
+        primaries is a coin toss, not a choice. Enquiry is the primary action
+        for a package tour, so it takes the accent; booking drops to outline
+        via `buttonClass` on the slot below.
+      */
+      }
+      <button
+        slot="submit"
+        type="submit"
+        class="tour-booking-button bg-accent w-full rounded-md px-4 py-3 font-semibold text-white transition-[filter] hover:brightness-105 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2"
+      >
+        {t('Tour.Form.Submit.Text', language)}
+      </button>
+      <div class="flex w-full flex-col justify-center">
+        <slot />
+      </div>
+    </div>
+  </Form>
+</details>
 
 <!-- Modal Trigger Checkbox (hidden) -->
 <input type="checkbox" id="terms-toggle" class="peer hidden" aria-hidden />
 
 <!-- Terms and Conditions Modal -->
 <div
-  class="bg-opacity-50 fixed inset-0 z-50 hidden items-center justify-center bg-gray-600 transition-opacity duration-300 peer-checked:flex"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-900/60 transition-opacity duration-300 peer-checked:flex"
 >
   <div
     class="max-h-[80vh] w-full max-w-lg transform overflow-y-auto rounded-lg bg-white p-6 shadow-xl transition-all duration-300 dark:bg-gray-800"
   >
     <div class="mb-4 flex items-center justify-between">
-      <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+      {
+        /*
+        `role="heading"` rather than an <h2>: this dialog is rendered inline on
+        every tour page, so a real heading put "Terms and Conditions" into the
+        document outline directly under the tour's own <h1>.
+      */
+      }
+      <span
+        role="heading"
+        aria-level="2"
+        class="font-heading text-xl font-bold text-gray-900 dark:text-white"
+      >
         {t('Tour.Form.Terms.Modal.Title', language)}
-      </h2>
+      </span>
       <label
         for="terms-toggle"
         class="cursor-pointer text-2xl text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
@@ -162,10 +235,35 @@ const { code, title } = Astro.props;
     <div class="mt-6 flex justify-end">
       <label
         for="terms-toggle"
-        class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
+        class="bg-primary cursor-pointer rounded-md px-4 py-2 text-white transition-[filter] hover:brightness-110 focus:outline-none"
       >
         {t('Tour.Form.Terms.Modal.Close', language)}
       </label>
     </div>
   </div>
 </div>
+
+<style>
+  /* The disclosure arrow is replaced by the button styling on the summary. */
+  .tour-enquiry > summary::marker,
+  .tour-enquiry-extra > summary::marker {
+    content: '';
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tour-enquiry[open] > form {
+      animation: enquiry-open var(--reveal-duration) var(--reveal-ease) both;
+    }
+  }
+
+  @keyframes enquiry-open {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--reveal-travel) * -0.5));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

@@ -6,9 +6,13 @@ import Grid from 'src/components/building-blocks/grid/grid.astro';
 import Stack from 'src/components/building-blocks/stack/stack.astro';
 import ReviewItem from '../collection/review-item.astro';
 import { getAuthorName } from '@utils/get-author-name';
-import { MapTestimonialToReview } from '@utils/map-testimonial-to-review';
+import {
+  MapTestimonialToReview,
+  type MappedReview
+} from '@utils/map-testimonial-to-review';
 import { getTestimonialsFor } from 'utils/testimonials';
 import { t } from 'utils/i18n';
+import { getTourPath } from 'utils/permalinks';
 
 type Props = {
   feature_testimonials: readonly string[];
@@ -29,12 +33,31 @@ const reviews =
   (await getCollection('tours', (item) => item.data.language === language))
     .flatMap((t) => t.data.reviews)
     .filter((item) => feature_testimonials?.includes(item.id ?? '')) ?? [];
-const items = reviews.concat(
+// Typed as MappedReview[] so the tour-review and testimonial halves share one
+// shape downstream — otherwise every read of `publishDate` needs an `in` guard
+// and TS narrows the union to `{}`.
+const items: MappedReview[] = (reviews as MappedReview[]).concat(
   (
     await getTestimonialsFor(language, (item) =>
       feature_testimonials?.includes(item.data.id)
     )
   ).map(MapTestimonialToReview)
+);
+
+/*
+ * Resolve each review's tour so the card can say which trip it is about.
+ * "Don rode Porto→Santiago in May 2025" is evidence; "Don — USA" is a quote.
+ * One lookup table rather than a getCollection per card.
+ */
+const allTours = await getCollection(
+  'tours',
+  (item) => item.data.language === language
+);
+const tourById = new Map(
+  allTours.map((entry) => [
+    entry.data.id,
+    { title: entry.data.title, href: getTourPath(entry.data, language) }
+  ])
 );
 
 const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
@@ -82,6 +105,19 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
                 content={review.content}
                 rating={review.rating}
                 expand_behavior={expand_behavior}
+                date={review.publishDate}
+                tourTitle={
+                  review.relatedProduct
+                    ? (tourById.get(review.relatedProduct)?.title ?? null)
+                    : null
+                }
+                tourHref={
+                  review.relatedProduct
+                    ? (tourById.get(review.relatedProduct)?.href ?? null)
+                    : null
+                }
+                sourceName={review.source?.name}
+                sourceUrl={review.source?.url}
               />
             </div>
           ))}
@@ -99,6 +135,19 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
             content={review.content}
             rating={review.rating}
             expand_behavior={expand_behavior}
+            date={review.publishDate}
+            tourTitle={
+              review.relatedProduct
+                ? (tourById.get(review.relatedProduct)?.title ?? null)
+                : null
+            }
+            tourHref={
+              review.relatedProduct
+                ? (tourById.get(review.relatedProduct)?.href ?? null)
+                : null
+            }
+            sourceName={review.source?.name}
+            sourceUrl={review.source?.url}
           />
         ))}
       </Grid>

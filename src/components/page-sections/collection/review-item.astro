@@ -10,6 +10,7 @@ import { cn } from '@utils/cn';
 import { t } from 'utils/i18n';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Languages from 'src/../data/languages.json';
 
 type Props = {
   name?: string;
@@ -18,6 +19,14 @@ type Props = {
   rating: number;
   photo?: string;
   expand_behavior?: 'hover' | 'button' | 'none';
+  /** When the trip was ridden. */
+  date?: Date | string | null;
+  /** Which tour this review is about, and where to read about it. */
+  tourTitle?: string | null;
+  tourHref?: string | null;
+  /** Where the review was published — TripAdvisor, Google, etc. */
+  sourceName?: string | null;
+  sourceUrl?: string | null;
 };
 
 const {
@@ -26,7 +35,12 @@ const {
   content,
   rating,
   photo,
-  expand_behavior = 'hover'
+  expand_behavior = 'hover',
+  date,
+  tourTitle,
+  tourHref,
+  sourceName,
+  sourceUrl
 } = Astro.props;
 const imageOptimized = photo
   ? (getImageByPath(photo) satisfies Promise<{
@@ -45,6 +59,22 @@ const excerpt = getMarkdownExcerpt(content, 200);
 // Reviews arrive from TripAdvisor exports, so either half can be blank —
 // don't render a dangling "Name - " or " - Country".
 const attribution = [name?.trim(), country?.trim()].filter(Boolean).join(' — ');
+
+/*
+ * "Don — USA" with five stars is the weakest possible form of the strongest
+ * asset this business has. Which trip, and when, is what makes a review
+ * evidence rather than decoration — and all three fields already exist in the
+ * testimonial content (`date`, `relatedProduct`, `reviewSource`); they were
+ * simply not being rendered.
+ */
+const reviewDate = date ? new Date(date) : null;
+const formattedDate =
+  reviewDate && !Number.isNaN(reviewDate.valueOf())
+    ? new Intl.DateTimeFormat(Languages[language].locale, {
+        month: 'long',
+        year: 'numeric'
+      }).format(reviewDate)
+    : '';
 ---
 
 <div
@@ -68,7 +98,29 @@ const attribution = [name?.trim(), country?.trim()].filter(Boolean).join(' — '
       )
     }
   </div>
-  <p class="text-xl font-semibold">{attribution}</p>
+  <div class="flex flex-col gap-1">
+    <p class="text-xl font-semibold">{attribution}</p>
+    {
+      (tourTitle || formattedDate) && (
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          {tourTitle ? (
+            tourHref ? (
+              <a
+                href={tourHref}
+                class="hover:text-primary underline-offset-2 hover:underline dark:hover:text-emerald-300"
+              >
+                {tourTitle}
+              </a>
+            ) : (
+              tourTitle
+            )
+          ) : null}
+          {tourTitle && formattedDate ? ' · ' : ''}
+          {formattedDate}
+        </p>
+      )
+    }
+  </div>
   {
     expand_behavior === 'button' ? (
       <>
@@ -125,8 +177,26 @@ const attribution = [name?.trim(), country?.trim()].filter(Boolean).join(' — '
       </div>
     )
   }
-  <div class="mt-auto">
+  <div class="mt-auto flex flex-wrap items-center justify-between gap-2">
     <Rating rating={rating} class="text-orange-500" />
+    {
+      sourceName ? (
+        sourceUrl ? (
+          <a
+            href={sourceUrl}
+            rel="nofollow noopener"
+            target="_blank"
+            class="text-xs text-neutral-500 underline-offset-2 hover:underline dark:text-neutral-400"
+          >
+            {sourceName}
+          </a>
+        ) : (
+          <span class="text-xs text-neutral-500 dark:text-neutral-400">
+            {sourceName}
+          </span>
+        )
+      ) : null
+    }
   </div>
 </div>
 

@@ -59,13 +59,15 @@
     "punycode": "2.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
+    "react-photo-album": "^3.6.1",
     "remove-markdown": "0.6.4",
     "satteri": "^0.9.5",
     "sharp": "0.35.3",
     "tailwind-merge": "3.6.0",
     "tailwind-variants": "3.3.1",
     "uuid": "14.0.1",
-    "vanilla-cookieconsent": "3.1.0"
+    "vanilla-cookieconsent": "3.1.0",
+    "yet-another-react-lightbox": "^3.32.2"
   },
   "devDependencies": {
     "@astrojs/rss": "4.0.19",

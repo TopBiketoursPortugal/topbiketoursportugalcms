@@ -1,0 +1,290 @@
+---
+import type { TourPackageSchema } from 'src/schemas/tours';
+import languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { InferEntrySchema } from 'astro:content';
+import TourBookNow from './tour-book-now.astro';
+import { isAffirmative, isInclusionFlag } from 'utils/inclusion-flag';
+import { t } from 'utils/i18n';
+
+type Group = {
+  title: string;
+  packages: TourPackageSchema[];
+};
+
+type Props = {
+  groups: Group[];
+  language: LanguageCodes;
+  tour: InferEntrySchema<'tours'>;
+};
+
+const { groups, language, tour } = Astro.props;
+
+/*
+ * The pricing section rendered as nine separate three-column tables —
+ * inclusions, then seasonal supplements, then add-ons — each repeating the
+ * same column headings, each with its own "Book now", at around 11px. Nine
+ * tables of the same three things is not three comparisons; it is one
+ * comparison printed three times.
+ *
+ * This is that one comparison: the priced packages are the columns, and the
+ * other tables become row groups inside it. Columns are matched by package
+ * title, which is how the CMS already pairs them.
+ */
+const priced = groups[0]?.packages ?? [];
+const columns = priced.map((pkg) => pkg.title);
+
+const currency = priced[0]?.price?.currency ?? 'EUR';
+const priceFormat = new Intl.NumberFormat(languages[language].locale, {
+  style: 'currency',
+  currency,
+  maximumFractionDigits: 0
+});
+
+type Cell = { text: string; flag: 'yes' | 'no' | null; info: string };
+
+const EMPTY_CELL: Cell = { text: '', flag: null, info: '' };
+
+function cellFor(pkg: TourPackageSchema | undefined, rowTitle: string): Cell {
+  const feature = (pkg?.included ?? []).find((f) => f.title === rowTitle);
+  if (!feature) return EMPTY_CELL;
+  const isBoolean = isInclusionFlag(feature.description);
+  return {
+    text: isBoolean ? '' : (feature.description ?? ''),
+    flag: isBoolean
+      ? isAffirmative(feature.description)
+        ? 'yes'
+        : 'no'
+      : null,
+    info: feature.info ?? ''
+  };
+}
+
+const rowGroups = groups.map((group) => {
+  // Row order follows the first column that defines it, then any row a later
+  // column adds — so a row present only in "Premium" is not silently dropped.
+  const rowTitles: string[] = [];
+  group.packages.forEach((pkg) => {
+    (pkg.included ?? []).forEach((feature) => {
+      if (feature.title && !rowTitles.includes(feature.title)) {
+        rowTitles.push(feature.title);
+      }
+    });
+  });
+
+  const rows = rowTitles.map((rowTitle) => {
+    const cells = columns.map((columnTitle) =>
+      cellFor(
+        group.packages.find((pkg) => pkg.title === columnTitle),
+        rowTitle
+      )
+    );
+    // A row where every column says the same thing is not a comparison — it is
+    // a fact about the trip. Those collapse behind the toggle by default so
+    // the differences are what the reader sees first.
+    const signature = cells.map((c) => `${c.flag ?? ''}|${c.text}`);
+    const isCommon = new Set(signature).size === 1;
+    return { title: rowTitle, cells, isCommon };
+  });
+
+  return {
+    title: group.title,
+    rows,
+    differing: rows.filter((r) => !r.isCommon).length,
+    common: rows.filter((r) => r.isCommon).length
+  };
+});
+
+const commonRowCount = rowGroups.reduce((sum, g) => sum + g.common, 0);
+---
+
+<div
+  class="tour-pricing-comparison flex min-w-0 flex-col gap-4"
+  data-pricing-table
+>
+  {
+    commonRowCount > 0 && (
+      <label class="flex w-fit cursor-pointer items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+        <input
+          type="checkbox"
+          data-pricing-show-all
+          class="accent-accent h-4 w-4 rounded border-gray-300 dark:border-gray-600"
+        />
+        {t('Tour.Pricing.ShowAll', language).replace(
+          '$1',
+          String(commonRowCount)
+        )}
+      </label>
+    )
+  }
+
+  {
+    /* `min-w-0` is load-bearing: this sits in a flex column, where the default
+      `min-width: auto` lets the wrapper grow to the table's 640px min-width
+      instead of scrolling it — which pushed the whole page sideways on a
+      phone rather than scrolling the table. */
+  }
+  <div class="min-w-0 overflow-x-auto">
+    <table
+      class="w-full min-w-[640px] border-collapse text-sm"
+      aria-label={t('Tour.Section.Packages.Title', language)}
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+            class="sticky left-0 z-10 bg-white p-3 text-left align-bottom dark:bg-gray-950"
+          >
+            <span class="sr-only">
+              {t('Tour.Section.Packages.Included', language)}
+            </span>
+          </th>
+          {
+            priced.map((pkg) => (
+              <th
+                scope="col"
+                class="border-b-2 border-gray-200 p-3 text-center align-bottom dark:border-gray-700"
+              >
+                <span class="font-heading block text-base font-bold">
+                  {pkg.title}
+                </span>
+                {pkg.price?.price ? (
+                  <span class="mt-1 block text-xl font-bold tabular-nums">
+                    {pkg.price.promo ? (
+                      <>
+                        <span class="mr-1 text-sm font-normal text-gray-500 line-through dark:text-gray-400">
+                          {priceFormat.format(pkg.price.price)}
+                        </span>
+                        {priceFormat.format(pkg.price.promo)}
+                      </>
+                    ) : (
+                      priceFormat.format(pkg.price.price)
+                    )}
+                  </span>
+                ) : null}
+                {pkg.duration ? (
+                  <span class="mt-0.5 block text-xs font-normal text-gray-500 dark:text-gray-400">
+                    {pkg.duration}
+                  </span>
+                ) : null}
+                {pkg.popular || pkg.price?.bestValue ? (
+                  <span
+                    class:list={[
+                      'mt-2 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wide text-white uppercase',
+                      pkg.popular ? 'bg-accent' : 'bg-primary'
+                    ]}
+                  >
+                    {pkg.popular
+                      ? t('Tour.Pricing.Popular', language)
+                      : t('Tour.Pricing.BestValue', language)}
+                  </span>
+                ) : null}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+
+      {
+        rowGroups.map((group) => (
+          <tbody class="pricing-group">
+            <tr>
+              <th
+                scope="colgroup"
+                colspan={columns.length + 1}
+                class="pt-6 pb-2 text-left"
+              >
+                <span class="font-heading text-base font-bold">
+                  {group.title}
+                </span>
+              </th>
+            </tr>
+            {group.rows.map((row) => (
+              <tr
+                data-common={row.isCommon ? '' : null}
+                class="border-b border-gray-100 last:border-0 dark:border-gray-800"
+              >
+                <th
+                  scope="row"
+                  class="sticky left-0 z-10 bg-white p-3 text-left font-normal text-gray-600 dark:bg-gray-950 dark:text-gray-300"
+                >
+                  {row.title}
+                </th>
+                {row.cells.map((cell) => (
+                  <td
+                    class="p-3 text-center align-middle tabular-nums"
+                    title={cell.info}
+                  >
+                    {cell.flag === 'yes' ? (
+                      <>
+                        <i
+                          class="icon-[ph--check-circle-fill] inline-block h-5 w-5 text-green-600"
+                          aria-hidden="true"
+                        />
+                        <span class="sr-only">
+                          {t('Tour.Pricing.Included', language)}
+                        </span>
+                      </>
+                    ) : cell.flag === 'no' ? (
+                      <>
+                        <i
+                          class="icon-[ph--minus-circle-fill] inline-block h-5 w-5 text-gray-300 dark:text-gray-600"
+                          aria-hidden="true"
+                        />
+                        <span class="sr-only">
+                          {t('Tour.Pricing.NotIncluded', language)}
+                        </span>
+                      </>
+                    ) : (
+                      cell.text
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        ))
+      }
+    </table>
+  </div>
+
+  {
+    /* One booking action for the whole comparison. There used to be one per
+      column plus a fourth below the grid, on a page whose sidebar already
+      carries the primary call to action. */
+  }
+  <div class="flex justify-center pt-2">
+    <div class="w-full max-w-xs">
+      <TourBookNow tour={tour} language={language} variant="inline" />
+    </div>
+  </div>
+</div>
+
+<style>
+  .tour-pricing-comparison tr[data-common] {
+    display: none;
+  }
+  .tour-pricing-comparison[data-show-all] tr[data-common] {
+    display: table-row;
+  }
+</style>
+
+<script>
+  const initPricingToggle = () => {
+    document
+      .querySelectorAll<HTMLElement>('[data-pricing-table]')
+      .forEach((table) => {
+        const toggle = table.querySelector<HTMLInputElement>(
+          '[data-pricing-show-all]'
+        );
+        if (!toggle || toggle.dataset.bound) return;
+        toggle.dataset.bound = 'true';
+        toggle.addEventListener('change', () => {
+          table.toggleAttribute('data-show-all', toggle.checked);
+        });
+      });
+  };
+
+  initPricingToggle();
+  document.addEventListener('astro:page-load', initPricingToggle);
+</script>

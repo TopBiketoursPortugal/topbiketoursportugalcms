@@ -21,7 +21,29 @@
  */
 
 const AFFIRMATIVE = new Set(['yes', 'sim', 'ja', 'si', 'oui']);
-const NEGATIVE = new Set(['no', 'nao', 'nein', 'nee', 'non']);
+/*
+ * The negatives also cover the marks editors actually type for "not included":
+ * a bare `X`, a cross glyph, or a dash. Those fell through to the prose branch
+ * and printed a literal letter X next to the green check circles — an
+ * inconsistency the reader has to decode rather than scan. They are
+ * language-independent, so they sit alongside the translated words.
+ */
+const NEGATIVE = new Set([
+  'no',
+  'nao',
+  'nein',
+  'nee',
+  'non',
+  'x',
+  '✗',
+  '✘',
+  '×',
+  '-',
+  '–',
+  '—',
+  'n/a',
+  'na'
+]);
 
 /** Lowercased, stripped of accents and surrounding space. */
 function normalise(value: string): string {

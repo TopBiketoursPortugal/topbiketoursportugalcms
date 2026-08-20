@@ -63,3 +63,5 @@ overrides:
   # esbuild intentionally NOT overridden: its advisory (GHSA-67mh-4wv8-2f99) is a
   # dev-server-only CORS issue that doesn't affect production builds, and forcing
   # 0.28.x breaks Vite 6's bundled esbuild (destructuring downlevel for es2020).
+patchedDependencies:
+  vite-plugin-pwa@1.3.0: patches/vite-plugin-pwa@1.3.0.patch

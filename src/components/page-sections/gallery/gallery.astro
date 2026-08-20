@@ -1,20 +1,9 @@
 ---
-import { cn } from 'utils/cn';
-import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import { getImageByPath } from 'utils/get-image';
-
-function getNavigation(pageIndex: number, totalPages: number) {
-  const firstPageIndex = 0;
-  const lastPageIndex = totalPages - 1;
-  const isLastPageIndex = pageIndex === lastPageIndex;
-  const isFirstPageIndex = pageIndex === 0;
-  const prevPage = isFirstPageIndex ? lastPageIndex : pageIndex - 1;
-  const nextPage = isLastPageIndex ? firstPageIndex : pageIndex + 1;
-
-  const prevImageTarget = `#image-${prevPage}`;
-  const nextImageTarget = `#image-${nextPage}`;
-  return { prevImageTarget, nextImageTarget };
-}
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+import PhotoGallery, { type GalleryPhoto } from './PhotoGallery.tsx';
 
 type Props = {
   images: {
@@ -24,119 +13,149 @@ type Props = {
 };
 
 const { images } = Astro.props;
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 
-const imagesWithImageOptimization = await Promise.all(
-  images.map(async (i) => ({
-    ...i,
-    srcOptimized: (await getImageByPath(i.src)).default
-  }))
-);
+/*
+ * Every rendition is produced here, at build time, by Astro's image service —
+ * the React island receives plain URLs and never touches `astro:assets`.
+ *
+ * The widths are the tile widths this grid actually asks for (two columns on a
+ * phone, four on a wide desktop) plus one large rendition for the full-screen
+ * viewer. Generating a 2000px file for a 280px tile is what the old gallery
+ * did, via a single `widths` list shared between the grid and the zoom.
+ */
+const GRID_WIDTHS: number[] = [320, 480, 720, 1080];
+const FULL_WIDTH = 2000;
+
+const photos: GalleryPhoto[] = (
+  await Promise.all(
+    (images ?? []).map(async ({ src, alt = '' }) => {
+      let source: ImageMetadata;
+      try {
+        source = (await getImageByPath(src)).default;
+      } catch {
+        // A CMS entry pointing at a path the asset glob does not know is a
+        // content problem, not a reason to fail the whole page build.
+        return null;
+      }
+
+      // Never upscale: a 900px original should not be asked for 1080.
+      const widths = GRID_WIDTHS.filter((w) => w <= source.width);
+      if (widths.length === 0) widths.push(source.width);
+
+      const renditions = await Promise.all(
+        widths.map((width) =>
+          getImage({ src: source, width, format: 'webp', quality: 80 })
+        )
+      );
+
+      const full = await getImage({
+        src: source,
+        width: Math.min(FULL_WIDTH, source.width),
+        format: 'webp',
+        quality: 82
+      });
+
+      const largestGrid = renditions[renditions.length - 1];
+
+      return {
+        // The album lays out from the real aspect ratio, so portrait photos
+        // stay portrait instead of being cropped to a shared 4:3 box.
+        src: largestGrid.src,
+        width: source.width,
+        height: source.height,
+        alt,
+        srcSet: renditions.map((image) => ({
+          src: image.src,
+          width: image.attributes.width ?? image.options.width ?? source.width,
+          height:
+            image.attributes.height ?? image.options.height ?? source.height
+        })),
+        full: {
+          src: full.src,
+          width: full.attributes.width ?? source.width,
+          height: full.attributes.height ?? source.height
+        }
+      } satisfies GalleryPhoto;
+    })
+  )
+).filter((photo): photo is GalleryPhoto => photo !== null);
+
+const labels = {
+  open: t('Gallery.Open', language),
+  close: t('Gallery.Close', language),
+  next: t('Gallery.Next', language),
+  previous: t('Gallery.Previous', language),
+  zoomIn: t('Gallery.ZoomIn', language),
+  zoomOut: t('Gallery.ZoomOut', language),
+  enterFullscreen: t('Gallery.EnterFullscreen', language),
+  exitFullscreen: t('Gallery.ExitFullscreen', language)
+};
 ---
 
-<div
-  class={cn(
-    'masonary',
-    'grid grid-cols-1 items-start sm:grid-cols-3 lg:grid-cols-4 gap-4'
-  )}
-  data-editable="array"
-  data-prop="images"
->
+{
+  /*
+  `data-editable` stays on the wrapper so CloudCannon still recognises the
+  images array. Per-item editing is lost — the tiles are laid out by the
+  island, and CloudCannon cannot annotate nodes React owns. Editors add and
+  reorder photos from the sidebar rather than by clicking a tile.
+*/
+}
+<div class="gallery" data-editable="array" data-prop="images">
   {
-    imagesWithImageOptimization.map(({ srcOptimized, alt = '' }, index) => {
-      const { prevImageTarget, nextImageTarget } = getNavigation(
-        index,
-        imagesWithImageOptimization.length
-      );
-      return (
-        <div data-editable="array-item">
-          <a
-            href={`#image-${index}`}
-            id={`image-${index}`}
-            class="h-full overflow-hidden rounded-lg"
-          >
-            <Image
-              src={srcOptimized}
-              alt={alt}
-              widths={[320, 500, 640, 840, 1024, 2048]}
-              sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px`}
-              class="ease h-full w-full cursor-pointer rounded-lg object-cover shadow-lg transition-all duration-300 hover:scale-105"
-              data-editable="image"
-              data-prop-src="src"
-              data-prop-alt="alt"
-            />
-          </a>
-          <div
-            class={cn(
-              'nav-buttons',
-              'fixed top-[50%] right-0 left-0 z-9999 hidden content-around items-center justify-between self-center px-8'
-            )}
-          >
-            <a
-              href={prevImageTarget}
-              class="rounded-lg bg-slate-800 px-2 py-4 text-3xl text-white no-underline hover:bg-slate-950"
-            >
-              &#10094;
-            </a>
-            <a
-              href={nextImageTarget}
-              class="rounded-lg bg-slate-800 px-2 py-4 text-3xl text-white no-underline hover:bg-slate-950"
-            >
-              &#10095;
-            </a>
-          </div>
-        </div>
-      );
-    })
+    photos.length > 0 ? (
+      /*
+       * `client:visible` — the gallery sits well below the fold on a tour
+       * page, so its ~40KB of JS is not on the critical path. The album is
+       * still server-rendered, so the photos are in the HTML and visible
+       * before (and without) hydration; only opening one needs JS.
+       */
+      <PhotoGallery client:visible photos={photos} labels={labels} />
+    ) : null
   }
-  <!-- Close button for the zoomed image -->
-  <a
-    href=""
-    class={cn(
-      'close-button',
-      'hidden fixed top-4 right-4 text-white  text-3xl cursor-pointer z-50 no-underline hover:text-gray-400'
-    )}>&times;</a
-  >
 </div>
 
-<style>
-  /* Masonry layout using CSS Grid */
-  /* Zoom-out effect using :target */
-  .masonary a:target img {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1.5);
-    z-index: 1000;
-    width: 80%;
-    height: auto;
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem;
+<style is:global>
+  .gallery .gallery-tile {
+    border-radius: 0.5rem;
+    /* The album sets explicit width/height, so this only guards against a
+       stray global `img { height: auto }` breaking the computed layout. */
+    display: block;
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery .gallery-tile {
+      transition:
+        transform var(--reveal-duration-slow, 420ms)
+          var(--reveal-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+        box-shadow var(--reveal-duration-slow, 420ms)
+          var(--reveal-ease, cubic-bezier(0.22, 1, 0.36, 1));
+    }
+    .gallery .react-photo-album--photo:hover .gallery-tile {
+      /* Matches the 1.045 card-hover scale set in global.css — one hover
+         language across the site rather than a second, louder one here. */
+      transform: scale(1.045);
+      box-shadow: 0 12px 32px -14px rgb(15 35 25 / 0.35);
+    }
+  }
+
+  /* The whole tile is the control, so the focus ring belongs on the tile, not
+     on the image inside it. */
+  .gallery .react-photo-album--photo:focus-visible {
+    outline: 2px solid var(--color-accent, #ff7700);
+    outline-offset: 3px;
     border-radius: 0.5rem;
   }
 
-  /* Overlay for the zoomed image */
-  .masonary a:target img:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 999;
+  /* Keep the viewer's controls clear of the notch and the home indicator.
+     Applied to the chrome, not the container — padding the container insets
+     the photo itself and leaves the backdrop showing through the gap. */
+  .yarl__toolbar {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
   }
-
-  /* Close button for the zoomed image */
-
-  .masonary a:target ~ .close-button {
-    display: block;
-    z-index: 999999;
-  }
-
-  .masonary a:target + .nav-buttons {
-    display: flex;
+  .yarl__thumbnails_container {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 </style>

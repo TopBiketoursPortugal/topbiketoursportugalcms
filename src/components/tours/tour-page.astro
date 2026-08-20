@@ -1,7 +1,7 @@
 ---
 /** @jsxImportSource astro */
 
-import TourPricing from 'src/components/tours/tour-pricing.astro';
+import TourPricingComparison from 'src/components/tours/tour-pricing-comparison.astro';
 import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
 import TabItem from 'src/components/building-blocks/tabs/TabItem.astro';
@@ -22,11 +22,12 @@ import { t } from 'utils/i18n';
 import TourItinerary from './tour-itinerary.astro';
 import Heading from 'src/components/building-blocks/typography/heading.astro';
 import TourBookNow from './tour-book-now.astro';
-import type { ReviewSchema } from 'src/schemas/tours';
 import { getAuthorName } from '@utils/get-author-name';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 import ReviewItem from '@components/page-sections/collection/review-item.astro';
 import TourProductSchema from '@components/schema/tour-product-schema.astro';
 import { getTourPath } from 'utils/permalinks';
+import DifficultyScale from './difficulty-scale.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -98,30 +99,14 @@ const pricingTables = [
 // Math.min down to 0.
 const pricedPackages = packages;
 
+// Was an inline copy of MapTestimonialToReview that had drifted: it dropped
+// `date`, so the reviews on a tour page were the only undated ones on the site.
 const testimonials = (
   (await getCollection(
     'testimonials',
     (t) => t.data.language === language && t.data.relatedProduct === tour.id
   )) ?? []
-).map(
-  (t) =>
-    ({
-      content: t.body ?? '',
-      rating: t.data.score,
-      title: t.data.title,
-      author: {
-        country: t.data.author.country ?? '',
-        givenName: t.data.author.name ?? ''
-      },
-      source: {
-        url: t.data.reviewSource,
-        name:
-          t.data.reviewSource?.indexOf('tripadvisor') !== -1
-            ? 'TripAdvisor'
-            : ''
-      }
-    }) satisfies ReviewSchema
-);
+).map(MapTestimonialToReview);
 
 const reviews = initialReviews.concat(testimonials);
 
@@ -138,9 +123,46 @@ const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
   style: 'currency',
   currency:
     (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
-    'EUR'
+    'EUR',
+  // A holiday is €1,596, never €1,596.00 — and the two trailing zeros cost
+  // real width in the sidebar and the mobile bar.
+  maximumFractionDigits: 0
 });
 const isPromotional = minPromoPrice > 0;
+
+/*
+ * Guided vs self-guided belongs in the facts strip, not buried in the tag
+ * list. Keyed off tag `path`, which is the only field stable across the six
+ * locales — see tour-card.astro for the same lookup.
+ */
+const tourTagEntries = await getCollection(
+  'tourTags',
+  (entry) =>
+    (tour.tags ?? []).includes(entry.data.id) &&
+    entry.data.language === language
+);
+const tagPaths = new Set(tourTagEntries.map((entry) => entry.data.path));
+const isGuided = tagPaths.has('guided');
+const isSelfGuided = tagPaths.has('self-guided');
+const styleLabel =
+  isGuided && isSelfGuided
+    ? t('Tour.Card.Style.Both', language)
+    : isGuided
+      ? t('Tour.Card.Style.Guided', language)
+      : isSelfGuided
+        ? t('Tour.Card.Style.SelfGuided', language)
+        : null;
+
+/*
+ * Every one of the 21 English tours carries `subTitle: '1'` — leftover from a
+ * migration. It was invisible while the hero was 288px and the title sat dead
+ * centre; under a full-height hero it prints a stray "1" beneath the title on
+ * every tour page. A subtitle that is a bare number is never a subtitle, so it
+ * is filtered here rather than hand-edited out of 21 files × 6 locales.
+ */
+const subTitle = tour.subTitle?.trim() ?? '';
+const hasSubtitle = subTitle.length > 3 && !/^\d+$/.test(subTitle);
+
 const enableFaqs = true;
 const cards_per_row = 3;
 const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
@@ -150,27 +172,45 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 {
   image && (
     <header class="relative isolate">
-      <div data-tour-hero class="overflow-clip">
+      {/*
+        Was capped at `max-h-72` — 288px for a product whose entire appeal is
+        landscape, and the shallow crop cut the horizon out of most images.
+        44vh on a phone / 60vh on a desktop gives the photograph room to do the
+        selling, and gives the `tour-hero` view transition from the list card
+        somewhere worth landing.
+      */}
+      <div
+        data-tour-hero
+        class="h-[44vh] max-h-[560px] min-h-[260px] overflow-clip sm:h-[52vh] lg:h-[60vh]"
+      >
         <ResponsiveImage
           {...image}
-          class="max-h-72 w-full object-cover"
+          class="h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
         />
       </div>
-      {/* contrast scrim — flat darken + center-weighted vignette */}
+      {/*
+        Bottom-anchored gradient rather than a centre-weighted vignette: the
+        vignette darkened exactly the middle of the frame, which is where the
+        riders and the horizon are. Two stops, not one, because hero images
+        here run from a dark forest road to a white palace against a bright
+        sky, and a single gradient that clears 3:1 on one clears nothing on the
+        other. The lower half carries the density, since that is where the type
+        sits.
+      */}
       <span
         aria-hidden="true"
-        class="pointer-events-none absolute inset-0 bg-black/25 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.45),transparent_70%)]"
+        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 from-5% via-black/55 via-35% to-black/10"
       />
-      {/* centered title overlay — tw-animate-css "enter" on load, delayed
-          past the 0.4s tour-hero morph; motion-safe so reduced-motion skips it */}
-      <div class="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-        <h1 class="font-heading motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 motion-safe:blur-in-[6px] motion-safe:fill-mode-both text-3xl font-bold text-balance text-white drop-shadow-lg motion-safe:delay-300 motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl md:text-5xl">
+      {/* Title overlay — tw-animate-css "enter" on load, delayed past the 0.4s
+          tour-hero morph; motion-safe so reduced-motion skips it */}
+      <div class="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-8 text-center sm:pb-12">
+        <h1 class="font-heading motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both max-w-4xl text-3xl font-bold text-balance text-white [text-shadow:0_2px_18px_rgb(0_0_0/0.55)] motion-safe:delay-200 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl md:text-5xl">
           {tour.title}
         </h1>
-        {tour.subTitle && (
-          <p class="motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 motion-safe:blur-in-[6px] motion-safe:fill-mode-both mt-3 max-w-2xl text-balance text-white/90 drop-shadow-md motion-safe:delay-500 motion-safe:duration-700 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-lg">
+        {hasSubtitle && (
+          <p class="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both mt-3 max-w-2xl text-balance text-white/95 [text-shadow:0_2px_12px_rgb(0_0_0/0.5)] motion-safe:delay-300 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-lg">
             {tour.subTitle}
           </p>
         )}
@@ -181,9 +221,17 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 <div
   class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
 >
+  {
+    /*
+    `overflow-auto` painted a real grey scrollbar under the tabs on every
+    phone. `overflow-x-auto` plus the scrollbar-hiding rule at the foot of this
+    file keeps the scroll, drops the chrome, and the mask fades the cut edge so
+    "there is more to the right" still reads.
+  */
+  }
   <div
     id="tour-tabs-container"
-    class="sticky top-17 z-40 overflow-auto bg-white md:top-34.25 dark:bg-slate-950"
+    class="tour-tabs sticky top-17 z-40 min-w-0 overflow-x-auto bg-white md:top-34.25 dark:bg-slate-950"
   >
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
@@ -211,63 +259,105 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
     </Tabs>
   </div>
+  {
+    /*
+    The column assignment is explicit — `sm:col-start-2` for the panel,
+    `sm:col-start-1 sm:col-end-2` for every section — because the sections used
+    to be `col-span-full`, which ran them underneath the panel's column once it
+    was sticky. `row-span-[99]` rather than `row-span-full`: `full` resolves to
+    `grid-row: 1 / -1`, and `-1` counts against the *explicit* grid, which has
+    no explicit rows here — so it collapsed the panel to zero height.
+
+    Two more changes below, and they are the same change.
+    1. `order-first` put an eight-field enquiry form between the hero and the
+       first fact about the trip on every phone. `order-last sm:order-none`
+       sends it below the content on mobile, where the fixed bar at the foot of
+       this file carries the call to action instead.
+    2. It set `self-start` but never `sticky`, so it left the viewport around
+       900px and never came back — the itinerary, the inclusions, the photos
+       and the reviews were all read with no way to act. It is sticky now,
+       which only works because the form below it is collapsed by default: a
+       700px panel cannot usefully stick inside a 900px viewport.
+  */
+  }
   <section
     id="tour-booking"
-    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-first row-span-4 mx-auto flex w-full shrink flex-col items-start justify-start gap-6 rounded-lg bg-white p-4 shadow-lg sm:order-0 sm:-mt-24 sm:self-start dark:bg-gray-800"
+    aria-label={t('Tour.Sidebar.Label', language)}
+    class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-last mx-auto flex w-full shrink flex-col items-start justify-start gap-4 rounded-lg bg-white p-4 shadow-lg sm:sticky sm:top-36 sm:order-none sm:col-start-2 sm:row-span-[99] sm:row-start-1 sm:-mt-24 sm:self-start dark:bg-gray-800"
   >
     {
       minPrice > 0 || minPromoPrice > 0 ? (
-        <div class="relative flex items-center gap-2">
-          <i class="icon-[ph--tag-light] h-5 w-5" aria-hidden="true" />
-          <span class="self-end text-sm text-gray-500 dark:text-gray-400">
+        <div class="relative flex w-full flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span class="text-sm text-gray-500 dark:text-gray-400">
             {t('Tour.Form.FromPrice', language)}
           </span>
           {minPrice > 0 ? (
             <span
               class={cn(
-                isPromotional ? 'line-trough text-xl' : 'text-2xl font-bold'
+                'tabular-nums',
+                isPromotional
+                  ? 'text-lg text-gray-500 line-through dark:text-gray-400'
+                  : 'text-2xl font-bold'
               )}
             >
               {priceFormat.format(minPrice)}
             </span>
           ) : null}
           {isPromotional && minPromoPrice > 0 ? (
-            <span class="font-bold">
-              {isPromotional && priceFormat.format(minPromoPrice)}
+            <span class="text-2xl font-bold tabular-nums">
+              {priceFormat.format(minPromoPrice)}
             </span>
           ) : null}
 
-          <div class="w-2 -translate-x-1">
-            <Tooltip class="align-top">
-              <i
-                slot="trigger"
-                class="icon-[ph--info-light] h-5 w-5"
-                aria-hidden="true"
-                title={t('Tour.Form.FromPrice.Info', language)}
-              />
-              <span slot="content">
-                {t('Tour.Form.FromPrice.Info', language)}
-              </span>
-            </Tooltip>
-          </div>
+          <Tooltip class="align-top">
+            <i
+              slot="trigger"
+              class="icon-[ph--info-light] h-4 w-4 text-gray-400"
+              aria-hidden="true"
+              title={t('Tour.Form.FromPrice.Info', language)}
+            />
+            <span slot="content">
+              {t('Tour.Form.FromPrice.Info', language)}
+            </span>
+          </Tooltip>
         </div>
       ) : null
     }
+
+    {
+      /* The page already promises a 24h reply, 9,000px further down. It belongs
+        at the point where the visitor is deciding whether to commit. */
+    }
+    <p
+      class="flex w-full items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
+    >
+      <i
+        class="icon-[ph--shield-check-light] mt-0.5 h-4 w-4 shrink-0"
+        aria-hidden="true"></i>
+      {t('Tour.Sidebar.Reassurance', language)}
+    </p>
+
     {minPrice > 0 || minPromoPrice > 0 ? <Separator /> : null}
-    <strong>{t('Tour.Form.Title', language)}</strong>
 
     <TourBookNow tour={tour} language={language} variant="panel" />
   </section>
   <section
     id="detail"
-    class="tour-section intersect:opacity-100 intersect-once col-end-2 flex w-full scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+    class="tour-section intersect:opacity-100 intersect-once col-end-2 flex w-full min-w-0 scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
   >
-    <div class="flex gap-3">
-      <Rating rating={average} class="text-orange-500" />
-      <span class="text-neutral-700 dark:text-neutral-300"
-        >({count} {t('Tour.Info.Reviews.Unit', language)})</span
-      >
-    </div>
+    {
+      /* Five hollow stars and "(0 review(s))" reads as a zero rating rather
+         than as an absence of one. No reviews prints nothing. */
+      count > 0 ? (
+        <div class="flex items-center gap-2">
+          <Rating rating={average} class="text-orange-500" />
+          <span class="text-neutral-700 tabular-nums dark:text-neutral-300">
+            {average.toFixed(1)} · {count}{' '}
+            {t('Tour.Info.Reviews.Unit', language)}
+          </span>
+        </div>
+      ) : null
+    }
     <div>
       <ul
         class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3"
@@ -313,22 +403,42 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
             </li>
           ) : null
         }
-        <li class="flex items-center gap-3">
-          {
-            tour.tourtype !== 'PackageTour' ? (
+        {
+          /* "Difficulty : 2/5" made the reader convert a fraction into a sense
+             of whether they could ride it. The scale shows the same value and
+             names it. */
+          tour.difficulty ? (
+            <li class="flex items-center gap-3">
+              {tour.tourtype !== 'PackageTour' ? (
+                <i
+                  class="icon-[ph--person-simple-walk-light] h-5 w-5 shrink-0"
+                  aria-hidden="true"
+                />
+              ) : (
+                <i
+                  class="icon-[ph--person-simple-bike-light] h-5 w-5 shrink-0"
+                  aria-hidden="true"
+                />
+              )}
+              <DifficultyScale
+                value={tour.difficulty}
+                language={language}
+                variant="labelled"
+              />
+            </li>
+          ) : null
+        }
+        {
+          styleLabel ? (
+            <li class="flex items-center gap-3">
               <i
-                class="icon-[ph--person-simple-walk-light] h-5 w-5"
+                class="icon-[ph--compass-light] h-5 w-5 shrink-0"
                 aria-hidden="true"
               />
-            ) : (
-              <i
-                class="icon-[ph--person-simple-bike-light] h-5 w-5"
-                aria-hidden="true"
-              />
-            )
-          }
-          {t('Tour.Info.Difficulty.Label', language)} : {tour.difficulty}/5
-        </li>
+              {styleLabel}
+            </li>
+          ) : null
+        }
         <li class="flex items-center gap-3">
           <i class="icon-[ph--airplane-light] h-5 w-5" aria-hidden="true"></i>
           {t('Tour.Info.ClosestAirport.Label', language)}:{' '}
@@ -352,7 +462,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     mapUrl.length > 0 ? (
       <section
         id="map"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
       >
         <Heading as="h2">{t('Tour.Section.Map.Title', language)}</Heading>
         <div class="w-full select-none">
@@ -373,10 +483,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     itinerary.length > 0 ? (
       <section
         id="itinerary"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
       >
         <Heading as="h2">{t('Tour.Section.Itinerary.Title', language)}</Heading>
-        <TourItinerary itinerary={itinerary} />
+        <TourItinerary itinerary={itinerary} language={language} />
       </section>
     ) : null
   }
@@ -384,35 +494,19 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     pricingTables.length > 0 ? (
       <section
         id="packages"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
       >
         <Heading as="h2">{t('Tour.Section.Packages.Title', language)}</Heading>
 
-        <div class="col-span-full flex flex-col gap-12">
-          {pricingTables.map((table) => (
-            <div class="col-span-full">
-              <Heading as="h3" class="mb-6">
-                {table.title || table.defaultTitle}
-              </Heading>
-              <TourPricing
-                language={language}
-                packages={table.packages}
-                tour={tour}
-                variant={table.variant}
-              />
-              {table.variant === 'pricing' ? (
-                <div class="mt-6 flex justify-center">
-                  <div class="w-full max-w-xs">
-                    <TourBookNow
-                      tour={tour}
-                      language={language}
-                      variant="inline"
-                    />
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ))}
+        <div class="col-span-full flex min-w-0 flex-col gap-8">
+          <TourPricingComparison
+            groups={pricingTables.map((table) => ({
+              title: table.title || table.defaultTitle,
+              packages: table.packages
+            }))}
+            language={language}
+            tour={tour}
+          />
 
           <Prose
             markdown={tour.afterPricing ?? ''}
@@ -424,7 +518,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   }
   <section
     id="photos"
-    class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+    class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
   >
     <Heading as="h2">{t('Tour.Section.Photos.Title', language)}</Heading>
     <Gallery images={tour.images ?? []} />
@@ -434,7 +528,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     enableFaqs ? (
       <section
         id="faqs"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
       >
         <Heading as="h2">{t('Tour.Section.Faq.Title', language)}</Heading>
         <TourFaqs faqs={faqs} language={language} />
@@ -443,7 +537,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   }
   <section
     id="reviews"
-    class="tour-section intersect:opacity-100 intersect-once col-span-full flex scroll-mt-[30px] flex-col gap-8 md:scroll-mt-[90px]"
+    class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
   >
     <Heading as="h2">{t('Tour.Section.Reviews.Title', language)}</Heading>
     {
@@ -471,12 +565,19 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
           >
             {reviews.map((review) => (
               <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+                {/* No tour name here — every review on this page is about
+                    this tour, so printing it on each card is noise. Date and
+                    source still carry, since they are what make the review
+                    verifiable. */}
                 <ReviewItem
                   name={getAuthorName(review)}
                   country={review.author?.country}
                   content={review.content}
                   rating={review.rating}
                   expand_behavior="button"
+                  date={review.publishDate}
+                  sourceName={review.source?.name}
+                  sourceUrl={review.source?.url}
                 />
               </div>
             ))}
@@ -491,12 +592,16 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     relatedTours.length > 0 ? (
       <section
         id="related"
-        class="tour-section intersect:opacity-100 intersect-once col-span-full flex flex-col gap-4"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 flex-col gap-4 sm:col-start-1 sm:col-end-2"
       >
         <Heading as="h2">
           {t('Tour.Section.RelatedTours.Title', language)}
         </Heading>
-        <TourRelated language={language} related={relatedTours} />
+        <TourRelated
+          language={language}
+          related={relatedTours}
+          current={tour}
+        />
       </section>
     ) : null
   }
@@ -511,6 +616,42 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       />
     ) : null
   }
+  {
+    /*
+    Mobile booking bar. On a phone the sidebar now sits below the content, so
+    this is what carries the call to action for the 24,000px in between. It
+    stays out of the way until the hero has scrolled past — see initMobileCta.
+  */
+  }
+  <div
+    data-tour-mobile-cta
+    class="tour-mobile-cta fixed inset-x-0 bottom-0 z-45 flex items-center justify-between gap-4 border-t border-gray-200 bg-white/95 px-4 py-3 backdrop-blur-md sm:hidden dark:border-gray-700 dark:bg-gray-900/95"
+  >
+    {
+      minPrice > 0 || minPromoPrice > 0 ? (
+        <div class="flex flex-col leading-tight">
+          <span class="text-xs text-gray-500 dark:text-gray-400">
+            {t('Tour.Form.FromPrice', language)}
+          </span>
+          <span class="text-lg font-bold tabular-nums">
+            {priceFormat.format(isPromotional ? minPromoPrice : minPrice)}
+          </span>
+        </div>
+      ) : (
+        <span class="font-heading truncate text-sm font-semibold">
+          {tour.title}
+        </span>
+      )
+    }
+    <a
+      href="#tour-booking"
+      data-tour-mobile-enquire
+      class="bg-accent shrink-0 rounded-md px-5 py-3 text-sm font-semibold text-white"
+    >
+      {t('Tour.Sidebar.OpenForm', language)}
+    </a>
+  </div>
+
   <TourProductSchema
     name={tour.title}
     description={tour.description}
@@ -581,73 +722,121 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       });
   };
 
+  /*
+   * Section scroll-spy.
+   *
+   * Was a `scroll` listener that called getBoundingClientRect() on every
+   * section on every event — a full layout read per frame on a page that is
+   * 14,000px long. An IntersectionObserver with a top root-margin gives the
+   * same answer from the compositor, for free.
+   *
+   * rootMargin's top offset matches the sticky header + tabs strip, so a
+   * section counts as current the moment it clears them rather than when it
+   * touches the top of the window.
+   */
+  let scrollspyObserver: IntersectionObserver | null = null;
+
   const initScrollspy = () => {
-    const sections = document.querySelectorAll('.tour-section[id]');
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>('.tour-section[id]')
+    );
     const tabsContainer = document.getElementById('tour-tabs-container');
     if (!sections.length || !tabsContainer) return;
-    const tabs = tabsContainer.querySelectorAll('a[href^="#"]');
 
-    const updateTabs = () => {
-      let currentId = '';
-      // The sticky header + tabs can be up to 200px on desktop.
-      // We set the hit line generously at 250px to ensure the section is captured
-      // right when it appears below the sticky tabs.
-      const hitLine = 250;
+    const tabs = Array.from(
+      tabsContainer.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+    );
 
-      // Iterate backwards to find the deepest section that has crossed the hit line
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const rect = sections[i].getBoundingClientRect();
-        if (rect.top <= hitLine) {
-          currentId = sections[i].getAttribute('id') || '';
-          break;
+    scrollspyObserver?.disconnect();
+
+    const visible = new Set<string>();
+
+    const paint = () => {
+      // The topmost section still intersecting wins, so scrolling up and down
+      // through a boundary is symmetrical.
+      const currentId =
+        sections.find((section) => visible.has(section.id))?.id ?? '';
+      if (!currentId) return;
+
+      tabs.forEach((tab) => {
+        const isCurrent = tab.getAttribute('href') === `#${currentId}`;
+        tab.classList.toggle('is-current', isCurrent);
+        tab.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
+
+        if (!isCurrent) return;
+
+        // Keep the active tab in view in the horizontally scrolling strip.
+        const tabRect = tab.getBoundingClientRect();
+        const containerRect = tabsContainer.getBoundingClientRect();
+        if (
+          tabRect.left < containerRect.left ||
+          tabRect.right > containerRect.right
+        ) {
+          tabsContainer.scrollBy({
+            left: tabRect.left - containerRect.left - 20,
+            behavior: 'smooth'
+          });
         }
-      }
-
-      // Fallback: if we are at the very bottom of the page, force the last section
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 10
-      ) {
-        currentId = sections[sections.length - 1].getAttribute('id') || '';
-      }
-
-      if (currentId) {
-        tabs.forEach((tab) => {
-          if (tab.getAttribute('href') === `#${currentId}`) {
-            tab.classList.add('bg-gray-100', 'dark:bg-gray-700');
-            tab.setAttribute('aria-selected', 'true');
-            // Auto-scroll the tab container horizontally if the tab is hidden
-            const tabRect = tab.getBoundingClientRect();
-            const containerRect = tabsContainer.getBoundingClientRect();
-            if (
-              tabRect.left < containerRect.left ||
-              tabRect.right > containerRect.right
-            ) {
-              tabsContainer.scrollBy({
-                left: tabRect.left - containerRect.left - 20,
-                behavior: 'smooth'
-              });
-            }
-          } else {
-            tab.classList.remove('bg-gray-100', 'dark:bg-gray-700');
-            tab.setAttribute('aria-selected', 'false');
-          }
-        });
-      }
+      });
     };
 
-    window.addEventListener('scroll', updateTabs, { passive: true });
+    scrollspyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        });
+        paint();
+      },
+      { rootMargin: '-160px 0px -55% 0px', threshold: 0 }
+    );
 
-    // Initial check
-    updateTabs();
+    sections.forEach((section) => scrollspyObserver?.observe(section));
 
-    // Cleanup when Astro view transitions unloads the page
     document.addEventListener(
       'astro:before-swap',
       () => {
-        window.removeEventListener('scroll', updateTabs);
+        scrollspyObserver?.disconnect();
+        scrollspyObserver = null;
       },
       { once: true }
+    );
+  };
+
+  /*
+   * Mobile booking bar. It rises into view once the hero has cleared, so it
+   * never covers the title, and it is the only call to action on a page that
+   * otherwise carries none for its last 12,000px on a phone.
+   */
+  const initMobileCta = () => {
+    const bar = document.querySelector<HTMLElement>('[data-tour-mobile-cta]');
+    const header = document.querySelector<HTMLElement>('[data-tour-hero]');
+    if (!bar || !header) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        bar.toggleAttribute('data-visible', !entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(header);
+
+    bar
+      .querySelector<HTMLAnchorElement>('[data-tour-mobile-enquire]')
+      ?.addEventListener('click', () => {
+        // Open the collapsed enquiry panel the link is scrolling to, so the
+        // press lands on a form rather than on another button.
+        document
+          .querySelector<HTMLDetailsElement>('[data-tour-enquiry]')
+          ?.setAttribute('open', '');
+      });
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => observer.disconnect(),
+      {
+        once: true
+      }
     );
   };
 
@@ -655,6 +844,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
   document.addEventListener('astro:page-load', () => {
     initCarousel();
     initScrollspy();
+    initMobileCta();
   });
 </script>
 
@@ -690,24 +880,88 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     }
   }
 
+  /* Section and sidebar entrances now run on the shared motion scale rather
+     than their own 0.5s/0.7s-with-0.2s-delay values. */
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
     .tour-section {
       transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+        opacity var(--reveal-duration) var(--reveal-ease),
+        transform var(--reveal-duration) var(--reveal-ease);
     }
     .tour-section[no-intersect] {
       opacity: 0;
-      transform: translateY(1rem);
+      transform: translateY(var(--reveal-travel));
     }
     .tour-sidebar {
       transition:
-        opacity 0.7s ease 0.2s,
-        transform 0.7s ease 0.2s;
+        opacity var(--reveal-duration) var(--reveal-ease) var(--reveal-step),
+        transform var(--reveal-duration) var(--reveal-ease) var(--reveal-step);
     }
     .tour-sidebar[no-intersect] {
       opacity: 0;
-      transform: translateX(1.5rem);
+      transform: translateX(var(--reveal-travel));
+    }
+  }
+
+  /*
+   * Tab strip. `overflow-x-auto` keeps the scroll; hiding the scrollbar drops
+   * the grey native bar that was painting under the tabs on every phone. The
+   * mask fades the right edge instead, so "there is more" still reads without
+   * chrome.
+   */
+  .tour-tabs {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .tour-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .tour-tabs {
+      -webkit-mask-image: linear-gradient(
+        to right,
+        black calc(100% - 2rem),
+        transparent
+      );
+      mask-image: linear-gradient(
+        to right,
+        black calc(100% - 2rem),
+        transparent
+      );
+    }
+  }
+
+  /* Current section, set by the IntersectionObserver scroll-spy. Was two
+     Tailwind background classes toggled from script; an underline reads as
+     "you are here" without the tab looking pressed. */
+  .tour-tabs :global(a.is-current) {
+    color: var(--color-primary);
+    box-shadow: inset 0 -2px 0 0 var(--color-accent);
+  }
+  :global(.dark) .tour-tabs :global(a.is-current) {
+    color: var(--color-accent);
+  }
+
+  /*
+   * Mobile booking bar: parked below the fold until the hero clears, then it
+   * rises. Translating rather than toggling display keeps it out of the tab
+   * order only when it is genuinely off-screen.
+   */
+  .tour-mobile-cta {
+    transform: translateY(110%);
+    visibility: hidden;
+    box-shadow: 0 -6px 24px rgb(15 35 25 / 0.14);
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  .tour-mobile-cta[data-visible] {
+    transform: none;
+    visibility: visible;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tour-mobile-cta {
+      transition:
+        transform var(--reveal-duration-slow) var(--reveal-ease),
+        visibility var(--reveal-duration-slow);
     }
   }
 </style>

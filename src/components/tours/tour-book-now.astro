@@ -27,11 +27,26 @@ const { tour, language, variant = 'panel', buttonClass } = Astro.props;
 const { wetravel, feature } = tour;
 const hasWetravel = !!(wetravel?.guidedUuid || wetravel?.selfGuidedUuid);
 const bookLabel = t('Tour.Form.Button.Text', language);
+
+// Secondary treatment for the sidebar's booking button, so it reads as the
+// alternative to the accent-coloured enquiry action above it rather than as a
+// second, competing primary.
+const secondaryButtonClass =
+  'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white dark:border-emerald-300 dark:text-emerald-300 dark:hover:bg-emerald-300 dark:hover:text-gray-900';
 ---
 
 {
   variant === 'panel' ? (
-    <TourForm code={tour.code} title={tour.title}>
+    /*
+     * Enquiry and booking are siblings now, not nested. They used to be one
+     * blue button stacked on one green button of the same size — two equal
+     * primaries, which is a coin toss rather than a choice. The enquiry
+     * <summary> carries the accent and the booking button drops to an outline
+     * below it; and because booking sits outside the collapsed form, a visitor
+     * who is ready to buy still sees "Book now" without opening anything.
+     */
+    <div class="flex w-full flex-col gap-3">
+      <TourForm code={tour.code} title={tour.title} />
       {hasWetravel ? (
         <WeTravelBooking
           guidedUuid={wetravel?.guidedUuid}
@@ -40,14 +55,19 @@ const bookLabel = t('Tour.Form.Button.Text', language);
           label={bookLabel}
           guidedLabel={t('Tour.Booking.Guided', language)}
           selfGuidedLabel={t('Tour.Booking.SelfGuided', language)}
-          buttonClass={buttonClass}
+          buttonClass={buttonClass ?? secondaryButtonClass}
         />
       ) : feature?.bokunLink ? (
-        <Linkbutton href={feature.bokunLink} title={bookLabel} stretch class={buttonClass}>
+        <Linkbutton
+          href={feature.bokunLink}
+          title={bookLabel}
+          stretch
+          class={buttonClass ?? secondaryButtonClass}
+        >
           {bookLabel}
         </Linkbutton>
       ) : null}
-    </TourForm>
+    </div>
   ) : hasWetravel ? (
     <WeTravelBooking
       guidedUuid={wetravel?.guidedUuid}
@@ -59,11 +79,21 @@ const bookLabel = t('Tour.Form.Button.Text', language);
       buttonClass={buttonClass}
     />
   ) : feature?.bokunLink ? (
-    <Linkbutton href={feature.bokunLink} title={bookLabel} stretch={variant !== 'column'} class={buttonClass}>
+    <Linkbutton
+      href={feature.bokunLink}
+      title={bookLabel}
+      stretch={variant !== 'column'}
+      class={buttonClass}
+    >
       {bookLabel}
     </Linkbutton>
   ) : (
-    <Linkbutton href="#tour-booking" title={bookLabel} stretch={variant !== 'column'} class={buttonClass}>
+    <Linkbutton
+      href="#tour-booking"
+      title={bookLabel}
+      stretch={variant !== 'column'}
+      class={buttonClass}
+    >
       {bookLabel}
     </Linkbutton>
   )

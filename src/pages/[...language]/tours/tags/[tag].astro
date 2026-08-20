@@ -182,15 +182,18 @@ const breadcrumbs = [
         showBikeCategory={relevantBikeCategories.length > 0}
         regions={relevantRegions.map((r) => ({
           id: r.data.id,
-          name: r.data.name ?? r.data.title
+          name: r.data.name ?? r.data.title,
+          slug: r.data.path
         }))}
         riderLevels={relevantRiderLevels.map((l) => ({
           id: l.data.id,
-          name: l.data.name ?? l.data.title
+          name: l.data.name ?? l.data.title,
+          slug: l.data.path
         }))}
         bikeCategories={relevantBikeCategories.map((c) => ({
           id: c.data.id,
-          name: c.data.name ?? c.data.title
+          name: c.data.name ?? c.data.title,
+          slug: c.data.path
         }))}
       />
       {

@@ -36,8 +36,11 @@ const regions = await getCollection(
 
   <div
     class={`reveal-stagger intersect:opacity-100 intersect-once ${
+      /* Three columns, not four. There are six regions, and a four-column
+         grid leaves a ragged row of two orphans under a full row of four —
+         3×2 resolves the set cleanly at every size this grid is used. */
       layout === 'overlay'
-        ? 'grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'
+        ? 'grid grid-cols-2 gap-4 sm:grid-cols-3'
         : 'flex flex-col gap-4'
     }`}
   >

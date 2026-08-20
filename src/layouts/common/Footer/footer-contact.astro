@@ -51,7 +51,11 @@ const contact = contacts[language] satisfies ContactSchema;
   }
   {
     contact?.email && (
-      <div>
+      /* `reservations@topbiketoursportugal.com` has no break opportunity, so
+         at 390px it pushed the whole document 124px wider than the viewport —
+         every page on the site scrolled sideways on a phone. `anywhere` lets
+         it wrap without hyphenating the address the way `break-all` would. */
+      <div class="[overflow-wrap:anywhere]">
         Email:
         <a href={'mailto:' + contact.email} aria-label="Email">
           {contact.email}
