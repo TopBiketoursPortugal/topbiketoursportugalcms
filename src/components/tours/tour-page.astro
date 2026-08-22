@@ -1,7 +1,7 @@
 ---
 /** @jsxImportSource astro */
 
-import TourPricingComparison from 'src/components/tours/tour-pricing-comparison.astro';
+import TourPricing from 'src/components/tours/tour-pricing.astro';
 import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
 import TabItem from 'src/components/building-blocks/tabs/TabItem.astro';
@@ -498,15 +498,31 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       >
         <Heading as="h2">{t('Tour.Section.Packages.Title', language)}</Heading>
 
-        <div class="col-span-full flex min-w-0 flex-col gap-8">
-          <TourPricingComparison
-            groups={pricingTables.map((table) => ({
-              title: table.title || table.defaultTitle,
-              packages: table.packages
-            }))}
-            language={language}
-            tour={tour}
-          />
+        <div class="col-span-full flex min-w-0 flex-col gap-12">
+          {pricingTables.map((table) => (
+            <div class="col-span-full">
+              <Heading as="h3" class="mb-6">
+                {table.title || table.defaultTitle}
+              </Heading>
+              <TourPricing
+                language={language}
+                packages={table.packages}
+                tour={tour}
+                variant={table.variant}
+              />
+              {table.variant === 'pricing' ? (
+                <div class="mt-6 flex justify-center">
+                  <div class="w-full max-w-xs">
+                    <TourBookNow
+                      tour={tour}
+                      language={language}
+                      variant="inline"
+                    />
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ))}
 
           <Prose
             markdown={tour.afterPricing ?? ''}
