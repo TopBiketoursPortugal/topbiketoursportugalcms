@@ -28,8 +28,8 @@ const { groups, language, tour } = Astro.props;
  * comparison printed three times.
  *
  * This is that one comparison: the priced packages are the columns, and the
- * other tables become row groups inside it. Columns are matched by package
- * title, which is how the CMS already pairs them.
+ * other tables become row groups inside it. Rows keep the order each package
+ * lists them in, exactly as they read when every package was its own table.
  */
 const priced = groups[0]?.packages ?? [];
 const columns = priced.map((pkg) => pkg.title);
@@ -45,46 +45,111 @@ type Cell = { text: string; flag: 'yes' | 'no' | null; info: string };
 
 const EMPTY_CELL: Cell = { text: '', flag: null, info: '' };
 
-function cellFor(pkg: TourPackageSchema | undefined, rowTitle: string): Cell {
-  const feature = (pkg?.included ?? []).find((f) => f.title === rowTitle);
-  if (!feature) return EMPTY_CELL;
-  const isBoolean = isInclusionFlag(feature.description);
-  return {
-    text: isBoolean ? '' : (feature.description ?? ''),
-    flag: isBoolean
-      ? isAffirmative(feature.description)
-        ? 'yes'
-        : 'no'
-      : null,
-    info: feature.info ?? ''
-  };
+/*
+ * Every row and every column heading is retyped per package in the CMS, so the
+ * same thing arrives spelled slightly differently: "Trains or Bus Tickets to
+ * Porto" against "Trains or Bus Tickets", "* Low Season (LS)" against "Low
+ * Season (LS)", "Guided Premium*" against "Guided Premium". Match on a
+ * normalised key, or those become a second row appended below the table.
+ */
+const normalise = (value: string | undefined) =>
+  (value ?? '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+
+const columnKeys = priced.map((pkg) => normalise(pkg.title));
+
+type RowEntry = { key: string; title: string; cell: Cell };
+
+// One package's rows, in the order the CMS lists them. A title repeated inside
+// the same package keeps its own key so the second one is not swallowed.
+function rowsOf(pkg: TourPackageSchema | undefined): RowEntry[] {
+  const seen = new Map<string, number>();
+  return (pkg?.included ?? [])
+    .filter((feature) => feature.title)
+    .map((feature) => {
+      const base = normalise(feature.title);
+      const repeat = seen.get(base) ?? 0;
+      seen.set(base, repeat + 1);
+      const isBoolean = isInclusionFlag(feature.description);
+      return {
+        key: repeat === 0 ? base : `${base}#${repeat}`,
+        title: feature.title ?? '',
+        cell: {
+          text: isBoolean ? '' : (feature.description ?? ''),
+          flag: isBoolean
+            ? isAffirmative(feature.description)
+              ? 'yes'
+              : 'no'
+            : null,
+          info: feature.info ?? ''
+        }
+      };
+    });
 }
 
-const rowGroups = groups.map((group) => {
-  // Row order follows the first column that defines it, then any row a later
-  // column adds — so a row present only in "Premium" is not silently dropped.
-  const rowTitles: string[] = [];
-  group.packages.forEach((pkg) => {
-    (pkg.included ?? []).forEach((feature) => {
-      if (feature.title && !rowTitles.includes(feature.title)) {
-        rowTitles.push(feature.title);
+// The seasons and add-ons tables are paired with the priced ones by position in
+// the CMS; their titles are retyped, so they do not always match. Prefer the
+// title, fall back to the position when that column's title belongs to nobody.
+function packageForColumn(group: Group, index: number) {
+  const byTitle = group.packages.find(
+    (pkg) => normalise(pkg.title) === columnKeys[index]
+  );
+  if (byTitle) return byTitle;
+  const byPosition = group.packages[index];
+  if (byPosition && !columnKeys.includes(normalise(byPosition.title))) {
+    return byPosition;
+  }
+  return undefined;
+}
+
+/*
+ * Row order is a merge of the columns, not the first column plus leftovers: a
+ * row only column two names is inserted where column two puts it, so each
+ * column still reads top to bottom in the order it did as its own table.
+ */
+function mergeRowOrder(lists: RowEntry[][]): string[] {
+  const merged: string[] = [];
+  lists.forEach((list) => {
+    let cursor = 0;
+    list.forEach(({ key }) => {
+      const at = merged.indexOf(key);
+      if (at === -1) {
+        merged.splice(cursor, 0, key);
+        cursor += 1;
+      } else {
+        cursor = Math.max(cursor, at + 1);
       }
     });
   });
+  return merged;
+}
 
-  const rows = rowTitles.map((rowTitle) => {
-    const cells = columns.map((columnTitle) =>
-      cellFor(
-        group.packages.find((pkg) => pkg.title === columnTitle),
-        rowTitle
-      )
-    );
+const rowGroups = groups.map((group) => {
+  const perColumn = columns.map((_, index) =>
+    rowsOf(packageForColumn(group, index))
+  );
+  const byKey = perColumn.map(
+    (entries) => new Map(entries.map((entry) => [entry.key, entry]))
+  );
+  const titles = new Map<string, string>();
+  perColumn.forEach((entries) =>
+    entries.forEach((entry) => {
+      if (!titles.has(entry.key)) titles.set(entry.key, entry.title);
+    })
+  );
+
+  const rows = mergeRowOrder(perColumn).map((key) => {
+    const cells = byKey.map((map) => map.get(key)?.cell ?? EMPTY_CELL);
     // A row where every column says the same thing is not a comparison — it is
     // a fact about the trip. Those collapse behind the toggle by default so
     // the differences are what the reader sees first.
     const signature = cells.map((c) => `${c.flag ?? ''}|${c.text}`);
     const isCommon = new Set(signature).size === 1;
-    return { title: rowTitle, cells, isCommon };
+    return { title: titles.get(key) ?? '', cells, isCommon };
   });
 
   return {
