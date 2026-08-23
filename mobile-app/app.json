@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "Rota",
+    "slug": "rota-trip-companion",
+    "scheme": "rota",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#FEF9EF",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.topbiketoursportugal.rota",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Rota uses your location to show your position on the route and the distance to your next stop."
+      }
+    },
+    "android": {
+      "package": "com.topbiketoursportugal.rota",
+      "adaptiveIcon": {
+        "backgroundColor": "#296A3F",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["ACCESS_FINE_LOCATION", "ACCESS_COARSE_LOCATION"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-secure-store",
+      "expo-font",
+      "expo-splash-screen",
+      "@maplibre/maplibre-react-native"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
