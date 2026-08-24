@@ -254,6 +254,48 @@ export function getBlogPermalink({ data }: CollectionEntry<'blog'>): string {
   );
 }
 
+/** `/guides/` listing for a language. */
+export function getGuidesIndexPath(language: LanguageCodes = 'en'): string {
+  return sanitizeUrl(`${getBasePath(language)}guides${trailingSlash}`);
+}
+
+/**
+ * `/guides/<slug>/` (en) or `/<lang>/guides/<slug>/`. Slug from `path`, else
+ * `title` — the same rule as blog posts, mirrored in
+ * tools/seo/lib/routes.mjs `COLLECTIONS.guides`.
+ *
+ * Accepts either a full entry or `{ data }` so layouts that only hold the
+ * frontmatter can call it too. `language` overrides the entry's own — useful
+ * when an English listing links to a translation.
+ */
+export function getGuidePath(
+  entry: Pick<CollectionEntry<'guides'>, 'data'>,
+  language?: LanguageCodes
+): string {
+  const { data } = entry;
+  const lang = language ?? data.language ?? 'en';
+  return sanitizeUrl(
+    `${getBasePath(lang)}guides/${slugify(data.path ?? data.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+  );
+}
+
+export async function getGuideLanguagesAlternates(
+  guide: CollectionEntry<'guides'>,
+  site: URL = new URL('https://topwalkingtoursportual.com')
+): Promise<ReadonlyArray<HrefLang>> {
+  const alternateGuides = await languageAlternates('guides', guide.filePath);
+
+  return alternateGuides.map((alternateGuide) => {
+    const { data: alternate } = alternateGuide;
+    return {
+      href: sanitizeUrl(
+        `${site}${alternate.language === 'en' ? '' : alternate.language + '/'}guides/${slugify(alternate.path ?? alternate.title, { lower: true, strict: true, trim: true })}${trailingSlash}`
+      ),
+      hreflang: alternate.language
+    };
+  });
+}
+
 export async function getTeamLanguagesAlternates(
   pageEntry: CollectionEntry<'team'>,
   site: URL = new URL('https://topwalkingtoursportual.com')

@@ -1,0 +1,123 @@
+---
+/**
+ * Reusable author byline/card. Resolves a team member by id (or by exact
+ * title) in the current locale, falling back to any language. Used by the
+ * AuthorCard block and, in `compact` mode, by the Guide / Post layouts.
+ */
+import Image from '@core-elements/image/Image.astro';
+import { getCollection } from 'astro:content';
+import markdownit from 'markdown-it';
+import { getTeamMemberPath } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = {
+  member?: string;
+  note?: string;
+  compact?: boolean;
+  language?: LanguageCodes;
+  class?: string;
+};
+
+const {
+  member = '',
+  note = '',
+  compact = false,
+  language: languageProp,
+  class: className
+} = Astro.props as Props;
+
+const language = (languageProp ?? Astro.currentLocale ?? 'en') as LanguageCodes;
+
+let person: any = null;
+if (member) {
+  const needle = member.trim().toLowerCase();
+  const team = await getCollection(
+    'team',
+    (e: any) =>
+      e.data.id === member || e.data.title?.trim().toLowerCase() === needle
+  );
+  person =
+    team.find((e: any) => e.data.language === language) ?? team[0] ?? null;
+}
+
+const md = markdownit({ html: true });
+const noteHtml = note ? md.render(note) : '';
+const name = person?.data?.title ?? '';
+const role = person?.data?.memberType ?? '';
+const imageSrc = person?.data?.image?.src ?? '';
+const imageAlt = person?.data?.image?.alt ?? name;
+const href = person ? getTeamMemberPath(name, language) : '';
+---
+
+{
+  person && compact && (
+    <div
+      class:list={[
+        'author-card author-card-compact flex items-center gap-3',
+        className
+      ]}
+    >
+      {imageSrc && (
+        <Image
+          source={imageSrc}
+          alt={imageAlt}
+          aspectRatio="square"
+          widths={[96, 192]}
+          sizes="48px"
+          class="author-card-photo h-12 w-12 shrink-0 overflow-hidden rounded-full"
+        />
+      )}
+      <div class="min-w-0 text-sm leading-tight">
+        <a
+          href={href}
+          class="font-semibold text-slate-900 no-underline hover:underline dark:text-slate-100"
+        >
+          {name}
+        </a>
+        {role && (
+          <p class="m-0 text-xs text-slate-500 dark:text-slate-400">{role}</p>
+        )}
+      </div>
+    </div>
+  )
+}
+
+{
+  person && !compact && (
+    <div
+      class:list={[
+        'author-card flex flex-col gap-5 rounded-lg border border-slate-200 bg-slate-50 p-6 sm:flex-row sm:items-start dark:border-slate-700 dark:bg-slate-800/60',
+        className
+      ]}
+    >
+      {imageSrc && (
+        <Image
+          source={imageSrc}
+          alt={imageAlt}
+          aspectRatio="square"
+          widths={[200, 400]}
+          sizes="112px"
+          class="author-card-photo h-28 w-28 shrink-0 overflow-hidden rounded-full"
+        />
+      )}
+      <div class="min-w-0">
+        <p class="m-0 text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+          {role}
+        </p>
+        <p class="m-0 mt-1 text-xl leading-tight font-bold text-slate-900 dark:text-slate-100">
+          <a href={href} class="no-underline hover:underline">
+            {name}
+          </a>
+        </p>
+        {noteHtml && (
+          <div
+            class="author-card-note prose dark:prose-invert prose-p:my-2 prose-a:text-primary dark:prose-a:text-blue-400 mt-3 max-w-none text-base"
+            data-editable="text"
+            data-prop="note"
+            set:html={noteHtml}
+          />
+        )}
+      </div>
+    </div>
+  )
+}

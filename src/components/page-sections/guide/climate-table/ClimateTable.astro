@@ -1,0 +1,189 @@
+---
+/**
+ * Climate table — month-by-month riding conditions for one region, read from
+ * data/climate.json. Each month carries a verdict (ride / shoulder / avoid)
+ * rendered as a colour-coded cell with a text label so colour is never the
+ * only signal.
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import climate from 'src/../data/climate.json';
+import markdownit from 'markdown-it';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Verdict = 'ride' | 'shoulder' | 'avoid';
+type Month = {
+  m: string;
+  high: number;
+  low: number;
+  rainDays: number;
+  wind: string;
+  verdict: Verdict;
+};
+
+const {
+  heading = '',
+  region = 'portugal',
+  note = '',
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const regions = climate.regions as Record<
+  string,
+  { name: string; months: Month[] }
+>;
+const data = regions[region] ?? regions.portugal;
+const months = data?.months ?? [];
+
+const md = markdownit({ html: true });
+const noteHtml = note ? md.render(note) : '';
+
+const VERDICT_CLASS: Record<Verdict, string> = {
+  ride: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200',
+  shoulder:
+    'bg-amber-100 text-amber-900 dark:bg-amber-900/50 dark:text-amber-200',
+  avoid: 'bg-rose-100 text-rose-900 dark:bg-rose-900/50 dark:text-rose-200'
+};
+const VERDICT_KEY: Record<
+  Verdict,
+  'Guide.Climate.Ride' | 'Guide.Climate.Shoulder' | 'Guide.Climate.Avoid'
+> = {
+  ride: 'Guide.Climate.Ride',
+  shoulder: 'Guide.Climate.Shoulder',
+  avoid: 'Guide.Climate.Avoid'
+};
+const windLabel = (w: string) => w.charAt(0).toUpperCase() + w.slice(1);
+const th =
+  'px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300';
+const td = 'px-3 py-2 tabular-nums text-slate-800 dark:text-slate-200';
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['climate-table', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  {
+    heading && (
+      <Heading
+        level="h3"
+        size="md"
+        text={heading}
+        style="margin-top:0"
+        data-prop="heading"
+      />
+    )
+  }
+
+  <div
+    class="climate-table-scroll mt-4 overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700"
+  >
+    <table class="w-full min-w-[40rem] border-collapse text-sm">
+      <caption class="sr-only">{data?.name}</caption>
+      <thead class="bg-slate-50 dark:bg-slate-800">
+        <tr>
+          <th scope="col" class={th}>{data?.name}</th>
+          <th scope="col" class={th}>{t('Guide.Climate.High', language)}</th>
+          <th scope="col" class={th}>{t('Guide.Climate.Low', language)}</th>
+          <th scope="col" class={th}>{t('Guide.Climate.RainDays', language)}</th
+          >
+          <th scope="col" class={th}>{t('Guide.Climate.Wind', language)}</th>
+          <th scope="col" class={th}>{t('Guide.Climate.Verdict', language)}</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+        {
+          months.map((row) => (
+            <tr class="bg-white dark:bg-slate-900/40">
+              <th
+                scope="row"
+                class="px-3 py-2 text-left font-semibold text-slate-900 dark:text-slate-100"
+              >
+                {row.m}
+              </th>
+              <td class={td}>{row.high}°C</td>
+              <td class={td}>{row.low}°C</td>
+              <td class={td}>{row.rainDays}</td>
+              <td class={td}>{windLabel(row.wind)}</td>
+              <td class="px-3 py-2">
+                <span
+                  class:list={[
+                    'inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold',
+                    VERDICT_CLASS[row.verdict] ?? VERDICT_CLASS.shoulder
+                  ]}
+                >
+                  {t(
+                    VERDICT_KEY[row.verdict] ?? 'Guide.Climate.Shoulder',
+                    language
+                  )}
+                </span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <ul
+    class="climate-table-legend mt-3 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-600 dark:text-slate-300"
+    aria-label={t('Guide.Climate.Verdict', language)}
+  >
+    {
+      (['ride', 'shoulder', 'avoid'] as Verdict[]).map((v) => (
+        <li class="inline-flex items-center gap-1.5">
+          <span
+            class:list={['inline-block h-3 w-3 rounded-full', VERDICT_CLASS[v]]}
+            aria-hidden="true"
+          />
+          {t(VERDICT_KEY[v], language)}
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    noteHtml && (
+      <div
+        class="climate-table-note prose dark:prose-invert prose-p:my-2 prose-a:text-primary dark:prose-a:text-blue-400 mt-4 max-w-none text-sm"
+        data-editable="text"
+        data-prop="note"
+        set:html={noteHtml}
+      />
+    )
+  }
+
+  <p
+    class="climate-table-source mt-3 text-xs text-slate-500 dark:text-slate-400"
+  >
+    {t('Guide.Climate.Source', language)}{' '}
+    <a
+      href="https://www.ipma.pt/en/oclima/normais.clima/"
+      target="_blank"
+      rel="noopener"
+      class="underline underline-offset-2"
+    >
+      IPMA
+    </a>
+    {t('Guide.Climate.SourceSuffix', language)}
+  </p>
+</CustomSection>

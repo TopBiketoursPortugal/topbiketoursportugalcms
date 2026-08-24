@@ -1,0 +1,230 @@
+---
+/**
+ * /guides/ — every guide in the language as a card grid, newest revision
+ * first, followed by a GPX library: one row per route-profile block across
+ * all guides that carries a GPX file, linking both the download and the
+ * section of the guide it belongs to.
+ */
+import Layout from 'src/layouts/Layout.astro';
+import GuideCard from 'src/components/guides/guide-card.astro';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import { getCollection } from 'astro:content';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import LanguageData from 'src/../data/languages.json';
+import SiteData from 'src/../data/site.json';
+import {
+  getGuidePath,
+  getGuidesIndexPath,
+  sanitizeUrl
+} from 'utils/permalinks';
+import { getHomeCrumb, getGuidesCrumb } from 'utils/breadcrumbs';
+import { slugifyLabel } from 'src/components/utils/slugify';
+import { t } from 'utils/i18n';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  // Only languages that have at least one guide get a listing — an empty
+  // /pt/guides/ would be a thin page in the sitemap.
+  const languages = languageCodes.filter((language) =>
+    guides.some((g) => g.data.language === language)
+  );
+  return languages.map((language) => ({
+    params: { language: language === 'en' ? undefined : language },
+    props: {
+      guides: guides
+        .filter((g) => g.data.language === language)
+        .sort(
+          (a, b) =>
+            new Date(b.data.updated ?? b.data.date).getTime() -
+            new Date(a.data.updated ?? a.data.date).getTime()
+        ),
+      languages
+    }
+  }));
+}
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { guides, languages } = Astro.props;
+
+const title = t('Guides.Index.Title', language);
+const description = t('Guides.Index.Description', language);
+
+// Cover image: the newest guide's, so the listing's OG card is never blank.
+const featuredImage = guides[0]?.data.image;
+
+const frontmatter = {
+  title,
+  seo: {
+    page_title: title,
+    page_description: description,
+    featured_image: featuredImage?.src,
+    featured_image_alt: featuredImage?.alt,
+    open_graph_type: 'website',
+    no_index: false
+  }
+};
+
+const site = (Astro.site ?? new URL(SiteData.en.site.url)).toString();
+const hrefs =
+  languages.length > 1
+    ? languages.map((lang) => ({
+        href: sanitizeUrl(`${site}${getGuidesIndexPath(lang)}`),
+        hreflang: lang
+      }))
+    : [];
+const defaultHref = hrefs.find((h) => h.hreflang === 'en');
+
+const breadcrumbs = [getHomeCrumb(language), getGuidesCrumb(language)];
+
+// GPX library: every route-profile block with a file, across all guides.
+type GpxRow = {
+  title: string;
+  distanceKm?: number | string;
+  elevationM?: number | string;
+  gpxFile: string;
+  guideTitle: string;
+  href: string;
+};
+const gpxRows: GpxRow[] = guides.flatMap((guide) => {
+  const blocks = [
+    ...(guide.data.content_blocks ?? []),
+    ...(guide.data.content_blocks_after ?? [])
+  ];
+  return blocks
+    .filter(
+      (b) =>
+        b?._component === 'page-sections/guide/route-profile' &&
+        typeof b.gpxFile === 'string' &&
+        b.gpxFile.trim() !== ''
+    )
+    .map((b) => {
+      const rowTitle = String(b.title ?? guide.data.title);
+      return {
+        title: rowTitle,
+        distanceKm: b.distanceKm,
+        elevationM: b.elevationM,
+        gpxFile: b.gpxFile,
+        guideTitle: guide.data.title,
+        href: `${getGuidePath(guide)}#${slugifyLabel(b.title ? String(b.title) : guide.data.title)}`
+      };
+    });
+});
+
+const baseUrl = site.replace(/\/$/, '');
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': title,
+  'description': description,
+  'url': `${baseUrl}${getGuidesIndexPath(language)}`,
+  'isPartOf': { '@type': 'WebSite', '@id': `${baseUrl}/#website` },
+  'mainEntity': {
+    '@type': 'ItemList',
+    'numberOfItems': guides.length,
+    'itemListElement': guides.map((guide, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'url': `${baseUrl}${getGuidePath(guide)}`
+    }))
+  }
+};
+---
+
+<Layout {...frontmatter} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+    <script
+      is:inline
+      async
+      type="application/ld+json"
+      set:html={JSON.stringify(collectionSchema)}
+    />
+  </slot>
+  <main class="mx-auto max-w-6xl px-8 py-12 md:py-10">
+    <header class="max-w-3xl">
+      <Heading as="h1">{t('Guides.Title', language)}</Heading>
+      <p class="mt-4 text-lg text-slate-700 dark:text-slate-300">
+        {description}
+      </p>
+    </header>
+
+    <section
+      class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+      aria-label={t('Guides.Title', language)}
+    >
+      {guides.map((guide) => <GuideCard guide={guide} headingLevel="h2" />)}
+    </section>
+
+    {
+      gpxRows.length > 0 ? (
+        <section class="mt-16" id="gpx">
+          <Heading as="h2">{t('Guides.Gpx.Heading', language)}</Heading>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full min-w-[36rem] text-left text-sm">
+              <thead class="border-b border-slate-300 dark:border-slate-700">
+                <tr>
+                  <th scope="col" class="py-2 pr-4 font-semibold">
+                    {t('Guides.Title', language)}
+                  </th>
+                  <th scope="col" class="py-2 pr-4 font-semibold tabular-nums">
+                    {t('Tour.Info.Distance.Label', language)} (km)
+                  </th>
+                  <th scope="col" class="py-2 pr-4 font-semibold tabular-nums">
+                    m ↑
+                  </th>
+                  <th scope="col" class="py-2 font-semibold">
+                    GPX
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {gpxRows.map((row) => (
+                  <tr class="border-b border-slate-200 dark:border-slate-800">
+                    <td class="py-2 pr-4">
+                      <a href={row.href} class="font-medium hover:underline">
+                        {row.title}
+                      </a>
+                      {row.title !== row.guideTitle ? (
+                        <span class="block text-xs text-slate-500 dark:text-slate-400">
+                          {row.guideTitle}
+                        </span>
+                      ) : null}
+                    </td>
+                    <td class="py-2 pr-4 tabular-nums">
+                      {row.distanceKm ?? '–'}
+                    </td>
+                    <td class="py-2 pr-4 tabular-nums">
+                      {row.elevationM ?? '–'}
+                    </td>
+                    <td class="py-2">
+                      <a
+                        href={row.gpxFile}
+                        download
+                        class="text-primary underline dark:text-blue-400"
+                      >
+                        {t('Guide.Gpx.Download', language)}
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null
+    }
+  </main>
+</Layout>

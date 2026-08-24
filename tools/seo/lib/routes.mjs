@@ -101,6 +101,11 @@ export const COLLECTIONS = {
     slugFrom: ['path', 'title'],
     url: (fm, lang) => `${base(lang)}blog/${slug(fm.path ?? fm.title)}/`
   },
+  guides: {
+    dir: 'guides',
+    slugFrom: ['path', 'title'],
+    url: (fm, lang) => `${base(lang)}guides/${slug(fm.path ?? fm.title)}/`
+  },
   postTags: {
     dir: 'blog-tags',
     slugFrom: ['path', 'name', 'title'],
@@ -143,6 +148,20 @@ export function readFrontmatter(source, label = '<memory>') {
       cause: error
     });
   }
+}
+
+/**
+ * A non-empty `redirect_to` retires the entry: src/schemas/published-glob.ts
+ * drops it from the collections, so it produces no page. Its old URL must
+ * still answer, which `redirectedRoutes` below turns into a 301. YAML `null`
+ * and blank strings (what CloudCannon leaves behind when the field is
+ * cleared) mean "not retired".
+ */
+export function redirectTarget(frontmatter) {
+  const value = frontmatter?.redirect_to;
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed && trimmed !== 'null' && trimmed !== '~' ? trimmed : null;
 }
 
 /** Language implied by a content path: src/content/<dir>/<lang>/... */
@@ -190,6 +209,9 @@ export function collectRoutes(root = REPO_ROOT) {
       // Unpublished translation stubs produce no route — src/schemas/
       // published-glob.ts drops them from the collections for the same reason.
       if (frontmatter.draft === true) continue;
+      // Retired entries produce no page either; their URL lives on as a 301
+      // (see redirectedRoutes) and must not be advertised as live content.
+      if (redirectTarget(frontmatter)) continue;
 
       const language = frontmatter.language ?? languageFromPath(relativePath);
       const url = config.url(frontmatter, language, relativePath);
@@ -240,6 +262,50 @@ export function collectRoutes(root = REPO_ROOT) {
   }
 
   return { routes, problems };
+}
+
+/**
+ * One 301 per retired entry, in every language: `[{ from, destination }]`
+ * where `from` is the URL the entry used to produce and `destination` its
+ * `redirect_to`. astro.config.ts writes these into `_redirects` after the
+ * hand-written rules in data/routing.json and before the generated URL
+ * history, so a deliberate retirement beats a stale history rule for the
+ * same path but never overrides an editor's explicit rule.
+ */
+export function redirectedRoutes(root = REPO_ROOT) {
+  const redirects = [];
+
+  for (const [collection, config] of Object.entries(COLLECTIONS)) {
+    const pattern = posix.join('src/content', config.dir, '**/*.{md,mdx}');
+    for (const match of globSync(pattern, { cwd: root })) {
+      const relativePath = match.split(/[\\/]/).join('/');
+      if (collectionFromPath(relativePath) !== collection) continue;
+
+      const source = readFileSync(join(root, relativePath), 'utf8');
+      const frontmatter = readFrontmatter(source, relativePath);
+      if (!frontmatter || frontmatter.draft === true) continue;
+
+      const destination = redirectTarget(frontmatter);
+      if (!destination) continue;
+
+      const language = frontmatter.language ?? languageFromPath(relativePath);
+      const from = config.url(frontmatter, language, relativePath);
+      // Redirecting a URL to itself would loop.
+      if (normalisePath(destination) === from) continue;
+
+      redirects.push({
+        from,
+        destination,
+        status: 301,
+        file: relativePath,
+        collection,
+        language,
+        id: frontmatter.id ?? null
+      });
+    }
+  }
+
+  return redirects;
 }
 
 /** The set of URLs currently served, for collision checks. */

@@ -1,0 +1,98 @@
+title:
+  type: text
+  comment: Route name (becomes the h3 and its anchor id).
+tour:
+  type: select
+  comment: Optional linked tour. Its distance, duration and difficulty fill any stat you leave blank.
+  options:
+    allow_create: false
+    allow_empty: true
+    values: collections.tours
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+distanceKm:
+  type: number
+  label: Distance (km)
+elevationM:
+  type: number
+  label: Elevation gain (m)
+days:
+  type: number
+  comment: Riding days.
+difficulty:
+  type: range
+  comment: 1 = easy, 5 = very hard.
+  options:
+    min: 1
+    max: 5
+    step: 1
+surface:
+  type: text
+  comment: e.g. "85% paved · 15% gravel".
+start:
+  type: text
+end:
+  type: text
+bestMonths:
+  type: multiselect
+  comment: Months highlighted in the best-months strip.
+  options:
+    allow_create: false
+    allow_empty: true
+    values:
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+gpxFile:
+  type: file
+  label: GPX file
+  comment: Upload to public/gpx. Naming convention <guide-slug>-<route>.gpx. Leave empty to hide the download button.
+  options:
+    accepts_mime_types:
+      - application/gpx+xml
+      - application/xml
+      - text/xml
+      - application/octet-stream
+    paths:
+      uploads: public/gpx
+      static: public
+externalGpxUrl:
+  type: url
+  label: External GPX source
+  comment:
+    Shown only when GPX file above is empty. Link to a real track for this
+    route on a route-sharing site (Wikiloc, EuroVelo, Rota Vicentina, …) —
+    never a competing tour operator. Leave empty to hide the download line.
+externalGpxLabel:
+  type: text
+  label: External GPX source name
+  comment: The site name shown as the link text, e.g. "Wikiloc".
+elevationImage:
+  type: image
+  label: Elevation profile image
+  options:
+    paths:
+      uploads: src/assets/images
+      static: ""
+    resize_style: contain
+    width: 1600
+    height: 600
+elevationImageAlt:
+  type: textarea
+  label: Elevation image alt text
+notes:
+  type: markdown
+  comment: Short notes on the route (also used as the GPX dataset description).

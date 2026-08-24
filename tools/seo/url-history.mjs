@@ -28,6 +28,7 @@ import {
   COLLECTIONS,
   collectRoutes,
   liveUrlSet,
+  redirectedRoutes,
   collectionFromPath,
   languageFromPath
 } from './lib/routes.mjs';
@@ -171,6 +172,19 @@ function build() {
     [...routes.values()].map((route) => [route.file, route])
   );
   const manual = manualRules();
+  // URLs of entries retired with `redirect_to`: astro.config.ts already 301s
+  // these, so they are neither lost nor in need of a generated rule.
+  const retiredRules = redirectedRoutes();
+  const retired = new Set(retiredRules.map((rule) => rule.from));
+  // A retired entry still owns its historical slugs: each of them should land
+  // where the entry's own `redirect_to` points, in one hop — Netlify follows
+  // a single rule, so pointing them at the retired URL would 404.
+  const retiredByKey = new Map();
+  const retiredByFile = new Map();
+  for (const rule of retiredRules) {
+    if (rule.id) retiredByKey.set(`${rule.collection}:${rule.language}:${rule.id}`, rule);
+    retiredByFile.set(rule.file, rule);
+  }
 
   const { perFile, renames } = historicalFieldValues();
 
@@ -216,11 +230,31 @@ function build() {
     }
 
     if (!route) {
+      let retiredRule = null;
+      for (const id of fields.get('id') ?? []) {
+        retiredRule = retiredByKey.get(`${collection}:${language}:${id}`);
+        if (retiredRule) break;
+      }
+      retiredRule ??= retiredByFile.get(currentFile);
+      if (retiredRule) {
+        for (const from of candidates) {
+          if (from === retiredRule.from) continue; // its own rule covers it
+          if (live.has(from) || manual.sources.has(from)) continue;
+          if (redirects.has(from) && redirects.get(from) !== retiredRule.destination) {
+            redirects.delete(from);
+            continue;
+          }
+          redirects.set(from, retiredRule.destination);
+        }
+        continue;
+      }
       // This entry has no current page. That only costs a URL if none of the
       // URLs it produced is served by something else today — CloudCannon
       // routinely replaces a file with a fresh id while keeping the same
       // `path`, which reads as a deletion here but changes nothing publicly.
-      const lost = [...candidates].filter((url) => !live.has(url));
+      const lost = [...candidates].filter(
+        (url) => !live.has(url) && !retired.has(url)
+      );
       if (lost.length) orphaned.push({ file: historicalFile, urls: lost });
       continue;
     }
@@ -229,6 +263,7 @@ function build() {
       if (from === route.url) continue; // still the live URL
       if (live.has(from)) continue; // another page owns this URL today
       if (manual.sources.has(from)) continue; // data/routing.json already covers it
+      if (retired.has(from)) continue; // a retired entry's own redirect wins
       // Emitting this would send traffic to a URL that data/routing.json then
       // redirects again — or, if the two disagree, straight into a loop.
       if (manual.destinations.has(from)) continue;

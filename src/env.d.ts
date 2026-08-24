@@ -12,6 +12,16 @@ declare module '@bookshop/astro-bookshop' {
   export default bookshop;
 }
 
+declare namespace App {
+  interface Locals {
+    // Headings of the page being rendered, for the table-of-contents block
+    // (page-sections/guide/table-of-contents). Set by src/layouts/Guide.astro
+    // and, for long posts, src/layouts/Post.astro — so a block dropped into
+    // the page finds them without being wired up by hand.
+    tocHeadings?: import('src/types').TocHeading[];
+  }
+}
+
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

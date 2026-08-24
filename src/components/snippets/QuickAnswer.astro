@@ -1,0 +1,28 @@
+---
+/**
+ * MDX snippet wrapper for page-sections/guide/quick-answer.
+ * Flat string args: `facts` is "Label: value|Label: value".
+ */
+import QuickAnswer from '@page-sections/guide/quick-answer/QuickAnswer.astro';
+
+const { heading = '', text = '', facts = '' } = Astro.props;
+
+const factList = String(facts ?? '')
+  .split('|')
+  .map((pair) => pair.trim())
+  .filter(Boolean)
+  .map((pair) => {
+    const idx = pair.indexOf(':');
+    return idx === -1
+      ? { label: pair, value: '' }
+      : { label: pair.slice(0, idx).trim(), value: pair.slice(idx + 1).trim() };
+  });
+---
+
+<QuickAnswer
+  heading={heading}
+  text={text}
+  facts={factList}
+  paddingHorizontal="none"
+  paddingVertical="sm"
+/>

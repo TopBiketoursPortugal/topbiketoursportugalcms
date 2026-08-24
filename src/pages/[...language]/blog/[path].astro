@@ -34,7 +34,7 @@ const { post } = Astro.props;
 if (!post) {
   throw new Error('Failed to get post with path: ' + Astro.params.path);
 }
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const language = Astro.currentLocale as LanguageCodes;
 const hrefs = await getPostLanguagesAlternates(post, Astro.site);
 const breadcrumbs = [
@@ -49,6 +49,10 @@ import SnippetsFile from 'src/components/snippets/File.astro';
 import SnippetsTint from 'src/components/snippets/Tint.astro';
 import SnippetsVideo from 'src/components/snippets/Video.astro';
 import SnippetsYoutube from 'src/components/snippets/Youtube.astro';
+import SnippetsQuickAnswer from 'src/components/snippets/QuickAnswer.astro';
+import SnippetsRouteProfile from 'src/components/snippets/RouteProfile.astro';
+import SnippetsClimateTable from 'src/components/snippets/ClimateTable.astro';
+import SnippetsComparisonTable from 'src/components/snippets/ComparisonTable.astro';
 
 const snippetComponents = {
   SnippetsAccordion,
@@ -57,13 +61,18 @@ const snippetComponents = {
   SnippetsFile,
   SnippetsTint,
   SnippetsVideo,
-  SnippetsYoutube
+  SnippetsYoutube,
+  SnippetsQuickAnswer,
+  SnippetsRouteProfile,
+  SnippetsClimateTable,
+  SnippetsComparisonTable
 };
 ---
 
 <PostLayout
   {...post.data}
   body={post.body}
+  headings={headings}
   language={language}
   hrefs={hrefs}
   breadcrumbs={breadcrumbs}

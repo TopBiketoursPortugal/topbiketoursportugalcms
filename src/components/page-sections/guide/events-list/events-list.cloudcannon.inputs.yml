@@ -1,0 +1,27 @@
+heading:
+  type: text
+  comment: Optional heading above the list.
+region:
+  type: select
+  comment: Filter events by region (data/events.json). "All" shows every event.
+  options:
+    allow_create: false
+    allow_empty: false
+    values:
+      - id: all
+        name: All of Portugal
+      - id: algarve
+        name: Algarve
+      - id: alentejo
+        name: Alentejo
+      - id: lisbon
+        name: Lisbon & coast
+      - id: centro
+        name: Centro (Coimbra & Aveiro)
+      - id: douro
+        name: Douro Valley
+      - id: minho
+        name: Minho & Porto
+limit:
+  type: number
+  comment: Maximum events to show. 0 shows all.

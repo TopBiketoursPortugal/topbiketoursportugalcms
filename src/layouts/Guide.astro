@@ -1,0 +1,330 @@
+---
+/**
+ * Guide page: hero image, title, byline (team member) with "Updated" date and
+ * reading time, then a two-column body — content blocks, the markdown prose,
+ * trailing content blocks, related tours / guides / posts — with a sticky
+ * table of contents alongside.
+ *
+ * The TOC is fed through `Astro.locals.tocHeadings` so the
+ * page-sections/guide/table-of-contents block renders the same list whether
+ * it sits in the aside (here) or is dropped into the content by an editor.
+ */
+import Layout from './Layout.astro';
+import PageHelper from 'src/shared/astro/page.astro';
+import TourCard from 'src/components/tours/tour-card.astro';
+import PostSummary from 'src/components/blog/summary.astro';
+import GuideCard from 'src/components/guides/guide-card.astro';
+import TableOfContents from 'src/components/page-sections/guide/table-of-contents/TableOfContents.astro';
+import AuthorCard from 'src/components/page-sections/people/author-card/AuthorCardInner.astro';
+import ArticleSchema from 'src/components/schema/article-schema.astro';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import LanguageData from 'src/../data/languages.json';
+import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getGuidePath, getTeamMemberPath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
+import { blockHeadings, markdownHeadings } from 'utils/toc';
+import { t } from 'utils/i18n';
+
+type Props = {
+  guide: CollectionEntry<'guides'>;
+  headings?: MarkdownHeading[];
+  hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+};
+
+const { guide, headings = [], hrefs = [], breadcrumbs = [] } = Astro.props;
+const { data } = guide;
+const {
+  title,
+  summary,
+  date,
+  updated,
+  author,
+  image,
+  relatedTours = [],
+  relatedGuides = [],
+  relatedPosts = [],
+  content_blocks = [],
+  content_blocks_after = []
+} = data;
+
+const language = (Astro.currentLocale ??
+  data.language ??
+  'en') as LanguageCodes;
+const guideUrl = getGuidePath(guide);
+const body = guide.body ?? '';
+const wordCount = body.split(/\s+/).filter(Boolean).length;
+const readingTime = Math.max(1, Math.round(wordCount / 183));
+const updatedAt = new Date(updated ?? date);
+
+// Headings in page order: leading blocks, the prose, trailing blocks.
+const tocHeadings = [
+  ...blockHeadings(content_blocks),
+  ...markdownHeadings(headings),
+  ...blockHeadings(content_blocks_after)
+];
+Astro.locals.tocHeadings = tocHeadings;
+
+// Byline. Prefer the member's page in this language; a member whose
+// translation is missing still gets named, via the English entry.
+const teamEntries = author
+  ? await getCollection('team', (m) => m.data.id === author)
+  : [];
+const member =
+  teamEntries.find((m) => m.data.language === language) ?? teamEntries[0];
+const schemaAuthor = member
+  ? {
+      name: member.data.title.trim(),
+      jobTitle: member.data.memberType,
+      url: `${Astro.site?.toString().replace(/\/$/, '') ?? ''}${getTeamMemberPath(member.data.title, language)}`
+    }
+  : null;
+
+const articleTours = (
+  await getCollection(
+    'tours',
+    (tour) =>
+      tour.data.language === language && relatedTours.includes(tour.data.id)
+  )
+).sort(
+  (a, b) => relatedTours.indexOf(a.data.id) - relatedTours.indexOf(b.data.id)
+);
+
+const siblingGuides = (
+  await getCollection(
+    'guides',
+    (g) =>
+      g.data.language === language &&
+      g.data.id !== data.id &&
+      relatedGuides.includes(g.data.id)
+  )
+).sort(
+  (a, b) => relatedGuides.indexOf(a.data.id) - relatedGuides.indexOf(b.data.id)
+);
+
+const linkedPosts = await getCollection(
+  'blog',
+  (post) =>
+    post.data.language === language && relatedPosts.includes(post.data.id)
+);
+
+const imageSrc = resolveImageSrc(image.src);
+const defaultHref = hrefs.find((h) => h.hreflang === LanguageData.en.code);
+
+const layoutProps = {
+  title,
+  seo: {
+    ...data.seo,
+    page_title: data.seo?.page_title ?? title,
+    page_description: data.seo?.page_description ?? summary,
+    featured_image: data.seo?.featured_image || image.src,
+    featured_image_alt: data.seo?.featured_image_alt || image.alt,
+    open_graph_type: data.seo?.open_graph_type || 'article'
+  }
+};
+---
+
+<Layout {...layoutProps} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  <slot name="head" slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+    <ArticleSchema
+      title={title}
+      description={summary}
+      date={date}
+      updated={updated}
+      author={schemaAuthor}
+      image={image.src}
+      wordCount={wordCount}
+      language={language}
+      url={guideUrl}
+    />
+  </slot>
+  <main class="mx-auto max-w-6xl px-8 py-12 md:py-10">
+    <div
+      class="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(min(240px,100%),1fr)]"
+    >
+      <div class="min-w-0">
+        <article
+          data-pagefind-body
+          data-pagefind-filter={`language:${language}`}
+          data-pagefind-meta="type:guide"
+        >
+          {
+            imageSrc ? (
+              <Image
+                class="aspect-video w-full rounded-lg object-cover"
+                src={imageSrc as any}
+                alt={image.alt ?? title}
+                loading="eager"
+                fetchpriority="high"
+                widths={[640, 960, 1280]}
+                sizes="(max-width: 1024px) 100vw, 900px"
+                data-pagefind-meta="image[src], image_alt[alt]"
+                data-editable="image"
+                data-prop-src="image.src"
+                data-prop-alt="image.alt"
+              />
+            ) : null
+          }
+          <h1
+            class="py-4 text-3xl font-semibold sm:text-4xl md:text-5xl"
+            data-editable="text"
+            data-prop="title"
+            data-type="span"
+          >
+            {title}
+          </h1>
+          <div
+            class="flex flex-col gap-3 border-b border-slate-200 py-4 text-sm font-light sm:flex-row sm:items-center sm:justify-between dark:border-slate-800"
+          >
+            {member ? <AuthorCard member={member.data.id} compact /> : <span />}
+            <div
+              class="flex flex-wrap gap-x-4 gap-y-1"
+              data-pagefind-meta={`date:${updatedAt.toISOString()}`}
+            >
+              <p>
+                {t('Guides.Updated', language)}{' '}
+                <time datetime={updatedAt.toISOString()}>
+                  {
+                    updatedAt.toLocaleDateString(
+                      LanguageData[language].locale,
+                      {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      }
+                    )
+                  }
+                </time>
+              </p>
+              <p>
+                {wordCount}
+                {t('Blog.Detail.Words', language)} · {readingTime}{' '}
+                {t('Blog.Detail.Minutes', language)}
+              </p>
+            </div>
+          </div>
+
+          <div class="guide-blocks">
+            <PageHelper
+              contentBlocks={content_blocks}
+              sectionsKey="content_blocks"
+            />
+          </div>
+
+          <div
+            class="py-6"
+            data-editable="text"
+            data-prop="@content"
+            data-type="block"
+          >
+            <Prose class="markdown-text">
+              <slot />
+            </Prose>
+          </div>
+
+          <div class="guide-blocks">
+            <PageHelper
+              contentBlocks={content_blocks_after}
+              sectionsKey="content_blocks_after"
+            />
+          </div>
+        </article>
+
+        {
+          articleTours.length > 0 ? (
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedTours', language)}
+              </h2>
+              <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {articleTours.slice(0, 4).map((tour) => (
+                  <div class="max-w-105">
+                    <TourCard
+                      tour={tour.data}
+                      language={language}
+                      contentDisplay="inline"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+        {
+          siblingGuides.length > 0 ? (
+            <section class="pt-12" data-pagefind-ignore>
+              <h2 class="text-center text-2xl">
+                {t('Guides.Related', language)}
+              </h2>
+              <div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {siblingGuides.slice(0, 6).map((g) => (
+                  <GuideCard guide={g} excerpt={140} />
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+        {
+          linkedPosts.length > 0 ? (
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedPosts', language)}
+              </h2>
+              <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {linkedPosts.slice(0, 4).map((post) => (
+                  <div class="max-w-105">
+                    <PostSummary {...post} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+      </div>
+
+      <aside
+        class="guide-sidebar flex flex-col gap-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:self-start lg:overflow-y-auto"
+        data-pagefind-ignore
+      >
+        {
+          tocHeadings.length > 0 ? (
+            <TableOfContents paddingHorizontal="none" paddingVertical="none" />
+          ) : null
+        }
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  /* Blocks use CustomSection, which pads for a full-width page; inside the
+     article column that padding doubles up with the page gutter. */
+  .guide-blocks :global(.custom-section) {
+    padding-inline: 0;
+  }
+</style>

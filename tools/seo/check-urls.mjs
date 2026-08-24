@@ -24,7 +24,8 @@ import {
   LANGUAGES,
   collectRoutes,
   liveUrlSet,
-  normalisePath
+  normalisePath,
+  redirectedRoutes
 } from './lib/routes.mjs';
 import { isUnnamed } from './lib/alternates.mjs';
 
@@ -190,8 +191,13 @@ const readRoutes = (file) => {
 const manual = readRoutes('data/routing.json');
 const generated = readRoutes('data/url-history.json');
 
+// Entries retired with `redirect_to` emit their own 301 at build time
+// (astro.config.ts), between the manual and generated rules.
+const retired = redirectedRoutes();
+const retiredFrom = new Set(retired.map((rule) => normalisePath(rule.from)));
+
 const sources = new Map(); // from -> destination (manual wins, as in the build)
-for (const rule of [...generated, ...manual]) {
+for (const rule of [...generated, ...retired, ...manual]) {
   sources.set(normalisePath(rule.from), normalisePath(rule.destination));
 }
 
@@ -207,7 +213,7 @@ for (const rule of manual) {
   seen.add(from);
 }
 
-for (const [from, destination] of sources) {
+for (let [from, destination] of sources) {
   if (exists(from)) {
     warn('inert-rule', `${from} is a live page, so its redirect never fires`, [
       `declared destination: ${destination}`
@@ -216,6 +222,12 @@ for (const [from, destination] of sources) {
   }
   if (destination.startsWith('http')) continue;
 
+  if (sources.has(destination) && retiredFrom.has(destination)) {
+    // The build collapses hops through a retired entry (collapseChains in
+    // astro.config.ts), so this rule ships pointing at the retired entry's
+    // own destination. Check that one instead.
+    destination = sources.get(destination);
+  }
   if (sources.has(destination)) {
     fail(
       'redirect-chain',

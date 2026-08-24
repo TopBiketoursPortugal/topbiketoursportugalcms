@@ -25,7 +25,7 @@ import {
   LOCALES,
   DEFAULT_LOCALE
 } from './tools/seo/lib/alternates.mjs';
-import { noindexPathSet } from './tools/seo/lib/routes.mjs';
+import { noindexPathSet, redirectedRoutes } from './tools/seo/lib/routes.mjs';
 import type { ValidRedirectStatus } from 'astro';
 import { writeFile } from 'fs/promises';
 import path from 'path';
@@ -63,6 +63,33 @@ function removeDuplicateRedirects(redirects: RedirectRule[]) {
   return uniqueRedirects;
 }
 
+/**
+ * Netlify follows one rule only, so a rule whose destination is itself the
+ * `from` of another rule would land the visitor on a 404. Retiring a post with
+ * `redirect_to` creates exactly that: every historical slug of the post still
+ * points at the post's last URL, which now 301s to a guide. Rewrite each rule
+ * to the end of its chain (fragment of the final hop kept), capped to guard
+ * against cycles.
+ */
+function collapseChains(redirects: RedirectRule[]): RedirectRule[] {
+  const byFrom = new Map(redirects.map((r) => [r.from, r]));
+  const strip = (value: string) => value.split('#')[0];
+  return redirects.map((rule) => {
+    let destination = rule.destination;
+    for (let hop = 0; hop < 10; hop++) {
+      const next = byFrom.get(strip(destination));
+      if (
+        !next ||
+        next === rule ||
+        strip(next.destination) === strip(destination)
+      )
+        break;
+      destination = next.destination;
+    }
+    return destination === rule.destination ? rule : { ...rule, destination };
+  });
+}
+
 // Generate denylist patterns from routing.json to exclude redirect paths from navigateFallback
 const redirectDenylist = RouteData.routes.map((route) => {
   // Escape special regex characters and create exact match pattern
@@ -95,11 +122,17 @@ export default defineConfig({
         'astro:build:done': async ({ dir: _ }) => {
           const manual = (RouteData as { routes: RedirectRule[] }).routes;
           const generated = (UrlHistory as { routes: RedirectRule[] }).routes;
+          // Entries retired with `redirect_to` in their frontmatter (posts
+          // merged into a guide). Between the hand-written rules, which an
+          // editor wrote on purpose, and the URL history, whose rule for the
+          // same path would point at the retired post's last slug.
+          const retired: RedirectRule[] = redirectedRoutes().map(
+            ({ from, destination }) => ({ from, destination, status: 301 })
+          );
 
-          const redirectsRules = removeDuplicateRedirects([
-            ...manual,
-            ...generated
-          ]);
+          const redirectsRules = collapseChains(
+            removeDuplicateRedirects([...manual, ...retired, ...generated])
+          );
 
           const encodePath = (value: string) =>
             value
@@ -123,6 +156,7 @@ export default defineConfig({
 
           console.log(
             `✅ _redirects generated — ${manual.length} hand-written + ` +
+              `${retired.length} retired entries + ` +
               `${generated.length} from URL history = ${redirectsRules.length} rules`
           );
         }
@@ -453,6 +487,23 @@ export default defineConfig({
     // works fine at runtime.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     plugins: [tailwindcss() as any],
+    server: {
+      watch: {
+        // The repo also hosts google-cloud-sdk/ (~60k files), the mobile app,
+        // the DataForSEO dumps and the built dist/. Watching them exhausts the
+        // kernel's inotify budget (ENOSPC) before the dev server is up, and
+        // none of them feed the site.
+        ignored: [
+          '**/google-cloud-sdk/**',
+          '**/mobile-app/**',
+          '**/DataForSeo/**',
+          '**/dist/**',
+          '**/topbiketoursportugal.com-audit/**',
+          '**/migration/**',
+          '**/.git/**'
+        ]
+      }
+    },
     resolve: {
       // Aliases used by the components imported from CloudCannon's
       // astro-component-starter (mirrors that repo's alias map).

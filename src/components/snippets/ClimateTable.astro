@@ -1,0 +1,14 @@
+---
+/** MDX snippet wrapper for page-sections/guide/climate-table. */
+import ClimateTable from '@page-sections/guide/climate-table/ClimateTable.astro';
+
+const { heading = '', region = 'portugal', note = '' } = Astro.props;
+---
+
+<ClimateTable
+  heading={heading}
+  region={region}
+  note={note}
+  paddingHorizontal="none"
+  paddingVertical="sm"
+/>

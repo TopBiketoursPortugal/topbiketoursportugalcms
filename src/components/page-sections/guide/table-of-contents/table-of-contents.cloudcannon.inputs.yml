@@ -1,0 +1,8 @@
+heading:
+  type: text
+  comment: Defaults to "On this page" (i18n Guide.Toc.Heading) when empty.
+items:
+  type: array
+  comment: Manual entries. Leave empty to auto-build from the page's headings.
+  options:
+    structures: _structures.tocItems

@@ -1,0 +1,16 @@
+heading:
+  type: text
+  comment: Optional heading above the table.
+columns:
+  type: array
+  comment: One entry per comparison column (e.g. Guided, Self-guided).
+  options:
+    structures: _structures.comparisonColumns
+rows:
+  type: array
+  comment: One entry per row; each row has a label and one cell per column.
+  options:
+    structures: _structures.comparisonRows
+note:
+  type: markdown
+  comment: Optional footnote under the table.

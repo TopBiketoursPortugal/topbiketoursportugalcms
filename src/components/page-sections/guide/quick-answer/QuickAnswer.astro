@@ -1,0 +1,91 @@
+---
+/**
+ * Quick answer — a highlighted, quotable panel (40–60 words) followed by a
+ * short grid of key facts. Sits at the top of a guide so readers (and search
+ * snippets) get the answer before the long-form prose.
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import markdownit from 'markdown-it';
+
+type Fact = { label?: string; value?: string };
+
+const {
+  heading = '',
+  text = '',
+  facts = [],
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const md = markdownit({ html: true });
+const answerHtml = text ? md.render(text) : '';
+const visibleFacts = (facts as Fact[]).filter(
+  (f) => f && f.label?.toString().trim() && f.value?.toString().trim()
+);
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['quick-answer', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  <div
+    class="quick-answer-panel border-l-primary rounded-lg border border-l-4 border-slate-200 bg-slate-50 px-6 py-5 dark:border-slate-700 dark:border-l-blue-400 dark:bg-slate-800/60"
+  >
+    {
+      heading && (
+        <Heading
+          level="h2"
+          size="sm"
+          text={heading}
+          class="quick-answer-heading"
+          style="margin-top:0"
+          data-prop="heading"
+        />
+      )
+    }
+    <div
+      class="quick-answer-text prose prose-lg dark:prose-invert prose-p:my-2 prose-a:text-primary dark:prose-a:text-blue-400 prose-a:font-semibold max-w-none"
+      data-editable="text"
+      data-prop="text"
+      set:html={answerHtml}
+    />
+    {
+      visibleFacts.length > 0 && (
+        <dl
+          class="quick-answer-facts mt-5 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-slate-200 pt-4 sm:grid-cols-3 dark:border-slate-700"
+          data-editable="array"
+          data-prop="facts"
+        >
+          {visibleFacts.map((fact) => (
+            <div data-editable="array-item" class="min-w-0">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                {fact.label}
+              </dt>
+              <dd class="mt-0.5 font-semibold text-slate-900 tabular-nums dark:text-slate-100">
+                {fact.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+  </div>
+</CustomSection>

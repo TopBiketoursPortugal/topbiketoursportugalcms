@@ -1,0 +1,33 @@
+---
+/**
+ * MDX snippet wrapper for page-sections/guide/comparison-table.
+ * `columns`: "A|B|C". `rows`: one row per line, "Label;cell;cell;cell".
+ */
+import ComparisonTable from '@page-sections/guide/comparison-table/ComparisonTable.astro';
+
+const { heading = '', columns = '', rows = '', note = '' } = Astro.props;
+
+const columnList = String(columns ?? '')
+  .split('|')
+  .map((c) => c.trim())
+  .filter(Boolean)
+  .map((title) => ({ title }));
+
+const rowList = String(rows ?? '')
+  .split(/\r?\n/)
+  .map((line) => line.trim())
+  .filter(Boolean)
+  .map((line) => {
+    const [label, ...cells] = line.split(';').map((c) => c.trim());
+    return { label, cells: cells.map((text) => ({ text })) };
+  });
+---
+
+<ComparisonTable
+  heading={heading}
+  columns={columnList}
+  rows={rowList}
+  note={note}
+  paddingHorizontal="none"
+  paddingVertical="sm"
+/>

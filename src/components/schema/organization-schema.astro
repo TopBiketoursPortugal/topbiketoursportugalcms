@@ -37,6 +37,9 @@ const schema = {
   'name': site.site.name,
   'url': baseUrl,
   'description': t('Organization.Description', language),
+  // Founded 2013 per the About Us page (as "Fold n' Visit", renamed in
+  // 2017) — a real, published fact, not a filler value.
+  'foundingDate': '2013',
   'telephone': contact.cellPhone,
   'email': contact.email,
   'logo': logoUrl,
@@ -76,7 +79,20 @@ const schema = {
     SocialData.instagram.href,
     SocialData.tripadvisor.href,
     SocialData.twitter.href
-  ]
+  ],
+  // Real, third-party-verified sustainability certification — see
+  // src/content/blog/Top-Bike-Tours-Portugal-Achieves-the-Official-Biosphere-Certification.mdx.
+  // A verifiable award is exactly the kind of trust signal E-E-A-T rewards;
+  // fabricating one would be worse than omitting it, so this stays out
+  // until the company actually holds it.
+  'award': 'Biosphere Sustainable Certification',
+  'hasCredential': {
+    '@type': 'EducationalOccupationalCredential',
+    'name': 'Biosphere Sustainable Certification',
+    'credentialCategory': 'certification',
+    'url':
+      'https://www.biospheresustainable.com/en/community/top-biketours-portugal/8112'
+  }
 };
 ---
 

@@ -1,0 +1,48 @@
+---
+/**
+ * MDX snippet wrapper for page-sections/guide/route-profile.
+ * Flat scalar args; `bestMonths` is "Apr,May,Jun".
+ */
+import RouteProfile from '@page-sections/guide/route-profile/RouteProfile.astro';
+
+const {
+  title = '',
+  tour = '',
+  distanceKm,
+  elevationM,
+  days,
+  difficulty,
+  surface = '',
+  start = '',
+  end = '',
+  bestMonths = '',
+  gpxFile = '',
+  elevationImage = '',
+  elevationImageAlt = '',
+  notes = ''
+} = Astro.props;
+
+const months = String(bestMonths ?? '')
+  .split(',')
+  .map((m) => m.trim())
+  .filter(Boolean);
+---
+
+<RouteProfile
+  title={title}
+  tour={tour}
+  distanceKm={distanceKm}
+  elevationM={elevationM}
+  days={days}
+  difficulty={difficulty}
+  surface={surface}
+  start={start}
+  end={end}
+  bestMonths={months}
+  gpxFile={gpxFile}
+  elevationImage={elevationImage}
+  elevationImageAlt={elevationImageAlt}
+  notes={notes}
+  paddingHorizontal="none"
+  paddingVertical="sm"
+/>

@@ -1,0 +1,27 @@
+heading:
+  type: text
+  comment: Optional heading above the table.
+region:
+  type: select
+  comment: Which region's monthly climate to show (data/climate.json).
+  options:
+    allow_create: false
+    allow_empty: false
+    values:
+      - id: algarve
+        name: Algarve
+      - id: alentejo
+        name: Alentejo
+      - id: lisbon
+        name: Lisbon & coast
+      - id: centro
+        name: Centro (Coimbra & Aveiro)
+      - id: douro
+        name: Douro Valley
+      - id: minho
+        name: Minho & Porto
+      - id: portugal
+        name: Portugal (national)
+note:
+  type: markdown
+  comment: Short note shown under the legend (source, caveats, local tips).

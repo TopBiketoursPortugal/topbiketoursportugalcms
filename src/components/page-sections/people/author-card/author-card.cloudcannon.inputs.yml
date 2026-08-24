@@ -1,0 +1,19 @@
+member:
+  type: select
+  comment: The team member to show.
+  options:
+    allow_create: false
+    allow_empty: true
+    values: collections.team
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: memberType
+note:
+  type: markdown
+  comment: Why this person is the authority here, e.g. "Sérgio has guided this route every season since 2012".
+compact:
+  type: switch
+  comment: Small inline byline (photo + name + role) instead of the full card.

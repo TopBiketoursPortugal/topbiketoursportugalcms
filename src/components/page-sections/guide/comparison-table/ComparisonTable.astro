@@ -1,0 +1,118 @@
+---
+/**
+ * Comparison table — editor-defined columns and rows (e.g. guided vs
+ * self-guided, or three routes side by side). Cells allow inline markdown.
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import markdownit from 'markdown-it';
+
+type Column = { title?: string };
+type Row = { label?: string; cells?: { text?: string }[] };
+
+const {
+  heading = '',
+  columns = [],
+  rows = [],
+  note = '',
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const md = markdownit({ html: true });
+const inline = (s: unknown) => (s ? md.renderInline(String(s)) : '');
+const noteHtml = note ? md.render(note) : '';
+const cols = columns as Column[];
+const body = rows as Row[];
+const th =
+  'px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300';
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['comparison-table', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  {
+    heading && (
+      <Heading
+        level="h3"
+        size="md"
+        text={heading}
+        style="margin-top:0"
+        data-prop="heading"
+      />
+    )
+  }
+
+  {
+    body.length > 0 && (
+      <div class="comparison-table-scroll mt-4 overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+        <table class="w-full border-collapse text-sm">
+          {heading && <caption class="sr-only">{heading}</caption>}
+          <thead class="bg-slate-50 dark:bg-slate-800">
+            <tr>
+              <th scope="col" class={th}>
+                <span class="sr-only">Criteria</span>
+              </th>
+              {cols.map((c) => (
+                <th scope="col" class={th} set:html={inline(c.title)} />
+              ))}
+            </tr>
+          </thead>
+          <tbody
+            class="divide-y divide-slate-200 dark:divide-slate-700"
+            data-editable="array"
+            data-prop="rows"
+          >
+            {body.map((row) => (
+              <tr
+                class="bg-white align-top dark:bg-slate-900/40"
+                data-editable="array-item"
+              >
+                <th
+                  scope="row"
+                  class="px-3 py-2 text-left font-semibold text-slate-900 dark:text-slate-100"
+                  set:html={inline(row.label)}
+                />
+                {cols.map((_c, i) => (
+                  <td
+                    class="px-3 py-2 text-slate-800 dark:text-slate-200"
+                    set:html={inline(row.cells?.[i]?.text)}
+                  />
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+
+  {
+    noteHtml && (
+      <div
+        class="comparison-table-note prose dark:prose-invert prose-p:my-2 prose-a:text-primary dark:prose-a:text-blue-400 mt-4 max-w-none text-sm"
+        data-editable="text"
+        data-prop="note"
+        set:html={noteHtml}
+      />
+    )
+  }
+</CustomSection>

@@ -16,6 +16,11 @@ import type { LanguageCodes } from 'src/schemas/language';
 import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
 import { resolveImageSrc } from 'utils/get-image';
 import { t } from '@utils/i18n';
+import type { MarkdownHeading } from 'astro';
+import TableOfContents from 'src/components/page-sections/guide/table-of-contents/TableOfContents.astro';
+import AuthorCard from 'src/components/page-sections/people/author-card/AuthorCardInner.astro';
+import { parseByline } from 'utils/schema-author';
+import { markdownHeadings } from 'utils/toc';
 
 function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
   return props?.rawContent;
@@ -24,6 +29,8 @@ function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
 type PostProps = InferEntrySchema<'blog'> & {
   hrefs?: ReadonlyArray<HrefLang>;
   breadcrumbs?: BreadcrumbItem[];
+  /** From `render(post).headings`; drives the TOC on long posts. */
+  headings?: MarkdownHeading[];
 };
 
 type Props = (PostProps & { body?: string }) | MarkdownLayoutProps<PostProps>;
@@ -41,7 +48,8 @@ const {
   hrefs = [],
   relatedPosts = [],
   relatedTours = [],
-  breadcrumbs = []
+  breadcrumbs = [],
+  headings = []
 } = props;
 const { src, alt } = props.image;
 const wordCount = content?.split(' ')?.length ?? 0;
@@ -49,6 +57,33 @@ const readingTime = Math.floor(wordCount / 183);
 const dateObj = new Date(date);
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const postUrl = getBlogPermalink({ data: props } as any);
+
+// A long read gets a table of contents; short posts do not need one. Shared
+// with the guide layout through Astro.locals so the TOC block reads it.
+const TOC_MIN_WORDS = 2000;
+const tocHeadings = wordCount > TOC_MIN_WORDS ? markdownHeadings(headings) : [];
+if (tocHeadings.length > 0) Astro.locals.tocHeadings = tocHeadings;
+
+// Byline → team member. `author` is free text ("Written by Sérgio Marques,
+// Founder…"); parseByline strips the lead-in and the role, and a match on the
+// member's title swaps the plain byline for the compact author card.
+const teamMembers = await getCollection(
+  'team',
+  (member) => member.data.language === language
+);
+const bylineName = author
+  ? parseByline(
+      author,
+      teamMembers.map((m) => m.data.title ?? '')
+    ).name
+  : '';
+const bylineMember = bylineName
+  ? teamMembers.find(
+      (m) =>
+        (m.data.title ?? '').trim().toLowerCase() ===
+        bylineName.trim().toLowerCase()
+    )
+  : undefined;
 
 const filterdRelatedPosts = await getCollection(
   'blog',
@@ -146,14 +181,20 @@ const latestPosts = (
           <div
             class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
           >
-            <p
-              class="post-data-list-item"
-              data-editable="text"
-              data-prop="author"
-              data-type="span"
-            >
-              {author}
-            </p>
+            {
+              bylineMember ? (
+                <AuthorCard member={bylineMember.data.id} compact />
+              ) : (
+                <p
+                  class="post-data-list-item"
+                  data-editable="text"
+                  data-prop="author"
+                  data-type="span"
+                >
+                  {author}
+                </p>
+              )
+            }
 
             <p
               class="post-data-list-item"
@@ -228,6 +269,11 @@ const latestPosts = (
         class="blog-sidebar intersect:opacity-100 intersect-once flex flex-col gap-8 sm:sticky sm:top-24 sm:self-start"
         data-pagefind-ignore
       >
+        {
+          tocHeadings.length > 0 && (
+            <TableOfContents paddingHorizontal="none" paddingVertical="none" />
+          )
+        }
         {
           allTags.length > 0 && (
             <div>

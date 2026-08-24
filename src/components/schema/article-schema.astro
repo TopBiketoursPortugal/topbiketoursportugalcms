@@ -1,0 +1,96 @@
+---
+/**
+ * schema.org `Article` for a guide.
+ *
+ * Differs from blog-posting-schema.astro in two ways: the author is a team
+ * member *reference* (name + team page URL resolved by the caller, not a
+ * free-text byline to parse) and `dateModified` comes from the guide's own
+ * `updated` field, which an editor bumps on a substantive revision — the git
+ * lastmod is only a fallback when it is later than both.
+ */
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import { resolveSchemaImage } from 'utils/schema-image';
+import { lastmodFor } from '../../../tools/seo/lib/lastmod.mjs';
+
+type Props = {
+  title: string;
+  description?: string | null;
+  date: string | Date;
+  updated?: string | Date | null;
+  author?: { name: string; url?: string; jobTitle?: string } | null;
+  image?: string | null;
+  wordCount?: number;
+  language: LanguageCodes;
+  /** Site-relative path, with trailing slash. */
+  url: string;
+};
+
+const {
+  title,
+  description,
+  date,
+  updated,
+  author,
+  image,
+  wordCount,
+  language,
+  url
+} = Astro.props;
+
+const site = SiteData[language];
+const baseUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const absoluteUrl = `${baseUrl}${url}`;
+const imageUrl = await resolveSchemaImage(image, Astro.site);
+
+// One organisation for the whole site — see blog-posting-schema.astro.
+const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization`;
+
+const publishedAt = new Date(date);
+const candidates = [
+  updated ? new Date(updated) : null,
+  (() => {
+    const raw = lastmodFor(absoluteUrl);
+    return raw ? new Date(raw) : null;
+  })()
+].filter((d): d is Date => !!d && !Number.isNaN(d.getTime()));
+const latest = candidates.sort((a, b) => b.getTime() - a.getTime())[0];
+// Never earlier than the publish date — a backdated guide would otherwise
+// claim it was modified before it existed.
+const dateModified =
+  latest && latest > publishedAt ? latest.toISOString() : null;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  'headline': title,
+  ...(description ? { description } : {}),
+  'datePublished': publishedAt.toISOString(),
+  ...(dateModified ? { dateModified } : {}),
+  'url': absoluteUrl,
+  'mainEntityOfPage': { '@type': 'WebPage', '@id': absoluteUrl },
+  'inLanguage': language,
+  'author': author
+    ? {
+        '@type': 'Person',
+        'name': author.name,
+        ...(author.jobTitle ? { jobTitle: author.jobTitle } : {}),
+        ...(author.url ? { url: author.url } : {})
+      }
+    : { '@type': 'Organization', '@id': organisationId },
+  ...(imageUrl ? { image: imageUrl } : {}),
+  ...(wordCount ? { wordCount } : {}),
+  'publisher': {
+    '@type': 'Organization',
+    '@id': organisationId,
+    'name': site.site.name
+  }
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

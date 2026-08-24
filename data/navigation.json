@@ -26,6 +26,11 @@
           "href": "/guided-bike-tours-calendar-portugal/"
         },
         {
+          "text": "Guides",
+          "page": "",
+          "href": "/guides/"
+        },
+        {
           "text": "Blog",
           "page": "",
           "href": "/blog/"
@@ -74,6 +79,10 @@
             {
               "text": "Calendar",
               "href": "/guided-bike-tours-calendar-portugal/"
+            },
+            {
+              "text": "Guides",
+              "href": "/guides/"
             },
             {
               "text": "Blog",
@@ -289,6 +298,11 @@
           "href": "/de/tourkalender/"
         },
         {
+          "text": "Reiseführer",
+          "page": "",
+          "href": "/de/guides/"
+        },
+        {
           "text": "Blog",
           "page": "",
           "href": "/de/blog/"
@@ -337,6 +351,10 @@
             {
               "text": "Kalender",
               "href": "/de/tourkalender/"
+            },
+            {
+              "text": "Reiseführer",
+              "href": "/de/guides/"
             },
             {
               "text": "Blog",
@@ -424,6 +442,11 @@
           "href": "/es/calendario-tours/"
         },
         {
+          "text": "Guías",
+          "page": "",
+          "href": "/es/guides/"
+        },
+        {
           "text": "Blog",
           "page": "",
           "href": "/es/blog/"
@@ -472,6 +495,10 @@
             {
               "text": "Calendario",
               "href": "/es/calendario-tours/"
+            },
+            {
+              "text": "Guías",
+              "href": "/es/guides/"
             },
             {
               "text": "Blog",
@@ -559,6 +586,11 @@
           "href": "/fr/calendrier-des-tours/"
         },
         {
+          "text": "Guides",
+          "page": "",
+          "href": "/fr/guides/"
+        },
+        {
           "text": "Blog",
           "page": "",
           "href": "/fr/blog/"
@@ -607,6 +639,10 @@
             {
               "text": "Calendrier",
               "href": "/fr/calendrier-des-tours/"
+            },
+            {
+              "text": "Guides",
+              "href": "/fr/guides/"
             },
             {
               "text": "Blog",
@@ -694,6 +730,11 @@
           "href": "/nl/tourkalender/"
         },
         {
+          "text": "Gidsen",
+          "page": "",
+          "href": "/nl/guides/"
+        },
+        {
           "text": "Blog",
           "page": "",
           "href": "/nl/blog/"
@@ -742,6 +783,10 @@
             {
               "text": "Kalender",
               "href": "/nl/tourkalender/"
+            },
+            {
+              "text": "Gidsen",
+              "href": "/nl/guides/"
             },
             {
               "text": "Blog",

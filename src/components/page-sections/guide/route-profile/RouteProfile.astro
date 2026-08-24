@@ -1,0 +1,351 @@
+---
+/**
+ * Route profile — the stats card for a ride: distance, climbing, days,
+ * difficulty, surface, start/end, best months, optional elevation image,
+ * notes and a GPX download. When `tour` points at a tours-collection id, the
+ * tour's distance / duration / difficulty are used as defaults for any stat
+ * left blank. Emits a schema.org Dataset (with a DataDownload distribution)
+ * when a GPX file is attached, so the track is discoverable as open data.
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Image from '@core-elements/image/Image.astro';
+import { slugifyLabel } from '@components/utils/slugify';
+import DifficultyScale from 'src/components/tours/difficulty-scale.astro';
+import { getCollection } from 'astro:content';
+import markdownit from 'markdown-it';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+
+const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
+];
+
+const {
+  title = '',
+  tour = '',
+  distanceKm,
+  elevationM,
+  days,
+  difficulty,
+  surface = '',
+  start = '',
+  end = '',
+  bestMonths = [],
+  gpxFile = '',
+  externalGpxUrl = '',
+  externalGpxLabel = '',
+  elevationImage = '',
+  elevationImageAlt = '',
+  notes = '',
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+
+// Defaults from the linked tour, if any.
+let tourEntry: any = null;
+if (tour) {
+  const tours = await getCollection('tours', (e: any) => e.data.id === tour);
+  tourEntry =
+    tours.find((e: any) => e.data.language === language) ?? tours[0] ?? null;
+}
+const toNumber = (v: unknown): number | undefined => {
+  if (v === null || v === undefined || v === '') return undefined;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : undefined;
+};
+const parseDays = (duration: unknown): number | undefined => {
+  const m = String(duration ?? '').match(/\d+/);
+  return m ? Number(m[0]) : undefined;
+};
+
+const finalDistance =
+  toNumber(distanceKm) ?? toNumber(tourEntry?.data?.distance);
+const finalElevation = toNumber(elevationM);
+const finalDays = toNumber(days) ?? parseDays(tourEntry?.data?.duration);
+const finalDifficulty =
+  toNumber(difficulty) ?? toNumber(tourEntry?.data?.difficulty);
+
+const md = markdownit({ html: true });
+const notesHtml = notes ? md.render(notes) : '';
+const notesPlain = notes
+  ? md
+      .render(notes)
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+  : '';
+
+const selectedMonths = new Set<string>(
+  (Array.isArray(bestMonths) ? bestMonths : String(bestMonths).split(','))
+    .map((m: string) => String(m).trim().slice(0, 3))
+    .map((m: string) => m.charAt(0).toUpperCase() + m.slice(1).toLowerCase())
+);
+
+const headingId = title ? slugifyLabel(title) : undefined;
+const fmt = new Intl.NumberFormat(language);
+
+const siteBase = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const gpxUrl = gpxFile
+  ? gpxFile.startsWith('http')
+    ? gpxFile
+    : `${siteBase}${gpxFile}`
+  : '';
+const dataset = gpxFile
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Dataset',
+      'name': title ? `${title} – GPX track` : 'GPX track',
+      'description':
+        notesPlain ||
+        [
+          title,
+          finalDistance ? `${fmt.format(finalDistance)} km` : null,
+          finalElevation ? `${fmt.format(finalElevation)} m climbing` : null
+        ]
+          .filter(Boolean)
+          .join(', ') ||
+        'GPS track of the described cycling route.',
+      'encodingFormat': 'application/gpx+xml',
+      'license': 'https://creativecommons.org/licenses/by-nc/4.0/',
+      'distribution': [
+        {
+          '@type': 'DataDownload',
+          'encodingFormat': 'application/gpx+xml',
+          'contentUrl': gpxUrl
+        }
+      ]
+    }
+  : null;
+
+const stats: { key: string; value: string | null; isDifficulty?: boolean }[] = [
+  {
+    key: 'Guide.Route.Distance',
+    value: finalDistance ? `${fmt.format(finalDistance)} km` : null
+  },
+  {
+    key: 'Guide.Route.Elevation',
+    value: finalElevation ? `${fmt.format(finalElevation)} m` : null
+  },
+  { key: 'Guide.Route.Days', value: finalDays ? String(finalDays) : null },
+  {
+    key: 'Guide.Route.Difficulty',
+    value: finalDifficulty ? String(finalDifficulty) : null,
+    isDifficulty: true
+  },
+  { key: 'Guide.Route.Surface', value: surface || null },
+  { key: 'Guide.Route.Start', value: start || null },
+  { key: 'Guide.Route.End', value: end || null }
+];
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['route-profile', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  <article
+    class="route-profile-card rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800/60"
+    aria-labelledby={headingId}
+  >
+    {
+      title && (
+        <Heading
+          level="h3"
+          size="md"
+          text={title}
+          id={headingId}
+          style="margin-top:0"
+          data-prop="title"
+        />
+      )
+    }
+
+    <dl
+      class="route-profile-stats mt-4 grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-4"
+    >
+      {
+        stats
+          .filter((s) => s.value)
+          .map((s) => (
+            <div class="min-w-0">
+              <dt class="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                {t(s.key as any, language)}
+              </dt>
+              <dd class="mt-0.5 text-lg font-semibold text-slate-900 tabular-nums dark:text-slate-100">
+                {s.isDifficulty ? (
+                  <DifficultyScale
+                    value={Number(s.value)}
+                    language={language}
+                    variant="labelled"
+                  />
+                ) : (
+                  s.value
+                )}
+              </dd>
+            </div>
+          ))
+      }
+    </dl>
+
+    {
+      selectedMonths.size > 0 && (
+        <div class="route-profile-months mt-6">
+          <p class="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+            {t('Guide.Route.BestMonths', language)}
+          </p>
+          <ol
+            class="mt-2 flex flex-wrap gap-1.5"
+            aria-label={t('Guide.Route.BestMonths', language)}
+          >
+            {MONTHS.map((m) => {
+              const on = selectedMonths.has(m);
+              return (
+                <li
+                  class:list={[
+                    'rounded-full px-2.5 py-1 text-xs font-semibold tabular-nums',
+                    on
+                      ? 'bg-emerald-600 text-white dark:bg-emerald-500 dark:text-slate-900'
+                      : 'bg-slate-100 text-slate-500 dark:bg-slate-700 dark:text-slate-400'
+                  ]}
+                  aria-current={on ? 'true' : undefined}
+                >
+                  {m}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      )
+    }
+
+    {
+      elevationImage && (
+        <figure class="route-profile-elevation mt-6">
+          <Image
+            source={elevationImage}
+            alt={elevationImageAlt}
+            rounded
+            widths={[640, 1280]}
+            sizes="(max-width: 1280px) 100vw, 1024px"
+            data-prop-src="elevationImage"
+            data-prop-alt="elevationImageAlt"
+          />
+        </figure>
+      )
+    }
+
+    {
+      notesHtml && (
+        <div
+          class="route-profile-notes prose dark:prose-invert prose-p:my-2 prose-a:text-primary dark:prose-a:text-blue-400 mt-6 max-w-none"
+          data-editable="text"
+          data-prop="notes"
+          set:html={notesHtml}
+        />
+      )
+    }
+
+    {
+      gpxFile && (
+        <p class="route-profile-download mt-6">
+          <a
+            href={gpxFile}
+            download
+            type="application/gpx+xml"
+            class="bg-primary focus-visible:outline-primary inline-flex items-center gap-2 rounded-md px-4 py-2 font-semibold text-white no-underline shadow-sm transition hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-blue-500 dark:text-slate-900"
+          >
+            <svg
+              aria-hidden="true"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3v12" />
+              <path d="m7 10 5 5 5-5" />
+              <path d="M5 21h14" />
+            </svg>
+            {t('Guide.Gpx.Download', language)}
+          </a>
+        </p>
+      )
+    }
+
+    {
+      // We don't publish a GPX of our own for every route yet. Rather than
+      // hide the download affordance entirely, point at a real track on a
+      // third-party route-sharing site — never a competing tour operator —
+      // so a reader who wants a file to load into their bike computer can
+      // still get one today. Only shown when we have no file of our own.
+      !gpxFile && externalGpxUrl && (
+        <p class="route-profile-download route-profile-download-external mt-6 text-sm text-slate-600 dark:text-slate-300">
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="mr-1.5 inline-block align-text-bottom"
+          >
+            <path d="M12 3v12" />
+            <path d="m7 10 5 5 5-5" />
+            <path d="M5 21h14" />
+          </svg>
+          {t('Guide.Gpx.ExternalPrefix', language)}{' '}
+          <a
+            href={externalGpxUrl}
+            target="_blank"
+            rel="noopener"
+            class="text-primary font-semibold underline underline-offset-2 dark:text-blue-400"
+          >
+            {externalGpxLabel || externalGpxUrl}
+          </a>
+        </p>
+      )
+    }
+  </article>
+</CustomSection>
+
+{
+  dataset && (
+    <script type="application/ld+json" set:html={JSON.stringify(dataset)} />
+  )
+}

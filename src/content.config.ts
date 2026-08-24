@@ -12,6 +12,7 @@ import { tourRiderLevelsCollection } from 'src/schemas/tour-rider-levels';
 import { bikeCategoriesCollection } from 'src/schemas/bike-categories';
 import { bikesCollection } from 'src/schemas/bikes';
 import { tourCollection } from 'src/schemas/tours';
+import { guidesCollection } from 'src/schemas/guides';
 
 const blogCollection = defineCollection({
   loader: publishedGlob({
@@ -37,6 +38,12 @@ const blogCollection = defineCollection({
       src: z.string(),
       alt: z.string()
     }),
+    // Retires the post: a non-empty value removes it from every collection
+    // query (src/schemas/published-glob.ts) and 301s its URL to this path
+    // (tools/seo/lib/routes.mjs `redirectedRoutes`). Declared here only so
+    // CloudCannon's schema and the zod type agree; the loader reads it from
+    // the file, not from `entry.data`.
+    redirect_to: z.string().optional().nullable(),
     seo: seoSchema
   })
 });
@@ -54,8 +61,14 @@ const pageSchema = z.object({
 });
 
 const featuredPostSchema = z.object({
+  // Which collection the block features. Blog posts use main_feature /
+  // feature_list; guides use main_guide / guide_list (separate fields so
+  // CloudCannon can offer the right collection in each picker).
+  collection: z.enum(['blog', 'guides']).optional().default('blog'),
   main_feature: z.string().uuid().optional().nullable(),
-  feature_list: z.array(z.string().uuid()).optional().nullable()
+  feature_list: z.array(z.string().uuid()).optional().nullable(),
+  main_guide: z.string().uuid().optional().nullable(),
+  guide_list: z.array(z.string().uuid()).optional().nullable()
 });
 
 export type FeaturedPost = z.infer<typeof featuredPostSchema>;
@@ -87,6 +100,7 @@ const pagesCollection = defineCollection({
 
 export const collections = {
   blog: blogCollection,
+  guides: guidesCollection,
   postTags: postTagsCollection,
   pages: pagesCollection,
   tours: tourCollection,

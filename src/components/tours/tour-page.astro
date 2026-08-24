@@ -28,6 +28,7 @@ import ReviewItem from '@components/page-sections/collection/review-item.astro';
 import TourProductSchema from '@components/schema/tour-product-schema.astro';
 import { getTourPath } from 'utils/permalinks';
 import DifficultyScale from './difficulty-scale.astro';
+import GuideCard from 'src/components/guides/guide-card.astro';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -63,6 +64,24 @@ const nightUnit =
   durationDays === 2
     ? ('Tour.Info.Duration.Unit.Night' as const)
     : ('Tour.Info.Duration.Unit.Nights' as const);
+
+// Guides that cover this tour ("Plan your trip"). A guide names its tours in
+// `relatedTours`; the tour page reads that back rather than keeping a second
+// list that would drift.
+const planningGuides = (
+  await getCollection(
+    'guides',
+    (guide) =>
+      guide.data.language === language &&
+      (guide.data.relatedTours ?? []).includes(tour.id)
+  )
+)
+  .sort(
+    (a, b) =>
+      new Date(b.data.updated ?? b.data.date).getTime() -
+      new Date(a.data.updated ?? a.data.date).getTime()
+  )
+  .slice(0, 3);
 
 // WeTravel takes priority over FareHarbor/Bokun and the enquiry form when a
 // guided and/or self-guided trip UUID is configured.
@@ -604,6 +623,22 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       )
     }
   </section>
+  {
+    planningGuides.length > 0 ? (
+      <section
+        id="plan-your-trip"
+        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 flex-col gap-4 sm:col-start-1 sm:col-end-2"
+        data-pagefind-ignore
+      >
+        <Heading as="h2">{t('Tour.PlanYourTrip.Heading', language)}</Heading>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {planningGuides.map((guide) => (
+            <GuideCard guide={guide} excerpt={160} />
+          ))}
+        </div>
+      </section>
+    ) : null
+  }
   {
     relatedTours.length > 0 ? (
       <section

@@ -1,0 +1,12 @@
+heading:
+  type: text
+  comment: Optional short heading above the answer (e.g. "In short").
+text:
+  type: markdown
+  comment: The quotable 40–60 word answer. Keep it to one or two plain paragraphs — no headings.
+facts:
+  type: array
+  label: Key facts
+  comment: Short label/value pairs shown as a grid under the answer (distance, days, best months…).
+  options:
+    structures: _structures.quickAnswerFacts

@@ -17,6 +17,16 @@ Explore Portugal on a bike tour! Guided & self-guided biking holidays with luxur
 ### Blog
 - [Blog](https://topbiketoursportugal.com/blog/): Read our blog for tips, stories, and insights about biking in Portugal.
 
+### Cycling guides
+In-depth, regularly updated guides written by the team that designs and guides the tours. Each opens with a short quotable answer, then covers routes, seasons, difficulty, where to stay and what to eat.
+- [Cycling guides](https://topbiketoursportugal.com/guides/): Index of all guides, plus a GPX route library.
+- [Cycling in Portugal](https://topbiketoursportugal.com/guides/cycling-in-portugal/): The pillar guide — regions, best time to go, difficulty, safety, bikes, guided vs self-guided, packing.
+- [Porto to Lisbon by bike](https://topbiketoursportugal.com/guides/porto-to-lisbon-by-bike/): The Atlantic coast route stage by stage, with where to stay and what to eat.
+- [Cycling the Portuguese Camino](https://topbiketoursportugal.com/guides/cycling-the-portuguese-camino/): Porto to Santiago de Compostela by bike — coastal and central ways, cycling vs walking, French Way comparison.
+- [Cycling the Algarve](https://topbiketoursportugal.com/guides/cycling-the-algarve/): Vicentine Coast and Algarve routes, seasons, gravel loops and accommodation.
+- [Self-guided bike tours in Portugal](https://topbiketoursportugal.com/guides/self-guided-bike-tours-portugal/): How self-guided trips work, guided vs self-guided, what is included.
+- [Cycling the Douro Valley](https://topbiketoursportugal.com/guides/cycling-the-douro-valley/): Douro and Trás-os-Montes routes, wine, climbs, Minho vs Douro, where to stay.
+
 ### About Us
 - [About us](https://topbiketoursportugal.com/about-us-biking-travel/): Learn more about our mission and the team behind Top Bike Tours Portugal.
 

@@ -16,9 +16,17 @@ const { language, faqs = [] } = Astro.props;
 const defaultFaqs = AllFaqs[language];
 
 const items = faqs?.length > 0 ? faqs : defaultFaqs;
+
+// The legacy Accordion emits FAQPage JSON-LD from `items` when `type="faq"`;
+// the slotted children below still render the markup, so the list is only
+// read for the schema.
+const schemaItems = items.map(({ question, answer }) => ({
+  header: { text: question },
+  content: answer
+}));
 ---
 
-<Accordion>
+<Accordion type="faq" items={schemaItems}>
   {
     items.map(({ question, answer }) => (
       <AccordionItem

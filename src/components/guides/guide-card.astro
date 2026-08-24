@@ -1,0 +1,98 @@
+---
+/**
+ * Card for a guide: thumbnail, title, summary and "Updated" date.
+ * Used by the /guides/ listing, the related-guides grid under a guide and the
+ * "Plan your trip" strip on tour pages.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import LanguageData from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getGuidePath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
+import { t } from 'utils/i18n';
+
+type Props = {
+  guide: CollectionEntry<'guides'>;
+  /** Heading level of the title; h3 inside a section that has its own h2. */
+  headingLevel?: 'h2' | 'h3';
+  /** Trim the summary to this many characters (word boundary). 0 = full. */
+  excerpt?: number;
+  class?: string;
+};
+
+const {
+  guide,
+  headingLevel = 'h3',
+  excerpt = 0,
+  class: className
+} = Astro.props;
+const { data } = guide;
+const language = (Astro.currentLocale ??
+  data.language ??
+  'en') as LanguageCodes;
+const href = getGuidePath(guide);
+const imageSrc = resolveImageSrc(data.thumb_image_path || data.image?.src);
+const updated = new Date(data.updated ?? data.date);
+const Title = headingLevel;
+
+const summary =
+  excerpt > 0 && data.summary.length > excerpt
+    ? data.summary.slice(0, excerpt).replace(/\s+\S*$/, '') + '…'
+    : data.summary;
+---
+
+<article
+  class:list={[
+    'guide-card intersect:opacity-100 intersect-once flex flex-col transition-transform duration-200 hover:-translate-y-1',
+    className
+  ]}
+>
+  {
+    imageSrc ? (
+      <a href={href} tabindex="-1" aria-hidden="true">
+        <Image
+          class="aspect-video w-full rounded-sm object-cover"
+          src={imageSrc as any}
+          alt={data.thumb_image_alt ?? data.image?.alt ?? data.title}
+          width={640}
+          loading="lazy"
+        />
+      </a>
+    ) : null
+  }
+  <div class="mt-3 flex flex-col gap-1">
+    <Title class="text-xl leading-snug font-semibold">
+      <a href={href} class="hover:underline">
+        {data.title}
+      </a>
+    </Title>
+    <p class="text-sm text-slate-700 dark:text-slate-300">{summary}</p>
+    <p class="mt-1 text-xs font-light text-slate-500 dark:text-slate-400">
+      {t('Guides.Updated', language)}{' '}
+      <time datetime={updated.toISOString()}>
+        {
+          updated.toLocaleDateString(LanguageData[language].locale, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        }
+      </time>
+    </p>
+  </div>
+</article>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .guide-card {
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+    .guide-card[no-intersect] {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+</style>

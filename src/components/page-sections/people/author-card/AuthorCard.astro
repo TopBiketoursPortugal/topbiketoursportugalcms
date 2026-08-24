@@ -1,0 +1,41 @@
+---
+/**
+ * Author card block — photo, name (linked to the team page), role and an
+ * editor-written note about the author's relationship to the route.
+ * The inner card lives in AuthorCardInner.astro so layouts can reuse it.
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import AuthorCardInner from './AuthorCardInner.astro';
+
+const {
+  member = '',
+  note = '',
+  compact = false,
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['author-card-section', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  <AuthorCardInner member={member} note={note} compact={compact} />
+</CustomSection>

@@ -159,3 +159,15 @@ export interface ContentSelectorItem {
   _component?: string;
   [key: string]: unknown;
 }
+
+/**
+ * One entry of an in-page table of contents. `depth` is the heading level
+ * (2 = h2, 3 = h3); `slug` is the element id to link to. Markdown headings
+ * from `render(entry).headings` already have this shape; block headings are
+ * mapped onto it by the Guide and Post layouts.
+ */
+export type TocHeading = {
+  depth: number;
+  slug: string;
+  text: string;
+};

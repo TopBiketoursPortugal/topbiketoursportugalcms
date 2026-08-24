@@ -144,6 +144,14 @@ collections_config:
           empty_type: array
         comment: To add a new tag, go to the postTags collection
         cascade: true
+      redirect_to:
+        type: text
+        label: Redirect to (retire this post)
+        comment: Set to a path like /guides/cycling-the-algarve/#where-to-stay
+          to retire this post. It disappears from the site and the old URL 301s
+          there. Clear to restore.
+        options:
+          empty_type: null
     add_options:
       - name: Add New Post
         icon: post_add
@@ -162,6 +170,239 @@ collections_config:
         remove_extra_inputs: true
         name: New Post
         icon: notes
+  guides:
+    path: src/content/guides
+    glob:
+      - '**/*.md*'
+    name: Guides
+    singular_name: Guide
+    icon: menu_book
+    url: /[relative_base_path]/guides/{path|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: Long-form cycling guides. Content blocks render above (and
+      "after" blocks below) the markdown body.
+    _enabled_editors:
+      - content
+      - visual
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          empty_type: string
+          required: true
+          required_message: Guide title is required
+        cascade: true
+      path:
+        type: text
+        comment: URL slug. Leave empty to derive it from the title.
+        cascade: true
+      summary:
+        type: textarea
+        comment: 40–60 words that answer the guide's question outright. Shown
+          on listing cards and used as the meta description when SEO has none.
+        options:
+          required: true
+          required_message: A summary is required
+        cascade: true
+      date:
+        type: datetime
+        cascade: true
+      updated:
+        type: date
+        label: Last updated
+        comment: Bump on a substantive revision; shown on the page and used
+          as dateModified. Falls back to the publish date.
+        cascade: true
+      author:
+        type: select
+        options:
+          allow_empty: true
+          values: collections.team
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: memberType
+            image:
+              - key: image.src
+        cascade: true
+      image:
+        type: image
+        options:
+          paths:
+            uploads: src/assets/images
+            static: ''
+          empty_type: string
+        cascade: true
+      thumb_image_path:
+        type: image
+        options:
+          paths:
+            uploads: src/assets/images
+            static: ''
+          empty_type: string
+          required: true
+          required_message: A thumbnail image is required
+        cascade: true
+      tags:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.postTags
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+          empty_type: array
+        comment: To add a new tag, go to the postTags collection
+        cascade: true
+      relatedTours:
+        type: multiselect
+        comment: Tours this guide covers. They are listed under the guide, and
+          each tour page shows the guide in its "Plan your trip" strip.
+        options:
+          allow_create: false
+          allow_empty: true
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+          empty_type: array
+        cascade: true
+      relatedGuides:
+        type: multiselect
+        options:
+          allow_create: false
+          allow_empty: true
+          values: collections.guides
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+          empty_type: array
+        cascade: true
+      relatedPosts:
+        type: multiselect
+        options:
+          allow_create: false
+          allow_empty: true
+          values: collections.blog
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+          empty_type: array
+        cascade: true
+      content_blocks:
+        type: array
+        label: Blocks before the text
+        options:
+          structures: _structures.content_blocks
+      content_blocks_after:
+        type: array
+        label: Blocks after the text
+        options:
+          structures: _structures.content_blocks
+    add_options:
+      - name: Add New Guide
+        icon: post_add
+        base_path: ''
+        schema: default
+      - name: New Guide Portuguese
+        icon: language
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Guide German
+        icon: language
+        base_path: /de/
+        schema: defaultDE
+      - name: New Guide Spanish
+        icon: language
+        base_path: /es/
+        schema: defaultES
+      - name: New Guide French
+        icon: language
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Guide Dutch
+        icon: language
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{filename|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
+      defaultPT:
+        path: schemas/pt/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
+      defaultDE:
+        path: schemas/de/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
+      defaultES:
+        path: schemas/es/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
+      defaultFR:
+        path: schemas/fr/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
+      defaultNL:
+        path: schemas/nl/guide.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        name: New Guide
+        icon: menu_book
   data:
     path: data
     name: Data
@@ -2567,6 +2808,308 @@ _snippets:
         type: textarea
         comment: The text for the download link
         cascade: true
+  quick_answer:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsQuickAnswer
+      named_args:
+        - editor_key: heading
+          source_key: heading
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: text
+          source_key: text
+          type: string
+        - editor_key: facts
+          source_key: facts
+          type: string
+          optional: true
+          remove_empty: true
+    preview:
+      text:
+        - key: heading
+        - Quick Answer
+      subtext:
+        - key: text
+        - Quotable 40–60 word answer plus key facts
+      icon: bolt
+    _inputs:
+      heading:
+        type: text
+        comment: Optional short heading (e.g. "In short").
+        cascade: true
+      text:
+        type: textarea
+        comment: The quotable 40–60 word answer (plain text or inline markdown).
+        cascade: true
+      facts:
+        type: textarea
+        comment: 'Key facts as "Label: value|Label: value" (pipe-separated).'
+        cascade: true
+  route_profile:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsRouteProfile
+      named_args:
+        - editor_key: title
+          source_key: title
+          type: string
+        - editor_key: tour
+          source_key: tour
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: distanceKm
+          source_key: distanceKm
+          type: number
+          optional: true
+          remove_empty: true
+        - editor_key: elevationM
+          source_key: elevationM
+          type: number
+          optional: true
+          remove_empty: true
+        - editor_key: days
+          source_key: days
+          type: number
+          optional: true
+          remove_empty: true
+        - editor_key: difficulty
+          source_key: difficulty
+          type: number
+          optional: true
+          remove_empty: true
+        - editor_key: surface
+          source_key: surface
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: start
+          source_key: start
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: end
+          source_key: end
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: bestMonths
+          source_key: bestMonths
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: gpxFile
+          source_key: gpxFile
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: elevationImage
+          source_key: elevationImage
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: elevationImageAlt
+          source_key: elevationImageAlt
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: notes
+          source_key: notes
+          type: string
+          optional: true
+          remove_empty: true
+    preview:
+      text:
+        - key: title
+        - Route Profile
+      subtext:
+        - key: surface
+        - Distance, climbing, days, difficulty, best months, GPX
+      icon: route
+    _inputs:
+      title:
+        type: text
+        cascade: true
+      tour:
+        type: select
+        comment: Optional linked tour; fills blank stats from the tour.
+        cascade: true
+        options:
+          allow_create: false
+          allow_empty: true
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+      distanceKm:
+        type: number
+        label: Distance (km)
+        cascade: true
+      elevationM:
+        type: number
+        label: Elevation gain (m)
+        cascade: true
+      days:
+        type: number
+        cascade: true
+      difficulty:
+        type: range
+        cascade: true
+        options:
+          min: 1
+          max: 5
+          step: 1
+      surface:
+        type: text
+        comment: e.g. "85% paved · 15% gravel".
+        cascade: true
+      start:
+        type: text
+        cascade: true
+      end:
+        type: text
+        cascade: true
+      bestMonths:
+        type: text
+        comment: Comma-separated three-letter months, e.g. "Apr,May,Jun".
+        cascade: true
+      gpxFile:
+        type: file
+        label: GPX file
+        comment: Upload to public/gpx (<guide-slug>-<route>.gpx). Empty hides the download button.
+        cascade: true
+        options:
+          accepts_mime_types:
+            - application/gpx+xml
+            - application/xml
+            - text/xml
+            - application/octet-stream
+          paths:
+            uploads: public/gpx
+            static: public
+      elevationImage:
+        type: image
+        cascade: true
+        options:
+          paths:
+            uploads: src/assets/images
+            static: ""
+      elevationImageAlt:
+        type: textarea
+        cascade: true
+      notes:
+        type: textarea
+        comment: Short notes (markdown).
+        cascade: true
+  climate_table:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsClimateTable
+      named_args:
+        - editor_key: heading
+          source_key: heading
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: region
+          source_key: region
+          type: string
+        - editor_key: note
+          source_key: note
+          type: string
+          optional: true
+          remove_empty: true
+    preview:
+      text:
+        - key: heading
+        - Climate Table
+      subtext:
+        - key: region
+        - Monthly riding conditions for a region
+      icon: thermostat
+    _inputs:
+      heading:
+        type: text
+        cascade: true
+      region:
+        type: select
+        cascade: true
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - id: algarve
+              name: Algarve
+            - id: alentejo
+              name: Alentejo
+            - id: lisbon
+              name: Lisbon & coast
+            - id: centro
+              name: Centro (Coimbra & Aveiro)
+            - id: douro
+              name: Douro Valley
+            - id: minho
+              name: Minho & Porto
+            - id: portugal
+              name: Portugal (national)
+      note:
+        type: textarea
+        comment: Short note under the legend (markdown).
+        cascade: true
+  comparison_table:
+    template: mdx_component
+    inline: false
+    definitions:
+      component_name: SnippetsComparisonTable
+      named_args:
+        - editor_key: heading
+          source_key: heading
+          type: string
+          optional: true
+          remove_empty: true
+        - editor_key: columns
+          source_key: columns
+          type: string
+        - editor_key: rows
+          source_key: rows
+          type: string
+        - editor_key: note
+          source_key: note
+          type: string
+          optional: true
+          remove_empty: true
+    preview:
+      text:
+        - key: heading
+        - Comparison Table
+      subtext:
+        - key: columns
+        - Compare options side by side
+      icon: table_chart
+    _inputs:
+      heading:
+        type: text
+        cascade: true
+      columns:
+        type: text
+        comment: Column headers separated by "|", e.g. "Guided|Self-guided".
+        cascade: true
+      rows:
+        type: textarea
+        comment: 'One row per line: "Label;cell;cell;cell" (one cell per column).'
+        cascade: true
+      note:
+        type: textarea
+        comment: Optional footnote (markdown).
+        cascade: true
   mdx_tint:
     template: mdx_paired_component
     inline: true
@@ -2632,6 +3175,10 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
+  climate:
+    path: data/climate.json
+  events:
+    path: data/events.json
 editor:
   default_path: ''
 timezone: Etc/UTC

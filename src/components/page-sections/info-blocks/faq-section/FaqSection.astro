@@ -1,17 +1,45 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import Accordion from "@wrappers/accordion/Accordion.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Accordion from '@wrappers/accordion/Accordion.astro';
+
+/**
+ * Plain text of an answer's content sections, for the FAQPage schema.
+ * Answers are authored as core-elements/text blocks (markdown); anything
+ * else (images, buttons) carries no answer text and is skipped.
+ */
+function plainText(markdown: string): string {
+  return markdown
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/[*_~`>#]/g, '')
+    .replace(/^\s*[-+]\s+/gm, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function answerText(item: any): string {
+  const sections: any[] = Array.isArray(item?.contentSections)
+    ? item.contentSections
+    : [];
+  return sections
+    .map((section) =>
+      typeof section?.text === 'string' ? plainText(section.text) : ''
+    )
+    .filter(Boolean)
+    .join(' ');
+}
 
 const {
-  heading = "Frequently Asked Questions",
+  heading = 'Frequently Asked Questions',
   items = [],
-  label = "About FAQ",
+  label = 'About FAQ',
   sectionLabel,
-  maxContentWidth = "xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -19,11 +47,40 @@ const {
   _component,
   ...htmlAttributes
 } = Astro.props;
+
+// FAQPage rich-result markup. Only questions with a text answer qualify;
+// none at all and the script is omitted rather than emitting an empty list.
+const faqEntities = (items as any[])
+  .map((item) => ({
+    '@type': 'Question',
+    'name': plainText(String(item?.title ?? '')),
+    'acceptedAnswer': { '@type': 'Answer', 'text': answerText(item) }
+  }))
+  .filter((q) => q.name && q.acceptedAnswer.text);
+const faqSchema =
+  faqEntities.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': faqEntities
+      }
+    : null;
 ---
+
+{
+  faqSchema && (
+    <script
+      is:inline
+      async
+      type="application/ld+json"
+      set:html={JSON.stringify(faqSchema)}
+    />
+  )
+}
 
 <CustomSection
   {...htmlAttributes}
-  class:list={["faq-section", className]}
+  class:list={['faq-section', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}

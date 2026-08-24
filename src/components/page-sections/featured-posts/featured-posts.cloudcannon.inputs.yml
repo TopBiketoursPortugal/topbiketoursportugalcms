@@ -1,6 +1,72 @@
+collection:
+  type: select
+  label: Source
+  comment: Which collection the features come from. Blog posts use the two
+    fields below; guides use "Main guide" and "Guide list".
+  options:
+    allow_empty: false
+    values:
+      - id: blog
+        name: Blog posts
+      - id: guides
+        name: Guides
+main_feature:
+  type: select
+  label: Main post
+  hidden: collection === 'guides'
+  options:
+    allow_empty: true
+    values: collections.blog
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+      image:
+        - key: image.src
 feature_list:
   type: multiselect
+  label: Post list
+  hidden: collection === 'guides'
   options:
     empty_type: array
     values: collections.blog
     value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+      image:
+        - key: image.src
+main_guide:
+  type: select
+  label: Main guide
+  hidden: collection !== 'guides'
+  options:
+    allow_empty: true
+    values: collections.guides
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+      image:
+        - key: image.src
+guide_list:
+  type: multiselect
+  label: Guide list
+  hidden: collection !== 'guides'
+  options:
+    empty_type: array
+    values: collections.guides
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+      image:
+        - key: image.src

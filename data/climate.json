@@ -1,0 +1,711 @@
+{
+  "regions": {
+    "algarve": {
+      "name": "Algarve",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 16,
+          "low": 8,
+          "rainDays": 9,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Feb",
+          "high": 17,
+          "low": 9,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 19,
+          "low": 10,
+          "rainDays": 7,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Apr",
+          "high": 20,
+          "low": 12,
+          "rainDays": 6,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 23,
+          "low": 14,
+          "rainDays": 3,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 26,
+          "low": 17,
+          "rainDays": 1,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 29,
+          "low": 19,
+          "rainDays": 0,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Aug",
+          "high": 29,
+          "low": 20,
+          "rainDays": 0,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Sep",
+          "high": 27,
+          "low": 18,
+          "rainDays": 2,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 23,
+          "low": 15,
+          "rainDays": 6,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 19,
+          "low": 12,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Dec",
+          "high": 17,
+          "low": 9,
+          "rainDays": 9,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        }
+      ]
+    },
+    "alentejo": {
+      "name": "Alentejo",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 14,
+          "low": 5,
+          "rainDays": 10,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Feb",
+          "high": 15,
+          "low": 6,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 18,
+          "low": 7,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Apr",
+          "high": 20,
+          "low": 9,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 24,
+          "low": 12,
+          "rainDays": 5,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 29,
+          "low": 15,
+          "rainDays": 2,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Jul",
+          "high": 33,
+          "low": 17,
+          "rainDays": 0,
+          "wind": "light",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Aug",
+          "high": 33,
+          "low": 17,
+          "rainDays": 0,
+          "wind": "light",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Sep",
+          "high": 29,
+          "low": 16,
+          "rainDays": 3,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Oct",
+          "high": 23,
+          "low": 13,
+          "rainDays": 7,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 17,
+          "low": 9,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Dec",
+          "high": 14,
+          "low": 6,
+          "rainDays": 10,
+          "wind": "light",
+          "verdict": "shoulder"
+        }
+      ]
+    },
+    "lisbon": {
+      "name": "Lisbon & coast",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 15,
+          "low": 8,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Feb",
+          "high": 16,
+          "low": 9,
+          "rainDays": 10,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 18,
+          "low": 10,
+          "rainDays": 9,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Apr",
+          "high": 20,
+          "low": 12,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 22,
+          "low": 14,
+          "rainDays": 5,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 25,
+          "low": 16,
+          "rainDays": 2,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 28,
+          "low": 18,
+          "rainDays": 0,
+          "wind": "strong",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Aug",
+          "high": 28,
+          "low": 18,
+          "rainDays": 1,
+          "wind": "strong",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Sep",
+          "high": 27,
+          "low": 17,
+          "rainDays": 3,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 23,
+          "low": 15,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 18,
+          "low": 11,
+          "rainDays": 10,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Dec",
+          "high": 15,
+          "low": 9,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        }
+      ]
+    },
+    "centro": {
+      "name": "Centro (Coimbra & Aveiro)",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 14,
+          "low": 5,
+          "rainDays": 13,
+          "wind": "moderate",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Feb",
+          "high": 15,
+          "low": 6,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 18,
+          "low": 8,
+          "rainDays": 10,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Apr",
+          "high": 19,
+          "low": 9,
+          "rainDays": 10,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 22,
+          "low": 12,
+          "rainDays": 7,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 26,
+          "low": 15,
+          "rainDays": 3,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 29,
+          "low": 16,
+          "rainDays": 1,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Aug",
+          "high": 29,
+          "low": 16,
+          "rainDays": 1,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Sep",
+          "high": 27,
+          "low": 15,
+          "rainDays": 4,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 22,
+          "low": 12,
+          "rainDays": 10,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 17,
+          "low": 9,
+          "rainDays": 12,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Dec",
+          "high": 14,
+          "low": 6,
+          "rainDays": 13,
+          "wind": "moderate",
+          "verdict": "avoid"
+        }
+      ]
+    },
+    "douro": {
+      "name": "Douro Valley",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 12,
+          "low": 4,
+          "rainDays": 12,
+          "wind": "light",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Feb",
+          "high": 14,
+          "low": 5,
+          "rainDays": 10,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 18,
+          "low": 7,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Apr",
+          "high": 20,
+          "low": 9,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 24,
+          "low": 12,
+          "rainDays": 7,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 29,
+          "low": 15,
+          "rainDays": 3,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 33,
+          "low": 18,
+          "rainDays": 1,
+          "wind": "light",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Aug",
+          "high": 33,
+          "low": 18,
+          "rainDays": 1,
+          "wind": "light",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Sep",
+          "high": 29,
+          "low": 15,
+          "rainDays": 4,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 22,
+          "low": 12,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 16,
+          "low": 8,
+          "rainDays": 11,
+          "wind": "light",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Dec",
+          "high": 12,
+          "low": 5,
+          "rainDays": 12,
+          "wind": "light",
+          "verdict": "avoid"
+        }
+      ]
+    },
+    "minho": {
+      "name": "Minho & Porto",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 14,
+          "low": 5,
+          "rainDays": 14,
+          "wind": "moderate",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Feb",
+          "high": 15,
+          "low": 6,
+          "rainDays": 12,
+          "wind": "moderate",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Mar",
+          "high": 17,
+          "low": 8,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Apr",
+          "high": 19,
+          "low": 9,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "May",
+          "high": 21,
+          "low": 12,
+          "rainDays": 8,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 25,
+          "low": 15,
+          "rainDays": 4,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 27,
+          "low": 16,
+          "rainDays": 2,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Aug",
+          "high": 27,
+          "low": 16,
+          "rainDays": 2,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Sep",
+          "high": 25,
+          "low": 15,
+          "rainDays": 6,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 21,
+          "low": 12,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Nov",
+          "high": 17,
+          "low": 9,
+          "rainDays": 13,
+          "wind": "moderate",
+          "verdict": "avoid"
+        },
+        {
+          "m": "Dec",
+          "high": 14,
+          "low": 6,
+          "rainDays": 14,
+          "wind": "moderate",
+          "verdict": "avoid"
+        }
+      ]
+    },
+    "portugal": {
+      "name": "Portugal (national average)",
+      "months": [
+        {
+          "m": "Jan",
+          "high": 14,
+          "low": 6,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Feb",
+          "high": 15,
+          "low": 7,
+          "rainDays": 10,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Mar",
+          "high": 18,
+          "low": 8,
+          "rainDays": 9,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Apr",
+          "high": 20,
+          "low": 10,
+          "rainDays": 9,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "May",
+          "high": 23,
+          "low": 13,
+          "rainDays": 6,
+          "wind": "moderate",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jun",
+          "high": 27,
+          "low": 15,
+          "rainDays": 3,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Jul",
+          "high": 30,
+          "low": 17,
+          "rainDays": 1,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Aug",
+          "high": 30,
+          "low": 17,
+          "rainDays": 1,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Sep",
+          "high": 27,
+          "low": 16,
+          "rainDays": 4,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Oct",
+          "high": 22,
+          "low": 13,
+          "rainDays": 9,
+          "wind": "light",
+          "verdict": "ride"
+        },
+        {
+          "m": "Nov",
+          "high": 17,
+          "low": 9,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        },
+        {
+          "m": "Dec",
+          "high": 14,
+          "low": 7,
+          "rainDays": 11,
+          "wind": "moderate",
+          "verdict": "shoulder"
+        }
+      ]
+    }
+  }
+}

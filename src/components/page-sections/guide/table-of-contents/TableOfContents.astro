@@ -1,0 +1,100 @@
+---
+/**
+ * Table of contents — a `<nav>` of in-page anchors. Editors can list items
+ * manually; when `items` is empty the block falls back to
+ * `Astro.locals.tocHeadings` (set by the Guide and Post layouts from the
+ * rendered markdown headings + block section labels).
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type TocItem = {
+  label?: string;
+  anchor?: string;
+  text?: string;
+  slug?: string;
+  depth?: number;
+};
+
+const {
+  heading,
+  items = [],
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'md',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const title = heading?.toString().trim() || t('Guide.Toc.Heading', language);
+
+const manual = (items as TocItem[]).filter((i) => i && (i.label || i.text));
+const auto = ((Astro.locals as any)?.tocHeadings ?? []) as TocItem[];
+const source = manual.length > 0 ? manual : auto;
+
+const entries = source
+  .map((i) => ({
+    label: (i.label ?? i.text ?? '').toString().trim(),
+    anchor: (i.anchor ?? i.slug ?? '').toString().trim().replace(/^#/, ''),
+    depth: Number(i.depth ?? 2)
+  }))
+  .filter((i) => i.label && i.anchor);
+---
+
+{
+  entries.length > 0 && (
+    <CustomSection
+      {...htmlAttributes}
+      class:list={['table-of-contents', className]}
+      label={sectionLabel}
+      maxContentWidth={maxContentWidth}
+      paddingHorizontal={paddingHorizontal}
+      paddingVertical={paddingVertical}
+      colorScheme={colorScheme}
+      backgroundColor={backgroundColor}
+      background={background}
+      useDefaultEditableBinding={useDefaultEditableBinding}
+    >
+      <nav
+        aria-label={title}
+        class="toc rounded-lg border border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-800/60"
+      >
+        <Heading
+          level="h2"
+          size="xs"
+          text={title}
+          style="margin-top:0"
+          data-prop="heading"
+        />
+        <ol
+          class="toc-list mt-2 space-y-1 text-sm"
+          data-editable={manual.length ? 'array' : undefined}
+          data-prop={manual.length ? 'items' : undefined}
+        >
+          {entries.map((e) => (
+            <li
+              class:list={[e.depth >= 3 && 'pl-4']}
+              data-editable={manual.length ? 'array-item' : undefined}
+            >
+              <a
+                href={`#${e.anchor}`}
+                class="hover:text-primary text-slate-700 underline-offset-2 hover:underline dark:text-slate-300 dark:hover:text-blue-400"
+              >
+                {e.label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </CustomSection>
+  )
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Volta ao Algarve",
+    "month": 2,
+    "dates": "Mid-February (5 stages)",
+    "region": "algarve",
+    "distance": "Pro stage race – spectate roadside, ride the Alto do Malhão climb",
+    "type": "stage-race",
+    "url": ""
+  },
+  {
+    "name": "Algarve Granfondo",
+    "month": 3,
+    "dates": "Spring",
+    "region": "algarve",
+    "distance": "Granfondo ~130 km / Mediofondo ~80 km",
+    "type": "sportive",
+    "url": ""
+  },
+  {
+    "name": "L'Étape Portugal by Tour de France",
+    "month": 5,
+    "dates": "Spring (date varies)",
+    "region": "lisbon",
+    "distance": "Long route ~120 km / short route ~70 km",
+    "type": "sportive",
+    "url": ""
+  },
+  {
+    "name": "Granfondo Serra da Estrela",
+    "month": 6,
+    "dates": "June",
+    "region": "centro",
+    "distance": "Granfondo ~150 km with the Torre climb (1,993 m)",
+    "type": "sportive",
+    "url": ""
+  },
+  {
+    "name": "Gerês Granfondo",
+    "month": 6,
+    "dates": "Early summer",
+    "region": "minho",
+    "distance": "Granfondo ~140 km in the Peneda-Gerês National Park",
+    "type": "sportive",
+    "url": ""
+  },
+  {
+    "name": "Troféu Joaquim Agostinho",
+    "month": 7,
+    "dates": "July",
+    "region": "lisbon",
+    "distance": "Pro stage race around Torres Vedras – spectator event",
+    "type": "stage-race",
+    "url": ""
+  },
+  {
+    "name": "Volta a Portugal em Bicicleta",
+    "month": 8,
+    "dates": "Early to mid-August (10 stages)",
+    "region": "all",
+    "distance": "Pro stage race crossing the country – roadside spectating, mountain-top finishes",
+    "type": "stage-race",
+    "url": ""
+  },
+  {
+    "name": "Douro Granfondo",
+    "month": 9,
+    "dates": "September",
+    "region": "douro",
+    "distance": "Granfondo ~130 km among the Douro vineyards",
+    "type": "sportive",
+    "url": ""
+  },
+  {
+    "name": "Gravel events in the Alentejo plains",
+    "month": 10,
+    "dates": "Autumn (several organisers)",
+    "region": "alentejo",
+    "distance": "Typically 60–120 km on farm tracks and cork-oak estates",
+    "type": "gravel",
+    "url": ""
+  },
+  {
+    "name": "Lisboa – Cascais coastal sportive rides",
+    "month": 10,
+    "dates": "Autumn",
+    "region": "lisbon",
+    "distance": "Open rides of 50–100 km along the Estoril coast and Sintra hills",
+    "type": "road",
+    "url": ""
+  },
+  {
+    "name": "Taça de Portugal de XCO (mountain bike cross-country rounds)",
+    "month": 4,
+    "dates": "Rounds from spring to autumn",
+    "region": "all",
+    "distance": "Lap races; amateur categories open",
+    "type": "mtb",
+    "url": ""
+  },
+  {
+    "name": "Minho gravel and cyclocross autumn season",
+    "month": 11,
+    "dates": "November to February",
+    "region": "minho",
+    "distance": "Short off-road circuits; good spectator days near Porto and Braga",
+    "type": "mtb",
+    "url": ""
+  }
+]

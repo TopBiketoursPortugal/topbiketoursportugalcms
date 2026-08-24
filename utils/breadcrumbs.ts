@@ -1,6 +1,10 @@
 import type { LanguageCodes } from 'src/schemas/language';
 import { t } from 'utils/i18n';
-import { getHomePermalink, getBasePath } from 'utils/permalinks';
+import {
+  getHomePermalink,
+  getBasePath,
+  getGuidesIndexPath
+} from 'utils/permalinks';
 
 export type BreadcrumbItem = {
   name: string;
@@ -52,5 +56,12 @@ export function getAboutCrumb(language: LanguageCodes): BreadcrumbItem {
   return {
     name: t('Breadcrumb.About', language),
     url: aboutPagePaths[language]
+  };
+}
+
+export function getGuidesCrumb(language: LanguageCodes): BreadcrumbItem {
+  return {
+    name: t('Guides.Title', language),
+    url: getGuidesIndexPath(language)
   };
 }

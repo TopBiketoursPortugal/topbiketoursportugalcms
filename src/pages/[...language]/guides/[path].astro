@@ -1,0 +1,78 @@
+---
+import type { LanguageCodes } from 'src/schemas/language';
+import GuideLayout from 'src/layouts/Guide.astro';
+import { getCollection, render } from 'astro:content';
+import slugify from 'slugify';
+import {
+  getGuidePath,
+  getGuideLanguagesAlternates,
+  trailingSlash
+} from 'utils/permalinks';
+import { getHomeCrumb, getGuidesCrumb } from 'utils/breadcrumbs';
+
+// The same MDX snippets a blog post may use, plus the guide-specific ones.
+import SnippetsAccordion from 'src/components/snippets/Accordion.astro';
+import SnippetsAlert from 'src/components/snippets/Alert.astro';
+import SnippetsAstroImage from 'src/components/snippets/AstroImage.astro';
+import SnippetsFile from 'src/components/snippets/File.astro';
+import SnippetsTint from 'src/components/snippets/Tint.astro';
+import SnippetsVideo from 'src/components/snippets/Video.astro';
+import SnippetsYoutube from 'src/components/snippets/Youtube.astro';
+import SnippetsQuickAnswer from 'src/components/snippets/QuickAnswer.astro';
+import SnippetsRouteProfile from 'src/components/snippets/RouteProfile.astro';
+import SnippetsClimateTable from 'src/components/snippets/ClimateTable.astro';
+import SnippetsComparisonTable from 'src/components/snippets/ComparisonTable.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: {
+      language: guide.data.language === 'en' ? undefined : guide.data.language,
+      path:
+        slugify(guide.data.path ?? guide.data.title, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
+    },
+    props: { guide }
+  }));
+}
+
+const { guide } = Astro.props;
+if (!guide) {
+  throw new Error('Failed to get guide with path: ' + Astro.params.path);
+}
+
+const { Content, headings } = await render(guide);
+const language = (Astro.currentLocale ?? guide.data.language) as LanguageCodes;
+const hrefs = await getGuideLanguagesAlternates(guide, Astro.site);
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getGuidesCrumb(language),
+  { name: guide.data.title, url: getGuidePath(guide) }
+];
+
+const snippetComponents = {
+  SnippetsAccordion,
+  SnippetsAlert,
+  SnippetsAstroImage,
+  SnippetsFile,
+  SnippetsTint,
+  SnippetsVideo,
+  SnippetsYoutube,
+  SnippetsQuickAnswer,
+  SnippetsRouteProfile,
+  SnippetsClimateTable,
+  SnippetsComparisonTable
+};
+---
+
+<GuideLayout
+  guide={guide}
+  headings={headings}
+  hrefs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <Content components={snippetComponents} />
+</GuideLayout>

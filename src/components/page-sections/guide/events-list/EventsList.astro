@@ -1,0 +1,169 @@
+---
+/**
+ * Events list — recurring Portuguese cycling events from data/events.json,
+ * filtered by region and sorted by month. HTML only (no Event JSON-LD: exact
+ * dates change every year).
+ */
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import events from 'src/../data/events.json';
+import climate from 'src/../data/climate.json';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type EventItem = {
+  name: string;
+  month: number;
+  dates: string;
+  region: string;
+  distance: string;
+  type: string;
+  url?: string;
+};
+
+const {
+  heading = '',
+  region = 'all',
+  limit = 0,
+  sectionLabel,
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'xl',
+  colorScheme = 'inherit',
+  backgroundColor,
+  background,
+  class: className,
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const regionNames = Object.fromEntries(
+  Object.entries(climate.regions).map(([k, v]) => [
+    k,
+    (v as { name: string }).name
+  ])
+) as Record<string, string>;
+regionNames.all = regionNames.portugal;
+
+const max = Number(limit) > 0 ? Number(limit) : Infinity;
+let list = (events as EventItem[])
+  .filter((e) => region === 'all' || e.region === region || e.region === 'all')
+  .sort((a, b) => a.month - b.month || a.name.localeCompare(b.name))
+  .slice(0, max);
+
+const monthName = (m: number) =>
+  new Intl.DateTimeFormat(language, { month: 'long' }).format(
+    new Date(2026, m - 1, 1)
+  );
+const TYPE_CLASS: Record<string, string> = {
+  'road': 'bg-sky-100 text-sky-900 dark:bg-sky-900/50 dark:text-sky-200',
+  'gravel':
+    'bg-amber-100 text-amber-900 dark:bg-amber-900/50 dark:text-amber-200',
+  'mtb': 'bg-lime-100 text-lime-900 dark:bg-lime-900/50 dark:text-lime-200',
+  'sportive':
+    'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/50 dark:text-emerald-200',
+  'stage-race':
+    'bg-violet-100 text-violet-900 dark:bg-violet-900/50 dark:text-violet-200'
+};
+const th =
+  'px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300';
+---
+
+<CustomSection
+  {...htmlAttributes}
+  class:list={['events-list', className]}
+  label={sectionLabel}
+  maxContentWidth={maxContentWidth}
+  paddingHorizontal={paddingHorizontal}
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  background={background}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+>
+  {
+    heading && (
+      <Heading
+        level="h3"
+        size="md"
+        text={heading}
+        style="margin-top:0"
+        data-prop="heading"
+      />
+    )
+  }
+
+  {
+    list.length > 0 && (
+      <div class="events-list-scroll mt-4 overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+        <table class="w-full min-w-[40rem] border-collapse text-sm">
+          {heading && <caption class="sr-only">{heading}</caption>}
+          <thead class="bg-slate-50 dark:bg-slate-800">
+            <tr>
+              <th scope="col" class={th}>
+                {t('Guide.Events.When', language)}
+              </th>
+              <th scope="col" class={th}>
+                Event
+              </th>
+              <th scope="col" class={th}>
+                {t('Guide.Events.Region', language)}
+              </th>
+              <th scope="col" class={th}>
+                {t('Guide.Events.Distance', language)}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+            {list.map((e) => (
+              <tr class="bg-white align-top dark:bg-slate-900/40">
+                <td class="px-3 py-2 whitespace-nowrap text-slate-800 dark:text-slate-200">
+                  <span class="font-semibold capitalize">
+                    {monthName(e.month)}
+                  </span>
+                  {e.dates && (
+                    <span class="block text-xs text-slate-500 dark:text-slate-400">
+                      {e.dates}
+                    </span>
+                  )}
+                </td>
+                <th
+                  scope="row"
+                  class="px-3 py-2 text-left font-semibold text-slate-900 dark:text-slate-100"
+                >
+                  {e.url ? (
+                    <a
+                      href={e.url}
+                      rel="noopener"
+                      class="text-primary underline dark:text-blue-400"
+                    >
+                      {e.name}
+                    </a>
+                  ) : (
+                    e.name
+                  )}
+                  <span
+                    class:list={[
+                      'ml-2 inline-block rounded-full px-2 py-0.5 align-middle text-[0.65rem] font-semibold tracking-wide uppercase',
+                      TYPE_CLASS[e.type] ?? TYPE_CLASS.road
+                    ]}
+                  >
+                    {e.type.replace('-', ' ')}
+                  </span>
+                </th>
+                <td class="px-3 py-2 text-slate-800 dark:text-slate-200">
+                  {regionNames[e.region] ?? e.region}
+                </td>
+                <td class="px-3 py-2 text-slate-800 dark:text-slate-200">
+                  {e.distance}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+</CustomSection>
