@@ -2073,6 +2073,36 @@
       "status": 301
     },
     {
+      "from": "/de/guides/der-portugiesische-jakobsweg-mit-dem-rad-porto-nach-santiago/",
+      "destination": "/de/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/de/guides/radfahren-an-der-algarve-routen-jahreszeiten-unterkunfte/",
+      "destination": "/de/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
+      "from": "/de/guides/radfahren-im-douro-tal-routen-quintas-jahreszeiten-and-unterkunfte/",
+      "destination": "/de/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/de/guides/radfahren-in-portugal-der-komplette-guide-2026/",
+      "destination": "/de/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/de/guides/selbstgefuhrte-radreisen-in-portugal-so-funktionieren-sie-and-welche-passt/",
+      "destination": "/de/guides/self-guided-bike-tours-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/de/guides/von-porto-nach-lissabon-mit-dem-rad-route-etappen-hotels-and-gpx/",
+      "destination": "/de/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
       "from": "/de/kalender-gefuhrte-radtouren/",
       "destination": "/de/tourkalender/",
       "status": 301
@@ -3523,6 +3553,36 @@
       "status": 301
     },
     {
+      "from": "/es/guides/ciclismo-en-el-algarve-rutas-temporadas-y-alojamiento/",
+      "destination": "/es/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
+      "from": "/es/guides/ciclismo-en-portugal-la-guia-completa-2026/",
+      "destination": "/es/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/es/guides/ciclismo-por-el-valle-del-duero-rutas-quintas-temporadas-y-alojamiento/",
+      "destination": "/es/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/es/guides/de-oporto-a-lisboa-en-bicicleta-ruta-etapas-alojamiento-y-gpx/",
+      "destination": "/es/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/es/guides/el-camino-portugues-en-bicicleta-de-oporto-a-santiago/",
+      "destination": "/es/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/es/guides/tours-en-bicicleta-autoguiados-en-portugal-como-funcionan-y-cual-elegir/",
+      "destination": "/es/guides/self-guided-bike-tours-portugal/",
+      "status": 301
+    },
+    {
       "from": "/es/pagina-de-agradecimiento/",
       "destination": "/es/gracias/",
       "status": 301
@@ -4938,6 +4998,36 @@
       "status": 301
     },
     {
+      "from": "/fr/guides/circuits-a-velo-en-liberte-au-portugal-comment-ca-marche-et-lequel-choisir/",
+      "destination": "/fr/guides/self-guided-bike-tours-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/guides/cyclisme-au-portugal-le-guide-complet-2026/",
+      "destination": "/fr/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/fr/guides/de-porto-a-lisbonne-a-velo-itineraire-etapes-hebergements-et-gpx/",
+      "destination": "/fr/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/fr/guides/le-camino-portugues-a-velo-de-porto-a-saint-jacques-de-compostelle/",
+      "destination": "/fr/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/fr/guides/le-velo-dans-la-vallee-du-douro-itineraires-quintas-saisons-et-hebergements/",
+      "destination": "/fr/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/fr/guides/le-velo-en-algarve-itineraires-saisons-hebergements/",
+      "destination": "/fr/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
       "from": "/fr/page-de-remerciement/",
       "destination": "/fr/merci/",
       "status": 301
@@ -5300,6 +5390,36 @@
     {
       "from": "/fr/voyages-a-velo-au-portugal/",
       "destination": "/fr/voyages-a-velo-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/guides/cycling-in-portugal-the-complete-guide-2026/",
+      "destination": "/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/guides/cycling-the-algarve-routes-seasons-where-to-stay/",
+      "destination": "/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
+      "from": "/guides/cycling-the-douro-valley-routes-quintas-seasons-and-where-to-stay/",
+      "destination": "/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/guides/cycling-the-portuguese-camino-porto-to-santiago-by-bike/",
+      "destination": "/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/guides/porto-to-lisbon-by-bike-route-stages-where-to-stay-and-gpx/",
+      "destination": "/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/guides/self-guided-bike-tours-in-portugal-how-they-work-and-which-to-choose/",
+      "destination": "/guides/self-guided-bike-tours-portugal/",
       "status": 301
     },
     {
@@ -6390,6 +6510,36 @@
     {
       "from": "/nl/fietstochten-in-portugal/",
       "destination": "/nl/fietsvakanties-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/de-portugese-camino-op-de-fiets-van-porto-naar-santiago/",
+      "destination": "/nl/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/fietsen-in-de-algarve-routes-seizoenen-en-overnachten/",
+      "destination": "/nl/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/fietsen-in-de-douro-vallei-routes-quintas-seizoenen-en-overnachten/",
+      "destination": "/nl/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/fietsen-in-portugal-de-complete-gids-2026/",
+      "destination": "/nl/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/van-porto-naar-lissabon-op-de-fiets-route-etappes-overnachten-and-gpx/",
+      "destination": "/nl/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/nl/guides/zelfgeleide-fietstochten-in-portugal-hoe-ze-werken-en-welke-je-kiest/",
+      "destination": "/nl/guides/self-guided-bike-tours-portugal/",
       "status": 301
     },
     {
@@ -8140,6 +8290,36 @@
     {
       "from": "/pt/guided-bike-tours-calendar-portugal/",
       "destination": "/pt/calendario-tours/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/cycling-in-portugal-the-complete-guide-2026/",
+      "destination": "/pt/guides/cycling-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/cycling-the-algarve-routes-seasons-where-to-stay/",
+      "destination": "/pt/guides/cycling-the-algarve/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/cycling-the-douro-valley-routes-quintas-seasons-and-where-to-stay/",
+      "destination": "/pt/guides/cycling-the-douro-valley/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/cycling-the-portuguese-camino-porto-to-santiago-by-bike/",
+      "destination": "/pt/guides/cycling-the-portuguese-camino/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/porto-to-lisbon-by-bike-route-stages-where-to-stay-and-gpx/",
+      "destination": "/pt/guides/porto-to-lisbon-by-bike/",
+      "status": 301
+    },
+    {
+      "from": "/pt/guides/self-guided-bike-tours-in-portugal-how-they-work-and-which-to-choose/",
+      "destination": "/pt/guides/self-guided-bike-tours-portugal/",
       "status": 301
     },
     {
