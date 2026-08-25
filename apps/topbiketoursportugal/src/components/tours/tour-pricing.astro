@@ -62,12 +62,16 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
           {(included ?? []).map((feature) => {
             const {
               description,
-              included: isIncluded,
               title: featureTitle = '',
               info = ''
             } = feature;
+            // The description text is the source of truth for the tick/cross.
+            // The `included` boolean is kept in sync with it in the content
+            // files, but it is NOT consulted here: the CMS structure defaults
+            // it to `true` on every new row, so a "No"/"X" row with a stale
+            // `included: true` used to render as a green check.
             const isBoolean = isInclusionFlag(description);
-            const isYes = isIncluded || isAffirmative(description);
+            const isYes = isAffirmative(description);
             return (
               <div class="flex items-center justify-between gap-3 border-b border-gray-100 py-2 text-sm last:border-0 dark:border-gray-800">
                 <span class="text-gray-600 dark:text-gray-400">
