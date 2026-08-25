@@ -1,0 +1,64 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { cn } from 'utils/cn';
+const textStyles = tv({
+  base: 'font-normal', // Base classes common for all headings
+  variants: {
+    weight: {
+      light: 'font-light',
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold'
+    },
+    intent: {
+      primary: 'text-foreground',
+      danger: 'text-red-600',
+      warning: 'text-yellow-600',
+      informative: 'text-blue-600',
+      neutral: 'text-muted-foreground',
+      positive: 'text-green-600',
+      mute: 'text-gray-200'
+    },
+    size: {
+      xxsmall: 'text-xxs',
+      xsmall: 'text-xs',
+      small: 'text-sm',
+      medium: 'text-base',
+      large: 'text-lg',
+      xlarge: 'text-xl'
+    }
+  },
+  defaultVariants: {
+    weight: 'normal',
+    intent: 'primary',
+    size: 'medium'
+  }
+});
+
+// type TextTypes = 'span' | 'p' | 'div' | 'blockquote' | 'caption' | 'label';
+
+type Props = {
+  text?: string;
+  as?: 'span' | 'p' | 'div' | 'blockquote' | 'caption' | 'strong';
+} & VariantProps<typeof textStyles> &
+  HTMLAttributes<'span' | 'p' | 'div' | 'blockquote' | 'caption' | 'strong'>;
+
+const {
+  text,
+  as = 'span',
+  intent = 'primary',
+  size = 'medium',
+  class: className,
+  weight,
+  ...props
+} = Astro.props satisfies Props;
+
+const style = cn(textStyles({ intent, size, weight, className }));
+const Tag = as ?? 'span';
+---
+
+<Tag {...props} class={style}>
+  <slot set:html={text} />
+</Tag>

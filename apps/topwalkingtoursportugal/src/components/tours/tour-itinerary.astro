@@ -1,0 +1,163 @@
+---
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = {
+  itinerary: {
+    title: string;
+    description?: string;
+  }[];
+  language: LanguageCodes;
+};
+
+const { itinerary = [], language } = Astro.props;
+
+/*
+ * The itinerary is the product on a 13-day holiday, and it rendered as
+ * thirteen identical collapsed grey bars at 13px — no day number, no distance,
+ * no sense of shape. Closed, a row now has to answer "where does this day go
+ * and how far is it" without being opened.
+ *
+ * The titles are free text authored in the CMS ("Day 2 - Porto - Furadouro
+ * ( 47 KM)", "Day 7: São Pedro de Moel – Nazaré (29 Km) – praia do norte"),
+ * so the structure is parsed out rather than stored. `\p{L}+` matches the day
+ * word in any locale — Day / Dia / Tag / Jour / Día / Dag — and anything that
+ * does not match this shape falls through with its title intact.
+ */
+const DAY_PATTERN = /^\s*(\p{L}+)\s*\.?\s*(\d+)\s*[-–—:.]*\s*(.*)$/u;
+const DISTANCE_PATTERN = /\(\s*(\d+(?:[.,]\d+)?)\s*km\s*\)/iu;
+
+const days = itinerary.map(({ title = '', description = '' }, index) => {
+  const match = title.match(DAY_PATTERN);
+  const dayNumber = match ? Number(match[2]) : index + 1;
+  let rest = match ? match[3] : title;
+
+  const distanceMatch = rest.match(DISTANCE_PATTERN);
+  const distance = distanceMatch
+    ? Number(distanceMatch[1].replace(',', '.'))
+    : null;
+  if (distanceMatch) rest = rest.replace(DISTANCE_PATTERN, '');
+
+  // Normalise the hand-typed separators into a single arrow so a stage reads
+  // as a journey rather than as punctuation.
+  const label = rest
+    .replace(/\s*[-–—]\s*/gu, ' → ')
+    .replace(/\s{2,}/gu, ' ')
+    .replace(/^[\s→]+|[\s→]+$/gu, '')
+    .trim();
+
+  return {
+    dayNumber,
+    label: label || title.trim(),
+    distance,
+    description: description?.trim() ?? '',
+    matched: Boolean(match)
+  };
+});
+
+const totalDistance = days.reduce((sum, day) => sum + (day.distance ?? 0), 0);
+const dayLabelTemplate = t('Tour.Itinerary.DayLabel', language);
+---
+
+<div class="tour-itinerary flex flex-col gap-3" data-tour-itinerary>
+  {
+    totalDistance > 0 && (
+      <p class="text-sm text-gray-600 tabular-nums dark:text-gray-300">
+        {days.length} {t('Tour.Info.Duration.Unit.Days', language)} ·{' '}
+        {Math.round(totalDistance)} km
+      </p>
+    )
+  }
+
+  <ol class="flex list-none flex-col gap-2 p-0">
+    {
+      days.map((day, index) => (
+        <li class="relative">
+          {/* Connector between day markers: the list reads as a route rather
+              than as thirteen unrelated rows. */}
+          {index < days.length - 1 && (
+            <span
+              aria-hidden="true"
+              class="absolute top-11 bottom-[-0.5rem] left-[1.375rem] w-px bg-gray-200 dark:bg-gray-700"
+            />
+          )}
+          <details class="itinerary-day group rounded-lg border border-gray-200 bg-white transition-colors hover:border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-600">
+            <summary class="flex cursor-pointer list-none items-center gap-3 p-3 [&::-webkit-details-marker]:hidden">
+              <span
+                class="bg-primary/10 text-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold tabular-nums dark:bg-emerald-300/15 dark:text-emerald-300"
+                aria-hidden="true"
+              >
+                {day.dayNumber}
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="sr-only">
+                  {dayLabelTemplate.replace('$1', String(day.dayNumber))}:{' '}
+                </span>
+                <span class="block truncate font-medium">{day.label}</span>
+              </span>
+              {day.distance ? (
+                <span class="shrink-0 rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600 tabular-nums dark:bg-gray-800 dark:text-gray-300">
+                  {day.distance} km
+                </span>
+              ) : null}
+              {day.description ? (
+                <i
+                  class="icon-[ph--caret-down] h-4 w-4 shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-180"
+                  aria-hidden="true"
+                />
+              ) : (
+                <span class="h-4 w-4 shrink-0" aria-hidden="true" />
+              )}
+            </summary>
+            {day.description ? (
+              <div class="itinerary-day-body border-t border-gray-100 px-3 py-3 pl-14 dark:border-gray-800">
+                <Prose markdown={day.description} />
+              </div>
+            ) : null}
+          </details>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  /* Rows with nothing to expand should not look pressable. */
+  .itinerary-day:not(:has(.itinerary-day-body)) > summary {
+    cursor: default;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .itinerary-day[open] .itinerary-day-body {
+      animation: itinerary-open var(--reveal-duration) var(--reveal-ease) both;
+    }
+  }
+
+  @keyframes itinerary-open {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--reveal-travel) * -0.4));
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // A row with no description has nothing to reveal, so pressing it should do
+  // nothing rather than silently toggling an empty panel.
+  const lockEmptyDays = () => {
+    document
+      .querySelectorAll<HTMLDetailsElement>('.itinerary-day')
+      .forEach((row) => {
+        if (row.querySelector('.itinerary-day-body')) return;
+        row.addEventListener('click', (event) => event.preventDefault());
+      });
+  };
+
+  lockEmptyDays();
+  document.addEventListener('astro:page-load', lockEmptyDays);
+</script>

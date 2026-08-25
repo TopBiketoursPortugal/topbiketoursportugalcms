@@ -1,0 +1,6 @@
+feature_list:
+  type: multiselect
+  options:
+    empty_type: array
+    values: collections.blog
+    value_key: id

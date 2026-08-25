@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import type { VisuallyEditable } from 'src/types';
+import type { LanguageCodes } from 'src/schemas/language';
+import TourCard from 'src/components/tours/tour-card.astro';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+
+type Props = {
+  title?: string;
+  main_feature?: string;
+  feature_list?: readonly string[];
+  feature_tours?: readonly string[];
+} & VisuallyEditable;
+
+const block = Astro.props;
+
+const feature_tours = block.feature_tours ?? [];
+const main_feature = block.main_feature ?? feature_tours[0];
+const feature_list = block.feature_list ?? feature_tours.slice(1);
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const allTours = await getCollection(
+  'tours',
+  (tour) =>
+    (main_feature === tour.data.id || feature_list?.includes(tour.data.id)) &&
+    tour.data.language === language
+);
+
+const mainTour = allTours.find((tour) => tour.data.id === main_feature);
+const otherTours = allTours.filter((tour) =>
+  feature_list?.includes(tour.data.id)
+);
+---
+
+{
+  /* Vertical padding is owned by the scoped `section` rule below; a `py-12`
+    here only looked like it applied — the element selector outranks it. */
+}
+<section class="flex flex-col gap-6">
+  {
+    block.title ? (
+      <div data-editable="text" data-type="block" data-prop="title">
+        <Prose
+          markdown={block.title}
+          class="reveal-up intersect:opacity-100 intersect-once px-6"
+        />
+      </div>
+    ) : null
+  }
+  <div
+    class="featured-tours-grid reveal-stagger intersect:opacity-100 intersect-once grid grid-cols-1 gap-6 md:grid-cols-2"
+  >
+    {
+      mainTour && (
+        <div class="featured-main md:col-span-2">
+          <TourCard
+            tour={mainTour.data}
+            contentDisplay="inline"
+            language={language}
+          />
+        </div>
+      )
+    }
+    {
+      otherTours.map((tour) => (
+        <TourCard
+          tour={tour.data}
+          contentDisplay="inline"
+          language={language}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  section {
+    max-width: var(--pageContainer);
+    margin-inline: auto;
+    padding-inline: var(--pagePadding);
+    padding-block: 24px;
+  }
+
+  /* All cards fill their grid cell */
+  .featured-tours-grid :global(.tour-card),
+  .featured-tours-grid :global(.tour-card > div) {
+    height: 100%;
+  }
+
+  /* Main featured card fills its cell */
+  .featured-main {
+    height: 100%;
+  }
+
+  /* Main card: switch to horizontal layout (image left, content right) on md+ */
+  @media (min-width: 768px) {
+    .featured-main :global(.tour-card > div) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .featured-main :global(.tour-card > div > div:first-child) {
+      height: 100%;
+    }
+
+    /*
+     * The media wrapper is taken out of flow so it inherits the row height set
+     * by the text column. Without this it is content-sized, `height: 100%` on
+     * the image below resolves against nothing, and the image lays out 0px
+     * tall — which also means a lazy image never intersects the viewport and
+     * so never loads at all. The card rendered with an empty left half.
+     */
+    .featured-main
+      :global(.tour-card > div > div:first-child > .parallax-media) {
+      position: absolute;
+      inset: 0;
+    }
+
+    .featured-main :global(.tour-card > div > div:first-child img) {
+      aspect-ratio: auto;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* Side cards: truncate excerpt to 2 lines */
+  .featured-tours-grid > :global(.tour-card .line-clamp-5) {
+    -webkit-line-clamp: 2;
+  }
+</style>

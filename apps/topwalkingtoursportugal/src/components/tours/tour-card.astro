@@ -1,0 +1,336 @@
+---
+import CardMedia from 'src/components/building-blocks/card/CardMedia.astro';
+import { getTourPath } from 'utils/permalinks';
+import CardContent, {
+  type CardContentProps
+} from 'src/components/building-blocks/card/CardContent.astro';
+import Card from 'src/components/building-blocks/card/Card.astro';
+import Languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getCollection, type InferEntrySchema } from 'astro:content';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Rating from 'src/components/building-blocks/rating/rating.astro';
+import LinkButton from 'src/components/building-blocks/linkbutton/linkbutton.astro';
+import DifficultyScale from 'src/components/tours/difficulty-scale.astro';
+import { t } from 'utils/i18n';
+import { getAggregatedReviews } from 'utils/reviews';
+import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
+import WeTravelButton from 'src/components/page-sections/wetravel-button/wetravel-button.astro';
+
+type Props = {
+  tour: InferEntrySchema<'tours'>;
+  language: LanguageCodes;
+  contentDisplay: CardContentProps['display'];
+};
+
+const { tour: data, contentDisplay = 'inline' } = Astro.props;
+
+const {
+  image,
+  content,
+  duration,
+  difficulty,
+  tags = [],
+  language,
+  packages = [],
+  tourtype,
+  distance,
+  reviews: initialReviews = [],
+  isNewTour = false
+} = data;
+
+const durationDays = Number(duration) || 0;
+// Only package tours are sold as stays, so only they carry a night count.
+// A day tour spans at most two calendar days with no accommodation, and
+// `durationDays - 1` would advertise a night that is not part of the trip.
+const isMultiDay = tourtype === 'PackageTour';
+// Day tours are all `duration: 1`, so the plural label is now reachable with a
+// count of one — "1 Days" — on every locale. Nights follow the same rule for
+// the shortest packages.
+const dayUnit =
+  durationDays === 1
+    ? ('Tour.Info.Duration.Unit.Day' as const)
+    : ('Tour.Info.Duration.Unit.Days' as const);
+
+const testimonials = (
+  (await getCollection(
+    'testimonials',
+    (t) => t.data.language === language && t.data.relatedProduct === data.id
+  )) ?? []
+).map(MapTestimonialToReview);
+
+const reviews = initialReviews.concat(testimonials);
+
+const { average, count } = getAggregatedReviews(reviews);
+const minPrice =
+  packages.length > 0
+    ? Math.min(...packages.map((p) => p.price?.price ?? 0))
+    : 0;
+const minPromoPrice =
+  packages.length > 0
+    ? Math.max(...packages.map((p) => p.price?.promo ?? 0))
+    : 0;
+const displayPrice = minPromoPrice > 0 ? minPromoPrice : minPrice;
+const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
+  style: 'currency',
+  currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR',
+  // A holiday priced at €1,596 is never €1,596.00 to the person choosing it,
+  // and the trailing zeros cost two characters of the card's tightest row.
+  maximumFractionDigits: 0
+});
+
+const tourTags = await getCollection(
+  'tourTags',
+  (t) => tags?.includes(t.data.id) && t.data.language === language
+);
+
+/*
+ * Guided vs self-guided is the one tag that is a real decision axis rather
+ * than filter vocabulary, so it is promoted to a chip on the image and the
+ * rest of the tag list leaves the card entirely (it duplicated the filter
+ * bar, wrapped to two lines, and made every card a different height).
+ *
+ * Keyed off `path`, not `id` or `name`: tag ids are per-locale files with
+ * different UUIDs, and `name` is translated — `path` is the one field that
+ * stays 'guided' / 'self-guided' in all six locales.
+ */
+const tagPaths = new Set(tourTags.map((tag) => tag.data.path));
+const isGuided = tagPaths.has('guided');
+const isSelfGuided = tagPaths.has('self-guided');
+const styleLabel =
+  isGuided && isSelfGuided
+    ? t('Tour.Card.Style.Both', language)
+    : isGuided
+      ? t('Tour.Card.Style.Guided', language)
+      : isSelfGuided
+        ? t('Tour.Card.Style.SelfGuided', language)
+        : null;
+
+// Region names live in their own collection; the tour only stores the uuid.
+const regionEntry = data.region
+  ? (
+      await getCollection(
+        'tourRegions',
+        (r) => r.data.id === data.region && r.data.language === language
+      )
+    )[0]
+  : undefined;
+const regionName = regionEntry?.data.name ?? regionEntry?.data.title;
+
+const tourPath = getTourPath(data, language);
+
+/*
+ * A day tour at €35 genuinely is an impulse buy and routes straight to
+ * WeTravel. A €1,596 twelve-night holiday is not bought from a grid tile, so
+ * the package card offers the next step instead of the last one — and stops
+ * the only saturated element in the tile competing with the photograph.
+ */
+const showBookNow =
+  !isMultiDay &&
+  Boolean(data.wetravel?.guidedUuid || data.wetravel?.selfGuidedUuid);
+---
+
+<div
+  class="tour-card tour-card-filterable reveal-up intersect:opacity-100 intersect-once h-full"
+  data-tour-title={data.title?.toLowerCase() || ''}
+  data-tour-region={data.region || ''}
+  data-tour-tags={data.tags?.join(' ') || ''}
+  data-tour-type={tourtype}
+  data-search-text={[
+    data.title,
+    regionName,
+    tourTags.map((tag) => tag.data.name ?? tag.data.title).join(' '),
+    getMarkdownExcerpt(content ?? '', 300)
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()}
+  data-sort-price={displayPrice || ''}
+  data-sort-duration={durationDays || ''}
+  data-sort-difficulty={difficulty || ''}
+  data-sort-rating={count > 0 ? average : ''}
+>
+  <Card
+    href={tourPath}
+    frame="light"
+    radius="xl"
+    {...data}
+    class="h-full flex-col"
+  >
+    {
+      image && (
+        <div class="relative">
+          <CardMedia {...image} />
+          <div class="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+            <div class="flex flex-wrap gap-2">
+              {isNewTour ? (
+                <span class="rounded-md bg-green-600 px-2.5 py-1 text-xs font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+                  {t('Tour.Badge.New', language)}
+                </span>
+              ) : null}
+              {regionName ? (
+                <span class="rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                  {regionName}
+                </span>
+              ) : null}
+            </div>
+            {styleLabel ? (
+              <span class="shrink-0 rounded-md bg-white/90 px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm backdrop-blur-sm dark:bg-gray-900/85 dark:text-gray-100">
+                {styleLabel}
+              </span>
+            ) : null}
+          </div>
+        </div>
+      )
+    }
+    <CardContent
+      display={contentDisplay}
+      class="flex h-full flex-col gap-3 p-6 sm:max-xl:p-4"
+    >
+      {
+        /*
+        Card text inherits `text-primary` (#296a3f) from <Card color="primary">,
+        which is a white-background green: on the dark surface it measures
+        2.74:1, under the 3:1 floor. The greys below were likewise declared
+        light-only. Each colour here carries its dark counterpart — emerald-300
+        matches the primary-on-dark pairing already used in timeline.astro.
+      */
+      }
+      <h3
+        class="font-oswald line-clamp-2 text-xl font-bold dark:text-emerald-300"
+      >
+        {data.title}
+      </h3>
+
+      {
+        /*
+        Was `line-clamp-5` at `text-lg` — five lines of marketing prose ending
+        mid-sentence, which is the largest block on the card and helps nobody
+        choose between two tours. Two lines is enough to set the tone; the
+        comparable facts below are what the reader is actually scanning.
+      */
+      }
+      <p class="line-clamp-2 text-base text-gray-600 dark:text-gray-300">
+        {getMarkdownExcerpt(content ?? '', 160)}
+      </p>
+
+      {
+        /*
+        Days, distance and difficulty were three stacked sentences in the same
+        size and colour as everything else. One dense row, set smaller and in
+        tabular figures, lets a reader compare across cards without reading.
+      */
+      }
+      <div
+        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 tabular-nums dark:text-gray-300"
+      >
+        {
+          durationDays > 0 ? (
+            <span class="flex items-center gap-1.5">
+              <i
+                class="icon-[ph--clock-countdown-light] h-4 w-4 shrink-0"
+                aria-hidden="true"
+              />
+              {durationDays} {t(dayUnit, language)}
+            </span>
+          ) : null
+        }
+        {
+          distance && distance > 0 ? (
+            <span class="flex items-center gap-1.5">
+              <i
+                class="icon-[ph--map-trifold-light] h-4 w-4 shrink-0"
+                aria-hidden="true"
+              />
+              {distance} km
+            </span>
+          ) : null
+        }
+        {
+          difficulty && difficulty > 0 ? (
+            <DifficultyScale
+              value={difficulty}
+              language={language}
+              variant="labelled"
+              class="text-sm"
+            />
+          ) : null
+        }
+      </div>
+
+      {
+        /*
+        Was rendered unconditionally: a tour with no testimonials showed five
+        hollow stars and "(0 review(s))", which reads at a glance as a zero
+        rating — sitting in a grid beside tours showing five filled ones. No
+        reviews is not a rating, so it prints nothing.
+      */
+      }
+      {
+        count > 0 ? (
+          <div class="flex items-center gap-2 text-sm">
+            <Rating rating={average} class="text-accent" />
+            <span class="text-neutral-700 tabular-nums dark:text-neutral-300">
+              {average.toFixed(1)} · {count}{' '}
+              {t('Tour.Info.Reviews.Unit', language)}
+            </span>
+          </div>
+        ) : isNewTour ? null : (
+          <div class="text-sm text-gray-500 dark:text-gray-400">
+            {t('Tour.Card.NoReviewsYet', language)}
+          </div>
+        )
+      }
+
+      {
+        /* `mt-auto` pins the price row to the bottom of every card, so a grid
+           of cards with different title and description lengths still lines
+           its prices and buttons up across the row. */
+      }
+      <div class="mt-auto flex w-full items-end justify-between gap-3 pt-2">
+        {
+          displayPrice > 0 ? (
+            <div class="flex flex-col">
+              <span class="text-xs text-gray-500 dark:text-gray-400">
+                {t('Tour.Form.FromPrice', language)}
+              </span>
+              <span class="flex items-baseline gap-2">
+                {minPromoPrice > 0 && (
+                  <span class="text-sm text-gray-500 line-through dark:text-gray-400">
+                    {priceFormat.format(minPrice)}
+                  </span>
+                )}
+                <span class="text-xl font-bold tabular-nums dark:text-emerald-300">
+                  {priceFormat.format(displayPrice)}
+                </span>
+              </span>
+            </div>
+          ) : (
+            <div />
+          )
+        }
+        {
+          showBookNow ? (
+            <WeTravelButton
+              uuid={
+                (data.wetravel?.guidedUuid ||
+                  data.wetravel?.selfGuidedUuid) as string
+              }
+              uid={data.wetravel?.uid}
+              label={t('Tour.Form.Button.Text', language)}
+              class="z-20 h-10 w-fit shrink-0 px-4 py-2 text-sm font-medium"
+            />
+          ) : (
+            <LinkButton
+              href={tourPath}
+              variant="outline"
+              class="border-primary text-primary hover:bg-primary z-20 shrink-0 bg-transparent hover:text-white dark:border-emerald-300 dark:text-emerald-300 dark:hover:bg-emerald-300 dark:hover:text-gray-900"
+            >
+              {t('Tour.Card.ViewTour', language)}
+            </LinkButton>
+          )
+        }
+      </div>
+    </CardContent>
+  </Card>
+</div>

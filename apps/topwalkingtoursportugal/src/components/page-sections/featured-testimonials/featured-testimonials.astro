@@ -1,0 +1,261 @@
+---
+import { getCollection } from 'astro:content';
+import type { VisuallyEditable } from 'src/types';
+import type { LanguageCodes } from 'src/schemas/language';
+import Grid from 'src/components/building-blocks/grid/grid.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import ReviewItem from '../collection/review-item.astro';
+import { getAuthorName } from '@utils/get-author-name';
+import {
+  MapTestimonialToReview,
+  type MappedReview
+} from '@utils/map-testimonial-to-review';
+import { getTestimonialsFor } from 'utils/testimonials';
+import { t } from 'utils/i18n';
+import { getTourPath } from 'utils/permalinks';
+
+type Props = {
+  feature_testimonials: readonly string[];
+  carousel?: boolean;
+  cards_per_row?: number;
+  expand_behavior?: 'hover' | 'button' | 'none';
+} & VisuallyEditable;
+
+const {
+  feature_testimonials,
+  carousel = false,
+  cards_per_row = 3,
+  expand_behavior = 'hover'
+} = Astro.props;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const reviews =
+  (await getCollection('tours', (item) => item.data.language === language))
+    .flatMap((t) => t.data.reviews)
+    .filter((item) => feature_testimonials?.includes(item.id ?? '')) ?? [];
+// Typed as MappedReview[] so the tour-review and testimonial halves share one
+// shape downstream — otherwise every read of `publishDate` needs an `in` guard
+// and TS narrows the union to `{}`.
+const items: MappedReview[] = (reviews as MappedReview[]).concat(
+  (
+    await getTestimonialsFor(language, (item) =>
+      feature_testimonials?.includes(item.data.id)
+    )
+  ).map(MapTestimonialToReview)
+);
+
+/*
+ * Resolve each review's tour so the card can say which trip it is about.
+ * "Don rode Porto→Santiago in May 2025" is evidence; "Don — USA" is a quote.
+ * One lookup table rather than a getCollection per card.
+ */
+const allTours = await getCollection(
+  'tours',
+  (item) => item.data.language === language
+);
+const tourById = new Map(
+  allTours.map((entry) => [
+    entry.data.id,
+    { title: entry.data.title, href: getTourPath(entry.data, language) }
+  ])
+);
+
+const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_row}`;
+---
+
+<Stack as="section" class="border-solid sm:p-6" layout="vertical">
+  {
+    carousel ? (
+      <div
+        class="featured-carousel-container relative max-w-full"
+        style="box-sizing: border-box;"
+      >
+        <button
+          type="button"
+          class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label={t('Carousel.Previous', language)}
+        >
+          <i class="icon-[ph--caret-left-bold] text-xl" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label={t('Carousel.Next', language)}
+        >
+          <i class="icon-[ph--caret-right-bold] text-xl" aria-hidden="true" />
+        </button>
+
+        {/*
+          tabindex + a group role make the overflow strip reachable by keyboard:
+          the arrows are hidden below `sm`, so without this the only way through
+          the reviews on a keyboard is a mouse-style drag that never arrives.
+        */}
+        <div
+          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+          tabindex="0"
+          role="group"
+          aria-label={t('Carousel.Reviews.Label', language)}
+        >
+          {items.map((review) => (
+            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+              <ReviewItem
+                name={getAuthorName(review)}
+                country={review.author?.country}
+                content={review.content}
+                rating={review.rating}
+                expand_behavior={expand_behavior}
+                date={review.publishDate}
+                tourTitle={
+                  review.relatedProduct
+                    ? (tourById.get(review.relatedProduct)?.title ?? null)
+                    : null
+                }
+                tourHref={
+                  review.relatedProduct
+                    ? (tourById.get(review.relatedProduct)?.href ?? null)
+                    : null
+                }
+                sourceName={review.source?.name}
+                sourceUrl={review.source?.url}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <Grid
+        cols={cards_per_row as 1 | 2 | 3 | 4}
+        class="reveal-stagger intersect:opacity-100 intersect-once"
+      >
+        {items.map((review) => (
+          <ReviewItem
+            name={getAuthorName(review)}
+            country={review.author?.country}
+            content={review.content}
+            rating={review.rating}
+            expand_behavior={expand_behavior}
+            date={review.publishDate}
+            tourTitle={
+              review.relatedProduct
+                ? (tourById.get(review.relatedProduct)?.title ?? null)
+                : null
+            }
+            tourHref={
+              review.relatedProduct
+                ? (tourById.get(review.relatedProduct)?.href ?? null)
+                : null
+            }
+            sourceName={review.source?.name}
+            sourceUrl={review.source?.url}
+          />
+        ))}
+      </Grid>
+    )
+  }
+</Stack>
+
+<script>
+  const initCarousel = () => {
+    document
+      .querySelectorAll('.featured-carousel-container')
+      .forEach((container) => {
+        // Prevent double initialization if navigating back/forth
+        if (container.hasAttribute('data-carousel-init')) return;
+        container.setAttribute('data-carousel-init', 'true');
+
+        const scrollContainer = container.querySelector('.scroll-container');
+        const prevBtn = container.querySelector(
+          '.prev'
+        ) as HTMLButtonElement | null;
+        const nextBtn = container.querySelector(
+          '.next'
+        ) as HTMLButtonElement | null;
+
+        if (!scrollContainer || !prevBtn || !nextBtn) return;
+
+        const scrollAmount = () => {
+          // Approximate slide width: take first item width + gap (1.5rem = 24px)
+          const item = scrollContainer.querySelector('.carousel-item');
+          return item ? item.getBoundingClientRect().width + 24 : 300;
+        };
+
+        const updateButtons = () => {
+          prevBtn.disabled = scrollContainer.scrollLeft <= 10;
+          nextBtn.disabled =
+            scrollContainer.scrollLeft >=
+            scrollContainer.scrollWidth - scrollContainer.clientWidth - 10;
+        };
+
+        prevBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: -scrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+
+        nextBtn.addEventListener('click', () => {
+          scrollContainer.scrollBy({
+            left: scrollAmount(),
+            behavior: 'smooth'
+          });
+        });
+
+        scrollContainer.addEventListener('scroll', updateButtons);
+        // Initial check
+        updateButtons();
+        // Wait for layout
+        setTimeout(updateButtons, 100);
+      });
+  };
+
+  // Initialize on page load and view transitions
+  document.addEventListener('astro:page-load', initCarousel);
+</script>
+
+<style>
+  .carousel-item {
+    width: calc(100% - 2rem); /* Mobile: almost full width with some peek */
+  }
+
+  /*
+   * Scroll-driven de-emphasis of the off-centre cards. Double-guarded on
+   * purpose: without @supports, engines that don't know named view timelines
+   * keep `animation: linear scale-up both` on the document timeline — a 0s
+   * animation whose `both` fill pins every card at the closing keyframe
+   * (opacity .5, scale .9). Correctness there must not depend on whether the
+   * minifier happens to fold the two declarations into one shorthand.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .carousel-item {
+        view-timeline-name: --carousel-item;
+        view-timeline-axis: inline;
+        animation: linear scale-up both;
+        animation-timeline: --carousel-item;
+        animation-range: entry 25% contain 25% exit 25% exit 75%;
+      }
+    }
+  }
+
+  @keyframes scale-up {
+    from {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0.5;
+      transform: scale(0.9);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-item {
+      width: var(--desktop-slide-width);
+    }
+  }
+</style>

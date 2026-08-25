@@ -1,0 +1,17 @@
+/*
+ * Design tokens for the components imported from CloudCannon's
+ * astro-component-starter. Token families that would collide with Tailwind v4
+ * theme variables are namespaced (--cc-color-*, --cc-radius-*); the bridge
+ * maps the starter's semantic tokens onto the TBTP brand.
+ */
+@import './variables/_colors.css';
+@import './variables/_spacing.css';
+@import './variables/_fonts.css';
+@import './variables/_radius.css';
+@import './variables/_content-widths.css';
+@import './variables/_aspects.css';
+@import './variables/_animations.css';
+@import './variables/_layers.css';
+@import './themes/_light.css';
+@import './themes/_dark.css';
+@import './bridge.css';

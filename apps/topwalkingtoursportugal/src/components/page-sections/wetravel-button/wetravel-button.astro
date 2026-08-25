@@ -1,0 +1,109 @@
+---
+import { buttonVariants } from 'src/components/building-blocks/linkbutton/button.style';
+import { cn } from 'utils/cn';
+
+/**
+ * WeTravel checkout button.
+ *
+ * Renders the vendor's `.wtrvl-checkout_button` markup (the embed script binds
+ * to that CLASS — NOT to the legacy `id="wetravel_button_widget"`, which we omit
+ * on purpose so multiple buttons can share a page, e.g. the calendar). Styled
+ * with the site button system instead of WeTravel's inline Poppins styling for
+ * design consistency.
+ *
+ * Reused by both the CMS block (this file is the block) and the tour sidebar
+ * booking widget.
+ */
+type Props = {
+  uuid: string;
+  uid?: string;
+  label?: string;
+  heading?: string;
+  class?: string;
+  hidden?: boolean;
+  env?: string;
+  version?: string;
+};
+
+const {
+  uuid,
+  uid = '2317568',
+  label = 'Book Now',
+  heading,
+  class: className,
+  hidden = false,
+  env = 'https://www.wetravel.com',
+  version = 'v0.4'
+} = Astro.props;
+
+// WeTravel's snippet puts an `href` on the <button> (non-standard but read by
+// their embed script). Spread it so TS doesn't reject href on a button element.
+const hrefAttr: Record<string, string> = {
+  href: `${env}/checkout_embed?uuid=${uuid}`
+};
+---
+
+{
+  uuid ? (
+    <div class="wetravel-cta flex flex-col gap-2" hidden={hidden}>
+      {heading ? <strong class="text-base">{heading}</strong> : null}
+      <button
+        type="button"
+        class={cn(
+          'wtrvl-checkout_button',
+          buttonVariants({ stretch: true, size: 'lg' }),
+          'capitalize',
+          className
+        )}
+        data-env={env}
+        data-version={version}
+        data-uid={uid}
+        data-uuid={uuid}
+        {...hrefAttr}
+      >
+        {label}
+      </button>
+    </div>
+  ) : null
+}
+
+<script>
+  // Load the WeTravel embed loader once, appended to <head> so it survives
+  // Astro view-transition body swaps.
+  //
+  // The vendor script binds click handlers to every `.wtrvl-checkout_button`
+  // inside a `DOMContentLoaded` listener (guarded by an `isTracked` flag, so
+  // it's idempotent). Because we inject the script AFTER the page has loaded,
+  // that event has already fired and the binding never runs. We therefore
+  // re-dispatch `DOMContentLoaded` once the script is ready — and again on
+  // every client-side navigation — so the vendor (re)binds any new buttons.
+  const WETRAVEL_SRC = 'https://cdn.wetravel.com/widgets/embed_checkout.js';
+
+  function bindWeTravel() {
+    const btns = document.querySelectorAll('.wtrvl-checkout_button');
+    // Only fire when there's an unbound button, so we don't re-trigger other
+    // libraries' DOMContentLoaded listeners needlessly.
+    const anyUnbound = Array.prototype.some.call(
+      btns,
+      (b) => !(b as Element & { isTracked?: boolean }).isTracked
+    );
+    if (!anyUnbound) return;
+    document.dispatchEvent(new Event('DOMContentLoaded'));
+  }
+
+  function ensureWeTravel() {
+    const existing = document.querySelector(`script[src="${WETRAVEL_SRC}"]`);
+    if (existing) {
+      bindWeTravel();
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = WETRAVEL_SRC;
+    s.async = true;
+    s.addEventListener('load', bindWeTravel);
+    document.head.appendChild(s);
+  }
+
+  ensureWeTravel();
+  document.addEventListener('astro:page-load', ensureWeTravel);
+</script>

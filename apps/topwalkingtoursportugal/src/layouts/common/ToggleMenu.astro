@@ -1,0 +1,36 @@
+---
+import { cn } from 'utils/cn';
+
+export interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = 'Toggle Menu', class: className } = Astro.props;
+---
+
+<button
+  type="button"
+  class={cn(
+    'flex flex-col h-12 w-12 rounded justify-center items-center cursor-pointer group text-black dark:text-white',
+    className
+  )}
+  aria-label={label}
+  data-aw-toggle-menu
+>
+  <span class="sr-only">{label}</span>
+  <slot>
+    <span
+      aria-hidden="true"
+      class="ease my-1 h-0.5 w-6 transform rounded-full bg-current opacity-80 transition duration-200 group-[.expanded]:translate-y-2.5 group-[.expanded]:rotate-45"
+    ></span>
+    <span
+      aria-hidden="true"
+      class="ease my-1 h-0.5 w-6 transform rounded-full bg-current opacity-80 transition duration-200 group-[.expanded]:opacity-0"
+    ></span>
+    <span
+      aria-hidden="true"
+      class="ease rounded-fullopacity-80 my-1 h-0.5 w-6 transform bg-current transition duration-200 group-[.expanded]:-translate-y-2.5 group-[.expanded]:-rotate-45"
+    ></span>
+  </slot>
+</button>

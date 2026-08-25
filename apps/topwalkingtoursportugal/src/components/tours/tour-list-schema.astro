@@ -1,0 +1,45 @@
+---
+/**
+ * Structured data for a page that *lists* tours — the hub, and the tag and
+ * region pages.
+ *
+ * This deliberately emits an ItemList of links and nothing more. It previously
+ * published a full Product graph per tour — price, aggregateRating and every
+ * review body — which meant the same testimonials appeared on ~30 URLs and the
+ * listing pages collected the star ratings that belong to the tours. Google
+ * ranked the categories above the tours they link to.
+ *
+ * Prices, ratings and reviews belong on the tour's own page, where the tour is
+ * the subject: see @components/schema/tour-product-schema.astro.
+ */
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getTourPath, sanitizeUrl } from 'utils/permalinks';
+
+type Props = { items: CollectionEntry<'tours'>[]; language: LanguageCodes };
+
+const { items, language } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'itemListOrder': 'https://schema.org/ItemListOrderAscending',
+  'numberOfItems': items.length,
+  'itemListElement': items.map(({ data: tour }, index) => ({
+    '@type': 'ListItem',
+    'position': index + 1,
+    'name': tour.title,
+    'url': sanitizeUrl(`${Astro.site}${getTourPath(tour, language)}`)
+  }))
+};
+---
+
+{
+  items.length > 0 && (
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(schema)}
+    />
+  )
+}

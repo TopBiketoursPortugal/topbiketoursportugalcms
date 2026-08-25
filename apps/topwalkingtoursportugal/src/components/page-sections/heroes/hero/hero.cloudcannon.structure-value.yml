@@ -1,0 +1,31 @@
+label: Hero
+icon: cottage
+description: Outline color
+value:
+  _component: page-sections/heroes/hero
+  background_color: "#ffffff"
+  heading:
+    heading_text: Heading text
+    heading_gradient_color: "#a0a2ff"
+    heading_size: h1
+  subheading:
+    markdown_content: Content for this subheading
+    color: "#393939"
+  image:
+    image_path: /src/assets/images/featured-image-5.jpg
+    alt_text: An image
+  buttons: []
+preview:
+  text:
+    - Hero
+  icon: cottage
+picker_preview:
+  text: Hero
+  subtext: Outline color
+_inputs_from_glob:
+  - /src/components/page-sections/heroes/hero/hero.cloudcannon.inputs.yml
+_inputs:
+  buttons:
+    type: array
+    options:
+      structures: _structures.buttons

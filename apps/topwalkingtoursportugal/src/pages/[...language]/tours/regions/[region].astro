@@ -1,0 +1,236 @@
+---
+import { getCollection } from 'astro:content';
+import slugify from 'slugify';
+import Layout from 'src/layouts/Layout.astro';
+import TourList from 'src/components/tours/tour-list.astro';
+import {
+  getTourRegionLanguagesAlternates,
+  getTourRegionsPath,
+  trailingSlash
+} from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Text from 'src/components/building-blocks/typography/text.astro';
+import PageHelper from 'src/shared/astro/page.astro';
+import LanguageData from 'src/../data/languages.json';
+
+import { getImage } from 'astro:assets';
+import { getImageByPath } from 'utils/get-image';
+import { t } from 'utils/i18n';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import PlaceSchema from 'src/components/schema/place-schema.astro';
+import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
+
+export async function getStaticPaths() {
+  const tours = await getCollection('tours');
+  const tourRegions = await getCollection('tourRegions');
+
+  return languageCodes.flatMap((language) => {
+    return tourRegions
+      .filter((tr) => tr.data.language === language)
+      .map((region) => ({
+        params: {
+          language: language === 'en' ? undefined : language,
+          // toursType: PermalinkData.tours[language],
+          region:
+            slugify(region.data.path ?? region.data.name ?? region.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
+        },
+        props: {
+          regionData: region,
+          tours:
+            tours.filter(
+              (tour) =>
+                tour.data.region === region.data.id &&
+                tour.data.language === language
+            ) ?? []
+        }
+      }));
+  });
+}
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { tours, regionData } = Astro.props;
+
+const packageTours = tours.filter((t) => t.data.tourtype === 'PackageTour');
+const dayTours = tours.filter((t) => t.data.tourtype === 'DayTour');
+
+const tourRegions = await getCollection(
+  'tourRegions',
+  (f) => f.data.language === language
+);
+
+const allTags = await getCollection(
+  'tourTags',
+  (f) => f.data.language === language
+);
+
+const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
+
+const relevantTags = allTags.filter((tg) => tourTagIds.has(tg.data.id));
+
+const baseUrl = Astro.site;
+
+const image = await getImage({
+  src: (await getImageByPath(regionData.data.seo?.featured_image!)).default,
+  format: 'avif'
+});
+
+const imageSrc = image.src.startsWith('/') ? image.src.substring(1) : image.src;
+
+// Authored title first. `t(...).replace(...)` always returns a string, so
+// putting it at the head of this `??` chain made the two fallbacks after it
+// dead code: all twelve region pages shipped as "Tour list region <name>" and
+// the titles written in the CMS were silently discarded. Every other taxonomy
+// template (tags) already reads seo.page_title first.
+const regionSeoTitle =
+  regionData.data.seo?.page_title ??
+  t('Tours.Regions.PackageTour.Title', language).replace(
+    '$1',
+    regionData.data.name ?? ''
+  ) ??
+  regionData.data.title;
+const regionSeoDescription =
+  regionData.data.seo?.page_description ?? regionSeoTitle;
+
+const frontmatter = {
+  title: regionData.data.title,
+  page_size: 6,
+  seo: {
+    page_title: regionSeoTitle,
+    page_description: regionSeoDescription,
+    featured_image: regionData.data.seo?.featured_image,
+    featured_image_alt:
+      regionData.data.seo?.featured_image_alt ?? regionSeoTitle,
+    canonical_url: regionData.data.seo?.canonical_url,
+    open_graph_type: regionData.data.seo?.open_graph_type,
+    author_twitter_handle: regionData.data.seo?.author_twitter_handle,
+    // Honour the entry's own `seo.no_index` instead of forcing every
+    // taxonomy term to be indexable. A thin term (one tour, or none) is
+    // worth excluding, and the flag was already set on some entries but
+    // silently discarded here.
+    no_index: regionData.data.seo?.no_index === true
+  }
+};
+const hrefs = await getTourRegionLanguagesAlternates(regionData, Astro.site);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  {
+    name: regionData.data.name ?? regionData.data.title,
+    url: getTourRegionsPath(regionData, language)
+  }
+];
+---
+
+<Layout
+  class="mb-16 px-8"
+  {...frontmatter}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+    <PlaceSchema
+      name={regionData.data.name ?? regionData.data.title}
+      description={regionSeoDescription}
+      image={`${baseUrl}${imageSrc}`}
+      url={getTourRegionsPath(regionData, language)}
+      language={language}
+    />
+  </slot>
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
+    <PageHelper contentBlocks={regionData.data.content_blocks ?? []} />
+    <div data-tour-filter-container>
+      <TourFilterBar
+        language={language}
+        totalCount={tours.length}
+        showTag={relevantTags.length > 0}
+        tags={relevantTags.map((tg) => ({
+          id: tg.data.id,
+          name: tg.data.name ?? tg.data.title,
+          slug: tg.data.path
+        }))}
+      />
+      {
+        packageTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Regions.PackageTour.Title', language).replace(
+                '$1',
+                regionData.data.name ?? ''
+              )}
+            </Heading>
+            <TourList items={packageTours} language={language} />
+          </div>
+        ) : null
+      }
+      {
+        dayTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Regions.DayTour.Title', language).replace(
+                '$1',
+                regionData.data.name ?? ''
+              )}
+            </Heading>
+            <TourList items={dayTours} language={language} />
+          </div>
+        ) : null
+      }
+    </div>
+    {
+      packageTours.length == 0 && dayTours.length === 0 ? (
+        <div class="flex flex-col gap-2 px-6">
+          <Text size="xlarge">
+            {t('Tours.Regions.NoResults.Title', language).replace(
+              '$1',
+              regionData.data.name ?? ''
+            )}
+          </Text>
+          <Text size="large">
+            {t('Tours.Regions.NoResults.AlternateTags.Title', language)}
+          </Text>
+          <ul class="list-disc pl-8">
+            {tourRegions
+              .filter((r) => r.data.id !== regionData.data.id)
+              .map((r) => (
+                <li class="pl-2">
+                  <a
+                    href={getTourRegionsPath(r, language)}
+                    title={regionSeoTitle}
+                    class="underline"
+                  >
+                    {regionSeoTitle}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ) : null
+    }
+    <PageHelper
+      contentBlocks={regionData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
+    />
+  </Stack>
+</Layout>
