@@ -7,12 +7,15 @@ pre-commit:
       glob: 'apps/**/*.{js,ts,astro}'
       run: pnpm eslint --fix {staged_files} && git add {staged_files}
     # A new English entry gets a stub beside it in every other language, so a translation is
-    # never simply forgotten. The stub is created `draft: false` and stays out of
+    # never simply forgotten. The stub is created `draft: true` and stays out of
     # the build until someone translates it — see src/schemas/published-glob.ts.
     # Runs before seo-url-history, which must see the stub to account for it.
     mdx-clone:
       glob: 'apps/topbiketoursportugal/src/content/**/*.mdx'
       run: pnpm --filter topbiketoursportugal mdx-clone
+    mdx-clone-walking:
+      glob: 'apps/topwalkingtoursportugal/src/content/**/*.mdx'
+      run: pnpm --filter topwalkingtoursportugal mdx-clone
 
     # A slug edit must ship with the 301 that preserves its old URL. Regenerate
     # and stage it rather than failing — the redirect is derivable, so there is
@@ -20,3 +23,6 @@ pre-commit:
     seo-url-history:
       glob: 'apps/topbiketoursportugal/src/content/**/*.{md,mdx}'
       run: pnpm --filter topbiketoursportugal seo:urls && git add apps/topbiketoursportugal/data/url-history.json
+    seo-url-history-walking:
+      glob: 'apps/topwalkingtoursportugal/src/content/**/*.{md,mdx}'
+      run: pnpm --filter topwalkingtoursportugal seo:urls && git add apps/topwalkingtoursportugal/data/url-history.json
