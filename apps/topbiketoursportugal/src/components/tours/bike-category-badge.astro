@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+import { getBikeCategoryPath } from 'utils/permalinks';
+
+type Props = {
+  category: CollectionEntry<'bikeCategories'>;
+  language: LanguageCodes;
+  size?: 'sm' | 'md';
+};
+
+const { category, language, size = 'sm' } = Astro.props;
+const name = category.data.name ?? category.data.title;
+const iconClass = getTagIconClass(category.data.icon);
+const href = getBikeCategoryPath(category, language);
+
+const sizeClasses =
+  size === 'sm' ? 'px-2 py-0.5 text-xs gap-1' : 'px-3 py-1 text-sm gap-1.5';
+
+const iconSize = size === 'sm' ? 'h-3.5 w-3.5' : 'h-4 w-4';
+---
+
+<a
+  href={href}
+  class:list={[
+    'bike-category-badge inline-flex items-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-900/50',
+    sizeClasses
+  ]}
+>
+  <i class:list={[iconClass, iconSize, 'shrink-0']} aria-hidden="true"></i>
+  <span>{name}</span>
+</a>

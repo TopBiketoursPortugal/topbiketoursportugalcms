@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getRiderLevelPath } from 'utils/permalinks';
+import ResponsiveImage from 'src/components/building-blocks/responsive-image/ResponsiveImage.astro';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+
+export type TourRiderLevelCardProps = {
+  level: CollectionEntry<'tourRiderLevels'>;
+  language: LanguageCodes;
+  tourCount?: number;
+  imageWidths?: number[];
+};
+
+type Props = TourRiderLevelCardProps;
+
+const { level, language, tourCount, imageWidths = [400] } = Astro.props;
+const { data } = level;
+const { title, name, seo, icon } = data;
+const levelPath = getRiderLevelPath(level, language);
+const iconClass = getTagIconClass(icon);
+const displayName = name ?? title;
+---
+
+<a
+  href={levelPath}
+  class="tour-rider-level-card group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white transition-all hover:shadow-lg dark:border-gray-700 dark:bg-gray-900 dark:hover:border-gray-600"
+>
+  {
+    seo?.featured_image ? (
+      <div class="relative h-44 w-full overflow-hidden">
+        <ResponsiveImage
+          src={seo.featured_image}
+          alt={seo?.featured_image_alt ?? displayName}
+          widths={imageWidths}
+          paralax={false}
+          class="h-full w-full object-cover transition-transform group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
+        <div class="absolute bottom-3 left-3 flex items-center gap-2 text-white">
+          <i class:list={[iconClass, 'h-6 w-6']} aria-hidden="true" />
+          <span class="text-xl font-bold">{displayName}</span>
+        </div>
+      </div>
+    ) : (
+      <div class="flex items-center gap-3 p-5">
+        <i
+          class:list={[iconClass, 'h-7 w-7 text-blue-600 dark:text-blue-400']}
+          aria-hidden="true"
+        />
+        <span class="text-xl font-bold text-gray-900 dark:text-gray-100">
+          {displayName}
+        </span>
+      </div>
+    )
+  }
+  {
+    tourCount !== undefined && (
+      <div class="px-4 py-2 text-sm text-gray-500 dark:text-gray-400">
+        {tourCount} {tourCount === 1 ? 'tour' : 'tours'}
+      </div>
+    )
+  }
+</a>

@@ -1,0 +1,131 @@
+---
+type Props = {
+  containerSelector?: string;
+  paginationSelector?: string;
+};
+
+const {
+  containerSelector = '.blog-index > div',
+  paginationSelector = '.blog-pagination'
+} = Astro.props;
+---
+
+<div
+  class="infinite-scroll-sentinel hidden items-center justify-center py-8"
+  data-container={containerSelector}
+  data-pagination={paginationSelector}
+>
+  <div class="infinite-scroll-spinner hidden">
+    <i class="icon-[ph--spinner] h-8 w-8 animate-spin text-neutral-400"></i>
+  </div>
+</div>
+
+<script>
+  function initInfiniteScroll() {
+    document
+      .querySelectorAll('.infinite-scroll-sentinel')
+      .forEach((sentinel) => {
+        if (sentinel.hasAttribute('data-infinite-init')) return;
+        sentinel.setAttribute('data-infinite-init', 'true');
+
+        const containerSelector =
+          sentinel.getAttribute('data-container') || '.blog-index > div';
+        const paginationSelector =
+          sentinel.getAttribute('data-pagination') || '.blog-pagination';
+
+        const pagination = document.querySelector(
+          paginationSelector
+        ) as HTMLElement | null;
+        const container = document.querySelector(
+          containerSelector
+        ) as HTMLElement | null;
+
+        if (!pagination || !container) return;
+
+        // Find the next page link
+        const nextLink = pagination.querySelector(
+          'a[aria-label="Next page"]'
+        ) as HTMLAnchorElement | null;
+        let nextUrl = nextLink?.href;
+
+        // Check if next link is disabled (no more pages)
+        const isDisabled =
+          nextLink?.getAttribute('aria-disabled') === 'true' ||
+          nextLink
+            ?.closest('.page-item')
+            ?.classList.contains('pointer-events-none');
+
+        if (!nextUrl || isDisabled) return;
+
+        // Hide pagination, show sentinel
+        pagination.style.display = 'none';
+        (sentinel as HTMLElement).style.display = 'flex';
+
+        const spinner = sentinel.querySelector(
+          '.infinite-scroll-spinner'
+        ) as HTMLElement;
+        let loading = false;
+
+        const observer = new IntersectionObserver(
+          async (entries) => {
+            const entry = entries[0];
+            if (!entry.isIntersecting || loading || !nextUrl) return;
+
+            loading = true;
+            spinner.style.display = 'flex';
+
+            try {
+              const response = await fetch(nextUrl);
+              if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+              const html = await response.text();
+              const doc = new DOMParser().parseFromString(html, 'text/html');
+
+              // Extract items from the fetched page's grid
+              const fetchedContainer = doc.querySelector(containerSelector);
+              if (fetchedContainer) {
+                const items = Array.from(fetchedContainer.children);
+                items.forEach((item) => {
+                  container.appendChild(document.importNode(item, true));
+                });
+              }
+
+              // Get next URL from fetched page's pagination
+              const fetchedPagination = doc.querySelector(paginationSelector);
+              const fetchedNextLink = fetchedPagination?.querySelector(
+                'a[aria-label="Next page"]'
+              ) as HTMLAnchorElement | null;
+
+              const fetchedIsDisabled =
+                fetchedNextLink?.getAttribute('aria-disabled') === 'true' ||
+                fetchedNextLink
+                  ?.closest('.page-item')
+                  ?.classList.contains('pointer-events-none');
+
+              if (fetchedNextLink && !fetchedIsDisabled) {
+                nextUrl = fetchedNextLink.href;
+              } else {
+                // No more pages
+                nextUrl = undefined;
+                observer.disconnect();
+                (sentinel as HTMLElement).style.display = 'none';
+              }
+            } catch {
+              // On error, restore pagination as fallback
+              observer.disconnect();
+              (sentinel as HTMLElement).style.display = 'none';
+              pagination.style.display = '';
+            }
+
+            spinner.style.display = 'none';
+            loading = false;
+          },
+          { rootMargin: '200px' }
+        );
+
+        observer.observe(sentinel);
+      });
+  }
+
+  document.addEventListener('astro:page-load', initInfiniteScroll);
+</script>

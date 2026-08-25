@@ -9,15 +9,26 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default defineConfig(
   {
     ignores: [
-      'dist/**',
-      '.astro/**',
-      'node_modules/**',
-      '.netlify/**',
-      '.jampack/**',
-      'dev-dist/**',
-      '.certs/**',
-      'public/pagefind/**',
-      'pnpm-lock.yaml'
+      '**/dist/**',
+      '**/.astro/**',
+      '**/node_modules/**',
+      '**/.netlify/**',
+      '**/.jampack/**',
+      '**/dev-dist/**',
+      '**/.certs/**',
+      '**/public/pagefind/**',
+      'pnpm-lock.yaml',
+      // Expo/React Native app — its own toolchain (expo lint) covers it; the
+      // Astro-oriented rules below would only mis-parse its .tsx routes.
+      'apps/topbiketoursportugal-mobile/**',
+      // Local-only agent/tooling artifacts, not source.
+      '.agent/**',
+      '.clawhub/**',
+      '.impeccable/**',
+      'skills/**',
+      'DataForSeo/**',
+      'google-cloud-sdk/**',
+      'topbiketoursportugal.com-audit/**'
     ]
   },
 

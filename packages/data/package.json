@@ -1,0 +1,10 @@
+{
+  "name": "@ttp/data",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Reference data identical across the Top Bike / Top Walking Tours Portugal sites. Brand- and site-specific data (site.json, navigation, colors, i18n copy, redirects) stays in each app's data/ folder.",
+  "exports": {
+    "./countries.json": "./countries.json"
+  }
+}

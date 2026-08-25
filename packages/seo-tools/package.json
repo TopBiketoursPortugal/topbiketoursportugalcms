@@ -1,0 +1,25 @@
+{
+  "name": "@ttp/seo-tools",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Redirect, sitemap and post-build SEO tooling shared by the Astro sites. Every script reads the calling app's data/, src/content/ and dist/ from the working directory — run them through that app's pnpm scripts.",
+  "bin": {
+    "ttp-seo-check": "./check-urls.mjs",
+    "ttp-seo-audit": "./audit-dist.mjs",
+    "ttp-seo-urls": "./url-history.mjs",
+    "ttp-mdx-clone": "./mdx-clone.mjs",
+    "ttp-validate-blog": "./validate-blog.mjs"
+  },
+  "exports": {
+    "./lib/routes.mjs": "./lib/routes.mjs",
+    "./lib/alternates.mjs": "./lib/alternates.mjs",
+    "./lib/lastmod.mjs": "./lib/lastmod.mjs"
+  },
+  "dependencies": {
+    "simple-git": "3.36.0",
+    "slugify": "1.6.9",
+    "yaml": "2.9.0",
+    "uuid": "14.0.1"
+  }
+}

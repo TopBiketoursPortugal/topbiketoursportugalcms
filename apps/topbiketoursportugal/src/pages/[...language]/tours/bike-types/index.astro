@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from 'src/layouts/Layout.astro';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import BikeCategoriesCard from 'src/components/page-sections/collection/bike-categories-card.astro';
+import { t } from 'utils/i18n';
+import { getBikeCategoriesListingPath, trailingSlash } from 'utils/permalinks';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import LanguageData from 'src/../data/languages.json';
+
+export async function getStaticPaths() {
+  return languageCodes.map((language) => ({
+    params: {
+      language: language === 'en' ? undefined : language
+    },
+    props: { language }
+  }));
+}
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+
+const categories = await getCollection(
+  'bikeCategories',
+  (c) => c.data.language === language
+);
+
+const tours = await getCollection('tours', (t) => t.data.language === language);
+
+const categoryCounts = new Map<string, number>();
+for (const category of categories) {
+  const count = tours.filter((t) =>
+    (t.data.bikeCategories ?? []).includes(category.data.id)
+  ).length;
+  categoryCounts.set(category.data.id, count);
+}
+
+const pageTitle = t('Tour.BikeCategoriesPageTitle', language);
+const pageDescription = t('Tour.BikeCategoriesPageDescription', language);
+
+const hrefs = languageCodes.map((lang) => ({
+  href: `${Astro.site}${lang === 'en' ? '' : lang + '/'}tours/bike-types${trailingSlash}`,
+  hreflang: lang
+}));
+
+const defaultHref = hrefs.find((h) => h.hreflang === 'en');
+
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  {
+    name: t('Tour.BikeCategoriesTitle', language),
+    url: getBikeCategoriesListingPath(language)
+  }
+];
+---
+
+<Layout
+  class="mb-16 px-8"
+  title={pageTitle}
+  seo={{ page_title: pageTitle, page_description: pageDescription }}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6">{pageTitle}</Heading>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      {
+        categories.map((category) => (
+          <BikeCategoriesCard
+            category={category}
+            language={language}
+            tourCount={categoryCounts.get(category.data.id) ?? 0}
+          />
+        ))
+      }
+    </div>
+  </Stack>
+</Layout>
