@@ -63,13 +63,6 @@ function removeDuplicateRedirects(redirects: RedirectRule[]) {
   return uniqueRedirects;
 }
 
-// Generate denylist patterns from routing.json to exclude redirect paths from navigateFallback
-const redirectDenylist = RouteData.routes.map((route) => {
-  // Escape special regex characters and create exact match pattern
-  const escapedPath = route.from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`^${escapedPath}$`);
-});
-
 // function convertJson(inputJson: {
 //   routes: { from: string; destination: string; status: ValidRedirectStatus }[];
 // }): Record<string, RedirectConfig> {
@@ -194,15 +187,19 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // No trailing slash: @vite-pwa/astro rewrites `404.html` in the
-        // precache manifest to `404` + (trailingSlash === 'always' ? '/' : ''),
-        // and this site is `trailingSlash: 'ignore'`. Asking for '/404/' looked
-        // up a key that is not in the manifest, so `createHandlerBoundToURL`
-        // threw `non-precached-url` while sw.js was still evaluating — which
-        // aborted the rest of the service worker setup, not just the fallback.
-        navigateFallback: '/404',
-        navigateFallbackDenylist: redirectDenylist,
-        globPatterns: ['**/*.{css,js,html,avif,ico}'],
+        // This is a multi-page site, so navigations must always go to the
+        // network. `navigateFallback` (an SPA pattern) registered a
+        // NavigationRoute that answered EVERY navigation from the precache
+        // without touching the network; because @vite-pwa/astro precaches
+        // `x/index.html` under the key `x` (no trailing slash) while Netlify
+        // and every link use `/x/`, the lookup always missed and the cached
+        // 404 page was served for the whole site (except `/`). Private
+        // windows — no service worker — were fine, which is how it surfaced.
+        navigateFallback: null,
+        // Precache only static assets. Precaching html shipped the entire
+        // site (1,357 pages, ~194 MB) to every visitor on install and again
+        // on every deploy; pages are cached at runtime below instead.
+        globPatterns: ['**/*.{css,js,avif,ico}'],
         // The CloudCannon editor-only registration bundle (eager glob of every
         // component) is ~14 MB and only loads inside the Visual Editor —
         // never precache it. Keep the node_modules default when overriding.
@@ -210,9 +207,12 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: ({ request }) => request.mode === 'navigate',
-            handler: 'StaleWhileRevalidate',
+            // Fresh HTML first; the cached copy is only an offline/slow-network
+            // fallback, so a deploy is visible on the next page load.
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'pages',
+              networkTimeoutSeconds: 3,
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
