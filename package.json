@@ -4,7 +4,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "prepare": "lefthook install",
+    "prepare": "node scripts/prepare.mjs",
     "dev": "pnpm --filter topbiketoursportugal dev",
     "dev:walking": "pnpm --filter topwalkingtoursportugal dev",
     "dev:mobile": "pnpm --filter topbiketoursportugal-mobile start",
