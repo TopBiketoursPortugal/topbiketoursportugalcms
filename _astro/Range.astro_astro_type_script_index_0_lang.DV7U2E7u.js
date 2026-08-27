@@ -1,0 +1,1 @@
+import{t as e}from"./onPageLoad.5Q5T7btX.js";e(()=>{let e=document.querySelectorAll(`.range`);e.length&&e.forEach(e=>{let t=e.querySelector(`.range-input`),n=e.querySelector(`.range-value`);t&&t.addEventListener(`input`,()=>{let e=Number(t.min)||0,r=Number(t.max)||100,i=(Number(t.value)-e)/(r-e)*100;t.style.setProperty(`--range-pct`,`${i}%`),n&&(n.value=t.value)})})});

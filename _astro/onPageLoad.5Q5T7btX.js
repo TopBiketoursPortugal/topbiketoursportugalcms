@@ -1,0 +1,1 @@
+function e(e){let t=``,n=()=>{let n=window.location.href;n!==t&&(t=n,e())};document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,n,{once:!0}):n(),document.addEventListener(`astro:page-load`,n)}export{e as t};

@@ -1,0 +1,5 @@
+
+User-Agent: *
+Disallow:
+
+Sitemap: https://topwalkingtoursportugal.com/sitemap-index.xml
