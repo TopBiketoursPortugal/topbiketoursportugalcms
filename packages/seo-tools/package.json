@@ -8,6 +8,7 @@
     "ttp-seo-check": "./check-urls.mjs",
     "ttp-seo-audit": "./audit-dist.mjs",
     "ttp-seo-urls": "./url-history.mjs",
+    "ttp-seo-lastmod": "./lastmod-snapshot.mjs",
     "ttp-mdx-clone": "./mdx-clone.mjs",
     "ttp-validate-blog": "./validate-blog.mjs"
   },

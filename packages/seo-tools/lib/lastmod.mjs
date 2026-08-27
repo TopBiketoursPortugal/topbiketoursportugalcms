@@ -11,7 +11,7 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   REPO_ROOT,
@@ -108,7 +108,7 @@ function lastCommitDates() {
  * live count of the tours using it. Newest of both collections it reads.
  */
 const INDEX_SOURCES = {
-  tags: ['tourTags', 'tours'],
+  'tags': ['tourTags', 'tours'],
   'bike-types': ['bikeCategories', 'tours'],
   'rider-levels': ['tourRiderLevels', 'tours']
 };
@@ -136,15 +136,116 @@ function indexDates(routes, dates) {
 }
 
 /**
+ * data/lastmod.json — a committed copy of the per-file dates above, written
+ * by `pnpm seo:lastmod` (the pre-commit hook keeps it current).
+ *
+ * The CloudCannon build server exports the site without a `.git` folder, so
+ * `git log` is impossible there; without this file every deploy from the
+ * editor shipped a sitemap with no `lastmod` at all and failed the post-build
+ * audit. Netlify-style shallow clones have the opposite problem: `git log`
+ * works but every file appears to have changed at the clone boundary, which
+ * tells Google the whole site changed at once. The snapshot is the answer to
+ * both — it carries the real dates from full history.
+ */
+export const SNAPSHOT = join(REPO_ROOT, 'data/lastmod.json');
+
+function git(args) {
+  return execFileSync('git', args, {
+    cwd: REPO_ROOT,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore']
+  }).trim();
+}
+
+/** 'full' when git log can be trusted, 'shallow' when it cannot, null without git. */
+export function gitHistory() {
+  try {
+    return git(['rev-parse', '--is-shallow-repository']) === 'false'
+      ? 'full'
+      : 'shallow';
+  } catch {
+    return null;
+  }
+}
+
+function snapshotDates() {
+  if (!existsSync(SNAPSHOT)) return null;
+  const { files } = JSON.parse(readFileSync(SNAPSHOT, 'utf8'));
+  return new Map(Object.entries(files ?? {}));
+}
+
+/**
+ * file -> date, from the best source available: full git history first, the
+ * committed snapshot when history is missing or shallow, and shallow history
+ * only as a last resort.
+ */
+function fileDates() {
+  const history = gitHistory();
+  if (history === 'full') return lastCommitDates();
+
+  const snapshot = snapshotDates();
+  if (snapshot) {
+    console.warn(
+      `⚠ sitemap lastmod: git history ${history ?? 'unavailable'} — using committed data/lastmod.json`
+    );
+    return snapshot;
+  }
+  if (history === 'shallow') return lastCommitDates();
+  throw new Error('git unavailable and data/lastmod.json is missing');
+}
+
+/**
+ * file -> date for every routable content file, as `pnpm seo:lastmod` writes
+ * it. Files modified in the working tree are dated now: the hook runs at
+ * commit time, and git still reports the previous commit for them.
+ */
+export function currentFileDates() {
+  const dates = lastCommitDates();
+  const now = new Date().toISOString();
+  const changed = git([
+    'status',
+    '--porcelain=v1',
+    '--untracked-files=all',
+    '--',
+    '.'
+  ])
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => line.slice(3).split(' -> ').pop().replace(/^"|"$/g, ''))
+    // Porcelain paths are repository-relative regardless of cwd.
+    .map(stripGitPrefix);
+  for (const file of changed) dates.set(file, now);
+
+  const { routes } = collectRoutes();
+  const result = new Map();
+  for (const route of [...routes.values()].sort((a, b) =>
+    a.file < b.file ? -1 : 1
+  )) {
+    if (result.has(route.file)) continue;
+    let date = dates.get(route.file);
+    if (!date) {
+      try {
+        date = statSync(join(REPO_ROOT, route.file)).mtime.toISOString();
+      } catch {
+        continue;
+      }
+    }
+    result.set(route.file, date);
+  }
+  return result;
+}
+
+/**
  * Build `url -> lastmod` for every URL a content entry produces, plus the
  * aggregate pages that no single entry backs.
- * Returns an empty map if git is unavailable, so a build never fails over this.
+ * Returns an empty map if no date source is available, so a build never fails
+ * over this (the post-build audit reports the empty sitemap instead).
  */
 export function lastmodByUrl() {
   if (cache) return cache;
 
   try {
-    const dates = lastCommitDates();
+    const dates = fileDates();
     const { routes } = collectRoutes();
     const all = [...routes.values()];
 

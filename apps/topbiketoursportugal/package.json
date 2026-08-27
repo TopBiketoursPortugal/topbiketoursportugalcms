@@ -25,6 +25,7 @@
     "deps": "pnpx npm-check-updates -i",
     "icons:update": "pwsh ./tools/update-icons.ps1",
     "seo:urls": "ttp-seo-urls",
+    "seo:lastmod": "ttp-seo-lastmod",
     "seo:check": "ttp-seo-check",
     "seo:audit": "ttp-seo-audit"
   },

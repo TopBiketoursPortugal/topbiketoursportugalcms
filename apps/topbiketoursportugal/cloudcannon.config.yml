@@ -1,3 +1,8 @@
+# Base path of this site's files, relative to the repository root. CloudCannon
+# no longer detects the source folder at build time: without this, every
+# collection `path` below (src/content/...) is resolved against the repo root,
+# where nothing exists, and collections show up empty in the editor.
+source: apps/topbiketoursportugal
 paths:
   uploads: src/assets/images
   static: ''

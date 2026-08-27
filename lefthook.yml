@@ -23,6 +23,14 @@ pre-commit:
     seo-url-history:
       glob: 'apps/topbiketoursportugal/src/content/**/*.{md,mdx}'
       run: pnpm --filter topbiketoursportugal seo:urls && git add apps/topbiketoursportugal/data/url-history.json
+    # The sitemap's lastmod comes from git at build time, but CloudCannon
+    # builds without .git — keep a committed copy of the dates current.
+    seo-lastmod:
+      glob: 'apps/topbiketoursportugal/src/content/**/*.{md,mdx}'
+      run: pnpm --filter topbiketoursportugal seo:lastmod && git add apps/topbiketoursportugal/data/lastmod.json
+    seo-lastmod-walking:
+      glob: 'apps/topwalkingtoursportugal/src/content/**/*.{md,mdx}'
+      run: pnpm --filter topwalkingtoursportugal seo:lastmod && git add apps/topwalkingtoursportugal/data/lastmod.json
     seo-url-history-walking:
       glob: 'apps/topwalkingtoursportugal/src/content/**/*.{md,mdx}'
       run: pnpm --filter topwalkingtoursportugal seo:urls && git add apps/topwalkingtoursportugal/data/url-history.json
