@@ -31,11 +31,6 @@
       "status": 301
     },
     {
-      "from": "/hiking-alentejo-vicentine-southeast-portugal-coast",
-      "destination": "/tours/hiking-algarve-vicentine-southeast-portugal-coast/",
-      "status": 301
-    },
-    {
       "from": "/hiking-alentejo-vicentine-southeast-portugal-coast/",
       "destination": "/tours/hiking-algarve-vicentine-southeast-portugal-coast/",
       "status": 301
@@ -116,18 +111,13 @@
       "status": 301
     },
     {
-      "from": "/santiago-Compostela-hiking-original-route-porto",
-      "destination": "/tours/santiago-Compostela-hiking-original-route-porto/",
-      "status": 301
-    },
-    {
       "from": "/santiago-Compostela-hiking-original-route-porto/santiago-compostela-hiking-original-route-porto/",
       "destination": "/tours/santiago-compostela-hiking-original-route-porto/",
       "status": 301
     },
     {
       "from": "/santiago-Compostela-hiking-stage-2",
-      "destination": "/tours/santiago-Compostela-hiking-stage-2/",
+      "destination": "/tours/santiago-compostela-hiking-stage-2/",
       "status": 301
     },
     {
@@ -178,16 +168,6 @@
     {
       "from": "/pt/tours/caminho-central-santiago-compoatela-porto-etapa-1/",
       "destination": "/pt/tours/caminho-central-santiago-compostela-porto-etapa-1/",
-      "status": 301
-    },
-    {
-      "from": "/pt/tours/douro-valley-wine-region-hiking-tour",
-      "destination": "/pt/tours/caminhada-na-regiao-vinicola-do-vale-do-douro/",
-      "status": 301
-    },
-    {
-      "from": "/pt/tours/minho-hiking-holiday-in-the-north-of-portugal",
-      "destination": "/pt/tours/caminhada-no-minho-norte-de-portugal/",
       "status": 301
     },
     {
@@ -288,11 +268,6 @@
     {
       "from": "/pt/tours/coastal-route-to-santiago-compostela-stage-2/",
       "destination": "/pt/tours/rota-costeira-santiago-de-compostela-etapa-2/",
-      "status": 301
-    },
-    {
-      "from": "/tours/coastal-route-to-santiago-compostela-stage-2",
-      "destination": "/tours/hiking-coast-santiago-compostela-stage-2/",
       "status": 301
     },
     {
