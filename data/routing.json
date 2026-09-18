@@ -1114,6 +1114,16 @@
       "from": "/wine-gastournomy-biketour/",
       "destination": "/pt/tours/wine-gastournomy-biketour/",
       "status": 301
+    },
+    {
+      "from": "/blog/best-time-to-cycle-in-portugal-when-to-go-and-what-to-expect/",
+      "destination": "/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/blog/tours-from-porto-to-santiago-de-compostela-in-portugal/",
+      "destination": "/blog/best-time-to-cycle-in-portugal/",
+      "status": 301
     }
   ]
 }
