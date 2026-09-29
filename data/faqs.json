@@ -9,8 +9,8 @@
       "answer": "Each day's ride ends in the afternoon, giving you time to relax before the next gastronomic experience, where you can taste regional flavors. We aim to provide an exceptional adventure with a little extra spice."
     },
     {
-      "question": "What types of walking tours do you offer in Portugal?",
-      "answer": "We offer the following types of walking tours:   Self-Guided Tour   Guided Tours   Guided Tour Plus "
+      "question": "What types of bike tours do you offer in Portugal?",
+      "answer": "We offer the following types of bike tours:   Self-Guided Tour   Guided Tours   Guided Tour Plus "
     },
     {
       "question": "What is included in the Self-Guided Tour?",
@@ -18,7 +18,7 @@
     },
     {
       "question": "What is included in the Guided Tours? ",
-      "answer": "The Guided Tours include:   includes everything described in the self –Guided tours   Guide and support van for the walking tour   Water, snacks, and transport for any dropouts   Organized lunches and dinners for the group "
+      "answer": "The Guided Tours include:   includes everything described in the self –Guided tours   Guide and support van for the bike tour   Water, snacks, and transport for any dropouts   Organized lunches and dinners for the group "
     },
     {
       "question": "What additional benefits are included in the Guided Tour Plus? ",
@@ -26,7 +26,7 @@
     },
     {
       "question": "How do you classify the routes?",
-      "answer": "Our route classifications are as follows:   Easy (1/5): Mostly flat terrain with daily distances up to 15 km.   Easy to Moderate (2/5): Mostly flat terrain with daily distances between 15 km and 25 km, with short climbs up to 20% of the route. Suitable for inexperienced hikers with some fitness preparation.   Moderate (3/5): Terrain can be dirt roads or trails, mostly flat with daily distances between 15 km and 25 km, with some climbs up to 40% of the route. Suitable for walkers with fitness preparation.   Moderate to Hard (4/5): Terrain can be dirt roads or trails, with daily distances between 15 km and 25 km and moderate climbs up to 60% of the route. Suitable for hikers with fitness preparation who want to challenge themselves.   Hard (5/5): Terrain can be dirt roads or trails, with daily distances between 15 km and 30 km and strong climbs up to 60% of the route. Suitable for experienced hikers. "
+      "answer": "Our route classifications are as follows:   Easy (1/5): Mostly flat terrain with daily distances up to 50 km. Inexperient level.   Easy to Moderate (2/5): Mostly flat terrain with daily distances between 50 km and 75 km. Short climbs up to 30% of the whole route. For inexperient cyclist with some fitness preparation.   Moderate (3/5): Terrain can be in dirt roads or trails. Mostly flat with daily distances between 50 km and 75 km with some climbs up to 40% of the whole route. For cyclist with fitness preparation.   Moderate to Hard (4/5): Terrain can be in dirt roads or trails. Daily distances between 50 km and 75 km with moderate climbs up to 60% of the whole route. For cyclist with fitness preparation that want to challenge themselves.   Hard (5/5): Terrain can be in dirt roads or trails. Daily distances between 50 km and 100 km with strong climbs up to 60% of the whole route. For experienced cyclists.   With electric bicycles all the route classifications have to be adapted and will be mostly easy for the majority of the cyclists. "
     },
     {
       "question": "In which languages are guided tours available?",
@@ -42,7 +42,7 @@
     },
     {
       "question": "How do I book a tour with Top Bike Tours Portugal? ",
-      "answer": "Booking a tour with Top Wlaking Tours Portugal is simple and straightforward. Start by visiting our website and browsing through our diverse range of tour packages. Once you've selected the perfect tour for you, reach out to us directly via our contact form or email. Our team is ready to provide you with all the information you need and assist you in finalizing your booking. "
+      "answer": "Booking a tour with Top Bike Tours Portugal is simple and straightforward. Start by visiting our website and browsing through our diverse range of tour packages. Once you've selected the perfect tour for you, reach out to us directly via our contact form or email. Our team is ready to provide you with all the information you need and assist you in finalizing your booking. "
     },
     {
       "question": "How long is a proposal valid? ",
@@ -86,7 +86,7 @@
     },
     {
       "question": "Can I postpone a tour? What is your flexibility? ",
-      "answer": "Yes, you can postpone a tour with Top Bike Tours Portugal. We offer flexibility in our booking policies, allowing you to postpone your walking tour free of charge up to 30 days before the start date, no questions asked. This provides you with the convenience to adjust your plans if needed. Click our full cancellation policy. "
+      "answer": "Yes, you can postpone a tour with Top Bike Tours Portugal. We offer flexibility in our booking policies, allowing you to postpone your bike tour free of charge up to 30 days before the start date, no questions asked. This provides you with the convenience to adjust your plans if needed. Click our full cancellation policy. "
     },
     {
       "question": "What payment methods do you accept? ",
@@ -103,8 +103,8 @@
       "answer": "Cada dia de passeio termina à tarde, dando-lhe tempo para relaxar antes da próxima experiência gastronômica, onde você pode saborear os sabores regionais. Nosso objetivo é proporcionar uma aventura excepcional com um toque especial."
     },
     {
-      "question": "Quais tipos de passeios a pé que oferecemos em Portugal?",
-      "answer": "Oferecemos os seguintes tipos de passeios a pé:  Passeio Autoguiado Passeios Guiados Passeio Guiado Plus"
+      "question": "Quais tipos de passeios de bicicleta que oferecemos em Portugal?",
+      "answer": "Oferecemos os seguintes tipos de passeios de bicicleta:  Passeio Autoguiado Passeios Guiados Passeio Guiado Plus"
     },
     {
       "question": "O que está incluído no Passeio Autoguiado?",
@@ -112,7 +112,7 @@
     },
     {
       "question": "O que está incluído nos Passeios Guiados?",
-      "answer": "Os Passeios Guiados incluem:  Tudo descrito nos passeios autoguiados Guia e van de apoio para o passeio a pé Água, lanches e transporte para qualquer desistência Almoços e jantares organizados para o grupo"
+      "answer": "Os Passeios Guiados incluem:  Tudo descrito nos passeios autoguiados Guia e van de apoio para o passeio de bicicleta Água, lanches e transporte para qualquer desistência Almoços e jantares organizados para o grupo"
     },
     {
       "question": "Quais benefícios adicionais estão incluídos no Passeio Guiado Plus?",
@@ -172,7 +172,7 @@
     },
     {
       "question": "Como será o pick up no aeroporto do Porto?",
-      "answer": "Alguém estará no aeroporto do Porto com um cartão exibindo o logotipo \"Top WlakingTours Portugal\" e/ou seu nome."
+      "answer": "Alguém estará no aeroporto do Porto com um cartão exibindo o logotipo \"Top Bike Tours Portugal\" e/ou seu nome."
     },
     {
       "question": "Como serei recebido no aeroporto de Lisboa?",
@@ -180,7 +180,7 @@
     },
     {
       "question": "Posso adiar um passeio? Qual é a sua flexibilidade?",
-      "answer": "Sim, você pode adiar um passeio com a Top Bike Tours Portugal. Oferecemos flexibilidade em nossas políticas de reserva, permitindo que você adie seu passeio a pé sem custo até 30 dias antes da data de início, sem perguntas. Isso proporciona a conveniência de ajustar seus planos, se necessário.  Verifiquea nossa política de cancelamento completa."
+      "answer": "Sim, você pode adiar um passeio com a Top Bike Tours Portugal. Oferecemos flexibilidade em nossas políticas de reserva, permitindo que você adie seu passeio de bicicleta sem custo até 30 dias antes da data de início, sem perguntas. Isso proporciona a conveniência de ajustar seus planos, se necessário.  Verifiquea nossa política de cancelamento completa."
     },
     {
       "question": "Quais métodos de pagamento vocês aceitam?",
