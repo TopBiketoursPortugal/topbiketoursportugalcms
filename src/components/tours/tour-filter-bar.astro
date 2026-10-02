@@ -227,12 +227,16 @@ const sortOptions = [
   >
   </div>
 
-  <!-- Empty state -->
+  <!-- Empty state. The string lives in an attribute rather than in the element
+       so it is not a text node in the served HTML: `display: none` hides it from
+       anything that applies CSS, but text-extraction crawlers ignore CSS and
+       read it as page copy sitting directly above a populated tour list. The
+       script fills it in on first use. -->
   <p
     data-filter-empty
+    data-empty-text={noResultsText}
     class="relative mt-3 hidden text-center text-sm text-gray-500 dark:text-gray-400"
   >
-    {noResultsText}
   </p>
 </div>
 
@@ -638,10 +642,11 @@ const sortOptions = [
         renderChips(active);
 
         if (emptyEl) {
-          emptyEl.classList.toggle(
-            'hidden',
-            visibleIndex > 0 || !hasActiveFilters
-          );
+          const isEmpty = visibleIndex === 0 && hasActiveFilters;
+          if (isEmpty && !emptyEl.textContent) {
+            emptyEl.textContent = emptyEl.dataset.emptyText ?? '';
+          }
+          emptyEl.classList.toggle('hidden', !isEmpty);
         }
 
         sections().forEach((section) => {
