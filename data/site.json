@@ -18,7 +18,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
@@ -58,7 +59,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
@@ -98,7 +100,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
@@ -138,7 +141,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
@@ -178,7 +182,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
@@ -218,7 +223,8 @@
     "metadata": {
       "title": {
         "default": "Top Bike Tours Portugal",
-        "template": "%s — Top Bike Tours Portugal"
+        "template": "%s — Top Bike Tours Portugal",
+        "template_short": "%s | Top Bike Tours"
       },
       "description": "Top Bike Tours Portugal",
       "robots": {
