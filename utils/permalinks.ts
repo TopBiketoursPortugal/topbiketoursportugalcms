@@ -200,7 +200,24 @@ async function languageAlternates<C extends CollectionKey>(
     collection,
     (entry: CollectionEntry<C>) => entry.filePath?.split('/').at(-1) === fileKey
   );
-  return (entries ?? []).length > 1 ? entries : [];
+  // A noindexed page must not be offered as an hreflang alternate. It is kept
+  // out of the sitemap, so pointing five other locales at it leaves them each
+  // declaring an alternate Google is told not to index - which is what
+  // `seo:audit` reports as `hreflang-unlisted`. Dropping it leaves the
+  // remaining locales referencing each other, which is still reciprocal.
+  // tools/seo/lib/alternates.mjs applies the same rule to the sitemap, and the
+  // two have to agree or the same tool reports the pair as a mismatch.
+  const isNoIndex = (entry: CollectionEntry<C>) =>
+    (entry.data as { seo?: { no_index?: boolean } }).seo?.no_index === true;
+
+  // And a noindexed page emits none itself. hreflang has to be
+  // self-referencing to be read at all, so a set this page cannot be part of
+  // is not a set it can usefully declare.
+  const self = (entries ?? []).find((entry) => entry.filePath === filePath);
+  if (self && isNoIndex(self)) return [];
+
+  const indexable = (entries ?? []).filter((entry) => !isNoIndex(entry));
+  return indexable.length > 1 ? indexable : [];
 }
 
 function trim(str = '', ch?: string): string {
