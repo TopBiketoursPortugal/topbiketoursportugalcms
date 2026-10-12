@@ -8,6 +8,15 @@ import { cn } from 'utils/cn';
 type Props = JSX.FormHTMLAttributes & { honeyPot?: boolean };
 
 const { class: className, honeyPot = true, ...props } = Astro.props;
+
+// Do NOT add the WhatConverts tracker script (137152.js) to this component. It
+// sets attribution cookies, so it must stay behind analytics consent, and this
+// component renders on every tour page and both contact pages in both locales.
+// The only two loaders are CookieConsent.astro (early load for visitors who
+// already granted) and loadWhatConverts() in CookieConsentConfig.ts (on grant);
+// both are guarded by window._wcLoaded. A hardcoded tag here bypassed consent
+// on 44 live pages and double-loaded the tracker once consent was given.
+// This note lives in the frontmatter so it is not emitted to public HTML.
 ---
 
 <form
@@ -44,8 +53,6 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
     }
   };
 </script>
-<script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
-></script>
 <script is:inline>
   function _hasAnalyticsConsent() {
     try {
