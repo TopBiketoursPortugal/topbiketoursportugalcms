@@ -212,8 +212,17 @@ const showBookNow =
         comparable facts below are what the reader is actually scanning.
       */
       }
+      {
+        /*
+        `cardSummary` when the tour has one, and only then the opening of the
+        body copy. The excerpt is the same paragraph wherever the card appears,
+        so one tour's intro was the dominant text on the region page, the
+        day-tour page, the tag pages and the bike-type pages at once. A summary
+        written for the card breaks that; tours without one keep the excerpt.
+      */
+      }
       <p class="line-clamp-2 text-base text-gray-600 dark:text-gray-300">
-        {getMarkdownExcerpt(content ?? '', 160)}
+        {data.cardSummary || getMarkdownExcerpt(content ?? '', 160)}
       </p>
 
       {

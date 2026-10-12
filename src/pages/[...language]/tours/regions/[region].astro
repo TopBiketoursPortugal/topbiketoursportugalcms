@@ -45,7 +45,10 @@ export async function getStaticPaths() {
           tours:
             tours.filter(
               (tour) =>
-                tour.data.region === region.data.id &&
+                (tour.data.region === region.data.id ||
+                  (tour.data.additionalRegions ?? []).includes(
+                    region.data.id
+                  )) &&
                 tour.data.language === language
             ) ?? []
         }
@@ -56,7 +59,19 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const { tours, regionData } = Astro.props;
 
 const packageTours = tours.filter((t) => t.data.tourtype === 'PackageTour');
-const dayTours = tours.filter((t) => t.data.tourtype === 'DayTour');
+// A region that hands its day tours to a dedicated page renders none here — see
+// `showDayTours` in src/schemas/tour-regions.ts. The tours stay published and
+// linked from that page and the mega menu; only this duplicate grid goes.
+const dayTours =
+  regionData.data.showDayTours === false
+    ? []
+    : tours.filter((t) => t.data.tourtype === 'DayTour');
+
+// Everything downstream — the result count and which filter chips are offered —
+// has to describe what the grids actually render, not what the region contains.
+// Reading `tours` here would advertise 8 tours and 5 unreachable filters on a
+// Porto page showing 3.
+const visibleTours = [...packageTours, ...dayTours];
 
 const tourRegions = await getCollection(
   'tourRegions',
@@ -77,11 +92,11 @@ const allBikeCategories = await getCollection(
 );
 
 const tourRiderLevelIds = new Set(
-  tours.flatMap((t) => t.data.riderLevels ?? [])
+  visibleTours.flatMap((t) => t.data.riderLevels ?? [])
 );
-const tourTagIds = new Set(tours.flatMap((t) => t.data.tags ?? []));
+const tourTagIds = new Set(visibleTours.flatMap((t) => t.data.tags ?? []));
 const tourBikeCategoryIds = new Set(
-  tours.flatMap((t) => t.data.bikeCategories ?? [])
+  visibleTours.flatMap((t) => t.data.bikeCategories ?? [])
 );
 
 const relevantRiderLevels = allRiderLevels.filter((l) =>
@@ -113,8 +128,14 @@ const regionSeoTitle =
     regionData.data.name ?? ''
   ) ??
   regionData.data.title;
-const regionSeoDescription =
-  regionData.data.seo?.page_description ?? regionSeoTitle;
+// Falling back to the title shipped a meta description that was a byte-for-byte
+// copy of the title tag. Google discards a description that only repeats the
+// title and writes its own snippet from the page, so the duplicate buys nothing
+// and costs us the one place we control the snippet. Leave it unset instead and
+// let `getPageSeo` fall back to the site description. Schema needs a non-empty
+// string, so it keeps its own fallback below.
+const regionSeoDescription = regionData.data.seo?.page_description ?? undefined;
+const regionSchemaDescription = regionSeoDescription ?? regionData.data.title;
 
 const frontmatter = {
   title: regionData.data.title,
@@ -171,7 +192,7 @@ const breadcrumbs = [
     }
     <PlaceSchema
       name={regionData.data.name ?? regionData.data.title}
-      description={regionSeoDescription}
+      description={regionSchemaDescription}
       image={`${baseUrl}${imageSrc}`}
       url={getTourRegionsPath(regionData, language)}
       language={language}
@@ -183,7 +204,7 @@ const breadcrumbs = [
     <div data-tour-filter-container>
       <TourFilterBar
         language={language}
-        totalCount={tours.length}
+        totalCount={visibleTours.length}
         showRiderLevel={relevantRiderLevels.length > 0}
         showTag={relevantTags.length > 0}
         showBikeCategory={relevantBikeCategories.length > 0}
@@ -247,12 +268,16 @@ const breadcrumbs = [
               .filter((r) => r.data.id !== regionData.data.id)
               .map((r) => (
                 <li class="pl-2">
+                  {/* `r`, not `regionData` — this list maps over the *other*
+                      regions, but labelled and titled every link with the
+                      current page's own title, so five different URLs all read
+                      the same. */}
                   <a
                     href={getTourRegionsPath(r, language)}
-                    title={regionSeoTitle}
+                    title={r.data.title}
                     class="underline"
                   >
-                    {regionSeoTitle}
+                    {r.data.name ?? r.data.title}
                   </a>
                 </li>
               ))}
