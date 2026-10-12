@@ -103,8 +103,12 @@ const iconClass = getTagIconClass(categoryData.data.icon);
 
 const categorySeoTitle =
   categoryData.data.seo?.page_title ?? categoryData.data.title;
+// No fallback to the title: `/tours/bike-types/e-bike/` was shipping a meta
+// description byte-for-byte identical to its title tag. Google discards a
+// description that only repeats the title, so leaving it unset and letting
+// `getPageSeo` fall back to the site description loses nothing.
 const categorySeoDescription =
-  categoryData.data.seo?.page_description ?? categoryData.data.title;
+  categoryData.data.seo?.page_description ?? undefined;
 const frontmatter = {
   title: categoryData.data.title ?? categoryData.data.seo?.page_title,
   page_size: 6,

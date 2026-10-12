@@ -130,6 +130,11 @@ const tourSchema = z.object({
   image: imageSchema.nullable().optional(),
   order: z.number().optional(),
   description: z.string().optional(),
+  // One line written for the tour card, used wherever the card is listed. Left
+  // empty the card falls back to the opening of `content`, which is how the
+  // same paragraph ended up as the dominant text on a region page, a day-tour
+  // page, a tag page and a bike-type page simultaneously.
+  cardSummary: z.string().max(160).optional(),
   afterPricing: z.string().optional().nullable(),
   packagesTitle: z.string().optional().nullable(),
   packages2: z.array(tourPackageSchema).optional().nullable(),
@@ -137,6 +142,15 @@ const tourSchema = z.object({
   packages3: z.array(tourPackageSchema).optional().nullable(),
   packages3Title: z.string().optional().nullable(),
   region: z.string().optional().default(''),
+  // Further regions this tour cycles through, beyond `region`. `region` stays
+  // the primary one and keeps owning the breadcrumb, the card label and
+  // related-tour scoring, so those stay unambiguous. A point-to-point tour
+  // belongs on both endpoint region pages: Porto to Lisbon was filed under
+  // Porto/North only, so `/tours/regions/lisbon/` — the page meant to hold
+  // "bike tours lisbon portugal" — never listed the one tour with Lisbon in
+  // its name. Transfers do not count; a tour that is met at Lisbon airport and
+  // driven to the Alentejo does not cycle in Lisbon.
+  additionalRegions: z.array(z.string().uuid()).optional().default([]),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),

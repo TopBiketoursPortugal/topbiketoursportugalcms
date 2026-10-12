@@ -78,16 +78,25 @@ function index() {
     }
 
     for (const group of groups.values()) {
+      // A noindexed translation is kept out of the sitemap, so it cannot be
+      // offered as an alternate either - a URL the sitemap never lists is what
+      // tools/seo/audit-dist.mjs reports as `hreflang-unlisted`. The page
+      // markup applies the same rule in utils/permalinks.ts and the two have
+      // to agree, or the same tool reports the pair as a mismatch. The
+      // noindexed URL still gets the surviving alternates: it is excluded from
+      // being pointed *at*, not from pointing.
+      const listed = group.filter((route) => !route.noIndex);
+
       // A single-language group has nothing to point at; a lone hreflang is
       // not a translation set, so leave those URLs unannotated.
-      if (group.length < 2) continue;
+      if (listed.length < 2) continue;
 
-      const links = group.map((route) => ({
+      const links = listed.map((route) => ({
         path: route.url,
         lang: LOCALES[route.language]
       }));
 
-      const fallback = group.find((route) => route.language === DEFAULT_LOCALE);
+      const fallback = listed.find((route) => route.language === DEFAULT_LOCALE);
       if (fallback) links.push({ path: fallback.url, lang: 'x-default' });
 
       for (const route of group) cache.byUrl.set(route.url, links);

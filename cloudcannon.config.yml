@@ -485,8 +485,37 @@ collections_config:
               - key: seo.featured_image
         comment: To add a new region, go to the tour regions collection
         cascade: true
+      additionalRegions:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.tourRegions
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
+          empty_type: array
+        comment:
+          Other regions this tour cycles through. The tour is listed on these
+          region pages too, but keeps the region above as its primary one for
+          the breadcrumb. Only add a region the tour actually rides in - not one
+          it is only transferred through.
+        cascade: true
       content:
         type: markdown
+        cascade: true
+      cardSummary:
+        type: text
+        options:
+          max_length: 160
+        comment:
+          One line describing this tour, shown on the tour card in every list it
+          appears in. Leave it empty and the card shows the start of the tour
+          text instead, which repeats the same paragraph across several pages.
         cascade: true
       afterPricing:
         type: markdown

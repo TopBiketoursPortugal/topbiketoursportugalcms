@@ -213,10 +213,10 @@
     "Tours.Filter.ShowCount": "Filters ($1)",
     "Tours.Filter.Sort": "Sort by",
     "Tours.Filter.Tag": "Category",
-    "Tours.Regions.DayTour.Title": "Day tour list region  $1",
+    "Tours.Regions.DayTour.Title": "Day bike tours in $1",
     "Tours.Regions.NoResults.AlternateTags.Title": "Could try other regions:",
     "Tours.Regions.NoResults.Title": "No tours yet for region $1",
-    "Tours.Regions.PackageTour.Title": "Tour list region $1",
+    "Tours.Regions.PackageTour.Title": "Multi-day bike tours in $1",
     "Tours.RiderLevels.DayTour.Title": "Day tours for $1 riders",
     "Tours.RiderLevels.NoResults.AlternateTitle": "Try other rider levels:",
     "Tours.RiderLevels.NoResults.Title": "No tours yet for $1 level",
@@ -228,10 +228,10 @@
     "Tours.Sort.PriceDesc": "Price: high to low",
     "Tours.Sort.RatingDesc": "Best rated",
     "Tours.Sort.Recommended": "Recommended",
-    "Tours.Tags.DayTour.Title": "Day tour list tag  $1",
+    "Tours.Tags.DayTour.Title": "Day bike tours: $1",
     "Tours.Tags.NoResults.AlternateTags.Title": "Could try other tags:",
     "Tours.Tags.NoResults.Title": "No tours yet for tag $1",
-    "Tours.Tags.PackageTour.Title": "Tour list tag $1"
+    "Tours.Tags.PackageTour.Title": "Multi-day bike tours: $1"
   },
   "pt": {
     "Bikes.MoreInfo": "Mais informações",
@@ -447,10 +447,10 @@
     "Tours.Filter.ShowCount": "Filtros ($1)",
     "Tours.Filter.Sort": "Ordenar por",
     "Tours.Filter.Tag": "Categoria",
-    "Tours.Regions.DayTour.Title": "Lista de tours diários da região $1",
+    "Tours.Regions.DayTour.Title": "Tours diários de bicicleta em $1",
     "Tours.Regions.NoResults.AlternateTags.Title": "Pode experimentar outras regiões:",
     "Tours.Regions.NoResults.Title": "Ainda não há tours para a região $1",
-    "Tours.Regions.PackageTour.Title": "Lista de tours da região $1",
+    "Tours.Regions.PackageTour.Title": "Tours de bicicleta de vários dias em $1",
     "Tours.RiderLevels.DayTour.Title": "Tours diários para ciclistas $1",
     "Tours.RiderLevels.NoResults.AlternateTitle": "Experimente outros níveis:",
     "Tours.RiderLevels.NoResults.Title": "Ainda não há tours para o nível $1",
@@ -462,10 +462,10 @@
     "Tours.Sort.PriceDesc": "Preço: do mais alto",
     "Tours.Sort.RatingDesc": "Melhor avaliados",
     "Tours.Sort.Recommended": "Recomendados",
-    "Tours.Tags.DayTour.Title": "Etiqueta de lista de tours diários $1",
+    "Tours.Tags.DayTour.Title": "Tours diários de bicicleta: $1",
     "Tours.Tags.NoResults.AlternateTags.Title": "Pode experimentar outras etiquetas:",
     "Tours.Tags.NoResults.Title": "Ainda não há tours para a etiqueta $1",
-    "Tours.Tags.PackageTour.Title": "Etiqueta de lista de tours $1"
+    "Tours.Tags.PackageTour.Title": "Tours de bicicleta de vários dias: $1"
   },
   "de": {
     "Bikes.MoreInfo": "Mehr erfahren",
