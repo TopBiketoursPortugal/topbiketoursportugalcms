@@ -1,0 +1,99 @@
+---
+/**
+ * `Product` + `AggregateOffer` for a region landing page.
+ *
+ * Why this exists: on the live results page for "bike tours portugal" the
+ * competitors show a price range inside their snippet (Backroads $5,899–$7,199,
+ * VBT $5,495–$9,340) and we show nothing, because the region pages carry
+ * `Place` and `ItemList` but no offer data. That is a click-through gap on the
+ * most valuable query in the market, and it is markup, not copy.
+ *
+ * Deliberately no `aggregateRating`. The 4.8 / 119 figure is the Google
+ * Business Profile rating for the company as a whole, not for the reviews on
+ * a region page — and Google issues manual actions for aggregate ratings that
+ * do not correspond to reviews on the page carrying them. The rating stays on
+ * the `LocalBusiness` node, where it is unambiguously true. The price range is
+ * the part that drives the snippet anyway.
+ *
+ * Prices are computed from the tours actually listed on the page (never
+ * hard-coded) using the same rule as the visible "from" price — see
+ * utils/tour-price.ts.
+ */
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { TourSchema } from 'src/schemas/tours';
+import { resolveSchemaImage } from 'utils/schema-image';
+import { tourFromPrice } from 'utils/tour-price';
+
+type Props = {
+  name: string;
+  description?: string;
+  image?: string;
+  url: string;
+  tours: TourSchema[];
+  language: LanguageCodes;
+};
+
+const { name, description, image, url, tours, language } = Astro.props;
+
+const site = SiteData[language];
+const baseUrl = (Astro.site ?? site.site.url).toString().replace(/\/$/, '');
+const pageUrl = `${baseUrl}${url.startsWith('/') ? url : `/${url}`}`;
+
+const priced = tours
+  .map((tour) => tourFromPrice(tour))
+  .filter((price): price is NonNullable<typeof price> => price !== null);
+
+// Mixing currencies in one AggregateOffer would publish a range that means
+// nothing, so aggregate only the majority currency on the page. In practice
+// every tour prices in EUR; this is here so a single USD tour cannot corrupt
+// the range.
+const currency = priced[0]?.currency ?? 'EUR';
+const amounts = priced
+  .filter((price) => price.currency === currency)
+  .map((price) => price.amount);
+
+const imageUrl = await resolveSchemaImage(image, Astro.site);
+
+const schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  'name': name,
+  'url': pageUrl,
+  'brand': {
+    '@type': 'Brand',
+    'name': site.site.name
+  }
+};
+
+if (description) schema.description = description;
+if (imageUrl) schema.image = imageUrl;
+
+if (amounts.length > 0) {
+  schema.offers = {
+    '@type': 'AggregateOffer',
+    'priceCurrency': currency,
+    'lowPrice': Math.min(...amounts),
+    'highPrice': Math.max(...amounts),
+    'offerCount': amounts.length,
+    'availability': 'https://schema.org/InStock',
+    'url': pageUrl
+  };
+}
+---
+
+{
+  /* A Product with no offer is not worth emitting — it adds an entity Google
+     has nothing to show for. Pages whose tours carry no price stay as they
+     are. */
+}
+{
+  amounts.length > 0 ? (
+    <script
+      is:inline
+      async
+      type="application/ld+json"
+      set:html={JSON.stringify(schema)}
+    />
+  ) : null
+}

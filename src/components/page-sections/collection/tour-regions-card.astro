@@ -26,8 +26,18 @@ const {
 // Matches the collection's 2 / 3 / 4 column grid.
 const overlaySizes = '(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw';
 const { data } = region;
-const { title, name, seo } = data;
+const { title, name, link_text, seo } = data;
 const regionPath = getTourRegionsPath(region, language);
+
+/**
+ * The card is the one body-copy link from the homepage into each region page,
+ * so its text is the anchor text those pages are judged on. `name` is a nav
+ * label — "Lisboa" on a page that has to rank for "Lisbon bike tours", and
+ * "Porto/North" on one targeting "Porto bike tours". `link_text` carries the
+ * phrase where an entry sets it; `name` stays the fallback, which leaves every
+ * non-English locale exactly as it is.
+ */
+const anchorText = link_text ?? name;
 ---
 
 {
@@ -52,7 +62,7 @@ const regionPath = getTourRegionsPath(region, language);
       {/* A heading, like the hstack variant — the region name is the card's
           title, and a bare <span> left this grid absent from the outline. */}
       <h3 class="font-heading absolute inset-x-0 bottom-0 p-3 text-center text-lg font-bold text-white capitalize drop-shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
-        {name}
+        {anchorText}
       </h3>
     </a>
   ) : (
@@ -73,7 +83,7 @@ const regionPath = getTourRegionsPath(region, language);
         </div>
       ) : null}
       <h3 class="text-lg font-semibold text-gray-900 capitalize dark:text-gray-100">
-        {name}
+        {anchorText}
       </h3>
     </a>
   )

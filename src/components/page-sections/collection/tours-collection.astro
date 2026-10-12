@@ -4,6 +4,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 import TourListSchema from 'src/components/tours/tour-list-schema.astro';
 import TourCard from 'src/components/tours/tour-card.astro';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
 import type { TourSchema } from 'src/schemas/tours';
 import { t } from 'utils/i18n';
 import { getTourPath } from 'utils/permalinks';
@@ -16,13 +17,13 @@ export type TourCollectionProps = {
   frame: 'none' | 'light' | 'heavy';
   layout: 'horizontal' | 'vertical';
   title: string;
-  heading: { text: string };
+  heading?: { text?: string };
   tourType?: TourSchema['tourtype'];
 };
 
 type Props = TourCollectionProps;
 
-const { contentDisplay = 'inline', tourType } = Astro.props;
+const { contentDisplay = 'inline', tourType, heading } = Astro.props;
 
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const tours = await getCollection(
@@ -86,6 +87,28 @@ const itemListSchema = {
 ---
 
 <section aria-label={t('Tours.Collection.Label', language)}>
+  {
+    /*
+      `heading` was declared in the props type and then never rendered, so the
+      H2 every one of these blocks authors in CloudCannon was dropped on the
+      floor — twelve pages shipped with a tour grid and no heading above it,
+      which is why /bike-tours-porto-portugal/ had no H2 at all. The authored
+      value carries its own markdown level ("## ..."), so it goes through Prose
+      rather than being wrapped in a fixed heading tag.
+    */
+  }
+  {
+    heading?.text ? (
+      <div
+        class="px-4 sm:px-6"
+        data-editable="text"
+        data-type="block"
+        data-prop="heading.text"
+      >
+        <Prose markdown={heading.text} />
+      </div>
+    ) : null
+  }
   <div data-tour-filter-container>
     <TourFilterBar
       language={language}

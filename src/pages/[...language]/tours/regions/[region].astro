@@ -20,6 +20,7 @@ import { getImageByPath } from 'utils/get-image';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import PlaceSchema from 'src/components/schema/place-schema.astro';
+import RegionOffersSchema from 'src/components/schema/region-offers-schema.astro';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
 
 export async function getStaticPaths() {
@@ -174,6 +175,14 @@ const breadcrumbs = [
       description={regionSeoDescription}
       image={`${baseUrl}${imageSrc}`}
       url={getTourRegionsPath(regionData, language)}
+      language={language}
+    />
+    <RegionOffersSchema
+      name={regionData.data.title}
+      description={regionSeoDescription}
+      image={regionData.data.seo?.featured_image ?? undefined}
+      url={getTourRegionsPath(regionData, language)}
+      tours={tours.map((tour) => tour.data)}
       language={language}
     />
   </slot>
