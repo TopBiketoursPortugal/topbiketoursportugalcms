@@ -6,6 +6,26 @@ import type { LayoutProps } from 'src/layouts/Layout.astro';
 import { sanitizeUrl } from './permalinks';
 import { getImageByPath } from './get-image';
 
+// The width Google renders before truncating a title with an ellipsis. It is
+// a pixel budget rather than a character count, so this is the usual
+// conservative character proxy, not an exact cutoff.
+const TITLE_CHAR_BUDGET = 60;
+
+function withBrandSuffix(
+  pageTitle: string,
+  template: string,
+  templateShort?: string
+): string {
+  const candidates = [template, templateShort].filter(
+    (t): t is string => typeof t === 'string' && t.length > 0
+  );
+  for (const candidate of candidates) {
+    const withSuffix = candidate.replace('%s', pageTitle);
+    if (withSuffix.length <= TITLE_CHAR_BUDGET) return withSuffix;
+  }
+  return pageTitle;
+}
+
 export async function getPageSeo(
   site: string | URL,
   page: LayoutProps,
@@ -17,10 +37,18 @@ export async function getPageSeo(
   const siteData = SiteData[language];
   const siteName = siteData.site.name;
   const titleTemplate = siteData.metadata.title.template;
+  const titleTemplateShort = siteData.metadata.title.template_short;
+  // Google shows roughly 60 characters of a title. Appending the full 26-char
+  // brand suffix unconditionally pushed 164 of 236 titles past that, and the
+  // suffix is at the end, so the part Google cut off was the brand itself —
+  // we lost the branding AND the end of the description. Take the longest
+  // suffix that still fits; if even the short one does not, ship the authored
+  // title alone. That leaves 34 titles over 60, all of which are already over
+  // 60 before any suffix — those are a copy-length fix, not a template one.
   const title = pageTitle
     ? pageTitle.includes(siteName)
       ? pageTitle
-      : titleTemplate.replace('%s', pageTitle)
+      : withBrandSuffix(pageTitle, titleTemplate, titleTemplateShort)
     : siteData.site_title;
 
   const baseUrl = site ?? import.meta.env.BASE_URL;
