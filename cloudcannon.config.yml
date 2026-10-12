@@ -828,6 +828,13 @@ collections_config:
           required: true
           required_message: Region display name is required
         cascade: true
+      link_text:
+        type: text
+        comment: >-
+          Anchor text for the cards that link to this region from the homepage.
+          Leave blank to use the display name. Set it to the phrase the page
+          should rank for ("Porto bike tours") rather than the short label.
+        cascade: true
       language:
         type: select
         options:
