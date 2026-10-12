@@ -87,7 +87,11 @@ const blogTagPageDescription =
 
 const seo = {
   page_title: blogTagPageTitle,
-  page_description: blogTagPageDescription
+  page_description: blogTagPageDescription,
+  // Page 2 onward is a slice of a listing: no unique copy, nothing to book,
+  // and — by the deliberate choice below — no hreflang set to belong to.
+  // 15 such pages exist on the English site. Page 1 stays indexable.
+  no_index: pageNumber > 1
 };
 
 const pagination = Astro.props.page;

@@ -41,6 +41,7 @@ const {
   hrefs = [],
   relatedPosts = [],
   relatedTours = [],
+  tags = [],
   breadcrumbs = []
 } = props;
 const { src, alt } = props.image;
@@ -74,10 +75,17 @@ const imageSrc = await resolveImageSrc(src);
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 
-const allTags = await getCollection(
-  'postTags',
-  (tag) => tag.data.language === language
-);
+// Only the tags this post actually carries. Previously this listed every tag
+// in the language on every post, which sent 2,204 internal links — 31% of all
+// in-content links on the English site — into 27 thin tag listing pages, while
+// the five destination hub pages received 63 between them. Same pattern as
+// `components/blog/summary.astro`.
+const postTags = tags.length
+  ? await getCollection(
+      'postTags',
+      (tag) => tags.includes(tag.data.id) && tag.data.language === language
+    )
+  : [];
 const latestPosts = (
   await getCollection(
     'blog',
@@ -229,13 +237,13 @@ const latestPosts = (
         data-pagefind-ignore
       >
         {
-          allTags.length > 0 && (
+          postTags.length > 0 && (
             <div>
               <h2 class="mb-3 text-lg font-semibold">
                 {t('Blog.Sidebar.Tags', language)}
               </h2>
               <div class="flex flex-wrap gap-2">
-                {allTags.map((tag) => (
+                {postTags.map((tag) => (
                   <a
                     href={getBlogTagPath(tag, language)}
                     class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800"
