@@ -305,11 +305,13 @@ export default defineConfig({
         optional: true,
         default: 'GTM-KRC3B4ZQ'
       }),
-      GOOGLE_ANALYTICS_ID: envField.string({
+      // See astro.config.ts for why the container is paired with a hostname.
+      // `localhost` keeps the dev server from reporting into the live GA4
+      // property, which it previously did on every `pnpm dev` page load.
+      GOOGLE_TAG_MANAGER_HOST: envField.string({
         context: 'client',
         access: 'public',
-        optional: true,
-        default: '385531271'
+        default: 'localhost'
       }),
       GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',

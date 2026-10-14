@@ -305,11 +305,27 @@ export default defineConfig({
         optional: true,
         default: 'GTM-KRC3B4ZQ'
       }),
-      GOOGLE_ANALYTICS_ID: envField.string({
+      // The hostname this container belongs to. Nothing else in the codebase
+      // ties a container to a site, and that is how the bike site's GA4
+      // property ended up recording 937 sessions from
+      // topwalkingtoursportugal.com: both sites are built from this repo, both
+      // inherit the `GOOGLE_TAG_MANAGER_ID` default above, and GTM-KRC3B4ZQ
+      // holds exactly one GA4 tag — G-RXEF72Y3WV, the bike property. The
+      // walking build was shipping the bike site's container.
+      //
+      // Declaring the owning host alongside the ID makes the pair travel
+      // together, so a build that inherits this container on some other
+      // hostname loads nothing instead of reporting into the wrong property.
+      // The check is at runtime, not build time, because the hostname is the
+      // only thing that distinguishes a deploy preview from production: both
+      // are the same build artefact.
+      //
+      // To give another site its own measurement, set BOTH variables in that
+      // site's build environment. Setting the ID alone is inert by design.
+      GOOGLE_TAG_MANAGER_HOST: envField.string({
         context: 'client',
         access: 'public',
-        optional: true,
-        default: '385531271'
+        default: 'topbiketoursportugal.com'
       }),
       GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',
