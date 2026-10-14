@@ -11,6 +11,7 @@ import type { LanguageCodes } from 'src/schemas/language';
 import Announcement from './common/Announcement.astro';
 import Header from './common/Header.astro';
 import BasicScripts from './common/BasicScripts.astro';
+import BookingHandoff from 'src/components/analytics/booking-handoff.astro';
 import CookieConsent from './common/CookieConsent.astro';
 import Footer from './common/Footer';
 import { getPageSeo } from 'utils/seo';
@@ -160,6 +161,15 @@ if (INDEX === 'false') {
     class="text-default flex min-h-screen flex-col overflow-x-clip tracking-tight antialiased dark:bg-slate-900 dark:text-white"
   >
     <BasicScripts />
+    {
+      /*
+      Site-wide, not tour-page-only: WeTravel checkout buttons also render on
+      tour cards in the listings and on /calendar/, so scoping this to the tour
+      template would miss clicks. One delegated listener, one early return per
+      unrelated click.
+    */
+    }
+    <BookingHandoff />
     <slot name="announcement">
       <Announcement
         language={language}
