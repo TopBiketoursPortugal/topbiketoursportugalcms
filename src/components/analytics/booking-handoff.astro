@@ -1,0 +1,108 @@
+---
+/**
+ * Booking-engine handoff tracking.
+ *
+ * Fires one `booking_handoff` dataLayer event per click on any vendor
+ * "Book now" control, so the closest thing we have to revenue stops being
+ * counted nowhere. Counts ATTEMPTS, never bookings: both checkouts open in
+ * vendor-hosted overlays we cannot see into, and neither navigates away
+ * (12 months of GA4: 1 `wetravel*` session, 0 `fareharbor*`), so completions
+ * exist only in WeTravel's and FareHarbor's own dashboards.
+ *
+ * Two vendors, two completely different shapes:
+ *  - WeTravel  — a `<button class="wtrvl-checkout_button" data-uuid="…">`
+ *                carrying `href` as a plain ATTRIBUTE (vendor quirk).
+ *  - FareHarbor — a real `<a href="…/embeds/book/…/items/<id>/…">`.
+ *
+ * WHY `dataLayer.push({ event })` AND NOT `gtag('event', …)` — measured on the
+ * live site 15 Oct 2026 over CDP, because the two look equivalent and are not:
+ *
+ *  1. GA4 (G-RXEF72Y3WV) is loaded BY the GTM container (gtag/js arrives with
+ *     `cx=c`), so GTM owns `window.dataLayer`. A gtag-form push
+ *     (`dataLayer.push(arguments)`) is left untouched in the array — no
+ *     `gtm.uniqueEventId` stamped, no `/g/collect` request. Dead on arrival.
+ *     The same push on a standalone gtag.js page DOES hit `/g/collect`, which
+ *     is why the gtag advice is true in general and false here.
+ *  2. This form IS ingested: GTM stamped `gtm.uniqueEventId` on it and the
+ *     container's data model then read back `event` and `vendor`.
+ *  3. Do not route this through the `gtag()` helper in CookieConsent.astro.
+ *     It is doubly unreachable: Astro wraps `define:vars` inline scripts in an
+ *     IIFE so the function is never global (`window.gtag` is `undefined` live),
+ *     and it pushes a rest ARRAY (`dataLayer.push(args)`) where gtag requires
+ *     an `arguments` object — the array form produced zero hits even on a clean
+ *     gtag.js page.
+ *
+ * So this half is the half that lives in the repo. Forwarding it to GA4 needs
+ * one Custom Event trigger (`booking_handoff`) plus one GA4 Event tag in
+ * GTM-KRC3B4ZQ; until that exists the event is visible in GTM Preview and
+ * nowhere else. See TOP-60.
+ *
+ * NOT consent-gated, on purpose. The container grants `analytics_storage`
+ * unconditionally for all regions and its consent `update` only ever touches
+ * the `ad_*` keys, so analytics is never blocked here — and a `cc_cookie`
+ * gate is precisely what made `form_submission` useless.
+ */
+---
+
+<script is:inline>
+  (function () {
+    // One delegated listener per page. The listener lives on `document`, which
+    // survives Astro's view-transition body swaps, but this inline script is
+    // re-executed on every swap — hence the guard. Without it, a visitor six
+    // pages deep would fire six events per click.
+    if (window.__bookingHandoffBound) return;
+    window.__bookingHandoffBound = true;
+
+    const WETRAVEL_SELECTOR = '.wtrvl-checkout_button';
+    const FAREHARBOR_SELECTOR = 'a[href*="fareharbor.com/embeds/book"]';
+
+    document.addEventListener(
+      'click',
+      function (event) {
+        const target = event.target;
+        // Guard rather than assume: a click inside an <svg> icon targets an
+        // SVGElement, and text nodes have no `closest`.
+        if (!target || typeof target.closest !== 'function') return;
+
+        // `.closest()` is required, not cosmetic — the raw click target is
+        // normally the label text or an inner <span>, so reading dataset off
+        // `event.target` returns undefined.
+        const wetravel = target.closest(WETRAVEL_SELECTOR);
+        const fareharbor = wetravel
+          ? null
+          : target.closest(FAREHARBOR_SELECTOR);
+        const element = wetravel || fareharbor;
+        if (!element) return;
+
+        let packageId = '(unknown)';
+        if (wetravel) {
+          // WeTravel's `data-uuid` is the package, which is the whole point:
+          // it separates "someone clicked" from "someone wanted the guided
+          // trip rather than the self-guided one".
+          packageId = wetravel.getAttribute('data-uuid') || '(unknown)';
+        } else {
+          const match = (fareharbor.getAttribute('href') || '').match(
+            /items\/(\d+)/
+          );
+          if (match) packageId = match[1];
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'booking_handoff',
+          vendor: wetravel ? 'wetravel' : 'fareharbor',
+          package_id: packageId,
+          tour_path: location.pathname,
+          // GA4 caps parameter values at 100 chars; 40 is plenty for a CTA and
+          // keeps the cardinality low enough to be readable in a report.
+          cta_label: (element.textContent || '').trim().slice(0, 40)
+        });
+      },
+      // Capture phase. Both vendors bind their own click handlers to these
+      // elements to open the checkout overlay; if either ever calls
+      // stopPropagation() a bubble-phase listener on document would never run
+      // and we would lose every click silently.
+      true
+    );
+  })();
+</script>
