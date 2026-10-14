@@ -1,9 +1,18 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
-import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+import {
+  GOOGLE_TAG_MANAGER_HOST,
+  GOOGLE_TAG_MANAGER_ID
+} from 'astro:env/client';
 ---
 
-<script is:inline define:vars={{ gtmId: GOOGLE_TAG_MANAGER_ID }}>
+<script
+  is:inline
+  define:vars={{
+    gtmId: GOOGLE_TAG_MANAGER_ID,
+    gtmHost: GOOGLE_TAG_MANAGER_HOST
+  }}
+>
   window.dataLayer = window.dataLayer || [];
   function gtag(...args) {
     dataLayer.push(args);
@@ -49,12 +58,35 @@ import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
   gtag('set', 'ads_data_redaction', !hasMarketing);
   gtag('set', 'url_passthrough', true);
 
+  // Only measure the hostname that owns this container. Mirrors
+  // isTagManagerHost() in ./tagManagerHost.ts — this script is `is:inline`, so
+  // it is never bundled and cannot import the shared helper. Keep the two in
+  // step; the rules are identical on purpose.
+  //
+  // Without this check the container loads wherever the build is served, which
+  // is how the bike property collected 937 sessions from the walking-tours
+  // domain and 246 from topbiketoursportugal.netlify.app.
+  const gtmHostMatches =
+    !!gtmHost &&
+    window.location.hostname
+      .trim()
+      .toLowerCase()
+      .replace(/\.$/, '')
+      .replace(/:\d+$/, '')
+      .replace(/^www\./, '') ===
+      gtmHost
+        .trim()
+        .toLowerCase()
+        .replace(/\.$/, '')
+        .replace(/:\d+$/, '')
+        .replace(/^www\./, '');
+
   // Advanced consent mode: always load GTM. With everything defaulted to
   // denied, Google tags send only cookieless pings until consent is granted,
   // which lets GA4 model the visitors who never interact with the banner.
   // The _gtmLoaded guard keeps loadGTM() in CookieConsentConfig.ts from
   // injecting the container a second time (double container = duplicate hits).
-  if (gtmId && !window._gtmLoaded) {
+  if (gtmId && gtmHostMatches && !window._gtmLoaded) {
     window._gtmLoaded = true;
     (function (w, d, s, l, i) {
       w[l] = w[l] || [];
