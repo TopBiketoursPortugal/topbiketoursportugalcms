@@ -37,3 +37,6 @@ DataForSeo/
 google-cloud-sdk/
 # SEO audit output — kept locally for reference, not tracked (see DataForSeo/).
 topbiketoursportugal.com-audit/
+mobile-app/.expo/devices.json
+mobile-app/.expo/README.md
+mobile-app/.expo
