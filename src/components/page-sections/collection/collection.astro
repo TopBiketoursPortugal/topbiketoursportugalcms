@@ -18,6 +18,7 @@ type Props = {
   frame: 'none' | 'light' | 'heavy';
   layout: 'horizontal' | 'vertical' | 'overlay' | 'hstack';
   title: string;
+  heading: { text: string };
 };
 
 const collectionComponentImports = import.meta.glob(
@@ -27,7 +28,14 @@ const collectionComponentImports = import.meta.glob(
   }
 );
 
-const { type = 'tours', title, ...data } = Astro.props;
+// `heading` was declared on the collection components but rendered by none of
+// them, so every authored value was dropped at build time — 24 of them across
+// six locales, including the `## Find our popular tours` on /day-tours/. It is
+// handled here rather than per-collection so all ten types behave the same.
+// Authors write this field two ways: `## Heading` (day-tours, bike-hollidays)
+// and bare text (about-us), so it goes through Prose like `title` does — the
+// first renders an h2, the second a paragraph.
+const { type = 'tours', title, heading, ...data } = Astro.props;
 
 const componentName = `/src/components/page-sections/collection/${type}-collection.astro`;
 const CollectionComponent = (collectionComponentImports[componentName] as any)
@@ -38,6 +46,11 @@ const CollectionComponent = (collectionComponentImports[componentName] as any)
   {title ? (
     <div data-editable="text" data-type="block" data-prop="title">
       <Prose markdown={title} />
+    </div>
+  ) : null}
+  {heading?.text ? (
+    <div data-editable="text" data-type="block" data-prop="heading.text">
+      <Prose markdown={heading.text} />
     </div>
   ) : null}
   <CollectionComponent {...data} />
