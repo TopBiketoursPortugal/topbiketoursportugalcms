@@ -1,0 +1,172 @@
+---
+import slugify from 'slugify';
+import BlogList from 'src/components/blog/list.astro';
+import BlogPagination from 'src/components/blog/pagination.astro';
+import InfiniteScroll from 'src/components/blog/infinite-scroll.astro';
+import Layout from 'src/layouts/Layout.astro';
+import PageHelper from 'src/shared/astro/page.astro';
+import { getCollection } from 'astro:content';
+import {
+  getBlogIndexPage,
+  getBlogTagLanguagesAlternates,
+  getBlogTagPath
+} from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import LanguageData from 'src/../data/languages.json';
+import { t } from 'utils/i18n';
+import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const posts = await getCollection('blog');
+  const postTags = await getCollection('postTags');
+
+  const pageIndex = await Promise.all(
+    languageCodes.map((language) => getBlogIndexPage(language))
+  );
+
+  return languageCodes.flatMap((language) => {
+    const filteredPosts = posts.filter((p) => p.data.language === language);
+    const langTags = postTags.filter((t) => t.data.language === language);
+
+    // A language whose pages/blog.mdx is still an untranslated (draft) stub
+    // contributes `undefined` here — getBlogIndexPage found nothing published.
+    // Filtering on p?.data keeps that language on the default page_size of 6
+    // instead of crashing the whole build over one missing index page.
+    const page = pageIndex.filter((p) => p?.data.language === language)[0];
+    const pageData = page?.data;
+    const pageSize =
+      pageData && 'page_size' in pageData ? pageData.page_size : 6;
+
+    return langTags.flatMap((tag) => {
+      const tagPosts = filteredPosts
+        .filter(({ data }) => data.tags?.includes(tag.data.id))
+        .sort((a, b) => {
+          const dateA = new Date(a.data.date).getTime();
+          const dateB = new Date(b.data.date).getTime();
+          return dateB - dateA;
+        });
+
+      return paginate(tagPosts, {
+        params: {
+          language: language === 'en' ? undefined : language,
+          // No trailing slash: this param is followed by the [...page]
+          // segment, so appending one made Astro's own page.url.prev/next
+          // emit /blog/tags/<tag>//2 — a 404. The emitted directory is
+          // unchanged either way (trailingSlash: 'ignore').
+          tag: slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
+            lower: true,
+            strict: true,
+            trim: true
+          })
+        },
+        props: { tagData: tag },
+        pageSize
+      });
+    });
+  });
+}
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { tagData } = Astro.props;
+const tagName = tagData.data.name ?? tagData.data.title;
+const { page: pageNumberStr } = Astro.params;
+
+const blogTagPageTitle = pageNumberStr
+  ? t('Blog.Tags.Paged.Title', language)
+      .replace('$1', tagName)
+      .replace('$2', pageNumberStr)
+  : t('Blog.Tags.Paged.Title', language)
+      .replace('$1', tagName)
+      .replace('$2', '1');
+
+const pageNumber = pageNumberStr ? parseInt(pageNumberStr) : 1;
+const blogTagPageDescription =
+  pageNumber > 1
+    ? `${tagData.data.seo?.page_description ?? tagName} - ${t('Blog.Tags.Paged.Page', language)} ${pageNumber}`
+    : (tagData.data.seo?.page_description ?? blogTagPageTitle);
+
+const seo = {
+  page_title: blogTagPageTitle,
+  page_description: blogTagPageDescription
+};
+
+const pagination = Astro.props.page;
+const filteredPosts = pagination.data;
+
+const hrefs = await getBlogTagLanguagesAlternates(tagData, Astro.site);
+const currentPageUrl = Astro.url.href;
+// No alternates means this tag has no translation, so there is nothing to
+// annotate — manufacturing a self entry here would emit a set of one, which
+// Google ignores and which the sitemap does not list.
+const hrefsWithSelf =
+  hrefs.length === 0
+    ? []
+    : hrefs.some((h) => h.hreflang === language)
+      ? hrefs.map((h) =>
+          h.hreflang === language ? { ...h, href: currentPageUrl } : h
+        )
+      : [...hrefs, { href: currentPageUrl, hreflang: language }];
+const defaultLocale = LanguageData.en;
+// The language switcher keeps every translation (landing on the tag's first
+// page is the right destination for a click), but page 2+ is annotated with
+// nothing: the translations run to different numbers of pages, so the other
+// language has no equivalent page. Pointing page 5 at its page 1 is not
+// reciprocated from there, and hreflang without a return link is discarded —
+// so the sitemap leaves these unannotated too (tools/seo/lib/alternates.mjs).
+const hrefLangTags = pageNumber === 1 ? hrefsWithSelf : [];
+const defaultHref = hrefLangTags.filter(
+  (h) => h.hreflang === defaultLocale.code
+)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getBlogCrumb(language),
+  { name: tagName, url: getBlogTagPath(tagData, language) }
+];
+---
+
+<Layout
+  title={blogTagPageTitle}
+  seo={seo}
+  hrefLangs={hrefsWithSelf}
+  breadcrumbs={breadcrumbs}
+>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefLangTags.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <div class="py-24">
+    <PageHelper contentBlocks={tagData.data.content_blocks ?? []} />
+    <h1
+      class="my-12 text-center text-3xl font-semibold first-letter:capitalize sm:text-4xl md:text-5xl lg:text-6xl"
+      data-editable="text"
+      data-prop="name"
+      data-type="span"
+    >
+      {tagName}
+    </h1>
+    <section class="blog-index mx-auto">
+      <BlogList posts={filteredPosts} />
+      <BlogPagination
+        pagination={pagination}
+        basePath={getBlogTagPath(tagData, language)}
+      />
+      <InfiniteScroll />
+    </section>
+    <PageHelper
+      contentBlocks={tagData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
+    />
+  </div>
+</Layout>

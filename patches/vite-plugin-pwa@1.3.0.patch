@@ -1,0 +1,22 @@
+diff --git a/dist/index.js b/dist/index.js
+index 84bf280f220d12313d0523b2160f7f6eb64fd81a..352dfb94bc671bf7677443ab87ff940b25649036 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -152,7 +152,7 @@ import { promises as fs2 } from "node:fs";
+ import { createRequire } from "node:module";
+ import { dirname, resolve } from "node:path";
+ import { fileURLToPath } from "node:url";
+-var _dirname = typeof __dirname !== "undefined" ? __dirname : dirname(fileURLToPath(import.meta.url));
++var _dirname = dirname(fileURLToPath(import.meta.url));
+ var require2 = createRequire(_dirname);
+ async function loadWorkboxBuild() {
+   try {
+@@ -367,7 +367,7 @@ import { readFileSync } from "node:fs";
+ import { dirname as dirname2, resolve as resolve3 } from "node:path";
+ import { fileURLToPath as fileURLToPath2 } from "node:url";
+ function createContext(userOptions) {
+-  const _dirname2 = typeof __dirname !== "undefined" ? __dirname : dirname2(fileURLToPath2(import.meta.url));
++  const _dirname2 = dirname2(fileURLToPath2(import.meta.url));
+   const { version } = JSON.parse(
+     readFileSync(resolve3(_dirname2, "../package.json"), "utf-8")
+   );

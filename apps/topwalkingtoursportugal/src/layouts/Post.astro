@@ -1,0 +1,281 @@
+---
+import Layout from './Layout.astro';
+import PostSummary from '../components/blog/summary.astro';
+import TourCard from '../components/tours/tour-card.astro';
+import SidebarPost from '../components/blog/sidebar-post.astro';
+import { getCollection } from 'astro:content';
+import type { MarkdownLayoutProps } from 'astro';
+import { Image } from 'astro:assets';
+import type { InferEntrySchema } from 'astro:content';
+import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
+import LanguageData from 'src/../data/languages.json';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+import BlogPostingSchema from 'src/components/schema/blog-posting-schema.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
+import { t } from '@utils/i18n';
+
+function isMarkdown(props: any): props is MarkdownLayoutProps<PostProps> {
+  return props?.rawContent;
+}
+
+type PostProps = InferEntrySchema<'blog'> & {
+  hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+};
+
+type Props = (PostProps & { body?: string }) | MarkdownLayoutProps<PostProps>;
+
+const props =
+  'frontmatter' in Astro.props ? Astro.props.frontmatter : Astro.props;
+const content = isMarkdown(Astro.props)
+  ? Astro.props.rawContent()
+  : Astro.props.body;
+
+const {
+  title,
+  date,
+  author,
+  hrefs = [],
+  relatedPosts = [],
+  relatedTours = [],
+  breadcrumbs = []
+} = props;
+const { src, alt } = props.image;
+const wordCount = content?.split(' ')?.length ?? 0;
+const readingTime = Math.floor(wordCount / 183);
+const dateObj = new Date(date);
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const postUrl = getBlogPermalink({ data: props } as any);
+
+const filterdRelatedPosts = await getCollection(
+  'blog',
+  (post) =>
+    post.data.language === language &&
+    post.data.title !== title &&
+    relatedPosts.includes(post.data.id)
+);
+
+// Tours the article discusses. Ordered as listed in the frontmatter rather
+// than by collection order, so the first one named is the one offered first.
+const articleTours = (
+  await getCollection(
+    'tours',
+    (tour) =>
+      tour.data.language === language && relatedTours.includes(tour.data.id)
+  )
+).sort(
+  (a, b) => relatedTours.indexOf(a.data.id) - relatedTours.indexOf(b.data.id)
+);
+
+const imageSrc = await resolveImageSrc(src);
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+
+const allTags = await getCollection(
+  'postTags',
+  (tag) => tag.data.language === language
+);
+const latestPosts = (
+  await getCollection(
+    'blog',
+    (p) => p.data.language === language && p.data.title !== title
+  )
+)
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  )
+  .slice(0, 3);
+---
+
+<Layout {...props} breadcrumbs={breadcrumbs}>
+  <slot name="head" slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+    <BlogPostingSchema
+      title={title}
+      date={date}
+      author={author}
+      image={src}
+      wordCount={wordCount}
+      language={language}
+      url={postUrl}
+    />
+  </slot>
+  <main class="mx-auto max-w-6xl px-8 py-12 md:py-10">
+    <div
+      class="grid grid-cols-1 gap-10 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
+    >
+      <div>
+        <article
+          data-pagefind-body
+          data-pagefind-filter={`language:${language}`}
+        >
+          <Image
+            class="aspect-video rounded-lg"
+            src={imageSrc}
+            alt={alt ?? title}
+            loading="lazy"
+            data-pagefind-meta="image[src], image_alt[alt]"
+            data-editable="image"
+            data-prop-src="image.src"
+            data-prop-alt="image.alt"
+          />
+          <h1
+            class="py-4 text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
+            data-editable="text"
+            data-prop="title"
+            data-type="span"
+          >
+            {title}
+          </h1>
+          <div
+            class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
+          >
+            <p
+              class="post-data-list-item"
+              data-editable="text"
+              data-prop="author"
+              data-type="span"
+            >
+              {author}
+            </p>
+
+            <p
+              class="post-data-list-item"
+              data-pagefind-meta={`date:${dateObj.toISOString()}`}
+            >
+              {
+                dateObj.toLocaleDateString(LanguageData[language].locale, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })
+              }
+            </p>
+
+            <div class="flex gap-3">
+              <p>{wordCount}<span> {t('Blog.Detail.Words', language)}</span></p>
+              <p>
+                {readingTime}<span> {t('Blog.Detail.Minutes', language)}</span>
+              </p>
+            </div>
+          </div>
+          <div data-editable="text" data-prop="@content" data-type="block">
+            <Prose class="markdown-text">
+              <slot />
+            </Prose>
+          </div>
+        </article>
+        {
+          articleTours.length > 0 ? (
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedTours', language)}
+              </h2>
+              <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {articleTours.slice(0, 4).map((tour) => (
+                  <div class="max-w-105">
+                    <TourCard
+                      tour={tour.data}
+                      language={language}
+                      contentDisplay="inline"
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+        {
+          filterdRelatedPosts.length > 0 ? (
+            <section
+              class="flex flex-col items-center pt-12"
+              data-pagefind-ignore
+            >
+              <h2 class="text-2xl">
+                {t('Blog.Detail.RelatedPosts', language)}
+              </h2>
+              <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                {filterdRelatedPosts.slice(0, 2).map((post) => (
+                  <div class="max-w-105">
+                    <PostSummary {...post} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null
+        }
+      </div>
+      <aside
+        class="blog-sidebar intersect:opacity-100 intersect-once flex flex-col gap-8 sm:sticky sm:top-24 sm:self-start"
+        data-pagefind-ignore
+      >
+        {
+          allTags.length > 0 && (
+            <div>
+              <h2 class="mb-3 text-lg font-semibold">
+                {t('Blog.Sidebar.Tags', language)}
+              </h2>
+              <div class="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <a
+                    href={getBlogTagPath(tag, language)}
+                    class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800"
+                  >
+                    {tag.data.name ?? tag.data.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )
+        }
+        {
+          latestPosts.length > 0 && (
+            <div>
+              <h2 class="mb-3 text-lg font-semibold">
+                {t('Blog.Sidebar.LatestPosts', language)}
+              </h2>
+              <div class="flex flex-col gap-4">
+                {latestPosts.map((post) => (
+                  <SidebarPost {...post} />
+                ))}
+              </div>
+            </div>
+          )
+        }
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .blog-sidebar {
+      transition:
+        opacity 0.7s ease 0.2s,
+        transform 0.7s ease 0.2s;
+    }
+    .blog-sidebar[no-intersect] {
+      opacity: 0;
+      transform: translateX(1.5rem);
+    }
+  }
+</style>

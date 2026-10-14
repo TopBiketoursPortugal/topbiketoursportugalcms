@@ -1,0 +1,67 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Except } from 'type-fest';
+import { tv, type VariantProps } from 'tailwind-variants';
+import { cn } from 'utils/cn';
+
+const headingStyles = tv({
+  base: 'font-extrabold', // Base classes common for all headings
+  variants: {
+    level: {
+      h1: 'extra-light text-3xl md:text-4xl lg:text-5xl', // Tailwind sizes for h1
+      h2: 'text-3xl md:text-4xl lg:text-5xl', // Tailwind sizes for h2
+      h3: 'text-2xl md:text-3xl lg:text-4xl', // Tailwind sizes for h3
+      h4: 'text-xl md:text-2xl lg:text-3xl', // Tailwind sizes for h4
+      h5: 'text-sm md:text-lg lg:text-xl', // Tailwind sizes for h5
+      h6: 'text-base md:text-lg lg:text-xl' // Tailwind sizes for h6
+    },
+    intent: {
+      primary: 'text-primary',
+      danger: 'text-red-600',
+      warning: 'text-yellow-600',
+      informative: 'text-blue-600',
+      neutral: 'text-gray-600',
+      positive: 'text-green-600',
+      mute: 'text-gray-400'
+    },
+    font: {
+      sans: 'font-sans',
+      oswald: 'font-oswald',
+      inter: 'font-oswald',
+      manrope: 'font-manrope',
+      poppins: 'font-poppins'
+    }
+  },
+  defaultVariants: {
+    level: 'h1',
+    font: 'oswald',
+    intent: 'primary'
+  }
+});
+
+type HeadingTypes = NonNullable<VariantProps<typeof headingStyles>['level']>;
+
+type Props = {
+  text?: string;
+  as?: HeadingTypes;
+} & Except<VariantProps<typeof headingStyles>, 'level'> &
+  HTMLAttributes<HeadingTypes>;
+
+const {
+  text,
+  as = 'h1',
+  intent = 'primary',
+  font = 'inter',
+  class: className,
+  ...props
+} = Astro.props satisfies Props;
+
+const style = cn(headingStyles({ level: as, intent, font }), className);
+const Tag = as ?? 'h1';
+---
+
+<Tag {...props} class={style}>
+  <slot>
+    {text}
+  </slot>
+</Tag>

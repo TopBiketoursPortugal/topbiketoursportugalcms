@@ -1,0 +1,8 @@
+{
+  "extends": ["astro/tsconfigs/strict", "../../tsconfig.base.json"],
+  "compilerOptions": {
+    // `paths` in the base resolve against this app's root, so bare
+    // `src/...` and `utils/...` imports work exactly as before.
+    "baseUrl": "."
+  }
+}

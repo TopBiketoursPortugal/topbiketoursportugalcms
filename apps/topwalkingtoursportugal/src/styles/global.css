@@ -1,0 +1,986 @@
+/*
+ * Cascade-layer order. Declared before any @import so the starter components'
+ * layers (`components`, `page-sections`) slot in BEFORE Tailwind's
+ * `utilities` — utility classes must still win over imported component CSS.
+ */
+@layer theme, base, components, page-sections, utilities;
+
+@import 'tailwindcss';
+@import './ccElegantBlack.css';
+@import './page-find.css';
+@import './starter/index.css';
+@import 'tw-animate-css';
+/*
+  Font faces are no longer imported here. Astro's `fonts` config (astro.config.ts)
+  owns them now, so it can preload the critical faces and generate
+  metric-matched fallbacks; the families below resolve through the
+  `--font-*` variables it exposes. Re-adding a Fontsource @import would load
+  every face a second time.
+*/
+
+/* Typography Plugin */
+@plugin '@tailwindcss/typography';
+@plugin '@iconify/tailwind4' {
+  prefixes: 'ph', 'fa', 'circle-flags', 'logos';
+}
+
+/* Theme Configuration */
+@theme {
+  /* Custom breakpoints (same as v3 config) */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Typography — families come from Astro's `fonts` config, which appends its
+     own metric-matched fallbacks to each `--font-*` variable. */
+  --font-sans: var(--font-figtree);
+  --font-heading: var(--font-bricolage), var(--font-figtree);
+  --font-oswald: var(--font-heading);
+  --font-caveat: var(--font-caveat-family);
+
+  /* Brand palette — pine green core, bright green accent (the walking logo's
+     green). Everything else in this file is the design system shared with the
+     bike site; only the logo and this accent differ between the two. */
+  --color-primary: #296a3f;
+  --color-primary-soft: #eaf3ed;
+  --color-secondary: #c2410c;
+  --color-accent: #009846;
+  --color-heading: #18271f;
+  --color-default: #2b3a32;
+  --color-muted: #5d6b62;
+  --color-info: #0e7490;
+}
+
+/*
+ * Motion scale.
+ *
+ * Entrance reveals used to run for 2s (wipe 1.8s, blur 1.6s, stagger 1.2s with
+ * delays to 540ms). At those numbers content is still arriving long after the
+ * reader's eye has reached it — a fast scroll catches most of a page mid-fade,
+ * and the page reads as sluggish rather than considered. An entrance wants
+ * 200–400ms. Travel shrinks alongside duration: the same 1.25rem rise over
+ * 320ms would read as a jerk, so it drops to 12px. The curve is unchanged —
+ * it was already the right one.
+ */
+:root {
+  --reveal-duration: 320ms;
+  --reveal-duration-slow: 420ms;
+  --reveal-stagger-duration: 260ms;
+  --reveal-step: 40ms;
+  --reveal-travel: 12px;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Custom Variants */
+@custom-variant intersect (&:not([no-intersect]));
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark Mode Configuration with Nightwind-style Color Inversion */
+* {
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+:root {
+  --pageContainer: 1280px;
+  --pagePadding: 2rem;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    text-wrap: balance;
+    line-height: 1.25;
+  }
+
+  body,
+  p {
+    line-height: 1.65;
+  }
+
+  li {
+    line-height: 1.55;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+  }
+}
+
+/*
+ * Tighten reading rhythm. @tailwindcss/typography (prose-lg / prose-xl)
+ * ships paragraph line-height ~1.78–1.8 and list-item ~1.71–1.78, which
+ * reads as "floating" on long tour descriptions. Pull back to 1.65 / 1.55
+ * (NN/g + WCAG comfortable range) while keeping headings compact at 1.25.
+ * .prose is a class, so it out-specifies the base element rules above —
+ * override it explicitly here.
+ */
+.prose :where(p, li):not(:where([class~='not-prose'] *)) {
+  line-height: 1.65;
+}
+
+.prose :where(li):not(:where([class~='not-prose'] *)) {
+  line-height: 1.55;
+}
+
+/*
+ * @tailwindcss/typography ships heavy heading top margins (h2 ~2em, h3 ~1.6em,
+ * h4 ~1.5em) measured against the already-large prose-lg/xl heading sizes, so
+ * headings float in a sea of whitespace. Pull them back to one standard, calmer
+ * top rhythm (~1.25em) while keeping a comfortable bottom gap; re-zero the first
+ * heading's top margin since this override would otherwise reinstate it.
+ */
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~='not-prose'] *)) {
+  line-height: 1.25;
+  margin-top: 1.25em;
+  margin-bottom: 0.6em;
+}
+
+.prose
+  :where(h1, h2, h3, h4, h5, h6):first-child:not(
+    :where([class~='not-prose'] *)
+  ) {
+  margin-top: 0;
+}
+
+/*
+ * Shared scroll-reveal utilities.
+ * Pair with the intersection observer (public/intersection-observer.js):
+ * the element ALSO needs an `intersect`-containing class so the observer
+ * registers it, e.g. class="reveal-up intersect:opacity-100 intersect-once".
+ * These are global (not Astro-scoped) so they survive cn()/class:list merging.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right,
+  .reveal-zoom {
+    transition:
+      opacity var(--reveal-duration) var(--reveal-ease),
+      transform var(--reveal-duration) var(--reveal-ease);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  .reveal[no-intersect],
+  .reveal-up[no-intersect],
+  .reveal-down[no-intersect],
+  .reveal-left[no-intersect],
+  .reveal-right[no-intersect],
+  .reveal-zoom[no-intersect] {
+    opacity: 0;
+  }
+
+  .reveal-up[no-intersect] {
+    transform: translateY(var(--reveal-travel));
+  }
+  .reveal-down[no-intersect] {
+    transform: translateY(calc(var(--reveal-travel) * -1));
+  }
+  .reveal-left[no-intersect] {
+    transform: translateX(calc(var(--reveal-travel) * -1.5));
+  }
+  .reveal-right[no-intersect] {
+    transform: translateX(calc(var(--reveal-travel) * 1.5));
+  }
+  .reveal-zoom[no-intersect] {
+    transform: scale(0.98);
+  }
+
+  /* Editorial wipe: content un-masks from a slightly inset frame */
+  .reveal-wipe {
+    transition:
+      opacity var(--reveal-duration-slow) var(--reveal-ease),
+      clip-path var(--reveal-duration-slow) var(--reveal-ease);
+    transition-delay: var(--reveal-delay, 0s);
+    clip-path: inset(0 0 0 0);
+  }
+  .reveal-wipe[no-intersect] {
+    opacity: 0.4;
+    clip-path: inset(12% 6% 12% 6% round 1.5rem);
+  }
+
+  /* Soft-focus rise: blurred and slightly low, settles into focus */
+  .reveal-blur {
+    transition:
+      opacity var(--reveal-duration-slow) var(--reveal-ease),
+      filter var(--reveal-duration-slow) var(--reveal-ease),
+      transform var(--reveal-duration-slow) var(--reveal-ease);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .reveal-blur[no-intersect] {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(calc(var(--reveal-travel) * 0.75));
+  }
+
+  /* Parent-driven stagger: put reveal-stagger + intersect classes on the
+     container; direct children fade-rise in sequence. */
+  .reveal-stagger > * {
+    transition:
+      opacity var(--reveal-stagger-duration) var(--reveal-ease),
+      transform var(--reveal-stagger-duration) var(--reveal-ease);
+  }
+  .reveal-stagger[no-intersect] > * {
+    opacity: 0;
+    transform: translateY(var(--reveal-travel));
+  }
+  /* The cascade flattens after the fourth child: a stagger that keeps adding
+     delay past ~160ms stops reading as sequence and starts reading as lag. */
+  .reveal-stagger > :nth-child(2) {
+    transition-delay: var(--reveal-step);
+  }
+  .reveal-stagger > :nth-child(3) {
+    transition-delay: calc(var(--reveal-step) * 2);
+  }
+  .reveal-stagger > :nth-child(n + 4) {
+    transition-delay: calc(var(--reveal-step) * 3);
+  }
+
+  .reveal-delay-1 {
+    --reveal-delay: var(--reveal-step);
+  }
+  .reveal-delay-2 {
+    --reveal-delay: calc(var(--reveal-step) * 2);
+  }
+  .reveal-delay-3 {
+    --reveal-delay: calc(var(--reveal-step) * 3);
+  }
+  .reveal-delay-4 {
+    --reveal-delay: calc(var(--reveal-step) * 4);
+  }
+
+  /*
+   * Genuine scroll-driven block entrances (Chromium 115+, Firefox 134+).
+   * Each block scrubs from its hidden state to visible as it scrolls into
+   * view, instead of the binary play-once observer toggle.
+   *
+   * Scoped to `.block-enter` (the per-block wrapper added in
+   * src/shared/astro/page.astro) on purpose: some internal component reveals
+   * share their element with `.parallax-drift`, and an element can hold only
+   * one `animation` shorthand — converting those would clobber the parallax.
+   * Block wrappers never carry parallax, so the animation is safe there.
+   *
+   * Safari (no animation-timeline) skips this @supports block and keeps the
+   * intersection-observer `transition` fallback defined above.
+   */
+  @supports (animation-timeline: view()) {
+    .block-enter.reveal {
+      animation-name: sd-fade;
+    }
+    .block-enter.reveal-up {
+      animation-name: sd-up;
+    }
+    .block-enter.reveal-down {
+      animation-name: sd-down;
+    }
+    .block-enter.reveal-left {
+      animation-name: sd-left;
+    }
+    .block-enter.reveal-right {
+      animation-name: sd-right;
+    }
+    .block-enter.reveal-zoom {
+      animation-name: sd-zoom;
+    }
+    .block-enter.reveal-blur {
+      animation-name: sd-blur;
+    }
+    .block-enter.reveal-wipe {
+      animation-name: sd-wipe;
+    }
+
+    .block-enter.reveal,
+    .block-enter.reveal-up,
+    .block-enter.reveal-down,
+    .block-enter.reveal-left,
+    .block-enter.reveal-right,
+    .block-enter.reveal-zoom,
+    .block-enter.reveal-blur,
+    .block-enter.reveal-wipe {
+      animation-fill-mode: both;
+      /* Ease-out scrub: the block becomes readable quickly as it enters, then
+         settles — far more refined than a mechanical linear scrub. */
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-timeline: view();
+      /* Begins just after the block peeks in, finishes once it's comfortably
+         within view — uniform across every block for a cohesive cadence. */
+      animation-range: entry 8% cover 36%;
+    }
+  }
+
+  @keyframes sd-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes sd-up {
+    from {
+      opacity: 0;
+      transform: translateY(var(--reveal-travel));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes sd-down {
+    from {
+      opacity: 0;
+      transform: translateY(calc(var(--reveal-travel) * -1));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes sd-left {
+    from {
+      opacity: 0;
+      transform: translateX(calc(var(--reveal-travel) * -1.5));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes sd-right {
+    from {
+      opacity: 0;
+      transform: translateX(calc(var(--reveal-travel) * 1.5));
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  @keyframes sd-zoom {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes sd-blur {
+    from {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(calc(var(--reveal-travel) * 0.75));
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
+  @keyframes sd-wipe {
+    from {
+      opacity: 0.4;
+      clip-path: inset(12% 6% 12% 6% round 1.5rem);
+    }
+    to {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+}
+
+/*
+ * Per-block off switch. The block wrapper gets `.anim-off` when the CMS sets
+ * `enter: none` on that block (src/shared/astro/page.astro). Beyond dropping
+ * the wrapper's own entrance, this forces every internal reveal/stagger inside
+ * the block to its resting (visible) state, so a single CMS prop disables ALL
+ * of a block's scroll-entrance motion. Continuous parallax is intentionally
+ * left alone — `enter` governs entrances, not ambient drift.
+ */
+.anim-off
+  :is(
+    .reveal,
+    .reveal-up,
+    .reveal-down,
+    .reveal-left,
+    .reveal-right,
+    .reveal-zoom,
+    .reveal-blur,
+    .reveal-wipe
+  ) {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  clip-path: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+.anim-off .reveal-stagger > * {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/*
+ * Scroll-driven nuances — progressive enhancement (Chromium 115+).
+ * Uses the `translate`/`scale` properties (not `transform`) so they compose
+ * with Tailwind hover transforms and the reveal transitions above.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* Clipped parallax: put .parallax-media on an overflow-clipped frame;
+       the media inside drifts vertically as it crosses the viewport. */
+    .parallax-media {
+      overflow: clip;
+    }
+    /* scale was 1.18 with a ±7% drift — enough overscan to visibly soften a
+       thumbnail, and applied to every media frame on the page it turned
+       ambient motion into the site's dominant one. 1.08 / ±4% still reads as
+       depth on a full-bleed image and disappears politely on a card. */
+    .parallax-media > :is(img, picture, video),
+    .parallax-media picture > img {
+      scale: 1.08;
+      animation: parallax-y linear both;
+      animation-timeline: view();
+    }
+
+    /* Free drift for unclipped imagery (floating rounded images) */
+    .parallax-drift {
+      animation: parallax-drift linear both;
+      animation-timeline: view();
+    }
+
+    /* Sticky header gains elevation once the page scrolls */
+    #header[data-aw-sticky-header] {
+      animation: header-elevate linear both;
+      animation-timeline: scroll();
+      animation-range: 0 160px;
+    }
+  }
+
+  @keyframes parallax-y {
+    from {
+      translate: 0 4%;
+    }
+    to {
+      translate: 0 -4%;
+    }
+  }
+  @keyframes parallax-drift {
+    from {
+      translate: 0 14px;
+    }
+    to {
+      translate: 0 -14px;
+    }
+  }
+  @keyframes header-elevate {
+    to {
+      box-shadow: 0 6px 24px rgb(15 35 25 / 0.14);
+    }
+  }
+}
+
+/*
+ * Section surfaces — per-block `surface` prop (applied by the block wrapper
+ * in src/shared/astro/page.astro). Alternating bands make section boundaries
+ * read clearly (kudanil.com-style: warm sand editorial bands between white,
+ * with deep forest bands for full-contrast moments).
+ */
+.surface-sand,
+.surface-soft,
+.surface-forest,
+.surface-white {
+  padding-block: 1.5rem;
+}
+
+/*
+ * Full-bleed block: escapes the page container (main is max-w-7xl mx-auto)
+ * so the background spans the whole viewport, while the mirrored inline
+ * padding keeps the content exactly where it was. Set per block with
+ * `bleed: true/false`; blocks with a `surface` bleed by default.
+ */
+.block-bleed {
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+}
+
+.surface-sand {
+  background-color: #f7f1e6;
+}
+.surface-soft {
+  background-color: var(--color-primary-soft);
+}
+.surface-white {
+  background-color: #ffffff;
+}
+/* Forest bands also carry the `dark` class (set by the wrapper) so inner
+   content switches to its dark-scheme colors automatically. */
+.surface-forest {
+  background-color: #152a1e;
+}
+
+:where(.dark) .surface-sand {
+  background-color: #1d2430;
+}
+:where(.dark) .surface-soft {
+  background-color: #14241b;
+}
+:where(.dark) .surface-white {
+  background-color: #0f172a;
+}
+
+/* Animated underline on top-level nav links */
+#header nav > ul > li > :is(a, button) {
+  position: relative;
+}
+#header nav > ul > li > :is(a, button)::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.45rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#header nav > ul > li > :is(a, button):hover::after,
+#header nav > ul > li > .aw-link-active::after {
+  transform: scaleX(1);
+}
+
+/* Visible, on-brand keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/*
+ * Carousels drive themselves with snap points and their own prev/next
+ * buttons, so the native horizontal scrollbar underneath them is chrome the
+ * design never asked for — a grey bar sitting under every testimonial row and
+ * review strip. Hiding it does not remove the scroll: touch, trackpad, and
+ * keyboard all still work, and the arrow buttons remain the visible affordance
+ * on pointer devices.
+ */
+.scroll-container {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Card hover: the card stays put, only the photo eases forward inside the
+ * clipped frame. Uses `transform` so it composes with the parallax
+ * `scale`/`translate` properties instead of overriding them.
+ *
+ * This was scale(1.2) over 0.3s ease-in-out. A fifth of the image's width is a
+ * lurch rather than a response, and it visibly softens the photograph at the
+ * zoomed size. 1.045 over 400ms on an ease-out curve reads as the image
+ * leaning in; the paired shadow lift is what makes it read as depth — the
+ * zoom alone, at any scale, reads as a glitch.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .group .parallax-media img,
+  .zoom-frame img {
+    transition: transform 400ms var(--reveal-ease);
+  }
+  .group:hover .parallax-media img,
+  :is(a, .group):hover .zoom-frame img,
+  .zoom-frame:hover img {
+    transform: scale(1.045);
+  }
+
+  .zoom-frame,
+  .group .parallax-media {
+    transition: box-shadow 400ms var(--reveal-ease);
+  }
+  :is(a, .group):hover .zoom-frame,
+  .zoom-frame:hover,
+  .group:hover .parallax-media {
+    box-shadow: 0 12px 32px -14px rgb(15 35 25 / 0.35);
+  }
+}
+
+/* Mark any clipped frame as a zoom target; hovering the surrounding link,
+   card (.group), or the frame itself zooms the image GYG-style. */
+.zoom-frame {
+  overflow: clip;
+}
+
+/*
+ * Shared-element morph: tour list card -> tour detail hero.
+ * The detail hero is named statically here; on list pages a script in
+ * Layout.astro names only the clicked card's media (avoids duplicate-name
+ * collisions when the same tour appears twice on a page).
+ */
+@media (prefers-reduced-motion: no-preference) {
+  [data-tour-hero] {
+    view-transition-name: tour-hero;
+  }
+
+  ::view-transition-group(tour-hero) {
+    animation-duration: 0.4s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Keep imagery cover-fitted while the group box interpolates between
+     the card's aspect ratio and the hero's */
+  ::view-transition-old(tour-hero),
+  ::view-transition-new(tour-hero) {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* `clip` (not `hidden`) prevents horizontal overflow from the full-bleed
+     blocks WITHOUT turning html/body into a scroll container — which would
+     break every `animation-timeline: view()` (block entrances, parallax). */
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Keep a stable scrollbar gutter so dropping body's forced scrollbar
+   (see Layout.astro) doesn't cause horizontal layout shift. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Custom Styles */
+
+/*
+ * Effect #9 — responsive sticky-header navigation that "appears on scroll"
+ * (prismic.io/blog/css-scroll-effects). The header slides up out of view as
+ * you scroll DOWN (freeing the viewport) and slides back in when you scroll
+ * UP, so the nav is there the instant you want it. Direction is detected in
+ * basic.js, which toggles `.nav-hidden`; near the top the header is always
+ * shown. Elevation comes from the existing `header-elevate` scroll animation,
+ * and the logo condenses once scrolled for a compact sticky bar.
+ */
+#header[data-aw-sticky-header] {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease;
+  will-change: transform;
+}
+#header[data-aw-sticky-header].nav-hidden {
+  transform: translateY(-100%);
+}
+/* Never hide while the mobile menu is open (the panel needs the header). */
+#header[data-aw-sticky-header].expanded {
+  transform: none;
+}
+/* Condense the logo once scrolled, for a more compact sticky bar. */
+#header[data-aw-sticky-header] a[title='Home'] svg {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: left center;
+}
+#header[data-aw-sticky-header].scroll a[title='Home'] svg {
+  transform: scale(0.88);
+}
+@media (prefers-reduced-motion: reduce) {
+  #header[data-aw-sticky-header] {
+    transition: none;
+  }
+  /* Don't slide the header out of view for reduced-motion users. */
+  #header[data-aw-sticky-header].nav-hidden {
+    transform: none;
+  }
+}
+
+/*
+ * Mobile slide-in menu. basic.js toggles `.expanded` on #header (and removes
+ * `hidden` from the nav). The header itself becomes `h-screen` with its
+ * bg-slate-50/950 base, so this fixed nav sits over that as a full-screen
+ * panel below the compact logo row. Scoped to mobile so the desktop nav is
+ * untouched.
+ */
+@media (max-width: 767px) {
+  #header.expanded nav {
+    position: fixed;
+    inset: 4.25rem 0 0 0;
+    padding: 0.25rem 0 5.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-top: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  }
+  #header.expanded nav > ul {
+    width: 100%;
+    gap: 0;
+  }
+  #header.expanded nav > ul > li,
+  #header.expanded nav > ul > li > :is(a, button) {
+    width: 100%;
+  }
+  #header.expanded nav > ul > li > :is(a, button) {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+  }
+  /* The desktop sliding underline doesn't suit a stacked list; active item
+     gets the brand accent instead (reads well in both light and dark). */
+  #header.expanded nav > ul > li > :is(a, button)::after {
+    content: none;
+  }
+  #header.expanded nav .aw-link-active {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  #header.expanded nav {
+    animation: mobileMenuIn 0.28s ease-out both;
+  }
+  #header.expanded nav > ul > li {
+    animation: mobileItemIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  #header.expanded nav > ul > li:nth-child(1) {
+    animation-delay: 0.04s;
+  }
+  #header.expanded nav > ul > li:nth-child(2) {
+    animation-delay: 0.09s;
+  }
+  #header.expanded nav > ul > li:nth-child(3) {
+    animation-delay: 0.14s;
+  }
+  #header.expanded nav > ul > li:nth-child(4) {
+    animation-delay: 0.19s;
+  }
+  #header.expanded nav > ul > li:nth-child(5) {
+    animation-delay: 0.24s;
+  }
+  #header.expanded nav > ul > li:nth-child(6) {
+    animation-delay: 0.29s;
+  }
+  #header.expanded nav > ul > li:nth-child(7) {
+    animation-delay: 0.34s;
+  }
+  #header.expanded nav > ul > li:nth-child(n + 8) {
+    animation-delay: 0.39s;
+  }
+}
+
+@keyframes mobileMenuIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes mobileItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/**************** mkardown ****************/
+/* .markdown-text h1,
+.markdown-text h2,
+.markdown-text h3,
+.markdown-text h4 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-text h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+.markdown-text h2 {
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+}
+
+.markdown-text h3 {
+  font-size: 2rem;
+  line-height: 2rem;
+}
+
+.markdown-text h4 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.markdown-text p,
+.markdown-text a,
+.markdown-text ol li,
+.markdown-text ul li {
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.75rem;
+}
+
+.markdown-text p {
+  margin-bottom: 1.5rem;
+}
+
+.markdown-text li p {
+  margin-bottom: 0.125rem;
+}
+
+.markdown-text li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-text blockquote {
+  font-style: italic;
+  border-left: 5px solid #000000;
+  padding-inline: 1rem;
+  margin-inline: 0;
+  margin-block: 1rem;
+}
+
+.markdown-text ul li {
+  margin-inline: 1rem;
+  padding-block: 0.125rem;
+  list-style: disc;
+}
+
+.markdown-text ol li {
+  list-style-type: decimal;
+  padding-block: 0.125rem;
+  margin-inline: 1rem;
+}
+
+.markdown-text a {
+  color: blue;
+  cursor: pointer;
+}
+
+.markdown-text sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.markdown-text sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.markdown-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.markdown-text table p {
+  margin-bottom: 0;
+  padding-block: 0.5rem;
+}
+
+.markdown-text th,
+.markdown-text td {
+  border: 1px solid #f2f2f2;
+  padding: 0.5rem;
+}
+
+.markdown-text table caption {
+  background-color: #f2f2f2;
+}
+
+.markdown-text table thead {
+  background-color: #f2f2f2;
+}
+
+.markdown-text img {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto;
+}
+
+.markdown-text hr {
+  border: 0;
+  border-top: 1px solid #928f8f;
+  margin: 1.5rem 0;
+}
+
+.markdown-text pre {
+  margin-block: 1.5rem;
+  padding: 1rem;
+} */
+body {
+  --primary: #296a3f;
+}
+/* .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0px;
+}
+
+.pagination .page-link {
+  display: inline-block;
+  padding: 20px 27px;
+  margin: 0px 15px;
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 20px;
+}
+
+.pagination .page-link.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.pagination .page-link svg {
+  margin-right: -2px;
+  color: var(--primary);
+}
+
+.pagination .page-link:hover svg g {
+  fill: var(--primary);
+}
+
+.blog-post-tag {
+  margin-block: 1rem;
+}
+
+.blog-post-tag a {
+  background: #f1f1f1;
+  border-radius: 6px;
+  padding: 4px 10px;
+  text-decoration: none;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 500;
+  margin-right: 1rem;
+} */

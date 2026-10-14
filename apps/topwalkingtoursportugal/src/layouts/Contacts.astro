@@ -1,0 +1,96 @@
+---
+import Layout, { type LayoutProps } from './Layout.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import Text from 'src/components/building-blocks/typography/text.astro';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Separator from 'src/components/building-blocks/separator/separator.astro';
+import ContactColumns from './common/contact-columns.astro';
+import ContactForm from './common/contact-form.astro';
+import PageHelper from '../shared/astro/page.astro';
+import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
+import LanguageData from 'src/../data/languages.json';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+import SiteData from 'src/../data/site.json';
+
+export type ContactProps = {
+  frontmatter: Except<LayoutProps, 'class'>;
+  content_blocks?: any[];
+  content_blocks_after?: any[];
+  class?: string;
+  showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+};
+
+type Props = ContactProps;
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const {
+  content_blocks = [],
+  content_blocks_after = [],
+  frontmatter,
+  hrefs = [],
+  breadcrumbs = []
+} = Astro.props;
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+const siteName = SiteData[language].site.name;
+const mapQuery = encodeURIComponent(siteName);
+---
+
+<Layout {...frontmatter} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
+  <slot name="head" slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+
+  <PageHelper contentBlocks={content_blocks ?? []} />
+  <ContactColumns class="container mx-auto" />
+  <Stack
+    as="section"
+    layout="vertical"
+    spacing="medium"
+    class="bg-slate-50 px-8 py-20 dark:bg-slate-800"
+  >
+    <Stack layout="vertical" spacing="small" class="items-center self-center">
+      <Heading as="h1" class="text-center font-bold"
+        >{t('Contact.Form.Title', language)}</Heading
+      >
+      <Text intent="neutral" class="text-center"
+        >{t('Contact.Form.Subtitle', language)}</Text
+      >
+    </Stack>
+    <Separator class="container mx-auto max-w-14" weight="heavy" />
+    <Stack class="mx-auto max-w-3xl justify-center">
+      <ContactForm />
+    </Stack>
+  </Stack>
+  <iframe
+    title={`Google Maps directions to ${siteName}`}
+    class="m-w-screen h-96 w-full border-none"
+    id="gmap_canvas"
+    src={`https://maps.google.com/maps?q=${mapQuery}&t=&z=17&ie=UTF8&iwloc=&output=embed`}
+    referrerpolicy="strict-origin-when-cross-origin"
+    loading="lazy"
+    allowfullscreen></iframe>
+  <slot />
+  <PageHelper
+    contentBlocks={content_blocks_after ?? []}
+    sectionsKey="content_blocks_after"
+  />
+</Layout>

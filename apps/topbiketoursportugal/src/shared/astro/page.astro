@@ -1,0 +1,38 @@
+---
+/**
+ * PageHelper — renders a page's content blocks through the
+ * astro-component-starter pipeline:
+ *
+ *   frontmatter array (content_blocks / content_blocks_after)
+ *     → this component-editable wrapper (re-render entry point)
+ *       → utils/MainComponent.astro (array editable container)
+ *         → per-block array-item wrapper (+ enter/surface/bleed presentation)
+ *           → resolved block component
+ *
+ * `sectionsKey` must name the frontmatter key the blocks came from — it is
+ * what lets CloudCannon push edits back to the right array.
+ */
+import type { VisuallyEditable } from 'src/types';
+import MainComponent from 'src/components/utils/MainComponent.astro';
+
+type SharePageProps = {
+  contentBlocks: any[];
+  sectionsKey?: string;
+};
+
+type Props = SharePageProps & VisuallyEditable;
+
+const { contentBlocks = [], sectionsKey = 'content_blocks' } = Astro.props;
+---
+
+{
+  contentBlocks.length > 0 && (
+    <div
+      data-editable="component"
+      data-component="utils/main-component"
+      data-prop-sections={sectionsKey}
+    >
+      <MainComponent sections={contentBlocks} />
+    </div>
+  )
+}

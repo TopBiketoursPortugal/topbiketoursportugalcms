@@ -1,0 +1,44 @@
+# src/components/accordion/accordion.bookshop.yml
+spec:
+  structures:
+    - accordion # Define a structure for accordion items
+  label: AccordionItem
+  description: A collapsible accordion component with expandable content.
+  icon: text # Choose an appropriate icon
+  tags:
+    - UI
+
+blueprint:
+  title: 'Accordion Title'
+  open: true
+  class: ''
+  header: 'Default Header Content'
+  content: 'Default Body Content'
+
+preview:
+  title: 'Accordion Preview'
+  open: true
+  class: ''
+  header: 'Preview Header Content'
+  content: 'Preview Body Content'
+
+_inputs:
+  title:
+    label: Title
+    type: markdown
+    description: The title of the accordion component.
+  open:
+    label: Open by Default
+    type: boolean
+    description: Whether the accordion is open by default.
+  class:
+    hidden: true
+  header:
+    label: Header Content
+    type: markdown
+    description:
+      Content to display in the header slot (overrides the default header).
+  content:
+    label: Body Content
+    type: markdown
+    description: Content to display in the body of the accordion.

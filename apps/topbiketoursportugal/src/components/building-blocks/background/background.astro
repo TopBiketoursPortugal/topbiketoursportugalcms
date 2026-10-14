@@ -1,0 +1,26 @@
+---
+import { tv, type VariantProps } from 'tailwind-variants';
+
+const pageStyle = tv({
+  base: 'absolute inset-0',
+  variants: {
+    isDark: {
+      true: 'bg-dark dark:bg-transparent',
+      false: ''
+    }
+  },
+  defaultVariants: {
+    isDark: false
+  }
+});
+
+export type Props = VariantProps<typeof pageStyle>;
+
+const { isDark = false } = Astro.props;
+
+const style = pageStyle({ isDark });
+---
+
+<div class={style}>
+  <slot />
+</div>

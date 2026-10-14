@@ -1,0 +1,18 @@
+title:
+  type: markdown
+type:
+  type: select
+  hidden: false
+  options:
+    allow_empty: false
+    values:
+      - tour
+      - tour-regions
+      - tours-package-tour
+      - tours-day-tour
+      - reviews
+      - team
+      - bikes
+      - bike-categories
+      - tour-tags
+      - tour-rider-levels

@@ -1,0 +1,229 @@
+---
+import { getCollection } from 'astro:content';
+import slugify from 'slugify';
+import Layout from 'src/layouts/Layout.astro';
+import TourList from 'src/components/tours/tour-list.astro';
+import {
+  getTourTagLanguagesAlternates,
+  getTourTagPath,
+  getTourTagsListingPath,
+  trailingSlash
+} from 'utils/permalinks';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Text from 'src/components/building-blocks/typography/text.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import PageHelper from 'src/shared/astro/page.astro';
+import LanguageData from 'src/../data/languages.json';
+
+import { t } from 'utils/i18n';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
+
+export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
+  const tours = await getCollection('tours');
+  const tourTags = await getCollection('tourTags');
+
+  return languageCodes.flatMap((language) => {
+    return tourTags
+      .filter((tr) => tr.data.language === language)
+      .map((tag) => ({
+        params: {
+          language: language === 'en' ? undefined : language,
+          // toursType: PermalinkData.tours[language],
+          tag:
+            slugify(tag.data.path ?? tag.data.name ?? tag.data.title, {
+              lower: true,
+              strict: true,
+              trim: true
+            }) + trailingSlash
+        },
+        props: {
+          tagData: tag,
+          tours:
+            tours.filter(
+              (tour) =>
+                tour.data.tags?.includes(tag.data.id) &&
+                tour.data.language === language
+            ) ?? []
+        }
+      }));
+  });
+}
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { tours, tagData } = Astro.props;
+
+const packageTours = tours.filter((t) => t.data.tourtype === 'PackageTour');
+const dayTours = tours.filter((t) => t.data.tourtype === 'DayTour');
+
+const tourTags = await getCollection(
+  'tourTags',
+  (f) => f.data.language === language
+);
+
+const allRegions = await getCollection(
+  'tourRegions',
+  (f) => f.data.language === language
+);
+
+const tourRegionIds = new Set(tours.map((t) => t.data.region).filter(Boolean));
+
+const relevantRegions = allRegions.filter((r) => tourRegionIds.has(r.data.id));
+
+const tagSeoTitle = tagData.data.seo?.page_title ?? tagData.data.title;
+const tagSeoDescription =
+  tagData.data.seo?.page_description ?? tagData.data.title;
+const frontmatter = {
+  title: tagData.data.title ?? tagData.data.seo?.page_title,
+  page_size: 6,
+  seo: {
+    page_title: tagSeoTitle,
+    page_description: tagSeoDescription,
+    featured_image: tagData.data.seo?.featured_image,
+    featured_image_alt: tagData.data.seo?.featured_image_alt ?? tagSeoTitle,
+    canonical_url: tagData.data.seo?.canonical_url,
+    open_graph_type: tagData.data.seo?.open_graph_type,
+    author_twitter_handle: tagData.data.seo?.author_twitter_handle,
+    // Honour the entry's own `seo.no_index` instead of forcing every
+    // taxonomy term to be indexable. A thin term (one tour, or none) is
+    // worth excluding, and the flag was already set on some entries but
+    // silently discarded here.
+    no_index: tagData.data.seo?.no_index === true
+  }
+};
+const hrefs = await getTourTagLanguagesAlternates(tagData, Astro.site);
+const currentPageUrl = Astro.url.href;
+// No alternates means this tag has no translation, so there is nothing to
+// annotate — manufacturing a self entry here would emit a set of one, which
+// Google ignores and which the sitemap does not list.
+const hrefsWithSelf =
+  hrefs.length === 0
+    ? []
+    : hrefs.some((h) => h.hreflang === language)
+      ? hrefs.map((h) =>
+          h.hreflang === language ? { ...h, href: currentPageUrl } : h
+        )
+      : [...hrefs, { href: currentPageUrl, hreflang: language }];
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefsWithSelf.filter(
+  (h) => h.hreflang === defaultLocale.code
+)[0];
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  {
+    name: t('Tour.TagsTitle', language),
+    url: getTourTagsListingPath(language)
+  },
+  {
+    name: tagData.data.name ?? tagData.data.title,
+    url: getTourTagPath(tagData, language)
+  }
+];
+---
+
+<Layout
+  class="mb-16 px-8"
+  {...frontmatter}
+  title={t('Tours.Tags.PackageTour.Title', language).replace(
+    '$1',
+    tagData.data.name ?? tagData.data.title
+  )}
+  hrefLangs={hrefsWithSelf}
+  breadcrumbs={breadcrumbs}
+>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefsWithSelf.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6"
+      >{tagData.data.title ?? tagData.data.seo?.page_title}</Heading
+    >
+    <PageHelper contentBlocks={tagData.data.content_blocks ?? []} />
+    <div data-tour-filter-container>
+      <TourFilterBar
+        language={language}
+        totalCount={tours.length}
+        showRegion={relevantRegions.length > 0}
+        regions={relevantRegions.map((r) => ({
+          id: r.data.id,
+          name: r.data.name ?? r.data.title,
+          slug: r.data.path
+        }))}
+      />
+      {
+        packageTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Tags.PackageTour.Title', language).replace(
+                '$1',
+                tagData.data.name ?? tagData.data.title
+              )}
+            </Heading>
+            <TourList items={packageTours} language={language} />
+          </div>
+        ) : null
+      }
+      {
+        dayTours.length > 0 ? (
+          <div data-tour-section>
+            <Heading as="h2" class="px-6">
+              {t('Tours.Tags.DayTour.Title', language).replace(
+                '$1',
+                tagData.data.name ?? tagData.data.title
+              )}
+            </Heading>
+            <TourList items={dayTours} language={language} />
+          </div>
+        ) : null
+      }
+    </div>
+    {
+      packageTours.length == 0 && dayTours.length === 0 ? (
+        <div class="flex flex-col gap-2 px-6">
+          <Text size="xlarge">
+            {t('Tours.Tags.NoResults.Title', language).replace(
+              '$1',
+              tagData.data.name ?? tagData.data.title
+            )}
+          </Text>
+          <Text size="large">
+            {t('Tours.Tags.NoResults.AlternateTags.Title', language)}
+          </Text>
+          <ul class="list-disc pl-8">
+            {tourTags
+              .filter((r) => r.data.id !== tagData.data.id)
+              .map((r) => (
+                <li class="pl-2">
+                  <a
+                    href={getTourTagPath(r, language)}
+                    title={r.data.name ?? r.data.title}
+                    class="underline"
+                  >
+                    {r.data.name ?? r.data.title}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      ) : null
+    }
+    <PageHelper
+      contentBlocks={tagData.data.content_blocks_after ?? []}
+      sectionsKey="content_blocks_after"
+    />
+  </Stack>
+</Layout>

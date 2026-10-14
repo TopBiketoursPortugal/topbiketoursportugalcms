@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getBlogPermalink, getBlogTagPath } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
+import SiteData from 'src/../data/site.json';
+
+type Props = CollectionEntry<'blog'>;
+
+const { data } = Astro.props;
+
+const { thumb_image_path, thumb_image_alt, title, date, tags } = data;
+
+const dateObj = new Date(date);
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const imageSrc = await resolveImageSrc(thumb_image_path);
+const siteName = SiteData[language].site.name;
+
+const postTags = tags?.length
+  ? await getCollection(
+      'postTags',
+      (t) => tags.includes(t.data.id) && t.data.language === language
+    )
+  : [];
+---
+
+<div
+  class="blog-card blog-card-filterable intersect:opacity-100 intersect-once block transition-transform duration-200 hover:-translate-y-1"
+  data-blog-title={title.toLowerCase()}
+  data-blog-tags={(tags ?? []).join(' ')}
+>
+  <a href={getBlogPermalink(Astro.props)}>
+    <Image
+      class="aspect-video w-full rounded-sm"
+      src={imageSrc}
+      alt={thumb_image_alt ?? siteName}
+      loading="lazy"
+    />
+  </a>
+  <div class="mt-2 flex max-w-125 flex-col justify-start">
+    {
+      postTags.length > 0 ? (
+        <div class="flex flex-col gap-3 sm:flex-row">
+          {postTags.map((tag) => {
+            return (
+              <a
+                href={getBlogTagPath(tag, language)}
+                class="rounded-sm bg-slate-200 px-2 py-1 first-letter:capitalize dark:bg-slate-800"
+              >
+                {tag.data.name ?? tag.data.title}
+              </a>
+            );
+          })}
+        </div>
+      ) : null
+    }
+    <a href={getBlogPermalink(Astro.props)}>
+      <p class="text-2xl font-semibold">{title}</p>
+    </a>
+    <p class="font-light">
+      {
+        dateObj.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      }
+    </p>
+  </div>
+</div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .blog-card {
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+    .blog-card[no-intersect] {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+  .blog-card-filterable {
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  .blog-card-filterable[data-filter-hidden] {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+</style>

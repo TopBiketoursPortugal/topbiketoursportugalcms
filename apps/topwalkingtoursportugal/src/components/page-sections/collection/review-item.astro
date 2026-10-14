@@ -1,0 +1,253 @@
+---
+/** @jsxImportSource astro */
+import 'src/safelist-icons.ts';
+import { Image } from 'astro:assets';
+import Rating from 'src/components/building-blocks/rating/rating.astro';
+import { getImageByPath } from 'utils/get-image';
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+import { getCountryCode } from 'utils/get-country-code';
+import { cn } from '@utils/cn';
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
+import Languages from 'src/../data/languages.json';
+
+type Props = {
+  name?: string;
+  country?: string;
+  content: string;
+  rating: number;
+  photo?: string;
+  expand_behavior?: 'hover' | 'button' | 'none';
+  /** When the trip was ridden. */
+  date?: Date | string | null;
+  /** Which tour this review is about, and where to read about it. */
+  tourTitle?: string | null;
+  tourHref?: string | null;
+  /** Where the review was published — TripAdvisor, Google, etc. */
+  sourceName?: string | null;
+  sourceUrl?: string | null;
+};
+
+const {
+  name,
+  country,
+  content,
+  rating,
+  photo,
+  expand_behavior = 'hover',
+  date,
+  tourTitle,
+  tourHref,
+  sourceName,
+  sourceUrl
+} = Astro.props;
+const imageOptimized = photo
+  ? (getImageByPath(photo) satisfies Promise<{
+      default: ImageMetadata;
+    }>)
+  : null;
+
+const countryCode = getCountryCode(country ?? '');
+
+const countryFlagIcon = countryCode
+  ? `icon-[circle-flags--${countryCode.toLowerCase()}]`
+  : 'icon-[ph--user-circle-light]';
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const excerpt = getMarkdownExcerpt(content, 200);
+// Reviews arrive from TripAdvisor exports, so either half can be blank —
+// don't render a dangling "Name - " or " - Country".
+const attribution = [name?.trim(), country?.trim()].filter(Boolean).join(' — ');
+
+/*
+ * "Don — USA" with five stars is the weakest possible form of the strongest
+ * asset this business has. Which trip, and when, is what makes a review
+ * evidence rather than decoration — and all three fields already exist in the
+ * testimonial content (`date`, `relatedProduct`, `reviewSource`); they were
+ * simply not being rendered.
+ */
+const reviewDate = date ? new Date(date) : null;
+const formattedDate =
+  reviewDate && !Number.isNaN(reviewDate.valueOf())
+    ? new Intl.DateTimeFormat(Languages[language].locale, {
+        month: 'long',
+        year: 'numeric'
+      }).format(reviewDate)
+    : '';
+---
+
+<div
+  class="flex h-full flex-col gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-md shadow-slate-900/5 dark:border-slate-700 dark:bg-slate-800"
+>
+  <div class="flex justify-center">
+    {
+      imageOptimized ? (
+        <Image
+          src={imageOptimized}
+          widths={[320, 500, 640]}
+          sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 640px`}
+          fetchpriority="auto"
+          decoding="async"
+          loading="lazy"
+          alt={name ?? country ?? ''}
+          class="w-32 rounded-[100%] shadow-lg dark:shadow-black/30"
+        />
+      ) : (
+        <i class={cn('mb-2 h-12 w-12', countryFlagIcon)} />
+      )
+    }
+  </div>
+  <div class="flex flex-col gap-1">
+    <p class="text-xl font-semibold">{attribution}</p>
+    {
+      (tourTitle || formattedDate) && (
+        <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          {tourTitle ? (
+            tourHref ? (
+              <a
+                href={tourHref}
+                class="hover:text-primary underline-offset-2 hover:underline dark:hover:text-emerald-300"
+              >
+                {tourTitle}
+              </a>
+            ) : (
+              tourTitle
+            )
+          ) : null}
+          {tourTitle && formattedDate ? ' · ' : ''}
+          {formattedDate}
+        </p>
+      )
+    }
+  </div>
+  {
+    expand_behavior === 'button' ? (
+      <>
+        {/*
+          A real <button>, not a click-handled <span>: this is the only route to
+          the full review, so it has to be reachable by keyboard and announced
+          as a control. Text stays left-aligned since the button wraps prose.
+        */}
+        <button
+          type="button"
+          class="review-clickable block cursor-pointer text-left text-neutral-600 transition-colors hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-neutral-100"
+          aria-haspopup="dialog"
+        >
+          <i class="icon-[ph--quotes-fill]" aria-hidden="true" />
+          <span class="block">{excerpt}</span>
+          {/* The excerpt stays the accessible name — it is what the reader is
+              choosing between — with the action appended rather than replacing
+              it, which an aria-label here would do. */}
+          <span class="sr-only">
+            {t('Tour.Section.Reviews.ViewDetail', language)}
+          </span>
+        </button>
+        <dialog class="review-dialog m-auto w-[calc(100%-2rem)] max-w-2xl rounded-lg p-0 shadow-2xl backdrop:bg-black/50 dark:bg-gray-800">
+          <div class="flex flex-col gap-6 p-6 sm:p-8">
+            <div class="flex items-center justify-between">
+              <p class="text-xl font-semibold">{attribution}</p>
+              <button
+                class="review-dialog-close flex h-8 w-8 shrink-0 items-center justify-center rounded-full hover:bg-neutral-100 dark:hover:bg-gray-700"
+                type="button"
+                aria-label={t('Tour.Section.Reviews.Close', language)}
+              >
+                <i class="icon-[ph--x-bold] text-lg" />
+              </button>
+            </div>
+            <Rating rating={rating} class="text-accent" />
+            <div class="text-neutral-600 dark:text-neutral-300">
+              <i class="icon-[ph--quotes-fill]" />
+              <Prose markdown={content} />
+            </div>
+          </div>
+        </dialog>
+      </>
+    ) : (
+      <div class="text-neutral-600 dark:text-neutral-300">
+        <i class="icon-[ph--quotes-fill]" aria-hidden="true" />
+        <div
+          class={cn(
+            'truncate-text',
+            expand_behavior === 'hover' && 'expand-hover'
+          )}
+        >
+          <Prose markdown={content} />
+        </div>
+      </div>
+    )
+  }
+  <div class="mt-auto flex flex-wrap items-center justify-between gap-2">
+    <Rating rating={rating} class="text-accent" />
+    {
+      sourceName ? (
+        sourceUrl ? (
+          <a
+            href={sourceUrl}
+            rel="nofollow noopener"
+            target="_blank"
+            class="text-xs text-neutral-500 underline-offset-2 hover:underline dark:text-neutral-400"
+          >
+            {sourceName}
+          </a>
+        ) : (
+          <span class="text-xs text-neutral-500 dark:text-neutral-400">
+            {sourceName}
+          </span>
+        )
+      ) : null
+    }
+  </div>
+</div>
+
+<script>
+  function initReviewDialogs() {
+    document.querySelectorAll('.review-clickable').forEach((clickable) => {
+      if (clickable.hasAttribute('data-dialog-init')) return;
+      clickable.setAttribute('data-dialog-init', 'true');
+
+      const dialog = clickable.nextElementSibling as HTMLDialogElement | null;
+      if (!dialog || dialog.tagName !== 'DIALOG') return;
+
+      clickable.addEventListener('click', () => {
+        dialog.showModal();
+      });
+
+      const closeBtn = dialog.querySelector('.review-dialog-close');
+      closeBtn?.addEventListener('click', () => {
+        dialog.close();
+      });
+
+      dialog.addEventListener('click', (e) => {
+        if (e.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initReviewDialogs);
+</script>
+
+<style is:global>
+  .truncate-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .truncate-text p {
+    margin-bottom: 0.5em;
+  }
+
+  .truncate-text.expand-hover:hover {
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+
+  .review-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+</style>

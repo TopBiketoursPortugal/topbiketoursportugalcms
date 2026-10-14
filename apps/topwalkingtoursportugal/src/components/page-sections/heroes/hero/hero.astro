@@ -1,0 +1,321 @@
+---
+import { Image } from 'astro:assets';
+import Markdown from 'src/components/building-blocks/utility/markdown.astro';
+import { getDarkEquivalent, getDarkTextEquivalent } from 'src/utils/dark-color';
+import { resolveImageSrc } from 'utils/get-image';
+
+interface Props {
+  background_color: string;
+  heading: {
+    heading_text: string;
+    heading_gradient_color: string;
+    heading_size: string;
+  };
+  subheading: {
+    markdown_content: string;
+    color: string;
+  };
+  image: {
+    image_path: string;
+    alt_text: string;
+  };
+  buttons: [
+    {
+      _component?: string;
+      _bookshop_name?: string;
+      text: string;
+      icon: string;
+      link: string;
+      background_color?: string;
+      hover_brightness: number;
+      text_color: string;
+    }
+  ];
+  class?: string;
+}
+
+const block = Astro.props;
+const buttonComponents = import.meta.glob(
+  '/src/components/building-blocks/buttons/**/*.astro',
+  {
+    eager: true
+  }
+);
+const imageSrc = await resolveImageSrc(block.image?.image_path);
+
+const headingGradientColor = block.heading?.heading_gradient_color ?? '#a0a2ff';
+
+const { background_color, buttons = [], heading, subheading } = block;
+
+const heading_size = heading?.heading_size ?? 'h1';
+
+const getHeadingSizeComponent = (size: string) => {
+  switch (size) {
+    case 'h1':
+      return 'h1';
+    case 'h2':
+      return 'h2';
+    case 'h3':
+      return 'h3';
+    case 'h4':
+      return 'h4';
+    case 'h5':
+      return 'h5';
+    case 'h6':
+      return 'h6';
+    default:
+      return 'h1';
+  }
+};
+const Heading = getHeadingSizeComponent(heading_size);
+---
+
+<section
+  class={block.class}
+  style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}
+>
+  <div class="hero-container">
+    <div
+      class="content reveal-stagger intersect:opacity-100 intersect-once flex flex-col gap-4"
+    >
+      {
+        heading?.heading_text ? (
+          <Heading
+            class="heading pb-3"
+            data-editable="text"
+            data-prop="heading.heading_text"
+          >
+            {heading?.heading_text}
+          </Heading>
+        ) : null
+      }
+      <div
+        class="subheading-text"
+        style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
+        data-editable="text"
+        data-type="block"
+        data-prop="subheading.markdown_content"
+      >
+        <Markdown content={subheading.markdown_content} />
+      </div>
+      <div class="buttons" data-editable="array" data-prop="buttons">
+        {
+          buttons.map((button) => {
+            const name = (button._component ?? button._bookshop_name)
+              ?.split('/')
+              .reverse()[0];
+            const filePath = `/src/components/building-blocks/buttons/${name}/${name}.astro`;
+            const Component = (buttonComponents[filePath] as any)?.default;
+            if (!Component) return null;
+            return (
+              <div data-editable="array-item">
+                <Component {...button} />
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+    <div
+      class="blob reveal-right reveal-delay-2 intersect:opacity-100 intersect-once"
+    >
+      {
+        imageSrc && (
+          <Image
+            alt={block.image.alt_text ?? ''}
+            widths={[320, 500, 640, 900, 1200]}
+            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 600px`}
+            src={imageSrc}
+            data-editable="image"
+            data-prop-src="image.image_path"
+            data-prop-alt="image.alt_text"
+          />
+        )
+      }
+    </div>
+  </div>
+</section>
+<style define:vars={{ headingGradientColor }}>
+  section {
+    background-color: var(--cms-bg, #ffffff);
+  }
+
+  :global(.dark) section {
+    background-color: var(--cms-bg-dark, #1e293b) !important;
+  }
+
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 24px;
+    padding-inline: var(--pagePadding);
+    max-width: var(--pageContainer);
+    margin-inline: auto;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /*
+   * The accent half of the gradient is real text, so it has to clear the 3:1
+   * large-text contrast floor on its own. Editors pick `heading_gradient_color`
+   * freely in CloudCannon and a mid-tone like #FF785A lands at 2.6:1 on white,
+   * so the light-theme stop is mixed toward black rather than trusted raw —
+   * the floor holds for whatever colour the CMS supplies. On the dark surface
+   * the same hue already clears 5:1, so it is used as authored.
+   */
+  .content h1 {
+    font-size: clamp(2.5rem, 4vw + 1.25rem, 4.25rem);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    /* Fallback for engines without background-clip: text — never invisible. */
+    color: #000000;
+    /* And a solid paint under the gradient: background-clip:text shipped well
+       before color-mix() (Safari 14 vs 16.2), so an engine that clips to text
+       but cannot parse the gradient would otherwise clip to nothing and leave
+       the headline blank. Solid black is the floor it lands on instead. */
+    background: #000000;
+    background: linear-gradient(
+      to left,
+      color-mix(in srgb, var(--headingGradientColor) 80%, #000) 50%,
+      #000000
+    );
+  }
+
+  :global(.dark) .content h1 {
+    color: #ffffff;
+    background: #ffffff;
+    background: linear-gradient(
+      to left,
+      var(--headingGradientColor) 50%,
+      #ffffff
+    );
+  }
+
+  @supports (-webkit-background-clip: text) or (background-clip: text) {
+    .content h1,
+    :global(.dark) .content h1 {
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .subheading-text {
+    margin-top: 1rem;
+    color: var(--cms-text);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 56ch;
+  }
+
+  :global(.dark) .subheading-text {
+    color: var(--cms-text-dark) !important;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: fit-content;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .blob {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .blob::before {
+    content: '';
+    position: absolute;
+    inset: 10%;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--headingGradientColor) 35%, transparent) 0%,
+      transparent 70%
+    );
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .blob > img {
+    max-width: 600px;
+    width: 100%;
+    background-size: cover;
+    -webkit-background-position: center;
+    background-position: center center;
+    margin: 20px;
+    /* Resting shape — the animation below only plays when motion is welcome. */
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  /*
+   * Two perpetual animations on the above-the-fold image. They are the hero's
+   * signature, but they never stop, so they stay behind a reduced-motion
+   * guard — this is the one place on the page that animates indefinitely.
+   */
+  @media (prefers-reduced-motion: no-preference) {
+    .blob > img {
+      animation:
+        animate 10s ease-in-out infinite,
+        blob-float 7s ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes blob-float {
+    from {
+      translate: 0 -8px;
+    }
+    to {
+      translate: 0 10px;
+    }
+  }
+
+  @media only screen and (min-width: 400px) {
+    .buttons {
+      flex-direction: row;
+      margin-top: 2rem;
+    }
+    .content h1 {
+      font-size: 3.8rem;
+    }
+  }
+  @media only screen and (min-width: 960px) {
+    .hero-container {
+      flex-direction: row;
+      padding-block: 48px;
+    }
+    .content {
+      width: 50%;
+    }
+
+    .blob {
+      width: 50%;
+    }
+    .buttons {
+      flex-direction: column;
+    }
+  }
+  @media only screen and (min-width: 1280px) {
+    .buttons {
+      flex-direction: row;
+    }
+  }
+
+  @keyframes animate {
+    0%,
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  /* Scroll-reveal handled by global .reveal-stagger / .reveal-right utilities */
+</style>

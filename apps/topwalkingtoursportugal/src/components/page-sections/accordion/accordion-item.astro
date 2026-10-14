@@ -1,0 +1,104 @@
+---
+import { v7 as uuidv7 } from 'uuid';
+import { clsx } from 'clsx';
+
+type Props = {
+  title?: string;
+  open?: boolean;
+  class?: string;
+};
+
+const { title, open = true, class: className } = Astro.props;
+const id = `accordion-${(title ?? uuidv7()).toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<details
+  open={open}
+  class={clsx(
+    'group accordion-item overflow-hidden border border-gray-200 dark:border-gray-900',
+    className
+  )}
+  id={id}
+>
+  <summary
+    class="w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden"
+    aria-controls={`${id}-content`}
+    aria-expanded={open}
+  >
+    <slot name="header">
+      <div
+        class="flex w-full items-center justify-between bg-gray-100 p-4 transition-all duration-200 ease-in-out hover:bg-gray-200 dark:bg-neutral-900"
+      >
+        <span class="font-medium">{title}</span>
+        <svg
+          class="h-5 w-5 transform transition-transform duration-300 ease-in-out group-open:rotate-180 hover:bg-slate-200 dark:hover:bg-neutral-800"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </div>
+    </slot>
+  </summary>
+  <div
+    class="grid grid-rows-[0fr] group-open:grid-rows-[1fr] group-[.is-closing]:grid-rows-[0fr] motion-safe:transition-[grid-template-rows] motion-safe:duration-300 motion-safe:ease-in-out"
+  >
+    <div class="overflow-hidden">
+      <div
+        id={`${id}-content`}
+        class="bg-white dark:bg-black"
+        role="region"
+        aria-labelledby={`${id}-heading`}
+      >
+        <div class="p-4">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
+</details>
+
+<script>
+  const setupAccordion = () => {
+    document
+      .querySelectorAll('details.accordion-item summary')
+      .forEach((summary) => {
+        const details = summary.closest('details');
+        if (!details || details.dataset.initialized) return;
+        details.dataset.initialized = 'true';
+
+        summary.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          const isOpen = details.hasAttribute('open');
+          const isReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+          ).matches;
+          const duration = isReducedMotion ? 0 : 300;
+
+          if (isOpen) {
+            // Closing animation
+            details.classList.add('is-closing');
+            setTimeout(() => {
+              details.removeAttribute('open');
+              details.classList.remove('is-closing');
+            }, duration);
+          } else {
+            // Opening animation
+            details.setAttribute('open', '');
+            // Small delay to ensure browser acknowledges open state before transition?
+            // Usually not needed for grid-template-rows on details, but safer to just let it flow.
+          }
+        });
+      });
+  };
+
+  setupAccordion();
+  document.addEventListener('astro:page-load', setupAccordion);
+</script>

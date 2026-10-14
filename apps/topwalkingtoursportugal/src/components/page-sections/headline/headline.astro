@@ -1,0 +1,74 @@
+---
+import { cn } from 'utils/cn';
+
+export type HeadlineProps = {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  classes?: Record<'container' | 'title' | 'subtitle', string>;
+};
+
+type Props = HeadlineProps;
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline,
+  classes = {
+    container: 'max-w-3xl',
+    title: 'text-3xl md:text-4xl ',
+    subtitle: 'text-xl'
+  }
+} = Astro.props;
+
+const {
+  container: containerClass,
+  title: titleClass,
+  subtitle: subtitleClass
+} = classes;
+---
+
+{
+  (title || subtitle || tagline) && (
+    <div
+      class={cn(
+        'reveal-up intersect:opacity-100 intersect-once mb-8 text-center md:mx-auto md:mb-12',
+        containerClass
+      )}
+    >
+      {tagline && (
+        <p
+          class="text-secondary dark:text-accent mb-2 text-sm font-bold tracking-[0.2em] uppercase"
+          set:html={tagline}
+          data-editable="text"
+          data-prop="tagline"
+        />
+      )}
+      {title && (
+        <h2
+          class={cn(
+            'text-heading font-heading text-3xl font-bold tracking-tight text-balance dark:text-white',
+            titleClass
+          )}
+          set:html={title}
+          data-editable="text"
+          data-type="block"
+          data-prop="title"
+        />
+      )}
+
+      {subtitle && (
+        <p
+          class={cn(
+            'text-muted mt-4 text-pretty dark:text-slate-400',
+            subtitleClass
+          )}
+          set:html={subtitle}
+          data-editable="text"
+          data-type="block"
+          data-prop="subtitle"
+        />
+      )}
+    </div>
+  )
+}

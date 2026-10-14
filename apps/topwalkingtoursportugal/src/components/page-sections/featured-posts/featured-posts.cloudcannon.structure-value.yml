@@ -1,0 +1,16 @@
+label: Featured Posts
+icon: newspaper
+description: Featured stories grid
+value:
+  _component: page-sections/featured-posts
+  main_feature: ""
+  feature_list: []
+preview:
+  text:
+    - Featured Posts
+  icon: newspaper
+picker_preview:
+  text: Featured Posts
+  subtext: Featured stories grid
+_inputs_from_glob:
+  - /src/components/page-sections/featured-posts/featured-posts.cloudcannon.inputs.yml

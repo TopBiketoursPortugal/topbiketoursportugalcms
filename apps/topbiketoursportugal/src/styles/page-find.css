@@ -1,0 +1,74 @@
+@layer base {
+  :root {
+    --accent1: #000;
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: var(--menu-surface);
+    --pagefind-ui-text: #000;
+    --pagefind-ui-message-text: #000;
+    --pagefind-ui-result-title-text: var(--brand);
+    --pagefind-ui-result-text: #000;
+    --pagefind-ui-background: var(--surface1);
+    --pagefind-input-background: var(--color-gray-700);
+    --pagefind-ui-border: var(--accent1);
+    --pagefind-ui-tag: #0d0a01;
+    --pagefind-ui-border-width: 2px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: sans-serif;
+    --pagefind-button-background: var(--pagefind-input-background);
+    --pagefind-button-color: var(--pagefind-ui-message-text);
+  }
+
+  .dark {
+    --accent1: #fff;
+    --brand: --color-gray-700;
+    --pagefind-ui-primary: var(--menu-surface);
+    --pagefind-ui-text: #fff;
+    --pagefind-ui-message-text: var(--pagefind-ui-text);
+    --pagefind-ui-result-title-text: var(--accent1);
+    --pagefind-ui-result-text: #fff;
+    --pagefind-ui-background: #ffffff;
+    --pagefind-input-background: var(--color-gray-700);
+    --pagefind-ui-border: var(--brand);
+    --pagefind-ui-tag: #b59c94;
+  }
+}
+
+@layer components {
+  #blog-search .pagefind-ui__search-input,
+  #blog-search .pagefind-ui__search-clear {
+    background-color: var(--pagefind-input-background);
+    color: var(--pagefind-ui-text);
+  }
+
+  #blog-search .pagefind-ui__result-title,
+  #blog-search .pagefind-ui__result-link {
+    display: inline-block;
+    font-weight: 700;
+    font-size: calc(40px * var(--pagefind-ui-scale));
+    color: var(--pagefind-ui-result-title-text);
+  }
+
+  #blog-search .pagefind-ui__result-excerpt {
+    color: var(--pagefind-ui-result-text);
+    font-weight: 400;
+    font-size: calc(1.5rem * var(--pagefind-ui-scale));
+  }
+
+  #blog-search .pagefind-ui__message {
+    color: var(--pagefind-ui-message-text);
+    margin: calc(0.5rem * var(--pagefind-ui-scale)) 0
+      calc(1.5rem * var(--pagefind-ui-scale))
+      calc(0.5rem * var(--pagefind-ui-scale));
+  }
+
+  #blog-search .pagefind-ui__button {
+    color: var(--pagefind-button-color);
+    background: var(--pagefind-button-background);
+  }
+
+  #blog-search .pagefind-ui__result-thumb {
+    flex-shrink: 0;
+  }
+}
