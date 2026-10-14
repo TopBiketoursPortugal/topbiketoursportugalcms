@@ -1,6 +1,66 @@
 [build.processing.html]
     pretty_urls = true
 
+# Keep non-production deploys out of the index.
+#
+# Every deploy preview and branch deploy is a complete, publicly reachable copy
+# of the live site. They shipped `<meta name="robots" content="index, follow">`,
+# a permissive robots.txt and no X-Robots-Tag, so the only thing discouraging
+# Google from indexing them was a canonical pointing at production — a hint,
+# not a directive.
+#
+# `INDEX = "false"` is read by src/layouts/Layout.astro (noindex on every page)
+# and src/pages/robots.txt.ts (`Disallow: /`). The header below is the belt to
+# that braces: it applies to every response including assets, feeds and the
+# sitemap, which carry no meta tag of their own.
+#
+# What this does NOT do is make previews private. Netlify serves them to
+# anyone with the URL regardless of headers; closing that needs password
+# protection on the Netlify site itself. Previews are left human-reachable on
+# purpose so the team can review a branch.
+[context.deploy-preview.environment]
+    INDEX = "false"
+
+[context.branch-deploy.environment]
+    INDEX = "false"
+
+[[context.deploy-preview.headers]]
+    for = "/*"
+
+    [context.deploy-preview.headers.values]
+        X-Robots-Tag = "noindex, nofollow, noarchive"
+
+[[context.branch-deploy.headers]]
+    for = "/*"
+
+    [context.branch-deploy.headers.values]
+        X-Robots-Tag = "noindex, nofollow, noarchive"
+
+# The two bare Netlify aliases serve the *production* deploy, so no
+# per-context rule above can reach them: to Netlify they are the production
+# context. They are byte-identical duplicates of the live site with no review
+# value, and they took 246 real sessions from the public, so they are redirected
+# at the edge rather than merely marked noindex.
+#
+# Deploy-preview and branch-deploy hostnames
+# (`deploy-preview-12--boring-kepler-5712ff.netlify.app`,
+# `some-branch--boring-kepler-5712ff.netlify.app`) do not match either pattern
+# and stay reachable for review.
+#
+# These rules are reached because the generated dist/_redirects contains no
+# host-qualified and no catch-all rules; Netlify evaluates _redirects first.
+[[redirects]]
+    from = "https://topbiketoursportugal.netlify.app/*"
+    to = "https://topbiketoursportugal.com/:splat"
+    status = 301
+    force = true
+
+[[redirects]]
+    from = "https://boring-kepler-5712ff.netlify.app/*"
+    to = "https://topbiketoursportugal.com/:splat"
+    status = 301
+    force = true
+
 # Security headers.
 #
 # Before this, the only header the site sent was HSTS, which Netlify adds. The
