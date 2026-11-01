@@ -153,25 +153,21 @@ const breadcrumbs = [
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefsWithSelf.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefsWithSelf.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
-    <Heading as="h1" class="px-6"
-      >{tagData.data.title ?? tagData.data.seo?.page_title}</Heading
-    >
+    <Heading as="h1" class="px-6">
+      {tagData.data.title ?? tagData.data.seo?.page_title}
+    </Heading>
     <PageHelper contentBlocks={tagData.data.content_blocks ?? []} />
     <div data-tour-filter-container>
       <TourFilterBar
@@ -196,63 +192,57 @@ const breadcrumbs = [
           slug: c.data.path
         }))}
       />
-      {
-        packageTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.Tags.PackageTour.Title', language).replace(
-                '$1',
-                tagData.data.name ?? tagData.data.title
-              )}
-            </Heading>
-            <TourList items={packageTours} language={language} />
-          </div>
-        ) : null
-      }
-      {
-        dayTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.Tags.DayTour.Title', language).replace(
-                '$1',
-                tagData.data.name ?? tagData.data.title
-              )}
-            </Heading>
-            <TourList items={dayTours} language={language} />
-          </div>
-        ) : null
-      }
-    </div>
-    {
-      packageTours.length == 0 && dayTours.length === 0 ? (
-        <div class="flex flex-col gap-2 px-6">
-          <Text size="xlarge">
-            {t('Tours.Tags.NoResults.Title', language).replace(
+      {packageTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.Tags.PackageTour.Title', language).replace(
               '$1',
               tagData.data.name ?? tagData.data.title
             )}
-          </Text>
-          <Text size="large">
-            {t('Tours.Tags.NoResults.AlternateTags.Title', language)}
-          </Text>
-          <ul class="list-disc pl-8">
-            {tourTags
-              .filter((r) => r.data.id !== tagData.data.id)
-              .map((r) => (
-                <li class="pl-2">
-                  <a
-                    href={getTourTagPath(r, language)}
-                    title={r.data.name ?? r.data.title}
-                    class="underline"
-                  >
-                    {r.data.name ?? r.data.title}
-                  </a>
-                </li>
-              ))}
-          </ul>
+          </Heading>
+          <TourList items={packageTours} language={language} />
         </div>
-      ) : null
-    }
+      ) : null}
+      {dayTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.Tags.DayTour.Title', language).replace(
+              '$1',
+              tagData.data.name ?? tagData.data.title
+            )}
+          </Heading>
+          <TourList items={dayTours} language={language} />
+        </div>
+      ) : null}
+    </div>
+    {packageTours.length == 0 && dayTours.length === 0 ? (
+      <div class="flex flex-col gap-2 px-6">
+        <Text size="xlarge">
+          {t('Tours.Tags.NoResults.Title', language).replace(
+            '$1',
+            tagData.data.name ?? tagData.data.title
+          )}
+        </Text>
+        <Text size="large">
+          {t('Tours.Tags.NoResults.AlternateTags.Title', language)}
+        </Text>
+        <ul class="list-disc pl-8">
+          {tourTags
+            .filter((r) => r.data.id !== tagData.data.id)
+            .map((r) => (
+              <li class="pl-2">
+                <a
+                  href={getTourTagPath(r, language)}
+                  title={r.data.name ?? r.data.title}
+                  class="underline"
+                >
+                  {r.data.name ?? r.data.title}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ) : null}
     <PageHelper
       contentBlocks={tagData.data.content_blocks_after ?? []}
       sectionsKey="content_blocks_after"

@@ -3,7 +3,7 @@ icon: view_sidebar
 description: Lets users switch between different content panels using tabs.
 value:
   _component: building-blocks/wrappers/content-selector
-  label: ""
+  label: ''
   items: []
   navigationPosition: start
 preview:
@@ -30,8 +30,10 @@ _structures:
             - key: title
             - Content Selector Item
           subtext:
-            - template: A content selector item containing {contentSections|array_length}
-                content {"block"|pluralize=contentSections}
+            - template:
+                A content selector item containing
+                {contentSections|array_length} content
+                {"block"|pluralize=contentSections}
             - Add content to the content selector item
         _inputs:
           title:
@@ -41,7 +43,8 @@ _structures:
             type: text
             comment: Optional supporting text shown beneath the item heading.
           iconName:
-            comment: The name of the icon to display. Sourced from
+            comment:
+              The name of the icon to display. Sourced from
               [Heroicons](https://heroicons.com/).
             type: select
             options:
@@ -49,7 +52,7 @@ _structures:
           iconColor:
             type: select
             comment: The color of the icon.
-            hidden: "!iconName"
+            hidden: '!iconName'
             options:
               values:
                 - id: default

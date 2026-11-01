@@ -1,7 +1,7 @@
 ---
-import RenderBlock from "@components/utils/renderBlock.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import Icon from "@core-elements/icon/Icon.astro";
+import RenderBlock from '@components/utils/renderBlock.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Icon from '@core-elements/icon/Icon.astro';
 
 const {
   title,
@@ -11,10 +11,10 @@ const {
   contentSections,
   useDefaultEditableBinding = false,
   checked = false,
-  groupName = "content-selector-tabs",
-  navigationPosition = "start",
+  groupName = 'content-selector-tabs',
+  navigationPosition = 'start',
   _component,
-  "data-children-prop": childrenDataProp,
+  'data-children-prop': childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
 
@@ -24,16 +24,13 @@ const panelId = `panel-${uniqueId}`;
 const tabLabelId = `tablabel-${uniqueId}`;
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'contentSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 ---
 
-<div
-  class="content-selector-item"
-  {...htmlAttributes}
->
+<div class="content-selector-item" {...htmlAttributes}>
   <input
     type="radio"
     name={groupName}
@@ -48,7 +45,7 @@ const arrayDataAttributes = effectiveChildrenProp
     for={tabId}
     role="tab"
     aria-controls={panelId}
-    aria-selected={checked ? "true" : "false"}
+    aria-selected={checked ? 'true' : 'false'}
     tabindex="0"
   >
     <Heading
@@ -57,21 +54,19 @@ const arrayDataAttributes = effectiveChildrenProp
       size="sm"
       iconName={iconName}
       iconColor={iconColor}
-      alignmentHorizontal={navigationPosition === "top" ? "center" : "start"}
+      alignmentHorizontal={navigationPosition === 'top' ? 'center' : 'start'}
       class="content-selector-tab-heading"
     />
-    {
-      subtext && (
-        <span
-          class:list={[
-            "content-selector-tab-subtext",
-            `align-${navigationPosition === "top" ? "center" : "start"}`,
-          ]}
-        >
-          {subtext}
-        </span>
-      )
-    }
+    {subtext && (
+      <span
+        class:list={[
+          'content-selector-tab-subtext',
+          `align-${navigationPosition === 'top' ? 'center' : 'start'}`
+        ]}
+      >
+        {subtext}
+      </span>
+    )}
     <Icon
       name="chevron-down"
       size="none"
@@ -84,21 +79,16 @@ const arrayDataAttributes = effectiveChildrenProp
     id={panelId}
     role="tabpanel"
     aria-labelledby={tabLabelId}
-    aria-hidden={checked ? "false" : "true"}
+    aria-hidden={checked ? 'false' : 'true'}
   >
-    <div
-      class="content-selector-panel-content"
-      {...arrayDataAttributes}
-    >
+    <div class="content-selector-panel-content" {...arrayDataAttributes}>
       <slot>
-        {
-          contentSections && (
-            <RenderBlock
-              contentSections={contentSections}
-              useDefaultEditableBinding={!!effectiveChildrenProp}
-            />
-          )
-        }
+        {contentSections && (
+          <RenderBlock
+            contentSections={contentSections}
+            useDefaultEditableBinding={!!effectiveChildrenProp}
+          />
+        )}
       </slot>
     </div>
   </div>
@@ -125,7 +115,7 @@ const arrayDataAttributes = effectiveChildrenProp
 
       &::before {
         background: transparent;
-        content: "";
+        content: '';
         position: absolute;
         transition:
           transform var(--animation-normal),
@@ -167,7 +157,9 @@ const arrayDataAttributes = effectiveChildrenProp
       background: var(--cc-color-border-strong);
     }
 
-    .content-selector-input:checked + .content-selector-tab + .content-selector-panel {
+    .content-selector-input:checked
+      + .content-selector-tab
+      + .content-selector-panel {
       display: block;
     }
 

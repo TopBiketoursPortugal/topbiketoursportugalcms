@@ -37,33 +37,29 @@ const postTags = tags?.length
     />
   </a>
   <div class="mt-2 flex max-w-125 flex-col justify-start">
-    {
-      postTags.length > 0 ? (
-        <div class="flex flex-col gap-3 sm:flex-row">
-          {postTags.map((tag) => {
-            return (
-              <a
-                href={getBlogTagPath(tag, language)}
-                class="rounded-sm bg-slate-200 px-2 py-1 first-letter:capitalize dark:bg-slate-800"
-              >
-                {tag.data.name ?? tag.data.title}
-              </a>
-            );
-          })}
-        </div>
-      ) : null
-    }
+    {postTags.length > 0 ? (
+      <div class="flex flex-col gap-3 sm:flex-row">
+        {postTags.map((tag) => {
+          return (
+            <a
+              href={getBlogTagPath(tag, language)}
+              class="rounded-sm bg-slate-200 px-2 py-1 first-letter:capitalize dark:bg-slate-800"
+            >
+              {tag.data.name ?? tag.data.title}
+            </a>
+          );
+        })}
+      </div>
+    ) : null}
     <a href={getBlogPermalink(Astro.props)}>
       <p class="text-2xl font-semibold">{title}</p>
     </a>
     <p class="font-light">
-      {
-        dateObj.toLocaleDateString(undefined, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-      }
+      {dateObj.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}
     </p>
   </div>
 </div>

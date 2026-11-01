@@ -1,61 +1,57 @@
 ---
-import ListItem from "./ListItem.astro";
+import ListItem from './ListItem.astro';
 
 type ItemProps = Record<string, unknown>;
 
 const {
   items = [],
-  direction = "vertical",
-  alignmentHorizontal = "start",
-  size = "md",
-  listType = "icon",
-  class: className,
-  "data-children-prop": childrenDataProp,
+  direction = 'vertical',
+  alignmentHorizontal = 'start',
+  size = 'md',
+  listType = 'icon',
+  'class': className,
+  'data-children-prop': childrenDataProp,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
 const hasItems = items?.length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 
-const ListTag = listType === "numbered" ? "ol" : "ul";
-const showIcons = listType === "icon";
+const ListTag = listType === 'numbered' ? 'ol' : 'ul';
+const showIcons = listType === 'icon';
 
 if (!_component && !hasItems && !hasSlotContent) return;
 
-const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "items" : null);
+const effectiveChildrenProp =
+  childrenDataProp ?? (useDefaultEditableBinding ? 'items' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 ---
 
-<div
-  class:list={["list", className]}
-  {...htmlAttributes}
->
+<div class:list={['list', className]} {...htmlAttributes}>
   <ListTag
     role="list"
     class:list={[
       `size-${size}`,
       `direction-${direction}`,
       `alignment-${alignmentHorizontal}`,
-      `type-${listType}`,
+      `type-${listType}`
     ]}
     {...arrayDataAttributes}
   >
     <slot>
-      {
-        items?.map((item: ItemProps) => (
-          <ListItem
-            data-id="building-blocks/core-elements/list/list-item"
-            data-editable="array-item"
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-            showIcon={showIcons}
-            {...item}
-          />
-        ))
-      }
+      {items?.map((item: ItemProps) => (
+        <ListItem
+          data-id="building-blocks/core-elements/list/list-item"
+          data-editable="array-item"
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+          showIcon={showIcons}
+          {...item}
+        />
+      ))}
     </slot>
   </ListTag>
 </div>

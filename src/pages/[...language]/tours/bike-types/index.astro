@@ -26,14 +26,13 @@ const categories = await getCollection(
   (c) => c.data.language === language
 );
 
-const tours = await getCollection(
-  'tours',
-  (t) => t.data.language === language
-);
+const tours = await getCollection('tours', (t) => t.data.language === language);
 
 const categoryCounts = new Map<string, number>();
 for (const category of categories) {
-  const count = tours.filter((t) => (t.data.bikeCategories ?? []).includes(category.data.id)).length;
+  const count = tours.filter((t) =>
+    (t.data.bikeCategories ?? []).includes(category.data.id)
+  ).length;
   categoryCounts.set(category.data.id, count);
 }
 
@@ -50,7 +49,10 @@ const defaultHref = hrefs.find((h) => h.hreflang === 'en');
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
-  { name: t('Tour.BikeCategoriesTitle', language), url: getBikeCategoriesListingPath(language) }
+  {
+    name: t('Tour.BikeCategoriesTitle', language),
+    url: getBikeCategoriesListingPath(language)
+  }
 ];
 ---
 
@@ -62,33 +64,29 @@ const breadcrumbs = [
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
-    <Heading as="h1" class="px-6">{pageTitle}</Heading>
+    <Heading as="h1" class="px-6">
+      {pageTitle}
+    </Heading>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-      {
-        categories.map((category) => (
-          <BikeCategoriesCard
-            category={category}
-            language={language}
-            tourCount={categoryCounts.get(category.data.id) ?? 0}
-          />
-        ))
-      }
+      {categories.map((category) => (
+        <BikeCategoriesCard
+          category={category}
+          language={language}
+          tourCount={categoryCounts.get(category.data.id) ?? 0}
+        />
+      ))}
     </div>
   </Stack>
 </Layout>

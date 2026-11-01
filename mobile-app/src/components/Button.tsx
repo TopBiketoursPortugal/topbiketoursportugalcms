@@ -1,5 +1,11 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, StyleSheet, Text, type ViewStyle } from 'react-native';
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  type ViewStyle
+} from 'react-native';
 
 import { useTheme } from '@/theme/ThemeProvider';
 
@@ -12,11 +18,28 @@ type Props = {
   style?: ViewStyle;
 };
 
-export function Button({ label, onPress, variant = 'primary', disabled, loading, style }: Props) {
+export function Button({
+  label,
+  onPress,
+  variant = 'primary',
+  disabled,
+  loading,
+  style
+}: Props) {
   const { colors, radii, spacing, fonts } = useTheme();
 
-  const bg = variant === 'primary' ? colors.accent : variant === 'secondary' ? colors.primarySoft : 'transparent';
-  const fg = variant === 'primary' ? '#241000' : variant === 'secondary' ? colors.primary : colors.primary;
+  const bg =
+    variant === 'primary'
+      ? colors.accent
+      : variant === 'secondary'
+        ? colors.primarySoft
+        : 'transparent';
+  const fg =
+    variant === 'primary'
+      ? '#241000'
+      : variant === 'secondary'
+        ? colors.primary
+        : colors.primary;
   const borderColor = variant === 'ghost' ? colors.border : 'transparent';
 
   return (
@@ -31,15 +54,17 @@ export function Button({ label, onPress, variant = 'primary', disabled, loading,
           borderWidth: variant === 'ghost' ? StyleSheet.hairlineWidth * 2 : 0,
           paddingVertical: spacing.md + 2,
           borderRadius: radii.md,
-          opacity: disabled ? 0.5 : pressed ? 0.85 : 1,
+          opacity: disabled ? 0.5 : pressed ? 0.85 : 1
         },
-        style,
+        style
       ]}
     >
       {loading ? (
         <ActivityIndicator color={fg} />
       ) : (
-        <Text style={[styles.label, { color: fg, fontFamily: fonts.bodyBold }]}>{label}</Text>
+        <Text style={[styles.label, { color: fg, fontFamily: fonts.bodyBold }]}>
+          {label}
+        </Text>
       )}
     </Pressable>
   );
@@ -48,9 +73,9 @@ export function Button({ label, onPress, variant = 'primary', disabled, loading,
 const styles = StyleSheet.create({
   base: {
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   label: {
-    fontSize: 15,
-  },
+    fontSize: 15
+  }
 });

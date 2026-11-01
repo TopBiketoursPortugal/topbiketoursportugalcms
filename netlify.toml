@@ -1,5 +1,5 @@
 [build.processing.html]
-    pretty_urls = true
+pretty_urls = true
 
 # Security headers.
 #
@@ -12,24 +12,24 @@
 # valid HTTPS for a year and is not safely reversible, so it needs an audit of
 # what subdomains exist before it goes on.
 [[headers]]
-    for = "/*"
+for = "/*"
 
-    [headers.values]
-        X-Frame-Options = "SAMEORIGIN"
-        X-Content-Type-Options = "nosniff"
-        Referrer-Policy = "strict-origin-when-cross-origin"
-        Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+[headers.values]
+X-Frame-Options = "SAMEORIGIN"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
 
-        # Report-only on purpose. The site loads Google Tag Manager, Google
-        # Analytics, Microsoft Clarity, WeTravel (the booking flow), Formspree
-        # and two smaller trackers. A blocking policy shipped without watching
-        # what it catches first would take the booking form down, so this
-        # reports violations to the browser console and enforces nothing.
-        #
-        # To promote it: watch the console on a tour page and the checkout for a
-        # release or two, fold in whatever legitimate origin it flags, then
-        # rename the header to `Content-Security-Policy`.
-        Content-Security-Policy-Report-Only = """
+# Report-only on purpose. The site loads Google Tag Manager, Google
+# Analytics, Microsoft Clarity, WeTravel (the booking flow), Formspree
+# and two smaller trackers. A blocking policy shipped without watching
+# what it catches first would take the booking form down, so this
+# reports violations to the browser console and enforces nothing.
+#
+# To promote it: watch the console on a tour page and the checkout for a
+# release or two, fold in whatever legitimate origin it flags, then
+# rename the header to `Content-Security-Policy`.
+Content-Security-Policy-Report-Only = """
         default-src 'self'; \
         script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://*.wetravel.com https://*.iconnode.com https://*.doubleclick.net https://s.ksrndkehqnwntyxlhgto.com; \
         style-src 'self' 'unsafe-inline'; \

@@ -30,7 +30,10 @@ function listMdx(dir) {
 }
 
 // --- classification ---------------------------------------------------------
-const normTitle = (t) => String(t ?? '').replace(/^[\s*•-]+/, '').trim();
+const normTitle = (t) =>
+  String(t ?? '')
+    .replace(/^[\s*•-]+/, '')
+    .trim();
 
 const isSeasonTitle = (title) => /season/i.test(normTitle(title));
 
@@ -63,7 +66,8 @@ function buildTitleMap(packages) {
       const prev = map.get(key);
       let bucket = 'features';
       if (isSeasonTitle(row.title)) bucket = 'seasons';
-      else if (hasPriceSignal(row) || isAddonTitle(row.title)) bucket = 'addons';
+      else if (hasPriceSignal(row) || isAddonTitle(row.title))
+        bucket = 'addons';
       // Stickiness: once a title is seen as season/addon anywhere, keep it.
       if (prev === 'seasons' || bucket === 'seasons') map.set(key, 'seasons');
       else if (prev === 'addons' || bucket === 'addons') map.set(key, 'addons');
@@ -129,17 +133,28 @@ for (const file of listMdx(TOURS_DIR)) {
       counts[bucket]++;
       // Flag add-on rows that read like a plain inclusion (carried along for
       // column parity) so they can be spot-checked.
-      if (bucket === 'addons' && /^(yes|no|x)$/i.test(String(row.description ?? '').trim())) {
-        flags.push(`  ${file} :: "${normTitle(row.title)}" -> addons (value "${row.description}")`);
+      if (
+        bucket === 'addons' &&
+        /^(yes|no|x)$/i.test(String(row.description ?? '').trim())
+      ) {
+        flags.push(
+          `  ${file} :: "${normTitle(row.title)}" -> addons (value "${row.description}")`
+        );
       }
     }
 
     newPackages.push({ ...pkg, included: buckets.features });
     if (buckets.seasons.length) {
-      seasonsTable.push({ ...emptyPriced(pkg, currency), included: buckets.seasons });
+      seasonsTable.push({
+        ...emptyPriced(pkg, currency),
+        included: buckets.seasons
+      });
     }
     if (buckets.addons.length) {
-      addonsTable.push({ ...emptyPriced(pkg, currency), included: buckets.addons });
+      addonsTable.push({
+        ...emptyPriced(pkg, currency),
+        included: buckets.addons
+      });
     }
   }
 
@@ -164,6 +179,8 @@ for (const file of listMdx(TOURS_DIR)) {
 
 console.log(`\nDone. ${changed} migrated, ${skipped} skipped.`);
 if (flags.length) {
-  console.log(`\n⚠ ${flags.length} low-confidence add-on rows — please review:`);
+  console.log(
+    `\n⚠ ${flags.length} low-confidence add-on rows — please review:`
+  );
   console.log(flags.join('\n'));
 }

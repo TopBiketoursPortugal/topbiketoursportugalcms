@@ -17,9 +17,7 @@ const { language = 'en', hrefLangs, showRssFeed = false } = Astro.props;
 const { cellPhone, email } = Contact[language];
 ---
 
-<div
-  class="relative hidden justify-between gap-1 overflow-hidden bg-black px-3 py-2 text-sm text-ellipsis whitespace-nowrap text-gray-300 md:flex dark:border-b dark:border-slate-800 dark:bg-slate-950"
->
+<div class="relative hidden justify-between gap-1 overflow-hidden bg-black px-3 py-2 text-sm text-ellipsis whitespace-nowrap text-gray-300 md:flex dark:border-b dark:border-slate-800 dark:bg-slate-950">
   <div class="flex gap-4 text-white dark:text-slate-400">
     <a
       href={'tel:' + cleanPhoneNumberFormatting(cellPhone)}
@@ -32,7 +30,9 @@ const { cellPhone, email } = Contact[language];
       href={'mailto:' + email}
       class="flex flex-row items-center justify-start gap-2"
     >
-      <i class="icon-[ph--envelope-simple-light] h-5 w-5" aria-hidden="true"
+      <i
+        class="icon-[ph--envelope-simple-light] h-5 w-5"
+        aria-hidden="true"
       ></i>
       <span class="whitespace-nowrap">{email}</span>
     </a>
@@ -47,19 +47,17 @@ const { cellPhone, email } = Contact[language];
       }))}
     />
     <ToggleTheme iconClass="w-5 h-5" />
-    {
-      showRssFeed && (
-        <a
-          class="text-gray-300 inline-flex items-center rounded-lg p-1 text-sm hover:text-white focus:ring-4 focus:ring-gray-200 focus:outline-none"
-          aria-label="RSS Feed"
-          href="/feed.xml"
-        >
-          <i
-            class="icon-[ph--rss-light] h-5 w-5 transition-transform duration-150 hover:scale-125"
-            aria-hidden="true"
-          />
-        </a>
-      )
-    }
+    {showRssFeed && (
+      <a
+        class="inline-flex items-center rounded-lg p-1 text-sm text-gray-300 hover:text-white focus:ring-4 focus:ring-gray-200 focus:outline-none"
+        aria-label="RSS Feed"
+        href="/feed.xml"
+      >
+        <i
+          class="icon-[ph--rss-light] h-5 w-5 transition-transform duration-150 hover:scale-125"
+          aria-hidden="true"
+        />
+      </a>
+    )}
   </div>
 </div>

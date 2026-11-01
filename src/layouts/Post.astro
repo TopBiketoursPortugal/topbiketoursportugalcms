@@ -92,20 +92,16 @@ const latestPosts = (
 
 <Layout {...props} breadcrumbs={breadcrumbs}>
   <slot name="head" slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
     <BlogPostingSchema
       title={title}
       date={date}
@@ -117,9 +113,7 @@ const latestPosts = (
     />
   </slot>
   <main class="mx-auto max-w-6xl px-8 py-12 md:py-10">
-    <div
-      class="grid grid-cols-1 gap-10 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]"
-    >
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)]">
       <div>
         <article
           data-pagefind-body
@@ -143,9 +137,7 @@ const latestPosts = (
           >
             {title}
           </h1>
-          <div
-            class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5"
-          >
+          <div class="flex flex-col justify-between py-5 text-sm font-light sm:gap-5">
             <p
               class="post-data-list-item"
               data-editable="text"
@@ -159,19 +151,21 @@ const latestPosts = (
               class="post-data-list-item"
               data-pagefind-meta={`date:${dateObj.toISOString()}`}
             >
-              {
-                dateObj.toLocaleDateString(LanguageData[language].locale, {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })
-              }
+              {dateObj.toLocaleDateString(LanguageData[language].locale, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
             </p>
 
             <div class="flex gap-3">
-              <p>{wordCount}<span> {t('Blog.Detail.Words', language)}</span></p>
               <p>
-                {readingTime}<span> {t('Blog.Detail.Minutes', language)}</span>
+                {wordCount}
+                <span> {t('Blog.Detail.Words', language)}</span>
+              </p>
+              <p>
+                {readingTime}
+                <span> {t('Blog.Detail.Minutes', language)}</span>
               </p>
             </div>
           </div>
@@ -181,86 +175,74 @@ const latestPosts = (
             </Prose>
           </div>
         </article>
-        {
-          articleTours.length > 0 ? (
-            <section
-              class="flex flex-col items-center pt-12"
-              data-pagefind-ignore
-            >
-              <h2 class="text-2xl">
-                {t('Blog.Detail.RelatedTours', language)}
-              </h2>
-              <div class="mt-5 grid gap-5 sm:grid-cols-2">
-                {articleTours.slice(0, 4).map((tour) => (
-                  <div class="max-w-105">
-                    <TourCard
-                      tour={tour.data}
-                      language={language}
-                      contentDisplay="inline"
-                    />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null
-        }
-        {
-          filterdRelatedPosts.length > 0 ? (
-            <section
-              class="flex flex-col items-center pt-12"
-              data-pagefind-ignore
-            >
-              <h2 class="text-2xl">
-                {t('Blog.Detail.RelatedPosts', language)}
-              </h2>
-              <div class="mt-5 grid gap-5 sm:grid-cols-2">
-                {filterdRelatedPosts.slice(0, 2).map((post) => (
-                  <div class="max-w-105">
-                    <PostSummary {...post} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null
-        }
+        {articleTours.length > 0 ? (
+          <section
+            class="flex flex-col items-center pt-12"
+            data-pagefind-ignore
+          >
+            <h2 class="text-2xl">{t('Blog.Detail.RelatedTours', language)}</h2>
+            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+              {articleTours.slice(0, 4).map((tour) => (
+                <div class="max-w-105">
+                  <TourCard
+                    tour={tour.data}
+                    language={language}
+                    contentDisplay="inline"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+        {filterdRelatedPosts.length > 0 ? (
+          <section
+            class="flex flex-col items-center pt-12"
+            data-pagefind-ignore
+          >
+            <h2 class="text-2xl">{t('Blog.Detail.RelatedPosts', language)}</h2>
+            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+              {filterdRelatedPosts.slice(0, 2).map((post) => (
+                <div class="max-w-105">
+                  <PostSummary {...post} />
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
       <aside
         class="blog-sidebar intersect:opacity-100 intersect-once flex flex-col gap-8 sm:sticky sm:top-24 sm:self-start"
         data-pagefind-ignore
       >
-        {
-          allTags.length > 0 && (
-            <div>
-              <h2 class="mb-3 text-lg font-semibold">
-                {t('Blog.Sidebar.Tags', language)}
-              </h2>
-              <div class="flex flex-wrap gap-2">
-                {allTags.map((tag) => (
-                  <a
-                    href={getBlogTagPath(tag, language)}
-                    class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800"
-                  >
-                    {tag.data.name ?? tag.data.title}
-                  </a>
-                ))}
-              </div>
+        {allTags.length > 0 && (
+          <div>
+            <h2 class="mb-3 text-lg font-semibold">
+              {t('Blog.Sidebar.Tags', language)}
+            </h2>
+            <div class="flex flex-wrap gap-2">
+              {allTags.map((tag) => (
+                <a
+                  href={getBlogTagPath(tag, language)}
+                  class="rounded-sm bg-slate-200 px-2 py-1 text-sm first-letter:capitalize dark:bg-slate-800"
+                >
+                  {tag.data.name ?? tag.data.title}
+                </a>
+              ))}
             </div>
-          )
-        }
-        {
-          latestPosts.length > 0 && (
-            <div>
-              <h2 class="mb-3 text-lg font-semibold">
-                {t('Blog.Sidebar.LatestPosts', language)}
-              </h2>
-              <div class="flex flex-col gap-4">
-                {latestPosts.map((post) => (
-                  <SidebarPost {...post} />
-                ))}
-              </div>
+          </div>
+        )}
+        {latestPosts.length > 0 && (
+          <div>
+            <h2 class="mb-3 text-lg font-semibold">
+              {t('Blog.Sidebar.LatestPosts', language)}
+            </h2>
+            <div class="flex flex-col gap-4">
+              {latestPosts.map((post) => (
+                <SidebarPost {...post} />
+              ))}
             </div>
-          )
-        }
+          </div>
+        )}
       </aside>
     </div>
   </main>

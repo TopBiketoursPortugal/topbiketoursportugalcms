@@ -3,7 +3,7 @@ icon: newspaper
 description: Featured stories grid
 value:
   _component: page-sections/featured-posts
-  main_feature: ""
+  main_feature: ''
   feature_list: []
 preview:
   text:

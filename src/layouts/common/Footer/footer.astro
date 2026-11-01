@@ -73,9 +73,7 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
 <footer class="footer-anim intersect:opacity-100 intersect-once mt-16">
   {/* Brand bar — compact single row */}
   <div class="bg-green-700 px-4 py-5 sm:px-6 lg:px-8 dark:bg-green-800">
-    <div
-      class="mx-auto flex max-w-7xl flex-col items-center gap-3 sm:flex-row sm:justify-between"
-    >
+    <div class="mx-auto flex max-w-7xl flex-col items-center gap-3 sm:flex-row sm:justify-between">
       <div class="flex items-center gap-4">
         <Logo class="max-h-10 brightness-0 invert" />
         <p class="hidden text-sm text-green-100 sm:block dark:text-green-200">
@@ -90,31 +88,27 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
 
   {/* Main content — navigation + regions + contact */}
   <div class="bg-gray-900 px-4 pt-10 pb-8 text-gray-300 sm:px-6 lg:px-8">
-    <div
-      class="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
-    >
+    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
       {/* Data-driven nav columns (Pages, Support) */}
-      {
-        navColumns.map(({ text, links: subLinks = [] }) => (
-          <nav aria-label={text}>
-            <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
-              {text}
-            </h3>
-            <ul class="flex flex-col gap-1.5">
-              {subLinks.map(({ href, text: linkText }) => (
-                <li>
-                  <a
-                    class="text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
-                    href={href.toLowerCase()}
-                  >
-                    {linkText}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))
-      }
+      {navColumns.map(({ text, links: subLinks = [] }) => (
+        <nav aria-label={text}>
+          <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+            {text}
+          </h3>
+          <ul class="flex flex-col gap-1.5">
+            {subLinks.map(({ href, text: linkText }) => (
+              <li>
+                <a
+                  class="text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+                  href={href.toLowerCase()}
+                >
+                  {linkText}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
 
       {/* Regions column — small card grid */}
       <div>
@@ -122,16 +116,14 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
           {t('Footer.TourRegionsTitle', language)}
         </h3>
         <div class="grid grid-cols-2 gap-1.5">
-          {
-            regions.map((region) => (
-              <TourRegionsCard
-                region={region}
-                language={language}
-                layout="overlay"
-                imageWidths={[120]}
-              />
-            ))
-          }
+          {regions.map((region) => (
+            <TourRegionsCard
+              region={region}
+              language={language}
+              layout="overlay"
+              imageWidths={[120]}
+            />
+          ))}
         </div>
       </div>
 
@@ -145,15 +137,9 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
     </div>
   </div>
 
-  {
-    /* Discover row — tour tags, rider levels, bike categories spread horizontally */
-  }
-  <div
-    class="border-t border-gray-800 bg-gray-900 px-4 pt-6 pb-10 text-gray-300 sm:px-6 lg:px-8"
-  >
-    <div
-      class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4"
-    >
+  {/* Discover row — tour tags, rider levels, bike categories spread horizontally */}
+  <div class="border-t border-gray-800 bg-gray-900 px-4 pt-6 pb-10 text-gray-300 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4">
       {/* Tour tags */}
       <nav
         aria-label={t('Footer.DiscoverTitle', language)}
@@ -168,25 +154,23 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
           </a>
         </h3>
         <ul class="flex flex-wrap gap-2">
-          {
-            tourTags.map((tag) => (
-              <li>
-                <a
-                  href={getTourTagPath(tag, language)}
-                  class="flex items-center gap-1.5 text-sm text-nowrap transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
-                >
-                  <i
-                    class:list={[
-                      getTagIconClass(tag.data.icon),
-                      'h-3.5 w-3.5 shrink-0 text-gray-500'
-                    ]}
-                    aria-hidden="true"
-                  />
-                  <span>{tag.data.name ?? tag.data.title}</span>
-                </a>
-              </li>
-            ))
-          }
+          {tourTags.map((tag) => (
+            <li>
+              <a
+                href={getTourTagPath(tag, language)}
+                class="flex items-center gap-1.5 text-sm text-nowrap transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+              >
+                <i
+                  class:list={[
+                    getTagIconClass(tag.data.icon),
+                    'h-3.5 w-3.5 shrink-0 text-gray-500'
+                  ]}
+                  aria-hidden="true"
+                />
+                <span>{tag.data.name ?? tag.data.title}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
@@ -201,25 +185,23 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
           </a>
         </h3>
         <ul class="flex flex-wrap gap-2">
-          {
-            riderLevels.map((level) => (
-              <li>
-                <a
-                  href={getRiderLevelPath(level, language)}
-                  class="flex items-center gap-1.5 text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
-                >
-                  <i
-                    class:list={[
-                      getTagIconClass(level.data.icon),
-                      'h-3.5 w-3.5 shrink-0 text-gray-500'
-                    ]}
-                    aria-hidden="true"
-                  />
-                  <span>{level.data.name ?? level.data.title}</span>
-                </a>
-              </li>
-            ))
-          }
+          {riderLevels.map((level) => (
+            <li>
+              <a
+                href={getRiderLevelPath(level, language)}
+                class="flex items-center gap-1.5 text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+              >
+                <i
+                  class:list={[
+                    getTagIconClass(level.data.icon),
+                    'h-3.5 w-3.5 shrink-0 text-gray-500'
+                  ]}
+                  aria-hidden="true"
+                />
+                <span>{level.data.name ?? level.data.title}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
@@ -234,25 +216,23 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
           </a>
         </h3>
         <ul class="flex flex-wrap gap-2">
-          {
-            bikeCategories.map((cat) => (
-              <li>
-                <a
-                  href={getBikeCategoryPath(cat, language)}
-                  class="flex items-center gap-1.5 text-sm transition-colors hover:text-amber-400 focus-visible:text-amber-400 focus-visible:outline-none"
-                >
-                  <i
-                    class:list={[
-                      getTagIconClass(cat.data.icon),
-                      'h-3.5 w-3.5 shrink-0 text-amber-500'
-                    ]}
-                    aria-hidden="true"
-                  />
-                  <span>{cat.data.name ?? cat.data.title}</span>
-                </a>
-              </li>
-            ))
-          }
+          {bikeCategories.map((cat) => (
+            <li>
+              <a
+                href={getBikeCategoryPath(cat, language)}
+                class="flex items-center gap-1.5 text-sm transition-colors hover:text-amber-400 focus-visible:text-amber-400 focus-visible:outline-none"
+              >
+                <i
+                  class:list={[
+                    getTagIconClass(cat.data.icon),
+                    'h-3.5 w-3.5 shrink-0 text-amber-500'
+                  ]}
+                  aria-hidden="true"
+                />
+                <span>{cat.data.name ?? cat.data.title}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
@@ -262,13 +242,11 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
   <div class="bg-gray-950 px-4 py-4 sm:px-6 lg:px-8">
     <div class="mx-auto flex max-w-7xl flex-col gap-4">
       {/* Payment & Partners row */}
-      <div
-        class="flex flex-col items-start gap-4 border-b border-gray-800 pb-4 sm:flex-row sm:items-center sm:justify-between"
-      >
+      <div class="flex flex-col items-start gap-4 border-b border-gray-800 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="flex items-center gap-3">
-          <span class="text-xs font-semibold text-gray-400"
-            >{t('Footer.PaymentTitle', language)}</span
-          >
+          <span class="text-xs font-semibold text-gray-400">
+            {t('Footer.PaymentTitle', language)}
+          </span>
           <div class="flex gap-1.5">
             <i class="icon-[logos--mastercard] h-6 w-6" aria-hidden="true"></i>
             <i class="icon-[logos--visa] h-6 w-6" aria-hidden="true"></i>
@@ -277,23 +255,26 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-xs font-semibold text-gray-400"
-            >{t('Footer.PartnersTitle', language)}</span
-          >
+          <span class="text-xs font-semibold text-gray-400">
+            {t('Footer.PartnersTitle', language)}
+          </span>
           <a
             target="_blank"
             rel="noopener noreferrer"
             title="PRR"
-            href={language === 'pt'
-              ? '/pt/blog/vouchersstartups/'
-              : '/blog/vouchers-for-startups/'}
-            ><Image
+            href={
+              language === 'pt'
+                ? '/pt/blog/vouchersstartups/'
+                : '/blog/vouchers-for-startups/'
+            }
+          >
+            <Image
               src={BARRA_LOGOS_03}
               alt="PRR"
               class="h-8 w-auto object-contain"
               loading="lazy"
-            /></a
-          >
+            />
+          </a>
           <a
             href="https://membership.adventuretravel.biz/directory/9ac4776b417c0a3becf7e58e69c58eef"
             target="_blank"
@@ -323,9 +304,7 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
         </div>
       </div>
       {/* Copyright & Legal row */}
-      <div
-        class="flex flex-col items-center gap-2 text-xs text-gray-500 sm:flex-row sm:justify-between"
-      >
+      <div class="flex flex-col items-center gap-2 text-xs text-gray-500 sm:flex-row sm:justify-between">
         <span>&copy; Top Bike Tours Portugal {year}</span>
         <nav aria-label={t('Footer.LegalNav.Label', language)}>
           <ul class="flex gap-4">
@@ -333,8 +312,9 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
               <a
                 href={termsPagePagePath}
                 class="transition-colors hover:text-gray-300 focus-visible:text-gray-300 focus-visible:outline-none"
-                >{t('TermsAndConditions', language)}</a
               >
+                {t('TermsAndConditions', language)}
+              </a>
             </li>
             <li>
               <a

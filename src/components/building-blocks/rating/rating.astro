@@ -34,36 +34,30 @@ const startDistribution = getStarDistribution(rating);
 ---
 
 <ul class="flex items-center gap-2">
-  {
-    startDistribution.fullStars > 0 &&
-      [...Array(startDistribution.fullStars).keys()].map(() => (
-        <li>
-          <i
-            aria-label="Star rating"
-            class={cn(startIconStyle, 'icon-[ph--star-fill]')}
-          />
-        </li>
-      ))
-  }
-  {
-    startDistribution.halfStars && (
+  {startDistribution.fullStars > 0 &&
+    [...Array(startDistribution.fullStars).keys()].map(() => (
       <li>
         <i
-          aria-label="Half Star rating"
-          class={cn(startIconStyle, 'icon-[ph--star-half-fill]')}
+          aria-label="Star rating"
+          class={cn(startIconStyle, 'icon-[ph--star-fill]')}
         />
       </li>
-    )
-  }
-  {
-    startDistribution.emptyStars > 0 &&
-      [...Array(startDistribution.emptyStars).keys()].map(() => (
-        <li>
-          <i
-            aria-label="Empty Star rating"
-            class={cn(startIconStyle, 'icon-[ph--star-light]')}
-          />
-        </li>
-      ))
-  }
+    ))}
+  {startDistribution.halfStars && (
+    <li>
+      <i
+        aria-label="Half Star rating"
+        class={cn(startIconStyle, 'icon-[ph--star-half-fill]')}
+      />
+    </li>
+  )}
+  {startDistribution.emptyStars > 0 &&
+    [...Array(startDistribution.emptyStars).keys()].map(() => (
+      <li>
+        <i
+          aria-label="Empty Star rating"
+          class={cn(startIconStyle, 'icon-[ph--star-light]')}
+        />
+      </li>
+    ))}
 </ul>

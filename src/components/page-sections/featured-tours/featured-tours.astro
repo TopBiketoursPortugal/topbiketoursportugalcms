@@ -32,44 +32,30 @@ const otherTours = allTours.filter((tour) =>
 );
 ---
 
-{
-  /* Vertical padding is owned by the scoped `section` rule below; a `py-12`
-    here only looked like it applied — the element selector outranks it. */
-}
+{/* Vertical padding is owned by the scoped `section` rule below; a `py-12`
+    here only looked like it applied — the element selector outranks it. */}
 <section class="flex flex-col gap-6">
-  {
-    block.title ? (
-      <div data-editable="text" data-type="block" data-prop="title">
-        <Prose
-          markdown={block.title}
-          class="reveal-up intersect:opacity-100 intersect-once px-6"
-        />
-      </div>
-    ) : null
-  }
-  <div
-    class="featured-tours-grid reveal-stagger intersect:opacity-100 intersect-once grid grid-cols-1 gap-6 md:grid-cols-2"
-  >
-    {
-      mainTour && (
-        <div class="featured-main md:col-span-2">
-          <TourCard
-            tour={mainTour.data}
-            contentDisplay="inline"
-            language={language}
-          />
-        </div>
-      )
-    }
-    {
-      otherTours.map((tour) => (
+  {block.title ? (
+    <div data-editable="text" data-type="block" data-prop="title">
+      <Prose
+        markdown={block.title}
+        class="reveal-up intersect:opacity-100 intersect-once px-6"
+      />
+    </div>
+  ) : null}
+  <div class="featured-tours-grid reveal-stagger intersect:opacity-100 intersect-once grid grid-cols-1 gap-6 md:grid-cols-2">
+    {mainTour && (
+      <div class="featured-main md:col-span-2">
         <TourCard
-          tour={tour.data}
+          tour={mainTour.data}
           contentDisplay="inline"
           language={language}
         />
-      ))
-    }
+      </div>
+    )}
+    {otherTours.map((tour) => (
+      <TourCard tour={tour.data} contentDisplay="inline" language={language} />
+    ))}
   </div>
 </section>
 

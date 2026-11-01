@@ -24,7 +24,12 @@ if (!Astro.props.frontmatter) {
   // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
   throw new Error('Page frontmatter must be defined missing');
 }
-const { frontmatter: props, hrefs = [], class: className, breadcrumbs = [] } = Astro.props;
+const {
+  frontmatter: props,
+  hrefs = [],
+  class: className,
+  breadcrumbs = []
+} = Astro.props;
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 //console.log(hrefs);
@@ -37,20 +42,16 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
   class={cn('flex flex-col gap-3 px-3 py-1 sm:gap-4 sm:p-3', className)}
 >
   <slot name="head" slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
 
   <h1 class="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl">

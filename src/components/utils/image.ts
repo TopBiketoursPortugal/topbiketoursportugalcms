@@ -58,7 +58,8 @@ interface StandardPreparedImageData extends BasePreparedImageData {
 }
 
 export type PreparedImageData =
-  OptimizedPreparedImageData | StandardPreparedImageData;
+  | OptimizedPreparedImageData
+  | StandardPreparedImageData;
 
 interface PrepareImageOptions {
   source?: string;

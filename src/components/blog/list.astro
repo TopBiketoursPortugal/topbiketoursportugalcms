@@ -8,10 +8,10 @@ type Props = {
 const { posts } = Astro.props;
 ---
 
-<div
-  class="blog-grid justify-between gap-5 md:mt-16 md:grid md:grid-cols-2 lg:grid-cols-3"
->
-  {posts.map((post) => <PostSummary {...post} />)}
+<div class="blog-grid justify-between gap-5 md:mt-16 md:grid md:grid-cols-2 lg:grid-cols-3">
+  {posts.map((post) => (
+    <PostSummary {...post} />
+  ))}
 </div>
 
 <style>

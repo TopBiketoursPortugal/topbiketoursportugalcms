@@ -12,10 +12,10 @@ content_blocks:
     # already covers them (hero, features/item-grid, featured-testimonials,
     # accordion, left-right/two-column-markdown). The components stay in the
     # repo and registered — delete a line here to re-enable one.
-    - "!/src/components/page-sections/heroes/hero-center/hero-center.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/heroes/hero-split/hero-split.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/features/feature-grid/feature-grid.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/features/feature-slider/feature-slider.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/features/feature-split/feature-split.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/people/testimonial-section/testimonial-section.cloudcannon.structure-value.yml"
-    - "!/src/components/page-sections/info-blocks/faq-section/faq-section.cloudcannon.structure-value.yml"
+    - '!/src/components/page-sections/heroes/hero-center/hero-center.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/heroes/hero-split/hero-split.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/features/feature-grid/feature-grid.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/features/feature-slider/feature-slider.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/features/feature-split/feature-split.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/people/testimonial-section/testimonial-section.cloudcannon.structure-value.yml'
+    - '!/src/components/page-sections/info-blocks/faq-section/faq-section.cloudcannon.structure-value.yml'

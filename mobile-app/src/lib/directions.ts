@@ -37,7 +37,8 @@ const ORS_TYPE_TO_TURN: Record<number, Maneuver['turn'] | null> = {
 
 export type DirectionsError = 'no-key' | 'network' | 'no-route';
 export type DirectionsResult =
-  { ok: true; route: PrecomputedTrack } | { ok: false; error: DirectionsError };
+  | { ok: true; route: PrecomputedTrack }
+  | { ok: false; error: DirectionsError };
 
 // Minimal shape of the ORS directions/geojson response — only the fields we read.
 interface OrsStep {

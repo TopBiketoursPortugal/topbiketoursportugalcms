@@ -37,28 +37,32 @@ alignmentHorizontal:
       - center
       - end
 slidesToScroll:
-  comment: Number of slides to scroll at a time, or "auto" to scroll by the number
-    of visible slides.
+  comment:
+    Number of slides to scroll at a time, or "auto" to scroll by the number of
+    visible slides.
   type: select
   options:
     values:
       - auto
-      - "1"
-      - "2"
-      - "3"
-      - "4"
+      - '1'
+      - '2'
+      - '3'
+      - '4'
 slideWidthPercent:
-  comment: Width of each slide as a percentage of the carousel (e.g., 33, 50, 100).
+  comment:
+    Width of each slide as a percentage of the carousel (e.g., 33, 50, 100).
   type: range
   options:
     min: 0
     max: 100
     step: 1
 minSlideWidth:
-  comment: Minimum width of slides in pixels. Prevents slides from getting too small.
+  comment:
+    Minimum width of slides in pixels. Prevents slides from getting too small.
   type: number
 gap:
-  comment: The gap between slides. Only visible when slides are narrower than the
+  comment:
+    The gap between slides. Only visible when slides are narrower than the
     viewport.
   type: select
   options:

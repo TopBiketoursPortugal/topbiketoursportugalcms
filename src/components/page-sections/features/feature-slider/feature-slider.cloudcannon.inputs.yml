@@ -18,7 +18,7 @@ slides:
           icon: view_carousel
           value:
             _component: page-sections/features/feature-slider/feature-slider-item
-            eyebrow: ""
+            eyebrow: ''
             title: Slide title
             description: Short description for this slide.
             imageSource: /src/assets/images/component-docs/sunset.jpg
@@ -46,7 +46,7 @@ slides:
               options:
                 paths:
                   uploads: src/assets/images
-                  static: ""
+                  static: ''
                 resize_style: contain
                 width: 1920
                 height: 1280

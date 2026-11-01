@@ -1,23 +1,23 @@
 ---
-import Component from "@components/utils/renderBlock.astro";
-import { slugifyLabel } from "@components/utils/slugify";
+import Component from '@components/utils/renderBlock.astro';
+import { slugifyLabel } from '@components/utils/slugify';
 
 const {
-  direction = "row",
-  alignmentHorizontal = "start",
+  direction = 'row',
+  alignmentHorizontal = 'start',
   buttonSections,
-  "data-children-prop": childrenDataProp,
+  'data-children-prop': childrenDataProp,
   useDefaultEditableBinding = false,
-  class: className,
+  'class': className,
   label,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "buttonSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'buttonSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 
 if (!htmlAttributes.id && label) {
@@ -25,36 +25,36 @@ if (!htmlAttributes.id && label) {
 }
 
 const alignMap = {
-  start: "align-start",
-  center: "align-center",
-  end: "align-end",
+  start: 'align-start',
+  center: 'align-center',
+  end: 'align-end'
 } as const;
 
-const alignClass = alignMap[alignmentHorizontal as keyof typeof alignMap] ?? "align-start";
+const alignClass =
+  alignMap[alignmentHorizontal as keyof typeof alignMap] ?? 'align-start';
 
 const hasButtonSections = buttonSections?.length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 
 if (!_component && !hasButtonSections && !hasSlotContent) return;
 ---
 
-<div
-  class:list={["button-group", className]}
-  {...htmlAttributes}
->
+<div class:list={['button-group', className]} {...htmlAttributes}>
   <div
-    class:list={["button-group__items", direction === "column" ? "column" : "row", alignClass]}
+    class:list={[
+      'button-group__items',
+      direction === 'column' ? 'column' : 'row',
+      alignClass
+    ]}
     {...arrayDataAttributes}
   >
     <slot>
-      {
-        buttonSections && buttonSections.length > 0 && (
-          <Component
-            contentSections={buttonSections}
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-          />
-        )
-      }
+      {buttonSections && buttonSections.length > 0 && (
+        <Component
+          contentSections={buttonSections}
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+        />
+      )}
     </slot>
   </div>
 </div>

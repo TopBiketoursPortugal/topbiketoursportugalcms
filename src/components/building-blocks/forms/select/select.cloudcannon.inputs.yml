@@ -6,8 +6,9 @@ name:
   comment: A unique name attribute for the select field.
   options:
     required: true
-    required_message: Only form elements with a name will have their values passed
-      when submitting a form.
+    required_message:
+      Only form elements with a name will have their values passed when
+      submitting a form.
 required:
   type: switch
   comment: Whether the field is required.
@@ -26,7 +27,8 @@ value:
   comment: The default selected value.
 iconName:
   type: select
-  comment: The name of an optional leading icon. Sourced from
+  comment:
+    The name of an optional leading icon. Sourced from
     [Heroicons](https://heroicons.com/). See the Icon component documentation
     for more information.
   options:
@@ -39,7 +41,7 @@ iconName:
 iconColor:
   type: select
   comment: The color of the icon.
-  hidden: "!iconName"
+  hidden: '!iconName'
   options:
     values:
       - id: default

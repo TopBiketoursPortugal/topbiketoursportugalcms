@@ -46,22 +46,18 @@ const breadcrumbs: BreadcrumbItem[] = isHomePage
   : [getHomeCrumb(language), { name: page.data.title, url: pagePath }];
 ---
 
-{
-  template === '~/layouts/Contacts.astro' ? (
-    <ContactLayout
-      frontmatter={page.data as any}
-      hrefs={hrefs}
-      breadcrumbs={breadcrumbs}
-    />
-  ) : null
-}
-{
-  template === '~/layouts/Page.astro' ? (
-    <PageLayout
-      frontmatter={page.data as any}
-      hrefs={hrefs}
-      breadcrumbs={breadcrumbs}
-      isHomePage={isHomePage}
-    />
-  ) : null
-}
+{template === '~/layouts/Contacts.astro' ? (
+  <ContactLayout
+    frontmatter={page.data as any}
+    hrefs={hrefs}
+    breadcrumbs={breadcrumbs}
+  />
+) : null}
+{template === '~/layouts/Page.astro' ? (
+  <PageLayout
+    frontmatter={page.data as any}
+    hrefs={hrefs}
+    breadcrumbs={breadcrumbs}
+    isHomePage={isHomePage}
+  />
+) : null}

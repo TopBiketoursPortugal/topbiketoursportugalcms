@@ -397,19 +397,12 @@
                 "description": "This key defines which order an option in the *Sort* dropdown should use to sort files in your *Collection browser*.\n\nCloudCannon will sort files according to the value of `sort_options[*].key` for each option in the *Sort* dropdown.\n\n## Examples\n\nIn this example, the \"Author (A-Z)\" option in the *Sort* dropdown will sort files in the `blog` *Collection browser* in ascending order.\n\n```yaml\ncollections_config:\n  blog:\n    sort_options:\n      - key: author\n        order: ascending\n        label: Author (A-Z)\n```",
                 "default": "ascending",
                 "type": "string",
-                "enum": [
-                  "ascending",
-                  "descending",
-                  "asc",
-                  "desc"
-                ],
+                "enum": ["ascending", "descending", "asc", "desc"],
                 "title": "order",
                 "markdownDescription": "This key defines which order an option in the *Sort* dropdown should use to sort files in your *Collection browser*.\n\nCloudCannon will sort files according to the value of `sort_options[*].key` for each option in the *Sort* dropdown.\n\n## Examples\n\nIn this example, the \"Author (A-Z)\" option in the *Sort* dropdown will sort files in the `blog` *Collection browser* in ascending order.\n\n```yaml\ncollections_config:\n  blog:\n    sort_options:\n      - key: author\n        order: ascending\n        label: Author (A-Z)\n```"
               }
             },
-            "required": [
-              "key"
-            ],
+            "required": ["key"],
             "additionalProperties": false,
             "title": "SortOption",
             "description": "This key represents a sort option for a Collection.",
@@ -424,11 +417,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "card",
-              "list",
-              "gallery"
-            ],
+            "enum": ["card", "list", "gallery"],
             "title": "view_options[*]",
             "description": "This key represents an individual view option string in the `collections_config.*.view_options` array.\n\nThe value is a string that specifies a view option for the View dropdown in the *Collection browser*. The first option listed is used as the default view.\n\n## Examples\n\nIn this example, we have configured a view option for the `developer_articles` Collection.\n\n```yaml\ncollections_config:\n  developer_articles:\n    path: developer/articles\n    icon: article\n    view_options:\n      - card\n```",
             "markdownDescription": "This key represents an individual view option string in the `collections_config.*.view_options` array.\n\nThe value is a string that specifies a view option for the View dropdown in the *Collection browser*. The first option listed is used as the default view.\n\n## Examples\n\nIn this example, we have configured a view option for the `developer_articles` Collection.\n\n```yaml\ncollections_config:\n  developer_articles:\n    path: developer/articles\n    icon: article\n    view_options:\n      - card\n```"
@@ -533,9 +522,7 @@
                     "markdownDescription": "This key defines the link for a URL option in the *\\+ Add* button dropdown.\n\nThe value is a string that specifies a URL. Values can be an external URL or an internal URL relative to the current Site.\n\nThis key is required for URL add options in the `collections_config.*.add_options` array.\n\n## Examples\n\nIn this example, the *\\+ Add* button dropdown in the `team` *Collection browser* uses a link option with the URL `https://forms.gle/xxxxxxx`.\n\n```yaml\ncollections_config:\n  team:\n    add_options:\n      - name: Submit Form\n        icon: assignment_add\n        href: https://forms.gle/xxxxxxx\n```"
                   }
                 },
-                "required": [
-                  "href"
-                ],
+                "required": ["href"],
                 "additionalProperties": false,
                 "title": "HREF Add Option",
                 "description": "This key represents the URL add option object in a `collections_config.*.add_options` array.\n\nThe value is an object that defines an option available in the *+ Add* button dropdown at the top right of the *Collection browser*. URL add options must contain a required `href` key and can contain optional `name` and `icon` keys.\n\n## Examples\n\nIn this example, the *\\+ Add* button dropdown in the `team` *Collection browser* has a link to the Office Locations page on our live website.\n\n```yaml\ncollections_config:\n  team:\n    add_options:\n      - name: Office Locations\n        icon: map\n        href: /our-offices\n```",
@@ -721,9 +708,7 @@
                 "title": "_editables_from_glob"
               }
             },
-            "required": [
-              "path"
-            ],
+            "required": ["path"],
             "additionalProperties": false,
             "title": "Schema",
             "description": "This key defines your schemas, which are the structured data formats for your content files.",
@@ -813,9 +798,7 @@
           "title": "_editables_from_glob"
         }
       },
-      "required": [
-        "path"
-      ],
+      "required": ["path"],
       "additionalProperties": false,
       "title": "Collection Config",
       "description": "This key defines your Collections, which are the sets of content files for your site grouped by folder.",
@@ -4471,9 +4454,7 @@
           "markdownDescription": "The icon displayed next to the link."
         }
       },
-      "required": [
-        "url"
-      ],
+      "required": ["url"],
       "additionalProperties": false,
       "title": "Documentation",
       "description": "Configuration for documentation links displayed in the CloudCannon interface.",
@@ -4481,11 +4462,7 @@
     },
     "EditorKey": {
       "type": "string",
-      "enum": [
-        "visual",
-        "content",
-        "data"
-      ],
+      "enum": ["visual", "content", "data"],
       "title": "Editor Key",
       "description": "The available editors in CloudCannon: visual, content, and data editors.",
       "markdownDescription": "The available editors in CloudCannon: visual, content, and data editors."
@@ -4810,9 +4787,7 @@
           "markdownDescription": "Options that are specific to Text Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Text Input",
       "description": "Provides a simple editing interface for plain text.",
@@ -4904,10 +4879,7 @@
       "title": "Instance Value",
       "description": "Controls if and how the value of this input is instantiated when created. This occurs when creating files, or adding array items containing the configured input.",
       "type": "string",
-      "enum": [
-        "UUID",
-        "NOW"
-      ],
+      "enum": ["UUID", "NOW"],
       "markdownDescription": "Controls if and how the value of this input is instantiated when created. This occurs when creating files, or adding array items containing the configured input."
     },
     "type._inputs.*.disable_instance_value_rehydration": {
@@ -5082,10 +5054,7 @@
       "default": "null",
       "description": "Set how an 'empty' value will be saved. Does not apply to existing empty values.",
       "type": "string",
-      "enum": [
-        "null",
-        "string"
-      ],
+      "enum": ["null", "string"],
       "title": "empty_type(all-of-0)",
       "markdownDescription": "Set how an 'empty' value will be saved. Does not apply to existing empty values."
     },
@@ -5135,9 +5104,7 @@
           "title": "Key Value"
         }
       },
-      "required": [
-        "key"
-      ],
+      "required": ["key"],
       "additionalProperties": false,
       "title": "Key"
     },
@@ -5149,9 +5116,7 @@
           "title": "Template Value"
         }
       },
-      "required": [
-        "template"
-      ],
+      "required": ["template"],
       "additionalProperties": false,
       "title": "Template"
     },
@@ -5163,9 +5128,7 @@
           "title": "Text Value"
         }
       },
-      "required": [
-        "text"
-      ],
+      "required": ["text"],
       "additionalProperties": false,
       "title": "Text"
     },
@@ -5312,9 +5275,7 @@
           "markdownDescription": "Options that are specific to Textarea Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Textarea Input",
       "description": "Provides an editing interface for plain text.",
@@ -5487,9 +5448,7 @@
           "markdownDescription": "Options that are specific to Code Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Code Input",
       "description": "Provides an editing interface for code or mono-spaced plain text content.",
@@ -5719,12 +5678,7 @@
             "format": {
               "description": "Sets what format the color value is saved as. Defaults to the naming convention, or HEX if that is unset.",
               "type": "string",
-              "enum": [
-                "rgb",
-                "hex",
-                "hsl",
-                "hsv"
-              ],
+              "enum": ["rgb", "hex", "hsl", "hsv"],
               "title": "format",
               "markdownDescription": "Sets what format the color value is saved as. Defaults to the naming convention, or HEX if that is unset."
             },
@@ -5754,9 +5708,7 @@
           "markdownDescription": "Options that are specific to Color Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Color Input",
       "description": "Provides an editing interface for color values.",
@@ -5806,18 +5758,13 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "checkbox",
-            "switch"
-          ],
+          "enum": ["checkbox", "switch"],
           "title": "Type",
           "description": "Sets an input type, which controls how this input appears and behaves.",
           "markdownDescription": "Sets an input type, which controls how this input appears and behaves."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Boolean Input",
       "description": "Provides an editing interface for true or false values.",
@@ -5921,9 +5868,7 @@
           "markdownDescription": "Options that are specific to Number Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Number Input",
       "description": "Provides an editing interface for numeric values.",
@@ -5933,10 +5878,7 @@
       "default": "null",
       "description": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values.",
       "type": "string",
-      "enum": [
-        "null",
-        "number"
-      ],
+      "enum": ["null", "number"],
       "title": "empty_type(all-of-0)",
       "markdownDescription": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values."
     },
@@ -6052,19 +5994,14 @@
               "$ref": "#/definitions/type._inputs.*.options.max_message"
             }
           },
-          "required": [
-            "min",
-            "max"
-          ],
+          "required": ["min", "max"],
           "additionalProperties": false,
           "description": "Options that are specific to Range Inputs.",
           "title": "options",
           "markdownDescription": "Options that are specific to Range Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Range Input",
       "description": "Provides a slider interface for selecting a numeric value.",
@@ -6114,10 +6051,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "html",
-            "markdown"
-          ],
+          "enum": ["html", "markdown"],
           "title": "Type",
           "description": "Sets an input type, which controls how this input appears and behaves.",
           "markdownDescription": "Sets an input type, which controls how this input appears and behaves."
@@ -6358,9 +6292,7 @@
           "markdownDescription": "Options that are specific to Rich Text Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Rich Text Input",
       "description": "Provides an editing interface for HTML markup content.",
@@ -6370,11 +6302,7 @@
       "title": "Mime Type",
       "description": "Sets the format images are converted to prior to upload. The extension of the file is updated to match. Defaults to keeping the mime type of the uploaded file.",
       "type": "string",
-      "enum": [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-      ],
+      "enum": ["image/jpeg", "image/png", "image/webp"],
       "markdownDescription": "Sets the format images are converted to prior to upload. The extension of the file is updated to match. Defaults to keeping the mime type of the uploaded file."
     },
     "type._inputs.*.options.resize_style": {
@@ -6382,12 +6310,7 @@
       "description": "Sets how uploaded image files are resized with a bounding box defined by width and height prior to upload. Has no effect when selecting existing images, or if width and height are unset.",
       "default": "contain",
       "type": "string",
-      "enum": [
-        "cover",
-        "contain",
-        "stretch",
-        "crop"
-      ],
+      "enum": ["cover", "contain", "stretch", "crop"],
       "markdownDescription": "Sets how uploaded image files are resized with a bounding box defined by width and height prior to upload. Has no effect when selecting existing images, or if width and height are unset."
     },
     "type._inputs.*.options.width": {
@@ -6453,9 +6376,7 @@
             "markdownDescription": "A reference to another input that is given the path to this additional image file."
           }
         },
-        "required": [
-          "size"
-        ],
+        "required": ["size"],
         "additionalProperties": false,
         "title": "sizes[*]"
       },
@@ -6743,9 +6664,7 @@
           "markdownDescription": "Options that are specific to URL Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "URL Input",
       "description": "Provides an editing interface for relative, absolute, and fully qualified URLs.",
@@ -7515,9 +7434,7 @@
           "markdownDescription": "Options that are specific to Select Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Select Input",
       "description": "Provides an editing interface for data with multiple predefined options. Select inputs only allow one value.",
@@ -7673,12 +7590,7 @@
     "preview.gallery.fit": {
       "default": "padded",
       "type": "string",
-      "enum": [
-        "padded",
-        "cover",
-        "contain",
-        "cover-top"
-      ],
+      "enum": ["padded", "cover", "contain", "cover-top"],
       "title": "fit"
     },
     "type.preview.gallery.background_color": {
@@ -7777,24 +7689,14 @@
     "type._inputs.*.options.view": {
       "description": "Controls how selected items are rendered.",
       "type": "string",
-      "enum": [
-        "card",
-        "text",
-        "gallery",
-        "gallery-left"
-      ],
+      "enum": ["card", "text", "gallery", "gallery-left"],
       "title": "view",
       "markdownDescription": "Controls how selected items are rendered."
     },
     "type._inputs.*.options.picker_view": {
       "description": "Controls how selectable options are rendered.",
       "type": "string",
-      "enum": [
-        "card",
-        "text",
-        "gallery",
-        "gallery-left"
-      ],
+      "enum": ["card", "text", "gallery", "gallery-left"],
       "title": "picker_view",
       "markdownDescription": "Controls how selectable options are rendered."
     },
@@ -8000,10 +7902,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "date",
-            "datetime"
-          ],
+          "enum": ["date", "datetime"],
           "title": "Type",
           "description": "Sets an input type, which controls how this input appears and behaves.",
           "markdownDescription": "Sets an input type, which controls how this input appears and behaves."
@@ -8086,9 +7985,7 @@
           "markdownDescription": "Options that are specific to Date Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Date Input",
       "description": "Provides an editing interface for date and/or time values.",
@@ -8768,9 +8665,7 @@
           "markdownDescription": "Options that are specific to Time Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Time Input",
       "description": "Provides an editing interface for time values only.",
@@ -8820,11 +8715,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "file",
-            "document",
-            "image"
-          ],
+          "enum": ["file", "document", "image"],
           "title": "Type",
           "description": "Sets an input type, which controls how this input appears and behaves.",
           "markdownDescription": "Sets an input type, which controls how this input appears and behaves."
@@ -8957,9 +8848,7 @@
           "markdownDescription": "Options that are specific to File Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "File Input",
       "description": "Provides an editing interface for uploading files to your repository or DAM and browsing existing assets.",
@@ -9090,9 +8979,7 @@
           "markdownDescription": "Options that are specific to Multiselect Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Multiselect Input",
       "description": "Provides an editing interface for data with multiple predefined options. Multiselect inputs allow several values.",
@@ -9138,10 +9025,7 @@
       "default": "null",
       "description": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values.",
       "type": "string",
-      "enum": [
-        "null",
-        "array"
-      ],
+      "enum": ["null", "array"],
       "title": "empty_type(all-of-0)",
       "markdownDescription": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values."
     },
@@ -9297,9 +9181,7 @@
           "markdownDescription": "Options that are specific to Choice Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Choice Input",
       "description": "Provides an editing interface for data with multiple predefined options. Choice inputs only allow one value.",
@@ -9427,9 +9309,7 @@
           "markdownDescription": "Options that are specific to Multichoice Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Multichoice Input",
       "description": "Provides an editing interface for data with multiple predefined options. Multichoice inputs allow several values.",
@@ -9513,11 +9393,7 @@
               "description": "Changes the appearance and behavior of the input.",
               "default": "object",
               "type": "string",
-              "enum": [
-                "object",
-                "mutable",
-                "tabbed"
-              ],
+              "enum": ["object", "mutable", "tabbed"],
               "title": "subtype",
               "markdownDescription": "Changes the appearance and behavior of the input."
             },
@@ -9652,11 +9528,7 @@
             "view": {
               "description": "Controls how object previews are rendered.",
               "type": "string",
-              "enum": [
-                "card",
-                "gallery",
-                "gallery-left"
-              ],
+              "enum": ["card", "gallery", "gallery-left"],
               "title": "view",
               "markdownDescription": "Controls how object previews are rendered."
             },
@@ -9680,9 +9552,7 @@
           "markdownDescription": "Options that are specific to Object Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Object Input",
       "description": "Provides a user interface for a group of inputs.",
@@ -9692,10 +9562,7 @@
       "default": "null",
       "description": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values.",
       "type": "string",
-      "enum": [
-        "null",
-        "object"
-      ],
+      "enum": ["null", "object"],
       "title": "empty_type(all-of-0)",
       "markdownDescription": "Set how an ‘empty’ value will be saved. Does not apply to existing empty values."
     },
@@ -9762,10 +9629,7 @@
           "description": "Defines whether options are shown to your editors in a select menu (select, default) or a modal pop up window (modal) when adding a new item.",
           "default": "select",
           "type": "string",
-          "enum": [
-            "select",
-            "modal"
-          ],
+          "enum": ["select", "modal"],
           "title": "style",
           "markdownDescription": "Defines whether options are shown to your editors in a select menu (select, default) or a modal pop up window (modal) when adding a new item."
         }
@@ -9995,9 +9859,7 @@
           "markdownDescription": "Provides a custom link for documentation for editors shown in the Data Editor for expanded values matching this Structure value. Has no default."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "additionalProperties": false,
       "title": "Structure Value",
       "description": "A single value option within a structure, defining the data format and appearance for content editors.",
@@ -10205,9 +10067,7 @@
           "markdownDescription": "Options that are specific to Array Inputs."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Array Input",
       "description": "Provides a user interface for lists of inputs or input groups.",
@@ -10289,9 +10149,7 @@
           "markdownDescription": "Options that are specific to this `type` of input."
         }
       },
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "additionalProperties": false,
       "title": "Automatic Input",
       "description": "Provides a default user interface based on the data contained.",
@@ -10855,10 +10713,7 @@
           "markdownDescription": "This key defines the Collections displayed in a group in the *Site Navigation*.\n\nThe value is an array of Collection key name strings, matching the keys defined in `collections_config`.\n\nThis key is required for each group entry in the `collection_groups` array.\n\n## Examples\n\nIn this example, we have configured two Collection groups with collections arrays.\n\n```yaml\ncollection_groups:\n  - heading: Content\n    collections:\n      - pages\n      - blog\n  - heading: Data Files\n    collections:\n      - data\n```"
         }
       },
-      "required": [
-        "heading",
-        "collections"
-      ],
+      "required": ["heading", "collections"],
       "additionalProperties": false,
       "title": "Collection Group",
       "description": "This key represents an individual group entry in the `collection_groups` array.\n\nThe value defines a group of Collections displayed in the *Site Navigation*. Each group entry must contain a `heading` key and a `collections` key.\n\n## Examples\n\nIn this example, we have configured two Collection groups with a heading and collections array.\n\n```yaml\ncollection_groups:\n  - heading: Content\n    collections:\n      - pages\n      - blog\n  - heading: Data Files\n    collections:\n      - data\n```",
@@ -10892,9 +10747,7 @@
           "markdownDescription": "This key defines the path to a file or folder of files containing data.\n\n## Examples\n\nIn this example, we have configured data config paths for both a CSV file and a folder of files.\n\n```yaml\ndata_config___1___:\n  authors:\n    path___2___: data/authors.csv\n  offices:\n    path___3___: data/offices\n```"
         }
       },
-      "required": [
-        "path"
-      ],
+      "required": ["path"],
       "additionalProperties": false,
       "title": "data_config.*",
       "description": "This key defines what data sets are available to populate *Select Inputs*.\n\n## Examples\n\nIn this example, we have configured data config entries for both a CSV file and a folder of files.\n\n```yaml\ndata_config___1___:\n  authors:\n    path___2___: data/authors.csv\n  offices:\n    path___3___: data/offices\n```",
@@ -10986,9 +10839,7 @@
           "title": "_editables_from_glob"
         }
       },
-      "required": [
-        "glob"
-      ],
+      "required": ["glob"],
       "additionalProperties": false,
       "title": "file_config[*]",
       "description": "This key defines scope to configure at a file level, without adding configuration to files.",
@@ -11001,9 +10852,7 @@
           "$ref": "#/definitions/editor.default_path"
         }
       },
-      "required": [
-        "default_path"
-      ],
+      "required": ["default_path"],
       "additionalProperties": false,
       "title": "editor",
       "description": "This key defines settings for the default editor actions on your site.",
@@ -11132,10 +10981,7 @@
           "description": "This key defines which Markdown processing engine CloudCannon will use to convert between HTML and Markdown.\n\n## Examples\n\nIn this example, we have configured CloudCannon to use the `kramdown` Markdown engine.\n\n```yaml\nmarkdown:\n  engine: kramdown\n```\n\nIn this example, we have configured CloudCannon to use the `commonmark` Markdown engine with custom options.\n\n```yaml\nmarkdown:\n  engine: commonmark\n  options:\n    html: true\n    breaks: true\n```",
           "default": "commonmark",
           "type": "string",
-          "enum": [
-            "commonmark",
-            "kramdown"
-          ],
+          "enum": ["commonmark", "kramdown"],
           "title": "engine",
           "markdownDescription": "This key defines which Markdown processing engine CloudCannon will use to convert between HTML and Markdown.\n\n## Examples\n\nIn this example, we have configured CloudCannon to use the `kramdown` Markdown engine.\n\n```yaml\nmarkdown:\n  engine: kramdown\n```\n\nIn this example, we have configured CloudCannon to use the `commonmark` Markdown engine with custom options.\n\n```yaml\nmarkdown:\n  engine: commonmark\n  options:\n    html: true\n    breaks: true\n```"
         },
@@ -11206,10 +11052,7 @@
             "code_block_fences": {
               "description": "This key defines which style of code block fences CloudCannon will use when converting HTML to Markdown.\n\nThe value can be `\\`\\`\\`` (three backticks) or `~~~` (three tildes).\n\n## Examples\n\nIn this example, we have configured Markdown to use tildes for code block fences.\n\n```yaml\nmarkdown:\n  engine: commonmark\n  options:\n    code_block_fences: '~~~'\n```",
               "type": "string",
-              "enum": [
-                "```",
-                "~~~"
-              ],
+              "enum": ["```", "~~~"],
               "title": "code_block_fences",
               "markdownDescription": "This key defines which style of code block fences CloudCannon will use when converting HTML to Markdown.\n\nThe value can be `\\`\\`\\`` (three backticks) or `~~~` (three tildes).\n\n## Examples\n\nIn this example, we have configured Markdown to use tildes for code block fences.\n\n```yaml\nmarkdown:\n  engine: commonmark\n  options:\n    code_block_fences: '~~~'\n```"
             },
@@ -11414,11 +11257,7 @@
             "view": {
               "deprecated": true,
               "type": "string",
-              "enum": [
-                "card",
-                "inline",
-                "gallery"
-              ],
+              "enum": ["card", "inline", "gallery"],
               "title": "view"
             }
           },
@@ -11455,11 +11294,7 @@
         "view": {
           "description": "Controls how selected items are rendered. Defaults to 'card', or 'inline' if `inline` is true.",
           "type": "string",
-          "enum": [
-            "card",
-            "inline",
-            "gallery"
-          ],
+          "enum": ["card", "inline", "gallery"],
           "title": "view",
           "markdownDescription": "Controls how selected items are rendered. Defaults to 'card', or 'inline' if `inline` is true."
         },
@@ -11522,10 +11357,7 @@
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Argument List Parser Config"
               },
@@ -11551,10 +11383,7 @@
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Argument Parser Config"
               },
@@ -11637,10 +11466,7 @@
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Content Parser Config"
               },
@@ -11669,16 +11495,12 @@
                         "$ref": "#/definitions/type.snippet-style"
                       }
                     },
-                    "required": [
-                      "models"
-                    ],
+                    "required": ["models"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser"
-                ],
+                "required": ["parser"],
                 "additionalProperties": false,
                 "title": "Key Value List Parser Config"
               },
@@ -11713,17 +11535,12 @@
                         "title": "format"
                       }
                     },
-                    "required": [
-                      "literal"
-                    ],
+                    "required": ["literal"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Literal Parser Config"
               },
@@ -11747,17 +11564,12 @@
                         "title": "remove_empty"
                       }
                     },
-                    "required": [
-                      "snippet"
-                    ],
+                    "required": ["snippet"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Optional Parser Config"
               },
@@ -11789,17 +11601,12 @@
                         "title": "editor_key"
                       }
                     },
-                    "required": [
-                      "literal"
-                    ],
+                    "required": ["literal"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Repeating Literal Parser Config"
               },
@@ -11838,17 +11645,12 @@
                         "title": "optional"
                       }
                     },
-                    "required": [
-                      "snippet"
-                    ],
+                    "required": ["snippet"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Repeating Parser Config"
               },
@@ -11875,17 +11677,12 @@
                         "$ref": "#/definitions/type.snippet-style"
                       }
                     },
-                    "required": [
-                      "snippet"
-                    ],
+                    "required": ["snippet"],
                     "additionalProperties": false,
                     "title": "options"
                   }
                 },
-                "required": [
-                  "parser",
-                  "options"
-                ],
+                "required": ["parser", "options"],
                 "additionalProperties": false,
                 "title": "Wrapper Parser Config"
               }
@@ -11933,13 +11730,7 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "array",
-            "object",
-            "string",
-            "boolean",
-            "number"
-          ],
+          "enum": ["array", "object", "string", "boolean", "number"],
           "title": "type"
         },
         "allowed_values": {
@@ -12152,9 +11943,7 @@
           "title": "ref"
         }
       },
-      "required": [
-        "ref"
-      ],
+      "required": ["ref"],
       "additionalProperties": false,
       "title": "Snippet Reference"
     },
@@ -12164,11 +11953,7 @@
       "properties": {
         "output": {
           "type": "string",
-          "enum": [
-            "legacy",
-            "inline",
-            "block"
-          ],
+          "enum": ["legacy", "inline", "block"],
           "title": "output"
         },
         "between": {
@@ -12256,9 +12041,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12269,9 +12052,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12315,9 +12096,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12328,9 +12107,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12350,9 +12127,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12363,9 +12138,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12385,9 +12158,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12398,9 +12169,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12420,9 +12189,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12433,9 +12200,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12455,9 +12220,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12468,9 +12231,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12490,9 +12251,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12503,9 +12262,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12525,9 +12282,7 @@
               "$ref": "#/definitions/SnippetImportExclude"
             }
           },
-          "required": [
-            "exclude"
-          ],
+          "required": ["exclude"],
           "additionalProperties": false,
           "title": "Exclude List"
         },
@@ -12538,9 +12293,7 @@
               "$ref": "#/definitions/SnippetImportInclude"
             }
           },
-          "required": [
-            "include"
-          ],
+          "required": ["include"],
           "additionalProperties": false,
           "title": "Include List"
         }
@@ -12659,9 +12412,7 @@
           "markdownDescription": "The value for this option."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "additionalProperties": false,
       "title": "Snippet Definition Select Value",
       "description": "A value option for select inputs, typically used in language lists.",

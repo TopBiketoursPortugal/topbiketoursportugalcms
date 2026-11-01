@@ -1,6 +1,7 @@
 text:
-  comment: The content for the text component (Markdown format). Leave empty to
-    use slot content instead.
+  comment:
+    The content for the text component (Markdown format). Leave empty to use
+    slot content instead.
   type: markdown
   options:
     blockquote: false

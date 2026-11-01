@@ -20,38 +20,24 @@ const defaultValue = value ?? min;
 const initialPct = ((defaultValue - min) / (max - min)) * 100;
 ---
 
-<div
-  class:list={["range", className]}
-  {...htmlAttributes}
->
-  {
-    label && (
-      <div class="range-header">
-        <label
-          for={fieldId}
-          class="label"
-        >
-          {label}
-          {required && (
-            <span
-              class="range-required"
-              aria-label="required"
-            >
-              *
-            </span>
-          )}
-        </label>
-        {showValue && (
-          <output
-            class="range-value"
-            for={fieldId}
-          >
-            {defaultValue}
-          </output>
+<div class:list={['range', className]} {...htmlAttributes}>
+  {label && (
+    <div class="range-header">
+      <label for={fieldId} class="label">
+        {label}
+        {required && (
+          <span class="range-required" aria-label="required">
+            *
+          </span>
         )}
-      </div>
-    )
-  }
+      </label>
+      {showValue && (
+        <output class="range-value" for={fieldId}>
+          {defaultValue}
+        </output>
+      )}
+    </div>
+  )}
   <input
     type="range"
     name={name}
@@ -65,33 +51,30 @@ const initialPct = ((defaultValue - min) / (max - min)) * 100;
     class="range-input"
     style={`--range-pct: ${initialPct}%`}
   />
-  <div
-    class="range-bounds"
-    aria-hidden="true"
-  >
+  <div class="range-bounds" aria-hidden="true">
     <span>{min}</span>
     <span>{max}</span>
   </div>
 </div>
 
 <script>
-  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { onPageLoad } from '@component-utils/onPageLoad';
 
   onPageLoad(() => {
-    const ranges = document.querySelectorAll<HTMLDivElement>(".range");
+    const ranges = document.querySelectorAll<HTMLDivElement>('.range');
     if (!ranges.length) return;
 
     ranges.forEach((wrapper) => {
-      const input = wrapper.querySelector<HTMLInputElement>(".range-input");
-      const output = wrapper.querySelector<HTMLOutputElement>(".range-value");
+      const input = wrapper.querySelector<HTMLInputElement>('.range-input');
+      const output = wrapper.querySelector<HTMLOutputElement>('.range-value');
       if (!input) return;
 
-      input.addEventListener("input", () => {
+      input.addEventListener('input', () => {
         const min = Number(input.min) || 0;
         const max = Number(input.max) || 100;
         const val = Number(input.value);
         const pct = ((val - min) / (max - min)) * 100;
-        input.style.setProperty("--range-pct", `${pct}%`);
+        input.style.setProperty('--range-pct', `${pct}%`);
         if (output) output.value = input.value;
       });
     });

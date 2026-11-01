@@ -1,6 +1,7 @@
 action:
   type: url
-  comment: Where to send the form-data when the form is submitted. The URL that
+  comment:
+    Where to send the form-data when the form is submitted. The URL that
     processes the form submission.
 formBlocks:
   type: array

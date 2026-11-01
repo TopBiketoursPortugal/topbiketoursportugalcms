@@ -75,20 +75,16 @@ const Heading = getHeadingSizeComponent(heading_size);
   style={`--cms-bg: ${background_color}; --cms-bg-dark: ${getDarkEquivalent(background_color)};`}
 >
   <div class="hero-container">
-    <div
-      class="content reveal-stagger intersect:opacity-100 intersect-once flex flex-col gap-4"
-    >
-      {
-        heading?.heading_text ? (
-          <Heading
-            class="heading pb-3"
-            data-editable="text"
-            data-prop="heading.heading_text"
-          >
-            {heading?.heading_text}
-          </Heading>
-        ) : null
-      }
+    <div class="content reveal-stagger intersect:opacity-100 intersect-once flex flex-col gap-4">
+      {heading?.heading_text ? (
+        <Heading
+          class="heading pb-3"
+          data-editable="text"
+          data-prop="heading.heading_text"
+        >
+          {heading?.heading_text}
+        </Heading>
+      ) : null}
       <div
         class="subheading-text"
         style={`--cms-text: ${block.subheading.color}; --cms-text-dark: ${getDarkTextEquivalent(block.subheading.color)};`}
@@ -99,39 +95,33 @@ const Heading = getHeadingSizeComponent(heading_size);
         <Markdown content={subheading.markdown_content} />
       </div>
       <div class="buttons" data-editable="array" data-prop="buttons">
-        {
-          buttons.map((button) => {
-            const name = (button._component ?? button._bookshop_name)
-              ?.split('/')
-              .reverse()[0];
-            const filePath = `/src/components/building-blocks/buttons/${name}/${name}.astro`;
-            const Component = (buttonComponents[filePath] as any)?.default;
-            if (!Component) return null;
-            return (
-              <div data-editable="array-item">
-                <Component {...button} />
-              </div>
-            );
-          })
-        }
+        {buttons.map((button) => {
+          const name = (button._component ?? button._bookshop_name)
+            ?.split('/')
+            .reverse()[0];
+          const filePath = `/src/components/building-blocks/buttons/${name}/${name}.astro`;
+          const Component = (buttonComponents[filePath] as any)?.default;
+          if (!Component) return null;
+          return (
+            <div data-editable="array-item">
+              <Component {...button} />
+            </div>
+          );
+        })}
       </div>
     </div>
-    <div
-      class="blob reveal-right reveal-delay-2 intersect:opacity-100 intersect-once"
-    >
-      {
-        imageSrc && (
-          <Image
-            alt={block.image.alt_text ?? ''}
-            widths={[320, 500, 640, 900, 1200]}
-            sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 600px`}
-            src={imageSrc}
-            data-editable="image"
-            data-prop-src="image.image_path"
-            data-prop-alt="image.alt_text"
-          />
-        )
-      }
+    <div class="blob reveal-right reveal-delay-2 intersect:opacity-100 intersect-once">
+      {imageSrc && (
+        <Image
+          alt={block.image.alt_text ?? ''}
+          widths={[320, 500, 640, 900, 1200]}
+          sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, 600px`}
+          src={imageSrc}
+          data-editable="image"
+          data-prop-src="image.image_path"
+          data-prop-alt="image.alt_text"
+        />
+      )}
     </div>
   </div>
 </section>

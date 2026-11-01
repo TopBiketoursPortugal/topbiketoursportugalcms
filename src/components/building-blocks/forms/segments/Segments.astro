@@ -1,6 +1,6 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
-import type { SegmentOption } from "../../../../types";
+import Icon from '@core-elements/icon/Icon.astro';
+import type { SegmentOption } from '../../../../types';
 
 const {
   name,
@@ -17,70 +17,66 @@ const {
 } = Astro.props;
 
 const groupId = htmlAttributes.id || `segments-${crypto.randomUUID()}`;
-const inputType = multiple ? "checkbox" : "radio";
+const inputType = multiple ? 'checkbox' : 'radio';
 ---
 
 <fieldset
-  class:list={["segments", className]}
-  role={multiple ? "group" : "radiogroup"}
+  class:list={['segments', className]}
+  role={multiple ? 'group' : 'radiogroup'}
   aria-labelledby={title ? `${groupId}-legend` : undefined}
   {...htmlAttributes}
 >
-  {
-    title && (
-      <legend
-        id={`${groupId}-legend`}
-        class="legend"
-      >
-        {title}
-        {required && (
-          <span
-            class="segments-required"
-            aria-label="required"
-          >
-            *
-          </span>
-        )}
-      </legend>
-    )
-  }
+  {title && (
+    <legend id={`${groupId}-legend`} class="legend">
+      {title}
+      {required && (
+        <span class="segments-required" aria-label="required">
+          *
+        </span>
+      )}
+    </legend>
+  )}
   <div
-    class:list={["segments-options", iconOnly && "icon-only", multiple && "multiple"]}
+    class:list={[
+      'segments-options',
+      iconOnly && 'icon-only',
+      multiple && 'multiple'
+    ]}
     role="presentation"
   >
-    {
-      options.map((option, index: number) => (
-        <label class="segments-option">
-          <input
-            type={inputType}
-            name={multiple ? `${name}[]` : name}
-            value={option.value}
-            checked={option.checked ? "checked" : undefined}
-            data-checked={option.checked}
-            required={required && index === 0}
-            aria-required={required && index === 0}
-            autocomplete={keepStateOnRefresh ? "on" : "off"}
-            class="segments-field"
-          />
-          <span
-            class="segment"
-            role="button"
-            tabindex="-1"
-            title={iconOnly && option.label ? option.label : undefined}
-          >
-            {option.icon && (
-              <Icon
-                name={option.icon}
-                size="none"
-                class="segment-icon"
-                aria-hidden="true"
-              />
-            )}
-            {option.label && !iconOnly && <span class="segment-label">{option.label}</span>}
-          </span>
-        </label>
-      ))
-    }
+    {options.map((option, index: number) => (
+      <label class="segments-option">
+        <input
+          type={inputType}
+          name={multiple ? `${name}[]` : name}
+          value={option.value}
+          checked={option.checked ? 'checked' : undefined}
+          data-checked={option.checked}
+          required={required && index === 0}
+          aria-required={required && index === 0}
+          autocomplete={keepStateOnRefresh ? 'on' : 'off'}
+          class="segments-field"
+        />
+        <span
+          class="segment"
+          role="button"
+          tabindex="-1"
+          title={iconOnly && option.label ? option.label : undefined}
+        >
+          {option.icon && (
+            <Icon
+              name={option.icon}
+              size="none"
+              class="segment-icon"
+              aria-hidden="true"
+            />
+          )}
+          {option.label && !iconOnly && (
+            <span class="segment-label">{option.label}</span>
+          )}
+        </span>
+      </label>
+    ))}
   </div>
 </fieldset>
 
@@ -190,7 +186,9 @@ const inputType = multiple ? "checkbox" : "radio";
         border-inline-end: none;
       }
 
-      .segments-option:not(:last-of-type):has(.segments-field:checked) + .segments-option .segment {
+      .segments-option:not(:last-of-type):has(.segments-field:checked)
+        + .segments-option
+        .segment {
         border-inline-start: 0;
       }
 

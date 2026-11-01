@@ -3,7 +3,7 @@ const {
   name,
   options = [],
   title,
-  orientation = "vertical",
+  orientation = 'vertical',
   required = false,
   multiple = false,
   class: className,
@@ -12,52 +12,46 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const inputType = multiple ? "checkbox" : "radio";
+const inputType = multiple ? 'checkbox' : 'radio';
 const inputName = multiple ? `${name}[]` : name;
 ---
 
-<div
-  class:list={["choice-group", className]}
-  {...htmlAttributes}
->
+<div class:list={['choice-group', className]} {...htmlAttributes}>
   <fieldset
     class="choice-group-fieldset"
-    role={multiple ? "group" : "radiogroup"}
+    role={multiple ? 'group' : 'radiogroup'}
   >
-    {
-      title && (
-        <legend class="legend">
-          {title}
-          {required && (
-            <span
-              class="choice-group-required"
-              aria-label="required"
-            >
-              *
-            </span>
-          )}
-        </legend>
-      )
-    }
+    {title && (
+      <legend class="legend">
+        {title}
+        {required && (
+          <span class="choice-group-required" aria-label="required">
+            *
+          </span>
+        )}
+      </legend>
+    )}
     <div
-      class:list={["choice-group-options", `orientation-${orientation}`, multiple && "multiple"]}
+      class:list={[
+        'choice-group-options',
+        `orientation-${orientation}`,
+        multiple && 'multiple'
+      ]}
     >
-      {
-        options.map((option, index) => (
-          <label class="choice-group-option">
-            <input
-              type={inputType}
-              name={inputName}
-              value={option.value}
-              checked={option.checked || false}
-              required={required && index === 0}
-              aria-required={required && index === 0}
-              class="choice-group-field"
-            />
-            <span class="choice-group-label-text">{option.label}</span>
-          </label>
-        ))
-      }
+      {options.map((option, index) => (
+        <label class="choice-group-option">
+          <input
+            type={inputType}
+            name={inputName}
+            value={option.value}
+            checked={option.checked || false}
+            required={required && index === 0}
+            aria-required={required && index === 0}
+            class="choice-group-field"
+          />
+          <span class="choice-group-label-text">{option.label}</span>
+        </label>
+      ))}
     </div>
   </fieldset>
 </div>

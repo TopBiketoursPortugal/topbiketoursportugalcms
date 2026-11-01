@@ -75,15 +75,13 @@ if (INDEX === 'false') {
     <meta name="title" content={seoProps.title} />
     {keywords ? <meta name="keywords" content={keywords} /> : null}
     <SEO {...seoProps} />
-    {
-      /*
+    {/*
     Emits each family's @font-face plus, where `preload` is set, a
     `<link rel="preload" as="font">`. Body and heading faces are preloaded
     because they are on the critical path for first paint; Caveat is
     decorative and used well below the fold, so it is left to load normally
     rather than competing for early bandwidth.
-  */
-    }
+  */}
     <Font cssVariable="--font-figtree" preload />
     <Font cssVariable="--font-bricolage" preload />
     <Font cssVariable="--font-caveat-family" />
@@ -124,17 +122,15 @@ if (INDEX === 'false') {
     <slot name="head" />
     <OrganizationSchema language={language} />
     {isHomePage && <WebSiteSchema language={language} />}
-    {
-      breadcrumbs.length > 0 && (
-        <BreadcrumbSchema items={breadcrumbs} site={Astro.site} />
-      )
-    }
-    {
-      pwaAssetsHead.themeColor && (
-        <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
-      )
-    }
-    {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
+    {breadcrumbs.length > 0 && (
+      <BreadcrumbSchema items={breadcrumbs} site={Astro.site} />
+    )}
+    {pwaAssetsHead.themeColor && (
+      <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+    )}
+    {pwaAssetsHead.links.map((link: any) => (
+      <link {...link} />
+    ))}
     <script src="/src/pwa.ts"></script>
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <!-- WhatConverts bootstrap: snapshots landing URL/referrer for attribution.
@@ -156,9 +152,7 @@ if (INDEX === 'false') {
       };
     </script>
   </head>
-  <body
-    class="text-default flex min-h-screen flex-col overflow-x-clip tracking-tight antialiased dark:bg-slate-900 dark:text-white"
-  >
+  <body class="text-default flex min-h-screen flex-col overflow-x-clip tracking-tight antialiased dark:bg-slate-900 dark:text-white">
     <BasicScripts />
     <slot name="announcement">
       <Announcement
@@ -172,7 +166,7 @@ if (INDEX === 'false') {
       isSticky
       hrefLangs={Astro.props.hrefLangs}
     />
-    <main class={cn('h-full w-full flex-1 max-w-7xl mx-auto', className)}>
+    <main class={cn('mx-auto h-full w-full max-w-7xl flex-1', className)}>
       {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
       <slot />
     </main>

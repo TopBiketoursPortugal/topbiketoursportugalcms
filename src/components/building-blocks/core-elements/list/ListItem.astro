@@ -1,63 +1,57 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
-import MarkdownIt from "markdown-it";
+import Icon from '@core-elements/icon/Icon.astro';
+import MarkdownIt from 'markdown-it';
 
 const {
-  text = "",
+  text = '',
   iconName,
-  iconColor = "default",
+  iconColor = 'default',
   showIcon = true,
   link,
-  class: className,
+  'class': className,
   useDefaultEditableBinding = false,
-  "data-prop": customDataProp,
+  'data-prop': customDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
 const md = new MarkdownIt({ html: true });
 
-const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveDataProp =
+  customDataProp ?? (useDefaultEditableBinding ? 'text' : null);
 const textDataAttributes = effectiveDataProp
-  ? { "data-editable": "text", "data-prop": effectiveDataProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveDataProp }
   : {};
 
 const hasIcon = showIcon && iconName;
 ---
 
 <li
-  class:list={["item", className, hasIcon && "list-item-has-icon"]}
+  class:list={['item', className, hasIcon && 'list-item-has-icon']}
   {...htmlAttributes}
 >
-  {
-    hasIcon && (
-      <Icon
-        name={iconName}
-        color={iconColor}
-        size="none"
-        class="list-icon"
-        aria-hidden="true"
-      />
-    )
-  }
-  {
-    link ? (
-      <a
-        href={link}
-        class="item-inner"
-      >
-        <p {...textDataAttributes}>
-          {text ? <Fragment set:html={md.renderInline(text)} /> : <slot />}
-        </p>
-      </a>
-    ) : (
-      <span class="item-inner">
-        <p {...textDataAttributes}>
-          {text ? <Fragment set:html={md.renderInline(text)} /> : <slot />}
-        </p>
-      </span>
-    )
-  }
+  {hasIcon && (
+    <Icon
+      name={iconName}
+      color={iconColor}
+      size="none"
+      class="list-icon"
+      aria-hidden="true"
+    />
+  )}
+  {link ? (
+    <a href={link} class="item-inner">
+      <p {...textDataAttributes}>
+        {text ? <Fragment set:html={md.renderInline(text)} /> : <slot />}
+      </p>
+    </a>
+  ) : (
+    <span class="item-inner">
+      <p {...textDataAttributes}>
+        {text ? <Fragment set:html={md.renderInline(text)} /> : <slot />}
+      </p>
+    </span>
+  )}
 </li>
 
 <style is:global>

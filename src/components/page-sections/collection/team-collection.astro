@@ -34,41 +34,33 @@ const items =
   <div class="container mx-auto px-20 py-24">
     <Stack layout="vertical" spacing="xlarge" class="gap-16">
       <Grid cols={3}>
-        {
-          items.map(({ data }) => {
-            const { image, title, memberType } = data;
+        {items.map(({ data }) => {
+          const { image, title, memberType } = data;
 
-            return (
-              <Card
-                href={getTeamMemberPath(data.title, language)}
-                title={title}
-              >
-                {image && <CardMedia {...image} class="min-h-80" />}
+          return (
+            <Card href={getTeamMemberPath(data.title, language)} title={title}>
+              {image && <CardMedia {...image} class="min-h-80" />}
 
-                <CardContent
-                  display="inline"
-                  class="bg-white dark:bg-slate-900"
+              <CardContent display="inline" class="bg-white dark:bg-slate-900">
+                <Stack
+                  class="gap-2 p-4"
+                  layout="vertical"
+                  distribution="center"
+                  alignment="center"
                 >
-                  <Stack
-                    class="gap-2 p-4"
-                    layout="vertical"
-                    distribution="center"
-                    alignment="center"
-                  >
-                    <strong class="text-neutral-700 dark:text-neutral-100">
-                      {title}
-                    </strong>
-                    {memberType ? (
-                      <p class="text-neutral-400 dark:text-neutral-200">
-                        {memberType}
-                      </p>
-                    ) : null}
-                  </Stack>
-                </CardContent>
-              </Card>
-            );
-          })
-        }
+                  <strong class="text-neutral-700 dark:text-neutral-100">
+                    {title}
+                  </strong>
+                  {memberType ? (
+                    <p class="text-neutral-400 dark:text-neutral-200">
+                      {memberType}
+                    </p>
+                  ) : null}
+                </Stack>
+              </CardContent>
+            </Card>
+          );
+        })}
       </Grid>
     </Stack>
   </div>

@@ -87,17 +87,13 @@ const Button2 = column2?.button
 ---
 
 <div class={twoColumnVariants({ padding, fullwidth })}>
-  <div
-    class="reveal-left intersect:opacity-100 intersect-once flex flex-col gap-4"
-  >
+  <div class="reveal-left intersect:opacity-100 intersect-once flex flex-col gap-4">
     <div data-editable="text" data-type="block" data-prop="column1.text">
       <Prose markdown={column1?.text ?? ''} />
     </div>
     {column1?.button && Button1 && <Button1 {...column1.button} />}
   </div>
-  <div
-    class="reveal-right reveal-delay-1 intersect:opacity-100 intersect-once flex flex-col gap-4"
-  >
+  <div class="reveal-right reveal-delay-1 intersect:opacity-100 intersect-once flex flex-col gap-4">
     <div data-editable="text" data-type="block" data-prop="column2.text">
       <Prose markdown={column2?.text ?? ''} />
     </div>

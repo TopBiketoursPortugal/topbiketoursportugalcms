@@ -4,18 +4,19 @@ source:
   options:
     paths:
       uploads: src/assets/images
-      static: ""
+      static: ''
     resize_style: contain
     width: 1920
     height: 1280
 alternateSource:
   type: image
-  comment: Optional alternate image shown when the site theme is toggled. The main
+  comment:
+    Optional alternate image shown when the site theme is toggled. The main
     source is shown by default.
   options:
     paths:
       uploads: src/assets/images
-      static: ""
+      static: ''
     resize_style: contain
     width: 1920
     height: 1280
@@ -60,8 +61,9 @@ aspectRatio:
         name: Horizontal Strip (16:5)
 positionVertical:
   type: select
-  comment: Vertical positioning of the image within the container (if aspect ratio
-    is set).
+  comment:
+    Vertical positioning of the image within the container (if aspect ratio is
+    set).
   options:
     values:
       - id: top
@@ -72,8 +74,9 @@ positionVertical:
         name: Bottom
 positionHorizontal:
   type: select
-  comment: Horizontal positioning of the image within the container (if aspect
-    ratio is set).
+  comment:
+    Horizontal positioning of the image within the container (if aspect ratio is
+    set).
   options:
     values:
       - id: left
@@ -88,4 +91,5 @@ background:
   comment: Covers the entire parent container with the image.
 priority:
   type: switch
-  comment: Load the image with high priority (eager loading for above-the-fold images).
+  comment:
+    Load the image with high priority (eager loading for above-the-fold images).

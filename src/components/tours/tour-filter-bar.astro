@@ -97,15 +97,13 @@ const sortOptions = [
   data-apply-template={applyTemplate}
   class="filter-bar relative sticky top-16 z-30 border-b border-gray-200 px-4 py-3 sm:px-6 dark:border-gray-700"
 >
-  {
-    /*
+  {/*
     The translucent blur lives on its own layer rather than on the bar.
     `backdrop-filter` makes an element the containing block for any `fixed`
     descendant, so with the blur on the bar itself the mobile filter sheet
     below anchored to the bar's 90px-tall box and rendered off the top of the
     screen instead of at the bottom of the viewport.
-  */
-  }
+  */}
   <span
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 bg-white/85 backdrop-blur-md dark:bg-gray-900/85"
@@ -115,7 +113,8 @@ const sortOptions = [
     <div class="relative min-w-50 flex-1">
       <i
         class="icon-[ph--magnifying-glass] absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
-        aria-hidden="true"></i>
+        aria-hidden="true"
+      ></i>
       <input
         type="search"
         data-filter-search
@@ -125,36 +124,34 @@ const sortOptions = [
       />
     </div>
 
-    {
-      /*
+    {/*
       Below `lg` the four facet selects wrapped into a three-row block ~200px
       tall — and the bar is sticky, so it held a quarter of a phone screen for
       the entire page. They now live in a bottom sheet behind this button. At
       `lg` the sheet wrapper becomes `display: contents` and the same selects
       rejoin this row, so there is only ever one set of controls and one source
       of state.
-    */
-    }
-    {
-      facets.length > 0 && (
-        <button
-          type="button"
-          data-filter-toggle
-          aria-expanded="false"
-          aria-controls="tour-filter-facets"
-          class="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-50 lg:hidden dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
-        >
-          <i class="icon-[ph--sliders-horizontal] h-4 w-4" aria-hidden="true" />
-          <span data-filter-toggle-label>{filtersLabel}</span>
-        </button>
-      )
-    }
+    */}
+    {facets.length > 0 && (
+      <button
+        type="button"
+        data-filter-toggle
+        aria-expanded="false"
+        aria-controls="tour-filter-facets"
+        class="flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-50 lg:hidden dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+      >
+        <i class="icon-[ph--sliders-horizontal] h-4 w-4" aria-hidden="true" />
+        <span data-filter-toggle-label>{filtersLabel}</span>
+      </button>
+    )}
 
     <label class="sr-only" for="tour-sort">
       {t('Tours.Filter.Sort', language)}
     </label>
     <select id="tour-sort" data-filter-sort class={selectClass}>
-      {sortOptions.map((o) => <option value={o.value}>{o.label}</option>)}
+      {sortOptions.map((o) => (
+        <option value={o.value}>{o.label}</option>
+      ))}
     </select>
 
     <div
@@ -176,23 +173,21 @@ const sortOptions = [
       </div>
 
       <div class="filter-sheet-body">
-        {
-          facets.map((facet) => (
-            <select
-              data-filter-select={facet.key}
-              data-filter-label={facet.label}
-              aria-label={facet.label}
-              class={`${selectClass} filter-facet-select`}
-            >
-              <option value="">{facet.label}</option>
-              {facet.options.map((o) => (
-                <option value={o.id} data-slug={o.slug ?? o.id}>
-                  {o.name}
-                </option>
-              ))}
-            </select>
-          ))
-        }
+        {facets.map((facet) => (
+          <select
+            data-filter-select={facet.key}
+            data-filter-label={facet.label}
+            aria-label={facet.label}
+            class={`${selectClass} filter-facet-select`}
+          >
+            <option value="">{facet.label}</option>
+            {facet.options.map((o) => (
+              <option value={o.id} data-slug={o.slug ?? o.id}>
+                {o.name}
+              </option>
+            ))}
+          </select>
+        ))}
       </div>
 
       <div class="filter-sheet-foot lg:hidden">
@@ -209,7 +204,8 @@ const sortOptions = [
          state rather than a summary. -->
     <span
       data-filter-count
-      class="text-sm text-gray-500 tabular-nums dark:text-gray-400"></span>
+      class="text-sm text-gray-500 tabular-nums dark:text-gray-400"
+    ></span>
 
     <button
       data-filter-clear
@@ -224,8 +220,7 @@ const sortOptions = [
   <div
     data-filter-chips
     class="relative mt-2 hidden flex-wrap items-center gap-2"
-  >
-  </div>
+  ></div>
 
   <!-- Empty state -->
   <p
@@ -240,8 +235,7 @@ const sortOptions = [
   data-filter-backdrop
   class="fixed inset-0 z-40 hidden bg-black/40 backdrop-blur-[2px] lg:hidden"
   hidden
->
-</div>
+></div>
 
 <style>
   /*

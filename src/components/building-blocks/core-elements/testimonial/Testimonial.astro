@@ -1,54 +1,48 @@
 ---
-import Image from "@core-elements/image/Image.astro";
-import MarkdownIt from "markdown-it";
+import Image from '@core-elements/image/Image.astro';
+import MarkdownIt from 'markdown-it';
 const {
   text,
   authorName,
   authorDescription,
-  alignmentHorizontal = "center",
-  authorImage = "",
-  class: className,
+  alignmentHorizontal = 'center',
+  authorImage = '',
+  'class': className,
   useDefaultEditableBinding = false,
-  "data-prop": customDataProp,
-  "data-prop-author-name": customDataPropAuthorName,
-  "data-prop-author-description": customDataPropAuthorDescription,
+  'data-prop': customDataProp,
+  'data-prop-author-name': customDataPropAuthorName,
+  'data-prop-author-description': customDataPropAuthorDescription,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
 const md = MarkdownIt({ html: true });
-const MarkdownText = text ? md.render(text) : "";
+const MarkdownText = text ? md.render(text) : '';
 
-const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveDataProp =
+  customDataProp ?? (useDefaultEditableBinding ? 'text' : null);
 const textDataAttributes = effectiveDataProp
-  ? { "data-editable": "text", "data-prop": effectiveDataProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveDataProp }
   : {};
 
 const effectiveAuthorNameProp =
-  customDataPropAuthorName ?? (useDefaultEditableBinding ? "authorName" : null);
+  customDataPropAuthorName ?? (useDefaultEditableBinding ? 'authorName' : null);
 const authorNameDataAttributes = effectiveAuthorNameProp
-  ? { "data-editable": "text", "data-prop": effectiveAuthorNameProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveAuthorNameProp }
   : {};
 
 const effectiveAuthorDescProp =
-  customDataPropAuthorDescription ?? (useDefaultEditableBinding ? "authorDescription" : null);
+  customDataPropAuthorDescription ??
+  (useDefaultEditableBinding ? 'authorDescription' : null);
 const authorDescriptionDataAttributes = effectiveAuthorDescProp
-  ? { "data-editable": "text", "data-prop": effectiveAuthorDescProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveAuthorDescProp }
   : {};
 ---
 
-<blockquote
-  class:list={["testimonial", className]}
-  {...htmlAttributes}
->
-  <div class:list={["testimonial-inner", `alignment-${alignmentHorizontal}`]}>
-    <div
-      class="quote"
-      {...textDataAttributes}
-    >
-      <slot>
-        {text && <Fragment set:html={MarkdownText} />}
-      </slot>
+<blockquote class:list={['testimonial', className]} {...htmlAttributes}>
+  <div class:list={['testimonial-inner', `alignment-${alignmentHorizontal}`]}>
+    <div class="quote" {...textDataAttributes}>
+      <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
     </div>
     <div class="author">
       <Image
@@ -61,25 +55,17 @@ const authorDescriptionDataAttributes = effectiveAuthorDescProp
         data-prop-alt="authorName"
       />
       <cite class="author-content">
-        <strong
-          class="name"
-          {...authorNameDataAttributes}
-        >
+        <strong class="name" {...authorNameDataAttributes}>
           {authorName}
         </strong>
-        {
-          authorDescription && (
-            <>
-              <br />
-              <span
-                class="description"
-                {...authorDescriptionDataAttributes}
-              >
-                {authorDescription}
-              </span>
-            </>
-          )
-        }
+        {authorDescription && (
+          <>
+            <br />
+            <span class="description" {...authorDescriptionDataAttributes}>
+              {authorDescription}
+            </span>
+          </>
+        )}
       </cite>
     </div>
   </div>
@@ -124,11 +110,11 @@ const authorDescriptionDataAttributes = effectiveAuthorDescProp
           }
 
           *:first-child::before {
-            content: "\201C";
+            content: '\201C';
           }
 
           *:last-child::after {
-            content: "\201D";
+            content: '\201D';
           }
         }
 

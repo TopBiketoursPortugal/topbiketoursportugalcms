@@ -1,6 +1,6 @@
 /* Light theme */
 :root,
-[data-theme="light"] {
+[data-theme='light'] {
   color-scheme: light;
 
   --cc-color-brand: var(--gray-12);

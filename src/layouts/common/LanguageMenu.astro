@@ -42,17 +42,15 @@ if (localizedUrls?.length === 0) {
 ---
 
 <div class="flex flex-row gap-4 text-2xl">
-  {
-    localizedUrls.map(({ locale, icon, display, path }) => (
-      <a
-        href={path}
-        title={display}
-        aria-label={display}
-        hreflang={locale}
-        class="transition-transform duration-150 hover:scale-125"
-      >
-        <i class={cn(icon!, 'h-6 w-6')} title={display} />
-      </a>
-    ))
-  }
+  {localizedUrls.map(({ locale, icon, display, path }) => (
+    <a
+      href={path}
+      title={display}
+      aria-label={display}
+      hreflang={locale}
+      class="transition-transform duration-150 hover:scale-125"
+    >
+      <i class={cn(icon!, 'h-6 w-6')} title={display} />
+    </a>
+  ))}
 </div>

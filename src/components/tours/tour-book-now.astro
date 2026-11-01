@@ -35,66 +35,64 @@ const secondaryButtonClass =
   'border border-primary bg-transparent text-primary hover:bg-primary hover:text-white dark:border-emerald-300 dark:text-emerald-300 dark:hover:bg-emerald-300 dark:hover:text-gray-900';
 ---
 
-{
-  variant === 'panel' ? (
-    /*
-     * Enquiry and booking are siblings now, not nested. They used to be one
-     * blue button stacked on one green button of the same size — two equal
-     * primaries, which is a coin toss rather than a choice. The enquiry
-     * <summary> carries the accent and the booking button drops to an outline
-     * below it; and because booking sits outside the collapsed form, a visitor
-     * who is ready to buy still sees "Book now" without opening anything.
-     */
-    <div class="flex w-full flex-col gap-3">
-      <TourForm code={tour.code} title={tour.title} />
-      {hasWetravel ? (
-        <WeTravelBooking
-          guidedUuid={wetravel?.guidedUuid}
-          selfGuidedUuid={wetravel?.selfGuidedUuid}
-          uid={wetravel?.uid}
-          label={bookLabel}
-          guidedLabel={t('Tour.Booking.Guided', language)}
-          selfGuidedLabel={t('Tour.Booking.SelfGuided', language)}
-          buttonClass={buttonClass ?? secondaryButtonClass}
-        />
-      ) : feature?.bokunLink ? (
-        <Linkbutton
-          href={feature.bokunLink}
-          title={bookLabel}
-          stretch
-          class={buttonClass ?? secondaryButtonClass}
-        >
-          {bookLabel}
-        </Linkbutton>
-      ) : null}
-    </div>
-  ) : hasWetravel ? (
-    <WeTravelBooking
-      guidedUuid={wetravel?.guidedUuid}
-      selfGuidedUuid={wetravel?.selfGuidedUuid}
-      uid={wetravel?.uid}
-      label={bookLabel}
-      guidedLabel={t('Tour.Booking.Guided', language)}
-      selfGuidedLabel={t('Tour.Booking.SelfGuided', language)}
-      buttonClass={buttonClass}
-    />
-  ) : feature?.bokunLink ? (
-    <Linkbutton
-      href={feature.bokunLink}
-      title={bookLabel}
-      stretch={variant !== 'column'}
-      class={buttonClass}
-    >
-      {bookLabel}
-    </Linkbutton>
-  ) : (
-    <Linkbutton
-      href="#tour-booking"
-      title={bookLabel}
-      stretch={variant !== 'column'}
-      class={buttonClass}
-    >
-      {bookLabel}
-    </Linkbutton>
-  )
-}
+{variant === 'panel' ? (
+  /*
+   * Enquiry and booking are siblings now, not nested. They used to be one
+   * blue button stacked on one green button of the same size — two equal
+   * primaries, which is a coin toss rather than a choice. The enquiry
+   * <summary> carries the accent and the booking button drops to an outline
+   * below it; and because booking sits outside the collapsed form, a visitor
+   * who is ready to buy still sees "Book now" without opening anything.
+   */
+  <div class="flex w-full flex-col gap-3">
+    <TourForm code={tour.code} title={tour.title} />
+    {hasWetravel ? (
+      <WeTravelBooking
+        guidedUuid={wetravel?.guidedUuid}
+        selfGuidedUuid={wetravel?.selfGuidedUuid}
+        uid={wetravel?.uid}
+        label={bookLabel}
+        guidedLabel={t('Tour.Booking.Guided', language)}
+        selfGuidedLabel={t('Tour.Booking.SelfGuided', language)}
+        buttonClass={buttonClass ?? secondaryButtonClass}
+      />
+    ) : feature?.bokunLink ? (
+      <Linkbutton
+        href={feature.bokunLink}
+        title={bookLabel}
+        stretch
+        class={buttonClass ?? secondaryButtonClass}
+      >
+        {bookLabel}
+      </Linkbutton>
+    ) : null}
+  </div>
+) : hasWetravel ? (
+  <WeTravelBooking
+    guidedUuid={wetravel?.guidedUuid}
+    selfGuidedUuid={wetravel?.selfGuidedUuid}
+    uid={wetravel?.uid}
+    label={bookLabel}
+    guidedLabel={t('Tour.Booking.Guided', language)}
+    selfGuidedLabel={t('Tour.Booking.SelfGuided', language)}
+    buttonClass={buttonClass}
+  />
+) : feature?.bokunLink ? (
+  <Linkbutton
+    href={feature.bokunLink}
+    title={bookLabel}
+    stretch={variant !== 'column'}
+    class={buttonClass}
+  >
+    {bookLabel}
+  </Linkbutton>
+) : (
+  <Linkbutton
+    href="#tour-booking"
+    title={bookLabel}
+    stretch={variant !== 'column'}
+    class={buttonClass}
+  >
+    {bookLabel}
+  </Linkbutton>
+)}

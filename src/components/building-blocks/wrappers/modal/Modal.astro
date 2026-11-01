@@ -1,20 +1,20 @@
 ---
-import Component from "@components/utils/renderBlock.astro";
-import { slugifyLabel } from "@components/utils/slugify";
-import Button from "@core-elements/button/Button.astro";
+import Component from '@components/utils/renderBlock.astro';
+import { slugifyLabel } from '@components/utils/slugify';
+import Button from '@core-elements/button/Button.astro';
 
 const {
   label,
   heading,
   triggerText,
-  triggerVariant = "primary",
-  triggerSize = "md",
+  triggerVariant = 'primary',
+  triggerSize = 'md',
   triggerIconName,
-  size = "md",
+  size = 'md',
   contentSections,
   useDefaultEditableBinding = false,
-  class: className,
-  "data-children-prop": childrenDataProp,
+  'class': className,
+  'data-children-prop': childrenDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
@@ -23,59 +23,53 @@ const generatedLabel = label || heading || `Modal-${crypto.randomUUID()}`;
 const popoverId = `modal-${slugifyLabel(generatedLabel)}`;
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'contentSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 const headingDataAttributes = useDefaultEditableBinding
-  ? { "data-editable": "text", "data-prop": "heading" }
+  ? { 'data-editable': 'text', 'data-prop': 'heading' }
   : {};
 
 const hasHeading = heading?.trim().length > 0;
 const hasContentSections = contentSections?.length > 0;
-const hasSlotContent = Astro.slots.has("default");
-const hasTrigger = triggerText?.trim().length > 0 || triggerIconName?.trim().length > 0;
+const hasSlotContent = Astro.slots.has('default');
+const hasTrigger =
+  triggerText?.trim().length > 0 || triggerIconName?.trim().length > 0;
 
 if (!_component && !hasContentSections && !hasSlotContent) return;
 ---
 
-<div
-  class:list={["modal", className]}
-  {...htmlAttributes}
->
-  {
-    hasTrigger && (
-      <Button
-        text={triggerText}
-        variant={triggerVariant}
-        size={triggerSize}
-        iconName={triggerIconName}
-        link={`^${popoverId}`}
-        class="modal-trigger"
-      />
-    )
-  }
+<div class:list={['modal', className]} {...htmlAttributes}>
+  {hasTrigger && (
+    <Button
+      text={triggerText}
+      variant={triggerVariant}
+      size={triggerSize}
+      iconName={triggerIconName}
+      link={`^${popoverId}`}
+      class="modal-trigger"
+    />
+  )}
 
   <div
     id={popoverId}
     popover="auto"
-    class:list={["modal-popover", `size-${size}`]}
+    class:list={['modal-popover', `size-${size}`]}
     role="dialog"
     aria-label={hasHeading ? undefined : label}
     aria-labelledby={hasHeading ? `${popoverId}-header` : undefined}
   >
-    <div class:list={["modal-header", hasHeading ? "has-header" : "no-header"]}>
-      {
-        hasHeading && (
-          <h2
-            id={`${popoverId}-header`}
-            class="modal-title"
-            {...headingDataAttributes}
-          >
-            {heading}
-          </h2>
-        )
-      }
+    <div class:list={['modal-header', hasHeading ? 'has-header' : 'no-header']}>
+      {hasHeading && (
+        <h2
+          id={`${popoverId}-header`}
+          class="modal-title"
+          {...headingDataAttributes}
+        >
+          {heading}
+        </h2>
+      )}
       <Button
         iconName="x-mark"
         hideText
@@ -87,51 +81,48 @@ if (!_component && !hasContentSections && !hasSlotContent) return;
         popovertargetaction="hide"
       />
     </div>
-    <div
-      class="modal-body"
-      {...arrayDataAttributes}
-    >
+    <div class="modal-body" {...arrayDataAttributes}>
       <slot>
-        {
-          contentSections && (
-            <Component
-              contentSections={contentSections}
-              useDefaultEditableBinding={!!effectiveChildrenProp}
-            />
-          )
-        }
+        {contentSections && (
+          <Component
+            contentSections={contentSections}
+            useDefaultEditableBinding={!!effectiveChildrenProp}
+          />
+        )}
       </slot>
     </div>
   </div>
 </div>
 
 <script>
-  import { onPageLoad } from "@component-utils/onPageLoad";
+  import { onPageLoad } from '@component-utils/onPageLoad';
 
   function updateModalScrollLock() {
     const openPopovers = Array.from(
-      document.querySelectorAll<HTMLElement>(".modal-popover")
-    ).filter((popover) => popover.matches(":popover-open"));
+      document.querySelectorAll<HTMLElement>('.modal-popover')
+    ).filter((popover) => popover.matches(':popover-open'));
     const hasOpenModal = openPopovers.length > 0;
 
-    document.body.toggleAttribute("data-modal-scroll-lock", hasOpenModal);
+    document.body.toggleAttribute('data-modal-scroll-lock', hasOpenModal);
   }
 
   function setupModals() {
-    document.querySelectorAll<HTMLElement>(".modal").forEach((modal) => {
-      if (modal.hasAttribute("data-modal-initialized")) return;
-      modal.setAttribute("data-modal-initialized", "");
+    document.querySelectorAll<HTMLElement>('.modal').forEach((modal) => {
+      if (modal.hasAttribute('data-modal-initialized')) return;
+      modal.setAttribute('data-modal-initialized', '');
 
-      const trigger = modal.querySelector<HTMLButtonElement>(".modal-trigger .button-inner");
-      const popover = modal.querySelector<HTMLElement>(".modal-popover");
+      const trigger = modal.querySelector<HTMLButtonElement>(
+        '.modal-trigger .button-inner'
+      );
+      const popover = modal.querySelector<HTMLElement>('.modal-popover');
       if (!popover) return;
 
-      popover.addEventListener("toggle", (e) => {
+      popover.addEventListener('toggle', (e) => {
         const { newState } = e as ToggleEvent;
-        trigger?.setAttribute("aria-expanded", String(newState === "open"));
+        trigger?.setAttribute('aria-expanded', String(newState === 'open'));
         updateModalScrollLock();
 
-        if (newState === "closed" && trigger) {
+        if (newState === 'closed' && trigger) {
           trigger.focus();
         }
       });

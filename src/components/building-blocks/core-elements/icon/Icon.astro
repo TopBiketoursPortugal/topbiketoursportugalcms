@@ -1,43 +1,37 @@
 ---
-import { Icon as AstroIcon } from "astro-icon/components";
+import { Icon as AstroIcon } from 'astro-icon/components';
 
 const {
   name,
-  size = "lg",
-  color = "default",
+  size = 'lg',
+  color = 'default',
   background = false,
-  alignmentHorizontal = "",
+  alignmentHorizontal = '',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const isValidName = name && typeof name === "string" && name.trim();
+const isValidName = name && typeof name === 'string' && name.trim();
 
 if (!_component && !isValidName) {
   return;
 }
 ---
 
-<span
-  class:list={["icon", className]}
-  {...htmlAttributes}
->
+<span class:list={['icon', className]} {...htmlAttributes}>
   <span
     class:list={[
-      "icon-inner",
+      'icon-inner',
       `size-${size}`,
       `color-${color}`,
-      background && "background",
+      background && 'background',
       alignmentHorizontal && `align-${alignmentHorizontal}`,
-      name?.includes("social/") && "fill",
+      name?.includes('social/') && 'fill'
     ]}
   >
-    <AstroIcon
-      name={String(name).trim()}
-      is:inline
-    />
+    <AstroIcon name={String(name).trim()} is:inline />
   </span>
 </span>
 

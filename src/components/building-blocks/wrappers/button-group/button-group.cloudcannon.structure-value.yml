@@ -8,8 +8,8 @@ value:
     - _component: building-blocks/core-elements/button
       text: My Button
       hideText: false
-      link: ""
-      iconName: ""
+      link: ''
+      iconName: ''
       iconColor: default
       iconPosition: before
       variant: primary

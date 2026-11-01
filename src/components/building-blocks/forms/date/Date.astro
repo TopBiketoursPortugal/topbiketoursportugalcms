@@ -15,28 +15,17 @@ const {
 const fieldId = htmlAttributes.id || `date-${crypto.randomUUID()}`;
 ---
 
-<div
-  class:list={["date", className]}
-  {...htmlAttributes}
->
-  {
-    label && (
-      <label
-        for={fieldId}
-        class="label"
-      >
-        {label}
-        {required && (
-          <span
-            class="date-required"
-            aria-label="required"
-          >
-            *
-          </span>
-        )}
-      </label>
-    )
-  }
+<div class:list={['date', className]} {...htmlAttributes}>
+  {label && (
+    <label for={fieldId} class="label">
+      {label}
+      {required && (
+        <span class="date-required" aria-label="required">
+          *
+        </span>
+      )}
+    </label>
+  )}
   <input
     type="date"
     name={name}

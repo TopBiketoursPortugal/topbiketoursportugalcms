@@ -1,6 +1,6 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
-import SelectOption from "./SelectOption.astro";
+import Icon from '@core-elements/icon/Icon.astro';
+import SelectOption from './SelectOption.astro';
 
 const {
   label,
@@ -10,7 +10,7 @@ const {
   required = false,
   value,
   iconName,
-  iconColor = "default",
+  iconColor = 'default',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
@@ -21,41 +21,28 @@ const fieldId = htmlAttributes.id || `select-${crypto.randomUUID()}`;
 const hasLeadingIcon = iconName?.trim().length > 0;
 ---
 
-<div
-  class:list={["select", className]}
-  {...htmlAttributes}
->
-  {
-    label && (
-      <label
-        for={fieldId}
-        class="label"
-      >
-        {label}
-        {required && (
-          <span
-            class="select-required"
-            aria-label="required"
-          >
-            *
-          </span>
-        )}
-      </label>
-    )
-  }
-  <div class:list={["field-shell", { "has-leading-icon": hasLeadingIcon }]}>
-    {
-      hasLeadingIcon && (
-        <Icon
-          name={iconName}
-          color={iconColor}
-          size="none"
-          class="select-icon select-leading-icon"
-          aria-hidden="true"
-          role="presentation"
-        />
-      )
-    }
+<div class:list={['select', className]} {...htmlAttributes}>
+  {label && (
+    <label for={fieldId} class="label">
+      {label}
+      {required && (
+        <span class="select-required" aria-label="required">
+          *
+        </span>
+      )}
+    </label>
+  )}
+  <div class:list={['field-shell', { 'has-leading-icon': hasLeadingIcon }]}>
+    {hasLeadingIcon && (
+      <Icon
+        name={iconName}
+        color={iconColor}
+        size="none"
+        class="select-icon select-leading-icon"
+        aria-hidden="true"
+        role="presentation"
+      />
+    )}
     <select
       name={name}
       id={fieldId}
@@ -63,29 +50,22 @@ const hasLeadingIcon = iconName?.trim().length > 0;
       aria-required={required}
       class="field"
     >
-      {
-        placeholder && (
-          <option
-            value=""
-            disabled
-          >
-            {placeholder}
-          </option>
-        )
-      }
-      {
-        options.length > 0 ? (
-          options.map((option) => (
-            <SelectOption
-              value={option.value}
-              label={option.label}
-              selected={option.value === value}
-            />
-          ))
-        ) : (
-          <slot />
-        )
-      }
+      {placeholder && (
+        <option value="" disabled>
+          {placeholder}
+        </option>
+      )}
+      {options.length > 0 ? (
+        options.map((option) => (
+          <SelectOption
+            value={option.value}
+            label={option.label}
+            selected={option.value === value}
+          />
+        ))
+      ) : (
+        <slot />
+      )}
     </select>
     <Icon
       name="chevron-down"

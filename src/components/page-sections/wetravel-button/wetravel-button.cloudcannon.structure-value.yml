@@ -3,10 +3,10 @@ icon: event_available
 description: A WeTravel checkout button (opens the booking/calendar overlay)
 value:
   _component: page-sections/wetravel-button
-  uuid: ""
+  uuid: ''
   label: Book Now
-  heading: ""
-  uid: "2317568"
+  heading: ''
+  uid: '2317568'
 preview:
   text:
     - WeTravel Book Now

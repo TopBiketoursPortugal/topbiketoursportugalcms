@@ -1,70 +1,82 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
+import Icon from '@core-elements/icon/Icon.astro';
 
 const {
   text,
   iconName,
-  iconColor = "default",
-  iconPosition = "before",
+  iconColor = 'default',
+  iconPosition = 'before',
   hideText = false,
-  variant = "primary",
-  size = "md",
+  variant = 'primary',
+  size = 'md',
   link,
   element,
-  class: className,
+  'class': className,
   useDefaultEditableBinding = false,
-  "data-prop": customDataProp,
+  'data-prop': customDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveDataProp =
+  customDataProp ?? (useDefaultEditableBinding ? 'text' : null);
 const textDataAttributes = effectiveDataProp
-  ? { "data-editable": "text", "data-prop": effectiveDataProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveDataProp }
   : {};
 
-const isPopoverLink = link?.startsWith("^");
-const Tag = (element ?? (isPopoverLink || !link ? "button" : "a")) as any;
+const isPopoverLink = link?.startsWith('^');
+const Tag = (element ?? (isPopoverLink || !link ? 'button' : 'a')) as any;
 
 const tagProps: Record<string, any> = isPopoverLink
-  ? { type: "button", popovertarget: link.slice(1), popovertargetaction: "show" }
-  : Tag === "a" && link
+  ? {
+      type: 'button',
+      popovertarget: link.slice(1),
+      popovertargetaction: 'show'
+    }
+  : Tag === 'a' && link
     ? { href: link }
-    : Tag === "button"
-      ? { type: "button" }
+    : Tag === 'button'
+      ? { type: 'button' }
       : {};
 
 if (hideText) {
-  tagProps["aria-label"] = htmlAttributes["aria-label"] || text;
-  delete htmlAttributes["aria-label"];
+  tagProps['aria-label'] = htmlAttributes['aria-label'] || text;
+  delete htmlAttributes['aria-label'];
 }
 
 const tagKeys = new Set<string>([
-  "id",
-  "tabindex",
-  "tabIndex",
-  "popovertarget",
-  "popovertargetaction",
+  'id',
+  'tabindex',
+  'tabIndex',
+  'popovertarget',
+  'popovertargetaction'
 ]);
 
-if (Tag === "a" && link) {
-  for (const k of ["target", "rel", "download", "hreflang", "referrerpolicy", "ping"]) {
+if (Tag === 'a' && link) {
+  for (const k of [
+    'target',
+    'rel',
+    'download',
+    'hreflang',
+    'referrerpolicy',
+    'ping'
+  ]) {
     tagKeys.add(k);
   }
 }
-if (Tag === "button") {
+if (Tag === 'button') {
   for (const k of [
-    "type",
-    "disabled",
-    "name",
-    "value",
-    "form",
-    "formaction",
-    "formenctype",
-    "formmethod",
-    "formnovalidate",
-    "formtarget",
-    "autofocus",
+    'type',
+    'disabled',
+    'name',
+    'value',
+    'form',
+    'formaction',
+    'formenctype',
+    'formmethod',
+    'formnovalidate',
+    'formtarget',
+    'autofocus'
   ]) {
     tagKeys.add(k);
   }
@@ -80,41 +92,29 @@ for (const key of tagKeys) {
 }
 
 const hasText = text?.trim().length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 const hasIcon = iconName?.trim().length > 0;
 
 if (!_component && !hasText && !hasSlotContent && !hasIcon) return;
 ---
 
-<span
-  class:list={["button", className]}
-  {...htmlAttributes}
->
+<span class:list={['button', className]} {...htmlAttributes}>
   <Tag
     class:list={[
-      "button-inner",
+      'button-inner',
       `variant-${variant}`,
       `size-${size}`,
-      iconPosition === "after" && "icon-after",
-      hideText && "icon-only",
+      iconPosition === 'after' && 'icon-after',
+      hideText && 'icon-only'
     ]}
     {...tagProps}
   >
-    <Icon
-      name={iconName}
-      color={iconColor}
-      size="none"
-    />
-    {
-      !hideText && (
-        <span
-          class="label-text"
-          {...textDataAttributes}
-        >
-          <slot>{text}</slot>
-        </span>
-      )
-    }
+    <Icon name={iconName} color={iconColor} size="none" />
+    {!hideText && (
+      <span class="label-text" {...textDataAttributes}>
+        <slot>{text}</slot>
+      </span>
+    )}
   </Tag>
 </span>
 

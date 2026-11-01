@@ -43,29 +43,27 @@ const hrefAttr: Record<string, string> = {
 };
 ---
 
-{
-  uuid ? (
-    <div class="wetravel-cta flex flex-col gap-2" hidden={hidden}>
-      {heading ? <strong class="text-base">{heading}</strong> : null}
-      <button
-        type="button"
-        class={cn(
-          'wtrvl-checkout_button',
-          buttonVariants({ stretch: true, size: 'lg' }),
-          'capitalize',
-          className
-        )}
-        data-env={env}
-        data-version={version}
-        data-uid={uid}
-        data-uuid={uuid}
-        {...hrefAttr}
-      >
-        {label}
-      </button>
-    </div>
-  ) : null
-}
+{uuid ? (
+  <div class="wetravel-cta flex flex-col gap-2" hidden={hidden}>
+    {heading ? <strong class="text-base">{heading}</strong> : null}
+    <button
+      type="button"
+      class={cn(
+        'wtrvl-checkout_button',
+        buttonVariants({ stretch: true, size: 'lg' }),
+        'capitalize',
+        className
+      )}
+      data-env={env}
+      data-version={version}
+      data-uid={uid}
+      data-uuid={uuid}
+      {...hrefAttr}
+    >
+      {label}
+    </button>
+  </div>
+) : null}
 
 <script>
   // Load the WeTravel embed loader once, appended to <head> so it survives

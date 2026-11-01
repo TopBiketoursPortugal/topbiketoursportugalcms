@@ -1,17 +1,17 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Testimonial from "@core-elements/testimonial/Testimonial.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Testimonial from '@core-elements/testimonial/Testimonial.astro';
 
 const {
-  text = "",
-  authorName = "",
-  authorDescription = "",
-  authorImage = "",
+  text = '',
+  authorName = '',
+  authorDescription = '',
+  authorImage = '',
   sectionLabel,
-  maxContentWidth = "xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "sm",
-  colorScheme = "inherit",
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = 'sm',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -23,7 +23,7 @@ const {
 
 <CustomSection
   {...htmlAttributes}
-  class:list={["testimonial-section", className]}
+  class:list={['testimonial-section', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}

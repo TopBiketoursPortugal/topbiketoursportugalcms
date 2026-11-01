@@ -80,7 +80,7 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       data-callback="onSubmit"
       data-action="submit"
       type="submit"
-      class="g-recaptcha w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+      class="g-recaptcha w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
     >
       {t('Contact.Form.Submit.Text', language)}
     </button>
@@ -91,12 +91,8 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 <input type="checkbox" id="terms-toggle" class="peer hidden" aria-hidden />
 
 <!-- Terms and Conditions Modal -->
-<div
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-600 bg-opacity-50 transition-opacity duration-300 peer-checked:flex"
->
-  <div
-    class="max-h-[80vh] w-full max-w-lg transform overflow-y-auto rounded-lg bg-white p-6 shadow-xl transition-all duration-300 dark:bg-gray-800"
-  >
+<div class="bg-opacity-50 fixed inset-0 z-50 hidden items-center justify-center bg-gray-600 transition-opacity duration-300 peer-checked:flex">
+  <div class="max-h-[80vh] w-full max-w-lg transform overflow-y-auto rounded-lg bg-white p-6 shadow-xl transition-all duration-300 dark:bg-gray-800">
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-xl font-bold text-gray-900 dark:text-white">
         {t('Contact.Form.Terms.Modal.Title', language)}
@@ -109,15 +105,13 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
       </label>
     </div>
 
-    <div
-      class="peer-check:flex space-y-4 text-gray-700 peer-checked:opacity-100 dark:text-gray-200"
-    >
+    <div class="peer-check:flex space-y-4 text-gray-700 peer-checked:opacity-100 dark:text-gray-200">
       <Prose markdown={t('Contact.Form.Terms.Modal.Body', language)} />
 
       <div class="mt-6 flex justify-end">
         <label
           for="terms-toggle"
-          class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          class="cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-gray-800"
         >
           {t('Contact.Form.Terms.Modal.Close', language)}
         </label>

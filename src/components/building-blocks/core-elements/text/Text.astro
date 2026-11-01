@@ -1,43 +1,43 @@
 ---
-import markdownit from "markdown-it";
+import markdownit from 'markdown-it';
 
 const md = markdownit({ html: true });
 
 const {
-  text = "",
+  text = '',
   size,
-  alignmentHorizontal = "start",
-  class: className,
+  alignmentHorizontal = 'start',
+  'class': className,
   useDefaultEditableBinding = false,
-  "data-prop": customDataProp,
+  'data-prop': customDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const markdownContent = text ? md.render(text) : "";
+const markdownContent = text ? md.render(text) : '';
 
-const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveDataProp =
+  customDataProp ?? (useDefaultEditableBinding ? 'text' : null);
 const textDataAttributes = effectiveDataProp
-  ? { "data-editable": "text", "data-prop": effectiveDataProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveDataProp }
   : {};
 
 const hasText = text?.trim().length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 
 if (!_component && !hasText && !hasSlotContent) return;
 ---
 
-<div
-  class:list={["text", className]}
-  {...htmlAttributes}
->
+<div class:list={['text', className]} {...htmlAttributes}>
   <div
-    class:list={["text-inner", size && `size-${size}`, `align-${alignmentHorizontal}`]}
+    class:list={[
+      'text-inner',
+      size && `size-${size}`,
+      `align-${alignmentHorizontal}`
+    ]}
     {...textDataAttributes}
   >
-    <slot>
-      {text && <Fragment set:html={markdownContent} />}
-    </slot>
+    <slot>{text && <Fragment set:html={markdownContent} />}</slot>
   </div>
 </div>
 

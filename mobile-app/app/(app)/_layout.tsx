@@ -9,7 +9,7 @@ const TAB_ICON: Record<string, string> = {
   route: '🗺️',
   elevation: '📈',
   sightseeing: '📍',
-  support: '🆘',
+  support: '🆘'
 };
 
 export default function AppLayout() {
@@ -21,9 +21,16 @@ export default function AppLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.muted,
-        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border
+        },
         tabBarLabelStyle: { fontFamily: fonts.bodySemiBold, fontSize: 11 },
-        tabBarIcon: ({ color }) => <Text style={{ fontSize: 18, color }}>{TAB_ICON[route.name] ?? '•'}</Text>,
+        tabBarIcon: ({ color }) => (
+          <Text style={{ fontSize: 18, color }}>
+            {TAB_ICON[route.name] ?? '•'}
+          </Text>
+        )
       })}
     >
       <Tabs.Screen name="index" options={{ title: 'My Trip' }} />

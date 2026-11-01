@@ -140,9 +140,9 @@ export default function PhotoGallery({ photos, labels }: Props) {
         // photo shown at max size should have nothing behind it.
         styles={{ root: { '--yarl__color_backdrop': '#0a0f0c' } }}
         labels={{
-          Close: labels.close,
-          Next: labels.next,
-          Previous: labels.previous,
+          'Close': labels.close,
+          'Next': labels.next,
+          'Previous': labels.previous,
           'Zoom in': labels.zoomIn,
           'Zoom out': labels.zoomOut,
           'Enter Fullscreen': labels.enterFullscreen,

@@ -11,7 +11,7 @@ function fixIcons(obj) {
     'columns': 'view_column',
     'video': 'smart_display'
   };
-  
+
   if (Array.isArray(obj)) {
     for (const item of obj) fixIcons(item);
   } else if (typeof obj === 'object' && obj !== null) {
@@ -38,14 +38,14 @@ function fixInputs(obj) {
     if (obj.default !== undefined) delete obj.default;
     if (obj.example !== undefined) delete obj.example;
     if (obj.required !== undefined) delete obj.required;
-    
+
     if (obj.type === 'boolean') obj.type = 'switch';
-    
+
     // Fix options array becoming object issue (padding.options)
     if (obj.options && Array.isArray(obj.options)) {
       obj.options = { values: obj.options };
     }
-    
+
     for (const key in obj) {
       fixInputs(obj[key]);
     }
@@ -56,15 +56,15 @@ async function main() {
   const configPath = 'cloudcannon.config.yml';
   const configStr = await fs.readFile(configPath, 'utf8');
   const config = yaml.parse(configStr);
-  
+
   // Fix editor default_path
   if (config.editor && !config.editor.default_path) {
     config.editor.default_path = '';
   }
-  
+
   // Fix icons globally
   fixIcons(config);
-  
+
   // Fix inputs in _structures
   if (config._structures) {
     for (const struct of Object.values(config._structures)) {
@@ -77,7 +77,7 @@ async function main() {
       }
     }
   }
-  
+
   await fs.writeFile(configPath, yaml.stringify(config));
   console.log('Fixed cloudcannon.config.yml validation errors');
 }

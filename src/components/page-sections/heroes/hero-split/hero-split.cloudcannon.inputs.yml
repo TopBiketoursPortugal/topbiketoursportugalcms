@@ -24,7 +24,7 @@ imageSource:
   options:
     paths:
       uploads: src/assets/images
-      static: ""
+      static: ''
     resize_style: contain
     width: 1920
     height: 1280
@@ -48,11 +48,13 @@ imageAspectRatio:
         name: Widescreen (16:9)
 buttonSections:
   type: array
-  comment: Array of button components for call-to-action buttons. See the Button
+  comment:
+    Array of button components for call-to-action buttons. See the Button
     component documentation for more information.
   options:
     structures: _structures.buttonSections
 reverse:
   type: switch
-  comment: Whether to reverse the order of content and image (image first, content
+  comment:
+    Whether to reverse the order of content and image (image first, content
     second).

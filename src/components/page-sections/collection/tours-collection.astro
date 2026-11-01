@@ -116,36 +116,34 @@ const itemListSchema = {
       }))}
     />
 
-    {
-      items.length > 0 ? (
-        <div data-tour-section>
-          {/* Two columns from 640px: the shared <Grid cols={3}> stays single-column
+    {items.length > 0 ? (
+      <div data-tour-section>
+        {/* Two columns from 640px: the shared <Grid cols={3}> stays single-column
             until 1024px, which is why a phone or tablet browsed this list one
             very tall card at a time. */}
-          <div class="px-4 py-6 sm:px-6">
-            <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {items.map(({ data }) => (
-                <TourCard
-                  tour={data}
-                  contentDisplay={contentDisplay}
-                  language={language}
-                />
-              ))}
-            </div>
+        <div class="px-4 py-6 sm:px-6">
+          <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {items.map(({ data }) => (
+              <TourCard
+                tour={data}
+                contentDisplay={contentDisplay}
+                language={language}
+              />
+            ))}
           </div>
         </div>
-      ) : (
-        <div class="flex flex-col items-center justify-center py-16 text-center">
-          <i
-            class="icon-[ph--map-trifold-light] mb-4 h-12 w-12 text-gray-300 dark:text-gray-600"
-            aria-hidden="true"
-          />
-          <p class="text-lg text-gray-500 dark:text-gray-400">
-            {t('Tours.Collection.NoResults', language)}
-          </p>
-        </div>
-      )
-    }
+      </div>
+    ) : (
+      <div class="flex flex-col items-center justify-center py-16 text-center">
+        <i
+          class="icon-[ph--map-trifold-light] mb-4 h-12 w-12 text-gray-300 dark:text-gray-600"
+          aria-hidden="true"
+        />
+        <p class="text-lg text-gray-500 dark:text-gray-400">
+          {t('Tours.Collection.NoResults', language)}
+        </p>
+      </div>
+    )}
   </div>
 </section>
 <TourListSchema items={items} language={language} />

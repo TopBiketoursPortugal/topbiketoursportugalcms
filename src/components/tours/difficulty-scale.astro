@@ -50,20 +50,16 @@ const label = `${t('Tour.Info.Difficulty.Label', language)}: ${levelName} (${cla
   role="img"
 >
   <span class="flex gap-[3px]" aria-hidden="true">
-    {
-      steps.map((step) => (
-        <span
-          class={cn(
-            'h-[7px] w-[7px] rounded-full',
-            step <= clamped ? 'bg-accent' : 'bg-gray-300 dark:bg-gray-600'
-          )}
-        />
-      ))
-    }
+    {steps.map((step) => (
+      <span
+        class={cn(
+          'h-[7px] w-[7px] rounded-full',
+          step <= clamped ? 'bg-accent' : 'bg-gray-300 dark:bg-gray-600'
+        )}
+      />
+    ))}
   </span>
-  {
-    variant === 'labelled' ? (
-      <span class="text-gray-600 dark:text-gray-300">{levelName}</span>
-    ) : null
-  }
+  {variant === 'labelled' ? (
+    <span class="text-gray-600 dark:text-gray-300">{levelName}</span>
+  ) : null}
 </span>

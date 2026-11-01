@@ -34,12 +34,10 @@ const schema = {
 };
 ---
 
-{
-  items.length > 0 && (
-    <script
-      is:inline
-      type="application/ld+json"
-      set:html={JSON.stringify(schema)}
-    />
-  )
-}
+{items.length > 0 && (
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+  />
+)}

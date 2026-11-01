@@ -1,0 +1,22 @@
+diff --git a/dist/assets/fonts/infra/cached-font-fetcher.js b/dist/assets/fonts/infra/cached-font-fetcher.js
+index 1c1e69f0e52654066e1df078ce6d2306f94674af..70b572dba7620d797a3f7f32f5a3dfbedf3386ad 100644
+--- a/dist/assets/fonts/infra/cached-font-fetcher.js
++++ b/dist/assets/fonts/infra/cached-font-fetcher.js
+@@ -1,4 +1,5 @@
+ import { isAbsolute } from "node:path";
++import { fileURLToPath } from "node:url";
+ import { AstroError, AstroErrorData } from "../../../core/errors/index.js";
+ export class CachedFontFetcher {
+ 	#storage;
+@@ -24,6 +25,11 @@ export class CachedFontFetcher {
+ 				if (isAbsolute(url)) {
+ 					return await this.#readFile(url);
+ 				}
++				// unifont >=1 (npm provider) resolves package files to `file://` URLs,
++				// which Node's fetch() cannot load.
++				if (url.startsWith("file:")) {
++					return await this.#readFile(fileURLToPath(url));
++				}
+ 				const response = await this.#fetch(url, init ?? undefined);
+ 				if (!response.ok) {
+ 					throw new Error(`Response was not successful, received status code ${response.status}`);

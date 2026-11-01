@@ -3,7 +3,7 @@ icon: image
 description: Displays multiple items in a sliding gallery.
 value:
   _component: building-blocks/wrappers/carousel
-  label: ""
+  label: ''
   slides: []
   autoPlay: false
   autoScroll: false
@@ -42,6 +42,7 @@ _structures:
           icon: transition_slide
           text: Carousel Slide
           subtext:
-            - template: Contains {contentSections|array_length} content
+            - template:
+                Contains {contentSections|array_length} content
                 {"block"|pluralize=contentSections}
             - Add one or more content blocks to the grid item

@@ -81,10 +81,7 @@ frontmatter = {
 const pagination = Astro.props.page;
 const { data: posts } = pagination;
 const hrefs = page ? await getPageLanguagesAlternates(page, Astro.site) : [];
-const breadcrumbs = [
-  getHomeCrumb(language),
-  getBlogCrumb(language)
-];
+const breadcrumbs = [getHomeCrumb(language), getBlogCrumb(language)];
 
 // Collect all tag UUIDs used by posts in this language
 const usedTagIds = new Set<string>();
@@ -93,8 +90,9 @@ posts.forEach((p) => {
 });
 
 // Fetch only the tags that are actually used
-const allPostTags = await getCollection('postTags', (t) =>
-  t.data.language === language && usedTagIds.has(t.data.id)
+const allPostTags = await getCollection(
+  'postTags',
+  (t) => t.data.language === language && usedTagIds.has(t.data.id)
 );
 const tagOptions = allPostTags
   .map((t) => ({ id: t.data.id, name: t.data.name ?? t.data.title }))
@@ -125,10 +123,26 @@ const collectionSchema = {
 };
 ---
 
-<PaginatedLayout frontmatter={frontmatter} hrefs={hrefs} breadcrumbs={breadcrumbs}>
-  <script is:inline async type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
-  <section data-blog-filter-container class="blog-index mx-auto flex flex-col justify-center">
-    <BlogFilterBar language={language} totalCount={posts.length} tags={tagOptions} />
+<PaginatedLayout
+  frontmatter={frontmatter}
+  hrefs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <script
+    is:inline
+    async
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionSchema)}
+  />
+  <section
+    data-blog-filter-container
+    class="blog-index mx-auto flex flex-col justify-center"
+  >
+    <BlogFilterBar
+      language={language}
+      totalCount={posts.length}
+      tags={tagOptions}
+    />
     <BlogList posts={posts} />
   </section>
 </PaginatedLayout>

@@ -149,48 +149,43 @@ const breadcrumbs = [
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
     <div class="flex items-center gap-3 px-6">
       <i
         class:list={[iconClass, 'h-8 w-8 text-amber-600 dark:text-amber-400']}
-        aria-hidden="true"></i>
-      <Heading as="h1"
-        >{categoryData.data.title ?? categoryData.data.seo?.page_title}</Heading
-      >
+        aria-hidden="true"
+      ></i>
+      <Heading as="h1">
+        {categoryData.data.title ?? categoryData.data.seo?.page_title}
+      </Heading>
     </div>
     <PageHelper contentBlocks={categoryData.data.content_blocks ?? []} />
-    {
-      bikes.length > 0 ? (
-        <div class="px-6">
-          <Heading as="h2">
-            {t('Tours.BikeCategories.BikesTitle', language).replace(
-              '$1',
-              displayName
-            )}
-          </Heading>
-          <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {bikes.map((bike) => (
-              <BikesCard bike={bike} language={language} imageWidths={[400]} />
-            ))}
-          </div>
+    {bikes.length > 0 ? (
+      <div class="px-6">
+        <Heading as="h2">
+          {t('Tours.BikeCategories.BikesTitle', language).replace(
+            '$1',
+            displayName
+          )}
+        </Heading>
+        <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {bikes.map((bike) => (
+            <BikesCard bike={bike} language={language} imageWidths={[400]} />
+          ))}
         </div>
-      ) : null
-    }
+      </div>
+    ) : null}
     <div data-tour-filter-container>
       <TourFilterBar
         language={language}
@@ -214,63 +209,57 @@ const breadcrumbs = [
           slug: tg.data.path
         }))}
       />
-      {
-        packageTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.BikeCategories.PackageTour.Title', language).replace(
-                '$1',
-                displayName
-              )}
-            </Heading>
-            <TourList items={packageTours} language={language} />
-          </div>
-        ) : null
-      }
-      {
-        dayTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.BikeCategories.DayTour.Title', language).replace(
-                '$1',
-                displayName
-              )}
-            </Heading>
-            <TourList items={dayTours} language={language} />
-          </div>
-        ) : null
-      }
-    </div>
-    {
-      packageTours.length == 0 && dayTours.length === 0 ? (
-        <div class="flex flex-col gap-2 px-6">
-          <Text size="xlarge">
-            {t('Tours.BikeCategories.NoResults.Title', language).replace(
+      {packageTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.BikeCategories.PackageTour.Title', language).replace(
               '$1',
               displayName
             )}
-          </Text>
-          <Text size="large">
-            {t('Tours.BikeCategories.NoResults.AlternateTitle', language)}
-          </Text>
-          <ul class="list-disc pl-8">
-            {bikeCategories
-              .filter((c) => c.data.id !== categoryData.data.id)
-              .map((c) => (
-                <li class="pl-2">
-                  <a
-                    href={getBikeCategoryPath(c, language)}
-                    title={c.data.name ?? c.data.title}
-                    class="underline"
-                  >
-                    {c.data.name ?? c.data.title}
-                  </a>
-                </li>
-              ))}
-          </ul>
+          </Heading>
+          <TourList items={packageTours} language={language} />
         </div>
-      ) : null
-    }
+      ) : null}
+      {dayTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.BikeCategories.DayTour.Title', language).replace(
+              '$1',
+              displayName
+            )}
+          </Heading>
+          <TourList items={dayTours} language={language} />
+        </div>
+      ) : null}
+    </div>
+    {packageTours.length == 0 && dayTours.length === 0 ? (
+      <div class="flex flex-col gap-2 px-6">
+        <Text size="xlarge">
+          {t('Tours.BikeCategories.NoResults.Title', language).replace(
+            '$1',
+            displayName
+          )}
+        </Text>
+        <Text size="large">
+          {t('Tours.BikeCategories.NoResults.AlternateTitle', language)}
+        </Text>
+        <ul class="list-disc pl-8">
+          {bikeCategories
+            .filter((c) => c.data.id !== categoryData.data.id)
+            .map((c) => (
+              <li class="pl-2">
+                <a
+                  href={getBikeCategoryPath(c, language)}
+                  title={c.data.name ?? c.data.title}
+                  class="underline"
+                >
+                  {c.data.name ?? c.data.title}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ) : null}
     <PageHelper
       contentBlocks={categoryData.data.content_blocks_after ?? []}
       sectionsKey="content_blocks_after"

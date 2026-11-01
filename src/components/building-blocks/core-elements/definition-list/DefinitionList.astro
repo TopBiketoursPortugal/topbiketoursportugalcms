@@ -1,47 +1,43 @@
 ---
-import DefinitionListItem from "./DefinitionListItem.astro";
+import DefinitionListItem from './DefinitionListItem.astro';
 
 type ItemProps = Record<string, unknown>;
 
 const {
   items,
-  alignmentHorizontal = "start",
-  class: className,
-  "data-children-prop": childrenDataProp,
+  alignmentHorizontal = 'start',
+  'class': className,
+  'data-children-prop': childrenDataProp,
   useDefaultEditableBinding = false,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
-const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "items" : null);
+const effectiveChildrenProp =
+  childrenDataProp ?? (useDefaultEditableBinding ? 'items' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 const hasItems = items?.length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 
 if (!_component && !hasItems && !hasSlotContent) return;
 ---
 
-<div
-  class:list={["definition-list", className]}
-  {...htmlAttributes}
->
+<div class:list={['definition-list', className]} {...htmlAttributes}>
   <dl
     class:list={[`alignment-${alignmentHorizontal}`]}
     {...arrayDataAttributes}
   >
     <slot>
-      {
-        items?.map((item: ItemProps) => (
-          <DefinitionListItem
-            data-id="building-blocks/core-elements/definition-list/definition-list-item"
-            data-editable="array-item"
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-            {...item}
-          />
-        ))
-      }
+      {items?.map((item: ItemProps) => (
+        <DefinitionListItem
+          data-id="building-blocks/core-elements/definition-list/definition-list-item"
+          data-editable="array-item"
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+          {...item}
+        />
+      ))}
     </slot>
   </dl>
 </div>

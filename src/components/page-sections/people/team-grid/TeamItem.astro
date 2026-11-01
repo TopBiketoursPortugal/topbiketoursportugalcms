@@ -1,16 +1,16 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import Card from "@wrappers/card/Card.astro";
-import GridItem from "@wrappers/grid/GridItem.astro";
+import Heading from '@core-elements/heading/Heading.astro';
+import Image from '@core-elements/image/Image.astro';
+import SimpleText from '@core-elements/simple-text/SimpleText.astro';
+import Card from '@wrappers/card/Card.astro';
+import GridItem from '@wrappers/grid/GridItem.astro';
 
 const {
-  name = "",
-  role = "",
-  bio = "",
-  imageSource = "",
-  imageAlt = "",
+  name = '',
+  role = '',
+  bio = '',
+  imageSource = '',
+  imageAlt = '',
   class: className,
   _component,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -20,7 +20,7 @@ const {
 
 <GridItem {...htmlAttributes}>
   <Card
-    class:list={["team-item", className]}
+    class:list={['team-item', className]}
     paddingHorizontal="lg"
     paddingVertical="lg"
     rounded

@@ -1,45 +1,44 @@
 ---
-import MarkdownIt from "markdown-it";
+import MarkdownIt from 'markdown-it';
 
 const {
   text,
-  size = "md",
-  alignmentHorizontal = "start",
-  class: className,
+  size = 'md',
+  alignmentHorizontal = 'start',
+  'class': className,
   useDefaultEditableBinding = false,
-  "data-prop": customDataProp,
+  'data-prop': customDataProp,
   _component,
   ...htmlAttributes
 } = Astro.props;
 
 const md = MarkdownIt({ html: true });
-let MarkdownText = text ? md.renderInline(text) : "";
+let MarkdownText = text ? md.renderInline(text) : '';
 
-MarkdownText = MarkdownText.replace(/\n/g, "<br />");
+MarkdownText = MarkdownText.replace(/\n/g, '<br />');
 
-const effectiveDataProp = customDataProp ?? (useDefaultEditableBinding ? "text" : null);
+const effectiveDataProp =
+  customDataProp ?? (useDefaultEditableBinding ? 'text' : null);
 const textDataAttributes = effectiveDataProp
-  ? { "data-editable": "text", "data-prop": effectiveDataProp }
+  ? { 'data-editable': 'text', 'data-prop': effectiveDataProp }
   : {};
 
 const hasText = text?.trim().length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 
 if (!_component && !hasText && !hasSlotContent) return;
 ---
 
-<div
-  class:list={["simple-text", className]}
-  {...htmlAttributes}
->
-  <p class:list={["simple-text-content", size && `size-${size}`, `align-${alignmentHorizontal}`]}>
-    <span
-      class="simple-text-inner"
-      {...textDataAttributes}
-    >
-      <slot>
-        {text && <Fragment set:html={MarkdownText} />}
-      </slot>
+<div class:list={['simple-text', className]} {...htmlAttributes}>
+  <p
+    class:list={[
+      'simple-text-content',
+      size && `size-${size}`,
+      `align-${alignmentHorizontal}`
+    ]}
+  >
+    <span class="simple-text-inner" {...textDataAttributes}>
+      <slot>{text && <Fragment set:html={MarkdownText} />}</slot>
     </span>
   </p>
 </div>

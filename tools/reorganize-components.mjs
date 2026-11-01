@@ -22,61 +22,61 @@ const EXTS = new Set(['.astro', '.ts', '.tsx', '.js', '.jsx', '.mjs']);
 
 // top-level dir under src/components → new subpath under src/components
 const MOVES = {
-  background: 'building-blocks/background',
-  buttons: 'building-blocks/buttons',
-  card: 'building-blocks/card',
-  container: 'building-blocks/container',
-  form: 'building-blocks/form',
-  grid: 'building-blocks/grid',
+  'background': 'building-blocks/background',
+  'buttons': 'building-blocks/buttons',
+  'card': 'building-blocks/card',
+  'container': 'building-blocks/container',
+  'form': 'building-blocks/form',
+  'grid': 'building-blocks/grid',
   'item-grid': 'building-blocks/item-grid',
-  linkbutton: 'building-blocks/linkbutton',
+  'linkbutton': 'building-blocks/linkbutton',
   'pricing-table': 'building-blocks/pricing-table',
-  rating: 'building-blocks/rating',
+  'rating': 'building-blocks/rating',
   'responsive-image': 'building-blocks/responsive-image',
-  separator: 'building-blocks/separator',
-  stack: 'building-blocks/stack',
-  tabs: 'building-blocks/tabs',
-  testimonials: 'building-blocks/testimonials',
-  tooltip: 'building-blocks/tooltip',
-  typography: 'building-blocks/typography',
-  utility: 'building-blocks/utility',
+  'separator': 'building-blocks/separator',
+  'stack': 'building-blocks/stack',
+  'tabs': 'building-blocks/tabs',
+  'testimonials': 'building-blocks/testimonials',
+  'tooltip': 'building-blocks/tooltip',
+  'typography': 'building-blocks/typography',
+  'utility': 'building-blocks/utility',
   'widget-wrapper': 'building-blocks/widget-wrapper',
-  accordion: 'page-sections/accordion',
-  collection: 'page-sections/collection',
+  'accordion': 'page-sections/accordion',
+  'collection': 'page-sections/collection',
   'featured-posts': 'page-sections/featured-posts',
   'featured-testimonials': 'page-sections/featured-testimonials',
   'featured-tours': 'page-sections/featured-tours',
-  features: 'page-sections/features', // merges into the starter group dir
-  gallery: 'page-sections/gallery',
-  headline: 'page-sections/headline',
-  hero: 'page-sections/heroes/hero',
+  'features': 'page-sections/features', // merges into the starter group dir
+  'gallery': 'page-sections/gallery',
+  'headline': 'page-sections/headline',
+  'hero': 'page-sections/heroes/hero',
   'left-right': 'page-sections/left-right',
-  text: 'page-sections/text',
-  timeline: 'page-sections/timeline',
+  'text': 'page-sections/text',
+  'timeline': 'page-sections/timeline',
   'two-column-markdown': 'page-sections/two-column-markdown',
   'wetravel-button': 'page-sections/wetravel-button',
-  youtube: 'page-sections/youtube',
-  breadcrumbs: 'navigation/breadcrumbs',
+  'youtube': 'page-sections/youtube',
+  'breadcrumbs': 'navigation/breadcrumbs',
   'mega-menu': 'navigation/mega-menu'
 };
 
 // old `_component` name → new (path-derived, filename-collapse rule)
 const NAME_MAP = {
-  accordion: 'page-sections/accordion',
-  collection: 'page-sections/collection',
+  'accordion': 'page-sections/accordion',
+  'collection': 'page-sections/collection',
   'featured-posts': 'page-sections/featured-posts',
   'featured-testimonials': 'page-sections/featured-testimonials',
   'featured-tours': 'page-sections/featured-tours',
-  features: 'page-sections/features',
-  gallery: 'page-sections/gallery',
-  headline: 'page-sections/headline',
-  hero: 'page-sections/heroes/hero',
+  'features': 'page-sections/features',
+  'gallery': 'page-sections/gallery',
+  'headline': 'page-sections/headline',
+  'hero': 'page-sections/heroes/hero',
   'left-right': 'page-sections/left-right',
-  text: 'page-sections/text',
-  timeline: 'page-sections/timeline',
+  'text': 'page-sections/text',
+  'timeline': 'page-sections/timeline',
   'two-column-markdown': 'page-sections/two-column-markdown',
   'wetravel-button': 'page-sections/wetravel-button',
-  youtube: 'page-sections/youtube',
+  'youtube': 'page-sections/youtube',
   'buttons/primary': 'building-blocks/buttons/primary',
   'buttons/secondary': 'building-blocks/buttons/secondary'
 };
@@ -111,14 +111,12 @@ for (const file of walk('src')) {
   let content = original;
 
   // (a) root-based and absolute specifiers + glob patterns + path templates
-  content = content.replace(
-    /src\/components\/([a-z-]+)\//g,
-    (whole, top) => (top in MOVES ? `src/components/${MOVES[top]}/` : whole)
+  content = content.replace(/src\/components\/([a-z-]+)\//g, (whole, top) =>
+    top in MOVES ? `src/components/${MOVES[top]}/` : whole
   );
   // (b) @components alias imports
-  content = content.replace(
-    /@components\/([a-z-]+)\//g,
-    (whole, top) => (top in MOVES ? `@components/${MOVES[top]}/` : whole)
+  content = content.replace(/@components\/([a-z-]+)\//g, (whole, top) =>
+    top in MOVES ? `@components/${MOVES[top]}/` : whole
   );
   // (c) relative specifiers on import-ish lines, resolved from the OLD dir
   const importerOldDir = path.posix.dirname(file);

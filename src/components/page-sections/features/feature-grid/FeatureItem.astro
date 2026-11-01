@@ -1,15 +1,15 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Icon from "@core-elements/icon/Icon.astro";
-import Text from "@core-elements/text/Text.astro";
-import Card from "@wrappers/card/Card.astro";
-import GridItem from "@wrappers/grid/GridItem.astro";
+import Heading from '@core-elements/heading/Heading.astro';
+import Icon from '@core-elements/icon/Icon.astro';
+import Text from '@core-elements/text/Text.astro';
+import Card from '@wrappers/card/Card.astro';
+import GridItem from '@wrappers/grid/GridItem.astro';
 
 const {
-  title = "",
-  description = "",
-  iconName = "",
-  iconColor = "default",
+  title = '',
+  description = '',
+  iconName = '',
+  iconColor = 'default',
   iconBackground = true,
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -18,12 +18,9 @@ const {
 } = Astro.props;
 ---
 
-<GridItem
-  class="feature-grid-item"
-  {...htmlAttributes}
->
+<GridItem class="feature-grid-item" {...htmlAttributes}>
   <Card
-    class:list={["feature-item", className]}
+    class:list={['feature-item', className]}
     paddingHorizontal="lg"
     paddingVertical="lg"
     rounded

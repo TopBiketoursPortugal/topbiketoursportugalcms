@@ -1,14 +1,15 @@
 label: Image Carousel
 icon: gallery_thumbnail
-description: Displays images in a carousel with a thumbnail strip for navigation.
+description:
+  Displays images in a carousel with a thumbnail strip for navigation.
 value:
   _component: building-blocks/wrappers/image-carousel
-  label: ""
+  label: ''
   images: []
   showArrows: true
   loop: true
   aspectRatio: landscape
-  sizes: "(max-width: 1280px) 100vw, 1280px"
+  sizes: '(max-width: 1280px) 100vw, 1280px'
   widths:
     - 640
     - 1280
@@ -30,8 +31,8 @@ _structures:
       - label: Image
         icon: image
         value:
-          source: ""
-          alt: ""
+          source: ''
+          alt: ''
           positionVertical: center
           positionHorizontal: center
         preview:
@@ -49,7 +50,7 @@ _structures:
             options:
               paths:
                 uploads: src/assets/images
-                static: ""
+                static: ''
               resize_style: contain
               width: 1920
               height: 1280

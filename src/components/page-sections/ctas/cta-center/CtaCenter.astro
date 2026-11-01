@@ -1,18 +1,18 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import Text from "@core-elements/text/Text.astro";
-import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Text from '@core-elements/text/Text.astro';
+import ButtonGroup from '@wrappers/button-group/ButtonGroup.astro';
 
 const {
-  heading = "",
-  subtext = "",
+  heading = '',
+  subtext = '',
   buttonSections = [],
   sectionLabel,
-  maxContentWidth = "lg",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = 'lg',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -23,7 +23,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["cta-center", className]}
+  class:list={['cta-center', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -41,11 +41,7 @@ const {
     data-prop="heading"
     text={heading}
   />
-  <Text
-    alignmentHorizontal="center"
-    data-prop="subtext"
-    text={subtext}
-  />
+  <Text alignmentHorizontal="center" data-prop="subtext" text={subtext} />
   <ButtonGroup
     class="buttonSections"
     buttonSections={buttonSections}

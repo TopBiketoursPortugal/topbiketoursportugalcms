@@ -1,11 +1,12 @@
 pre-commit:
   commands:
-    prettier:
-      glob: '*.{js,ts,astro,json,md,css}'
-      run: pnpm prettier --write {staged_files} && git add {staged_files}
-    eslint:
-      glob: '*.{js,ts,astro}'
-      run: pnpm eslint --fix {staged_files} && git add {staged_files}
+    oxfmt:
+      glob: '*.{js,mjs,ts,tsx,astro,json,md,css}'
+      exclude: 'src/content/**'
+      run: pnpm oxfmt {staged_files} && git add {staged_files}
+    oxlint:
+      glob: '*.{js,mjs,ts,tsx,astro}'
+      run: pnpm oxlint --fix {staged_files} && git add {staged_files}
     # A new English entry gets a stub beside it in every other language, so a translation is
     # never simply forgotten. The stub is created `draft: false` and stays out of
     # the build until someone translates it — see src/schemas/published-glob.ts.
