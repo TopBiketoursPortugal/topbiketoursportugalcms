@@ -418,6 +418,11 @@
       "status": 301
     },
     {
+      "from": "/blog/greater/",
+      "destination": "/blog/multi-day-cycling-tours-atlantic-coast-portugal/",
+      "status": 301
+    },
+    {
       "from": "/blog/guide-to-the-best-tours-in-portugal-unique-experiences/",
       "destination": "/blog/cycling-with-kids-portugal/",
       "status": 301
@@ -455,11 +460,6 @@
     {
       "from": "/blog/how-to-keep-your-bike-in-perfect-condition-or-top-bike-tours-portugal/",
       "destination": "/blog/how-to-keep-your-bike-in-perfect-condition/",
-      "status": 301
-    },
-    {
-      "from": "/blog/how-to-prepare-for-a-multi-day-algarve-cycling-tour/",
-      "destination": "/blog/how-to-prepare-multi-day-algarve-bike-tour/",
       "status": 301
     },
     {
@@ -7288,6 +7288,11 @@
       "status": 301
     },
     {
+      "from": "/pt/blog/greater/",
+      "destination": "/pt/blog/bicicletas-electricas-como-ajudam-no-seu-percurso/",
+      "status": 301
+    },
+    {
       "from": "/pt/blog/guia-completo-de-bicicletas-tipos-diferencas-e-como-escolher-em-portugal/",
       "destination": "/pt/blog/guia-completo-de-bicicletas/",
       "status": 301
@@ -7460,11 +7465,6 @@
     {
       "from": "/pt/blog/onde-ficar-alojadoo-no-tour-de-bicicleta-de-porto-a-lisboa/",
       "destination": "/pt/blog/onde-ficar-alojado-no-tour-porto-a-lisboa-em-bicicleta/",
-      "status": 301
-    },
-    {
-      "from": "/pt/blog/onde-ficar-num-tour-de-bicicleta-no-vale-do-douro/",
-      "destination": "/pt/blog/onde-ficar-no-tour-de-bicicleta-no-vale-do-douro/",
       "status": 301
     },
     {
