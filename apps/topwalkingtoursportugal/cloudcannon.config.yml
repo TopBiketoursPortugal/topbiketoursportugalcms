@@ -195,6 +195,15 @@ collections_config:
     url: /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: code
+      image:
+        - key: image.src
+        - key: seo.featured_image
+      icon: directions_walk
     _inputs:
       title:
         type: text
