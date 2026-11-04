@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from 'src/layouts/Layout.astro';
+import { languageCodes, type LanguageCodes } from 'src/schemas/language';
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import Stack from 'src/components/building-blocks/stack/stack.astro';
+import TourRiderLevelsCard from 'src/components/page-sections/collection/tour-rider-levels-card.astro';
+import { t } from 'utils/i18n';
+import { getRiderLevelsListingPath, trailingSlash } from 'utils/permalinks';
+import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
+import LanguageData from 'src/../data/languages.json';
+
+export async function getStaticPaths() {
+  return languageCodes.map((language) => ({
+    params: {
+      language: language === 'en' ? undefined : language
+    },
+    props: { language }
+  }));
+}
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+
+const levels = await getCollection(
+  'tourRiderLevels',
+  (t) => t.data.language === language
+);
+
+const tours = await getCollection('tours', (t) => t.data.language === language);
+
+const levelCounts = new Map<string, number>();
+for (const level of levels) {
+  const count = tours.filter((t) =>
+    (t.data.riderLevels ?? []).includes(level.data.id)
+  ).length;
+  levelCounts.set(level.data.id, count);
+}
+
+const pageTitle = t('Tour.RiderLevelsPageTitle', language);
+const pageDescription = t('Tour.RiderLevelsPageDescription', language);
+
+const hrefs = languageCodes.map((lang) => ({
+  href: `${Astro.site}${lang === 'en' ? '' : lang + '/'}tours/rider-levels${trailingSlash}`,
+  hreflang: lang
+}));
+
+const defaultHref = hrefs.find((h) => h.hreflang === 'en');
+
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getToursCrumb(language),
+  {
+    name: t('Tour.RiderLevelsTitle', language),
+    url: getRiderLevelsListingPath(language)
+  }
+];
+---
+
+<Layout
+  class="mb-16 px-8"
+  title={pageTitle}
+  seo={{ page_title: pageTitle, page_description: pageDescription }}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <slot slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  <Stack spacing="large" layout="vertical" class="pt-6">
+    <Heading as="h1" class="px-6">{pageTitle}</Heading>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      {
+        levels.map((level) => (
+          <TourRiderLevelsCard
+            level={level}
+            language={language}
+            tourCount={levelCounts.get(level.data.id) ?? 0}
+            imageWidths={[400]}
+          />
+        ))
+      }
+    </div>
+  </Stack>
+</Layout>

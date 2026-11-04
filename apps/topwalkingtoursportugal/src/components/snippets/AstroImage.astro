@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImageSrc } from 'utils/get-image';
+
+const block = Astro.props;
+
+const imageSrc = await resolveImageSrc(block.image_path);
+---
+
+<Image
+  alt={block.image_alt ?? 'Always'}
+  widths={[320, 500, 640, 1280]}
+  sizes={`(max-width: 640px) 320px, (max-width: 960px) 500px, (max-width: 1280px) 640px, 1280px`}
+  src={imageSrc}
+/>

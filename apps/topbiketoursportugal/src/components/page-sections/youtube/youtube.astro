@@ -1,0 +1,151 @@
+---
+// src/components/YouTubeVideo.astro
+type YouTubeVideoProps = {
+  /**
+   * YouTube video ID (the part after v= in the URL)
+   * @example "dQw4w9WgXcQ"
+   */
+  videoId: string;
+
+  /**
+   * Width of the video player
+   * @default "100%"
+   */
+  width?: string;
+
+  /**
+   * Height of the video player
+   * @default "400px"
+   */
+  height?: string;
+
+  /**
+   * Title of the video (used for caption and aria-label)
+   */
+  title?: string;
+
+  /**
+   * Allow fullscreen mode
+   * @default true
+   */
+  allowFullscreen?: boolean;
+
+  /**
+   * Loading strategy
+   * @default "lazy"
+   */
+  loading?: 'eager' | 'lazy';
+
+  /**
+   * Additional CSS class
+   */
+  className?: string;
+};
+
+export interface Props extends YouTubeVideoProps {
+  // Optional props with defaults
+  width?: string;
+  height?: string;
+  title?: string;
+  allowFullscreen?: boolean;
+  loading?: 'eager' | 'lazy';
+  className?: string;
+}
+
+const {
+  videoId,
+  title = 'YouTube Video Player',
+  loading = 'lazy',
+  className = ''
+} = Astro.props;
+
+const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`;
+---
+
+<figure class={`youtube-video-container m-0 max-w-full ${className}`}>
+  <div
+    class="youtube-video-wrapper relative h-0 w-full overflow-hidden bg-black"
+    style={`padding-bottom: ${(9 / 16) * 100}%;`}
+    data-video-id={videoId}
+  >
+    <div
+      class="youtube-facade absolute top-0 left-0 h-full w-full cursor-pointer"
+    >
+      <img
+        src={thumbnailUrl}
+        alt={title}
+        loading={loading}
+        decoding="async"
+        class="absolute top-0 left-0 h-full w-full object-cover"
+      />
+      <button
+        class="youtube-play-button absolute top-1/2 left-1/2 h-[48px] w-[68px] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-none bg-transparent p-0 transition-transform duration-200 hover:scale-110"
+        aria-label={`Play ${title}`}
+        data-embed-url={embedUrl}
+      >
+        <svg height="100%" version="1.1" viewBox="0 0 68 48" width="100%">
+          <path
+            d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z"
+            fill="#f00"></path>
+          <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  {
+    title && (
+      <figcaption class="mt-2 text-center text-[0.9rem] text-(--text-color-secondary)">
+        {title}
+      </figcaption>
+    )
+  }
+</figure>
+
+<script>
+  function initYouTubeFacades() {
+    const playButtons = document.querySelectorAll('.youtube-play-button');
+
+    playButtons.forEach((button) => {
+      if (button.hasAttribute('data-initialized')) return;
+      button.setAttribute('data-initialized', 'true');
+
+      button.addEventListener('click', function (this: HTMLElement) {
+        const embedUrl = this.getAttribute('data-embed-url');
+        const wrapper = this.closest('.youtube-video-wrapper');
+
+        if (embedUrl && wrapper) {
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('src', embedUrl);
+          iframe.className = 'absolute top-0 left-0 w-full h-full border-none';
+          iframe.setAttribute(
+            'allow',
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          );
+          iframe.setAttribute('allowfullscreen', 'true');
+          iframe.setAttribute(
+            'title',
+            this.getAttribute('aria-label') || 'YouTube video player'
+          );
+
+          // Remove the facade
+          const facade = wrapper.querySelector('.youtube-facade');
+          if (facade) {
+            facade.remove();
+          }
+
+          // Add the iframe
+          wrapper.appendChild(iframe);
+        }
+      });
+    });
+  }
+
+  // Initialize on page load
+  initYouTubeFacades();
+
+  // Re-initialize after Astro page transitions
+  document.addEventListener('astro:after-swap', () => {
+    initYouTubeFacades();
+  });
+</script>

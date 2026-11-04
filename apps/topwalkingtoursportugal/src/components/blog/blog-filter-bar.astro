@@ -1,0 +1,249 @@
+---
+import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
+
+type FilterOption = { id: string; name: string };
+type Props = {
+  language: LanguageCodes;
+  totalCount: number;
+  tags?: FilterOption[];
+};
+
+const { language, totalCount, tags = [] } = Astro.props;
+
+const resultCountTemplate = t('Blog.Filter.ResultCount', language);
+const clearLabel = t('Blog.Filter.Clear', language);
+const searchPlaceholder = t('Blog.Filter.SearchPlaceholder', language);
+const noResultsText = t('Blog.Filter.NoResults', language);
+const tagLabel = t('Blog.Filter.Tag', language);
+---
+
+<div
+  data-blog-filter-bar
+  data-total-count={totalCount}
+  data-result-template={resultCountTemplate}
+  class="sticky top-16 z-30 border-b border-gray-200 bg-white/80 px-6 py-3 backdrop-blur-md dark:border-gray-700 dark:bg-gray-900/80"
+>
+  <div class="flex flex-wrap items-center gap-3">
+    <!-- Search input -->
+    <div class="relative min-w-[200px] flex-1">
+      <i
+        class="icon-[ph--magnifying-glass] absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400"
+        aria-hidden="true"></i>
+      <input
+        type="search"
+        data-blog-filter-search
+        placeholder={searchPlaceholder}
+        aria-label={searchPlaceholder}
+        class="focus:border-accent focus:ring-accent dark:focus:border-accent dark:focus:ring-accent w-full rounded-lg border border-gray-300 bg-white py-2 pr-3 pl-9 text-sm transition-colors outline-none focus:ring-1 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+      />
+    </div>
+
+    <!-- Tag dropdown -->
+    {
+      tags.length > 0 && (
+        <select
+          data-blog-filter-select="tag"
+          aria-label={tagLabel}
+          class="focus:border-accent focus:ring-accent dark:focus:border-accent dark:focus:ring-accent rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm transition-colors outline-none focus:ring-1 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100"
+        >
+          <option value="">{tagLabel}</option>
+          {tags.map((tg) => (
+            <option value={tg.id}>{tg.name}</option>
+          ))}
+        </select>
+      )
+    }
+
+    <!-- Result count -->
+    <span
+      data-blog-filter-count
+      class="text-sm text-gray-500 dark:text-gray-400"></span>
+
+    <!-- Clear filters button -->
+    <button
+      data-blog-filter-clear
+      class="hidden rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+    >
+      {clearLabel}
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <p
+    data-blog-filter-empty
+    class="mt-3 hidden text-center text-sm text-gray-500 dark:text-gray-400"
+  >
+    {noResultsText}
+  </p>
+</div>
+
+<script>
+  function initBlogFilter() {
+    document
+      .querySelectorAll<HTMLElement>('[data-blog-filter-bar]')
+      .forEach((bar) => {
+        if (bar.dataset.blogFilterInitialized) return;
+        bar.dataset.blogFilterInitialized = 'true';
+
+        const container = bar.closest('[data-blog-filter-container]');
+        if (!container) return;
+
+        const searchInput = bar.querySelector<HTMLInputElement>(
+          '[data-blog-filter-search]'
+        );
+        const tagSelect = bar.querySelector<HTMLSelectElement>(
+          '[data-blog-filter-select="tag"]'
+        );
+        const countEl = bar.querySelector<HTMLElement>(
+          '[data-blog-filter-count]'
+        );
+        const clearBtn = bar.querySelector<HTMLButtonElement>(
+          '[data-blog-filter-clear]'
+        );
+        const emptyEl = bar.querySelector<HTMLElement>(
+          '[data-blog-filter-empty]'
+        );
+        const totalCount = parseInt(bar.dataset.totalCount ?? '0', 10);
+        const resultTemplate =
+          bar.dataset.resultTemplate ?? 'Showing $1 of $2 posts';
+
+        const cards = () =>
+          container.querySelectorAll<HTMLElement>('.blog-card-filterable');
+
+        const prefersReducedMotion = window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        function applyFilters() {
+          const query = (searchInput?.value ?? '').toLowerCase().trim();
+          const selectedTag = tagSelect?.value ?? '';
+          const hasActiveFilters = query.length > 0 || selectedTag.length > 0;
+          let visibleIndex = 0;
+
+          cards().forEach((card) => {
+            const title = card.getAttribute('data-blog-title') ?? '';
+            const cardTags = card.getAttribute('data-blog-tags') ?? '';
+
+            const matchesSearch = !query || title.includes(query);
+            const matchesTag =
+              !selectedTag || cardTags.split(' ').includes(selectedTag);
+            const visible = matchesSearch && matchesTag;
+
+            if (visible) {
+              showCard(card, visibleIndex);
+              visibleIndex++;
+            } else {
+              hideCard(card);
+            }
+          });
+
+          // Update count
+          if (countEl) {
+            if (hasActiveFilters) {
+              countEl.textContent = resultTemplate
+                .replace('$1', String(visibleIndex))
+                .replace('$2', String(totalCount));
+            } else {
+              countEl.textContent = '';
+            }
+          }
+
+          // Toggle clear button
+          if (clearBtn) {
+            clearBtn.classList.toggle('hidden', !hasActiveFilters);
+          }
+
+          // Toggle empty state
+          if (emptyEl) {
+            emptyEl.classList.toggle(
+              'hidden',
+              visibleIndex > 0 || !hasActiveFilters
+            );
+          }
+        }
+
+        function hideCard(card: HTMLElement) {
+          if (card.hasAttribute('data-filter-hidden')) return;
+
+          if (prefersReducedMotion) {
+            card.setAttribute('data-filter-hidden', '');
+            card.style.display = 'none';
+            return;
+          }
+
+          card.setAttribute('data-filter-hidden', '');
+          card.style.transitionDelay = '';
+
+          const onEnd = () => {
+            card.removeEventListener('transitionend', onEnd);
+            if (card.hasAttribute('data-filter-hidden')) {
+              card.style.display = 'none';
+            }
+          };
+          card.addEventListener('transitionend', onEnd, { once: true });
+
+          setTimeout(() => {
+            if (card.hasAttribute('data-filter-hidden')) {
+              card.style.display = 'none';
+            }
+          }, 400);
+        }
+
+        function showCard(card: HTMLElement, index: number) {
+          if (
+            !card.hasAttribute('data-filter-hidden') &&
+            card.style.display !== 'none'
+          ) {
+            card.style.transitionDelay = '';
+            return;
+          }
+
+          if (prefersReducedMotion) {
+            card.removeAttribute('data-filter-hidden');
+            card.style.display = '';
+            card.style.transitionDelay = '';
+            return;
+          }
+
+          card.style.display = '';
+          void card.offsetHeight;
+          card.style.transitionDelay = `${index * 0.05}s`;
+          card.removeAttribute('data-filter-hidden');
+
+          const onEnd = () => {
+            card.removeEventListener('transitionend', onEnd);
+            card.style.transitionDelay = '';
+          };
+          card.addEventListener('transitionend', onEnd, { once: true });
+
+          setTimeout(
+            () => {
+              card.style.transitionDelay = '';
+            },
+            400 + index * 50
+          );
+        }
+
+        // Debounced search
+        let searchTimeout: ReturnType<typeof setTimeout>;
+        searchInput?.addEventListener('input', () => {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(applyFilters, 200);
+        });
+
+        // Tag dropdown change
+        tagSelect?.addEventListener('change', applyFilters);
+
+        // Clear button
+        clearBtn?.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          if (tagSelect) tagSelect.value = '';
+          applyFilters();
+        });
+      });
+  }
+
+  initBlogFilter();
+  document.addEventListener('astro:page-load', initBlogFilter);
+</script>

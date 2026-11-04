@@ -1,0 +1,97 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageOutputFormat, ImageQualityPreset } from 'astro';
+import { getImageByPath } from 'utils/get-image';
+import { cn } from 'utils/cn';
+
+export type ResponsiveImageProps = {
+  alt?: string;
+  fetchPriority?: 'low' | 'high';
+  src: string;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  quality?: ImageQualityPreset | number;
+  formats?: ImageOutputFormat[];
+  widths?: number[];
+  /**
+   * The slot this image actually occupies, as a CSS `sizes` list. Without it
+   * Astro falls back to `100vw`, so the browser shops for a viewport-wide
+   * candidate and settles for the largest available — which is how a card
+   * image can be served at 300w into a 400px slot and look soft on any
+   * retina screen. Pass the real measurement wherever the slot is known.
+   */
+  sizes?: string;
+  paralax?: boolean;
+  /**
+   * Force jampack's above-the-fold verdict for this image.
+   *
+   * The deploy runs `pnpm dlx @divriots/jampack ./dist` after the Astro build,
+   * and jampack decides "above the fold" by byte offset — `<main>.startIndex +
+   * 5000` — not by layout. Anything it judges above the fold has its
+   * `loading="lazy"` stripped and `fetchpriority="high"` set.
+   *
+   * That heuristic misreads any markup that sits early in the document but is
+   * not actually visible, which on this site means the mega-menu: it renders 24
+   * tour cards into the <header> of every page, ~190 KB before <main> begins.
+   *
+   * Pass `false` for images inside collapsed or offscreen UI. Jampack reads the
+   * resulting `data-abovethefold="0"` and removes the attribute from its output.
+   */
+  aboveTheFold?: boolean;
+};
+
+type Props = ResponsiveImageProps;
+
+const {
+  alt = '',
+  src,
+  loading = 'lazy',
+  fetchPriority = 'auto',
+  // `'max'` is quality 100, which for AVIF is close to lossless and the reason
+  // these averaged 238 KB each. AVIF at 80 is visually indistinguishable for
+  // photographic content at a fraction of the bytes; the preset is used rather
+  // than a number so it keeps tracking Astro's table. Per-image `quality` wins
+  // over `image.service.config` in astro.config.ts, so this default — not the
+  // config — is what actually governs these images.
+  quality = 'high',
+  formats = ['avif'],
+  widths = [480, 768, 1024, 1920],
+  sizes,
+  paralax = true,
+  aboveTheFold,
+  class: className
+} = Astro.props;
+
+const foldAttributes =
+  aboveTheFold === undefined
+    ? {}
+    : { 'data-abovethefold': aboveTheFold ? '1' : '0' };
+
+const twclass = cn([
+  'aspect-video w-full object-cover',
+  paralax ? 'paralax' : '',
+  className
+]);
+
+const imageOptimized = getImageByPath(src) satisfies Promise<{
+  default: ImageMetadata;
+}>;
+---
+
+{
+  imageOptimized && (
+    <Picture
+      alt={alt}
+      class={twclass}
+      decoding="async"
+      fetchpriority={fetchPriority}
+      formats={formats}
+      loading={loading}
+      src={imageOptimized}
+      widths={widths}
+      {...(sizes ? { sizes } : {})}
+      quality={quality}
+      {...foldAttributes}
+    />
+  )
+}

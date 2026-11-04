@@ -1,0 +1,89 @@
+---
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import { resolveSchemaImage } from 'utils/schema-image';
+
+type Props = {
+  name: string;
+  description?: string;
+  image?: string;
+  url: string;
+  price?: number;
+  promoPrice?: number;
+  currency?: string;
+  ratingAverage?: number;
+  ratingCount?: number;
+  language: LanguageCodes;
+};
+
+const {
+  name,
+  description,
+  image,
+  url,
+  price = 0,
+  promoPrice = 0,
+  currency = 'EUR',
+  ratingAverage = 0,
+  ratingCount = 0,
+  language
+} = Astro.props;
+
+const site = SiteData[language];
+const baseUrl = Astro.site ?? site.site.url;
+const effectivePrice = promoPrice > 0 ? promoPrice : price;
+
+// `image` arrives as the raw frontmatter path (/src/assets/images/foo.jpg),
+// which 404s in production — an unfetchable image makes the Product
+// ineligible for a rich result.
+const imageUrl = await resolveSchemaImage(image, Astro.site);
+
+const schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  'name': name,
+  'url': `${baseUrl}${url.startsWith('/') ? url.substring(1) : url}`,
+  'brand': {
+    '@type': 'Brand',
+    'name': site.site.name
+  }
+};
+
+if (description) schema.description = description;
+if (imageUrl) schema.image = imageUrl;
+
+// A tour is an intangible service, so the Offer carries no `shippingDetails`
+// or `hasMerchantReturnPolicy`. Those two properties are what made Google
+// classify these pages as Merchant listings — an experience meant for physical
+// goods shipped to a buyer — and they declared a 0-day transit time for a
+// multi-day walking holiday, which describes nothing real.
+//
+// `Product` itself stays: TouristTrip has no Google rich-result support, and
+// the review-star snippet these pages already earn depends on Product.
+if (effectivePrice > 0) {
+  schema.offers = {
+    '@type': 'Offer',
+    'price': effectivePrice,
+    'priceCurrency': currency,
+    'availability': 'https://schema.org/InStock'
+  };
+}
+
+if (ratingCount > 0 && ratingAverage > 0) {
+  schema.aggregateRating = {
+    '@type': 'AggregateRating',
+    'ratingValue': ratingAverage.toFixed(1),
+    'reviewCount': ratingCount,
+    'bestRating': 5,
+    'worstRating': 1
+  };
+}
+---
+
+<script
+  is:inline
+  async
+  defer
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

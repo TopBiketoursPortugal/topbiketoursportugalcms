@@ -1,0 +1,47 @@
+/*
+ * Bridge: maps the starter components' semantic tokens onto the TBTP design
+ * system (Tailwind v4 @theme in global.css) — pine green brand, sand/soft
+ * surfaces, Figtree/Bricolage type. Loaded after the starter theme files so
+ * these values win.
+ */
+
+:where(:root) {
+  /* The starter expects Astro <Font /> variables; use the site fonts. */
+  --font-body: var(--font-sans);
+  --font-headings: var(--font-heading);
+}
+
+:root,
+[data-theme='light'] {
+  --cc-color-brand: var(--color-primary, #296a3f);
+  --cc-color-brand-muted: #3d8a57;
+  --cc-color-brand-subtle: #9cc3aa;
+  --cc-color-brand-on: #ffffff;
+  --cc-color-text-on-brand: #ffffff;
+
+  --cc-color-link: var(--color-primary, #296a3f);
+  --cc-color-link-hover: #1d4d2e;
+
+  /* Accent/highlight bands follow the site's surface palette. */
+  --cc-color-bg-accent: var(--color-primary-soft, #eaf3ed);
+  --cc-color-bg-highlight: #f7f1e6; /* surface-sand */
+
+  --cc-color-focus-ring: rgba(41, 106, 63, 0.4);
+}
+
+html.dark,
+[data-theme='dark'] {
+  --cc-color-brand: #4fa06c;
+  --cc-color-brand-muted: #3d8a57;
+  --cc-color-brand-subtle: #2d5c3e;
+  --cc-color-brand-on: #0c1710;
+  --cc-color-text-on-brand: #0c1710;
+
+  --cc-color-link: #7fc297;
+  --cc-color-link-hover: #a4d5b6;
+
+  --cc-color-bg-accent: #16281d;
+  --cc-color-bg-highlight: #241f14;
+
+  --cc-color-focus-ring: rgba(127, 194, 151, 0.4);
+}

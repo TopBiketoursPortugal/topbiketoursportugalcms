@@ -1,0 +1,29 @@
+---
+import { cn } from '@utils/cn';
+import social from 'src/../data/social.json';
+
+const network = social as Record<string, any>;
+const keys = Object.keys(network);
+const socialNetworks = keys.map((k) => network[k]).filter((n) => n !== null);
+---
+
+<div class="flex flex-row gap-4">
+  {
+    socialNetworks.map((network) => {
+      return (
+        <a
+          href={network.href}
+          title={network.alt}
+          aria-label={network.alt}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group flex min-w-6 items-center justify-center text-lg transition-transform duration-150 hover:scale-125"
+        >
+          {network && network.icon && (
+            <i class={cn(network.icon, 'h-6 w-6')} title={network.alt} />
+          )}
+        </a>
+      );
+    })
+  }
+</div>

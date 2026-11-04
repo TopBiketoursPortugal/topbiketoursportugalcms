@@ -1,0 +1,268 @@
+---
+import '../styles/global.css';
+import { SEO } from 'astro-seo';
+import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+import SiteVerification from './common/SiteVerification.astro';
+
+import CommonMeta from './common/CommonMeta.astro';
+import Navigation from 'src/../data/navigation.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import Announcement from './common/Announcement.astro';
+import Header from './common/Header.astro';
+import BasicScripts from './common/BasicScripts.astro';
+import CookieConsent from './common/CookieConsent.astro';
+import Footer from './common/Footer';
+import { getPageSeo } from 'utils/seo';
+import { INDEX } from 'astro:env/client';
+import type { HrefLang } from 'src/types/hreflang';
+import { pwaInfo } from 'virtual:pwa-info';
+import { pwaAssetsHead } from 'virtual:pwa-assets/head';
+import { cn } from '@utils/cn';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
+import OrganizationSchema from 'src/components/schema/organization-schema.astro';
+import WebSiteSchema from 'src/components/schema/website-schema.astro';
+import BreadcrumbSchema from 'src/components/schema/breadcrumb-schema.astro';
+import Breadcrumbs from 'src/components/navigation/breadcrumbs/breadcrumbs.astro';
+
+export type SEOProps = {
+  page_title: string | null;
+  page_description: string | null;
+  featured_image?: string | null;
+  featured_image_alt?: string | null;
+  canonical_url?: string | null;
+  no_index?: boolean | null;
+  open_graph_type?: string | null;
+  author_twitter_handle?: string | null;
+  keywords?: string;
+};
+
+export type LayoutProps = {
+  title?: string;
+  seo?: SEOProps;
+  class?: string;
+  hrefLangs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+  isHomePage?: boolean;
+};
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const {
+  seo,
+  class: className,
+  breadcrumbs = [],
+  isHomePage = false
+} = Astro.props;
+const { keywords } = seo ?? { keywords: '' };
+const seoProps = await getPageSeo(
+  Astro.site ?? import.meta.env.BASE_URL,
+  Astro.props,
+  language,
+  Astro.url
+);
+if (INDEX === 'false') {
+  seoProps.noindex = true;
+}
+---
+
+<!doctype html>
+<html
+  lang={language}
+  dir="ltr"
+  class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth"
+>
+  <head>
+    <meta name="title" content={seoProps.title} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
+    <SEO {...seoProps} />
+    {
+      /*
+    Emits each family's @font-face plus, where `preload` is set, a
+    `<link rel="preload" as="font">`. Body and heading faces are preloaded
+    because they are on the critical path for first paint; Caveat is
+    decorative and used well below the fold, so it is left to load normally
+    rather than competing for early bandwidth.
+  */
+    }
+    <Font cssVariable="--font-figtree" preload />
+    <Font cssVariable="--font-bricolage" preload />
+    <Font cssVariable="--font-caveat-family" />
+    <script is:inline>
+      // Initialize theme
+      const getTheme = () => {
+        if (
+          typeof localStorage !== 'undefined' &&
+          localStorage.getItem('darkMode')
+        ) {
+          return localStorage.getItem('darkMode');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      };
+
+      const theme = getTheme();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      if (typeof localStorage !== 'undefined') {
+        // Ensure we don't overwrite 'system' preference if it was set
+        if (!localStorage.getItem('darkMode')) {
+          // Optional: Set it if you want to persist the detected preference
+          // localStorage.setItem('darkMode', theme);
+        }
+      }
+    </script>
+    <CommonMeta />
+
+    <SiteVerification />
+    <ClientRouter fallback="swap" />
+    <slot name="head" />
+    <OrganizationSchema language={language} />
+    {isHomePage && <WebSiteSchema language={language} />}
+    {
+      breadcrumbs.length > 0 && (
+        <BreadcrumbSchema items={breadcrumbs} site={Astro.site} />
+      )
+    }
+    {
+      pwaAssetsHead.themeColor && (
+        <meta name="theme-color" content={pwaAssetsHead.themeColor.content} />
+      )
+    }
+    {pwaAssetsHead.links.map((link: any) => <link {...link} />)}
+    <script src="/src/pwa.ts"></script>
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <!-- WhatConverts bootstrap: snapshots landing URL/referrer for attribution.
+         No cookies, no network — the tracker itself (137152.js) is loaded by
+         CookieConsent only after analytics consent. -->
+    <script is:inline>
+      window.$wc_load = function (a) {
+        return JSON.parse(JSON.stringify(a));
+      };
+      // The `|| {...}` guards against this bootstrap running twice on the
+      // same page (e.g. if the layout is ever nested/duplicated).
+      window.$wc_leads = window.$wc_leads || {
+        doc: {
+          url: window.$wc_load(document.URL),
+          ref: window.$wc_load(document.referrer),
+          search: window.$wc_load(location.search),
+          hash: window.$wc_load(location.hash)
+        }
+      };
+    </script>
+  </head>
+  <body
+    class="text-default flex min-h-screen flex-col overflow-x-clip tracking-tight antialiased dark:bg-slate-900 dark:text-white"
+  >
+    <BasicScripts />
+    <slot name="announcement">
+      <Announcement
+        language={language}
+        hrefLangs={Astro.props.hrefLangs}
+        showRssFeed
+      />
+    </slot>
+    <Header
+      {...Navigation[language].header}
+      isSticky
+      hrefLangs={Astro.props.hrefLangs}
+    />
+    <main class={cn('h-full w-full flex-1 max-w-7xl mx-auto', className)}>
+      {breadcrumbs.length > 0 && <Breadcrumbs items={breadcrumbs} />}
+      <slot />
+    </main>
+    <Footer language={language} />
+    <script>
+      // Shared-element morph between tour cards and the tour detail hero.
+      // Forward: name the clicked card's media so it morphs into the detail
+      // hero ([data-tour-hero], named in global.css). Back: name the matching
+      // card in the incoming list page so the hero morphs into it.
+      const TOUR_HERO = 'tour-hero';
+      const reduceMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      );
+
+      const cardMedia = (card: Element | null) =>
+        card?.querySelector<HTMLElement>('.parallax-media') ??
+        card?.querySelector<HTMLElement>('img') ??
+        null;
+
+      document.addEventListener('astro:before-preparation', (event) => {
+        if (reduceMotion.matches) return;
+        // Clear stale tags (e.g. left over from a previous back-navigation);
+        // duplicate view-transition-names abort the whole transition.
+        document
+          .querySelectorAll<HTMLElement>(
+            '.tour-card [style*="view-transition-name"]'
+          )
+          .forEach((el) => (el.style.viewTransitionName = ''));
+        const source = event.sourceElement;
+        const link =
+          source instanceof Element ? source.closest('a[href]') : null;
+        // Only the card's main overlay link, not tag links inside the card
+        if (!link || !link.matches('.tour-card > div > a')) return;
+        const media = cardMedia(link.closest('.tour-card'));
+        if (media) media.style.viewTransitionName = TOUR_HERO;
+      });
+
+      document.addEventListener('astro:before-swap', (event) => {
+        if (reduceMotion.matches) return;
+        const newDocument = event.newDocument;
+        // Clear stale inline names; duplicates abort the whole transition.
+        newDocument
+          .querySelectorAll<HTMLElement>(
+            '.tour-card [style*="view-transition-name"]'
+          )
+          .forEach((el) => (el.style.viewTransitionName = ''));
+        // Leaving a detail page: morph the hero back into its list card.
+        if (!document.querySelector('[data-tour-hero]')) return;
+        const path = event.from?.pathname ?? location.pathname;
+        const link =
+          newDocument.querySelector(`.tour-card a[href="${path}"]`) ??
+          newDocument.querySelector(
+            `.tour-card a[href="${path.replace(/\/$/, '')}"]`
+          );
+        const media = cardMedia(link?.closest('.tour-card') ?? null);
+        if (media) media.style.viewTransitionName = TOUR_HERO;
+      });
+    </script>
+    <div transition:persist="find-me-on-the-other-side" id="cc-container">
+      <CookieConsent />
+      <script is:inline>
+        // Restore the `show--consent` class if it was present before the page swap
+        document.addEventListener('astro:before-preparation', () => {
+          const htmlClassName = window.document.documentElement.className;
+          const consentClassPresent = htmlClassName.includes('show--consent')
+            ? true
+            : false;
+          window._showConsentClass = consentClassPresent;
+        });
+
+        document.addEventListener('astro:before-swap', (event) => {
+          const showConsent = window._showConsentClass ? ` show--consent` : '';
+          event.newDocument.documentElement.className += showConsent;
+        });
+      </script>
+    </div>
+    <script>
+      if (window.inEditorMode) {
+        import('../cloudcannon/registerComponents').catch((error) => {
+          console.warn(
+            'Failed to load CloudCannon component registration:',
+            error
+          );
+        });
+        // Re-initialises script-driven components (Embla carousels, bento
+        // spans) after editable-regions re-renders strip inline scripts.
+        import('../cloudcannon/editorLiveSync').catch((error) => {
+          console.warn('Failed to load CloudCannon editor live sync:', error);
+        });
+      }
+    </script>
+  </body>
+</html>

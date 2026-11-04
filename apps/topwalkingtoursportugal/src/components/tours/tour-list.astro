@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import type { CardContentProps } from 'src/components/building-blocks/card/CardContent.astro';
+import TourCard from './tour-card.astro';
+import TourListSchema from './tour-list-schema.astro';
+
+type Props = {
+  language: LanguageCodes;
+  items: CollectionEntry<'tours'>[];
+  contentDisplay?: CardContentProps['display'];
+};
+
+const { items, contentDisplay = 'inline', language } = Astro.props;
+---
+
+{
+  /*
+  Not the shared <Grid cols={3}>: it only leaves one column until `lg`, so a
+  tablet and a large phone both browse this list one tall card at a time. Two
+  columns from 640px up cuts the page height roughly in half on exactly the
+  devices this audience researches on. `items-stretch` plus `h-full` on the
+  card is what makes prices and buttons line up across a row.
+*/
+}
+<div data-tour-grid class="px-4 py-6 sm:px-6">
+  <div
+    class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3"
+  >
+    {
+      items.map(({ data: tour }) => (
+        <TourCard
+          tour={tour}
+          contentDisplay={contentDisplay}
+          language={language}
+        />
+      ))
+    }
+  </div>
+</div>
+<TourListSchema items={items} language={language} />
+
+<style>
+  /* Row-wise stagger. Steps come from the shared motion scale so they stay in
+     proportion to the reveal duration — a fixed 0.1s/0.2s was a third of the
+     old 2s reveal and would now be most of a 320ms one. */
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    :global(.tour-card:nth-child(3n + 2)) {
+      transition-delay: var(--reveal-step);
+    }
+    :global(.tour-card:nth-child(3n + 3)) {
+      transition-delay: calc(var(--reveal-step) * 2);
+    }
+  }
+</style>

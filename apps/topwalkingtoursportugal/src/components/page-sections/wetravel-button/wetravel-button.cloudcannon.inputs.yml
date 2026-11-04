@@ -1,0 +1,16 @@
+uuid:
+  type: text
+  label: WeTravel Trip UUID
+  comment: The data-uuid from the WeTravel embed snippet (the value after ?uuid=
+    in the checkout URL).
+label:
+  type: text
+  label: Button Label
+heading:
+  type: text
+  label: Heading (optional)
+  comment: Optional title shown above the button, e.g. the tour name.
+uid:
+  type: text
+  label: WeTravel Account ID (uid)
+  hidden: true

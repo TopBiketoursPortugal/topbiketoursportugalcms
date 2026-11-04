@@ -1,0 +1,17 @@
+title:
+  label: Title
+  type: markdown
+  comment: Title of the section
+feature_tours:
+  label: Feature Tours
+  type: multiselect
+  options:
+    empty_type: array
+    values: collections.tours
+    value_key: id
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: language
+      icon: directions_walk

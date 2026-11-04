@@ -1,0 +1,364 @@
+---
+import FooterContact from './footer-contact.astro';
+import NavigationData from 'src/../data/navigation.json';
+import { t } from 'utils/i18n';
+import { getCollection } from 'astro:content';
+import { getPagePath } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import Logo from 'src/layouts/common/Logo.astro';
+import type { CollectionEntry } from 'astro:content';
+import TourRegionsCard from 'src/components/page-sections/collection/tour-regions-card.astro';
+import {
+  getTourTagPath,
+  getTourTagsListingPath,
+  getRiderLevelPath,
+  getRiderLevelsListingPath,
+  getBikeCategoryPath,
+  getBikeCategoriesListingPath
+} from 'utils/permalinks';
+import { getTagIconClass } from 'src/utils/tag-icon-safelist';
+import { Image } from 'astro:assets';
+import SocialMenu from '../SocialMenu.astro';
+import BARRA_LOGOS_03 from 'src/assets/images/BARRA_LOGOS-03.png';
+import BiosphereLogo from 'src/assets/images/biosphere-logo.svg';
+import AttaLogo from 'src/assets/images/atta-logo.svg';
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const { footer } = NavigationData[language];
+const { links } = footer;
+const year = new Date().getFullYear();
+
+const regions = await getCollection(
+  'tourRegions',
+  (r) => r.data.language === language
+);
+
+const tourTags = await getCollection(
+  'tourTags',
+  (t) => t.data.language === language
+);
+
+const riderLevels = await getCollection(
+  'tourRiderLevels',
+  (t) => t.data.language === language
+);
+
+const bikeCategories = await getCollection(
+  'bikeCategories',
+  (c) => c.data.language === language
+);
+
+const termsPageSelector = (p: CollectionEntry<'pages'>) =>
+  p.filePath?.endsWith('terms-and-conditions.mdx') &&
+  (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en');
+
+const privacyPageSelector = (p: CollectionEntry<'pages'>) =>
+  p.filePath?.endsWith('privacy-policy.mdx') &&
+  (p.data.language ?? 'en') === (Astro.currentLocale ?? 'en');
+
+const pageCollection = await getCollection(
+  'pages',
+  (p) => privacyPageSelector(p) || termsPageSelector(p)
+);
+
+const termsPage = pageCollection.filter(termsPageSelector)[0];
+const privacyPage = pageCollection.filter(privacyPageSelector)[0];
+const privacyPagePath = privacyPage ? getPagePath(privacyPage) : '';
+const termsPagePagePath = termsPage ? getPagePath(termsPage) : '';
+
+// Merge all nav link groups that have more than 1 link into first/second columns,
+// skip very sparse ones (they'll be covered by the explore column)
+const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
+---
+
+<footer class="footer-anim intersect:opacity-100 intersect-once mt-16">
+  {/* Brand bar — compact single row */}
+  <div class="bg-green-700 px-4 py-5 sm:px-6 lg:px-8 dark:bg-green-800">
+    <div
+      class="mx-auto flex max-w-7xl flex-col items-center gap-3 sm:flex-row sm:justify-between"
+    >
+      <div class="flex items-center gap-4">
+        <Logo class="max-h-10 brightness-0 invert" />
+        <p class="hidden text-sm text-green-100 sm:block dark:text-green-200">
+          {t('Footer.Tagline', language)}
+        </p>
+      </div>
+      <nav aria-label={t('Footer.SocialNav.Label', language)}>
+        <SocialMenu language={language} />
+      </nav>
+    </div>
+  </div>
+
+  {/* Main content — navigation + regions + contact */}
+  <div class="bg-gray-900 px-4 pt-10 pb-8 text-gray-300 sm:px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {/* Data-driven nav columns (Pages, Support) */}
+      {
+        navColumns.map(({ text, links: subLinks = [] }) => (
+          <nav aria-label={text}>
+            <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+              {text}
+            </h3>
+            <ul class="flex flex-col gap-1.5">
+              {subLinks.map(({ href, text: linkText }) => (
+                <li>
+                  <a
+                    class="text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+                    href={href.toLowerCase()}
+                  >
+                    {linkText}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      {/* Regions column — small card grid */}
+      <div>
+        <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+          {t('Footer.TourRegionsTitle', language)}
+        </h3>
+        <div class="grid grid-cols-2 gap-1.5">
+          {
+            regions.map((region) => (
+              <TourRegionsCard
+                region={region}
+                language={language}
+                layout="overlay"
+                imageWidths={[120]}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+      {/* Contact column */}
+      <div>
+        <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+          {t('Footer.ContactInfoTitle', language)}
+        </h3>
+        <FooterContact language={language} />
+      </div>
+    </div>
+  </div>
+
+  {
+    /* Discover row — tour tags, rider levels, bike categories spread horizontally */
+  }
+  <div
+    class="border-t border-gray-800 bg-gray-900 px-4 pt-6 pb-10 text-gray-300 sm:px-6 lg:px-8"
+  >
+    <div
+      class="mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-4"
+    >
+      {/* Tour tags */}
+      <nav
+        aria-label={t('Footer.DiscoverTitle', language)}
+        class="sm:col-span-2"
+      >
+        <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+          <a
+            href={getTourTagsListingPath(language)}
+            class="transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+          >
+            {t('Footer.DiscoverTitle', language)}
+          </a>
+        </h3>
+        <ul class="flex flex-wrap gap-2">
+          {
+            tourTags.map((tag) => (
+              <li>
+                <a
+                  href={getTourTagPath(tag, language)}
+                  class="flex items-center gap-1.5 text-sm text-nowrap transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+                >
+                  <i
+                    class:list={[
+                      getTagIconClass(tag.data.icon),
+                      'h-3.5 w-3.5 shrink-0 text-gray-500'
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <span>{tag.data.name ?? tag.data.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {/* Rider levels */}
+      <nav aria-label={t('Footer.TourRiderLevelsTitle', language)}>
+        <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+          <a
+            href={getRiderLevelsListingPath(language)}
+            class="transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+          >
+            {t('Footer.TourRiderLevelsTitle', language)}
+          </a>
+        </h3>
+        <ul class="flex flex-wrap gap-2">
+          {
+            riderLevels.map((level) => (
+              <li>
+                <a
+                  href={getRiderLevelPath(level, language)}
+                  class="flex items-center gap-1.5 text-sm transition-colors hover:text-green-400 focus-visible:text-green-400 focus-visible:outline-none"
+                >
+                  <i
+                    class:list={[
+                      getTagIconClass(level.data.icon),
+                      'h-3.5 w-3.5 shrink-0 text-gray-500'
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <span>{level.data.name ?? level.data.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {/* Bike categories */}
+      <nav aria-label={t('Footer.BikeCategoriesTitle', language)}>
+        <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
+          <a
+            href={getBikeCategoriesListingPath(language)}
+            class="hover:text-accent focus-visible:text-accent transition-colors focus-visible:outline-none"
+          >
+            {t('Footer.BikeCategoriesTitle', language)}
+          </a>
+        </h3>
+        <ul class="flex flex-wrap gap-2">
+          {
+            bikeCategories.map((cat) => (
+              <li>
+                <a
+                  href={getBikeCategoryPath(cat, language)}
+                  class="hover:text-accent focus-visible:text-accent flex items-center gap-1.5 text-sm transition-colors focus-visible:outline-none"
+                >
+                  <i
+                    class:list={[
+                      getTagIconClass(cat.data.icon),
+                      'text-accent h-3.5 w-3.5 shrink-0'
+                    ]}
+                    aria-hidden="true"
+                  />
+                  <span>{cat.data.name ?? cat.data.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  {/* Bottom bar — payment, partners, copyright, legal all in one */}
+  <div class="bg-gray-950 px-4 py-4 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-4">
+      {/* Payment & Partners row */}
+      <div
+        class="flex flex-col items-start gap-4 border-b border-gray-800 pb-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-semibold text-gray-400"
+            >{t('Footer.PaymentTitle', language)}</span
+          >
+          <div class="flex gap-1.5">
+            <i class="icon-[logos--mastercard] h-6 w-6" aria-hidden="true"></i>
+            <i class="icon-[logos--visa] h-6 w-6" aria-hidden="true"></i>
+            <i class="icon-[logos--amex] h-6 w-6" aria-hidden="true"></i>
+            <i class="icon-[logos--jcb] h-6 w-6" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-semibold text-gray-400"
+            >{t('Footer.PartnersTitle', language)}</span
+          >
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            title="PRR"
+            href={language === 'pt'
+              ? '/pt/blog/vouchersstartups/'
+              : '/blog/vouchers-for-startups/'}
+            ><Image
+              src={BARRA_LOGOS_03}
+              alt="PRR"
+              class="h-8 w-auto object-contain"
+              loading="lazy"
+            /></a
+          >
+          <a
+            href="https://membership.adventuretravel.biz/directory/9ac4776b417c0a3becf7e58e69c58eef"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Adventure Travel Trade Association"
+          >
+            <Image
+              src={AttaLogo}
+              alt="Adventure Travel Trade Association Member"
+              class="h-8 w-auto object-contain invert"
+              loading="lazy"
+            />
+          </a>
+          <a
+            href="https://www.biospheresustainable.com/en/community/top-biketours-portugal/8112"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Biosphere Sustainable"
+          >
+            <Image
+              src={BiosphereLogo}
+              alt="Biosphere Sustainable"
+              class="h-10 w-auto object-contain"
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </div>
+      {/* Copyright & Legal row */}
+      <div
+        class="flex flex-col items-center gap-2 text-xs text-gray-500 sm:flex-row sm:justify-between"
+      >
+        <span>&copy; Top Bike Tours Portugal {year}</span>
+        <nav aria-label={t('Footer.LegalNav.Label', language)}>
+          <ul class="flex gap-4">
+            <li>
+              <a
+                href={termsPagePagePath}
+                class="transition-colors hover:text-gray-300 focus-visible:text-gray-300 focus-visible:outline-none"
+                >{t('TermsAndConditions', language)}</a
+              >
+            </li>
+            <li>
+              <a
+                href={privacyPagePath}
+                class="transition-colors hover:text-gray-300 focus-visible:text-gray-300 focus-visible:outline-none"
+                title={t('PrivacyPolicy', language)}
+              >
+                {t('PrivacyPolicy', language)}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .footer-anim {
+      transition: opacity 0.7s ease;
+    }
+    .footer-anim[no-intersect] {
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+import type { LanguageCodes } from 'src/schemas/language';
+import PostLayout from 'src/layouts/Post.astro';
+import { getCollection, render } from 'astro:content';
+import slugify from 'slugify';
+import {
+  getBlogPermalink,
+  getPostLanguagesAlternates,
+  trailingSlash
+} from 'utils/permalinks';
+import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: {
+      // blog: 'blog',
+      language: post.data.language === 'en' ? undefined : post.data.language,
+      path:
+        slugify(post.data.path ?? post.data.title, {
+          lower: true,
+          strict: true,
+          trim: true
+        }) + trailingSlash
+    },
+    props: { post }
+  }));
+}
+
+if (!Astro.params.path) {
+  throw new Error('Post path is undefined');
+}
+const { post } = Astro.props;
+if (!post) {
+  throw new Error('Failed to get post with path: ' + Astro.params.path);
+}
+const { Content } = await render(post);
+const language = Astro.currentLocale as LanguageCodes;
+const hrefs = await getPostLanguagesAlternates(post, Astro.site);
+const breadcrumbs = [
+  getHomeCrumb(language),
+  getBlogCrumb(language),
+  { name: post.data.title, url: getBlogPermalink(post) }
+];
+import SnippetsAccordion from 'src/components/snippets/Accordion.astro';
+import SnippetsAlert from 'src/components/snippets/Alert.astro';
+import SnippetsAstroImage from 'src/components/snippets/AstroImage.astro';
+import SnippetsFile from 'src/components/snippets/File.astro';
+import SnippetsTint from 'src/components/snippets/Tint.astro';
+import SnippetsVideo from 'src/components/snippets/Video.astro';
+import SnippetsYoutube from 'src/components/snippets/Youtube.astro';
+
+const snippetComponents = {
+  SnippetsAccordion,
+  SnippetsAlert,
+  SnippetsAstroImage,
+  SnippetsFile,
+  SnippetsTint,
+  SnippetsVideo,
+  SnippetsYoutube
+};
+---
+
+<PostLayout
+  {...post.data}
+  body={post.body}
+  language={language}
+  hrefs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <Content components={snippetComponents} />
+</PostLayout>

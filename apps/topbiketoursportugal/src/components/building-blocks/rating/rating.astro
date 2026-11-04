@@ -1,0 +1,69 @@
+---
+/** @jsxImportSource astro */
+import { cn } from 'utils/cn';
+
+type Props = {
+  rating: number;
+  class?: string;
+};
+
+function getStarDistribution(rating: number = 0, maxStars = 5) {
+  if (rating === 0) {
+    return { fullStars: 0, halfStars: false, emptyStars: maxStars };
+  }
+
+  let fullStars = Math.floor(rating);
+  const fractional = rating - fullStars;
+
+  const halfStars = fractional >= 0.25 && fractional < 0.75 ? 1 : 0;
+  if (fractional >= 0.75) {
+    fullStars++;
+  }
+
+  const emptyStars = maxStars - (fullStars + halfStars);
+
+  return { fullStars, halfStars: halfStars === 1, emptyStars };
+}
+
+const { rating = 0, class: className } = Astro.props;
+const startIconStyle = cn(
+  'text-accent fill-current text-lg w-6 h-6',
+  className
+);
+const startDistribution = getStarDistribution(rating);
+---
+
+<ul class="flex items-center gap-2">
+  {
+    startDistribution.fullStars > 0 &&
+      [...Array(startDistribution.fullStars).keys()].map(() => (
+        <li>
+          <i
+            aria-label="Star rating"
+            class={cn(startIconStyle, 'icon-[ph--star-fill]')}
+          />
+        </li>
+      ))
+  }
+  {
+    startDistribution.halfStars && (
+      <li>
+        <i
+          aria-label="Half Star rating"
+          class={cn(startIconStyle, 'icon-[ph--star-half-fill]')}
+        />
+      </li>
+    )
+  }
+  {
+    startDistribution.emptyStars > 0 &&
+      [...Array(startDistribution.emptyStars).keys()].map(() => (
+        <li>
+          <i
+            aria-label="Empty Star rating"
+            class={cn(startIconStyle, 'icon-[ph--star-light]')}
+          />
+        </li>
+      ))
+  }
+</ul>

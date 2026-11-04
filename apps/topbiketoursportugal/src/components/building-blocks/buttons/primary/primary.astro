@@ -1,0 +1,56 @@
+---
+interface Props {
+  button_text: string;
+  button_icon: string;
+  button_link: string;
+  background_color?: string;
+  hover_brightness: number;
+  text_color: string;
+}
+
+const block = Astro.props;
+const hover_brightness = block.hover_brightness;
+const backgroundColor = block.background_color || 'var(--color-accent)'; // Default to the brand accent if missing
+---
+
+<a
+  style={`background-color: ${backgroundColor}; color: ${block.text_color};`}
+  href={block.button_link}
+  class="button"
+>
+  {
+    block.button_icon ? (
+      <span class="button__icon">
+        <i class={block.button_icon} />
+      </span>
+    ) : null
+  }
+  <span>{block.button_text}</span>
+</a>
+
+<style define:vars={{ hover_brightness }}>
+  .button {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+    transition:
+      filter 0.2s ease,
+      translate 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .button:hover {
+    filter: brightness(var(--hover_brightness, 1.1));
+    translate: 0 -2px;
+    box-shadow: 0 8px 22px rgb(0 0 0 / 0.18);
+  }
+  .button:active {
+    translate: 0 0;
+  }
+</style>

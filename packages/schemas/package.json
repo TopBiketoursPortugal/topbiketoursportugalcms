@@ -1,0 +1,16 @@
+{
+  "name": "@ttp/schemas",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Content-collection schemas shared by the Top Bike / Top Walking Tours Portugal Astro sites. Site-specific parts (locale list, extra tour fields, booking ids) are injected by each app.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "astro": "*"
+  },
+  "devDependencies": {
+    "astro": "7.2.2"
+  }
+}

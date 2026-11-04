@@ -1,0 +1,69 @@
+---
+/**
+ * Difficulty as a five-step scale rather than the string "3/5".
+ *
+ * A shopper comparing two tours has to hold both numbers in their head to
+ * compare them; five dots compare pre-attentively, in the grid, without
+ * reading. The numeric value stays in the accessible name so the information
+ * is not lost to a screen reader — the dots are decoration over a label.
+ */
+import { t } from 'utils/i18n';
+import type { LanguageCodes } from 'src/schemas/language';
+import { cn } from 'utils/cn';
+
+type Props = {
+  value: number;
+  language: LanguageCodes;
+  /** `dots` for cards and tight rows, `labelled` to also print the word. */
+  variant?: 'dots' | 'labelled';
+  class?: string;
+};
+
+const {
+  value,
+  language,
+  variant = 'dots',
+  class: className
+} = Astro.props as Props;
+
+const steps = [1, 2, 3, 4, 5] as const;
+const clamped = Math.min(5, Math.max(1, Math.round(value)));
+
+// Named steps read faster than a fraction and carry the same information.
+// Listed rather than built from a template literal so `t()` still type-checks
+// the key against the i18n table.
+const LEVEL_KEYS = [
+  'Tour.Difficulty.Level.1',
+  'Tour.Difficulty.Level.2',
+  'Tour.Difficulty.Level.3',
+  'Tour.Difficulty.Level.4',
+  'Tour.Difficulty.Level.5'
+] as const;
+const levelName = t(LEVEL_KEYS[clamped - 1], language);
+const label = `${t('Tour.Info.Difficulty.Label', language)}: ${levelName} (${clamped}/5)`;
+---
+
+<span
+  class={cn('inline-flex items-center gap-2', className)}
+  title={label}
+  aria-label={label}
+  role="img"
+>
+  <span class="flex gap-[3px]" aria-hidden="true">
+    {
+      steps.map((step) => (
+        <span
+          class={cn(
+            'h-[7px] w-[7px] rounded-full',
+            step <= clamped ? 'bg-accent' : 'bg-gray-300 dark:bg-gray-600'
+          )}
+        />
+      ))
+    }
+  </span>
+  {
+    variant === 'labelled' ? (
+      <span class="text-gray-600 dark:text-gray-300">{levelName}</span>
+    ) : null
+  }
+</span>

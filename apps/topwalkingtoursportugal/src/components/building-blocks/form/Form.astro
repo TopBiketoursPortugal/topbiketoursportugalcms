@@ -1,0 +1,142 @@
+---
+import type { JSX } from 'astro/jsx-runtime';
+import FormField from './FormField.astro';
+import { cn } from 'utils/cn';
+// import { GOOGLE_PUBLIC_CAPTCHA } from 'astro:env/client';
+
+// const googleScript = `https://www.google.com/recaptcha/enterprise.js?render=${GOOGLE_PUBLIC_CAPTCHA}`;
+type Props = JSX.FormHTMLAttributes & { honeyPot?: boolean };
+
+const { class: className, honeyPot = true, ...props } = Astro.props;
+---
+
+<form
+  {...props}
+  class={cn('flex w-full flex-col gap-3 validate-form', className)}
+  autocomplete="off"
+>
+  {
+    honeyPot ? (
+      <FormField
+        name="honeypot"
+        as="hidden"
+        type="hidden"
+        label="honeypot"
+        required
+        value=""
+      />
+    ) : null
+  }
+  <slot />
+</form>
+<script is:inline defer async>
+  window.$wc_load = function (a) {
+    return JSON.parse(JSON.stringify(a));
+  };
+  // The `|| {...}` guards against this bootstrap running twice on the same
+  // page (e.g. this Form component appearing more than once).
+  window.$wc_leads = window.$wc_leads || {
+    doc: {
+      url: window.$wc_load(document.URL),
+      ref: window.$wc_load(document.referrer),
+      search: window.$wc_load(location.search),
+      hash: window.$wc_load(location.hash)
+    }
+  };
+</script>
+<script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
+></script>
+<script is:inline>
+  function _hasAnalyticsConsent() {
+    try {
+      const cookie = document.cookie.split('; ').find(function (row) {
+        return row.startsWith('cc_cookie=');
+      });
+      if (!cookie) return false;
+      const value = JSON.parse(decodeURIComponent(cookie.split('=')[1]));
+      return (
+        value &&
+        value.categories &&
+        value.categories.indexOf('analytics') !== -1
+      );
+    } catch (_e) {
+      return false;
+    }
+  }
+
+  function _initFormTracking() {
+    document.querySelectorAll('form.validate-form').forEach(function (form) {
+      if (form.hasAttribute('data-tracking-init')) return;
+      form.setAttribute('data-tracking-init', 'true');
+
+      const getParam = function (key) {
+        try {
+          return sessionStorage.getItem('_track_' + key) || '';
+        } catch (_e) {
+          return '';
+        }
+      };
+
+      // Inject hidden fields with tracking params into the form (sent to Formspree)
+      const fields = {
+        'keyword': getParam('utm_term') || getParam('keyword'),
+        'cost': getParam('cost'),
+        'utm-source': getParam('utm_source'),
+        'utm-medium': getParam('utm_medium'),
+        'utm-campaign': getParam('utm_campaign')
+      };
+      for (const name in fields) {
+        if (fields[name]) {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = fields[name];
+          form.appendChild(input);
+        }
+      }
+
+      form.addEventListener('submit', function (e) {
+        // Only fire analytics events if user has granted consent
+        if (!_hasAnalyticsConsent()) return;
+
+        const keyword = getParam('utm_term') || getParam('keyword');
+        const cost = getParam('cost');
+        const formId = form.id || '';
+        const productCodeEl = form.querySelector('[name="product-code"]');
+        const productTitleEl = form.querySelector('[name="product-title"]');
+        const isContactForm = form.classList.contains('contact-form');
+
+        // Push event to dataLayer for GTM
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'form_submission',
+          form_id: formId,
+          form_type: isContactForm ? 'contact' : 'tour_booking',
+          keyword: keyword,
+          cost: cost,
+          utm_source: getParam('utm_source'),
+          utm_medium: getParam('utm_medium'),
+          utm_campaign: getParam('utm_campaign'),
+          product_code: productCodeEl ? productCodeEl.value : '',
+          product_title: productTitleEl ? productTitleEl.value : ''
+        });
+
+        // Fire GA4 generate_lead event
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            currency: 'EUR',
+            value: cost ? parseFloat(cost) : 0
+          });
+        }
+
+        // Brief delay to allow tracking events to fire before navigation
+        e.preventDefault();
+        setTimeout(function () {
+          form.submit();
+        }, 150);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', _initFormTracking);
+</script>

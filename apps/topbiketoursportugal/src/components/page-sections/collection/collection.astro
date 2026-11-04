@@ -1,0 +1,46 @@
+---
+import Prose from 'src/components/building-blocks/typography/prose.astro';
+
+type Props = {
+  type:
+    | 'tours'
+    | 'tour-regions'
+    | 'tours-package-tour'
+    | 'tours-day-tour'
+    | 'reviews'
+    | 'team'
+    | 'bikes'
+    | 'posts'
+    | 'tour-tags'
+    | 'tour-rider-levels';
+  display: 'slideshow' | 'list';
+  contentDisplay: 'overlay' | 'inline';
+  frame: 'none' | 'light' | 'heavy';
+  layout: 'horizontal' | 'vertical' | 'overlay' | 'hstack';
+  title: string;
+};
+
+const collectionComponentImports = import.meta.glob(
+  '/src/components/page-sections/collection/**/*-collection.astro',
+  {
+    eager: true
+  }
+);
+
+const { type = 'tours', title, ...data } = Astro.props;
+
+const componentName = `/src/components/page-sections/collection/${type}-collection.astro`;
+const CollectionComponent = (collectionComponentImports[componentName] as any)
+  ?.default;
+---
+
+<div class="flex flex-col gap-3 px-3 py-1 sm:gap-4 sm:py-3">
+  {
+    title ? (
+      <div data-editable="text" data-type="block" data-prop="title">
+        <Prose markdown={title} />
+      </div>
+    ) : null
+  }
+  <CollectionComponent {...data} />
+</div>

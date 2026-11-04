@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { getBlogPermalink } from 'utils/permalinks';
+import { resolveImageSrc } from 'utils/get-image';
+
+type Props = CollectionEntry<'blog'>;
+
+const { data } = Astro.props;
+const { thumb_image_path, thumb_image_alt, title, date } = data;
+
+const dateObj = new Date(date);
+const imageSrc = await resolveImageSrc(thumb_image_path);
+---
+
+<a href={getBlogPermalink(Astro.props)} class="sidebar-post group flex gap-3">
+  <Image
+    class="aspect-video w-20 shrink-0 rounded-sm object-cover"
+    src={imageSrc}
+    alt={thumb_image_alt ?? title}
+    width={160}
+    loading="lazy"
+  />
+  <div class="flex flex-col">
+    <p class="text-sm leading-snug font-medium group-hover:underline">
+      {title}
+    </p>
+    <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+      {
+        dateObj.toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })
+      }
+    </p>
+  </div>
+</a>

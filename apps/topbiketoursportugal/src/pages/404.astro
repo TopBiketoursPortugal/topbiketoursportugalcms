@@ -1,0 +1,37 @@
+---
+import Layout from 'src/layouts/Layout.astro';
+const props = {
+  title: '404 - Not Found',
+  // The page correctly returns HTTP 404, but it was also serving
+  // `robots: index, follow` — no reason to invite Google to index it.
+  seo: {
+    page_title: '404 - Not Found',
+    page_description: null,
+    no_index: true
+  },
+  openGraph: {
+    basic: {
+      title: '404 - Not Found',
+      type: 'website',
+      image: '/images/404.png',
+      keywords: 'Not found'
+    }
+  }
+};
+---
+
+<Layout {...props}>
+  <section class="mx-auto max-w-(--pageContainer)">
+    <div class="container">
+      <div class="flex min-h-[80vh] flex-col items-center justify-center">
+        <img src="/images/404.png" alt="Error illustration" />
+        <h1 class="my-5 text-[2rem] min-[960px]:text-[3rem]">
+          Page not found!
+        </h1>
+        <a href="/" class="btn btn-lg btn-primary hover:text-blue-700">
+          &larr; Back home
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

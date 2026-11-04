@@ -1,0 +1,72 @@
+---
+import Heading from 'src/components/building-blocks/typography/heading.astro';
+import PageHelper from '../shared/astro/page.astro';
+import Layout, { type LayoutProps } from './Layout.astro';
+import type { Except } from 'type-fest';
+import type { HrefLang } from 'src/types/hreflang';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
+import LanguageData from 'src/../data/languages.json';
+
+type Props = {
+  frontmatter: {
+    content_blocks?: any[];
+    page_size?: number;
+  } & Except<LayoutProps, 'class'>;
+  class?: string;
+  showPageTitle?: boolean;
+  hrefs?: ReadonlyArray<HrefLang>;
+  breadcrumbs?: BreadcrumbItem[];
+  isHomePage?: boolean;
+};
+
+const {
+  frontmatter,
+  class: className,
+  showPageTitle = false,
+  hrefs = [],
+  breadcrumbs = [],
+  isHomePage = false
+} = Astro.props;
+
+if (!frontmatter) {
+  throw new Error('No frontmatter');
+}
+
+const { content_blocks = [] } = frontmatter;
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+---
+
+<Layout
+  {...frontmatter}
+  class={className}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+  isHomePage={isHomePage}
+>
+  <slot name="head" slot="head">
+    {
+      defaultHref ? (
+        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+      ) : null
+    }
+    {
+      hrefs.map(({ href, hreflang }) => (
+        <link
+          rel="alternate"
+          href={href}
+          hreflang={LanguageData[hreflang].locale}
+        />
+      ))
+    }
+  </slot>
+  {
+    showPageTitle ? (
+      <Heading as="h1" class="px-6 text-4xl font-bold capitalize">
+        {frontmatter?.title}
+      </Heading>
+    ) : null
+  }
+  <slot />
+  <PageHelper contentBlocks={content_blocks} />
+</Layout>

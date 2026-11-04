@@ -1,0 +1,45 @@
+---
+import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+
+const tagScriptSrc = `https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`;
+---
+
+<!-- Google Tag Manager (noscript) -->
+<noscript
+  ><iframe
+    src={tagScriptSrc}
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden"></iframe></noscript
+>
+<!-- End Google Tag Manager (noscript) -->
+
+<script is:inline src="/basic.js" defer></script>
+<script is:inline src="/intersection-observer.js" defer></script>
+<script is:inline>
+  // Capture tracking parameters from URL to sessionStorage
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const keys = [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_term',
+      'utm_content',
+      'keyword',
+      'cost',
+      'gclid',
+      'fbclid'
+    ];
+    for (let i = 0; i < keys.length; i++) {
+      const value = params.get(keys[i]);
+      if (value) {
+        try {
+          sessionStorage.setItem('_track_' + keys[i], value);
+        } catch (_e) {
+          // sessionStorage may be unavailable (e.g. private browsing); skip.
+        }
+      }
+    }
+  })();
+</script>

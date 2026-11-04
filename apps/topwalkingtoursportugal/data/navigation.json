@@ -1,0 +1,506 @@
+{
+  "en": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/"
+        },
+        {
+          "text": "Hiking tours",
+          "page": "",
+          "href": "/hiking-tours-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/blog/"
+        },
+        {
+          "text": "Contacts",
+          "page": "",
+          "href": "/contacts/"
+        },
+        {
+          "text": "About us",
+          "page": "",
+          "href": "/about-us/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Main pages",
+          "links": [
+            {
+              "text": "Home",
+              "href": "/"
+            },
+            {
+              "text": "Hiking tours",
+              "href": "/hiking-tours-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/blog/"
+            },
+            {
+              "text": "Testimonials",
+              "href": "/testimonials/"
+            }
+          ]
+        },
+        {
+          "text": "Support",
+          "links": [
+            {
+              "text": "About us",
+              "href": "/about-us/"
+            },
+            {
+              "text": "Contacts",
+              "href": "/contacts/"
+            },
+            {
+              "text": "Faqs",
+              "href": "/faqs/"
+            },
+            {
+              "text": "Terms & Conditions",
+              "href": "/terms-and-Conditions/"
+            },
+            {
+              "text": "Privacy Policy",
+              "href": "/privacy-policy/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "pt": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/pt/"
+        },
+        {
+          "text": "Caminhadas",
+          "page": "",
+          "href": "/pt/passeios-pedestres-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/pt/blog/"
+        },
+        {
+          "text": "Contatos",
+          "page": "",
+          "href": "/pt/contatos/"
+        },
+        {
+          "text": "Sobre nós",
+          "page": "",
+          "href": "/pt/sobre-nos/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Páginas principais",
+          "links": [
+            {
+              "text": "Início",
+              "href": "/pt/"
+            },
+            {
+              "text": "Caminhadas",
+              "href": "/pt/passeios-pedestres-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/pt/blog/"
+            },
+            {
+              "text": "Testemunhos",
+              "href": "/pt/testemunhos/"
+            }
+          ]
+        },
+        {
+          "text": "Suporte",
+          "links": [
+            {
+              "text": "Sobre nós",
+              "href": "/pt/sobre-nos/"
+            },
+            {
+              "text": "Contatos",
+              "href": "/pt/contatos/"
+            },
+            {
+              "text": "Perguntas frequentes",
+              "href": "/pt/perguntas-frequentes/"
+            },
+            {
+              "text": "Termos e Condições",
+              "href": "/pt/termos-condicoes/"
+            },
+            {
+              "text": "Política de Privacidade",
+              "href": "/pt/politica-de-privacidade/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "de": {
+    "header": {
+      "links": [
+        {
+          "text": "Startseite",
+          "page": "",
+          "href": "/de/"
+        },
+        {
+          "text": "Wanderreisen",
+          "page": "",
+          "href": "/de/wanderreisen-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/de/blog/"
+        },
+        {
+          "text": "Kontakt",
+          "page": "",
+          "href": "/de/kontakt/"
+        },
+        {
+          "text": "Über uns",
+          "page": "",
+          "href": "/de/ueber-uns/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Hauptseiten",
+          "links": [
+            {
+              "text": "Startseite",
+              "href": "/de/"
+            },
+            {
+              "text": "Wanderreisen",
+              "href": "/de/wanderreisen-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/de/blog/"
+            },
+            {
+              "text": "Erfahrungsberichte",
+              "href": "/de/erfahrungsberichte/"
+            }
+          ]
+        },
+        {
+          "text": "Service",
+          "links": [
+            {
+              "text": "Über uns",
+              "href": "/de/ueber-uns/"
+            },
+            {
+              "text": "Kontakt",
+              "href": "/de/kontakt/"
+            },
+            {
+              "text": "FAQ",
+              "href": "/de/faq/"
+            },
+            {
+              "text": "AGB",
+              "href": "/de/agb/"
+            },
+            {
+              "text": "Datenschutz",
+              "href": "/de/datenschutz/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "es": {
+    "header": {
+      "links": [
+        {
+          "text": "Inicio",
+          "page": "",
+          "href": "/es/"
+        },
+        {
+          "text": "Rutas de senderismo",
+          "page": "",
+          "href": "/es/rutas-de-senderismo-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/es/blog/"
+        },
+        {
+          "text": "Contactos",
+          "page": "",
+          "href": "/es/contacto/"
+        },
+        {
+          "text": "Sobre nosotros",
+          "page": "",
+          "href": "/es/sobre-nosotros/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Páginas principales",
+          "links": [
+            {
+              "text": "Inicio",
+              "href": "/es/"
+            },
+            {
+              "text": "Rutas de senderismo",
+              "href": "/es/rutas-de-senderismo-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/es/blog/"
+            },
+            {
+              "text": "Testimonios",
+              "href": "/es/testimonios/"
+            }
+          ]
+        },
+        {
+          "text": "Soporte",
+          "links": [
+            {
+              "text": "Sobre nosotros",
+              "href": "/es/sobre-nosotros/"
+            },
+            {
+              "text": "Contactos",
+              "href": "/es/contacto/"
+            },
+            {
+              "text": "Preguntas frecuentes",
+              "href": "/es/preguntas-frecuentes/"
+            },
+            {
+              "text": "Términos y condiciones",
+              "href": "/es/terminos-y-condiciones/"
+            },
+            {
+              "text": "Política de privacidad",
+              "href": "/es/politica-de-privacidad/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "fr": {
+    "header": {
+      "links": [
+        {
+          "text": "Accueil",
+          "page": "",
+          "href": "/fr/"
+        },
+        {
+          "text": "Randonnées",
+          "page": "",
+          "href": "/fr/randonnees-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/fr/blog/"
+        },
+        {
+          "text": "Contact",
+          "page": "",
+          "href": "/fr/contact/"
+        },
+        {
+          "text": "À propos",
+          "page": "",
+          "href": "/fr/a-propos/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Pages principales",
+          "links": [
+            {
+              "text": "Accueil",
+              "href": "/fr/"
+            },
+            {
+              "text": "Randonnées",
+              "href": "/fr/randonnees-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/fr/blog/"
+            },
+            {
+              "text": "Témoignages",
+              "href": "/fr/temoignages/"
+            }
+          ]
+        },
+        {
+          "text": "Assistance",
+          "links": [
+            {
+              "text": "À propos",
+              "href": "/fr/a-propos/"
+            },
+            {
+              "text": "Contact",
+              "href": "/fr/contact/"
+            },
+            {
+              "text": "FAQ",
+              "href": "/fr/faq/"
+            },
+            {
+              "text": "Conditions générales",
+              "href": "/fr/conditions-generales/"
+            },
+            {
+              "text": "Politique de confidentialité",
+              "href": "/fr/politique-de-confidentialite/"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "nl": {
+    "header": {
+      "links": [
+        {
+          "text": "Home",
+          "page": "",
+          "href": "/nl/"
+        },
+        {
+          "text": "Wandelreizen",
+          "page": "",
+          "href": "/nl/wandelreizen-portugal/",
+          "megaMenu": {
+            "tourTypes": ["WalkingTour"]
+          }
+        },
+        {
+          "text": "Blog",
+          "page": "",
+          "href": "/nl/blog/"
+        },
+        {
+          "text": "Contact",
+          "page": "",
+          "href": "/nl/contact/"
+        },
+        {
+          "text": "Over ons",
+          "page": "",
+          "href": "/nl/over-ons/"
+        }
+      ]
+    },
+    "footer": {
+      "links": [
+        {
+          "text": "Hoofdpagina’s",
+          "links": [
+            {
+              "text": "Home",
+              "href": "/nl/"
+            },
+            {
+              "text": "Wandelreizen",
+              "href": "/nl/wandelreizen-portugal/"
+            },
+            {
+              "text": "Blog",
+              "href": "/nl/blog/"
+            },
+            {
+              "text": "Ervaringen",
+              "href": "/nl/beoordelingen/"
+            }
+          ]
+        },
+        {
+          "text": "Ondersteuning",
+          "links": [
+            {
+              "text": "Over ons",
+              "href": "/nl/over-ons/"
+            },
+            {
+              "text": "Contact",
+              "href": "/nl/contact/"
+            },
+            {
+              "text": "Veelgestelde vragen",
+              "href": "/nl/veelgestelde-vragen/"
+            },
+            {
+              "text": "Algemene voorwaarden",
+              "href": "/nl/algemene-voorwaarden/"
+            },
+            {
+              "text": "Privacybeleid",
+              "href": "/nl/privacybeleid/"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

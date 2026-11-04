@@ -1,0 +1,36 @@
+---
+import SiteData from 'src/../data/site.json';
+import Languages from 'src/../data/languages.json';
+import type { LanguageCodes } from 'src/schemas/language';
+
+type Props = { language: LanguageCodes };
+
+const { language } = Astro.props;
+const site = SiteData[language];
+
+const baseUrl = site.site.url.replace(/\/$/, '');
+
+// The site is one per locale, but the publisher behind it is not — see the
+// note in organization-schema.astro.
+const organisationId = `${SiteData.en.site.url.replace(/\/$/, '')}/#organization`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${baseUrl}/#website`,
+  'name': site.site.name,
+  'url': baseUrl,
+  'description': site.description,
+  'inLanguage': Languages[language].locale,
+  'publisher': {
+    '@id': organisationId
+  }
+};
+---
+
+<script
+  is:inline
+  async
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Runs on the CloudCannon build server, before `astro build`.
+#
+# Edits made in the CloudCannon editor never touch a local git hook, so a slug
+# changed by an editor arrives here with data/url-history.json out of date.
+# Regenerating it now means the deploy still ships a 301 for the old URL — the
+# committed file catches up the next time someone commits locally.
+#
+# This is best-effort on purpose: if history is unavailable the committed file
+# is still correct for every URL that existed at the last local commit, and a
+# missing redirect must not take the site down.
+
+set -uo pipefail
+
+# Historical slugs come from git history, which a shallow clone does not have.
+if [ "$(git rev-parse --is-shallow-repository 2>/dev/null)" = "true" ]; then
+  echo "→ unshallowing repository so URL history can be derived"
+  git fetch --unshallow --quiet || echo "⚠ could not unshallow; using committed url-history.json"
+fi
+
+if pnpm seo:urls; then
+  if ! git diff --quiet -- data/url-history.json 2>/dev/null; then
+    echo "⚠ a content slug changed in the editor — url-history.json was stale."
+    echo "  This deploy has the correct redirects. Run 'pnpm seo:urls' locally"
+    echo "  and commit data/url-history.json to keep the repo in sync."
+  fi
+else
+  echo "⚠ url-history generation failed; building with the committed file"
+fi

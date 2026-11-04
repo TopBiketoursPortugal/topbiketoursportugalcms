@@ -1,0 +1,21 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": ["src/components/page-sections/heroes/hero/hero.astro"],
+        "createdAt": "2026-08-16T11:29:32.395Z",
+        "reason": "Incumbent CMS feature, not a stray: heading_gradient_color is an exposed CloudCannon field the homepage sets to #FF785A. Polish preserves the incumbent world; the accent stop is now color-mixed to clear the 3:1 large-text floor and has a solid color fallback."
+      },
+      {
+        "rule": "gray-on-color",
+        "value": "text-gray-900 on bg-green-600",
+        "createdAt": "2026-08-16T11:42:59.554Z",
+        "reason": "False positive: the detector pairs the dark-variant text (dark:text-gray-900) with the light-variant background (bg-green-600). The actual dark-mode pairing is dark:text-gray-900 on dark:bg-green-500, measured at 8.6:1."
+      }
+    ]
+  }
+}

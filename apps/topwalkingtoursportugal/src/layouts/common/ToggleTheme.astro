@@ -1,0 +1,46 @@
+---
+import { cn } from '@utils/cn';
+
+type Props = {
+  enableSystem?: boolean;
+  iconClass?: string;
+};
+
+const { iconClass } = Astro.props;
+---
+
+<div class="relative inline-flex items-center gap-2">
+  <button
+    type="button"
+    class="text-muted hidden rounded-lg p-2.5 text-sm transition-transform duration-150 hover:scale-125 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:block"
+    data-theme-toggle="light"
+    aria-label="Switch to light mode"
+  >
+    <i class={cn('icon-[ph--sun-light] h-6 w-6', iconClass)}></i>
+    <span class="sr-only">light</span>
+  </button>
+
+  <button
+    type="button"
+    class="text-muted block rounded-lg p-2.5 text-sm transition-transform duration-150 hover:scale-125 focus:ring-4 focus:ring-gray-200 focus:outline-none dark:hidden"
+    data-theme-toggle="dark"
+    aria-label="Switch to dark mode"
+  >
+    <i class={cn('icon-[ph--moon-light] h-6 w-6', iconClass)}></i>
+    <span class="sr-only">dark</span>
+  </button>
+</div>
+
+<style is:global>
+  /* Only keep screen reader styles as they're not available in Tailwind by default */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+</style>
