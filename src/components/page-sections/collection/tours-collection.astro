@@ -87,28 +87,24 @@ const itemListSchema = {
 ---
 
 <section aria-label={t('Tours.Collection.Label', language)}>
-  {
-    /*
+  {/*
       `heading` was declared in the props type and then never rendered, so the
       H2 every one of these blocks authors in CloudCannon was dropped on the
       floor — twelve pages shipped with a tour grid and no heading above it,
       which is why /bike-tours-porto-portugal/ had no H2 at all. The authored
       value carries its own markdown level ("## ..."), so it goes through Prose
       rather than being wrapped in a fixed heading tag.
-    */
-  }
-  {
-    heading?.text ? (
-      <div
-        class="px-4 sm:px-6"
-        data-editable="text"
-        data-type="block"
-        data-prop="heading.text"
-      >
-        <Prose markdown={heading.text} />
-      </div>
-    ) : null
-  }
+    */}
+  {heading?.text ? (
+    <div
+      class="px-4 sm:px-6"
+      data-editable="text"
+      data-type="block"
+      data-prop="heading.text"
+    >
+      <Prose markdown={heading.text} />
+    </div>
+  ) : null}
   <div data-tour-filter-container>
     <TourFilterBar
       language={language}
