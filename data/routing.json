@@ -147,7 +147,22 @@
     },
     {
       "from": "/blog/best-porto-to-lisbon-bike-tour/",
-      "destination": "/blog/best-porto-to-lisbon-cycling-holiday/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/blog/best-porto-to-lisbon-bike-tour-explore-portugal/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/blog/best-porto-to-lisbon-cycling-holiday/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/blog/best-porto-to-lisbon-cycling-holiday-in-portugal/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
       "status": 301
     },
     {
@@ -161,8 +176,18 @@
       "status": 301
     },
     {
+      "from": "/blog/cycling-porto-to-lisbon-a-complete-bike-tour-guide/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
       "from": "/blog/cycling-porto-to-lisbon-bike-tour-guide/",
-      "destination": "/blog/cycling-porto-to-lisbon-cycling-tour-guide/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/blog/cycling-porto-to-lisbon-cycling-tour-guide/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
       "status": 301
     },
     {
@@ -178,6 +203,16 @@
     {
       "from": "/blog/O-Papel-das-Bike-Tours-na Promocao-do-Turismo-Sustentavel-em-Portugal",
       "destination": "/pt/blog/o-papel-das-bike-tours-na-promocao-do-turismo-sustentavel-em-portugal/",
+      "status": 301
+    },
+    {
+      "from": "/blog/porto-to-lisbon-by-bicycle-a-premium-coastal-adventure-at-atlantic-pace/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
+      "from": "/blog/porto-to-lisbon-by-bicycle-a-premium-coastal-adventure-at-atlantic-peace/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
       "status": 301
     },
     {
