@@ -1,6 +1,6 @@
 ---
 const {
-  paddingVertical = "md",
+  paddingVertical = 'md',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
@@ -8,12 +8,8 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class:list={["divider", className]}
-  {...htmlAttributes}
-  aria-hidden="true"
->
-  <div class:list={["divider-inner", `padding-y-${paddingVertical}`]}>
+<div class:list={['divider', className]} {...htmlAttributes} aria-hidden="true">
+  <div class:list={['divider-inner', `padding-y-${paddingVertical}`]}>
     <hr class="rule" />
   </div>
 </div>

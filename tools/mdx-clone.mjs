@@ -8,7 +8,7 @@ import {
 } from 'fs';
 import { join, dirname, basename, sep } from 'path';
 import { v7 as uuidv7 } from 'uuid'; // For generating GUIDs
-import simpleGit from 'simple-git'; // For Git operations
+import { simpleGit } from 'simple-git'; // For Git operations
 
 /**
  * Translation stubs.

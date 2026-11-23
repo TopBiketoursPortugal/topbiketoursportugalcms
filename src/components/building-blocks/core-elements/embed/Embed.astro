@@ -1,7 +1,7 @@
 ---
 const {
   html,
-  aspectRatio = "landscape",
+  aspectRatio = 'landscape',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
@@ -9,11 +9,8 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class:list={["embed-wrapper", className]}
-  {...htmlAttributes}
->
-  <div class:list={["embed-content", `ratio-${aspectRatio}`]}>
+<div class:list={['embed-wrapper', className]} {...htmlAttributes}>
+  <div class:list={['embed-content', `ratio-${aspectRatio}`]}>
     <slot>
       <Fragment set:html={html} />
     </slot>

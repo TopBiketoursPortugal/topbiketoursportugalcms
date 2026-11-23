@@ -17,7 +17,8 @@ title:
   comment: Video title for accessibility and display.
 videoId:
   type: text
-  comment: Used for externally hosted videos — enter the YouTube or Vimeo video ID.
+  comment:
+    Used for externally hosted videos — enter the YouTube or Vimeo video ID.
   hidden: type=local-source
 source:
   type: file
@@ -63,7 +64,8 @@ triggerSize:
         name: Large
 triggerIconName:
   type: select
-  comment: Optional icon for the trigger button. Sourced from
+  comment:
+    Optional icon for the trigger button. Sourced from
     [Heroicons](https://heroicons.com/).
   options:
     values: _select_data.icons

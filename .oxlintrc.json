@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  // oxlint lints .js/.ts/.tsx and the frontmatter + <script> blocks of .astro
+  // files natively. `correctness` is the equivalent of the old
+  // `eslint:recommended` + `typescript-eslint` recommended baseline.
+  "plugins": ["eslint", "typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "node": true
+  },
+  // .gitignore is honoured automatically (dist/, .astro/, node_modules/,
+  // google-cloud-sdk/, ...). These are generated or untracked on top of it.
+  "ignorePatterns": [
+    "apps/**",
+    "public/pagefind/**",
+    ".netlify/**",
+    "pnpm-lock.yaml"
+  ],
+  "rules": {
+    // A leading underscore marks a binding that is intentionally unused —
+    // most visibly the CloudCannon editable-region props every
+    // building-block component destructures.
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      // Ambient .d.ts files can only pull in other declarations via
+      // triple-slash references.
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "typescript/triple-slash-reference": "off"
+      }
+    }
+  ]
+}

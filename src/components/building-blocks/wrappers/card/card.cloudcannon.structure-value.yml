@@ -15,8 +15,8 @@ value:
     positionVertical: top
     positionHorizontal: center
     priority: false
-    imageSource: ""
-    imageAlt: ""
+    imageSource: ''
+    imageAlt: ''
     videoSource: null
     overlay: 0
   link: null

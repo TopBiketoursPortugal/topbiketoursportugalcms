@@ -23,16 +23,14 @@ const regions = await getCollection(
 ---
 
 <Stack layout="vertical" spacing="large" class="w-full">
-  {
-    title ? (
-      <Heading
-        as="h2"
-        class="reveal-up intersect:opacity-100 intersect-once px-6"
-      >
-        {title}
-      </Heading>
-    ) : null
-  }
+  {title ? (
+    <Heading
+      as="h2"
+      class="reveal-up intersect:opacity-100 intersect-once px-6"
+    >
+      {title}
+    </Heading>
+  ) : null}
 
   <div
     class={`reveal-stagger intersect:opacity-100 intersect-once ${
@@ -44,15 +42,13 @@ const regions = await getCollection(
         : 'flex flex-col gap-4'
     }`}
   >
-    {
-      regions.map((region) => (
-        <TourRegionsCard
-          region={region}
-          language={language}
-          layout={layout}
-          imageWidths={imageWidths}
-        />
-      ))
-    }
+    {regions.map((region) => (
+      <TourRegionsCard
+        region={region}
+        language={language}
+        layout={layout}
+        imageWidths={imageWidths}
+      />
+    ))}
   </div>
 </Stack>

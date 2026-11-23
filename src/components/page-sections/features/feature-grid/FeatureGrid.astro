@@ -1,26 +1,26 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import Text from "@core-elements/text/Text.astro";
-import FeatureItem from "@features/feature-grid/FeatureItem.astro";
-import Grid from "@wrappers/grid/Grid.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import SimpleText from '@core-elements/simple-text/SimpleText.astro';
+import Text from '@core-elements/text/Text.astro';
+import FeatureItem from '@features/feature-grid/FeatureItem.astro';
+import Grid from '@wrappers/grid/Grid.astro';
 
 type FeatureProps = Record<string, unknown>;
 
 const {
-  eyebrow = "",
-  heading = "",
-  subtext = "",
+  eyebrow = '',
+  heading = '',
+  subtext = '',
   features = [],
   sectionLabel,
-  maxContentWidth = "2xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = '2xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
-  alignmentHorizontal = "center",
+  alignmentHorizontal = 'center',
   class: className,
   useDefaultEditableBinding = false,
   _component,
@@ -29,7 +29,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["feature-grid", className]}
+  class:list={['feature-grid', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -67,15 +67,13 @@ const {
     class="feature-grid-grid"
     data-children-prop="features"
   >
-    {
-      features.map((feature: FeatureProps) => (
-        <FeatureItem
-          data-id="page-sections/features/feature-grid/feature-item"
-          data-editable="array-item"
-          {...feature}
-        />
-      ))
-    }
+    {features.map((feature: FeatureProps) => (
+      <FeatureItem
+        data-id="page-sections/features/feature-grid/feature-item"
+        data-editable="array-item"
+        {...feature}
+      />
+    ))}
   </Grid>
 </CustomSection>
 

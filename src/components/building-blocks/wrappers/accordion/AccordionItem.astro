@@ -1,6 +1,6 @@
 ---
-import RenderBlock from "@components/utils/renderBlock.astro";
-import Icon from "@core-elements/icon/Icon.astro";
+import RenderBlock from '@components/utils/renderBlock.astro';
+import Icon from '@core-elements/icon/Icon.astro';
 
 const {
   title,
@@ -9,14 +9,14 @@ const {
   isOpen = false,
   accordionName,
   _component,
-  "data-children-prop": childrenDataProp,
+  'data-children-prop': childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'contentSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 ---
 
@@ -28,25 +28,16 @@ const arrayDataAttributes = effectiveChildrenProp
 >
   <summary class="accordion-item-title">
     <span class="accordion-item-title-text">{title}</span>
-    <Icon
-      name="chevron-down"
-      size="none"
-      class="accordion-item-icon"
-    />
+    <Icon name="chevron-down" size="none" class="accordion-item-icon" />
   </summary>
-  <div
-    class="accordion-item-detail"
-    {...arrayDataAttributes}
-  >
+  <div class="accordion-item-detail" {...arrayDataAttributes}>
     <slot>
-      {
-        contentSections && (
-          <RenderBlock
-            contentSections={contentSections}
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-          />
-        )
-      }
+      {contentSections && (
+        <RenderBlock
+          contentSections={contentSections}
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+        />
+      )}
     </slot>
   </div>
 </details>

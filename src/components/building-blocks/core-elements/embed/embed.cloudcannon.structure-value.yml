@@ -3,7 +3,7 @@ icon: data_object
 description: Responsive wrapper for third-party embeds and raw HTML content.
 value:
   _component: building-blocks/core-elements/embed
-  html: ""
+  html: ''
   aspectRatio: landscape
 preview:
   text:

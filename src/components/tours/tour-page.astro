@@ -169,28 +169,27 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 // mapa, itenerario, preço
 ---
 
-{
-  image && (
-    <header class="relative isolate">
-      {/*
+{image && (
+  <header class="relative isolate">
+    {/*
         Was capped at `max-h-72` — 288px for a product whose entire appeal is
         landscape, and the shallow crop cut the horizon out of most images.
         44vh on a phone / 60vh on a desktop gives the photograph room to do the
         selling, and gives the `tour-hero` view transition from the list card
         somewhere worth landing.
       */}
-      <div
-        data-tour-hero
-        class="h-[44vh] max-h-[560px] min-h-[260px] overflow-clip sm:h-[52vh] lg:h-[60vh]"
-      >
-        <ResponsiveImage
-          {...image}
-          class="h-full w-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-        />
-      </div>
-      {/*
+    <div
+      data-tour-hero
+      class="h-[44vh] max-h-[560px] min-h-[260px] overflow-clip sm:h-[52vh] lg:h-[60vh]"
+    >
+      <ResponsiveImage
+        {...image}
+        class="h-full w-full object-cover"
+        loading="eager"
+        fetchPriority="high"
+      />
+    </div>
+    {/*
         Bottom-anchored gradient rather than a centre-weighted vignette: the
         vignette darkened exactly the middle of the frame, which is where the
         riders and the horizon are. Two stops, not one, because hero images
@@ -199,68 +198,54 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         other. The lower half carries the density, since that is where the type
         sits.
       */}
-      <span
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 from-5% via-black/55 via-35% to-black/10"
-      />
-      {/* Title overlay — tw-animate-css "enter" on load, delayed past the 0.4s
+    <span
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 from-5% via-black/55 via-35% to-black/10"
+    />
+    {/* Title overlay — tw-animate-css "enter" on load, delayed past the 0.4s
           tour-hero morph; motion-safe so reduced-motion skips it */}
-      <div class="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-8 text-center sm:pb-12">
-        <h1 class="font-heading motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both max-w-4xl text-3xl font-bold text-balance text-white [text-shadow:0_2px_18px_rgb(0_0_0/0.55)] motion-safe:delay-200 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl md:text-5xl">
-          {tour.title}
-        </h1>
-        {hasSubtitle && (
-          <p class="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both mt-3 max-w-2xl text-balance text-white/95 [text-shadow:0_2px_12px_rgb(0_0_0/0.5)] motion-safe:delay-300 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-lg">
-            {tour.subTitle}
-          </p>
-        )}
-      </div>
-    </header>
-  )
-}
-<div
-  class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8"
->
-  {
-    /*
+    <div class="absolute inset-x-0 bottom-0 flex flex-col items-center px-4 pb-8 text-center sm:pb-12">
+      <h1 class="font-heading motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both max-w-4xl text-3xl font-bold text-balance text-white [text-shadow:0_2px_18px_rgb(0_0_0/0.55)] motion-safe:delay-200 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-4xl md:text-5xl">
+        {tour.title}
+      </h1>
+      {hasSubtitle && (
+        <p class="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both mt-3 max-w-2xl text-balance text-white/95 [text-shadow:0_2px_12px_rgb(0_0_0/0.5)] motion-safe:delay-300 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)] sm:text-lg">
+          {tour.subTitle}
+        </p>
+      )}
+    </div>
+  </header>
+)}
+<div class="line-container mx-auto grid w-full grid-cols-1 justify-between gap-10 scroll-smooth px-4 sm:grid-cols-[3fr_minmax(min(200px,100%),1fr)] sm:px-6 lg:px-8">
+  {/*
     `overflow-auto` painted a real grey scrollbar under the tabs on every
     phone. `overflow-x-auto` plus the scrollbar-hiding rule at the foot of this
     file keeps the scroll, drops the chrome, and the mask fades the cut edge so
     "there is more to the right" still reads.
-  */
-  }
+  */}
   <div
     id="tour-tabs-container"
     class="tour-tabs sticky top-17 z-40 min-w-0 overflow-x-auto bg-white md:top-34.25 dark:bg-slate-950"
   >
     <Tabs>
       <TabItem href="#detail" text={t('Tour.Tab.Details', language)} selected />
-      {
-        mapUrl.length > 0 ? (
-          <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
-        ) : null
-      }
-      {
-        itinerary.length > 0 ? (
-          <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
-        ) : null
-      }
-      {
-        pricingTables.length > 0 ? (
-          <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
-        ) : null
-      }
+      {mapUrl.length > 0 ? (
+        <TabItem href="#map" text={t('Tour.Tab.Map', language)} />
+      ) : null}
+      {itinerary.length > 0 ? (
+        <TabItem href="#itinerary" text={t('Tour.Tab.Itinerary', language)} />
+      ) : null}
+      {pricingTables.length > 0 ? (
+        <TabItem href="#packages" text={t('Tour.Tab.Packages', language)} />
+      ) : null}
       <TabItem href="#photos" text={t('Tour.Tab.Photos', language)} />
-      {
-        enableFaqs ? (
-          <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
-        ) : null
-      }
+      {enableFaqs ? (
+        <TabItem href="#faqs" text={t('Tour.Tab.Faqs', language)} />
+      ) : null}
       <TabItem href="#reviews" text={t('Tour.Tab.Reviews', language)} />
     </Tabs>
   </div>
-  {
-    /*
+  {/*
     The column assignment is explicit — `sm:col-start-2` for the panel,
     `sm:col-start-1 sm:col-end-2` for every section — because the sections used
     to be `col-span-full`, which ran them underneath the panel's column once it
@@ -278,62 +263,54 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
        and the reviews were all read with no way to act. It is sticky now,
        which only works because the form below it is collapsed by default: a
        700px panel cannot usefully stick inside a 900px viewport.
-  */
-  }
+  */}
   <section
     id="tour-booking"
     aria-label={t('Tour.Sidebar.Label', language)}
     class="tour-sidebar intersect:opacity-100 intersect-once z-40 order-last mx-auto flex w-full shrink flex-col items-start justify-start gap-4 rounded-lg bg-white p-4 shadow-lg sm:sticky sm:top-36 sm:order-none sm:col-start-2 sm:row-span-[99] sm:row-start-1 sm:-mt-24 sm:self-start dark:bg-gray-800"
   >
-    {
-      minPrice > 0 || minPromoPrice > 0 ? (
-        <div class="relative flex w-full flex-wrap items-baseline gap-x-2 gap-y-1">
-          <span class="text-sm text-gray-500 dark:text-gray-400">
-            {t('Tour.Form.FromPrice', language)}
+    {minPrice > 0 || minPromoPrice > 0 ? (
+      <div class="relative flex w-full flex-wrap items-baseline gap-x-2 gap-y-1">
+        <span class="text-sm text-gray-500 dark:text-gray-400">
+          {t('Tour.Form.FromPrice', language)}
+        </span>
+        {minPrice > 0 ? (
+          <span
+            class={cn(
+              'tabular-nums',
+              isPromotional
+                ? 'text-lg text-gray-500 line-through dark:text-gray-400'
+                : 'text-2xl font-bold'
+            )}
+          >
+            {priceFormat.format(minPrice)}
           </span>
-          {minPrice > 0 ? (
-            <span
-              class={cn(
-                'tabular-nums',
-                isPromotional
-                  ? 'text-lg text-gray-500 line-through dark:text-gray-400'
-                  : 'text-2xl font-bold'
-              )}
-            >
-              {priceFormat.format(minPrice)}
-            </span>
-          ) : null}
-          {isPromotional && minPromoPrice > 0 ? (
-            <span class="text-2xl font-bold tabular-nums">
-              {priceFormat.format(minPromoPrice)}
-            </span>
-          ) : null}
+        ) : null}
+        {isPromotional && minPromoPrice > 0 ? (
+          <span class="text-2xl font-bold tabular-nums">
+            {priceFormat.format(minPromoPrice)}
+          </span>
+        ) : null}
 
-          <Tooltip class="align-top">
-            <i
-              slot="trigger"
-              class="icon-[ph--info-light] h-4 w-4 text-gray-400"
-              aria-hidden="true"
-              title={t('Tour.Form.FromPrice.Info', language)}
-            />
-            <span slot="content">
-              {t('Tour.Form.FromPrice.Info', language)}
-            </span>
-          </Tooltip>
-        </div>
-      ) : null
-    }
+        <Tooltip class="align-top">
+          <i
+            slot="trigger"
+            class="icon-[ph--info-light] h-4 w-4 text-gray-400"
+            aria-hidden="true"
+            title={t('Tour.Form.FromPrice.Info', language)}
+          />
+          <span slot="content">{t('Tour.Form.FromPrice.Info', language)}</span>
+        </Tooltip>
+      </div>
+    ) : null}
 
-    {
-      /* The page already promises a 24h reply, 9,000px further down. It belongs
-        at the point where the visitor is deciding whether to commit. */
-    }
-    <p
-      class="flex w-full items-start gap-2 text-sm text-gray-600 dark:text-gray-300"
-    >
+    {/* The page already promises a 24h reply, 9,000px further down. It belongs
+        at the point where the visitor is deciding whether to commit. */}
+    <p class="flex w-full items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
       <i
         class="icon-[ph--shield-check-light] mt-0.5 h-4 w-4 shrink-0"
-        aria-hidden="true"></i>
+        aria-hidden="true"
+      ></i>
       {t('Tour.Sidebar.Reassurance', language)}
     </p>
 
@@ -359,50 +336,42 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
       ) : null
     }
     <div>
-      <ul
-        class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3"
-      >
-        {
-          durationDays > 0 ? (
-            <li class="flex items-center gap-3">
-              <i
-                class="icon-[ph--clock-countdown-light] h-5 w-5"
-                aria-hidden="true"
-              />
-              {durationDays} {t(dayUnit, language)}
-              {isMultiDay && durationDays > 1 ? (
-                <>
-                  {' / '}
-                  {durationDays - 1} {t(nightUnit, language)}
-                </>
-              ) : null}
-            </li>
-          ) : null
-        }
-        {
-          (tour.groupSize?.min ?? 0) + (tour.groupSize?.max ?? 0) > 0 ? (
-            <li class="flex items-center gap-3">
-              <i
-                class="icon-[ph--users-three-light] h-5 w-5"
-                aria-hidden="true"
-              />
-              {t('Tour.Info.Group.Label', language)} :{' '}
-              {tour.groupSize?.min ?? 0}-{tour.groupSize?.max ?? 0}
-              {t('Tour.Info.Group.Unit', language)}
-            </li>
-          ) : null
-        }
-        {
-          tour.distance ? (
-            <li class="flex items-center gap-3">
-              <i
-                class="icon-[ph--map-trifold-light] h-5 w-5"
-                aria-hidden="true"
-              />
-              {t('Tour.Info.Distance.Label', language)}: {tour.distance} km
-            </li>
-          ) : null
-        }
+      <ul class="center grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {durationDays > 0 ? (
+          <li class="flex items-center gap-3">
+            <i
+              class="icon-[ph--clock-countdown-light] h-5 w-5"
+              aria-hidden="true"
+            />
+            {durationDays} {t(dayUnit, language)}
+            {isMultiDay && durationDays > 1 ? (
+              <>
+                {' / '}
+                {durationDays - 1} {t(nightUnit, language)}
+              </>
+            ) : null}
+          </li>
+        ) : null}
+        {(tour.groupSize?.min ?? 0) + (tour.groupSize?.max ?? 0) > 0 ? (
+          <li class="flex items-center gap-3">
+            <i
+              class="icon-[ph--users-three-light] h-5 w-5"
+              aria-hidden="true"
+            />
+            {t('Tour.Info.Group.Label', language)} : {tour.groupSize?.min ?? 0}-
+            {tour.groupSize?.max ?? 0}
+            {t('Tour.Info.Group.Unit', language)}
+          </li>
+        ) : null}
+        {tour.distance ? (
+          <li class="flex items-center gap-3">
+            <i
+              class="icon-[ph--map-trifold-light] h-5 w-5"
+              aria-hidden="true"
+            />
+            {t('Tour.Info.Distance.Label', language)}: {tour.distance} km
+          </li>
+        ) : null}
         {
           /* "Difficulty : 2/5" made the reader convert a fraction into a sense
              of whether they could ride it. The scale shows the same value and
@@ -428,110 +397,97 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
             </li>
           ) : null
         }
-        {
-          styleLabel ? (
-            <li class="flex items-center gap-3">
-              <i
-                class="icon-[ph--compass-light] h-5 w-5 shrink-0"
-                aria-hidden="true"
-              />
-              {styleLabel}
-            </li>
-          ) : null
-        }
+        {styleLabel ? (
+          <li class="flex items-center gap-3">
+            <i
+              class="icon-[ph--compass-light] h-5 w-5 shrink-0"
+              aria-hidden="true"
+            />
+            {styleLabel}
+          </li>
+        ) : null}
         <li class="flex items-center gap-3">
           <i class="icon-[ph--airplane-light] h-5 w-5" aria-hidden="true"></i>
           {t('Tour.Info.ClosestAirport.Label', language)}:{' '}
           {tour.closestAirport ?? 'Aeroporto Sá Carneiro'}
         </li>
-        {
-          tour.minAge ? (
-            <li class="flex items-center gap-3">
-              <i class="icon-[ph--user-light] h-5 w-5" aria-hidden="true" />
-              {t('Tour.Info.MinAge.Label', language)}: {tour.minAge}
-            </li>
-          ) : null
-        }
+        {tour.minAge ? (
+          <li class="flex items-center gap-3">
+            <i class="icon-[ph--user-light] h-5 w-5" aria-hidden="true" />
+            {t('Tour.Info.MinAge.Label', language)}: {tour.minAge}
+          </li>
+        ) : null}
       </ul>
     </div>
     <Separator />
     <Prose markdown={tour.content ?? ''} />
     <slot />
   </section>
-  {
-    mapUrl.length > 0 ? (
-      <section
-        id="map"
-        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
-      >
-        <Heading as="h2">{t('Tour.Section.Map.Title', language)}</Heading>
-        <div class="w-full select-none">
-          <iframe
-            title="tour"
-            src={mapUrl}
-            width="100%"
-            height="480"
-            style="border:0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          />
-        </div>
-      </section>
-    ) : null
-  }
-  {
-    itinerary.length > 0 ? (
-      <section
-        id="itinerary"
-        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
-      >
-        <Heading as="h2">{t('Tour.Section.Itinerary.Title', language)}</Heading>
-        <TourItinerary itinerary={itinerary} language={language} />
-      </section>
-    ) : null
-  }
-  {
-    pricingTables.length > 0 ? (
-      <section
-        id="packages"
-        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
-      >
-        <Heading as="h2">{t('Tour.Section.Packages.Title', language)}</Heading>
+  {mapUrl.length > 0 ? (
+    <section
+      id="map"
+      class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
+    >
+      <Heading as="h2">{t('Tour.Section.Map.Title', language)}</Heading>
+      <div class="w-full select-none">
+        <iframe
+          title="tour"
+          src={mapUrl}
+          width="100%"
+          height="480"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+      </div>
+    </section>
+  ) : null}
+  {itinerary.length > 0 ? (
+    <section
+      id="itinerary"
+      class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
+    >
+      <Heading as="h2">{t('Tour.Section.Itinerary.Title', language)}</Heading>
+      <TourItinerary itinerary={itinerary} language={language} />
+    </section>
+  ) : null}
+  {pricingTables.length > 0 ? (
+    <section
+      id="packages"
+      class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
+    >
+      <Heading as="h2">{t('Tour.Section.Packages.Title', language)}</Heading>
 
-        <div class="col-span-full flex min-w-0 flex-col gap-12">
-          {pricingTables.map((table) => (
-            <div class="col-span-full">
-              <Heading as="h3" class="mb-6">
-                {table.title || table.defaultTitle}
-              </Heading>
-              <TourPricing
-                language={language}
-                packages={table.packages}
-                tour={tour}
-                variant={table.variant}
-              />
-              {table.variant === 'pricing' ? (
-                <div class="mt-6 flex justify-center">
-                  <div class="w-full max-w-xs">
-                    <TourBookNow
-                      tour={tour}
-                      language={language}
-                      variant="inline"
-                    />
-                  </div>
+      <div class="col-span-full flex min-w-0 flex-col gap-12">
+        {pricingTables.map((table) => (
+          <div class="col-span-full">
+            <Heading as="h3" class="mb-6">
+              {table.title || table.defaultTitle}
+            </Heading>
+            <TourPricing
+              language={language}
+              packages={table.packages}
+              tour={tour}
+              variant={table.variant}
+            />
+            {table.variant === 'pricing' ? (
+              <div class="mt-6 flex justify-center">
+                <div class="w-full max-w-xs">
+                  <TourBookNow
+                    tour={tour}
+                    language={language}
+                    variant="inline"
+                  />
                 </div>
-              ) : null}
-            </div>
-          ))}
+              </div>
+            ) : null}
+          </div>
+        ))}
 
-          <Prose
-            markdown={tour.afterPricing ?? ''}
-            class="col-span-full mt-8"
-          />
-        </div>
-      </section>
-    ) : null
-  }
+        <Prose markdown={tour.afterPricing ?? ''} class="col-span-full mt-8" />
+      </div>
+    </section>
+  ) : null}
   <section
     id="photos"
     class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
@@ -540,125 +496,109 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     <Gallery images={tour.images ?? []} />
   </section>
 
-  {
-    enableFaqs ? (
-      <section
-        id="faqs"
-        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
-      >
-        <Heading as="h2">{t('Tour.Section.Faq.Title', language)}</Heading>
-        <TourFaqs faqs={faqs} language={language} />
-      </section>
-    ) : null
-  }
+  {enableFaqs ? (
+    <section
+      id="faqs"
+      class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
+    >
+      <Heading as="h2">{t('Tour.Section.Faq.Title', language)}</Heading>
+      <TourFaqs faqs={faqs} language={language} />
+    </section>
+  ) : null}
   <section
     id="reviews"
     class="tour-section intersect:opacity-100 intersect-once flex min-w-0 scroll-mt-[30px] flex-col gap-8 sm:col-start-1 sm:col-end-2 md:scroll-mt-[90px]"
   >
     <Heading as="h2">{t('Tour.Section.Reviews.Title', language)}</Heading>
-    {
-      reviews.length > 0 ? (
-        <div
-          class="reviews-carousel-container relative max-w-full"
-          style="box-sizing: border-box;"
+    {reviews.length > 0 ? (
+      <div
+        class="reviews-carousel-container relative max-w-full"
+        style="box-sizing: border-box;"
+      >
+        <button
+          class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Previous slide"
         >
-          <button
-            class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-            aria-label="Previous slide"
-          >
-            <i class="icon-[ph--caret-left-bold] text-xl" />
-          </button>
-          <button
-            class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-            aria-label="Next slide"
-          >
-            <i class="icon-[ph--caret-right-bold] text-xl" />
-          </button>
+          <i class="icon-[ph--caret-left-bold] text-xl" />
+        </button>
+        <button
+          class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+          aria-label="Next slide"
+        >
+          <i class="icon-[ph--caret-right-bold] text-xl" />
+        </button>
 
-          <div
-            class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
-            style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
-          >
-            {reviews.map((review) => (
-              <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
-                {/* No tour name here — every review on this page is about
+        <div
+          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+        >
+          {reviews.map((review) => (
+            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+              {/* No tour name here — every review on this page is about
                     this tour, so printing it on each card is noise. Date and
                     source still carry, since they are what make the review
                     verifiable. */}
-                <ReviewItem
-                  name={getAuthorName(review)}
-                  country={review.author?.country}
-                  content={review.content}
-                  rating={review.rating}
-                  expand_behavior="button"
-                  date={review.publishDate}
-                  sourceName={review.source?.name}
-                  sourceUrl={review.source?.url}
-                />
-              </div>
-            ))}
-          </div>
+              <ReviewItem
+                name={getAuthorName(review)}
+                country={review.author?.country}
+                content={review.content}
+                rating={review.rating}
+                expand_behavior="button"
+                date={review.publishDate}
+                sourceName={review.source?.name}
+                sourceUrl={review.source?.url}
+              />
+            </div>
+          ))}
         </div>
-      ) : (
-        <div>{t('Tour.Section.Reviews.Empty', language)}</div>
-      )
-    }
+      </div>
+    ) : (
+      <div>{t('Tour.Section.Reviews.Empty', language)}</div>
+    )}
   </section>
-  {
-    relatedTours.length > 0 ? (
-      <section
-        id="related"
-        class="tour-section intersect:opacity-100 intersect-once flex min-w-0 flex-col gap-4 sm:col-start-1 sm:col-end-2"
-      >
-        <Heading as="h2">
-          {t('Tour.Section.RelatedTours.Title', language)}
-        </Heading>
-        <TourRelated
-          language={language}
-          related={relatedTours}
-          current={tour}
-        />
-      </section>
-    ) : null
-  }
-  {
-    !hasWetravel && feature?.bokunLink ? (
-      <script
-        is:inline
-        async
-        defer
-        type="text/javascript"
-        src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
-      />
-    ) : null
-  }
-  {
-    /*
+  {relatedTours.length > 0 ? (
+    <section
+      id="related"
+      class="tour-section intersect:opacity-100 intersect-once flex min-w-0 flex-col gap-4 sm:col-start-1 sm:col-end-2"
+    >
+      <Heading as="h2">
+        {t('Tour.Section.RelatedTours.Title', language)}
+      </Heading>
+      <TourRelated language={language} related={relatedTours} current={tour} />
+    </section>
+  ) : null}
+  {!hasWetravel && feature?.bokunLink ? (
+    <script
+      is:inline
+      async
+      defer
+      type="text/javascript"
+      src="https://fareharbor.com/embeds/api/v1/?autolightframe=yes"
+    />
+  ) : null}
+  {/*
     Mobile booking bar. On a phone the sidebar now sits below the content, so
     this is what carries the call to action for the 24,000px in between. It
     stays out of the way until the hero has scrolled past — see initMobileCta.
-  */
-  }
+  */}
   <div
     data-tour-mobile-cta
     class="tour-mobile-cta fixed inset-x-0 bottom-0 z-45 flex items-center justify-between gap-4 border-t border-gray-200 bg-white/95 px-4 py-3 backdrop-blur-md sm:hidden dark:border-gray-700 dark:bg-gray-900/95"
   >
-    {
-      minPrice > 0 || minPromoPrice > 0 ? (
-        <div class="flex flex-col leading-tight">
-          <span class="text-xs text-gray-500 dark:text-gray-400">
-            {t('Tour.Form.FromPrice', language)}
-          </span>
-          <span class="text-lg font-bold tabular-nums">
-            {priceFormat.format(isPromotional ? minPromoPrice : minPrice)}
-          </span>
-        </div>
-      ) : (
-        <span class="font-heading truncate text-sm font-semibold">
-          {tour.title}
+    {minPrice > 0 || minPromoPrice > 0 ? (
+      <div class="flex flex-col leading-tight">
+        <span class="text-xs text-gray-500 dark:text-gray-400">
+          {t('Tour.Form.FromPrice', language)}
         </span>
-      )
-    }
+        <span class="text-lg font-bold tabular-nums">
+          {priceFormat.format(isPromotional ? minPromoPrice : minPrice)}
+        </span>
+      </div>
+    ) : (
+      <span class="font-heading truncate text-sm font-semibold">
+        {tour.title}
+      </span>
+    )}
     <a
       href="#tour-booking"
       data-tour-mobile-enquire
@@ -675,9 +615,10 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     url={getTourPath(tour, language)}
     price={minPrice}
     promoPrice={minPromoPrice}
-    currency={(pricedPackages.length > 0
-      ? pricedPackages[0].price?.currency
-      : null) ?? 'EUR'}
+    currency={
+      (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
+      'EUR'
+    }
     ratingAverage={average}
     ratingCount={count}
     language={language}

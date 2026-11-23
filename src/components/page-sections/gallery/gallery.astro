@@ -93,26 +93,22 @@ const labels = {
 };
 ---
 
-{
-  /*
+{/*
   `data-editable` stays on the wrapper so CloudCannon still recognises the
   images array. Per-item editing is lost — the tiles are laid out by the
   island, and CloudCannon cannot annotate nodes React owns. Editors add and
   reorder photos from the sidebar rather than by clicking a tile.
-*/
-}
+*/}
 <div class="gallery" data-editable="array" data-prop="images">
-  {
-    photos.length > 0 ? (
-      /*
-       * `client:visible` — the gallery sits well below the fold on a tour
-       * page, so its ~40KB of JS is not on the critical path. The album is
-       * still server-rendered, so the photos are in the HTML and visible
-       * before (and without) hydration; only opening one needs JS.
-       */
-      <PhotoGallery client:visible photos={photos} labels={labels} />
-    ) : null
-  }
+  {photos.length > 0 ? (
+    /*
+     * `client:visible` — the gallery sits well below the fold on a tour
+     * page, so its ~40KB of JS is not on the critical path. The album is
+     * still server-rendered, so the photos are in the HTML and visible
+     * before (and without) hydration; only opening one needs JS.
+     */
+    <PhotoGallery client:visible photos={photos} labels={labels} />
+  ) : null}
 </div>
 
 <style is:global>

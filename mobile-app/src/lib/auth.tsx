@@ -1,4 +1,11 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 
 import { findBookingByPhone, type Booking } from '@/data/bookings';
 import { deleteItem, getItem, setItem } from '@/lib/storage';
@@ -28,11 +35,16 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function requestOtp(phone: string): Promise<{ ok: true } | { ok: false; error: string }> {
+export async function requestOtp(
+  phone: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
   await delay(NETWORK_DELAY_MS);
   const digits = phone.replace(/\D/g, '');
   if (digits.length < 8) {
-    return { ok: false, error: "That doesn't look like a full phone number yet." };
+    return {
+      ok: false,
+      error: "That doesn't look like a full phone number yet."
+    };
   }
   // Real implementation: call your backend's /auth/otp/start with { phone }.
   return { ok: true };
@@ -45,14 +57,18 @@ export async function verifyOtp(
   await delay(NETWORK_DELAY_MS);
 
   if (code !== DEMO_OTP_CODE) {
-    return { ok: false, error: 'That code is incorrect. Check the SMS and try again.' };
+    return {
+      ok: false,
+      error: 'That code is incorrect. Check the SMS and try again.'
+    };
   }
 
   const booking = findBookingByPhone(phone);
   if (!booking) {
     return {
       ok: false,
-      error: "We don't see a booking for this number — check the one you used at checkout, or contact support.",
+      error:
+        "We don't see a booking for this number — check the one you used at checkout, or contact support."
     };
   }
 
@@ -95,7 +111,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSession(null);
   }, []);
 
-  const value = useMemo(() => ({ session, isLoading, signIn, signOut }), [session, isLoading, signIn, signOut]);
+  const value = useMemo(
+    () => ({ session, isLoading, signIn, signOut }),
+    [session, isLoading, signIn, signOut]
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

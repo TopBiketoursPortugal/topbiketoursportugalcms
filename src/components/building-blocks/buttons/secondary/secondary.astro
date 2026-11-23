@@ -17,13 +17,11 @@ const hover_brightness = block.hover_brightness;
   href={block.button_link}
   class="button"
 >
-  {
-    block.button_icon ? (
-      <span class="button__icon">
-        <i class={block.button_icon} />
-      </span>
-    ) : null
-  }
+  {block.button_icon ? (
+    <span class="button__icon">
+      <i class={block.button_icon} />
+    </span>
+  ) : null}
   <span>{block.button_text}</span>
 </a>
 

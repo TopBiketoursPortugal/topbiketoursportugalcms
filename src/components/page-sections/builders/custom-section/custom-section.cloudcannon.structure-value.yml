@@ -3,7 +3,7 @@ icon: star
 description: Used to group and style large sections of a page.
 value:
   _component: page-sections/builders/custom-section
-  label: ""
+  label: ''
   contentSections: []
   maxContentWidth: 2xl
   paddingHorizontal: md
@@ -15,8 +15,8 @@ value:
     positionVertical: top
     positionHorizontal: center
     priority: false
-    imageSource: ""
-    imageAlt: ""
+    imageSource: ''
+    imageAlt: ''
     videoSource: null
     overlay: 0
   rounded: false

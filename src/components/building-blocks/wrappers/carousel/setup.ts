@@ -9,57 +9,68 @@
  *   from the live-sync script in that context.
  */
 
-import EmblaCarousel, { type EmblaCarouselType } from "embla-carousel";
-import AutoScroll from "embla-carousel-auto-scroll";
-import Autoplay from "embla-carousel-autoplay";
+import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
+import AutoScroll from 'embla-carousel-auto-scroll';
+import Autoplay from 'embla-carousel-autoplay';
 
 export interface CarouselElement extends HTMLElement {
   __embla?: EmblaCarouselType;
 }
 
 export function setupCarousel(carousel: CarouselElement): void {
-  if (carousel.hasAttribute("data-embla-initialized")) return;
+  if (carousel.hasAttribute('data-embla-initialized')) return;
 
-  const inner = carousel.querySelector<HTMLElement>(".carousel-inner");
-  const viewport = inner?.querySelector<HTMLElement>(".viewport");
-  const track = viewport?.querySelector<HTMLElement>(".track");
-  const slides = track?.querySelectorAll<HTMLElement>(".slide");
-  const controlsWrapper = inner?.querySelector<HTMLElement>(".controls-wrapper");
-  const indicatorsContainer = controlsWrapper?.querySelector<HTMLElement>(".indicators");
-  const fractionEl = controlsWrapper?.querySelector<HTMLElement>(".carousel-fraction");
+  const inner = carousel.querySelector<HTMLElement>('.carousel-inner');
+  const viewport = inner?.querySelector<HTMLElement>('.viewport');
+  const track = viewport?.querySelector<HTMLElement>('.track');
+  const slides = track?.querySelectorAll<HTMLElement>('.slide');
+  const controlsWrapper =
+    inner?.querySelector<HTMLElement>('.controls-wrapper');
+  const indicatorsContainer =
+    controlsWrapper?.querySelector<HTMLElement>('.indicators');
+  const fractionEl =
+    controlsWrapper?.querySelector<HTMLElement>('.carousel-fraction');
 
   if (!inner || !viewport || !track || !slides || !slides.length) {
     // Silently skip: in the CloudCannon editor the inner DOM can be
     // briefly incomplete while content loads; the live-sync observer
     // will re-run setup once slides are inserted.
     if (import.meta.env.DEV) {
-      console.debug("Carousel: skipping setup, required elements missing", carousel);
+      console.debug(
+        'Carousel: skipping setup, required elements missing',
+        carousel
+      );
     }
     return;
   }
 
-  const loop = inner.getAttribute("data-loop") !== "false";
-  const slidesToScroll = inner.hasAttribute("data-slides-to-scroll")
-    ? Number(inner.getAttribute("data-slides-to-scroll")) || "auto"
-    : "auto";
-  const alignAttr = inner.getAttribute("data-align");
+  const loop = inner.getAttribute('data-loop') !== 'false';
+  const slidesToScroll = inner.hasAttribute('data-slides-to-scroll')
+    ? Number(inner.getAttribute('data-slides-to-scroll')) || 'auto'
+    : 'auto';
+  const alignAttr = inner.getAttribute('data-align');
   const align =
-    alignAttr === "start" || alignAttr === "center" || alignAttr === "end"
-      ? (alignAttr as "start" | "center" | "end")
-      : "start";
+    alignAttr === 'start' || alignAttr === 'center' || alignAttr === 'end'
+      ? (alignAttr as 'start' | 'center' | 'end')
+      : 'start';
 
   const plugins = [];
 
-  if (inner.hasAttribute("data-autoplay")) {
-    const autoplayInterval = Number(inner.getAttribute("data-autoplay")) * 1000 || 3000;
+  if (inner.hasAttribute('data-autoplay')) {
+    const autoplayInterval =
+      Number(inner.getAttribute('data-autoplay')) * 1000 || 3000;
 
-    plugins.push(Autoplay({ delay: autoplayInterval, stopOnInteraction: false }));
+    plugins.push(
+      Autoplay({ delay: autoplayInterval, stopOnInteraction: false })
+    );
   }
 
   let watchDrag = true;
 
-  if (inner.hasAttribute("data-autoscroll")) {
-    const scrollValue = parseFloat(inner.getAttribute("data-autoscroll") || "1");
+  if (inner.hasAttribute('data-autoscroll')) {
+    const scrollValue = parseFloat(
+      inner.getAttribute('data-autoscroll') || '1'
+    );
     const speed = isNaN(scrollValue) ? 1 : scrollValue;
 
     plugins.push(AutoScroll({ speed }));
@@ -76,19 +87,23 @@ export function setupCarousel(carousel: CarouselElement): void {
       duration: 20,
       startIndex: 0,
       skipSnaps: false,
-      inViewThreshold: 0.7,
+      inViewThreshold: 0.7
     },
     plugins
   );
 
-  carousel.setAttribute("data-embla-initialized", "true");
+  carousel.setAttribute('data-embla-initialized', 'true');
   carousel.__embla = embla;
 
-  const prevButton = inner.querySelector<HTMLButtonElement>(".prev > .button-inner");
-  const nextButton = inner.querySelector<HTMLButtonElement>(".next > .button-inner");
+  const prevButton = inner.querySelector<HTMLButtonElement>(
+    '.prev > .button-inner'
+  );
+  const nextButton = inner.querySelector<HTMLButtonElement>(
+    '.next > .button-inner'
+  );
 
-  if (prevButton) prevButton.style.borderRadius = "9999px";
-  if (nextButton) nextButton.style.borderRadius = "9999px";
+  if (prevButton) prevButton.style.borderRadius = '9999px';
+  if (nextButton) nextButton.style.borderRadius = '9999px';
 
   const updateButtons = () => {
     if (prevButton) prevButton.disabled = !embla.canScrollPrev();
@@ -96,34 +111,41 @@ export function setupCarousel(carousel: CarouselElement): void {
   };
 
   updateButtons();
-  embla.on("select", updateButtons);
-  if (prevButton) prevButton.addEventListener("click", () => embla.scrollPrev());
-  if (nextButton) nextButton.addEventListener("click", () => embla.scrollNext());
+  embla.on('select', updateButtons);
+  if (prevButton)
+    prevButton.addEventListener('click', () => embla.scrollPrev());
+  if (nextButton)
+    nextButton.addEventListener('click', () => embla.scrollNext());
 
   if (indicatorsContainer) {
     const renderDots = () => {
-      indicatorsContainer.innerHTML = "";
+      indicatorsContainer.innerHTML = '';
 
       embla.scrollSnapList().forEach((_, index) => {
-        const dot = document.createElement("div");
+        const dot = document.createElement('div');
 
-        dot.className = "indicator";
-        dot.setAttribute("data-selected", (index === embla.selectedScrollSnap()).toString());
-        dot.addEventListener("click", () => embla.scrollTo(index));
+        dot.className = 'indicator';
+        dot.setAttribute(
+          'data-selected',
+          (index === embla.selectedScrollSnap()).toString()
+        );
+        dot.addEventListener('click', () => embla.scrollTo(index));
         indicatorsContainer.appendChild(dot);
       });
     };
 
     const updateSelectedDot = () => {
-      indicatorsContainer.querySelectorAll(".indicator").forEach((dot, index) => {
-        const isSelected = index === embla.selectedScrollSnap();
+      indicatorsContainer
+        .querySelectorAll('.indicator')
+        .forEach((dot, index) => {
+          const isSelected = index === embla.selectedScrollSnap();
 
-        dot.setAttribute("data-selected", isSelected.toString());
-      });
+          dot.setAttribute('data-selected', isSelected.toString());
+        });
     };
 
-    embla.on("select", updateSelectedDot);
-    embla.on("reInit", renderDots);
+    embla.on('select', updateSelectedDot);
+    embla.on('reInit', renderDots);
     renderDots();
   }
 
@@ -135,17 +157,22 @@ export function setupCarousel(carousel: CarouselElement): void {
       const safeCurrent = Math.min(current, safeTotal);
 
       fractionEl.textContent = `${safeCurrent}/${safeTotal}`;
-      fractionEl.setAttribute("aria-label", `Slide ${safeCurrent} of ${safeTotal}`);
+      fractionEl.setAttribute(
+        'aria-label',
+        `Slide ${safeCurrent} of ${safeTotal}`
+      );
     };
 
-    embla.on("select", updateFraction);
-    embla.on("reInit", updateFraction);
+    embla.on('select', updateFraction);
+    embla.on('reInit', updateFraction);
     updateFraction();
   }
 }
 
 export function setupAllCarousels(root: ParentNode = document): void {
-  root.querySelectorAll<CarouselElement>(".carousel").forEach((el) => setupCarousel(el));
+  root
+    .querySelectorAll<CarouselElement>('.carousel')
+    .forEach((el) => setupCarousel(el));
 }
 
 export function destroyCarousel(carousel: CarouselElement): void {
@@ -155,10 +182,10 @@ export function destroyCarousel(carousel: CarouselElement): void {
     try {
       embla.destroy();
     } catch (err) {
-      console.warn("Carousel destroy failed", err);
+      console.warn('Carousel destroy failed', err);
     }
     delete carousel.__embla;
   }
 
-  carousel.removeAttribute("data-embla-initialized");
+  carousel.removeAttribute('data-embla-initialized');
 }

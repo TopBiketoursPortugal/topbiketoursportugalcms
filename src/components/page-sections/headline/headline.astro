@@ -28,42 +28,45 @@ const {
 } = classes;
 ---
 
-{
-  (title || subtitle || tagline) && (
-    <div
-      class={cn(
-        'reveal-up intersect:opacity-100 intersect-once mb-8 text-center md:mx-auto md:mb-12',
-        containerClass
-      )}
-    >
-      {tagline && (
-        <p
-          class="text-secondary mb-2 text-sm font-bold tracking-[0.2em] uppercase dark:text-amber-400"
-          set:html={tagline}
-          data-editable="text" data-prop="tagline"
-        />
-      )}
-      {title && (
-        <h2
-          class={cn(
-            'text-heading font-heading text-3xl font-bold tracking-tight text-balance dark:text-white',
-            titleClass
-          )}
-          set:html={title}
-          data-editable="text" data-type="block" data-prop="title"
-        />
-      )}
+{(title || subtitle || tagline) && (
+  <div
+    class={cn(
+      'reveal-up intersect:opacity-100 intersect-once mb-8 text-center md:mx-auto md:mb-12',
+      containerClass
+    )}
+  >
+    {tagline && (
+      <p
+        class="text-secondary mb-2 text-sm font-bold tracking-[0.2em] uppercase dark:text-amber-400"
+        set:html={tagline}
+        data-editable="text"
+        data-prop="tagline"
+      />
+    )}
+    {title && (
+      <h2
+        class={cn(
+          'text-heading font-heading text-3xl font-bold tracking-tight text-balance dark:text-white',
+          titleClass
+        )}
+        set:html={title}
+        data-editable="text"
+        data-type="block"
+        data-prop="title"
+      />
+    )}
 
-      {subtitle && (
-        <p
-          class={cn(
-            'text-muted mt-4 text-pretty dark:text-slate-400',
-            subtitleClass
-          )}
-          set:html={subtitle}
-          data-editable="text" data-type="block" data-prop="subtitle"
-        />
-      )}
-    </div>
-  )
-}
+    {subtitle && (
+      <p
+        class={cn(
+          'text-muted mt-4 text-pretty dark:text-slate-400',
+          subtitleClass
+        )}
+        set:html={subtitle}
+        data-editable="text"
+        data-type="block"
+        data-prop="subtitle"
+      />
+    )}
+  </div>
+)}

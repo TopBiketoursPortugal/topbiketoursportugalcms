@@ -95,7 +95,8 @@ const relevantBikeCategories = allBikeCategories.filter((c) =>
 const baseUrl = Astro.site;
 
 const image = await getImage({
-  src: (await getImageByPath(regionData.data.seo?.featured_image!)).default,
+  src: (await getImageByPath(regionData.data.seo?.featured_image as string))
+    .default,
   format: 'avif'
 });
 
@@ -155,20 +156,16 @@ const breadcrumbs = [
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
     <PlaceSchema
       name={regionData.data.name ?? regionData.data.title}
       description={regionSeoDescription}
@@ -178,7 +175,9 @@ const breadcrumbs = [
     />
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
-    <Heading as="h1" class="px-6">{regionData.data.title}</Heading>
+    <Heading as="h1" class="px-6">
+      {regionData.data.title}
+    </Heading>
     <PageHelper contentBlocks={regionData.data.content_blocks ?? []} />
     <div data-tour-filter-container>
       <TourFilterBar
@@ -203,63 +202,57 @@ const breadcrumbs = [
           slug: c.data.path
         }))}
       />
-      {
-        packageTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.Regions.PackageTour.Title', language).replace(
-                '$1',
-                regionData.data.name ?? ''
-              )}
-            </Heading>
-            <TourList items={packageTours} language={language} />
-          </div>
-        ) : null
-      }
-      {
-        dayTours.length > 0 ? (
-          <div data-tour-section>
-            <Heading as="h2" class="px-6">
-              {t('Tours.Regions.DayTour.Title', language).replace(
-                '$1',
-                regionData.data.name ?? ''
-              )}
-            </Heading>
-            <TourList items={dayTours} language={language} />
-          </div>
-        ) : null
-      }
-    </div>
-    {
-      packageTours.length == 0 && dayTours.length === 0 ? (
-        <div class="flex flex-col gap-2 px-6">
-          <Text size="xlarge">
-            {t('Tours.Regions.NoResults.Title', language).replace(
+      {packageTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.Regions.PackageTour.Title', language).replace(
               '$1',
               regionData.data.name ?? ''
             )}
-          </Text>
-          <Text size="large">
-            {t('Tours.Regions.NoResults.AlternateTags.Title', language)}
-          </Text>
-          <ul class="list-disc pl-8">
-            {tourRegions
-              .filter((r) => r.data.id !== regionData.data.id)
-              .map((r) => (
-                <li class="pl-2">
-                  <a
-                    href={getTourRegionsPath(r, language)}
-                    title={regionSeoTitle}
-                    class="underline"
-                  >
-                    {regionSeoTitle}
-                  </a>
-                </li>
-              ))}
-          </ul>
+          </Heading>
+          <TourList items={packageTours} language={language} />
         </div>
-      ) : null
-    }
+      ) : null}
+      {dayTours.length > 0 ? (
+        <div data-tour-section>
+          <Heading as="h2" class="px-6">
+            {t('Tours.Regions.DayTour.Title', language).replace(
+              '$1',
+              regionData.data.name ?? ''
+            )}
+          </Heading>
+          <TourList items={dayTours} language={language} />
+        </div>
+      ) : null}
+    </div>
+    {packageTours.length == 0 && dayTours.length === 0 ? (
+      <div class="flex flex-col gap-2 px-6">
+        <Text size="xlarge">
+          {t('Tours.Regions.NoResults.Title', language).replace(
+            '$1',
+            regionData.data.name ?? ''
+          )}
+        </Text>
+        <Text size="large">
+          {t('Tours.Regions.NoResults.AlternateTags.Title', language)}
+        </Text>
+        <ul class="list-disc pl-8">
+          {tourRegions
+            .filter((r) => r.data.id !== regionData.data.id)
+            .map((r) => (
+              <li class="pl-2">
+                <a
+                  href={getTourRegionsPath(r, language)}
+                  title={regionSeoTitle}
+                  class="underline"
+                >
+                  {regionSeoTitle}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </div>
+    ) : null}
     <PageHelper
       contentBlocks={regionData.data.content_blocks_after ?? []}
       sectionsKey="content_blocks_after"

@@ -19,22 +19,22 @@ const SRC = '.cloudcannon/schemas/migrated-structures.json';
 
 // migrated key → component directory (and thereby its `_component` name).
 const DIRS = {
-  accordion: 'src/components/accordion',
-  primary: 'src/components/buttons/primary',
-  secondary: 'src/components/buttons/secondary',
-  collection: 'src/components/collection',
+  'accordion': 'src/components/accordion',
+  'primary': 'src/components/buttons/primary',
+  'secondary': 'src/components/buttons/secondary',
+  'collection': 'src/components/collection',
   'featured-posts': 'src/components/featured-posts',
   'featured-testimonials': 'src/components/featured-testimonials',
   'featured-tours': 'src/components/featured-tours',
-  features: 'src/components/features',
-  headline: 'src/components/headline',
-  hero: 'src/components/hero',
+  'features': 'src/components/features',
+  'headline': 'src/components/headline',
+  'hero': 'src/components/hero',
   'left-right': 'src/components/left-right',
-  text: 'src/components/text',
-  timeline: 'src/components/timeline',
+  'text': 'src/components/text',
+  'timeline': 'src/components/timeline',
   'two-column-markdown': 'src/components/two-column-markdown',
   'wetravel-button': 'src/components/wetravel-button',
-  youtube: 'src/components/youtube'
+  'youtube': 'src/components/youtube'
   // NOTE: the migrated "tours" entry is skipped on purpose — it is a collapsed
   // artifact of the tour-page/tour-card/... bookshop files, which render via
   // dedicated routes and are not generic content blocks.

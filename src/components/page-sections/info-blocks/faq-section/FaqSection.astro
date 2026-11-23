@@ -1,17 +1,17 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import Accordion from "@wrappers/accordion/Accordion.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Accordion from '@wrappers/accordion/Accordion.astro';
 
 const {
-  heading = "Frequently Asked Questions",
+  heading = 'Frequently Asked Questions',
   items = [],
-  label = "About FAQ",
+  label = 'About FAQ',
   sectionLabel,
-  maxContentWidth = "xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -23,7 +23,7 @@ const {
 
 <CustomSection
   {...htmlAttributes}
-  class:list={["faq-section", className]}
+  class:list={['faq-section', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}

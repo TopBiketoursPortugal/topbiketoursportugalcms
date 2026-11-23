@@ -6,7 +6,7 @@ value:
   text: My testimonial text.
   authorName: Charlie Parker
   authorDescription: Author
-  authorImage: ""
+  authorImage: ''
   alignmentHorizontal: start
 preview:
   text:

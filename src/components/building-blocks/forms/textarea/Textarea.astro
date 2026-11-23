@@ -14,28 +14,17 @@ const {
 const fieldId = htmlAttributes.id || `textarea-${crypto.randomUUID()}`;
 ---
 
-<div
-  class:list={["textarea", className]}
-  {...htmlAttributes}
->
-  {
-    label && (
-      <label
-        for={fieldId}
-        class="label"
-      >
-        {label}
-        {required && (
-          <span
-            class="textarea-required"
-            aria-label="required"
-          >
-            *
-          </span>
-        )}
-      </label>
-    )
-  }
+<div class:list={['textarea', className]} {...htmlAttributes}>
+  {label && (
+    <label for={fieldId} class="label">
+      {label}
+      {required && (
+        <span class="textarea-required" aria-label="required">
+          *
+        </span>
+      )}
+    </label>
+  )}
   <textarea
     name={name}
     id={fieldId}
@@ -43,8 +32,7 @@ const fieldId = htmlAttributes.id || `textarea-${crypto.randomUUID()}`;
     required={required}
     aria-required={required}
     class="field"
-    >{value}</textarea
-  >
+  >{value}</textarea>
 </div>
 
 <style is:global>
