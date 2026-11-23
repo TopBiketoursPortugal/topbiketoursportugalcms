@@ -10,7 +10,11 @@ import Grid from 'src/components/building-blocks/grid/grid.astro';
 import CardMedia from 'src/components/building-blocks/card/CardMedia.astro';
 import CardContent from 'src/components/building-blocks/card/CardContent.astro';
 import Stack from 'src/components/building-blocks/stack/stack.astro';
-import { trailingSlash, getTeamLanguagesAlternates, getTeamMemberPath } from 'utils/permalinks';
+import {
+  trailingSlash,
+  getTeamLanguagesAlternates,
+  getTeamMemberPath
+} from 'utils/permalinks';
 import { languageCodes, type LanguageCodes } from 'src/schemas/language';
 import LanguageData from 'src/../data/languages.json';
 import { getHomeCrumb, getAboutCrumb } from 'utils/breadcrumbs';
@@ -73,20 +77,16 @@ const breadcrumbs = [
 
 <Layout title={title} seo={seo} hrefLangs={hrefs} breadcrumbs={breadcrumbs}>
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
   <Card>
     <Grid cols={3}>
@@ -97,12 +97,8 @@ const breadcrumbs = [
         class="col-span-2 bg-white dark:bg-slate-900"
       >
         <Stack class="gap-2 p-4" layout="vertical" distribution="center">
-          <h1 class="text-neutral-700 dark:text-neutral-100">
-            {title}
-          </h1>
-          <p class="text-neutral-400 dark:text-neutral-200">
-            {memberType}
-          </p>
+          <h1 class="text-neutral-700 dark:text-neutral-100">{title}</h1>
+          <p class="text-neutral-400 dark:text-neutral-200">{memberType}</p>
           <article>
             <Content />
           </article>

@@ -12,21 +12,19 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
 
 <form
   {...props}
-  class={cn('flex w-full flex-col gap-3 validate-form', className)}
+  class={cn('validate-form flex w-full flex-col gap-3', className)}
   autocomplete="off"
 >
-  {
-    honeyPot ? (
-      <FormField
-        name="honeypot"
-        as="hidden"
-        type="hidden"
-        label="honeypot"
-        required
-        value=""
-      />
-    ) : null
-  }
+  {honeyPot ? (
+    <FormField
+      name="honeypot"
+      as="hidden"
+      type="hidden"
+      label="honeypot"
+      required
+      value=""
+    />
+  ) : null}
   <slot />
 </form>
 <script is:inline defer async>
@@ -44,7 +42,11 @@ const { class: className, honeyPot = true, ...props } = Astro.props;
     }
   };
 </script>
-<script is:inline async defer src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
+<script
+  is:inline
+  async
+  defer
+  src="//s.ksrndkehqnwntyxlhgto.com/137152.js"
 ></script>
 <script is:inline>
   function _hasAnalyticsConsent() {

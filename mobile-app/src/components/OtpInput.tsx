@@ -30,16 +30,20 @@ export function OtpInput({ value, onChange, autoFocus }: Props) {
                 styles.box,
                 {
                   borderRadius: radii.sm,
-                  borderColor: filled || active ? colors.primary : colors.border,
-                  backgroundColor: colors.bgAlt,
-                },
+                  borderColor:
+                    filled || active ? colors.primary : colors.border,
+                  backgroundColor: colors.bgAlt
+                }
               ]}
               onTouchEnd={() => inputRef.current?.focus()}
             >
               <TextInput
                 editable={false}
                 value={filled ? digit : ''}
-                style={[styles.digit, { color: colors.ink, fontFamily: fonts.displayBold }]}
+                style={[
+                  styles.digit,
+                  { color: colors.ink, fontFamily: fonts.displayBold }
+                ]}
                 pointerEvents="none"
               />
             </View>
@@ -67,8 +71,8 @@ const styles = StyleSheet.create({
     height: 54,
     borderWidth: 1.5,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   digit: { fontSize: 20, textAlign: 'center', width: '100%' },
-  hidden: { position: 'absolute', opacity: 0, height: 1, width: 1 },
+  hidden: { position: 'absolute', opacity: 0, height: 1, width: 1 }
 });

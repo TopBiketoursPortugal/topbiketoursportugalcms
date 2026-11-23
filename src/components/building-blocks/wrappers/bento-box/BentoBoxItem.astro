@@ -1,33 +1,33 @@
 ---
-import RenderBlock from "@components/utils/renderBlock.astro";
+import RenderBlock from '@components/utils/renderBlock.astro';
 
 const {
   colSpan = 1,
   rowSpan = 1,
   contentSections,
   useDefaultEditableBinding = false,
-  class: className,
+  'class': className,
   _component,
-  "data-children-prop": childrenDataProp,
+  'data-children-prop': childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'contentSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 
 const cellStyles = [
   Number(colSpan) > 1 && `grid-column: span ${colSpan}`,
-  Number(rowSpan) > 1 && `grid-row: span ${rowSpan}`,
+  Number(rowSpan) > 1 && `grid-row: span ${rowSpan}`
 ]
   .filter(Boolean)
-  .join("; ");
+  .join('; ');
 ---
 
 <div
-  class:list={["bento-box-item", className]}
+  class:list={['bento-box-item', className]}
   style={cellStyles || undefined}
   {...htmlAttributes}
 >
@@ -38,14 +38,12 @@ const cellStyles = [
     {...arrayDataAttributes}
   >
     <slot>
-      {
-        contentSections && (
-          <RenderBlock
-            contentSections={contentSections}
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-          />
-        )
-      }
+      {contentSections && (
+        <RenderBlock
+          contentSections={contentSections}
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+        />
+      )}
     </slot>
   </div>
 </div>

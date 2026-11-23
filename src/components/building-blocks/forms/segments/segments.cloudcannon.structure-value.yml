@@ -51,7 +51,8 @@ _structures:
             comment: Whether the field is checked by default.
           icon:
             type: select
-            comment: Icon next to the segment option. Sourced from
+            comment:
+              Icon next to the segment option. Sourced from
               [Heroicons](https://heroicons.com/).
             options:
               values: _select_data.icons

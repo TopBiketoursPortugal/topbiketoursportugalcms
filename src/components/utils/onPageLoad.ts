@@ -5,7 +5,7 @@ type InitCallback = () => void;
  * Prevents duplicate runs for the same URL.
  */
 export function onPageLoad(init: InitCallback): void {
-  let lastUrl = "";
+  let lastUrl = '';
 
   const run = () => {
     const currentUrl = window.location.href;
@@ -15,11 +15,11 @@ export function onPageLoad(init: InitCallback): void {
     init();
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run, { once: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, { once: true });
   } else {
     run();
   }
 
-  document.addEventListener("astro:page-load", run);
+  document.addEventListener('astro:page-load', run);
 }

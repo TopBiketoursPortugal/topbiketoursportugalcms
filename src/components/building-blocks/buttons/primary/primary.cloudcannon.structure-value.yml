@@ -5,10 +5,10 @@ value:
   _component: building-blocks/buttons/primary
   button_text: null
   button_icon: null
-  button_link: ""
-  background_color: ""
+  button_link: ''
+  background_color: ''
   hover_brightness: 0.85
-  text_color: ""
+  text_color: ''
 preview:
   text:
     - Primary Button

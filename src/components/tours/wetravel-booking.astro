@@ -36,46 +36,50 @@ const both = hasGuided && hasSelf;
 ---
 
 <div class="wetravel-booking flex w-full flex-col gap-3">
-  {
-    both ? (
-      <div
-        class="wt-toggle inline-flex w-full self-stretch rounded-md bg-slate-100 p-1 text-sm dark:bg-slate-700"
-        role="tablist"
+  {both ? (
+    <div
+      class="wt-toggle inline-flex w-full self-stretch rounded-md bg-slate-100 p-1 text-sm dark:bg-slate-700"
+      role="tablist"
+    >
+      <button
+        type="button"
+        class="wt-seg is-active flex-1 rounded px-3 py-1.5 font-medium transition-colors"
+        data-mode="guided"
+        aria-pressed="true"
       >
-        <button
-          type="button"
-          class="wt-seg is-active flex-1 rounded px-3 py-1.5 font-medium transition-colors"
-          data-mode="guided"
-          aria-pressed="true"
-        >
-          {guidedLabel}
-        </button>
-        <button
-          type="button"
-          class="wt-seg flex-1 rounded px-3 py-1.5 font-medium transition-colors"
-          data-mode="self"
-          aria-pressed="false"
-        >
-          {selfGuidedLabel}
-        </button>
-      </div>
-    ) : null
-  }
+        {guidedLabel}
+      </button>
+      <button
+        type="button"
+        class="wt-seg flex-1 rounded px-3 py-1.5 font-medium transition-colors"
+        data-mode="self"
+        aria-pressed="false"
+      >
+        {selfGuidedLabel}
+      </button>
+    </div>
+  ) : null}
 
-  {
-    hasGuided ? (
-      <div data-wt-pane="guided">
-        <WeTravelButton uuid={guidedUuid!} uid={uid} label={label} class={buttonClass} />
-      </div>
-    ) : null
-  }
-  {
-    hasSelf ? (
-      <div data-wt-pane="self" hidden={both}>
-        <WeTravelButton uuid={selfGuidedUuid!} uid={uid} label={label} class={buttonClass} />
-      </div>
-    ) : null
-  }
+  {hasGuided ? (
+    <div data-wt-pane="guided">
+      <WeTravelButton
+        uuid={guidedUuid!}
+        uid={uid}
+        label={label}
+        class={buttonClass}
+      />
+    </div>
+  ) : null}
+  {hasSelf ? (
+    <div data-wt-pane="self" hidden={both}>
+      <WeTravelButton
+        uuid={selfGuidedUuid!}
+        uid={uid}
+        label={label}
+        class={buttonClass}
+      />
+    </div>
+  ) : null}
 </div>
 
 <style>

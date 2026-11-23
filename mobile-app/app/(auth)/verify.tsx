@@ -51,13 +51,29 @@ export default function VerifyScreen() {
     <SafeAreaView style={[styles.flex, { backgroundColor: colors.bg }]}>
       <View style={[styles.body, { paddingHorizontal: spacing.xl }]}>
         <Pressable onPress={() => router.back()} hitSlop={12}>
-          <Text style={{ color: colors.muted, fontFamily: fonts.bodyMedium }}>← Back</Text>
+          <Text style={{ color: colors.muted, fontFamily: fonts.bodyMedium }}>
+            ← Back
+          </Text>
         </Pressable>
 
-        <Text style={[styles.title, { color: colors.ink, fontFamily: fonts.displayBold }]}>Verify it's you</Text>
-        <Text style={[styles.lede, { color: colors.muted, fontFamily: fonts.bodyRegular }]}>
+        <Text
+          style={[
+            styles.title,
+            { color: colors.ink, fontFamily: fonts.displayBold }
+          ]}
+        >
+          Verify it's you
+        </Text>
+        <Text
+          style={[
+            styles.lede,
+            { color: colors.muted, fontFamily: fonts.bodyRegular }
+          ]}
+        >
           Enter the 6-digit code sent to{' '}
-          <Text style={{ color: colors.ink, fontFamily: fonts.bodySemiBold }}>{phone}</Text>
+          <Text style={{ color: colors.ink, fontFamily: fonts.bodySemiBold }}>
+            {phone}
+          </Text>
         </Text>
 
         <View style={{ marginTop: spacing.xl }}>
@@ -72,7 +88,16 @@ export default function VerifyScreen() {
           />
         </View>
 
-        {error && <Text style={[styles.error, { color: colors.danger, fontFamily: fonts.bodyMedium }]}>{error}</Text>}
+        {error && (
+          <Text
+            style={[
+              styles.error,
+              { color: colors.danger, fontFamily: fonts.bodyMedium }
+            ]}
+          >
+            {error}
+          </Text>
+        )}
 
         <Button
           label="Unlock my trip"
@@ -82,9 +107,21 @@ export default function VerifyScreen() {
           style={{ marginTop: spacing.xl }}
         />
 
-        <Pressable onPress={handleResend} disabled={cooldown > 0} style={{ marginTop: spacing.lg }}>
-          <Text style={{ color: cooldown > 0 ? colors.muted : colors.primary, fontFamily: fonts.bodyMedium, textAlign: 'center' }}>
-            {cooldown > 0 ? `Resend code in 0:${cooldown.toString().padStart(2, '0')}` : 'Resend code'}
+        <Pressable
+          onPress={handleResend}
+          disabled={cooldown > 0}
+          style={{ marginTop: spacing.lg }}
+        >
+          <Text
+            style={{
+              color: cooldown > 0 ? colors.muted : colors.primary,
+              fontFamily: fonts.bodyMedium,
+              textAlign: 'center'
+            }}
+          >
+            {cooldown > 0
+              ? `Resend code in 0:${cooldown.toString().padStart(2, '0')}`
+              : 'Resend code'}
           </Text>
         </Pressable>
       </View>
@@ -97,5 +134,5 @@ const styles = StyleSheet.create({
   body: { flex: 1, paddingTop: 24 },
   title: { fontSize: 24, marginTop: 24 },
   lede: { fontSize: 15, lineHeight: 22, marginTop: 10 },
-  error: { fontSize: 13, marginTop: 16 },
+  error: { fontSize: 13, marginTop: 16 }
 });

@@ -2,14 +2,14 @@ import {
   BricolageGrotesque_400Regular,
   BricolageGrotesque_500Medium,
   BricolageGrotesque_600SemiBold,
-  BricolageGrotesque_700Bold,
+  BricolageGrotesque_700Bold
 } from '@expo-google-fonts/bricolage-grotesque';
 import { Caveat_600SemiBold } from '@expo-google-fonts/caveat';
 import {
   Figtree_400Regular,
   Figtree_500Medium,
   Figtree_600SemiBold,
-  Figtree_700Bold,
+  Figtree_700Bold
 } from '@expo-google-fonts/figtree';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -33,7 +33,7 @@ export default function RootLayout() {
     Figtree_500Medium,
     Figtree_600SemiBold,
     Figtree_700Bold,
-    Caveat_600SemiBold,
+    Caveat_600SemiBold
   });
 
   useEffect(() => {

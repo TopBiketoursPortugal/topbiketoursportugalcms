@@ -1,1 +1,1 @@
-export { resolveImageSource } from "./image";
+export { resolveImageSource } from './image';

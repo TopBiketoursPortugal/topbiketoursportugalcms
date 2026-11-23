@@ -12,7 +12,7 @@ preview:
   text:
     - Counter
   subtext:
-    - template: "{prefix}{number}{suffix}"
+    - template: '{prefix}{number}{suffix}'
   icon: speed
 picker_preview:
   text: Counter

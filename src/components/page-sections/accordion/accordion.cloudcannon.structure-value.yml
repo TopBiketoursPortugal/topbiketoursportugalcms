@@ -6,7 +6,7 @@ value:
   container: full
   expansionType: plus
   padding: normal
-  type: ""
+  type: ''
   items:
     - header:
         text: Q1

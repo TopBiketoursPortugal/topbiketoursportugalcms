@@ -41,14 +41,63 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
 });
 ---
 
-<section
-  class="reveal-stagger intersect:opacity-100 intersect-once mx-auto flex max-w-7xl flex-col gap-6 px-12 py-12 lg:flex-row"
->
-  {
-    allPosts
+<section class="reveal-stagger intersect:opacity-100 intersect-once mx-auto flex max-w-7xl flex-col gap-6 px-12 py-12 lg:flex-row">
+  {allPosts
+    .filter(
+      (post) =>
+        block.main_feature === post.data.id && post.data.language === language
+    )
+    .map((post) => {
+      const featuredPostURL = getBlogPermalink(post);
+      const date = new Date(post.data.date);
+      const formattedDate = dateTimeFormatter.format(date);
+      const imageSrc = thumbImageMap.get(post.data.thumb_image_path);
+      const resolvedTags = (post.data.tags ?? [])
+        .map((id) => tagMap.get(id))
+        .filter(Boolean);
+
+      return (
+        <div class="lg:w-3/4">
+          <a
+            href={featuredPostURL}
+            class="zoom-frame block rounded-xl shadow-md shadow-slate-900/10"
+          >
+            <Image
+              class="aspect-video w-full rounded-xl object-cover"
+              alt={post.data.thumb_image_alt ?? 'Top Bike Tours Portugal'}
+              widths={[320, 500, 640, 960, 1280]}
+              sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
+              src={imageSrc}
+            />
+          </a>
+          {resolvedTags.length > 0 ? (
+            <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+              {resolvedTags.map((tag) => {
+                return (
+                  <a href={getBlogTagPath(tag!, language)}>
+                    <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                      {tag!.data.name ?? tag!.data.title}
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          ) : (
+            ''
+          )}
+          <a href={featuredPostURL}>
+            <h3 class="py-2 text-3xl font-semibold">{post.data.title}</h3>
+          </a>
+          <p>{formattedDate}</p>
+        </div>
+      );
+    })}
+  <div class="non-featured-posts mx-auto flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col">
+    {allPosts
       .filter(
         (post) =>
-          block.main_feature === post.data.id && post.data.language === language
+          block.feature_list?.includes(post.data.id) &&
+          post.data.language === language
       )
       .map((post) => {
         const featuredPostURL = getBlogPermalink(post);
@@ -60,102 +109,45 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en-US', {
           .filter(Boolean);
 
         return (
-          <div class="lg:w-3/4">
+          <div>
             <a
               href={featuredPostURL}
               class="zoom-frame block rounded-xl shadow-md shadow-slate-900/10"
             >
               <Image
                 class="aspect-video w-full rounded-xl object-cover"
-                alt={post.data.thumb_image_alt ?? 'Top Bike Tours Portugal'}
-                widths={[320, 500, 640, 960, 1280]}
-                sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, (max-width: 640px) 640px, (max-width: 960px) 960px, 1280px`}
+                alt={
+                  post.data.thumb_image_alt ??
+                  'Top Bike Tours Portugal thumb_image_alt'
+                }
+                widths={[320, 500, 640]}
+                sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
                 src={imageSrc}
               />
             </a>
-            {resolvedTags.length > 0 ? (
-              <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                {resolvedTags.map((tag) => {
-                  return (
-                    <a href={getBlogTagPath(tag!, language)}>
-                      <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                        {tag!.data.name ?? tag!.data.title}
-                      </span>
-                    </a>
-                  );
-                })}
-              </div>
-            ) : (
-              ''
-            )}
-            <a href={featuredPostURL}>
-              <h3 class="py-2 text-3xl font-semibold">{post.data.title}</h3>
-            </a>
-            <p>{formattedDate}</p>
+            <div>
+              {resolvedTags.length > 0 ? (
+                <div class="flex flex-col gap-3 pt-3 sm:flex-row">
+                  {resolvedTags.map((tag) => {
+                    return (
+                      <a href={getBlogTagPath(tag!, language)}>
+                        <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
+                          {tag!.data.name ?? tag!.data.title}
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              ) : (
+                ''
+              )}
+              <a href={featuredPostURL}>
+                <h3 class="py-1 text-2xl font-semibold">{post.data.title}</h3>
+              </a>
+              <p>{formattedDate}</p>
+            </div>
           </div>
         );
-      })
-  }
-  <div
-    class="non-featured-posts mx-auto flex flex-col gap-3 md:flex-row lg:w-1/4 lg:flex-col"
-  >
-    {
-      allPosts
-        .filter(
-          (post) =>
-            block.feature_list?.includes(post.data.id) &&
-            post.data.language === language
-        )
-        .map((post) => {
-          const featuredPostURL = getBlogPermalink(post);
-          const date = new Date(post.data.date);
-          const formattedDate = dateTimeFormatter.format(date);
-          const imageSrc = thumbImageMap.get(post.data.thumb_image_path);
-          const resolvedTags = (post.data.tags ?? [])
-            .map((id) => tagMap.get(id))
-            .filter(Boolean);
-
-          return (
-            <div>
-              <a
-                href={featuredPostURL}
-                class="zoom-frame block rounded-xl shadow-md shadow-slate-900/10"
-              >
-                <Image
-                  class="aspect-video w-full rounded-xl object-cover"
-                  alt={
-                    post.data.thumb_image_alt ??
-                    'Top Bike Tours Portugal thumb_image_alt'
-                  }
-                  widths={[320, 500, 640]}
-                  sizes={`(max-width: 320px) 320px, (max-width: 500px) 500px, 640px`}
-                  src={imageSrc}
-                />
-              </a>
-              <div>
-                {resolvedTags.length > 0 ? (
-                  <div class="flex flex-col gap-3 pt-3 sm:flex-row">
-                    {resolvedTags.map((tag) => {
-                      return (
-                        <a href={getBlogTagPath(tag!, language)}>
-                          <span class="rounded-sm bg-slate-200 px-2 py-1 dark:bg-slate-800">
-                            {tag!.data.name ?? tag!.data.title}
-                          </span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  ''
-                )}
-                <a href={featuredPostURL}>
-                  <h3 class="py-1 text-2xl font-semibold">{post.data.title}</h3>
-                </a>
-                <p>{formattedDate}</p>
-              </div>
-            </div>
-          );
-        })
-    }
+      })}
   </div>
 </section>

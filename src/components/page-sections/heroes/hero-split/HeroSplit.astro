@@ -1,26 +1,26 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import Text from "@core-elements/text/Text.astro";
-import ButtonGroup from "@wrappers/button-group/ButtonGroup.astro";
-import Split from "@wrappers/split/Split.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import Image from '@core-elements/image/Image.astro';
+import SimpleText from '@core-elements/simple-text/SimpleText.astro';
+import Text from '@core-elements/text/Text.astro';
+import ButtonGroup from '@wrappers/button-group/ButtonGroup.astro';
+import Split from '@wrappers/split/Split.astro';
 
 const {
-  eyebrow = "",
-  heading = "",
-  subtext = "",
-  imageSource = "",
-  imageAlt = "",
-  imageAspectRatio = "none",
+  eyebrow = '',
+  heading = '',
+  subtext = '',
+  imageSource = '',
+  imageAlt = '',
+  imageAspectRatio = 'none',
   buttonSections = [],
   reverse = false,
   sectionLabel,
-  maxContentWidth = "xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -38,7 +38,7 @@ const {
   colorScheme={colorScheme}
   backgroundColor={backgroundColor}
   background={background}
-  class:list={["hero", className]}
+  class:list={['hero', className]}
   useDefaultEditableBinding={useDefaultEditableBinding}
   {...htmlAttributes}
 >
@@ -52,22 +52,11 @@ const {
     class="hero-split"
   >
     <Fragment slot="first">
-      <SimpleText
-        class="eyebrow"
-        data-prop="eyebrow"
-        text={eyebrow}
-      />
-      <Heading
-        level="h1"
-        size="2xl"
-        data-prop="heading"
-        >{heading}</Heading
-      >
-      <Text
-        class="subtext"
-        data-prop="subtext"
-        text={subtext}
-      />
+      <SimpleText class="eyebrow" data-prop="eyebrow" text={eyebrow} />
+      <Heading level="h1" size="2xl" data-prop="heading">
+        {heading}
+      </Heading>
+      <Text class="subtext" data-prop="subtext" text={subtext} />
       <ButtonGroup
         class="buttons-container"
         buttonSections={buttonSections}

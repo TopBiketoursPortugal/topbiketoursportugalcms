@@ -126,41 +126,39 @@ function resolveBleed(block: any, surface: string | null): boolean {
 ---
 
 <div data-editable="array" data-prop="sections" data-component-key="_component">
-  {
-    sections.map((block: any, i: number) => {
-      // `_component` is the current discriminator (starter convention);
-      // `_type`/`_bookshop_name` are accepted for not-yet-migrated content.
-      const typeName = block._component || block._type || block._bookshop_name;
-      const Component = components[typeName];
-      if (!Component && typeName) {
-        console.warn(
-          `Component not found: ${typeName}. Available components:`,
-          Object.keys(components)
-        );
-      }
-      if (!Component) return null;
-      const enter = resolveEnter(block, i);
-      const enterClass = ENTER_CLASS[enter];
-      // An explicit `enter: none` (not the index-0 default) is a deliberate
-      // request to turn this block's motion off — also kill its inner reveals.
-      const animOff = block.enter === 'none';
-      const surface = resolveSurface(block);
-      const bleed = resolveBleed(block, surface);
-      return (
-        <div
-          data-editable="array-item"
-          data-id={typeName}
-          class:list={[
-            enterClass,
-            enterClass && 'block-enter intersect:opacity-100 intersect-once',
-            animOff && 'anim-off',
-            surface && `surface-${surface}`,
-            { 'dark': surface === 'forest', 'block-bleed': bleed }
-          ]}
-        >
-          <Component {...block} />
-        </div>
+  {sections.map((block: any, i: number) => {
+    // `_component` is the current discriminator (starter convention);
+    // `_type`/`_bookshop_name` are accepted for not-yet-migrated content.
+    const typeName = block._component || block._type || block._bookshop_name;
+    const Component = components[typeName];
+    if (!Component && typeName) {
+      console.warn(
+        `Component not found: ${typeName}. Available components:`,
+        Object.keys(components)
       );
-    })
-  }
+    }
+    if (!Component) return null;
+    const enter = resolveEnter(block, i);
+    const enterClass = ENTER_CLASS[enter];
+    // An explicit `enter: none` (not the index-0 default) is a deliberate
+    // request to turn this block's motion off — also kill its inner reveals.
+    const animOff = block.enter === 'none';
+    const surface = resolveSurface(block);
+    const bleed = resolveBleed(block, surface);
+    return (
+      <div
+        data-editable="array-item"
+        data-id={typeName}
+        class:list={[
+          enterClass,
+          enterClass && 'block-enter intersect:opacity-100 intersect-once',
+          animOff && 'anim-off',
+          surface && `surface-${surface}`,
+          { 'dark': surface === 'forest', 'block-bleed': bleed }
+        ]}
+      >
+        <Component {...block} />
+      </div>
+    );
+  })}
 </div>

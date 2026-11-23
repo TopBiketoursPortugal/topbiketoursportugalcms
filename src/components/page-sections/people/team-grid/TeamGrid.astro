@@ -1,25 +1,25 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import Heading from "@core-elements/heading/Heading.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import TeamItem from "@page-sections/people/team-grid/TeamItem.astro";
-import Grid from "@wrappers/grid/Grid.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import Heading from '@core-elements/heading/Heading.astro';
+import SimpleText from '@core-elements/simple-text/SimpleText.astro';
+import TeamItem from '@page-sections/people/team-grid/TeamItem.astro';
+import Grid from '@wrappers/grid/Grid.astro';
 
 type MemberProps = Record<string, unknown>;
 
 const {
-  eyebrow = "",
-  heading = "",
-  subtext = "",
+  eyebrow = '',
+  heading = '',
+  subtext = '',
   teamMembers = [],
   sectionLabel,
-  maxContentWidth = "2xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = '2xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
-  layout = "start",
+  layout = 'start',
   useDefaultEditableBinding = false,
   _component,
   class: className,
@@ -28,7 +28,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["team-grid", className]}
+  class:list={['team-grid', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -69,16 +69,14 @@ const {
     data-children-prop="teamMembers"
     layout={layout}
   >
-    {
-      teamMembers.map((member: MemberProps) => (
-        <TeamItem
-          data-id="page-sections/people/team-grid/team-item"
-          data-editable="array-item"
-          {...member}
-          class="team-grid-item"
-        />
-      ))
-    }
+    {teamMembers.map((member: MemberProps) => (
+      <TeamItem
+        data-id="page-sections/people/team-grid/team-item"
+        data-editable="array-item"
+        {...member}
+        class="team-grid-item"
+      />
+    ))}
   </Grid>
 </CustomSection>
 

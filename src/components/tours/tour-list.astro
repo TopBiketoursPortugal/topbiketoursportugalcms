@@ -14,28 +14,22 @@ type Props = {
 const { items, contentDisplay = 'inline', language } = Astro.props;
 ---
 
-{
-  /*
+{/*
   Not the shared <Grid cols={3}>: it only leaves one column until `lg`, so a
   tablet and a large phone both browse this list one tall card at a time. Two
   columns from 640px up cuts the page height roughly in half on exactly the
   devices this audience researches on. `items-stretch` plus `h-full` on the
   card is what makes prices and buttons line up across a row.
-*/
-}
+*/}
 <div data-tour-grid class="px-4 py-6 sm:px-6">
-  <div
-    class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3"
-  >
-    {
-      items.map(({ data: tour }) => (
-        <TourCard
-          tour={tour}
-          contentDisplay={contentDisplay}
-          language={language}
-        />
-      ))
-    }
+  <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
+    {items.map(({ data: tour }) => (
+      <TourCard
+        tour={tour}
+        contentDisplay={contentDisplay}
+        language={language}
+      />
+    ))}
   </div>
 </div>
 <TourListSchema items={items} language={language} />

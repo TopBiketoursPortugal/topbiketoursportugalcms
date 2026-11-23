@@ -1,5 +1,5 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
+import Icon from '@core-elements/icon/Icon.astro';
 
 const {
   page,
@@ -51,98 +51,85 @@ if (totalVisible > maxVisiblePages) {
 const getPageUrl = (pageNum: number) => {
   // Always use first page URL for page 1
   if (pageNum === 1) {
-    return page.url.first || page.url.current?.replace(/\/\d+\/?$/, "") || "/blog";
+    return (
+      page.url.first || page.url.current?.replace(/\/\d+\/?$/, '') || '/blog'
+    );
   }
 
   // For other pages, construct from the first page URL
   if (page.url && page.url.first) {
-    const baseUrl = page.url.first.replace(/\/$/, "");
+    const baseUrl = page.url.first.replace(/\/$/, '');
 
     return `${baseUrl}/${pageNum}`;
   }
 
   // Fallback: extract base from current URL
   if (page.url && page.url.current) {
-    const baseUrl = page.url.current.replace(/\/\d+\/?$/, "").replace(/\/$/, "");
+    const baseUrl = page.url.current
+      .replace(/\/\d+\/?$/, '')
+      .replace(/\/$/, '');
 
     return `${baseUrl}/${pageNum}`;
   }
 
   // Final fallback
-  return pageNum === 1 ? "/blog" : `/blog/${pageNum}`;
+  return pageNum === 1 ? '/blog' : `/blog/${pageNum}`;
 };
 ---
 
 <nav
-  class:list={["pagination", className]}
+  class:list={['pagination', className]}
   aria-label="Pagination Navigation"
   {...htmlAttributes}
 >
-  {
-    showArrows && currentPage > 1 && (
-      <a
-        href={getPageUrl(currentPage - 1)}
-        class="pagination-arrow pagination-prev"
-        aria-label="Go to previous page"
-      >
-        <Icon
-          name="chevron-left"
-          size="sm"
-        />
-      </a>
-    )
-  }
+  {showArrows && currentPage > 1 && (
+    <a
+      href={getPageUrl(currentPage - 1)}
+      class="pagination-arrow pagination-prev"
+      aria-label="Go to previous page"
+    >
+      <Icon name="chevron-left" size="sm" />
+    </a>
+  )}
 
   {startPage > 0 && <a href={getPageUrl(1)}>1</a>}
 
   {startPage > 1 && <span aria-hidden="true">…</span>}
 
-  {
-    Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-      const pageNum = startPage + i + 1;
+  {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
+    const pageNum = startPage + i + 1;
 
-      return pageNum === currentPage ? (
-        <span
-          class="current"
-          aria-current="page"
-          aria-label={`Page ${pageNum}, current page`}
-        >
-          {pageNum}
-        </span>
-      ) : (
-        <a
-          href={getPageUrl(pageNum)}
-          aria-label={`Go to page ${pageNum}`}
-        >
-          {pageNum}
-        </a>
-      );
-    })
-  }
-
-  {
-    endPage < lastPage && (
-      <>
-        <span aria-hidden="true">…</span>
-        <a href={getPageUrl(totalPages)}>{totalPages}</a>
-      </>
-    )
-  }
-
-  {
-    showArrows && currentPage < totalPages && (
-      <a
-        href={getPageUrl(currentPage + 1)}
-        class="pagination-arrow pagination-next"
-        aria-label="Go to next page"
+    return pageNum === currentPage ? (
+      <span
+        class="current"
+        aria-current="page"
+        aria-label={`Page ${pageNum}, current page`}
       >
-        <Icon
-          name="chevron-right"
-          size="sm"
-        />
+        {pageNum}
+      </span>
+    ) : (
+      <a href={getPageUrl(pageNum)} aria-label={`Go to page ${pageNum}`}>
+        {pageNum}
       </a>
-    )
-  }
+    );
+  })}
+
+  {endPage < lastPage && (
+    <>
+      <span aria-hidden="true">…</span>
+      <a href={getPageUrl(totalPages)}>{totalPages}</a>
+    </>
+  )}
+
+  {showArrows && currentPage < totalPages && (
+    <a
+      href={getPageUrl(currentPage + 1)}
+      class="pagination-arrow pagination-next"
+      aria-label="Go to next page"
+    >
+      <Icon name="chevron-right" size="sm" />
+    </a>
+  )}
 </nav>
 
 <style is:global>
@@ -180,7 +167,7 @@ const getPageUrl = (pageNum: number) => {
           border-top-right-radius: var(--cc-radius-sm);
         }
 
-        &[aria-hidden="true"] {
+        &[aria-hidden='true'] {
           cursor: default;
 
           &:hover {
