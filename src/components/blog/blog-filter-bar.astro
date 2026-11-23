@@ -69,13 +69,15 @@ const tagLabel = t('Blog.Filter.Tag', language);
     </button>
   </div>
 
-  <!-- Empty state -->
+  <!-- Empty state. The text is carried as an attribute, not as a text node, so
+  that readers which extract text without applying CSS (crawler text modes,
+  content parsers, AI fetchers) do not read "no posts match" above a populated
+  list. The script writes it in the first time the state is genuinely needed. -->
   <p
     data-blog-filter-empty
+    data-empty-text={noResultsText}
     class="mt-3 hidden text-center text-sm text-gray-500 dark:text-gray-400"
-  >
-    {noResultsText}
-  </p>
+  ></p>
 </div>
 
 <script>
@@ -156,10 +158,11 @@ const tagLabel = t('Blog.Filter.Tag', language);
 
           // Toggle empty state
           if (emptyEl) {
-            emptyEl.classList.toggle(
-              'hidden',
-              visibleIndex > 0 || !hasActiveFilters
-            );
+            const showEmpty = visibleIndex === 0 && hasActiveFilters;
+            if (showEmpty && !emptyEl.textContent?.trim()) {
+              emptyEl.textContent = emptyEl.dataset.emptyText ?? '';
+            }
+            emptyEl.classList.toggle('hidden', !showEmpty);
           }
         }
 
