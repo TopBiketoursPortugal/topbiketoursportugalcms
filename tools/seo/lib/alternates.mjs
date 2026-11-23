@@ -96,7 +96,9 @@ function index() {
         lang: LOCALES[route.language]
       }));
 
-      const fallback = listed.find((route) => route.language === DEFAULT_LOCALE);
+      const fallback = listed.find(
+        (route) => route.language === DEFAULT_LOCALE
+      );
       if (fallback) links.push({ path: fallback.url, lang: 'x-default' });
 
       for (const route of group) cache.byUrl.set(route.url, links);

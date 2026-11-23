@@ -2,7 +2,13 @@ import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 /** The arched line from the marketing site's favicon — reused as the app's loading / brand mark. */
-export function BrandMark({ size = 40, color = '#FFFFFF' }: { size?: number; color?: string }) {
+export function BrandMark({
+  size = 40,
+  color = '#FFFFFF'
+}: {
+  size?: number;
+  color?: string;
+}) {
   return (
     <Svg width={size} height={size * 0.6} viewBox="0 0 100 60">
       <Path

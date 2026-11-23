@@ -894,7 +894,12 @@
     },
     {
       "from": "/blog/what-is-a-bike-tour-and-why-should-you-do-one/",
-      "destination": "/blog/what-is-nike-tour/",
+      "destination": "/blog/what-is-a-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/blog/what-is-nike-tour/",
+      "destination": "/blog/what-is-a-bike-tour/",
       "status": 301
     },
     {
@@ -8913,6 +8918,16 @@
       "status": 301
     },
     {
+      "from": "/tours/regions/alentejo-bike-tours/",
+      "destination": "/tours/regions/alentejo/",
+      "status": 301
+    },
+    {
+      "from": "/tours/regions/algarve-bike-tours/",
+      "destination": "/tours/regions/algarve/",
+      "status": 301
+    },
+    {
       "from": "/tours/regions/best-tours-in-douro-region-portugal/",
       "destination": "/tours/regions/douro-river/",
       "status": 301
@@ -8948,7 +8963,17 @@
       "status": 301
     },
     {
+      "from": "/tours/regions/bike-tours-in-porto-and-northern-portugal/",
+      "destination": "/tours/regions/porto/",
+      "status": 301
+    },
+    {
       "from": "/tours/regions/bike-tours-santiago-compostela/",
+      "destination": "/tours/regions/santiago-compostela/",
+      "status": 301
+    },
+    {
+      "from": "/tours/regions/camino-de-santiago-bike-tours/",
       "destination": "/tours/regions/santiago-compostela/",
       "status": 301
     },
@@ -8995,6 +9020,11 @@
     {
       "from": "/tours/regions/cycling-tours-santiago-compostela/",
       "destination": "/tours/regions/santiago-compostela/",
+      "status": 301
+    },
+    {
+      "from": "/tours/regions/douro-valley-bike-tours/",
+      "destination": "/tours/regions/douro-river/",
       "status": 301
     },
     {

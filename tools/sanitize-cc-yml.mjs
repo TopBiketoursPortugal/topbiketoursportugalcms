@@ -57,7 +57,7 @@ function sanitizeInputsMap(inputs) {
     if (def.type === 'boolean') def.type = 'switch';
 
     if (def.syntax) {
-      def.options = { ...(def.options ?? {}), syntax: def.syntax };
+      def.options = { ...def.options, syntax: def.syntax };
       delete def.syntax;
     }
 

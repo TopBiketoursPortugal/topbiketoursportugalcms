@@ -1,16 +1,16 @@
 ---
-import CustomSection from "@builders/custom-section/CustomSection.astro";
-import FeatureSliderItem from "@features/feature-slider/FeatureSliderItem.astro";
-import Carousel from "@wrappers/carousel/Carousel.astro";
+import CustomSection from '@builders/custom-section/CustomSection.astro';
+import FeatureSliderItem from '@features/feature-slider/FeatureSliderItem.astro';
+import Carousel from '@wrappers/carousel/Carousel.astro';
 
 type SlideProps = Record<string, unknown>;
 
 const {
   sectionLabel,
-  maxContentWidth = "xl",
-  paddingHorizontal = "lg",
-  paddingVertical = "4xl",
-  colorScheme = "inherit",
+  maxContentWidth = 'xl',
+  paddingHorizontal = 'lg',
+  paddingVertical = '4xl',
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   class: className,
@@ -22,7 +22,7 @@ const {
 ---
 
 <CustomSection
-  class:list={["feature-slider", className]}
+  class:list={['feature-slider', className]}
   label={sectionLabel}
   maxContentWidth={maxContentWidth}
   paddingHorizontal={paddingHorizontal}
@@ -41,15 +41,13 @@ const {
     autoScroll={false}
     data-children-prop="slides"
   >
-    {
-      slides.map((slide: SlideProps, index: number) => (
-        <FeatureSliderItem
-          aria-label={`Slide ${index + 1} of ${slides.length}`}
-          data-editable="array-item"
-          data-id="page-sections/features/feature-slider/feature-slider-item"
-          {...slide}
-        />
-      ))
-    }
+    {slides.map((slide: SlideProps, index: number) => (
+      <FeatureSliderItem
+        aria-label={`Slide ${index + 1} of ${slides.length}`}
+        data-editable="array-item"
+        data-id="page-sections/features/feature-slider/feature-slider-item"
+        {...slide}
+      />
+    ))}
   </Carousel>
 </CustomSection>

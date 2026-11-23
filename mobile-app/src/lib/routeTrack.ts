@@ -8,7 +8,12 @@ export type Maneuver = {
   // 'straight' only ever comes from a live-recomputed route (src/lib/directions.ts)
   // — the offline GPX pipeline never emits a maneuver for a sub-threshold turn.
   turn:
-    'left' | 'right' | 'slight-left' | 'slight-right' | 'u-turn' | 'straight';
+    | 'left'
+    | 'right'
+    | 'slight-left'
+    | 'slight-right'
+    | 'u-turn'
+    | 'straight';
   instruction: string;
 };
 

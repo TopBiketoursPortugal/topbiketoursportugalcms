@@ -3,7 +3,7 @@ icon: grid_on
 description: Arranges content into a grid that adapts to screen size.
 value:
   _component: building-blocks/wrappers/grid
-  label: ""
+  label: ''
   layout: center
   minItemWidth: 280
   maxItemWidth: 400
@@ -30,7 +30,8 @@ _structures:
           icon: grid_view
           text: Grid Item
           subtext:
-            - template: Contains {contentSections|array_length} content
+            - template:
+                Contains {contentSections|array_length} content
                 {"block"|pluralize=contentSections}
             - Add one or more content blocks to the grid item
         _inputs:

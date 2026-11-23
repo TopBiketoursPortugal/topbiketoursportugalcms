@@ -1,13 +1,13 @@
 ---
-import Button from "@core-elements/button/Button.astro";
+import Button from '@core-elements/button/Button.astro';
 
 const {
-  text = "Submit",
-  variant = "primary",
-  size = "md",
+  text = 'Submit',
+  variant = 'primary',
+  size = 'md',
   iconName,
-  iconColor = "default",
-  iconPosition = "before",
+  iconColor = 'default',
+  iconPosition = 'before',
   hideText = false,
   disabled = false,
   class: className,
@@ -29,7 +29,7 @@ const {
   hideText={hideText}
   disabled={disabled}
   data-prop="text"
-  class:list={["submit", className]}
+  class:list={['submit', className]}
   {...htmlAttributes}
 />
 

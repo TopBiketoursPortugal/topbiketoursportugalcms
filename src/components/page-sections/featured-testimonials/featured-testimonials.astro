@@ -64,95 +64,93 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
 ---
 
 <Stack as="section" class="border-solid sm:p-6" layout="vertical">
-  {
-    carousel ? (
-      <div
-        class="featured-carousel-container relative max-w-full"
-        style="box-sizing: border-box;"
+  {carousel ? (
+    <div
+      class="featured-carousel-container relative max-w-full"
+      style="box-sizing: border-box;"
+    >
+      <button
+        type="button"
+        class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+        aria-label={t('Carousel.Previous', language)}
       >
-        <button
-          type="button"
-          class="nav-btn prev absolute top-1/2 -left-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-left-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label={t('Carousel.Previous', language)}
-        >
-          <i class="icon-[ph--caret-left-bold] text-xl" aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
-          aria-label={t('Carousel.Next', language)}
-        >
-          <i class="icon-[ph--caret-right-bold] text-xl" aria-hidden="true" />
-        </button>
+        <i class="icon-[ph--caret-left-bold] text-xl" aria-hidden="true" />
+      </button>
+      <button
+        type="button"
+        class="nav-btn next absolute top-1/2 -right-4 z-10 hidden -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:-right-6 sm:block dark:bg-black/50 dark:hover:bg-black/80"
+        aria-label={t('Carousel.Next', language)}
+      >
+        <i class="icon-[ph--caret-right-bold] text-xl" aria-hidden="true" />
+      </button>
 
-        {/*
+      {/*
           tabindex + a group role make the overflow strip reachable by keyboard:
           the arrows are hidden below `sm`, so without this the only way through
           the reviews on a keyboard is a mouse-style drag that never arrives.
         */}
-        <div
-          class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
-          style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
-          tabindex="0"
-          role="group"
-          aria-label={t('Carousel.Reviews.Label', language)}
-        >
-          {items.map((review) => (
-            <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
-              <ReviewItem
-                name={getAuthorName(review)}
-                country={review.author?.country}
-                content={review.content}
-                rating={review.rating}
-                expand_behavior={expand_behavior}
-                date={review.publishDate}
-                tourTitle={
-                  review.relatedProduct
-                    ? (tourById.get(review.relatedProduct)?.title ?? null)
-                    : null
-                }
-                tourHref={
-                  review.relatedProduct
-                    ? (tourById.get(review.relatedProduct)?.href ?? null)
-                    : null
-                }
-                sourceName={review.source?.name}
-                sourceUrl={review.source?.url}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    ) : (
-      <Grid
-        cols={cards_per_row as 1 | 2 | 3 | 4}
-        class="reveal-stagger intersect:opacity-100 intersect-once"
+      <div
+        class="scroll-container flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6"
+        style={{ '--desktop-slide-width': `calc(${slideWidthRaw})` }}
+        tabindex="0"
+        role="group"
+        aria-label={t('Carousel.Reviews.Label', language)}
       >
         {items.map((review) => (
-          <ReviewItem
-            name={getAuthorName(review)}
-            country={review.author?.country}
-            content={review.content}
-            rating={review.rating}
-            expand_behavior={expand_behavior}
-            date={review.publishDate}
-            tourTitle={
-              review.relatedProduct
-                ? (tourById.get(review.relatedProduct)?.title ?? null)
-                : null
-            }
-            tourHref={
-              review.relatedProduct
-                ? (tourById.get(review.relatedProduct)?.href ?? null)
-                : null
-            }
-            sourceName={review.source?.name}
-            sourceUrl={review.source?.url}
-          />
+          <div class="carousel-item shrink-0 snap-start first:pl-4 last:pr-4 sm:first:pl-0 sm:last:pr-0">
+            <ReviewItem
+              name={getAuthorName(review)}
+              country={review.author?.country}
+              content={review.content}
+              rating={review.rating}
+              expand_behavior={expand_behavior}
+              date={review.publishDate}
+              tourTitle={
+                review.relatedProduct
+                  ? (tourById.get(review.relatedProduct)?.title ?? null)
+                  : null
+              }
+              tourHref={
+                review.relatedProduct
+                  ? (tourById.get(review.relatedProduct)?.href ?? null)
+                  : null
+              }
+              sourceName={review.source?.name}
+              sourceUrl={review.source?.url}
+            />
+          </div>
         ))}
-      </Grid>
-    )
-  }
+      </div>
+    </div>
+  ) : (
+    <Grid
+      cols={cards_per_row as 1 | 2 | 3 | 4}
+      class="reveal-stagger intersect:opacity-100 intersect-once"
+    >
+      {items.map((review) => (
+        <ReviewItem
+          name={getAuthorName(review)}
+          country={review.author?.country}
+          content={review.content}
+          rating={review.rating}
+          expand_behavior={expand_behavior}
+          date={review.publishDate}
+          tourTitle={
+            review.relatedProduct
+              ? (tourById.get(review.relatedProduct)?.title ?? null)
+              : null
+          }
+          tourHref={
+            review.relatedProduct
+              ? (tourById.get(review.relatedProduct)?.href ?? null)
+              : null
+          }
+          sourceName={review.source?.name}
+          sourceUrl={review.source?.url}
+        />
+      ))}
+    </Grid>
+  )}
 </Stack>
 
 <script>

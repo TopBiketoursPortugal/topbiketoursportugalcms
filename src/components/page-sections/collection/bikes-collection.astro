@@ -27,25 +27,46 @@ const allBikes = await getCollection(
   (b) => b.data.language === language
 );
 
-const groupedBikes = categories.map((cat) => ({
-  category: cat,
-  items: allBikes
-    .filter((b) => b.data.category === cat.data.id)
-    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
-})).filter((g) => g.items.length > 0);
+const groupedBikes = categories
+  .map((cat) => ({
+    category: cat,
+    items: allBikes
+      .filter((b) => b.data.category === cat.data.id)
+      .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  }))
+  .filter((g) => g.items.length > 0);
 ---
 
 <Stack layout="vertical" spacing="large" class="w-full">
-  {title ? <Heading as="h2" class="px-6">{title}</Heading> : null}
+  {title ? (
+    <Heading as="h2" class="px-6">
+      {title}
+    </Heading>
+  ) : null}
   {groupedBikes.map((group) => (
     <section class="flex flex-col gap-6">
-      <a href={getBikeCategoryPath(group.category, language)} class="flex items-center gap-3 px-6 transition-colors hover:text-amber-600 dark:hover:text-amber-400">
-        <i class:list={[getTagIconClass(group.category.data.icon), 'h-7 w-7 text-amber-600 dark:text-amber-400']} aria-hidden="true" />
-        <Heading as="h3">{group.category.data.name ?? group.category.data.title}</Heading>
+      <a
+        href={getBikeCategoryPath(group.category, language)}
+        class="flex items-center gap-3 px-6 transition-colors hover:text-amber-600 dark:hover:text-amber-400"
+      >
+        <i
+          class:list={[
+            getTagIconClass(group.category.data.icon),
+            'h-7 w-7 text-amber-600 dark:text-amber-400'
+          ]}
+          aria-hidden="true"
+        />
+        <Heading as="h3">
+          {group.category.data.name ?? group.category.data.title}
+        </Heading>
       </a>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {group.items.map((bike) => (
-          <BikesCard bike={bike} language={language} imageWidths={imageWidths} />
+          <BikesCard
+            bike={bike}
+            language={language}
+            imageWidths={imageWidths}
+          />
         ))}
       </div>
     </section>

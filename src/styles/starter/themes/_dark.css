@@ -1,6 +1,6 @@
 /* Dark theme */
 html.dark,
-[data-theme="dark"] {
+[data-theme='dark'] {
   color-scheme: dark;
 
   --cc-color-brand: var(--gray-0);
