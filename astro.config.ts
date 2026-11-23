@@ -305,11 +305,14 @@ export default defineConfig({
         optional: true,
         default: 'GTM-KRC3B4ZQ'
       }),
+      // No default: '385531271' was the GA4 property ID for Top Walking Tours
+      // Portugal, the other site in this repo. Nothing reads this field today,
+      // so it shipped nothing, but a stale cross-site default is a trap for
+      // whoever wires analytics next.
       GOOGLE_ANALYTICS_ID: envField.string({
         context: 'client',
         access: 'public',
-        optional: true,
-        default: '385531271'
+        optional: true
       }),
       GOOGLE_PUBLIC_CAPTCHA: envField.string({
         context: 'client',
