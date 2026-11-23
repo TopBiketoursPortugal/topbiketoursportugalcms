@@ -238,6 +238,11 @@
       "status": 301
     },
     {
+      "from": "/blog/cycling-porto-to-lisbon-routes-seasons-and-logistics/",
+      "destination": "/blog/cycling-porto-lisbon-travel-guide/",
+      "status": 301
+    },
+    {
       "from": "/blog/cycling-portugal-climate-and-geography-top-bike-tours/",
       "destination": "/blog/climate-and-geography-in-portugal-for-cycling/",
       "status": 301
