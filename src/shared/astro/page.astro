@@ -25,14 +25,12 @@ type Props = SharePageProps & VisuallyEditable;
 const { contentBlocks = [], sectionsKey = 'content_blocks' } = Astro.props;
 ---
 
-{
-  contentBlocks.length > 0 && (
-    <div
-      data-editable="component"
-      data-component="utils/main-component"
-      data-prop-sections={sectionsKey}
-    >
-      <MainComponent sections={contentBlocks} />
-    </div>
-  )
-}
+{contentBlocks.length > 0 && (
+  <div
+    data-editable="component"
+    data-component="utils/main-component"
+    data-prop-sections={sectionsKey}
+  >
+    <MainComponent sections={contentBlocks} />
+  </div>
+)}

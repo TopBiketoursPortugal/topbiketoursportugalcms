@@ -16,7 +16,13 @@
  * Tours without a GPX file keep their placeholder `null` track and fall
  * back to the straight-line stop-to-stop cue sheet in the app.
  */
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync
+} from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,7 +39,9 @@ function haversine(a, b) {
   const dLng = toRad(b.lng - a.lng);
   const lat1 = toRad(a.lat);
   const lat2 = toRad(b.lat);
-  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  const h =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
   return 2 * EARTH_RADIUS_M * Math.asin(Math.sqrt(h));
 }
 
@@ -42,7 +50,9 @@ function bearing(a, b) {
   const lat2 = toRad(b.lat);
   const dLng = toRad(b.lng - a.lng);
   const y = Math.sin(dLng) * Math.cos(lat2);
-  const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
+  const x =
+    Math.cos(lat1) * Math.sin(lat2) -
+    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLng);
   return (toDeg(Math.atan2(y, x)) + 360) % 360;
 }
 
@@ -69,7 +79,11 @@ function parseGpx(xml) {
     const lon = /lon="(-?\d+(?:\.\d+)?)"/.exec(m[1]);
     if (!lat || !lon) continue;
     const ele = m[2] ? /<ele>\s*(-?\d+(?:\.\d+)?)\s*<\/ele>/.exec(m[2]) : null;
-    points.push({ lat: parseFloat(lat[1]), lng: parseFloat(lon[1]), ele: ele ? parseFloat(ele[1]) : null });
+    points.push({
+      lat: parseFloat(lat[1]),
+      lng: parseFloat(lon[1]),
+      ele: ele ? parseFloat(ele[1]) : null
+    });
   }
   return points;
 }
@@ -126,7 +140,7 @@ function buildElevation(points, cumDist) {
     minM: Math.min(...samples),
     maxM: Math.max(...samples),
     ascentM: Math.round(ascentM),
-    descentM: Math.round(descentM),
+    descentM: Math.round(descentM)
   };
 }
 
@@ -136,14 +150,14 @@ function buildElevation(points, cumDist) {
  *  indices into the original `points` array. */
 function simplify(points, toleranceM) {
   if (points.length < 3) return points.map((_, i) => i);
-  const keep = new Array(points.length).fill(false);
+  const keep = Array.from({ length: points.length }, () => false);
   keep[0] = true;
   keep[points.length - 1] = true;
 
   const lat0 = toRad(points[Math.floor(points.length / 2)].lat);
   const project = (p) => ({
     x: toRad(p.lng) * Math.cos(lat0) * EARTH_RADIUS_M,
-    y: toRad(p.lat) * EARTH_RADIUS_M,
+    y: toRad(p.lat) * EARTH_RADIUS_M
   });
   const proj = points.map(project);
 
@@ -204,7 +218,8 @@ function classifyTurn(deltaDeg) {
 function dropStationaryJitter(points, minMoveM = 3) {
   const out = [points[0]];
   for (let i = 1; i < points.length; i++) {
-    if (haversine(out[out.length - 1], points[i]) >= minMoveM) out.push(points[i]);
+    if (haversine(out[out.length - 1], points[i]) >= minMoveM)
+      out.push(points[i]);
   }
   return out;
 }
@@ -233,15 +248,23 @@ function buildTrack(rawPoints) {
     const bearingOut = bearing(points[curIdx], points[nextIdx]);
     const delta = normalizeDelta(bearingOut - bearingIn);
     if (Math.abs(delta) < TURN_ANGLE_THRESHOLD_DEG) continue;
-    candidates.push({ atIndex: curIdx, distanceFromStartM: cumDist[curIdx], delta });
+    candidates.push({
+      atIndex: curIdx,
+      distanceFromStartM: cumDist[curIdx],
+      delta
+    });
   }
 
   // Merge candidates that fall within the same real-world junction.
   const merged = [];
   for (const c of candidates) {
     const last = merged[merged.length - 1];
-    if (last && c.distanceFromStartM - last.distanceFromStartM < MANEUVER_MERGE_WINDOW_M) {
-      if (Math.abs(c.delta) > Math.abs(last.delta)) merged[merged.length - 1] = c;
+    if (
+      last &&
+      c.distanceFromStartM - last.distanceFromStartM < MANEUVER_MERGE_WINDOW_M
+    ) {
+      if (Math.abs(c.delta) > Math.abs(last.delta))
+        merged[merged.length - 1] = c;
     } else {
       merged.push(c);
     }
@@ -252,26 +275,40 @@ function buildTrack(rawPoints) {
     // indexes into `points` (this function's dense working array), which
     // is NOT the same array as the shipped, separately-thinned `track`,
     // so an index here would silently point at the wrong place.
-    at: [Math.round(points[c.atIndex].lat * 1e6) / 1e6, Math.round(points[c.atIndex].lng * 1e6) / 1e6],
+    at: [
+      Math.round(points[c.atIndex].lat * 1e6) / 1e6,
+      Math.round(points[c.atIndex].lng * 1e6) / 1e6
+    ],
     distanceFromStartM: Math.round(c.distanceFromStartM),
-    ...classifyTurn(c.delta),
+    ...classifyTurn(c.delta)
   }));
 
   // Finer simplification for the shipped polyline/snap-to-route track —
   // dense enough to match GPS accurately, thin enough to keep bundle size
   // and on-device matching cheap.
   const trackIdx = simplify(points, 8);
-  const track = trackIdx.map((i) => [Math.round(points[i].lat * 1e6) / 1e6, Math.round(points[i].lng * 1e6) / 1e6]);
+  const track = trackIdx.map((i) => [
+    Math.round(points[i].lat * 1e6) / 1e6,
+    Math.round(points[i].lng * 1e6) / 1e6
+  ]);
   const trackCumDist = trackIdx.map((i) => Math.round(cumDist[i]));
 
   const elevation = buildElevation(points, cumDist);
 
-  return { totalDistanceM: Math.round(totalDistanceM), track, trackCumDist, maneuvers, elevation };
+  return {
+    totalDistanceM: Math.round(totalDistanceM),
+    track,
+    trackCumDist,
+    maneuvers,
+    elevation
+  };
 }
 
 function main() {
   if (!existsSync(GPX_DIR)) {
-    console.log(`No ${GPX_DIR} — nothing to convert yet. See README "Real GPX tracks".`);
+    console.log(
+      `No ${GPX_DIR} — nothing to convert yet. See README "Real GPX tracks".`
+    );
     return;
   }
   mkdirSync(OUT_DIR, { recursive: true });
@@ -286,13 +323,17 @@ function main() {
     const tourId = basename(file, '.gpx');
     const outPath = join(OUT_DIR, `${tourId}.json`);
     if (!existsSync(outPath)) {
-      console.warn(`⚠️  ${file}: "${tourId}" doesn't match any id in src/data/tours.ts — skipping.`);
+      console.warn(
+        `⚠️  ${file}: "${tourId}" doesn't match any id in src/data/tours.ts — skipping.`
+      );
       continue;
     }
     const xml = readFileSync(join(GPX_DIR, file), 'utf8');
     const points = parseGpx(xml);
     if (points.length < 2) {
-      console.warn(`⚠️  ${file}: found ${points.length} track points (expected <trkpt lat lon>), skipping.`);
+      console.warn(
+        `⚠️  ${file}: found ${points.length} track points (expected <trkpt lat lon>), skipping.`
+      );
       continue;
     }
     const result = buildTrack(points);

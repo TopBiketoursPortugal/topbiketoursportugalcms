@@ -159,179 +159,151 @@ const showBookNow =
     {...data}
     class="h-full flex-col"
   >
-    {
-      image && (
-        <div class="relative">
-          <CardMedia {...image} />
-          <div class="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
-            <div class="flex flex-wrap gap-2">
-              {isNewTour ? (
-                <span class="rounded-md bg-green-600 px-2.5 py-1 text-xs font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
-                  {t('Tour.Badge.New', language)}
-                </span>
-              ) : null}
-              {regionName ? (
-                <span class="rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
-                  {regionName}
-                </span>
-              ) : null}
-            </div>
-            {styleLabel ? (
-              <span class="shrink-0 rounded-md bg-white/90 px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm backdrop-blur-sm dark:bg-gray-900/85 dark:text-gray-100">
-                {styleLabel}
+    {image && (
+      <div class="relative">
+        <CardMedia {...image} />
+        <div class="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+          <div class="flex flex-wrap gap-2">
+            {isNewTour ? (
+              <span class="rounded-md bg-green-600 px-2.5 py-1 text-xs font-bold text-white uppercase shadow-lg dark:bg-green-500 dark:text-gray-900">
+                {t('Tour.Badge.New', language)}
+              </span>
+            ) : null}
+            {regionName ? (
+              <span class="rounded-md bg-black/55 px-2.5 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                {regionName}
               </span>
             ) : null}
           </div>
+          {styleLabel ? (
+            <span class="shrink-0 rounded-md bg-white/90 px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm backdrop-blur-sm dark:bg-gray-900/85 dark:text-gray-100">
+              {styleLabel}
+            </span>
+          ) : null}
         </div>
-      )
-    }
+      </div>
+    )}
     <CardContent
       display={contentDisplay}
       class="flex h-full flex-col gap-3 p-6 sm:max-xl:p-4"
     >
-      {
-        /*
+      {/*
         Card text inherits `text-primary` (#296a3f) from <Card color="primary">,
         which is a white-background green: on the dark surface it measures
         2.74:1, under the 3:1 floor. The greys below were likewise declared
         light-only. Each colour here carries its dark counterpart — emerald-300
         matches the primary-on-dark pairing already used in timeline.astro.
-      */
-      }
-      <h3
-        class="font-oswald line-clamp-2 text-xl font-bold dark:text-emerald-300"
-      >
+      */}
+      <h3 class="font-oswald line-clamp-2 text-xl font-bold dark:text-emerald-300">
         {data.title}
       </h3>
 
-      {
-        /*
+      {/*
         Was `line-clamp-5` at `text-lg` — five lines of marketing prose ending
         mid-sentence, which is the largest block on the card and helps nobody
         choose between two tours. Two lines is enough to set the tone; the
         comparable facts below are what the reader is actually scanning.
-      */
-      }
+      */}
       <p class="line-clamp-2 text-base text-gray-600 dark:text-gray-300">
         {getMarkdownExcerpt(content ?? '', 160)}
       </p>
 
-      {
-        /*
+      {/*
         Days, distance and difficulty were three stacked sentences in the same
         size and colour as everything else. One dense row, set smaller and in
         tabular figures, lets a reader compare across cards without reading.
-      */
-      }
-      <div
-        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 tabular-nums dark:text-gray-300"
-      >
-        {
-          durationDays > 0 ? (
-            <span class="flex items-center gap-1.5">
-              <i
-                class="icon-[ph--clock-countdown-light] h-4 w-4 shrink-0"
-                aria-hidden="true"
-              />
-              {durationDays} {t(dayUnit, language)}
-            </span>
-          ) : null
-        }
-        {
-          distance && distance > 0 ? (
-            <span class="flex items-center gap-1.5">
-              <i
-                class="icon-[ph--map-trifold-light] h-4 w-4 shrink-0"
-                aria-hidden="true"
-              />
-              {distance} km
-            </span>
-          ) : null
-        }
-        {
-          difficulty && difficulty > 0 ? (
-            <DifficultyScale
-              value={difficulty}
-              language={language}
-              variant="labelled"
-              class="text-sm"
+      */}
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-600 tabular-nums dark:text-gray-300">
+        {durationDays > 0 ? (
+          <span class="flex items-center gap-1.5">
+            <i
+              class="icon-[ph--clock-countdown-light] h-4 w-4 shrink-0"
+              aria-hidden="true"
             />
-          ) : null
-        }
+            {durationDays} {t(dayUnit, language)}
+          </span>
+        ) : null}
+        {distance && distance > 0 ? (
+          <span class="flex items-center gap-1.5">
+            <i
+              class="icon-[ph--map-trifold-light] h-4 w-4 shrink-0"
+              aria-hidden="true"
+            />
+            {distance} km
+          </span>
+        ) : null}
+        {difficulty && difficulty > 0 ? (
+          <DifficultyScale
+            value={difficulty}
+            language={language}
+            variant="labelled"
+            class="text-sm"
+          />
+        ) : null}
       </div>
 
-      {
-        /*
+      {/*
         Was rendered unconditionally: a tour with no testimonials showed five
         hollow stars and "(0 review(s))", which reads at a glance as a zero
         rating — sitting in a grid beside tours showing five filled ones. No
         reviews is not a rating, so it prints nothing.
-      */
-      }
-      {
-        count > 0 ? (
-          <div class="flex items-center gap-2 text-sm">
-            <Rating rating={average} class="text-orange-500" />
-            <span class="text-neutral-700 tabular-nums dark:text-neutral-300">
-              {average.toFixed(1)} · {count}{' '}
-              {t('Tour.Info.Reviews.Unit', language)}
+      */}
+      {count > 0 ? (
+        <div class="flex items-center gap-2 text-sm">
+          <Rating rating={average} class="text-orange-500" />
+          <span class="text-neutral-700 tabular-nums dark:text-neutral-300">
+            {average.toFixed(1)} · {count}{' '}
+            {t('Tour.Info.Reviews.Unit', language)}
+          </span>
+        </div>
+      ) : isNewTour ? null : (
+        <div class="text-sm text-gray-500 dark:text-gray-400">
+          {t('Tour.Card.NoReviewsYet', language)}
+        </div>
+      )}
+
+      {/* `mt-auto` pins the price row to the bottom of every card, so a grid
+           of cards with different title and description lengths still lines
+           its prices and buttons up across the row. */}
+      <div class="mt-auto flex w-full items-end justify-between gap-3 pt-2">
+        {displayPrice > 0 ? (
+          <div class="flex flex-col">
+            <span class="text-xs text-gray-500 dark:text-gray-400">
+              {t('Tour.Form.FromPrice', language)}
+            </span>
+            <span class="flex items-baseline gap-2">
+              {minPromoPrice > 0 && (
+                <span class="text-sm text-gray-500 line-through dark:text-gray-400">
+                  {priceFormat.format(minPrice)}
+                </span>
+              )}
+              <span class="text-xl font-bold tabular-nums dark:text-emerald-300">
+                {priceFormat.format(displayPrice)}
+              </span>
             </span>
           </div>
-        ) : isNewTour ? null : (
-          <div class="text-sm text-gray-500 dark:text-gray-400">
-            {t('Tour.Card.NoReviewsYet', language)}
-          </div>
-        )
-      }
-
-      {
-        /* `mt-auto` pins the price row to the bottom of every card, so a grid
-           of cards with different title and description lengths still lines
-           its prices and buttons up across the row. */
-      }
-      <div class="mt-auto flex w-full items-end justify-between gap-3 pt-2">
-        {
-          displayPrice > 0 ? (
-            <div class="flex flex-col">
-              <span class="text-xs text-gray-500 dark:text-gray-400">
-                {t('Tour.Form.FromPrice', language)}
-              </span>
-              <span class="flex items-baseline gap-2">
-                {minPromoPrice > 0 && (
-                  <span class="text-sm text-gray-500 line-through dark:text-gray-400">
-                    {priceFormat.format(minPrice)}
-                  </span>
-                )}
-                <span class="text-xl font-bold tabular-nums dark:text-emerald-300">
-                  {priceFormat.format(displayPrice)}
-                </span>
-              </span>
-            </div>
-          ) : (
-            <div />
-          )
-        }
-        {
-          showBookNow ? (
-            <WeTravelButton
-              uuid={
-                (data.wetravel?.guidedUuid ||
-                  data.wetravel?.selfGuidedUuid) as string
-              }
-              uid={data.wetravel?.uid}
-              label={t('Tour.Form.Button.Text', language)}
-              class="z-20 h-10 w-fit shrink-0 px-4 py-2 text-sm font-medium"
-            />
-          ) : (
-            <LinkButton
-              href={tourPath}
-              variant="outline"
-              class="border-primary text-primary hover:bg-primary z-20 shrink-0 bg-transparent hover:text-white dark:border-emerald-300 dark:text-emerald-300 dark:hover:bg-emerald-300 dark:hover:text-gray-900"
-            >
-              {t('Tour.Card.ViewTour', language)}
-            </LinkButton>
-          )
-        }
+        ) : (
+          <div />
+        )}
+        {showBookNow ? (
+          <WeTravelButton
+            uuid={
+              (data.wetravel?.guidedUuid ||
+                data.wetravel?.selfGuidedUuid) as string
+            }
+            uid={data.wetravel?.uid}
+            label={t('Tour.Form.Button.Text', language)}
+            class="z-20 h-10 w-fit shrink-0 px-4 py-2 text-sm font-medium"
+          />
+        ) : (
+          <LinkButton
+            href={tourPath}
+            variant="outline"
+            class="border-primary text-primary hover:bg-primary z-20 shrink-0 bg-transparent hover:text-white dark:border-emerald-300 dark:text-emerald-300 dark:hover:bg-emerald-300 dark:hover:text-gray-900"
+          >
+            {t('Tour.Card.ViewTour', language)}
+          </LinkButton>
+        )}
       </div>
     </CardContent>
   </Card>

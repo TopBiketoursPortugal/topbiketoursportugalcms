@@ -7,7 +7,8 @@ link:
   comment: The URL to which the button should link.
 iconName:
   type: select
-  comment: The name of the icon to display. Sourced from
+  comment:
+    The name of the icon to display. Sourced from
     [Heroicons](https://heroicons.com/). See the Icon component documentation
     for more information.
   options:
@@ -20,7 +21,7 @@ iconName:
 iconColor:
   type: select
   comment: The color of the icon.
-  hidden: "!iconName"
+  hidden: '!iconName'
   options:
     values:
       - id: default
@@ -44,7 +45,7 @@ iconColor:
 iconPosition:
   type: select
   comment: The position of the icon relative to the text.
-  hidden: "!iconName"
+  hidden: '!iconName'
   options:
     values:
       - id: before
@@ -53,7 +54,7 @@ iconPosition:
         name: After
 hideText:
   type: switch
-  hidden: "!iconName"
+  hidden: '!iconName'
   comment: Whether to hide the button text and show only the icon.
 variant:
   type: select

@@ -68,7 +68,7 @@ function lastCommitDates() {
  * live count of the tours using it. Newest of both collections it reads.
  */
 const INDEX_SOURCES = {
-  tags: ['tourTags', 'tours'],
+  'tags': ['tourTags', 'tours'],
   'bike-types': ['bikeCategories', 'tours'],
   'rider-levels': ['tourRiderLevels', 'tours']
 };

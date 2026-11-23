@@ -21,14 +21,13 @@ const tags = await getCollection(
   (t) => t.data.language === language
 );
 
-const tours = await getCollection(
-  'tours',
-  (t) => t.data.language === language
-);
+const tours = await getCollection('tours', (t) => t.data.language === language);
 
 const tagCounts = new Map<string, number>();
 for (const tag of tags) {
-  const count = tours.filter((t) => (t.data.tags ?? []).includes(tag.data.id)).length;
+  const count = tours.filter((t) =>
+    (t.data.tags ?? []).includes(tag.data.id)
+  ).length;
   tagCounts.set(tag.data.id, count);
 }
 
@@ -36,24 +35,20 @@ const visibleTags = tags.filter((t) => (tagCounts.get(t.data.id) ?? 0) > 0);
 ---
 
 <Stack layout="vertical" spacing="large" class="w-full">
-  {
-    title ? (
-      <Heading as="h2" class="px-6">
-        {title}
-      </Heading>
-    ) : null
-  }
+  {title ? (
+    <Heading as="h2" class="px-6">
+      {title}
+    </Heading>
+  ) : null}
 
   <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-    {
-      visibleTags.map((tag) => (
-        <TourTagsCard
-          tag={tag}
-          language={language}
-          tourCount={tagCounts.get(tag.data.id) ?? 0}
-          imageWidths={imageWidths}
-        />
-      ))
-    }
+    {visibleTags.map((tag) => (
+      <TourTagsCard
+        tag={tag}
+        language={language}
+        tourCount={tagCounts.get(tag.data.id) ?? 0}
+        imageWidths={imageWidths}
+      />
+    ))}
   </div>
 </Stack>

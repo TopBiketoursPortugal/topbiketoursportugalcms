@@ -1,16 +1,16 @@
 ---
-import Icon from "@core-elements/icon/Icon.astro";
+import Icon from '@core-elements/icon/Icon.astro';
 
 const {
   label,
   name,
-  type = "text",
+  type = 'text',
   placeholder,
   required = false,
   value,
   iconName,
-  iconColor = "default",
-  iconPosition = "before",
+  iconColor = 'default',
+  iconPosition = 'before',
   id: customId,
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
@@ -22,51 +22,29 @@ const fieldId = customId || `input-${crypto.randomUUID()}`;
 const hasIcon = iconName?.trim().length > 0;
 ---
 
-<div
-  class:list={["input", className]}
-  {...htmlAttributes}
->
-  {
-    label && (
-      <label
-        for={fieldId}
-        class="label"
-      >
-        {label}
-        {required && (
-          <span
-            class="input-required"
-            aria-label="required"
-          >
-            *
-          </span>
-        )}
-      </label>
-    )
-  }
-  {
-    hasIcon ? (
-      <span class:list={["field-shell", iconPosition === "after" && "icon-after"]}>
-        <Icon
-          name={iconName}
-          color={iconColor}
-          size="none"
-          class="input-icon"
-          aria-hidden="true"
-          role="presentation"
-        />
-        <input
-          type={type}
-          name={name}
-          id={fieldId}
-          placeholder={placeholder}
-          required={required}
-          aria-required={required}
-          value={value}
-          class="field"
-        />
-      </span>
-    ) : (
+<div class:list={['input', className]} {...htmlAttributes}>
+  {label && (
+    <label for={fieldId} class="label">
+      {label}
+      {required && (
+        <span class="input-required" aria-label="required">
+          *
+        </span>
+      )}
+    </label>
+  )}
+  {hasIcon ? (
+    <span
+      class:list={['field-shell', iconPosition === 'after' && 'icon-after']}
+    >
+      <Icon
+        name={iconName}
+        color={iconColor}
+        size="none"
+        class="input-icon"
+        aria-hidden="true"
+        role="presentation"
+      />
       <input
         type={type}
         name={name}
@@ -77,8 +55,19 @@ const hasIcon = iconName?.trim().length > 0;
         value={value}
         class="field"
       />
-    )
-  }
+    </span>
+  ) : (
+    <input
+      type={type}
+      name={name}
+      id={fieldId}
+      placeholder={placeholder}
+      required={required}
+      aria-required={required}
+      value={value}
+      class="field"
+    />
+  )}
 </div>
 
 <style is:global>

@@ -43,8 +43,13 @@ const displayName = name ?? title;
     </div>
   ) : (
     <div class="flex items-center gap-3 p-4">
-      <i class:list={[iconClass, 'h-6 w-6 text-green-600 dark:text-green-400']} aria-hidden="true" />
-      <span class="text-lg font-bold text-gray-900 dark:text-gray-100">{displayName}</span>
+      <i
+        class:list={[iconClass, 'h-6 w-6 text-green-600 dark:text-green-400']}
+        aria-hidden="true"
+      />
+      <span class="text-lg font-bold text-gray-900 dark:text-gray-100">
+        {displayName}
+      </span>
     </div>
   )}
   {tourCount !== undefined && (

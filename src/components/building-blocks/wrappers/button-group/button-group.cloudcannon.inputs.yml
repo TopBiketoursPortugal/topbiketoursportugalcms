@@ -1,5 +1,6 @@
 label:
-  comment: Optional label for the button group to help identify it in the editor.
+  comment:
+    Optional label for the button group to help identify it in the editor.
   type: text
 buttonSections:
   type: array

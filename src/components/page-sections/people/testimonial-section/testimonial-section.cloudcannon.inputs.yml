@@ -24,7 +24,7 @@ authorImage:
   options:
     paths:
       uploads: src/assets/images
-      static: ""
+      static: ''
     resize_style: contain
     width: 1920
     height: 1280

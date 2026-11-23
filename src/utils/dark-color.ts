@@ -15,7 +15,7 @@ const BG_MAP: Record<string, string> = {
   '#faf9f6': '#1c1917', // secondary light font -> stone-950
   '#edeade': '#292524', // tertiary light font -> stone-900
   '#fffff0': '#422006', // primary light font -> yellow-950
-  '#808080': '#6b7280', // gray -> gray-500 (stays similar)
+  '#808080': '#6b7280' // gray -> gray-500 (stays similar)
 };
 
 const TEXT_MAP: Record<string, string> = {
@@ -25,7 +25,7 @@ const TEXT_MAP: Record<string, string> = {
   '#333333': '#e5e7eb', // dark gray text -> gray-200
   '#333232': '#e5e7eb', // jet -> gray-200
   '#ffffff': '#0f172a', // white text -> slate-900
-  '#808080': '#9ca3af', // gray -> gray-400
+  '#808080': '#9ca3af' // gray -> gray-400
 };
 
 export function getDarkEquivalent(lightHex: string | undefined | null): string {

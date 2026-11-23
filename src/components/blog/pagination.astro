@@ -83,52 +83,50 @@ const pager = tv({
 const { link, container, item, icon } = pager();
 ---
 
-{
-  lastPage !== 1 && (
-    <nav class="blog-pagination" aria-label="pagination">
-      <ul class={cn('pagination', container())}>
-        <li class={cn('page-item rounded-tl-md rounded-bl-md', item())}>
-          <a
-            class={cn(
-              link({ disabled: currentPage === 1 }),
-              'page-link rounded-tl-md rounded-bl-md'
-            )}
-            href={prev}
-            aria-label="Previous page"
-            aria-disabled={currentPage === 1}
-          >
-            <i class={cn(icon(), 'icon-[ph--arrow-left-light]')} />
-          </a>
-        </li>
-
-        {pageLinks.map((pageNum) => (
-          <li class={cn('page-item', item())}>
-            <a
-              class={cn('page-link', link({ active: pageNum === currentPage }))}
-              href={hrefFor(pageNum)}
-              aria-label={`Page ${currentPage}`}
-            >
-              {pageNum}
-            </a>
-          </li>
-        ))}
-
-        <li
-          class={cn(item(), 'page-item rounded-tr-md rounded-br-md border-r-1')}
+{lastPage !== 1 && (
+  <nav class="blog-pagination" aria-label="pagination">
+    <ul class={cn('pagination', container())}>
+      <li class={cn('page-item rounded-tl-md rounded-bl-md', item())}>
+        <a
+          class={cn(
+            link({ disabled: currentPage === 1 }),
+            'page-link rounded-tl-md rounded-bl-md'
+          )}
+          href={prev}
+          aria-label="Previous page"
+          aria-disabled={currentPage === 1}
         >
+          <i class={cn(icon(), 'icon-[ph--arrow-left-light]')} />
+        </a>
+      </li>
+
+      {pageLinks.map((pageNum) => (
+        <li class={cn('page-item', item())}>
           <a
-            class={cn(
-              link({ disabled: pageLinks.length - 1 === currentPage }),
-              'page-link rounded-tr-md rounded-br-md border-r-1'
-            )}
-            href={next}
-            aria-label="Next page"
-            aria-disabled={pageLinks.length - 1 === currentPage}
+            class={cn('page-link', link({ active: pageNum === currentPage }))}
+            href={hrefFor(pageNum)}
+            aria-label={`Page ${currentPage}`}
           >
-            <i class={cn(icon(), 'icon-[ph--arrow-right-light]')} />
+            {pageNum}
           </a>
         </li>
-      </ul>
-    </nav>
-  )
-}
+      ))}
+
+      <li
+        class={cn(item(), 'page-item rounded-tr-md rounded-br-md border-r-1')}
+      >
+        <a
+          class={cn(
+            link({ disabled: pageLinks.length - 1 === currentPage }),
+            'page-link rounded-tr-md rounded-br-md border-r-1'
+          )}
+          href={next}
+          aria-label="Next page"
+          aria-disabled={pageLinks.length - 1 === currentPage}
+        >
+          <i class={cn(icon(), 'icon-[ph--arrow-right-light]')} />
+        </a>
+      </li>
+    </ul>
+  </nav>
+)}

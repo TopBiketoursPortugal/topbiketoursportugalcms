@@ -1,6 +1,6 @@
 ---
 const {
-  size = "md",
+  size = 'md',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
@@ -8,12 +8,8 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class:list={["spacer", className]}
-  {...htmlAttributes}
-  aria-hidden="true"
->
-  <div class:list={["spacer-inner", `size-${size}`]}></div>
+<div class:list={['spacer', className]} {...htmlAttributes} aria-hidden="true">
+  <div class:list={['spacer-inner', `size-${size}`]}></div>
 </div>
 
 <style is:global>

@@ -59,9 +59,7 @@ const items = scored.slice(0, 3);
 ---
 
 <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
-  {
-    items.map((tour) => (
-      <TourCard language={language} tour={tour.data} contentDisplay="inline" />
-    ))
-  }
+  {items.map((tour) => (
+    <TourCard language={language} tour={tour.data} contentDisplay="inline" />
+  ))}
 </div>

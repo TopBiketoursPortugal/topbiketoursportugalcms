@@ -78,20 +78,18 @@ const imageOptimized = getImageByPath(src) satisfies Promise<{
 }>;
 ---
 
-{
-  imageOptimized && (
-    <Picture
-      alt={alt}
-      class={twclass}
-      decoding="async"
-      fetchpriority={fetchPriority}
-      formats={formats}
-      loading={loading}
-      src={imageOptimized}
-      widths={widths}
-      {...(sizes ? { sizes } : {})}
-      quality={quality}
-      {...foldAttributes}
-    />
-  )
-}
+{imageOptimized && (
+  <Picture
+    alt={alt}
+    class={twclass}
+    decoding="async"
+    fetchpriority={fetchPriority}
+    formats={formats}
+    loading={loading}
+    src={imageOptimized}
+    widths={widths}
+    {...(sizes ? { sizes } : {})}
+    quality={quality}
+    {...foldAttributes}
+  />
+)}

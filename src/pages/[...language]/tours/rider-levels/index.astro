@@ -26,14 +26,13 @@ const levels = await getCollection(
   (t) => t.data.language === language
 );
 
-const tours = await getCollection(
-  'tours',
-  (t) => t.data.language === language
-);
+const tours = await getCollection('tours', (t) => t.data.language === language);
 
 const levelCounts = new Map<string, number>();
 for (const level of levels) {
-  const count = tours.filter((t) => (t.data.riderLevels ?? []).includes(level.data.id)).length;
+  const count = tours.filter((t) =>
+    (t.data.riderLevels ?? []).includes(level.data.id)
+  ).length;
   levelCounts.set(level.data.id, count);
 }
 
@@ -50,7 +49,10 @@ const defaultHref = hrefs.find((h) => h.hreflang === 'en');
 const breadcrumbs = [
   getHomeCrumb(language),
   getToursCrumb(language),
-  { name: t('Tour.RiderLevelsTitle', language), url: getRiderLevelsListingPath(language) }
+  {
+    name: t('Tour.RiderLevelsTitle', language),
+    url: getRiderLevelsListingPath(language)
+  }
 ];
 ---
 
@@ -62,34 +64,30 @@ const breadcrumbs = [
   breadcrumbs={breadcrumbs}
 >
   <slot slot="head">
-    {
-      defaultHref ? (
-        <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
-      ) : null
-    }
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
-    <Heading as="h1" class="px-6">{pageTitle}</Heading>
+    <Heading as="h1" class="px-6">
+      {pageTitle}
+    </Heading>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
-      {
-        levels.map((level) => (
-          <TourRiderLevelsCard
-            level={level}
-            language={language}
-            tourCount={levelCounts.get(level.data.id) ?? 0}
-            imageWidths={[400]}
-          />
-        ))
-      }
+      {levels.map((level) => (
+        <TourRiderLevelsCard
+          level={level}
+          language={language}
+          tourCount={levelCounts.get(level.data.id) ?? 0}
+          imageWidths={[400]}
+        />
+      ))}
     </div>
   </Stack>
 </Layout>

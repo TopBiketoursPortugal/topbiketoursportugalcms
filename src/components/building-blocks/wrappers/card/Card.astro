@@ -1,8 +1,8 @@
 ---
-import Component from "@components/utils/renderBlock.astro";
-import { slugifyLabel } from "@components/utils/slugify";
-import Image from "@core-elements/image/Image.astro";
-import Video from "@core-elements/video/Video.astro";
+import Component from '@components/utils/renderBlock.astro';
+import { slugifyLabel } from '@components/utils/slugify';
+import Image from '@core-elements/image/Image.astro';
+import Video from '@core-elements/video/Video.astro';
 
 const {
   label,
@@ -12,31 +12,31 @@ const {
   maxContentWidth,
   paddingHorizontal,
   paddingVertical,
-  colorScheme = "inherit",
+  colorScheme = 'inherit',
   backgroundColor,
   background,
   link,
   showBeforeAfter = true,
   rounded = false,
   border = false,
-  class: className,
+  'class': className,
   useDefaultEditableBinding = false,
   _component,
-  "data-children-prop": childrenDataProp,
-  "data-children-prop-before": childrenDataPropBefore,
-  "data-children-prop-after": childrenDataPropAfter,
+  'data-children-prop': childrenDataProp,
+  'data-children-prop-before': childrenDataPropBefore,
+  'data-children-prop-after': childrenDataPropAfter,
   ...htmlAttributes
 } = Astro.props;
 
 const {
-  type: bgType = "image",
-  positionVertical = "top",
-  positionHorizontal = "center",
+  type: bgType = 'image',
+  positionVertical = 'top',
+  positionHorizontal = 'center',
   priority = false,
-  imageSource = "",
-  imageAlt = "",
-  videoSource = "",
-  overlay = 0,
+  imageSource = '',
+  imageAlt = '',
+  videoSource = '',
+  overlay = 0
 } = background || {};
 
 if (!htmlAttributes.id && label) {
@@ -44,143 +44,132 @@ if (!htmlAttributes.id && label) {
 }
 
 const effectiveChildrenProp =
-  childrenDataProp ?? (useDefaultEditableBinding ? "contentSections" : null);
+  childrenDataProp ?? (useDefaultEditableBinding ? 'contentSections' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 
 const effectiveBeforeProp =
-  childrenDataPropBefore ?? (useDefaultEditableBinding ? "beforeContentSections" : null);
+  childrenDataPropBefore ??
+  (useDefaultEditableBinding ? 'beforeContentSections' : null);
 const arrayDataAttributesBefore = effectiveBeforeProp
-  ? { "data-editable": "array", "data-prop": effectiveBeforeProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveBeforeProp }
   : {};
 
 const effectiveAfterProp =
-  childrenDataPropAfter ?? (useDefaultEditableBinding ? "afterContentSections" : null);
+  childrenDataPropAfter ??
+  (useDefaultEditableBinding ? 'afterContentSections' : null);
 const arrayDataAttributesAfter = effectiveAfterProp
-  ? { "data-editable": "array", "data-prop": effectiveAfterProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveAfterProp }
   : {};
 
-const isPopoverLink = link?.startsWith("^");
-const Tag = link ? (isPopoverLink ? "button" : "a") : "div";
-const hasBeforeSlot = Astro.slots.has("before");
-const hasAfterSlot = Astro.slots.has("after");
-const usesBeforeContentSections = !hasBeforeSlot && showBeforeAfter && beforeContentSections;
-const usesAfterContentSections = !hasAfterSlot && showBeforeAfter && afterContentSections;
+const isPopoverLink = link?.startsWith('^');
+const Tag = link ? (isPopoverLink ? 'button' : 'a') : 'div';
+const hasBeforeSlot = Astro.slots.has('before');
+const hasAfterSlot = Astro.slots.has('after');
+const usesBeforeContentSections =
+  !hasBeforeSlot && showBeforeAfter && beforeContentSections;
+const usesAfterContentSections =
+  !hasAfterSlot && showBeforeAfter && afterContentSections;
 ---
 
-<div
-  class:list={["card", className]}
-  {...htmlAttributes}
->
+<div class:list={['card', className]} {...htmlAttributes}>
   <Tag
-    {...isPopoverLink
-      ? { type: "button", popovertarget: link.slice(1), popovertargetaction: "show" }
-      : link && { href: link }}
-    class:list={["card-inner", rounded && "rounded", border && "border"]}
-    data-theme={colorScheme && colorScheme !== "inherit" ? colorScheme : undefined}
+    {...(isPopoverLink
+      ? {
+          type: 'button',
+          popovertarget: link.slice(1),
+          popovertargetaction: 'show'
+        }
+      : link && { href: link })}
+    class:list={['card-inner', rounded && 'rounded', border && 'border']}
+    data-theme={
+      colorScheme && colorScheme !== 'inherit' ? colorScheme : undefined
+    }
   >
-    {
-      bgType === "image" && (
-        <Image
-          class:list={["background-image"]}
-          source={imageSource}
-          alt={imageAlt}
-          priority={priority}
-          positionVertical={positionVertical}
-          positionHorizontal={positionHorizontal}
-          background={true}
-        />
-      )
-    }
-    {
-      bgType === "video" && (
-        <Video
-          type="local-source"
-          source={videoSource}
-          background={true}
-          style={{ "--background-position": `${positionHorizontal} ${positionVertical}` }}
-        />
-      )
-    }
-    {
-      overlay !== 0 && (
-        <div
-          class="background-overlay"
-          aria-hidden="true"
-          style={{
-            backgroundColor: `rgba(${overlay < 0 ? "0, 0, 0" : "255, 255, 255"}, ${Math.abs(overlay)})`,
-          }}
-        />
-      )
-    }
-    {
-      backgroundColor && (
-        <div
-          aria-hidden="true"
-          class:list={["background", backgroundColor && `bg-${backgroundColor}`]}
-        />
-      )
-    }
+    {bgType === 'image' && (
+      <Image
+        class:list={['background-image']}
+        source={imageSource}
+        alt={imageAlt}
+        priority={priority}
+        positionVertical={positionVertical}
+        positionHorizontal={positionHorizontal}
+        background={true}
+      />
+    )}
+    {bgType === 'video' && (
+      <Video
+        type="local-source"
+        source={videoSource}
+        background={true}
+        style={{
+          '--background-position': `${positionHorizontal} ${positionVertical}`
+        }}
+      />
+    )}
+    {overlay !== 0 && (
+      <div
+        class="background-overlay"
+        aria-hidden="true"
+        style={{
+          backgroundColor: `rgba(${overlay < 0 ? '0, 0, 0' : '255, 255, 255'}, ${Math.abs(overlay)})`
+        }}
+      />
+    )}
+    {backgroundColor && (
+      <div
+        aria-hidden="true"
+        class:list={['background', backgroundColor && `bg-${backgroundColor}`]}
+      />
+    )}
 
-    {
-      (usesBeforeContentSections || hasBeforeSlot) && (
-        <div
-          class="before-content"
-          {...arrayDataAttributesBefore}
-        >
-          <slot name="before">
-            {beforeContentSections && (
-              <Component
-                contentSections={beforeContentSections}
-                useDefaultEditableBinding={!!effectiveBeforeProp}
-              />
-            )}
-          </slot>
-        </div>
-      )
-    }
+    {(usesBeforeContentSections || hasBeforeSlot) && (
+      <div class="before-content" {...arrayDataAttributesBefore}>
+        <slot name="before">
+          {beforeContentSections && (
+            <Component
+              contentSections={beforeContentSections}
+              useDefaultEditableBinding={!!effectiveBeforeProp}
+            />
+          )}
+        </slot>
+      </div>
+    )}
 
     <div class="card-outer-content">
       <div
         class:list={[
-          "card-content",
+          'card-content',
           paddingHorizontal && `pad-x-${paddingHorizontal}`,
           paddingVertical && `pad-y-${paddingVertical}`,
-          maxContentWidth && `max-width-${maxContentWidth}`,
+          maxContentWidth && `max-width-${maxContentWidth}`
         ]}
         {...arrayDataAttributes}
       >
         <slot>
-          {
-            contentSections && (
-              <Component
-                contentSections={contentSections}
-                useDefaultEditableBinding={!!effectiveChildrenProp}
-              />
-            )
-          }
+          {contentSections && (
+            <Component
+              contentSections={contentSections}
+              useDefaultEditableBinding={!!effectiveChildrenProp}
+            />
+          )}
         </slot>
       </div>
     </div>
 
-    {
-      (usesAfterContentSections || hasAfterSlot) && (
-        <div
-          class="after-content"
-          {...arrayDataAttributesAfter}
-        >
-          <slot name="after">
-            {afterContentSections && (
-              <Component
-                contentSections={afterContentSections}
-                useDefaultEditableBinding={!!effectiveAfterProp}
-              />
-            )}
-          </slot>
-        </div>
-      )
-    }
+    {(usesAfterContentSections || hasAfterSlot) && (
+      <div class="after-content" {...arrayDataAttributesAfter}>
+        <slot name="after">
+          {afterContentSections && (
+            <Component
+              contentSections={afterContentSections}
+              useDefaultEditableBinding={!!effectiveAfterProp}
+            />
+          )}
+        </slot>
+      </div>
+    )}
   </Tag>
 </div>
 

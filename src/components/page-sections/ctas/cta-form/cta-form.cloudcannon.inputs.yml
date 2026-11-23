@@ -17,7 +17,8 @@ subtext:
     numberedlist: false
 formAction:
   type: url
-  comment: Where to send the form-data when the form is submitted. The URL that
+  comment:
+    Where to send the form-data when the form is submitted. The URL that
     processes the form submission.
 formBlocks:
   type: array
@@ -30,7 +31,7 @@ imageSource:
   options:
     paths:
       uploads: src/assets/images
-      static: ""
+      static: ''
     resize_style: contain
     width: 1920
     height: 1280

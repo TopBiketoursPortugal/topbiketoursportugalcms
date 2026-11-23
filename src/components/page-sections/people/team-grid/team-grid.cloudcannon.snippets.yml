@@ -57,7 +57,9 @@ teamGrid:
   _inputs:
     sectionLabel:
       type: text
-      comment: Optional label to identify the section in the editor. When set and no HTML id is provided, an id is derived from this value.
+      comment:
+        Optional label to identify the section in the editor. When set and no
+        HTML id is provided, an id is derived from this value.
     maxContentWidth:
       type: select
       comment: Maximum width constraint for the content.
@@ -140,7 +142,9 @@ teamGrid:
             name: Dark
     lockColorScheme:
       type: switch
-      comment: Keep the selected color scheme from flipping when the visitor toggles the site theme.
+      comment:
+        Keep the selected color scheme from flipping when the visitor toggles
+        the site theme.
       hidden: true
     backgroundColor:
       type: select
@@ -159,7 +163,10 @@ teamGrid:
             name: Highlight
     background:
       type: object
-      comment: Optional background still image or looping HTML5 video (self-hosted). Shared positioning applies to whichever type you choose. Video is hidden when the user prefers reduced motion.
+      comment:
+        Optional background still image or looping HTML5 video (self-hosted).
+        Shared positioning applies to whichever type you choose. Video is hidden
+        when the user prefers reduced motion.
       options:
         preview:
           icon: wallpaper
@@ -178,7 +185,9 @@ teamGrid:
           - id: video
             name: Video
     background.positionVertical:
-      comment: Vertical focal point (object-position for video; image position for pictures).
+      comment:
+        Vertical focal point (object-position for video; image position for
+        pictures).
       type: select
       options:
         values:
@@ -189,7 +198,9 @@ teamGrid:
           - id: bottom
             name: Bottom
     background.positionHorizontal:
-      comment: Horizontal focal point (object-position for video; image position for pictures).
+      comment:
+        Horizontal focal point (object-position for video; image position for
+        pictures).
       type: select
       options:
         values:
@@ -202,7 +213,9 @@ teamGrid:
     background.priority:
       type: switch
       label: Prioritize image load
-      comment: When using a background image, load it eagerly (use for above-the-fold sections).
+      comment:
+        When using a background image, load it eagerly (use for above-the-fold
+        sections).
       hidden: "background.type !== 'image'"
     background.imageSource:
       comment: URL or path to the background image.
@@ -211,7 +224,7 @@ teamGrid:
       options:
         paths:
           uploads: src/assets/images
-          static: ""
+          static: ''
         resize_style: contain
         width: 1920
         height: 1280
@@ -222,7 +235,9 @@ teamGrid:
     background.videoSource:
       type: file
       label: Video source
-      comment: Path to a video under public/videos. Sibling formats with the same basename are added automatically when present.
+      comment:
+        Path to a video under public/videos. Sibling formats with the same
+        basename are added automatically when present.
       hidden: "background.type !== 'video'"
       options:
         accepts_mime_types:
@@ -234,7 +249,9 @@ teamGrid:
           static: public
     background.overlay:
       type: range
-      comment: "Overlay in front of the background (-1.0 to 1.0). Negative values darken, positive values lighten."
+      comment:
+        'Overlay in front of the background (-1.0 to 1.0). Negative values
+        darken, positive values lighten.'
       options:
         min: -1
         max: 1

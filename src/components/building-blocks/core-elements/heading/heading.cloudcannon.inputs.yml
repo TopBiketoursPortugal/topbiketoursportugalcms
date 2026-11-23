@@ -47,7 +47,8 @@ alignmentHorizontal:
       - id: end
         name: End
 iconName:
-  comment: The name of the icon to display. Sourced from
+  comment:
+    The name of the icon to display. Sourced from
     [Heroicons](https://heroicons.com/).
   type: select
   options:
@@ -60,7 +61,7 @@ iconName:
 iconColor:
   type: select
   comment: The color of the icon.
-  hidden: "!iconName"
+  hidden: '!iconName'
   options:
     values:
       - id: default

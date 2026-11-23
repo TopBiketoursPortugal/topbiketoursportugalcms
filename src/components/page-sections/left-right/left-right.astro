@@ -55,83 +55,81 @@ if (!imageSrc) return;
   class="left-right"
   style={`--cms-bg: ${block.background_color}; --cms-bg-dark: ${getDarkEquivalent(block.background_color)};`}
 >
-  {
-    block.flipped ? (
-      <div class="left-right__wrapper left-right--flipped">
-        {imageSrc && (
-          <Image
-            class="left-right__image parallax-drift reveal-left intersect:opacity-100 intersect-once order-2 md:order-1"
-            alt={block.image.alt_text ?? ''}
-            widths={[320, 500, 640, 1000]}
-            sizes={`(max-width: 767px) calc(100vw - 32px), 500px`}
-            src={imageSrc}
-            data-editable="image"
-            data-prop-src="image.image_path"
-            data-prop-alt="image.alt_text"
-          />
-        )}
-        <div class="left-right__text reveal-right reveal-delay-1 intersect:opacity-100 intersect-once order-1 md:order-2">
-          {block.heading?.heading_text ? (
-            <h2
-              class="text-4xl"
-              style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
-              data-editable="text"
-              data-prop="heading.heading_text"
-            >
-              {block.heading?.heading_text}
-            </h2>
-          ) : null}
-          <div
-            class="left-right__body mb-4"
-            style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+  {block.flipped ? (
+    <div class="left-right__wrapper left-right--flipped">
+      {imageSrc && (
+        <Image
+          class="left-right__image parallax-drift reveal-left intersect:opacity-100 intersect-once order-2 md:order-1"
+          alt={block.image.alt_text ?? ''}
+          widths={[320, 500, 640, 1000]}
+          sizes={`(max-width: 767px) calc(100vw - 32px), 500px`}
+          src={imageSrc}
+          data-editable="image"
+          data-prop-src="image.image_path"
+          data-prop-alt="image.alt_text"
+        />
+      )}
+      <div class="left-right__text reveal-right reveal-delay-1 intersect:opacity-100 intersect-once order-1 md:order-2">
+        {block.heading?.heading_text ? (
+          <h2
+            class="text-4xl"
+            style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
             data-editable="text"
-            data-type="block"
-            data-prop="text.markdown_content"
+            data-prop="heading.heading_text"
           >
-            <Markdown content={block.text.markdown_content ?? ''} />
-          </div>
-          {block.button && <Button {...block.button} />}
+            {block.heading?.heading_text}
+          </h2>
+        ) : null}
+        <div
+          class="left-right__body mb-4"
+          style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+          data-editable="text"
+          data-type="block"
+          data-prop="text.markdown_content"
+        >
+          <Markdown content={block.text.markdown_content ?? ''} />
         </div>
+        {block.button && <Button {...block.button} />}
       </div>
-    ) : (
-      <div class="left-right__wrapper">
-        <div class="left-right__text reveal-left intersect:opacity-100 intersect-once">
-          {block.heading?.heading_text ? (
-            <h2
-              class="text-4xl"
-              style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
-              data-editable="text"
-              data-prop="heading.heading_text"
-            >
-              {block.heading?.heading_text}
-            </h2>
-          ) : null}
-          <div
-            class="left-right__body mb-4"
-            style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+    </div>
+  ) : (
+    <div class="left-right__wrapper">
+      <div class="left-right__text reveal-left intersect:opacity-100 intersect-once">
+        {block.heading?.heading_text ? (
+          <h2
+            class="text-4xl"
+            style={`--cms-heading: ${block.heading?.color}; --cms-heading-dark: ${getDarkTextEquivalent(block.heading?.color)};`}
             data-editable="text"
-            data-type="block"
-            data-prop="text.markdown_content"
+            data-prop="heading.heading_text"
           >
-            <Markdown content={block.text.markdown_content} />
-          </div>
-          {block.button && <Button {...block.button} />}
+            {block.heading?.heading_text}
+          </h2>
+        ) : null}
+        <div
+          class="left-right__body mb-4"
+          style={`--cms-text: ${block.text?.color}; --cms-text-dark: ${getDarkTextEquivalent(block.text?.color)};`}
+          data-editable="text"
+          data-type="block"
+          data-prop="text.markdown_content"
+        >
+          <Markdown content={block.text.markdown_content} />
         </div>
-        {imageSrc && (
-          <Image
-            class="left-right__image parallax-drift reveal-right reveal-delay-1 intersect:opacity-100 intersect-once"
-            alt={block.image.alt_text ?? ''}
-            widths={[320, 500, 640, 1000]}
-            sizes={`(max-width: 767px) calc(100vw - 32px), 500px`}
-            src={imageSrc}
-            data-editable="image"
-            data-prop-src="image.image_path"
-            data-prop-alt="image.alt_text"
-          />
-        )}
+        {block.button && <Button {...block.button} />}
       </div>
-    )
-  }
+      {imageSrc && (
+        <Image
+          class="left-right__image parallax-drift reveal-right reveal-delay-1 intersect:opacity-100 intersect-once"
+          alt={block.image.alt_text ?? ''}
+          widths={[320, 500, 640, 1000]}
+          sizes={`(max-width: 767px) calc(100vw - 32px), 500px`}
+          src={imageSrc}
+          data-editable="image"
+          data-prop-src="image.image_path"
+          data-prop-alt="image.alt_text"
+        />
+      )}
+    </div>
+  )}
 </div>
 
 <style>

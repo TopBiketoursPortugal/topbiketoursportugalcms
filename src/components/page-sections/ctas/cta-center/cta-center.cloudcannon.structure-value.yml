@@ -1,17 +1,18 @@
 label: CTA Center
 icon: panorama
-description: Centered call-to-action with headline, supporting text, and buttons.
+description:
+  Centered call-to-action with headline, supporting text, and buttons.
 value:
   _component: page-sections/ctas/cta-center
-  sectionLabel: ""
+  sectionLabel: ''
   heading: Heading text
   subtext: Subtext placeholder text that will be replaced with actual content.
   buttonSections:
     - _component: building-blocks/core-elements/button
       text: My Button
       hideText: false
-      link: ""
-      iconName: ""
+      link: ''
+      iconName: ''
       iconColor: default
       iconPosition: before
       variant: primary
@@ -26,8 +27,8 @@ value:
     positionVertical: top
     positionHorizontal: center
     priority: false
-    imageSource: ""
-    imageAlt: ""
+    imageSource: ''
+    imageAlt: ''
     videoSource: null
     overlay: 0
 preview:
@@ -44,8 +45,9 @@ _inputs_from_glob:
 _inputs:
   sectionLabel:
     type: text
-    comment: Optional label to identify the section in the editor. When set and no
-      HTML id is provided, an id is derived from this value.
+    comment:
+      Optional label to identify the section in the editor. When set and no HTML
+      id is provided, an id is derived from this value.
   maxContentWidth:
     type: select
     comment: Maximum width constraint for the content.
@@ -128,8 +130,9 @@ _inputs:
           name: Dark
   lockColorScheme:
     type: switch
-    comment: Keep the selected color scheme from flipping when the visitor toggles
-      the site theme.
+    comment:
+      Keep the selected color scheme from flipping when the visitor toggles the
+      site theme.
     hidden: true
   backgroundColor:
     type: select
@@ -148,7 +151,8 @@ _inputs:
           name: Highlight
   background:
     type: object
-    comment: Optional background still image or looping HTML5 video (self-hosted).
+    comment:
+      Optional background still image or looping HTML5 video (self-hosted).
       Shared positioning applies to whichever type you choose. Video is hidden
       when the user prefers reduced motion.
     options:
@@ -169,7 +173,8 @@ _inputs:
         - id: video
           name: Video
   background.positionVertical:
-    comment: Vertical focal point (object-position for video; image position for
+    comment:
+      Vertical focal point (object-position for video; image position for
       pictures).
     type: select
     options:
@@ -181,7 +186,8 @@ _inputs:
         - id: bottom
           name: Bottom
   background.positionHorizontal:
-    comment: Horizontal focal point (object-position for video; image position for
+    comment:
+      Horizontal focal point (object-position for video; image position for
       pictures).
     type: select
     options:
@@ -195,7 +201,8 @@ _inputs:
   background.priority:
     type: switch
     label: Prioritize image load
-    comment: When using a background image, load it eagerly (use for above-the-fold
+    comment:
+      When using a background image, load it eagerly (use for above-the-fold
       sections).
     hidden: background.type !== 'image'
   background.imageSource:
@@ -205,7 +212,7 @@ _inputs:
     options:
       paths:
         uploads: src/assets/images
-        static: ""
+        static: ''
       resize_style: contain
       width: 1920
       height: 1280
@@ -216,7 +223,8 @@ _inputs:
   background.videoSource:
     type: file
     label: Video source
-    comment: Path to a video under public/videos. Sibling formats with the same
+    comment:
+      Path to a video under public/videos. Sibling formats with the same
       basename are added automatically when present.
     hidden: background.type !== 'video'
     options:
@@ -229,8 +237,9 @@ _inputs:
         static: public
   background.overlay:
     type: range
-    comment: Overlay in front of the background (-1.0 to 1.0). Negative values
-      darken, positive values lighten.
+    comment:
+      Overlay in front of the background (-1.0 to 1.0). Negative values darken,
+      positive values lighten.
     options:
       min: -1
       max: 1

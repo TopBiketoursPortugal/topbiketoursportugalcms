@@ -1,18 +1,18 @@
 ---
-import Heading from "@core-elements/heading/Heading.astro";
-import Image from "@core-elements/image/Image.astro";
-import SimpleText from "@core-elements/simple-text/SimpleText.astro";
-import Text from "@core-elements/text/Text.astro";
-import Card from "@wrappers/card/Card.astro";
-import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
-import Split from "@wrappers/split/Split.astro";
+import Heading from '@core-elements/heading/Heading.astro';
+import Image from '@core-elements/image/Image.astro';
+import SimpleText from '@core-elements/simple-text/SimpleText.astro';
+import Text from '@core-elements/text/Text.astro';
+import Card from '@wrappers/card/Card.astro';
+import CarouselSlide from '@wrappers/carousel/CarouselSlide.astro';
+import Split from '@wrappers/split/Split.astro';
 
 const {
-  eyebrow = "",
-  title = "",
-  description = "",
-  imageSource = "",
-  imageAlt = "",
+  eyebrow = '',
+  title = '',
+  description = '',
+  imageSource = '',
+  imageAlt = '',
   class: className,
   useDefaultEditableBinding: _useDefaultEditableBinding = false,
   _component,
@@ -22,7 +22,7 @@ const {
 
 <CarouselSlide {...htmlAttributes}>
   <Card
-    class:list={["feature-slider-item", className]}
+    class:list={['feature-slider-item', className]}
     paddingHorizontal="xs"
     paddingVertical="none"
   >
@@ -32,23 +32,11 @@ const {
       alignmentVertical="center"
     >
       <Fragment slot="first">
-        <SimpleText
-          class="eyebrow"
-          data-prop="eyebrow"
-          text={eyebrow}
-        />
-        <Heading
-          level="h2"
-          size="lg"
-          style="margin-top: 0;"
-          data-prop="title"
-        >
+        <SimpleText class="eyebrow" data-prop="eyebrow" text={eyebrow} />
+        <Heading level="h2" size="lg" style="margin-top: 0;" data-prop="title">
           {title}
         </Heading>
-        <Text
-          data-prop="description"
-          text={description}
-        />
+        <Text data-prop="description" text={description} />
       </Fragment>
       <Image
         slot="second"

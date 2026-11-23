@@ -7,8 +7,16 @@ import { useTheme } from '@/theme/ThemeProvider';
 export function Screen({ children }: { children: React.ReactNode }) {
   const { colors, spacing } = useTheme();
   return (
-    <SafeAreaView style={[styles.flex, { backgroundColor: colors.bg }]} edges={['top', 'left', 'right']}>
-      <ScrollView contentContainerStyle={{ padding: spacing.xl, paddingBottom: spacing.xxxl }}>
+    <SafeAreaView
+      style={[styles.flex, { backgroundColor: colors.bg }]}
+      edges={['top', 'left', 'right']}
+    >
+      <ScrollView
+        contentContainerStyle={{
+          padding: spacing.xl,
+          paddingBottom: spacing.xxxl
+        }}
+      >
         {children}
       </ScrollView>
     </SafeAreaView>

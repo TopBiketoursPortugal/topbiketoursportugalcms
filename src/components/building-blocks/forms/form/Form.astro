@@ -1,30 +1,31 @@
 ---
-import RenderBlock from "@components/utils/renderBlock.astro";
+import RenderBlock from '@components/utils/renderBlock.astro';
 
 const {
   action,
   formBlocks = [],
-  class: className,
+  'class': className,
   _component,
   useDefaultEditableBinding = false,
-  "data-children-prop": childrenDataProp,
+  'data-children-prop': childrenDataProp,
   ...htmlAttributes
 } = Astro.props;
 
-const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "formBlocks" : null);
+const effectiveChildrenProp =
+  childrenDataProp ?? (useDefaultEditableBinding ? 'formBlocks' : null);
 const arrayDataAttributes = effectiveChildrenProp
-  ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
+  ? { 'data-editable': 'array', 'data-prop': effectiveChildrenProp }
   : {};
 
 const hasFormBlocks = formBlocks?.length > 0;
-const hasSlotContent = Astro.slots.has("default");
+const hasSlotContent = Astro.slots.has('default');
 const usesFormBlocks = !hasSlotContent;
 
 if (!_component && !hasFormBlocks && !usesFormBlocks) return;
 ---
 
 <form
-  class:list={["form", className]}
+  class:list={['form', className]}
   action={action}
   method="post"
   enctype="multipart/form-data"
@@ -32,14 +33,12 @@ if (!_component && !hasFormBlocks && !usesFormBlocks) return;
 >
   <div {...arrayDataAttributes}>
     <slot>
-      {
-        formBlocks && (
-          <RenderBlock
-            contentSections={formBlocks}
-            useDefaultEditableBinding={!!effectiveChildrenProp}
-          />
-        )
-      }
+      {formBlocks && (
+        <RenderBlock
+          contentSections={formBlocks}
+          useDefaultEditableBinding={!!effectiveChildrenProp}
+        />
+      )}
     </slot>
   </div>
 </form>

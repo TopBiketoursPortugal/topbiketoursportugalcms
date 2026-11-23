@@ -10,7 +10,7 @@ preview:
     - Hidden
   subtext:
     - key: text
-    - ""
+    - ''
   icon: visibility_off
 picker_preview:
   text: Hidden
