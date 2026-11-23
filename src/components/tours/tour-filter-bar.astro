@@ -222,13 +222,16 @@ const sortOptions = [
     class="relative mt-2 hidden flex-wrap items-center gap-2"
   ></div>
 
-  <!-- Empty state -->
+  <!-- Empty state. The text is carried as an attribute, not as a text node, so
+  that readers which extract text without applying CSS (crawler text modes,
+  content parsers, AI fetchers) do not read "no tours match" above a populated
+  tour list. The script writes it in the first time the state is genuinely
+  needed. -->
   <p
     data-filter-empty
+    data-empty-text={noResultsText}
     class="relative mt-3 hidden text-center text-sm text-gray-500 dark:text-gray-400"
-  >
-    {noResultsText}
-  </p>
+  ></p>
 </div>
 
 <div
@@ -632,10 +635,11 @@ const sortOptions = [
         renderChips(active);
 
         if (emptyEl) {
-          emptyEl.classList.toggle(
-            'hidden',
-            visibleIndex > 0 || !hasActiveFilters
-          );
+          const showEmpty = visibleIndex === 0 && hasActiveFilters;
+          if (showEmpty && !emptyEl.textContent?.trim()) {
+            emptyEl.textContent = emptyEl.dataset.emptyText ?? '';
+          }
+          emptyEl.classList.toggle('hidden', !showEmpty);
         }
 
         sections().forEach((section) => {
