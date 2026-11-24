@@ -10,19 +10,19 @@
     },
     {
       "question": "What types of bike tours do you offer in Portugal?",
-      "answer": "We offer the following types of bike tours:\n\n- Self-Guided Tour\n- Guided Tours\n- Guided Tour Plus"
+      "answer": "We offer the following types of bike tours:\n\n- Self-Guided Tour\n- Guided Tours\n- Guided Premium"
     },
     {
       "question": "What is included in the Self-Guided Tour?",
       "answer": "The Self-Guided Tour includes:\n\n- airport transfers\n- Hotel bookings with breakfast included\n- GPS with route\n- Light picnics\n- Daily luggage transfer to the next hotel\n- Transfer from the destination back to the start point"
     },
     {
-      "question": "What is included in the Guided Tours? ",
-      "answer": "The Guided Tours include:\n\n- includes everything described in the self –Guided tours\n- Guide and support van for the bike tour\n- Water, snacks, and transport for any dropouts\n- Organized lunches and dinners for the group"
+      "question": "What is included in the Guided Tours?",
+      "answer": "The Guided Tours include:\n\n- everything described in the Self-Guided Tour\n- a guide for the whole tour, and a support van when the group is 8 or more\n- water, snacks, and transport for any dropouts\n- lunches and dinners organized for the group"
     },
     {
-      "question": "What additional benefits are included in the Guided Tour Plus? ",
-      "answer": "The Guided Tour Plus includes everything described in the Guided Tours, plus daily lunches and dinners featuring typical dishes of the Portuguese regions. "
+      "question": "What does Guided Premium add?",
+      "answer": "Guided Premium is the guided tour plus 5-star accommodation and upgraded rooms — sea view and premium rooms — and a few experiences we don't put in the itinerary. Meals are the same as on any guided tour: the guides organize the group's lunches and dinners."
     },
     {
       "question": "How do you classify the routes?",
@@ -30,7 +30,7 @@
     },
     {
       "question": "In which languages are guided tours available?",
-      "answer": "Guided tours are available in Portuguese, and English."
+      "answer": "Guided tours are available in Portuguese, English and Spanish."
     },
     {
       "question": "Is insurance included in the tours?",
@@ -104,7 +104,7 @@
     },
     {
       "question": "Quais tipos de passeios de bicicleta que oferecemos em Portugal?",
-      "answer": "Oferecemos os seguintes tipos de passeios de bicicleta:\n\n- Passeio Autoguiado\n- Passeios Guiados\n- Passeio Guiado Plus"
+      "answer": "Oferecemos os seguintes tipos de passeios de bicicleta:\n\n- Passeio Autoguiado\n- Passeios Guiados\n- Guided Premium"
     },
     {
       "question": "O que está incluído no Passeio Autoguiado?",
@@ -112,11 +112,11 @@
     },
     {
       "question": "O que está incluído nos Passeios Guiados?",
-      "answer": "Os Passeios Guiados incluem:\n\n- Tudo descrito nos passeios autoguiados\n- Guia e van de apoio para o passeio de bicicleta\n- Água, lanches e transporte para qualquer desistência\n- Almoços e jantares organizados para o grupo"
+      "answer": "Os Passeios Guiados incluem:\n\n- tudo descrito nos passeios autoguiados\n- guia durante todo o passeio e van de apoio a partir de 8 participantes\n- água, lanches e transporte para qualquer desistência\n- almoços e jantares organizados para o grupo"
     },
     {
-      "question": "Quais benefícios adicionais estão incluídos no Passeio Guiado Plus?",
-      "answer": "O Passeio Guiado Plus inclui tudo descrito nos Passeios Guiados, além de almoços e jantares diários com pratos típicos das regiões portuguesas."
+      "question": "O que acrescenta o Guided Premium?",
+      "answer": "O Guided Premium é o passeio guiado com alojamento de 5 estrelas e quartos superiores — vista de mar e quartos premium — mais algumas experiências que não constam do itinerário. As refeições são as mesmas de qualquer passeio guiado: os guias organizam os almoços e jantares do grupo."
     },
     {
       "question": "Como classificamos as rotas?",
@@ -124,7 +124,7 @@
     },
     {
       "question": "Em quais idiomas os passeios guiados estão disponíveis?",
-      "answer": "Os passeios guiados estão disponíveis em português e inglês."
+      "answer": "Os passeios guiados estão disponíveis em português, inglês e espanhol."
     },
     {
       "question": "O seguro está incluído nos passeios?",
@@ -198,19 +198,19 @@
     },
     {
       "question": "Welche Arten von Touren bieten Sie in Portugal an?",
-      "answer": "Wir bieten die folgenden Tourarten an:\n\n- Selbstgeführte Tour\n- Geführte Touren\n- Geführte Tour Plus"
+      "answer": "Wir bieten die folgenden Tourarten an:\n\n- Selbstgeführte Tour\n- Geführte Touren\n- Guided Premium"
     },
     {
       "question": "Was ist in der selbstgeführten Tour enthalten?",
       "answer": "Die selbstgeführte Tour umfasst:\n\n- Flughafentransfers\n- Hotelbuchungen inklusive Frühstück\n- GPS-Gerät mit Route\n- Leichte Picknicks\n- Täglicher Gepäcktransport zum nächsten Hotel\n- Rücktransfer vom Zielort zum Ausgangspunkt"
     },
     {
-      "question": "Was ist in den geführten Touren enthalten? ",
-      "answer": "Die geführten Touren umfassen:\n\n- alle Leistungen der selbstgeführten Touren\n- Guide und Begleitfahrzeug während der gesamten Tour\n- Wasser, Snacks und Transport für alle, die eine Etappe auslassen möchten\n- Organisierte Mittag- und Abendessen für die Gruppe"
+      "question": "Was ist in den geführten Touren enthalten?",
+      "answer": "Die geführten Touren umfassen:\n\n- alle Leistungen der selbstgeführten Touren\n- einen Guide während der gesamten Tour und ein Begleitfahrzeug ab 8 Teilnehmenden\n- Wasser, Snacks und Transport für alle, die eine Etappe auslassen möchten\n- organisierte Mittag- und Abendessen für die Gruppe"
     },
     {
-      "question": "Welche zusätzlichen Leistungen bietet die Geführte Tour Plus? ",
-      "answer": "Die Geführte Tour Plus umfasst alle Leistungen der geführten Touren sowie täglich Mittag- und Abendessen mit typischen Gerichten der portugiesischen Regionen. "
+      "question": "Was bietet Guided Premium zusätzlich?",
+      "answer": "Guided Premium ist die geführte Tour mit 5-Sterne-Hotels und höherwertigen Zimmern – Meerblick und Premium-Zimmer – sowie einigen Erlebnissen, die nicht im Reiseverlauf stehen. Die Mahlzeiten sind dieselben wie auf jeder geführten Tour: Die Guides organisieren die Mittag- und Abendessen für die Gruppe."
     },
     {
       "question": "Wie stufen Sie die Routen ein?",
@@ -218,7 +218,7 @@
     },
     {
       "question": "In welchen Sprachen werden die geführten Touren angeboten?",
-      "answer": "Die geführten Touren werden auf Portugiesisch und Englisch angeboten."
+      "answer": "Die geführten Touren werden auf Portugiesisch, Englisch und Spanisch angeboten."
     },
     {
       "question": "Ist eine Versicherung in den Touren enthalten?",
@@ -292,19 +292,19 @@
     },
     {
       "question": "¿Qué tipos de tours en bicicleta ofrecéis en Portugal?",
-      "answer": "Ofrecemos los siguientes tipos de tours en bicicleta:\n\n- Tour autoguiado\n- Tours guiados\n- Tour guiado Plus"
+      "answer": "Ofrecemos los siguientes tipos de tours en bicicleta:\n\n- Tour autoguiado\n- Tours guiados\n- Guided Premium"
     },
     {
       "question": "¿Qué incluye el tour autoguiado?",
       "answer": "El tour autoguiado incluye:\n\n- traslados al aeropuerto\n- reservas de hotel con desayuno incluido\n- GPS con la ruta\n- picnics ligeros\n- traslado diario del equipaje al siguiente hotel\n- traslado desde el destino de vuelta al punto de partida"
     },
     {
-      "question": "¿Qué incluyen los tours guiados? ",
-      "answer": "Los tours guiados incluyen:\n\n- todo lo descrito en los tours autoguiados\n- guía y furgoneta de apoyo durante el recorrido\n- agua, tentempiés y transporte para quienes decidan abandonar la etapa\n- comidas y cenas organizadas para el grupo"
+      "question": "¿Qué incluyen los tours guiados?",
+      "answer": "Los tours guiados incluyen:\n\n- todo lo descrito en los tours autoguiados\n- un guía durante todo el recorrido y furgoneta de apoyo a partir de 8 participantes\n- agua, tentempiés y transporte para quienes decidan abandonar la etapa\n- comidas y cenas organizadas para el grupo"
     },
     {
-      "question": "¿Qué ventajas adicionales incluye el tour guiado Plus? ",
-      "answer": "El tour guiado Plus incluye todo lo descrito en los tours guiados y, además, comidas y cenas diarias con platos típicos de las distintas regiones portuguesas. "
+      "question": "¿Qué añade el Guided Premium?",
+      "answer": "El Guided Premium es el tour guiado con alojamiento de 5 estrellas y habitaciones superiores —con vistas al mar y habitaciones premium— y alguna experiencia que no figura en el itinerario. Las comidas son las mismas que en cualquier tour guiado: los guías organizan las comidas y cenas del grupo."
     },
     {
       "question": "¿Cómo clasificáis las rutas?",
@@ -312,7 +312,7 @@
     },
     {
       "question": "¿En qué idiomas están disponibles los tours guiados?",
-      "answer": "Los tours guiados están disponibles en portugués e inglés."
+      "answer": "Los tours guiados están disponibles en portugués, inglés y español."
     },
     {
       "question": "¿El seguro está incluido en los tours?",
@@ -386,7 +386,7 @@
     },
     {
       "question": "Quels types de circuits à vélo proposez-vous au Portugal ?",
-      "answer": "Nous proposons les formules suivantes :\n\n- Circuit à vélo en liberté\n- Circuits à vélo guidés\n- Circuit à vélo guidé Plus"
+      "answer": "Nous proposons les formules suivantes :\n\n- Circuit à vélo en liberté\n- Circuits à vélo guidés\n- Guided Premium"
     },
     {
       "question": "Que comprend le circuit à vélo en liberté ?",
@@ -394,11 +394,11 @@
     },
     {
       "question": "Que comprennent les circuits à vélo guidés ?",
-      "answer": "Les circuits à vélo guidés comprennent :\n\n- tout ce qui est décrit dans la formule en liberté\n- un guide et un véhicule d'assistance pendant tout le circuit\n- de l'eau, des en-cas et le transport de ceux qui souhaitent s'arrêter\n- des déjeuners et des dîners organisés pour le groupe"
+      "answer": "Les circuits à vélo guidés comprennent :\n\n- tout ce qui est décrit dans la formule en liberté\n- un guide pendant tout le circuit et un véhicule d'assistance à partir de 8 participants\n- de l'eau, des en-cas et le transport de ceux qui souhaitent s'arrêter\n- des déjeuners et des dîners organisés pour le groupe"
     },
     {
-      "question": "Quels avantages supplémentaires offre le circuit à vélo guidé Plus ?",
-      "answer": "Le circuit à vélo guidé Plus comprend tout ce qui est décrit dans les circuits à vélo guidés, auxquels s'ajoutent les déjeuners et dîners quotidiens autour des plats typiques des régions du Portugal."
+      "question": "Qu'apporte le Guided Premium ?",
+      "answer": "Le Guided Premium, c'est le circuit guidé avec des hôtels 5 étoiles et des chambres supérieures — vue mer et chambres premium — ainsi que quelques expériences qui ne figurent pas au programme. Les repas sont les mêmes que sur n'importe quel circuit guidé : les guides organisent les déjeuners et les dîners du groupe."
     },
     {
       "question": "Comment classez-vous les itinéraires ?",
@@ -406,7 +406,7 @@
     },
     {
       "question": "Dans quelles langues les circuits guidés sont-ils proposés ?",
-      "answer": "Les circuits guidés sont proposés en portugais et en anglais."
+      "answer": "Les circuits guidés sont proposés en portugais, en anglais et en espagnol."
     },
     {
       "question": "L'assurance est-elle incluse dans les circuits ?",
@@ -480,19 +480,19 @@
     },
     {
       "question": "Welke soorten tours bieden jullie aan in Portugal?",
-      "answer": "Wij bieden de volgende soorten tours aan:\n\n- Tour zonder gids\n- Begeleide tours\n- Begeleide tour Plus"
+      "answer": "Wij bieden de volgende soorten tours aan:\n\n- Tour zonder gids\n- Begeleide tours\n- Guided Premium"
     },
     {
       "question": "Wat is inbegrepen bij de tour zonder gids?",
       "answer": "De tour zonder gids omvat:\n\n- luchthaventransfers\n- Hotelboekingen inclusief ontbijt\n- GPS met de route\n- Lichte picknicks\n- Dagelijks bagagevervoer naar het volgende hotel\n- Transfer van de eindbestemming terug naar het startpunt"
     },
     {
-      "question": "Wat is inbegrepen bij de begeleide tours? ",
-      "answer": "De begeleide tours omvatten:\n\n- alles wat in de tours zonder gids is beschreven\n- Gids en volgbusje tijdens de tour\n- Water, snacks en vervoer voor wie afhaakt\n- Georganiseerde lunches en diners voor de groep"
+      "question": "Wat is inbegrepen bij de begeleide tours?",
+      "answer": "De begeleide tours omvatten:\n\n- alles wat in de tours zonder gids is beschreven\n- een gids tijdens de hele tour en een volgbusje vanaf 8 deelnemers\n- water, snacks en vervoer voor wie afhaakt\n- georganiseerde lunches en diners voor de groep"
     },
     {
-      "question": "Welke extra's zitten er in de begeleide tour Plus? ",
-      "answer": "De begeleide tour Plus omvat alles wat in de begeleide tours is beschreven, aangevuld met dagelijkse lunches en diners met typische gerechten uit de Portugese regio's. "
+      "question": "Wat voegt Guided Premium toe?",
+      "answer": "Guided Premium is de begeleide tour met 5-sterrenhotels en betere kamers — zeezicht en premiumkamers — en een paar ervaringen die niet in het programma staan. De maaltijden zijn dezelfde als op elke begeleide tour: de gidsen regelen de lunches en diners voor de groep."
     },
     {
       "question": "Hoe delen jullie de routes in?",
@@ -500,7 +500,7 @@
     },
     {
       "question": "In welke talen worden de begeleide tours verzorgd?",
-      "answer": "De begeleide tours worden verzorgd in het Portugees en het Engels."
+      "answer": "De begeleide tours worden verzorgd in het Portugees, het Engels en het Spaans."
     },
     {
       "question": "Is er een verzekering bij de tours inbegrepen?",
