@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "cloudcannon-configuration": {
+      "source": "CloudCannon/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/cloudcannon-configuration/SKILL.md",
+      "computedHash": "976e489bbc279b51e37946a218b48996de4e1b421c68800954e32b2913d0d029"
+    },
+    "cloudcannon-visual-editing": {
+      "source": "CloudCannon/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/cloudcannon-visual-editing/SKILL.md",
+      "computedHash": "90f6318dc924e5df8650ce0af4b5cdf8b29bdb93b23cd82aefef5ba39b3ad757"
+    }
+  }
+}

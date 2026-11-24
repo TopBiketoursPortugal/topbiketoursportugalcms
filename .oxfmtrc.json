@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "semi": true,
+  "printWidth": 80,
+  "singleQuote": true,
+  "quoteProps": "consistent",
+  "proseWrap": "always",
+  "sortPackageJson": false,
+  "sortTailwindcss": {
+    "functions": ["tv"],
+    "attributes": ["class:list", "class"]
+  },
+  "astro": {},
+  "ignorePatterns": ["src/content/**", "public/**", "apps/**", "pnpm-lock.yaml"]
+}

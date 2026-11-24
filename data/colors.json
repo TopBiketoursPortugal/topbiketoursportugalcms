@@ -1,23 +1,107 @@
 [
-  { "name": "White", "value": "#ffffff" },
-  { "name": "Black", "value": "#000000" },
-  { "name": "Gray", "value": "#808080" },
-  { "name": "Light Gray", "value": "#f2f2f2" },
-  { "name": "Dark Gray", "value": "#333333" },
-  { "name": "Primary Font Color", "value": "#393939" },
-  { "name": "Secondary Font Color", "value": "#475569" },
-  { "name": "Tertiary Font Color", "value": "#94a3b8" },
-  { "name": "Primary Light Font Color", "value": "#FFFFF0" },
-  { "name": "Secondary Light Font Color", "value": "#FAF9F6" },
-  { "name": "Tertiary Light Font Color", "value": "#EDEADE" },
-  { "name": "Byzantine Blue", "value": "#034AD8" },
-  { "name": "Vista Blue", "value": "#a0a2ff" },
-  { "name": "Eggshell", "value": "#faf3dd" },
-  { "name": "Almond", "value": "#F2E2D2" },
-  { "name": "Floral White", "value": "#FEF9EF" },
-  { "name": "Tea Green", "value": "#c8d5b9" },
-  { "name": "Bittersweet", "value": "#FF785A" },
-  { "name": "Cambridge Blue", "value": "#9ABCA7" },
-  { "name": "Melon", "value": "#F7B2AD" },
-  { "name": "Jet", "value": "#333232" }
+  {
+    "name": "White",
+    "value": "#ffffff",
+    "class": "white dark:black"
+  },
+  {
+    "name": "Black",
+    "value": "#000000",
+    "class": "black dark:white"
+  },
+  {
+    "name": "Gray",
+    "value": "#808080",
+    "class": "gray-500 dark:gray-500"
+  },
+  {
+    "name": "Light Gray",
+    "value": "#f2f2f2",
+    "class": "gray-50 dark:gray-950"
+  },
+  {
+    "name": "Dark Gray",
+    "value": "#333333",
+    "class": "gray-800 dark:gray-200"
+  },
+  {
+    "name": "Primary Font Color",
+    "value": "#393939",
+    "class": "gray-700 dark:gray-300"
+  },
+  {
+    "name": "Secondary Font Color",
+    "value": "#475569",
+    "class": "slate-600 dark:slate-400"
+  },
+  {
+    "name": "Tertiary Font Color",
+    "value": "#94a3b8",
+    "class": "slate-400 dark:slate-600"
+  },
+  {
+    "name": "Primary Light Font Color",
+    "value": "#FFFFF0",
+    "class": "yellow-50 dark:yellow-950"
+  },
+  {
+    "name": "Secondary Light Font Color",
+    "value": "#FAF9F6",
+    "class": "stone-50 dark:stone-950"
+  },
+  {
+    "name": "Tertiary Light Font Color",
+    "value": "#EDEADE",
+    "class": "stone-100 dark:stone-900"
+  },
+  {
+    "name": "Byzantine Blue",
+    "value": "#034AD8",
+    "class": "blue-700 dark:blue-300"
+  },
+  {
+    "name": "Vista Blue",
+    "value": "#a0a2ff",
+    "class": "indigo-300 dark:indigo-700"
+  },
+  {
+    "name": "Eggshell",
+    "value": "#faf3dd",
+    "class": "amber-50 dark:amber-950"
+  },
+  {
+    "name": "Almond",
+    "value": "#F2E2D2",
+    "class": "orange-100 dark:orange-900"
+  },
+  {
+    "name": "Floral White",
+    "value": "#FEF9EF",
+    "class": "orange-50 dark:orange-950"
+  },
+  {
+    "name": "Tea Green",
+    "value": "#c8d5b9",
+    "class": "green-200 dark:green-800"
+  },
+  {
+    "name": "Bittersweet",
+    "value": "#FF785A",
+    "class": "orange-500 dark:orange-500"
+  },
+  {
+    "name": "Cambridge Blue",
+    "value": "#9ABCA7",
+    "class": "emerald-300 dark:emerald-700"
+  },
+  {
+    "name": "Melon",
+    "value": "#F7B2AD",
+    "class": "red-200 dark:red-800"
+  },
+  {
+    "name": "Jet",
+    "value": "#333232",
+    "class": "gray-800 dark:gray-200"
+  }
 ]

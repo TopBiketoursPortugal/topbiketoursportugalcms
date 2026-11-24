@@ -1,31 +1,36 @@
 ---
+/**
+ * PageHelper — renders a page's content blocks through the
+ * astro-component-starter pipeline:
+ *
+ *   frontmatter array (content_blocks / content_blocks_after)
+ *     → this component-editable wrapper (re-render entry point)
+ *       → utils/MainComponent.astro (array editable container)
+ *         → per-block array-item wrapper (+ enter/surface/bleed presentation)
+ *           → resolved block component
+ *
+ * `sectionsKey` must name the frontmatter key the blocks came from — it is
+ * what lets CloudCannon push edits back to the right array.
+ */
 import type { VisuallyEditable } from 'src/types';
+import MainComponent from 'src/components/utils/MainComponent.astro';
 
 type SharePageProps = {
   contentBlocks: any[];
+  sectionsKey?: string;
 };
 
 type Props = SharePageProps & VisuallyEditable;
 
-const components: Record<string, Function> = {};
-const componentImports = import.meta.glob('../../components/**/*.{jsx,astro}', {
-  eager: true
-});
-Object.entries(componentImports).forEach(([path, obj]) => {
-  const parts = path.replace('../../components/', '').split('.')[0].split('/');
-  if (parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2]) {
-    parts.pop();
-  }
-  const bookshopName = parts.join('/');
-  components[bookshopName] = (obj as any).default;
-});
-
-const { contentBlocks } = Astro.props;
+const { contentBlocks = [], sectionsKey = 'content_blocks' } = Astro.props;
 ---
 
-{
-  contentBlocks.map((block, i) => {
-    const Component = components[block._bookshop_name];
-    return <Component {...block} key={i} />;
-  })
-}
+{contentBlocks.length > 0 && (
+  <div
+    data-editable="component"
+    data-component="utils/main-component"
+    data-prop-sections={sectionsKey}
+  >
+    <MainComponent sections={contentBlocks} />
+  </div>
+)}

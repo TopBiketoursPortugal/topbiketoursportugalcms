@@ -1,9 +1,10 @@
 ---
 import type { HrefLang } from 'src/types/hreflang';
-import FeaturedPosts from '../components/featured-posts/featured-posts.astro';
 import Layout, { type SEOProps } from './Layout.astro';
-import type { FeaturedPost } from 'src/content/config';
+import type { FeaturedPost } from 'src/content.config';
+import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
+import { cn } from '@utils/cn';
 
 export type PaginatedProps = {
   frontmatter: {
@@ -13,6 +14,8 @@ export type PaginatedProps = {
     seo?: SEOProps;
   };
   hrefs?: ReadonlyArray<HrefLang>;
+  class?: string;
+  breadcrumbs?: BreadcrumbItem[];
 };
 
 type Props = PaginatedProps;
@@ -21,46 +24,38 @@ if (!Astro.props.frontmatter) {
   // console.log(JSON.stringify(Astro.props), Astro.url, Astro.props);
   throw new Error('Page frontmatter must be defined missing');
 }
-const { frontmatter: props, hrefs = [] } = Astro.props;
+const {
+  frontmatter: props,
+  hrefs = [],
+  class: className,
+  breadcrumbs = []
+} = Astro.props;
+const defaultLocale = LanguageData.en;
+const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
 //console.log(hrefs);
 ---
 
-<Layout {...props} hrefLangs={hrefs}>
+<Layout
+  {...props}
+  hrefLangs={hrefs}
+  breadcrumbs={breadcrumbs}
+  class={cn('flex flex-col gap-3 px-3 py-1 sm:gap-4 sm:p-3', className)}
+>
   <slot name="head" slot="head">
-    {
-      hrefs.map(({ href, hreflang }) => (
-        <link
-          rel="alternate"
-          href={href}
-          hreflang={LanguageData[hreflang].locale}
-        />
-      ))
-    }
+    {defaultHref ? (
+      <link rel="alternate" href={defaultHref.href} hreflang="x-default" />
+    ) : null}
+    {hrefs.map(({ href, hreflang }) => (
+      <link
+        rel="alternate"
+        href={href}
+        hreflang={LanguageData[hreflang].locale}
+      />
+    ))}
   </slot>
 
-  <div class="blog-index py-[48px]">
-    <h1
-      class="mt-[48px] text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl"
-    >
-      {props.title}
-    </h1>
-    {
-      Astro.props.frontmatter?.featured_posts !== null &&
-      Astro.props.frontmatter?.featured_posts !== undefined ? (
-        <FeaturedPosts
-          bookshop:live
-          {...Astro.props.frontmatter.featured_posts}
-        />
-      ) : null
-    }
-    <slot />
-  </div>
+  <h1 class="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl">
+    {props.title}
+  </h1>
+  <slot />
 </Layout>
-
-<style>
-  .blog-index h1 {
-    max-width: var(--pageContainer);
-    padding-inline: var(--pagePadding);
-    margin: 0 auto;
-  }
-</style>

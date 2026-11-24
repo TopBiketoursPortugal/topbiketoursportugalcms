@@ -1,0 +1,148 @@
+---
+import type { Page } from 'astro';
+import BlogList from 'src/components/blog/list.astro';
+import BlogFilterBar from 'src/components/blog/blog-filter-bar.astro';
+import PaginatedLayout, {
+  type PaginatedProps
+} from 'src/layouts/Paginated.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getBlogIndexPage, getPageLanguagesAlternates } from 'utils/permalinks';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getHomeCrumb, getBlogCrumb } from 'utils/breadcrumbs';
+import { getBlogPermalink } from 'utils/permalinks';
+import SiteData from 'src/../data/site.json';
+
+type Props = {
+  page: Page<CollectionEntry<'blog'>>;
+};
+if (!Map.groupBy) {
+  Map.groupBy = function (items, callbackFn: Function) {
+    const map = new Map();
+    for (const item of items) {
+      const key = callbackFn(item);
+      if (!map.has(key)) {
+        map.set(key, []);
+      }
+      map.get(key).push(item);
+    }
+    return map;
+  };
+}
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  if (!Map.groupBy) {
+    Map.groupBy = function (items, callbackFn: Function) {
+      const map = new Map();
+      for (const item of items) {
+        const key = callbackFn(item);
+        if (!map.has(key)) {
+          map.set(key, []);
+        }
+        map.get(key).push(item);
+      }
+      return map;
+    };
+  }
+
+  const posts = await getCollection('blog');
+
+  const postPerLanguage = Map.groupBy(posts, (p) => p.data.language);
+
+  return Array.from(postPerLanguage).flatMap(([language, filteredPosts]) => {
+    return paginate(
+      filteredPosts.sort((a, b) => {
+        const dateA = new Date(a.data.date).getTime();
+        const dateB = new Date(b.data.date).getTime();
+        return dateB - dateA;
+      }),
+      {
+        params: {
+          language: language === 'en' ? undefined : language
+        },
+        pageSize: 9999
+      }
+    );
+  });
+}
+
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const page = await getBlogIndexPage(language);
+let frontmatter = page?.data as PaginatedProps['frontmatter'];
+
+frontmatter = {
+  ...frontmatter,
+  title: page.data.title,
+  seo: {
+    ...frontmatter.seo,
+    page_title: page.data.title,
+    page_description: frontmatter.seo?.page_description ?? null
+  }
+};
+
+const pagination = Astro.props.page;
+const { data: posts } = pagination;
+const hrefs = page ? await getPageLanguagesAlternates(page, Astro.site) : [];
+const breadcrumbs = [getHomeCrumb(language), getBlogCrumb(language)];
+
+// Collect all tag UUIDs used by posts in this language
+const usedTagIds = new Set<string>();
+posts.forEach((p) => {
+  (p.data.tags ?? []).forEach((id: string) => usedTagIds.add(id));
+});
+
+// Fetch only the tags that are actually used
+const allPostTags = await getCollection(
+  'postTags',
+  (t) => t.data.language === language && usedTagIds.has(t.data.id)
+);
+const tagOptions = allPostTags
+  .map((t) => ({ id: t.data.id, name: t.data.name ?? t.data.title }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+// CollectionPage structured data
+const site = SiteData[language];
+const baseUrl = (Astro.site ?? site.site.url).toString().replace(/\/$/, '');
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': page.data.title,
+  'description': frontmatter.seo?.page_description ?? '',
+  'url': `${baseUrl}${language === 'en' ? '/blog/' : `/${language}/blog/`}`,
+  'isPartOf': {
+    '@type': 'WebSite',
+    '@id': `${baseUrl}/#website`
+  },
+  'mainEntity': {
+    '@type': 'ItemList',
+    'numberOfItems': posts.length,
+    'itemListElement': posts.slice(0, 10).map((post, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'url': `${baseUrl}${getBlogPermalink(post)}`
+    }))
+  }
+};
+---
+
+<PaginatedLayout
+  frontmatter={frontmatter}
+  hrefs={hrefs}
+  breadcrumbs={breadcrumbs}
+>
+  <script
+    is:inline
+    async
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionSchema)}
+  />
+  <section
+    data-blog-filter-container
+    class="blog-index mx-auto flex flex-col justify-center"
+  >
+    <BlogFilterBar
+      language={language}
+      totalCount={posts.length}
+      tags={tagOptions}
+    />
+    <BlogList posts={posts} />
+  </section>
+</PaginatedLayout>

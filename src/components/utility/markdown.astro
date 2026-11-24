@@ -1,9 +1,0 @@
----
-import markdownit from 'markdown-it';
-import Prose from '../typography/prose.astro';
-const md = markdownit({ html: true });
-const { content } = Astro.props;
----
-
-<!-- This is styled in src/styles/_markdown.scss, which also styles the blog markdown text -->
-<Prose class="markdown-text" set:html={md.render(content ?? '')} />

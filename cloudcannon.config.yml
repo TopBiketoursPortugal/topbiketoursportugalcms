@@ -1,4 +1,3 @@
-_schema: _schema
 paths:
   uploads: src/assets/images
   static: ''
@@ -9,8 +8,7 @@ collections_config:
       - '**/*.md*'
     name: Pages
     icon: laptop_mac
-    # /home, /pt/home
-    url: "/[relative_base_path]{path|default:title|prepend:'/'|deburr|slugify|lowercase|trim|strip|replace:'/home',|append:'/'|replace:'//','/'}"
+    url: /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|strip|prepend:'/'|replace:'/home','/'|append:'/'|replace:'//','/'}
     disable_url: false
     description: ''
     _enabled_editors:
@@ -41,15 +39,9 @@ collections_config:
         remove_extra_inputs: false
         name: New Page
         icon: web_asset
-        _enabled_editors:
         create:
           path: '[relative_base_path]/{title|deburr|slugify|lower}.mdx'
-          extra_data:
-          publish_to:
-          _inputs:
-          _select_data:
-          _structures:
-        new_preview_url: "/[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/"
+        new_preview_url: /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/
       paginated:
         path: schemas/paginated.mdx
         reorder_inputs: true
@@ -58,31 +50,55 @@ collections_config:
         remove_extra_inputs: false
         name: Paginated collection
         icon: pages
-        _enabled_editors:
-        create:
-        new_preview_url:
+      page:
+        path: schemas/page.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: Page
+        icon: home
+        new_preview_url: /[relative_base_path]/{path|default:title|deburr|slugify|lowercase|trim|replace:'home',''}/
   blog:
     path: src/content/blog
     glob:
       - '**/*.md*'
     name: Blog
     icon: newspaper
-    url: /[relative_base_path]/blog/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/blog/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     _enabled_editors:
       - content
       - visual
     _inputs:
+      relatedPosts:
+        type: multiselect
+        options:
+          allow_create: false
+          allow_empty: true
+          values: collections.blog
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+          empty_type: array
+        cascade: true
       id:
         type: auto
         instance_value: UUID
         hidden: true
         cascade: true
       title:
-        type: auto
+        type: text
         options:
           empty_type: string
+          required: true
+          required_message: Blog post title is required
         cascade: true
       image:
         type: image
@@ -99,6 +115,8 @@ collections_config:
             uploads: src/assets/images
             static: ''
           empty_type: string
+          required: true
+          required_message: A thumbnail image is required
         cascade: true
       image_alt:
         type: auto
@@ -113,11 +131,18 @@ collections_config:
       tags:
         type: multiselect
         options:
+          allow_empty: true
+          values: collections.postTags
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
           empty_type: array
-          values: data.tags
-        comment: >-
-          To add a new tag, go to the [tags data
-          file](cloudcannon:collections/data/tags.json)
+        comment: To add a new tag, go to the postTags collection
         cascade: true
     add_options:
       - name: Add New Post
@@ -143,11 +168,10 @@ collections_config:
     icon: drive_file_move
     disable_url: false
     description: ''
-    _enabled_editors:
     _inputs:
       icons:
         type: auto
-        comment: >-
+        comment:
           Add an icon from the list of [Font Awesome
           icons](https://fontawesome.com/search?o=r&m=free). Then add it to the
           ```~/components/utility/icon.astro.tsx``` file, following the existing
@@ -163,11 +187,44 @@ collections_config:
     name: Tours
     singular_name: Tour
     icon: directions_bike
-    url: /[relative_base_path]/tours/{title|deburr|slugify|lowercase|trim}/
+    url: /[relative_base_path]/tours/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
-    _enabled_editors:
     _inputs:
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Tour name is required
+        cascade: true
+      code:
+        type: text
+        options:
+          required: true
+          required_message: Tour code is required (e.g. CT 01)
+        cascade: true
+      difficulty:
+        type: range
+        options:
+          min: 1
+          max: 5
+          step: 1
+        comment: Tour difficulty (1 = easy, 5 = hard)
+        cascade: true
+      distance:
+        type: number
+        options:
+          min: 1
+          min_message: Distance must be at least 1 km
+        comment: Tour distance in kilometers
+        cascade: true
+      duration:
+        type: number
+        options:
+          min: 1
+          min_message: Duration must be at least 1 day
+        comment: Tour duration in days
+        cascade: false
       type:
         type: select
         options:
@@ -178,11 +235,99 @@ collections_config:
             - PackageTour
             - WalkingTour
         cascade: true
+      packages:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.tour_packages
+        comment: Pricing table
+        cascade: true
       packages[*].title:
         type: markdown
         cascade: true
       packages[*].description:
         type: markdown
+        cascade: true
+      packages[*].duration:
+        type: text
+        comment: Duration of this package (e.g. "3 days")
+        cascade: true
+      packagesTitle:
+        type: text
+        comment: Optional heading shown above the first pricing table
+        cascade: true
+      packages2:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.tour_packages
+        comment:
+          Seasons table — one column per package (same as the first table), with
+          each season as a row (e.g. Low / Regular / High / Summer)
+        cascade: true
+      packages2Title:
+        type: text
+        comment: Heading for the seasons table (defaults to "Seasonal prices")
+        cascade: true
+      packages2[*].title:
+        type: markdown
+        cascade: true
+      packages2[*].description:
+        type: markdown
+        cascade: true
+      packages2[*].duration:
+        type: text
+        comment: Duration of this package (e.g. "3 days")
+        cascade: true
+      packages3:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.tour_packages
+        comment:
+          Add-ons table — one column per package (same as the first table), with
+          each optional paid extra as a row (e.g. Bike rent, Half-board, Jersey)
+        cascade: true
+      packages3Title:
+        type: text
+        comment: Heading for the add-ons table (defaults to "Add-ons & extras")
+        cascade: true
+      packages3[*].title:
+        type: markdown
+        cascade: true
+      packages3[*].description:
+        type: markdown
+        cascade: true
+      packages3[*].duration:
+        type: text
+        comment: Duration of this package (e.g. "3 days")
+        cascade: true
+      packages[*].included:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.included_features
+        cascade: true
+      packages2[*].included:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.season_features
+        comment: Season rows (e.g. "Low season" → price/supplement)
+        cascade: true
+      packages3[*].included:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.addon_features
+        comment: Add-on rows (e.g. "Bike rent" → "+270€")
+        cascade: true
+      included:
+        type: array
+        options:
+          empty_type: array
+          structures: _structures.included_features
+        comment: Features included in this package
         cascade: true
       included[*].title:
         type: markdown
@@ -190,8 +335,8 @@ collections_config:
       included[*].description:
         type: markdown
         cascade: true
-      reviews[*].title:
-        type: markdown
+      included[*].info:
+        type: text
         cascade: true
       itinerary:
         type: array
@@ -208,14 +353,13 @@ collections_config:
       itinerary[*].location:
         type: object
         options:
-          allow_label_formatting: false
-          place_groups_below: false
           subtype: object
           empty_type: 'null'
           preview:
             text: city
             subtext: countryCode.englishName
             icon: map
+          place_groups_below: false
         cascade: true
       itinerary[*].location.lat:
         type: text
@@ -245,7 +389,6 @@ collections_config:
         type: multiselect
         options:
           allow_empty: true
-          empty_type: array
           values: collections.tours
           value_key: id
           preview:
@@ -255,6 +398,7 @@ collections_config:
               - key: language
             image:
               - key: image.src
+          empty_type: array
         cascade: true
       faqs:
         type: array
@@ -275,9 +419,50 @@ collections_config:
           structures: _structures.images
         cascade: true
       tags:
-        type: array
+        type: multiselect
         options:
-          structures: _structures.tags
+          allow_empty: true
+          values: collections.tourTags
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
+          empty_type: array
+        cascade: true
+      riderLevels:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.tourRiderLevels
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
+          empty_type: array
+        comment:
+          Select rider levels for this tour (Beginner, Intermediate, Advanced)
+        cascade: true
+      bikeCategories:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.bikeCategories
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+          empty_type: array
+        comment: Select bicycle types available for this tour
         cascade: true
       id:
         type: auto
@@ -289,22 +474,89 @@ collections_config:
         options:
           allow_create: false
           allow_empty: true
-          values: data.tour_regions[*]
+          values: collections.tourRegions
           value_key: id
           preview:
             text:
-              - key: en.name
+              - key: name
+            subtext:
+              - key: language
             image:
-              - key: en.src
-        comment: >-
-          To add a new region, go to the [tour_regions data
-          file](cloudcannon:collections/data/tour_regions.json)
+              - key: seo.featured_image
+        comment: To add a new region, go to the tour regions collection
+        cascade: true
+      additionalRegions:
+        type: multiselect
+        options:
+          allow_empty: true
+          values: collections.tourRegions
+          value_key: id
+          preview:
+            text:
+              - key: name
+            subtext:
+              - key: language
+            image:
+              - key: seo.featured_image
+          empty_type: array
+        comment:
+          Other regions this tour cycles through. The tour is listed on these
+          region pages too, but keeps the region above as its primary one for
+          the breadcrumb. Only add a region the tour actually rides in - not one
+          it is only transferred through.
         cascade: true
       content:
         type: markdown
         cascade: true
+      cardSummary:
+        type: text
+        options:
+          max_length: 160
+        comment:
+          One line describing this tour, shown on the tour card in every list it
+          appears in. Leave it empty and the card shows the start of the tour
+          text instead, which repeats the same paragraph across several pages.
+        cascade: true
       afterPricing:
         type: markdown
+        cascade: true
+      closestAirport:
+        type: text
+        cascade: true
+      isNewTour:
+        type: checkbox
+        comment:
+          Mark this tour as new to display a green "NEW" badge over the tour
+          image
+        cascade: true
+      wetravel:
+        type: object
+        options:
+          preview:
+            text:
+              - WeTravel booking
+            subtext:
+              - Set the trip UUIDs that power the Book Now buttons
+            icon: event_available
+        comment:
+          Controls the "Book Now" buttons on this tour. Set the guided and/or
+          self-guided trip UUID (the value after ?uuid= in the WeTravel checkout
+          URL). Leave both empty to fall back to the enquiry form.
+        cascade: true
+      wetravel.guidedUuid:
+        type: text
+        label: Guided trip UUID
+        comment: UUID for the guided / group-departure WeTravel trip (optional).
+        cascade: true
+      wetravel.selfGuidedUuid:
+        type: text
+        label: Self-guided trip UUID
+        comment: UUID for the self-guided WeTravel trip (optional).
+        cascade: true
+      wetravel.uid:
+        type: text
+        label: WeTravel Account ID
+        comment: Usually 2317568 — leave as-is unless told otherwise.
         cascade: true
     add_options:
       - name: New Tour English
@@ -317,9 +569,28 @@ collections_config:
         editor: visual
         base_path: /pt/
         schema: defaultPT
+      - name: New Tour German
+        icon: language
+        editor: visual
+        base_path: /de/
+        schema: defaultDE
+      - name: New Tour Spanish
+        icon: language
+        editor: visual
+        base_path: /es/
+        schema: defaultES
+      - name: New Tour French
+        icon: language
+        editor: visual
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Tour Dutch
+        icon: language
+        editor: visual
+        base_path: /nl/
+        schema: defaultNL
     create:
       path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
-
     disable_add: false
     disable_add_folder: true
     disable_file_actions: true
@@ -340,14 +611,148 @@ collections_config:
         remove_extra_inputs: true
         name: New tour
         icon: notes
+      defaultDE:
+        path: schemas/de/tour.mdx
+        reorder_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+      defaultES:
+        path: schemas/es/tour.mdx
+        reorder_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+      defaultFR:
+        path: schemas/fr/tour.mdx
+        reorder_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+      defaultNL:
+        path: schemas/nl/tour.mdx
+        reorder_inputs: true
+        hide_extra_inputs: true
+        remove_empty_inputs: true
+        remove_extra_inputs: true
+        name: New tour
+        icon: notes
+  testimonials:
+    path: src/content/testimonials
+    glob:
+      - '**/*.md*'
+    name: Testimonials
+    singular_name: Testimonial
+    icon: notes
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - template: '{language} - {author.country} - {author.name}'
+    _enabled_editors:
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Testimonial title is required
+        cascade: true
+      quote:
+        type: markdown
+        options:
+          required: true
+          required_message: Review quote text is required
+        cascade: true
+      reviewSource:
+        type: url
+        options:
+          hide_link_to_file: true
+          hide_link_to_page: true
+          hide_link_to_email_address: true
+        cascade: true
+      score:
+        type: number
+        options:
+          min: 1
+          max: 5
+        cascade: true
+      author.avatar:
+        type: image
+        cascade: true
+      relatedProduct:
+        type: select
+        options:
+          allow_empty: true
+          values: collections.tours
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+            image:
+              - key: image.src
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        cascade: true
+    add_options:
+      - name: New Testimonial
+        icon: language
+        editor: content
+        base_path: ''
+        schema: default
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase|trim}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/testimonial.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Testimonial
+        icon: chat
   team:
     path: src/content/team
     glob:
       - '**/*.md*'
     name: Team
     singular_name: Team member
-    icon: people
-    url: /[relative_base_path]/team/{title|deburr|slugify|lowercase|trim}/
+    icon: groups
+    url: /[relative_base_path]/team/{path|default:title|deburr|slugify|lowercase|trim}/
     disable_url: false
     description: ''
     preview:
@@ -365,8 +770,30 @@ collections_config:
         instance_value: UUID
         hidden: true
         cascade: true
-      language:
+      title:
         type: text
+        options:
+          required: true
+          required_message: Team member name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
         hidden: true
         cascade: true
       subTitle:
@@ -381,22 +808,9 @@ collections_config:
               key: Owner
           value_key: code
         cascade: true
-    add_options:
-      - name: New Team Member English
-        icon: language
-        editor: visual
-        base_path: ''
-        schema: default
-      - name: New Team Member Portuguese
-        icon: language
-        editor: visual
-        base_path: /pt/
-        schema: defaultPT
-    create:
-      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
     disable_add: false
-    disable_add_folder: true
-    disable_file_actions: true
+    disable_add_folder: false
+    disable_file_actions: false
     schemas:
       default:
         path: schemas/team-member.mdx
@@ -404,31 +818,1033 @@ collections_config:
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NewTeamMember
-        icon: people
-      defaultPT:
-        path: schemas/pt/team-member.mdx
+        name: New Team Member
+        icon: person
+  tourRegions:
+    path: src/content/tour-regions
+    glob:
+      - '**/*.md*'
+    name: Tour Regions
+    singular_name: Tour Region
+    icon: location_on
+    url: /[relative_base_path]/tours/regions/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Region name is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Region display name is required
+        cascade: true
+      link_text:
+        type: text
+        comment: >-
+          Anchor text for the cards that link to this region from the homepage.
+          Leave blank to use the display name. Set it to the phrase the page
+          should rank for ("Porto bike tours") rather than the short label.
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Tour Region English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+      - name: New Tour Region Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Tour Region German
+        icon: language
+        editor: visual
+        base_path: /de/
+        schema: defaultDE
+      - name: New Tour Region Spanish
+        icon: language
+        editor: visual
+        base_path: /es/
+        schema: defaultES
+      - name: New Tour Region French
+        icon: language
+        editor: visual
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Tour Region Dutch
+        icon: language
+        editor: visual
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour-region.mdx
         reorder_inputs: true
         hide_extra_inputs: false
         remove_empty_inputs: false
         remove_extra_inputs: false
-        name: NovoMembro
-        icon: people
+        name: New Tour Region
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
+        icon: pedal_bike
+      defaultDE:
+        path: schemas/de/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
+        icon: pedal_bike
+      defaultES:
+        path: schemas/es/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
+        icon: pedal_bike
+      defaultFR:
+        path: schemas/fr/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
+        icon: pedal_bike
+      defaultNL:
+        path: schemas/nl/tour-region.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Region
+        icon: pedal_bike
+  tourTags:
+    path: src/content/tour-tags
+    glob:
+      - '**/*.md*'
+    name: Tour Tags
+    singular_name: Tour Tag
+    icon: tag
+    url: /[relative_base_path]/tours/tags/{path|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Tag title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Tag display name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Wine
+              value: ph--wine-light
+            - name: Gastronomy (Fork & Knife)
+              value: ph--fork-knife-light
+            - name: Cultural & Heritage (Bank)
+              value: ph--bank-light
+            - name: Coastal (Waves)
+              value: ph--waves-light
+            - name: Pilgrimage (Church)
+              value: ph--church-light
+            - name: Nature (Tree)
+              value: ph--tree-light
+            - name: City Tours (Buildings)
+              value: ph--buildings-light
+            - name: Mountain (Mountains)
+              value: ph--mountains-light
+            - name: Families (Users)
+              value: ph--users-light
+        cascade: true
+    add_options:
+      - name: New Tour Tag English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+      - name: New Tour Tag Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Tour Tag German
+        icon: language
+        editor: visual
+        base_path: /de/
+        schema: defaultDE
+      - name: New Tour Tag Spanish
+        icon: language
+        editor: visual
+        base_path: /es/
+        schema: defaultES
+      - name: New Tour Tag French
+        icon: language
+        editor: visual
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Tour Tag Dutch
+        icon: language
+        editor: visual
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultDE:
+        path: schemas/de/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultES:
+        path: schemas/es/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultFR:
+        path: schemas/fr/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+      defaultNL:
+        path: schemas/nl/tour-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Tour Tag
+        icon: pedal_bike
+  tourRiderLevels:
+    path: src/content/tour-rider-levels
+    glob:
+      - '**/*.md*'
+    name: Tour Rider Levels
+    singular_name: Tour Rider Level
+    icon: fitness_center
+    url: /[relative_base_path]/tours/rider-levels/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Rider level title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Rider level display name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Beginner (Baby)
+              value: ph--baby-light
+            - name: Intermediate (Cyclist)
+              value: ph--person-simple-bike-light
+            - name: Advanced (Trophy)
+              value: ph--trophy-light
+        cascade: true
+    add_options:
+      - name: New Rider Level English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: riderLevel
+      - name: New Rider Level Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: riderLevelPT
+      - name: New Rider Level German
+        icon: language
+        editor: visual
+        base_path: /de/
+        schema: riderLevelDE
+      - name: New Rider Level Spanish
+        icon: language
+        editor: visual
+        base_path: /es/
+        schema: riderLevelES
+      - name: New Rider Level French
+        icon: language
+        editor: visual
+        base_path: /fr/
+        schema: riderLevelFR
+      - name: New Rider Level Dutch
+        icon: language
+        editor: visual
+        base_path: /nl/
+        schema: riderLevelNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      riderLevel:
+        path: schemas/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      riderLevelPT:
+        path: schemas/pt/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      riderLevelDE:
+        path: schemas/de/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      riderLevelES:
+        path: schemas/es/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      riderLevelFR:
+        path: schemas/fr/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+      riderLevelNL:
+        path: schemas/nl/tour-rider-level.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Rider Level
+        icon: fitness_center
+  bikeCategories:
+    path: src/content/bike-categories
+    glob:
+      - '**/*.md*'
+    name: Bike Categories
+    singular_name: Bike Category
+    icon: pedal_bike
+    disable_url: false
+    preview:
+      text:
+        - key: title
+    _enabled_editors:
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Bike category name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      icon:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: true
+          values:
+            - name: Touring (Bicycle)
+              value: ph--bicycle-light
+            - name: Mountain (Mountains)
+              value: ph--mountains-light
+            - name: E-Bike (Lightning)
+              value: ph--lightning-light
+            - name: Road (Road Horizon)
+              value: ph--road-horizon-light
+            - name: Gravel (Path)
+              value: ph--path-light
+        cascade: true
+    add_options:
+      - name: New Bike Category English
+        icon: language
+        editor: data
+        base_path: ''
+        schema: default
+      - name: New Bike Category Portuguese
+        icon: language
+        editor: data
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Bike Category German
+        icon: language
+        editor: data
+        base_path: /de/
+        schema: defaultDE
+      - name: New Bike Category Spanish
+        icon: language
+        editor: data
+        base_path: /es/
+        schema: defaultES
+      - name: New Bike Category French
+        icon: language
+        editor: data
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Bike Category Dutch
+        icon: language
+        editor: data
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultPT:
+        path: schemas/pt/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultDE:
+        path: schemas/de/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultES:
+        path: schemas/es/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultFR:
+        path: schemas/fr/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+      defaultNL:
+        path: schemas/nl/bike-category.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike Category
+        icon: pedal_bike
+  bikes:
+    path: src/content/bikes
+    glob:
+      - '**/*.md*'
+    name: Bikes
+    singular_name: Bike
+    icon: directions_bike
+    disable_url: true
+    preview:
+      text:
+        - key: title
+      subtext:
+        - key: brand
+      image:
+        - key: image.src
+    _enabled_editors:
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Bike model name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+      category:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values: collections.bikeCategories
+          value_key: id
+          preview:
+            text:
+              - key: title
+            subtext:
+              - key: language
+          required: true
+          required_message: Bike category is required
+        comment: Select the bike category
+        cascade: true
+      specs:
+        type: markdown
+        cascade: true
+      infoUrl:
+        type: url
+        cascade: true
+      order:
+        type: number
+        comment: Display order within the category (lower = first)
+        cascade: true
+    add_options:
+      - name: New Bike English
+        icon: language
+        editor: data
+        base_path: ''
+        schema: default
+      - name: New Bike Portuguese
+        icon: language
+        editor: data
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Bike German
+        icon: language
+        editor: data
+        base_path: /de/
+        schema: defaultDE
+      - name: New Bike Spanish
+        icon: language
+        editor: data
+        base_path: /es/
+        schema: defaultES
+      - name: New Bike French
+        icon: language
+        editor: data
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Bike Dutch
+        icon: language
+        editor: data
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultPT:
+        path: schemas/pt/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultDE:
+        path: schemas/de/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultES:
+        path: schemas/es/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultFR:
+        path: schemas/fr/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+      defaultNL:
+        path: schemas/nl/bike.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Bike
+        icon: directions_bike
+  postTags:
+    path: src/content/blog-tags
+    glob:
+      - '**/*.md*'
+    name: Post Tags
+    singular_name: Post Tag
+    icon: tag
+    url: /[relative_base_path]/blog/tags/{path|default:name|default:title|deburr|slugify|lowercase|trim}/
+    disable_url: false
+    description: ''
+    preview:
+      text:
+        - key: title
+      image:
+        - key: seo.featured_image
+    _enabled_editors:
+      - visual
+      - data
+      - content
+    _inputs:
+      id:
+        type: auto
+        instance_value: UUID
+        hidden: true
+        cascade: true
+      title:
+        type: text
+        options:
+          required: true
+          required_message: Post tag title is required
+        cascade: true
+      name:
+        type: text
+        options:
+          required: true
+          required_message: Post tag display name is required
+        cascade: true
+      language:
+        type: select
+        options:
+          allow_create: false
+          allow_empty: false
+          values:
+            - name: Portuguese
+              value: pt
+            - name: German
+              value: de
+            - name: Spanish
+              value: es
+            - name: French
+              value: fr
+            - name: Dutch
+              value: nl
+            - name: English
+              value: en
+        hidden: true
+        cascade: true
+    add_options:
+      - name: New Post Tag English
+        icon: language
+        editor: visual
+        base_path: ''
+        schema: default
+      - name: New Post Tag Portuguese
+        icon: language
+        editor: visual
+        base_path: /pt/
+        schema: defaultPT
+      - name: New Post Tag German
+        icon: language
+        editor: visual
+        base_path: /de/
+        schema: defaultDE
+      - name: New Post Tag Spanish
+        icon: language
+        editor: visual
+        base_path: /es/
+        schema: defaultES
+      - name: New Post Tag French
+        icon: language
+        editor: visual
+        base_path: /fr/
+        schema: defaultFR
+      - name: New Post Tag Dutch
+        icon: language
+        editor: visual
+        base_path: /nl/
+        schema: defaultNL
+    create:
+      path: '[relative_base_path]/{title|deburr|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: true
+    disable_file_actions: true
+    schemas:
+      default:
+        path: schemas/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
+      defaultPT:
+        path: schemas/pt/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
+      defaultDE:
+        path: schemas/de/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
+      defaultES:
+        path: schemas/es/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
+      defaultFR:
+        path: schemas/fr/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
+      defaultNL:
+        path: schemas/nl/post-tag.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Post Tag
+        icon: newspaper
 collection_groups:
   - heading: Pages
     collections:
       - pages
       - blog
+      - postTags
       - tours
+      - tourRegions
+      - tourTags
+      - tourRiderLevels
+      - bikeCategories
+      - bikes
       - team
+      - testimonials
   - heading: Data
     collections:
       - data
 _inputs:
+  background_color:
+    type: select
+    options:
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+    hidden: border_only
+    cascade: true
+  color:
+    type: select
+    options:
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+    cascade: true
+  text_color:
+    type: select
+    options:
+      allow_empty: true
+      values: data.colors
+      value_key: value
+      preview:
+        text:
+          - key: name
+    cascade: true
+  heading_gradient_color:
+    type: select
+    options:
+      allow_empty: false
+      values:
+        - label: Accent - Orange
+          value: accent-9
+        - label: Legacy - Orange (#FF785A)
+          value: '#FF785A'
+    comment: Gradient color for headings
+    cascade: true
+  tourtype:
+    type: select
+    options:
+      allow_empty: true
+      values:
+        - PackageTour
+        - DayTour
+        - WalkingTour
+    cascade: true
+  feature_testimonials:
+    type: multiselect
+    options:
+      allow_empty: true
+      values: collections.testimonials
+      value_key: id
+      preview:
+        text:
+          - key: title
+        subtext:
+          - key: language
+        icon: chat
+      empty_type: array
+    cascade: true
+  feature_tours:
+    type: multiselect
+    options:
+      allow_empty: true
+      values:
+        - collections.tours
+      value_key: id
+      preview:
+        text:
+          - key: title
+        icon: chat
+        image:
+          - key: image.src
+      empty_type: array
+    cascade: true
   path:
     type: text
     label: Url
     comment: Set this only with lower case and '-'
+    cascade: true
   template:
     type: auto
     hidden: true
@@ -466,10 +1882,10 @@ _inputs:
         - image/png
         - image/jpeg
         - image/webp
-      empty_type: 'null'
       resize_style: contain
       expandable: false
       prevent_resize_existing_files: true
+      empty_type: 'null'
     cascade: true
   memberType:
     type: select
@@ -491,15 +1907,24 @@ _inputs:
           code: en
         - name: Portuguese
           code: pt
+        - name: German
+          code: de
+        - name: Spanish
+          code: es
+        - name: French
+          code: fr
+        - name: Dutch
+          code: nl
       value_key: code
     hidden: true
     cascade: true
   feature_list:
     type: multiselect
     options:
-      empty_type: array
+      allow_empty: true
       values: collections.blog
       value_key: id
+      empty_type: array
     cascade: true
   main_feature:
     type: select
@@ -555,37 +1980,6 @@ _inputs:
     cascade: true
   height:
     type: number
-    cascade: true
-  background_color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
-    hidden: border_only
-    cascade: true
-  text_color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
-    cascade: true
-  color:
-    type: select
-    options:
-      allow_empty: true
-      values: data.colors
-      value_key: value
-      preview:
-        text:
-          - key: name
     cascade: true
   icon:
     type: select
@@ -681,20 +2075,40 @@ _inputs:
     comment: Automatically prefixed with the current year
     cascade: true
   page_title:
-    type: auto
-    comment: Defaults to the description set in the Site SEO data file
+    type: text
+    comment: Recommended 50–60 characters for optimal search engine display
+    options:
+      required: true
+      required_message: A page title is required for SEO
+      max_length: 70
+      max_length_message: Keep under 70 characters for search results
     cascade: true
   page_description:
-    type: auto
-    comment: Defaults to the description set in the Site SEO data file
+    type: textarea
+    comment: Recommended 150–160 characters for search engine snippets
+    options:
+      required: true
+      required_message: A meta description is required for SEO
+      max_length: 160
+      max_length_message: Keep under 160 characters for search snippets
     cascade: true
   canonical_url:
     type: auto
     comment: Defaults to the pages url
     cascade: true
   featured_image:
-    type: auto
+    type: image
     comment: Defaults to the image set in the Site SEO data file
+    options:
+      paths:
+        uploads: src/assets/images
+    cascade: true
+  featured_image_alt:
+    type: text
+    comment: Describe the image for accessibility (max 125 characters)
+    options:
+      max_length: 125
+      max_length_message: Alt text should be under 125 characters
     cascade: true
   open_graph_type:
     type: select
@@ -715,15 +2129,85 @@ _inputs:
     cascade: true
   no_index:
     type: checkbox
-    comment: >-
+    comment:
       When selected this removes the page from your sitemap and adds the noindex
       robots meta tag
     cascade: true
+  enter:
+    type: select
+    label: Entrance animation
+    options:
+      allow_empty: true
+      values:
+        - label: Slide up
+          value: slide-up
+        - label: Fade
+          value: fade
+        - label: Slide left
+          value: slide-left
+        - label: Slide right
+          value: slide-right
+        - label: Zoom
+          value: zoom
+        - label: Wipe
+          value: wipe
+        - label: Blur
+          value: blur
+        - label: None (disable this block's animations)
+          value: none
+      value_key: value
+    comment:
+      How this block animates into view. Leave empty for the smart default
+      (gentle slide-up for most blocks); 'none' also silences inner reveals.
+    cascade: true
+  surface:
+    type: select
+    label: Background surface
+    options:
+      allow_empty: true
+      values:
+        - label: Sand (cream)
+          value: sand
+        - label: Soft
+          value: soft
+        - label: Forest (dark green)
+          value: forest
+        - label: White
+          value: white
+      value_key: value
+    comment:
+      Optional full-width background band behind this block. Leave empty for the
+      default page background. Forest flips inner text to light automatically.
+    cascade: true
+  bleed:
+    type: switch
+    label: Full-width background
+    comment:
+      Let the background span the full viewport width. Defaults to on when a
+      surface is set, off otherwise.
+    cascade: true
+  content_blocks:
+    type: array
+    comment: The content blocks that make up this page.
+    options:
+      structures: _structures.content_blocks
+  content_blocks_after:
+    type: array
+    comment: Content blocks rendered after the page body.
+    options:
+      structures: _structures.content_blocks
 _structures:
+  relatedPosts:
+    style: select
+    values:
+      - icon: newspaper
+        label: Related post
+        value:
+          id: ''
   itinerary_stage:
     style: select
     values:
-      - icon: place
+      - icon: location_on
         label: Itinerary stage
         value:
           title: ''
@@ -734,6 +2218,84 @@ _structures:
             country: pt
             region: ''
             city: ''
+  tour_packages:
+    style: select
+    values:
+      - label: Tour Package
+        icon: card_travel
+        value:
+          title: ''
+          description: ''
+          duration: ''
+          popular: false
+          price:
+            price: 0
+            promo: 0
+            currency: EUR
+            bestValue: false
+          included: []
+        _inputs:
+          duration:
+            type: text
+            comment: Duration of this package (e.g. "3 days")
+          included:
+            type: array
+            options:
+              empty_type: array
+              structures: _structures.included_features
+        preview:
+          text:
+            - key: title
+  included_features:
+    style: select
+    values:
+      - label: Included feature
+        icon: check
+        value:
+          title: ''
+          description: ''
+          included: true
+          info: ''
+        preview:
+          text:
+            - key: title
+  season_features:
+    style: select
+    values:
+      - label: Season row
+        icon: calendar_month
+        value:
+          title: ''
+          description: ''
+          included: true
+          info: ''
+        _inputs:
+          title:
+            comment: Season name (e.g. "Low season", "High Season")
+          comment:
+            comment:
+              Price or supplement for this season (e.g. "1.608€", "+360€")
+        preview:
+          text:
+            - key: title
+  addon_features:
+    style: select
+    values:
+      - label: Add-on row
+        icon: add_shopping_cart
+        value:
+          title: ''
+          description: ''
+          included: false
+          info: ''
+        _inputs:
+          title:
+            comment: Add-on name (e.g. "Bike rent", "Half-board")
+          comment:
+            comment: Price for this add-on (e.g. "+270€", "extra 350€")
+        preview:
+          text:
+            - key: title
   tags:
     style: select
     values:
@@ -761,23 +2323,17 @@ _structures:
   reviews:
     values:
       - label: Review
-        icon: message
+        icon: chat
         value:
           title: ''
           rating: 5
           author:
-            givenName: John
-            familyName: Doe
+            givenName: ''
+            familyName: ''
             country: Portugal
-          datePublished: 2023-10-15T00:00:00Z
-          content: >-
-            These headphones are fantastic! The noise cancellation works
-            perfectly, and the sound quality is top-notch. Highly recommend them
-            for anyone looking for a premium audio experience.
         preview:
           text:
-            - key: question
-    style: select
+            - key: title
     reorder_inputs: true
     remove_empty_inputs: true
     hide_extra_inputs: true
@@ -894,7 +2450,6 @@ _snippets:
     template: mdx_component
     inline: false
     preview:
-      view: gallery
       icon: image
       text: Astro Image
       subtext:
@@ -1093,9 +2648,7 @@ file_config:
         values:
           - preview:
               icon: palette
-            value:
-              name:
-              value:
+            value: {}
   - glob: data/tags.json
     _inputs:
       $:
@@ -1115,17 +2668,15 @@ data_config:
     path: data/colors.json
   tags:
     path: data/tags.json
-  tour_regions:
-    path: data/tour_regions.json
-timezone: Europe/Lisbon
+editor:
+  default_path: ''
+timezone: Etc/UTC
 markdown:
-  engine:
   options:
     xhtml: true
     breaks: true
-    linkify: false
-    typographer: false
-    quotes:
+    linkify: true
+    typographer: true
     spaced_lists: false
     sentence_per_line: false
     gfm: false
@@ -1138,4 +2689,5 @@ markdown:
     superscript: false
     heading_ids: false
     attributes: false
-    attribute_elements:
+_structures_from_glob:
+  - /.cloudcannon/structures/*.cloudcannon.structures.yml

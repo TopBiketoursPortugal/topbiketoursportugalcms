@@ -1,0 +1,14 @@
+---
+import { cn } from 'utils/cn';
+import ResponsiveImage, {
+  type ResponsiveImageProps
+} from '../responsive-image/ResponsiveImage.astro';
+
+type Props = ResponsiveImageProps & { class?: string };
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div class="bg-primary parallax-media overflow-clip">
+  <ResponsiveImage {...props} class={cn('aspect-video h-full', className)} />
+</div>

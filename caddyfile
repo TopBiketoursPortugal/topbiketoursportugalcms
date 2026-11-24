@@ -1,0 +1,126 @@
+# Redirect ALL HTTP traffic to HTTPS
+http://localhost {
+	redir https://localhost{uri} permanent
+}
+
+https://localhost {
+	root * ./dist
+	encode zstd gzip
+
+	# Serve files
+	file_server
+
+	# -------------------------
+	#  TLS Configuration
+	# -------------------------
+	tls {
+		protocols tls1.2 tls1.3
+		# cipher_suites TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	}
+
+	# -------------------------
+	#  Security Headers
+	# -------------------------
+	header {
+		# Content Security Policy (adjust as needed)
+		# Content-Security-Policy "
+		#     default-src 'self';
+
+		#     script-src
+		#         'self'
+		#         'nonce-{nonce}'
+		#         'strict-dynamic'
+		#         https://www.googletagmanager.com
+		#         https://www.google-analytics.com
+		#         https://www.googletagservices.com
+		#         https://www.gstatic.com
+		#         https://cdn.jsdelivr.net
+		#         https://unpkg.com;
+
+		#     script-src-elem
+		#         'self'
+		#         'nonce-{nonce}'
+		#         'strict-dynamic'
+		#         https://www.googletagmanager.com
+		#         https://www.google-analytics.com
+		#         https://www.googletagservices.com
+		#         https://www.gstatic.com;
+
+		#     style-src
+		#         'self'
+		#         'unsafe-inline';  # Astro inline styles + cookieconsent
+
+		#     img-src
+		#         'self'
+		#         data:
+		#         blob:
+		#         https:;
+
+		#     font-src
+		#         'self'
+		#         data:
+		#         https:;
+
+		#     connect-src
+		#         'self'
+		#         https://www.google-analytics.com
+		#         https://www.googletagmanager.com;
+
+		#     manifest-src 'self';
+		#     media-src 'self';
+		#     object-src 'none';
+		#     base-uri 'self';
+		#     frame-ancestors 'none';
+
+		#     worker-src 'self' blob:;
+
+		#     frame-src
+		#         https://www.googletagmanager.com
+		#         https://www.youtube.com
+		#         https://www.youtube-nocookie.com;
+
+		#     prefetch-src 'self';
+		# "
+
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		X-Frame-Options "DENY"
+
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Embedder-Policy "require-corp"
+		Cross-Origin-Resource-Policy "same-origin"
+
+		Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+		-Server
+	}
+
+	# ---------------------------------
+	#  Caching Strategy
+	# ---------------------------------
+	@staticFiles {
+		path *.css *.js *.woff *.woff2 *.ttf *.png *.jpg *.jpeg *.gif *.svg *.webp *.avif *.ico *.json *.map
+	}
+	header @staticFiles {
+		Cache-Control "public, max-age=31536000, immutable"
+	}
+
+	@html {
+		path *.html
+	}
+	header @html {
+		Cache-Control "public, max-age=60"
+	}
+
+	header {
+		Cache-Control "public, max-age=300"
+	}
+
+	# -------------------------
+	# Logging (optional)
+	# -------------------------
+	log {
+		output file /var/log/caddy/access.log
+		format json
+	}
+}

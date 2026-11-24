@@ -5,7 +5,7 @@ import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 export type IconNames = (typeof Icons)[number];
 
 export type VisuallyEditable = {
-  'bookshop:live'?: boolean;
+  ''?: boolean;
 };
 
 export type Image = {
@@ -134,4 +134,28 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+}
+
+// --- Types used by the imported CloudCannon starter components ---
+
+export interface ContentBlock {
+  _component: string;
+  [key: string]: unknown;
+}
+
+export interface SegmentOption {
+  value: string;
+  label?: string;
+  checked?: boolean;
+  icon?: string;
+}
+
+export interface ContentSelectorItem {
+  title?: string;
+  subtext?: string;
+  iconName?: string;
+  iconColor?: string;
+  contentSections?: ContentBlock[];
+  _component?: string;
+  [key: string]: unknown;
 }

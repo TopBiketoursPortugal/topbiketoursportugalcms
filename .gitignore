@@ -27,3 +27,15 @@ ca.crt
 ca.key
 cert.crt
 dev-dist
+docker/scrapped/
+nul
+skills
+.claude/
+.claude/settings.local.json
+DataForSeo/
+.gitignore
+google-cloud-sdk/
+# SEO audit output — kept locally for reference, not tracked (see DataForSeo/).
+topbiketoursportugal.com-audit/
+mobile-app/.expo
+mobile-app/android

@@ -1,10 +1,12 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { seoSchema } from './seo';
-import { glob } from 'astro/loaders';
+import { languageSchema } from './language';
+import { publishedGlob } from 'src/schemas/published-glob';
 
 const teamMemberSchema = z.object({
   id: z.string().uuid(),
-  language: z.enum(['en', 'pt']),
+  language: languageSchema,
   title: z.string(),
   memberType: z.string().optional(),
   path: z.string().optional().nullable(),
@@ -24,6 +26,9 @@ const teamMemberSchema = z.object({
 export type TeamMemberSchema = z.infer<typeof teamMemberSchema>;
 
 export const teamCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/team' }),
+  loader: publishedGlob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/team'
+  }),
   schema: teamMemberSchema
 });

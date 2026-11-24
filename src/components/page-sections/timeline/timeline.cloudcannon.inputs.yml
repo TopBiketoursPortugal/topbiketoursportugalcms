@@ -1,0 +1,29 @@
+padding:
+  options:
+    values:
+      - tight
+      - normal
+      - loose
+    preview:
+      icon: short_text
+      text:
+        - key: style.padding
+container:
+  options:
+    values:
+      - full
+      - centered
+    preview:
+      icon: short_text
+      text:
+        - key: style.container
+dates:
+  type: array
+dates[*].date:
+  type: date
+dates[*].title:
+  type: markdown
+dates[*].subtitle:
+  type: markdown
+dates[*].description:
+  type: markdown

@@ -1,7 +1,8 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 
 import { languageSchema } from './language';
-import { glob } from 'astro/loaders';
+import { publishedGlob } from 'src/schemas/published-glob';
 import { seoSchema } from './seo';
 
 // Schema for individual image objects
@@ -49,7 +50,7 @@ const tourPackageSchema = z.object({
   description: z.string().optional(),
   price: priceSchema,
   popular: z.boolean().default(false),
-  duration: z.string().default(''),
+  duration: z.coerce.string().default(''),
   included: z
     .array(
       z.object({
@@ -69,6 +70,7 @@ const groupSizeSchema = z.object({
 });
 
 const reviewSchema = z.object({
+  id: z.string().uuid().optional().nullable(),
   author: z
     .object({
       familyName: z.string().optional().nullable(),
@@ -98,6 +100,24 @@ const faqsSchema = z.object({
   answer: z.string()
 });
 
+const featureSchema = z.object({
+  // align: z.enum(['center', 'left', 'right']).optional().default('center'),
+  // imageAlign: z
+  //   .string()
+  //   .regex(/^(center|left|right) (center|top|bottom)$/)
+  //   .optional()
+  //   .default('center center'),
+  bokunLink: z.string().url().optional().nullable(),
+  bokunId: z.string().optional(),
+  textcolor: z.enum(['white', 'black', 'custom']).optional().default('white'),
+  subtitle: z.string().optional(),
+  title: z.string(),
+  image: z.string().refine((val) => val.startsWith('/src/assets/images/'), {
+    message: "Image path must start with '/src/assets/images/'"
+  }),
+  bokunLinkText: z.string().optional().default('Book now')
+});
+
 // Main schema for the "tours" collection
 const tourSchema = z.object({
   code: z.string(),
@@ -110,15 +130,36 @@ const tourSchema = z.object({
   image: imageSchema.nullable().optional(),
   order: z.number().optional(),
   description: z.string().optional(),
+  // One line written for the tour card, used wherever the card is listed. Left
+  // empty the card falls back to the opening of `content`, which is how the
+  // same paragraph ended up as the dominant text on a region page, a day-tour
+  // page, a tag page and a bike-type page simultaneously.
+  cardSummary: z.string().max(160).optional(),
   afterPricing: z.string().optional().nullable(),
+  packagesTitle: z.string().optional().nullable(),
+  packages2: z.array(tourPackageSchema).optional().nullable(),
+  packages2Title: z.string().optional().nullable(),
+  packages3: z.array(tourPackageSchema).optional().nullable(),
+  packages3Title: z.string().optional().nullable(),
   region: z.string().optional().default(''),
+  // Further regions this tour cycles through, beyond `region`. `region` stays
+  // the primary one and keeps owning the breadcrumb, the card label and
+  // related-tour scoring, so those stay unambiguous. A point-to-point tour
+  // belongs on both endpoint region pages: Porto to Lisbon was filed under
+  // Porto/North only, so `/tours/regions/lisbon/` — the page meant to hold
+  // "bike tours lisbon portugal" — never listed the one tour with Lisbon in
+  // its name. Transfers do not count; a tour that is met at Lisbon airport and
+  // driven to the Alentejo does not cycle in Lisbon.
+  additionalRegions: z.array(z.string().uuid()).optional().default([]),
   template: z.string().optional().default('Layout.astro'),
   images: z.array(imageSchema).optional().nullable(),
   itinerary: z.array(itinerarySchema).optional(),
   packages: z.array(tourPackageSchema).optional(),
   seo: seoSchema.optional(),
-  tags: z.array(z.string()).optional().nullable(),
-  duration: z.number().optional().nullable(),
+  tags: z.array(z.string().uuid()).optional().default([]),
+  riderLevels: z.array(z.string().uuid()).optional().default([]),
+  bikeCategories: z.array(z.string().uuid()).optional().default([]),
+  duration: z.coerce.string().optional().nullable(),
   distance: z.number().optional(),
   difficulty: z.number().min(1).max(5).optional(),
   skill: z.number().min(1).max(5).optional(),
@@ -133,13 +174,27 @@ const tourSchema = z.object({
     .default('PackageTour'),
   reviews: z.array(reviewSchema).optional().default([]),
   faqs: z.array(faqsSchema).optional().default([]),
-  relatedTours: z.array(z.string().uuid()).optional().default([])
+  relatedTours: z.array(z.string().uuid()).optional().default([]),
+  feature: featureSchema.optional().nullable(),
+  wetravel: z
+    .object({
+      uid: z.string().optional().default('2317568'),
+      guidedUuid: z.string().optional().nullable(),
+      selfGuidedUuid: z.string().optional().nullable()
+    })
+    .optional()
+    .nullable(),
+  closestAirport: z.string().optional().nullable(),
+  isNewTour: z.boolean().optional().nullable().default(false)
 });
 
 export type TourSchema = z.infer<typeof tourSchema>;
 export type TourPackageSchema = z.infer<typeof tourPackageSchema>;
 export type ReviewSchema = z.infer<typeof reviewSchema>;
 export const tourCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md(x)?', base: './src/content/tours' }),
+  loader: publishedGlob({
+    pattern: '**/*.md(x)?',
+    base: './src/content/tours'
+  }),
   schema: tourSchema
 });

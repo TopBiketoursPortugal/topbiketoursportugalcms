@@ -3,6 +3,8 @@
 /// <reference types="vite-plugin-pwa/client" />
 /// <reference types="vite-plugin-pwa/info" />
 /// <reference types="vite-plugin-pwa/vanillajs" />
+/// <reference types="@vite-pwa/assets-generator/virtual" />
+/// <reference types="vite-plugin-pwa/pwa-assets" />
 
 declare module '@bookshop/astro-bookshop' {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -12,7 +14,11 @@ declare module '@bookshop/astro-bookshop' {
 
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dataLayer: Record<string, any>[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     gtag: (...args: any[]) => void;
+    // Set by CloudCannon's editor bundle when the Visual Editor is active.
+    inEditorMode?: boolean;
   }
 }

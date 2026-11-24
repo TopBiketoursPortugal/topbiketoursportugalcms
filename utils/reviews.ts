@@ -32,7 +32,10 @@ export function getAggregatedReviews(
   );
   return {
     count: ratings.length,
-    average: Math.ceil(total / ratings.length),
+    // The true mean, not rounded up. Publishing Math.ceil() here inflated every
+    // rating in the Product structured data — a 4.2 average shipped as a 5 —
+    // and the Rating component renders half stars, so it needs the real value.
+    average: total / ratings.length,
     max,
     min,
     total

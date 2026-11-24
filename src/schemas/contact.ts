@@ -1,8 +1,8 @@
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 
 const addressSchema = z.object({
   street: z.string(),
-  number: z.string().optional(),
+  number: z.number().optional(),
   postalCode: z.string().optional(),
   city: z.string().optional(),
   state: z.string().optional(),

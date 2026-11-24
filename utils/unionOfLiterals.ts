@@ -1,4 +1,4 @@
-import { z } from 'astro:content';
+import { z } from 'astro/zod';
 
 export function unionOfLiterals<T extends string | number>(
   constants: ReadonlyArray<T>

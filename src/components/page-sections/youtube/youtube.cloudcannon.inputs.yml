@@ -1,0 +1,35 @@
+videoId:
+  type: text
+  label: YouTube Video ID
+  comment: |
+    Extract from URL: https://www.youtube.com/watch?v=VIDEO_ID
+    Only include the part after "v="
+width:
+  type: text
+  label: Width
+  comment: CSS width value (e.g., "100%", "800px")
+height:
+  type: text
+  label: Height
+  comment: CSS height value (e.g., "450px", "auto")
+title:
+  type: text
+  label: Video Title
+  comment: Used for accessibility and optional caption
+allowFullscreen:
+  type: switch
+  label: Allow Fullscreen
+loading:
+  type: choice
+  label: Loading Strategy
+  options:
+    values:
+      - label: Lazy Load (recommended)
+        value: lazy
+      - label: Load Immediately
+        value: eager
+className:
+  hidden: true
+  type: text
+  label: CSS Class
+  comment: Additional classes for custom styling
