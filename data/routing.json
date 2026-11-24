@@ -21,6 +21,11 @@
       "status": 301
     },
     {
+      "from": "/bike-hollidays/",
+      "destination": "/",
+      "status": 301
+    },
+    {
       "from": "/bike-tour-camino-de-santiago-cycling-french-way-leon/",
       "destination": "/tours/bike-tour-camino-de-santiago-cycling-french-way-leon/",
       "status": 301
@@ -58,6 +63,11 @@
     {
       "from": "/bike-tours-portugal-the-way-of-st-james",
       "destination": "/tours/french-way-to-santiago-bike-tour/",
+      "status": 301
+    },
+    {
+      "from": "/bike-tours-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -232,7 +242,7 @@
     },
     {
       "from": "/campo-de-treino-douro-em-bicicleta/",
-      "destination": "/bike-tours-in-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -287,7 +297,7 @@
     },
     {
       "from": "/douro-valley-cycling-camp-road-bike/",
-      "destination": "/bike-tours-in-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -323,6 +333,11 @@
     {
       "from": "/full-day-biketour-deluxe/",
       "destination": "/pt/tours/full-day-biketour-deluxe/",
+      "status": 301
+    },
+    {
+      "from": "/hiking-tours-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -697,7 +712,7 @@
     },
     {
       "from": "/static/94f3639374d100379659db7564b01b2c/416b2/kit-for-cycling -holidays.jpg",
-      "destination": "/bike-tours-in-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -1097,7 +1112,7 @@
     },
     {
       "from": "/tours/",
-      "destination": "/bike-tours-in-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
@@ -1132,7 +1147,7 @@
     },
     {
       "from": "/tours/south-",
-      "destination": "/bike-tours-in-portugal/",
+      "destination": "/",
       "status": 301
     },
     {
