@@ -86,8 +86,10 @@ const relevantBikeCategories = allBikeCategories.filter((c) =>
 );
 
 const levelSeoTitle = levelData.data.seo?.page_title ?? levelData.data.title;
-const levelSeoDescription =
-  levelData.data.seo?.page_description ?? levelData.data.title;
+// No fallback to the title: a meta description that repeats the title tag is
+// discarded by Google, which then writes its own snippet anyway. Leaving it
+// unset lets `getPageSeo` fall back to the site description instead.
+const levelSeoDescription = levelData.data.seo?.page_description ?? undefined;
 const frontmatter = {
   title: levelData.data.title ?? levelData.data.seo?.page_title,
   page_size: 6,
