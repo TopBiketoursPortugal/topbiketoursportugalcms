@@ -37,6 +37,12 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const template = (page.data as any).template ?? '~/layouts/Page.astro';
+// Both layouts accept `showPageTitle` but this route never forwarded it, so the
+// prop always fell back to its `false` default and the frontmatter flag was
+// inert on every page in the collection — editing `title` in the CMS changed
+// nothing on the page. The flag only governs the layout-supplied h1; pages that
+// already carry one in a content block set it to `false`.
+const showPageTitle = (page.data as any).showPageTitle === true;
 const hrefs = await getPageLanguagesAlternates(page, Astro.site);
 const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
 const pagePath = getPagePath(page);
@@ -49,6 +55,7 @@ const breadcrumbs: BreadcrumbItem[] = isHomePage
 {template === '~/layouts/Contacts.astro' ? (
   <ContactLayout
     frontmatter={page.data as any}
+    showPageTitle={showPageTitle}
     hrefs={hrefs}
     breadcrumbs={breadcrumbs}
   />
@@ -56,6 +63,7 @@ const breadcrumbs: BreadcrumbItem[] = isHomePage
 {template === '~/layouts/Page.astro' ? (
   <PageLayout
     frontmatter={page.data as any}
+    showPageTitle={showPageTitle}
     hrefs={hrefs}
     breadcrumbs={breadcrumbs}
     isHomePage={isHomePage}
