@@ -13,16 +13,6 @@
       "status": 301
     },
     {
-      "from": "/bike-hollidays/",
-      "destination": "/bike-tours-in-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/bike-tours-portugal/",
-      "destination": "/bike-tours-in-portugal/",
-      "status": 301
-    },
-    {
       "from": "/blog-bicycle-tours-portugal/",
       "destination": "/blog/",
       "status": 301
@@ -5295,11 +5285,6 @@
     {
       "from": "/fr/voyages-a-velo-au-portugal/",
       "destination": "/fr/voyages-a-velo-portugal/",
-      "status": 301
-    },
-    {
-      "from": "/hiking-tours-portugal/",
-      "destination": "/bike-tours-in-portugal/",
       "status": 301
     },
     {
