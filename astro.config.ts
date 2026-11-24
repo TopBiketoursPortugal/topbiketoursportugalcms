@@ -213,6 +213,27 @@ export default defineConfig({
         optional: true,
         default: 'GTM-KRC3B4ZQ'
       }),
+      // The hostname that owns the container above. GTM-KRC3B4ZQ belongs to
+      // topbiketoursportugal.com: it holds exactly one GA4 tag, G-RXEF72Y3WV,
+      // which is the *bike* site's property. This site has been loading it on
+      // every page, so the bike property recorded 937 sessions and 6 enquiry
+      // form submissions from topwalkingtoursportugal.com in the 12 months to
+      // 14 Oct 2026 — another company's traffic in their reports.
+      //
+      // Declaring the owning host next to the ID makes the pair travel
+      // together, so this build loads the container only on the hostname it
+      // belongs to — which is never this site. Nothing is lost: the container
+      // has no tag pointing at this site's own GA4 property (385531271), so
+      // that property receives nothing from it today either.
+      //
+      // To give this site its own measurement, create a container for it and
+      // set BOTH variables in this build's environment. Setting the ID alone
+      // is inert by design.
+      GOOGLE_TAG_MANAGER_HOST: envField.string({
+        context: 'client',
+        access: 'public',
+        default: 'topbiketoursportugal.com'
+      }),
       GOOGLE_ANALYTICS_ID: envField.string({
         context: 'client',
         access: 'public',
