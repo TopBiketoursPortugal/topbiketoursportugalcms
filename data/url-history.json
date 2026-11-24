@@ -1949,7 +1949,7 @@
     },
     {
       "from": "/de/blog/was-ist-eine-radtour-und-warum-sollten-sie-eine-machen/",
-      "destination": "/de/blog/what-is-nike-tour/",
+      "destination": "/de/blog/was-ist-eine-radtour/",
       "status": 301
     },
     {
@@ -1974,7 +1974,12 @@
     },
     {
       "from": "/de/blog/what-is-a-bike-tour-and-why-should-you-do-one/",
-      "destination": "/de/blog/what-is-nike-tour/",
+      "destination": "/de/blog/was-ist-eine-radtour/",
+      "status": 301
+    },
+    {
+      "from": "/de/blog/what-is-nike-tour/",
+      "destination": "/de/blog/was-ist-eine-radtour/",
       "status": 301
     },
     {
@@ -3169,7 +3174,7 @@
     },
     {
       "from": "/es/blog/que-es-un-tour-en-bicicleta-y-por-que-deberias-hacer-uno/",
-      "destination": "/es/blog/what-is-nike-tour/",
+      "destination": "/es/blog/que-es-un-tour-en-bicicleta/",
       "status": 301
     },
     {
@@ -3459,7 +3464,12 @@
     },
     {
       "from": "/es/blog/what-is-a-bike-tour-and-why-should-you-do-one/",
-      "destination": "/es/blog/what-is-nike-tour/",
+      "destination": "/es/blog/que-es-un-tour-en-bicicleta/",
+      "status": 301
+    },
+    {
+      "from": "/es/blog/what-is-nike-tour/",
+      "destination": "/es/blog/que-es-un-tour-en-bicicleta/",
       "status": 301
     },
     {
@@ -4579,7 +4589,7 @@
     },
     {
       "from": "/fr/blog/quest-ce-quun-circuit-a-velo-et-pourquoi-en-faire-un/",
-      "destination": "/fr/blog/what-is-nike-tour/",
+      "destination": "/fr/blog/qu-est-ce-qu-un-circuit-a-velo/",
       "status": 301
     },
     {
@@ -4874,7 +4884,12 @@
     },
     {
       "from": "/fr/blog/what-is-a-bike-tour-and-why-should-you-do-one/",
-      "destination": "/fr/blog/what-is-nike-tour/",
+      "destination": "/fr/blog/qu-est-ce-qu-un-circuit-a-velo/",
+      "status": 301
+    },
+    {
+      "from": "/fr/blog/what-is-nike-tour/",
+      "destination": "/fr/blog/qu-est-ce-qu-un-circuit-a-velo/",
       "status": 301
     },
     {
@@ -6309,7 +6324,7 @@
     },
     {
       "from": "/nl/blog/wat-is-een-fietstocht-en-waarom-zou-je-er-een-maken/",
-      "destination": "/nl/blog/what-is-nike-tour/",
+      "destination": "/nl/blog/wat-is-een-fietstocht/",
       "status": 301
     },
     {
@@ -6324,7 +6339,12 @@
     },
     {
       "from": "/nl/blog/what-is-a-bike-tour-and-why-should-you-do-one/",
-      "destination": "/nl/blog/what-is-nike-tour/",
+      "destination": "/nl/blog/wat-is-een-fietstocht/",
+      "status": 301
+    },
+    {
+      "from": "/nl/blog/what-is-nike-tour/",
+      "destination": "/nl/blog/wat-is-een-fietstocht/",
       "status": 301
     },
     {
