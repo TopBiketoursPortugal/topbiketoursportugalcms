@@ -12,6 +12,13 @@
  * those files have ever produced, and writes a redirect from each one to the
  * file's current URL.
  *
+ * Retiring a page is the same problem seen from the other end: the file is
+ * deleted, so there is no current URL to redirect to. The retirement rule in
+ * data/routing.json covers the URL the page was serving when it went, and this
+ * script sends every older URL that file produced to that rule's final
+ * destination — otherwise those URLs go from a 301 to a 404 in the commit that
+ * retires the page.
+ *
  * Output: data/url-history.json — committed, so builds do not depend on having
  * full git history available. astro.config.ts merges it into dist/_redirects
  * underneath data/routing.json, which stays hand-editable and wins on conflict.
@@ -29,7 +36,8 @@ import {
   collectRoutes,
   liveUrlSet,
   collectionFromPath,
-  languageFromPath
+  languageFromPath,
+  readFrontmatter
 } from './lib/routes.mjs';
 
 const OUTPUT = join(REPO_ROOT, 'data/url-history.json');
@@ -48,11 +56,14 @@ const SLUG_FIELDS = new Set(
  */
 const TRACKED_FIELDS = new Set([...SLUG_FIELDS, 'id']);
 
-function git(args) {
+function git(args, { quiet = false } = {}) {
   return execFileSync('git', args, {
     cwd: REPO_ROOT,
     encoding: 'utf8',
-    maxBuffer: 512 * 1024 * 1024
+    maxBuffer: 512 * 1024 * 1024,
+    // `quiet` is for lookups that are expected to miss — asking HEAD for a
+    // file it no longer has is a normal outcome here, not something to print.
+    stdio: quiet ? ['ignore', 'pipe', 'ignore'] : undefined
   });
 }
 
@@ -152,16 +163,108 @@ function resolveRenames(path, renames, seen = new Set()) {
  */
 function manualRules() {
   const path = join(REPO_ROOT, 'data/routing.json');
-  if (!existsSync(path)) return { sources: new Set(), destinations: new Set() };
-  const { routes = [] } = JSON.parse(readFileSync(path, 'utf8'));
   const slash = (value) =>
     value && !value.startsWith('http') && !value.endsWith('/')
       ? `${value}/`
       : value;
+  const routes = existsSync(path)
+    ? (JSON.parse(readFileSync(path, 'utf8')).routes ?? [])
+    : [];
+
+  // First rule for a source wins, matching how the build deduplicates.
+  const byFrom = new Map();
+  for (const rule of routes) {
+    const from = slash(rule.from);
+    if (!byFrom.has(from)) byFrom.set(from, slash(rule.destination));
+  }
+
   return {
     sources: new Set(routes.map((rule) => slash(rule.from))),
-    destinations: new Set(routes.map((rule) => slash(rule.destination)))
+    destinations: new Set(routes.map((rule) => slash(rule.destination))),
+    /**
+     * Follow `url` through routing.json to the end of its chain, so a rule
+     * derived from it lands where a visitor would land — in one hop, not two.
+     * Returns null if no rule covers the URL, or if the rules loop.
+     */
+    resolve(url) {
+      let current = slash(url);
+      const seen = new Set();
+      while (byFrom.has(current)) {
+        if (seen.has(current)) return null; // cycle — a human has to fix it
+        seen.add(current);
+        current = byFrom.get(current);
+      }
+      if (!seen.size) return null; // no manual rule covers this URL
+      return current;
+    }
   };
+}
+
+/**
+ * Commit that deleted each content file, newest deletion first. Used to read
+ * a retired entry's final frontmatter, which is the only place the URL it was
+ * serving when it went is still recorded.
+ */
+let deletionCommits = null;
+
+function deletingCommitFor(file) {
+  if (!deletionCommits) {
+    deletionCommits = new Map();
+    const log = git([
+      'log',
+      '-M',
+      '--diff-filter=D',
+      '--no-color',
+      '--format=%x01%H',
+      '--name-only',
+      '--',
+      'src/content'
+    ]);
+    let sha = null;
+    for (const line of log.split('\n')) {
+      if (line.startsWith('\x01')) {
+        sha = line.slice(1).trim();
+        continue;
+      }
+      const path = line.trim();
+      if (!path || !sha) continue;
+      if (!deletionCommits.has(path)) deletionCommits.set(path, sha);
+    }
+  }
+  return deletionCommits.get(file) ?? null;
+}
+
+const lastFrontmatterCache = new Map();
+
+/**
+ * The frontmatter a file that is no longer in the working tree held when it
+ * was last published.
+ *
+ * Two revisions are tried, newest first. HEAD still has the file when a
+ * retirement is staged but not yet committed — which is exactly when the
+ * pre-commit hook regenerates this output. For a retirement that has already
+ * landed, the parent of the commit that deleted it has the last live version.
+ */
+function lastFrontmatter(file) {
+  if (lastFrontmatterCache.has(file)) return lastFrontmatterCache.get(file);
+
+  const deleted = deletingCommitFor(file);
+  let frontmatter = null;
+  for (const rev of ['HEAD', deleted && `${deleted}^`]) {
+    if (!rev) continue;
+    try {
+      frontmatter = readFrontmatter(
+        git(['show', `${rev}:${file}`], { quiet: true }),
+        file
+      );
+    } catch {
+      continue; // file absent at that revision, or its YAML no longer parses
+    }
+    if (frontmatter) break;
+  }
+
+  lastFrontmatterCache.set(file, frontmatter);
+  return frontmatter;
 }
 
 function build() {
@@ -175,7 +278,8 @@ function build() {
   const { perFile, renames } = historicalFieldValues();
 
   const redirects = new Map(); // from -> to
-  const orphaned = []; // historical files with no current route
+  const retired = []; // { file, lost, destination } for entries with no route
+  const orphaned = []; // historical files whose URLs have nowhere to go
 
   for (const [historicalFile, fields] of perFile) {
     const collection = collectionFromPath(historicalFile);
@@ -221,7 +325,25 @@ function build() {
       // routinely replaces a file with a fresh id while keeping the same
       // `path`, which reads as a deletion here but changes nothing publicly.
       const lost = [...candidates].filter((url) => !live.has(url));
-      if (lost.length) orphaned.push({ file: historicalFile, urls: lost });
+      if (!lost.length) continue;
+
+      // Retiring a page adds a rule to data/routing.json for the URL it was
+      // serving — but that leaves the older URLs the same file produced with
+      // nothing covering them, so they turn from a 301 into a 404 in the same
+      // commit. Read the entry's final frontmatter, work out which URL that
+      // rule is for, and send every other URL it ever served to the same
+      // place, in one hop.
+      const previous = lastFrontmatter(currentFile);
+      const lastUrl = previous
+        ? config.url(previous, previous.language ?? language, currentFile)
+        : null;
+      const destination = lastUrl ? manual.resolve(lastUrl) : null;
+
+      if (destination) {
+        retired.push({ file: historicalFile, lost, destination });
+      } else {
+        orphaned.push({ file: historicalFile, urls: lost });
+      }
       continue;
     }
 
@@ -241,11 +363,53 @@ function build() {
     }
   }
 
+  // Retired entries are merged after every live entry has staked its claims,
+  // so a URL a live page can still account for is never handed to a page that
+  // no longer exists.
+  const recovered = new Map(); // from -> to
+  const dropped = new Set(); // claimed by two retired entries that disagree
+  for (const { lost, destination } of retired) {
+    for (const from of lost) {
+      if (from === destination) continue; // the retirement rule's own source
+      if (redirects.has(from)) continue; // a live page already covers it
+      if (manual.sources.has(from)) continue; // data/routing.json covers it
+      if (manual.destinations.has(from)) continue; // would chain onto a rule
+      if (dropped.has(from)) continue;
+      if (recovered.has(from) && recovered.get(from) !== destination) {
+        // Two retired entries claim the same URL and disagree about where it
+        // should go. Leave it to a human, as with the live case above.
+        recovered.delete(from);
+        dropped.add(from);
+        continue;
+      }
+      recovered.set(from, destination);
+    }
+  }
+  for (const [from, destination] of recovered) redirects.set(from, destination);
+
+  // Report whatever is still uncovered — a retirement with no rule behind it,
+  // and the individual URLs the guards above had to refuse.
+  for (const { file, lost } of retired) {
+    const urls = lost.filter(
+      (url) =>
+        !redirects.has(url) &&
+        !manual.sources.has(url) &&
+        !manual.destinations.has(url)
+    );
+    if (urls.length) orphaned.push({ file, urls });
+  }
+
   const routes301 = [...redirects.entries()]
     .map(([from, destination]) => ({ from, destination, status: 301 }))
     .sort((a, b) => a.from.localeCompare(b.from));
 
-  return { routes: routes301, orphaned, problems, routeCount: routes.size };
+  return {
+    routes: routes301,
+    orphaned,
+    recoveredCount: recovered.size,
+    problems,
+    routeCount: routes.size
+  };
 }
 
 // --- run ---------------------------------------------------------------
@@ -262,7 +426,7 @@ if (!hasFullHistory()) {
   process.exit(1);
 }
 
-const { routes, orphaned, problems, routeCount } = build();
+const { routes, orphaned, recoveredCount, problems, routeCount } = build();
 const payload = {
   $comment:
     'Generated by tools/seo/url-history.mjs — do not edit. Hand-written ' +
@@ -275,12 +439,19 @@ const serialised = `${JSON.stringify(payload, null, 2)}\n`;
 for (const problem of problems) {
   console.warn(`⚠ ${problem.file}: ${problem.reason}`);
 }
+if (recoveredCount) {
+  console.log(
+    `↪ ${recoveredCount} URL(s) from retired entries follow their ` +
+      'data/routing.json retirement rule.'
+  );
+}
 if (orphaned.length) {
   const lostUrls = orphaned.flatMap((entry) => entry.urls);
   console.warn(
     `⚠ ${lostUrls.length} URL(s) from ${orphaned.length} deleted entr(ies) are ` +
       'no longer served and have no automatic destination.\n' +
-      '  Add a redirect in data/routing.json if any of them ever ranked:'
+      '  Add a redirect in data/routing.json for the URL the entry last ' +
+      'served and every URL below will follow it:'
   );
   for (const url of lostUrls.slice(0, 12)) console.warn(`    ${url}`);
   if (lostUrls.length > 12)
