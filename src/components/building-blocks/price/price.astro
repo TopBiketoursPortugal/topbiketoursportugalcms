@@ -1,0 +1,87 @@
+---
+/**
+ * One euro amount, rendered once per supported currency.
+ *
+ * All three figures are in the served HTML and `src/styles/currency.css`
+ * reveals the one matching `html[data-currency]`. That is deliberate:
+ *
+ *  - no flash of the wrong currency and no layout shift, because the choice
+ *    is applied by an inline head script before first paint;
+ *  - no client-side rate payload, `Intl` bundle or network request, so the
+ *    switcher costs the page nothing it did not already cost;
+ *  - with JavaScript off, or if `data-currency` is ever missing, the euro
+ *    price of record is what shows.
+ *
+ * Conversions are approximate by construction (see `utils/currency.ts`) and
+ * are prefixed with `≈` so no converted figure can read as a quote.
+ */
+import { cn } from '@utils/cn';
+import type { LanguageCodes } from 'src/schemas/language';
+import {
+  CURRENCY_OF_RECORD,
+  SUPPORTED_CURRENCIES,
+  convertFromEur,
+  formatMoney,
+  getExchangeRates,
+  isSupportedCurrency
+} from 'utils/currency';
+
+type Props = {
+  /** Amount in euros — the currency of record for every price on the site. */
+  amount: number;
+  language: LanguageCodes;
+  /**
+   * The currency the amount is authored in. Every package price in
+   * `src/content` is euros and the CloudCannon structure hard-codes
+   * `currency: EUR`, but `priceSchema` still permits USD. If one ever
+   * appears it is shown as authored and left out of the switcher, rather than
+   * silently converted as though it were euros.
+   */
+  currency?: string;
+  class?: string;
+};
+
+const {
+  amount,
+  language,
+  currency: sourceCurrency = CURRENCY_OF_RECORD,
+  class: className
+} = Astro.props;
+
+const rates = await getExchangeRates();
+
+const isConvertible = sourceCurrency === CURRENCY_OF_RECORD;
+const authored = isSupportedCurrency(sourceCurrency)
+  ? formatMoney(amount, sourceCurrency, language)
+  : `${amount} ${sourceCurrency}`;
+---
+
+{isConvertible ? (
+  <span class={cn('price', className)} data-price-eur={amount}>
+    {SUPPORTED_CURRENCIES.map((currency) => {
+      const isRecord = currency === CURRENCY_OF_RECORD;
+      return (
+        <span
+          class="price-amount"
+          data-currency={currency}
+          /* Keeps the two hidden conversions out of the Pagefind index,
+               which would otherwise return three prices for one tour. */
+          data-pagefind-ignore={isRecord ? undefined : 'all'}
+        >
+          {isRecord
+            ? formatMoney(amount, currency, language)
+            : `≈ ${formatMoney(
+                convertFromEur(amount, currency, rates),
+                currency,
+                language
+              )}`}
+        </span>
+      );
+    })}
+  </span>
+) : (
+  /* Not authored in euros, so not ours to convert: shown as written, with
+       no `price-amount` class, which keeps it visible in every switcher
+       state. */
+  <span class={cn('price', className)}>{authored}</span>
+)}

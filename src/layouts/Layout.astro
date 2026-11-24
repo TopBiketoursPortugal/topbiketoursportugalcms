@@ -19,6 +19,7 @@ import type { HrefLang } from 'src/types/hreflang';
 import { pwaInfo } from 'virtual:pwa-info';
 import { pwaAssetsHead } from 'virtual:pwa-assets/head';
 import { cn } from '@utils/cn';
+import { CURRENCY_OF_RECORD } from 'utils/currency';
 import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import OrganizationSchema from 'src/components/schema/organization-schema.astro';
 import WebSiteSchema from 'src/components/schema/website-schema.astro';
@@ -70,6 +71,7 @@ if (INDEX === 'false') {
   lang={language}
   dir="ltr"
   class="scroll-mt-32 scroll-pt-32 will-change-scroll motion-safe:scroll-smooth"
+  data-currency={CURRENCY_OF_RECORD}
 >
   <head>
     <meta name="title" content={seoProps.title} />
@@ -114,6 +116,71 @@ if (INDEX === 'false') {
           // localStorage.setItem('darkMode', theme);
         }
       }
+    </script>
+    {/*
+      Currency selection, resolved before first paint so no visitor ever sees
+      a euro figure replace itself with a dollar one. All three figures are
+      already in the HTML (see <Price>); this only decides which one the CSS
+      reveals, so there is no reflow and no request.
+
+      An explicit choice always wins. Failing that the visitor's own browser
+      is the only market signal available on a static site: IANA time zone
+      first (it says where they are, not what language they read), then the
+      region of `navigator.language`. Everything else gets euros.
+    */}
+    <script is:inline>
+      (function () {
+        var SUPPORTED = ['EUR', 'USD', 'CAD'];
+        // Zones are listed explicitly. A bare `America/` prefix would hand
+        // Mexico City and São Paulo a US dollar price.
+        var CA =
+          /^(Canada\/|America\/(Atikokan|Blanc-Sablon|Cambridge_Bay|Coral_Harbour|Creston|Dawson|Dawson_Creek|Edmonton|Fort_Nelson|Glace_Bay|Goose_Bay|Halifax|Inuvik|Iqaluit|Moncton|Montreal|Nipigon|Pangnirtung|Rainy_River|Rankin_Inlet|Regina|Resolute|St_Johns|Swift_Current|Thunder_Bay|Toronto|Vancouver|Whitehorse|Winnipeg|Yellowknife)(\/|$))/;
+        var US =
+          /^(US\/|Pacific\/Honolulu(\/|$)|America\/(Adak|Anchorage|Boise|Chicago|Denver|Detroit|Indiana|Juneau|Kentucky|Los_Angeles|Menominee|Metlakatla|New_York|Nome|North_Dakota|Phoenix|Shiprock|Sitka|Yakutat)(\/|$))/;
+
+        function chosen() {
+          try {
+            var saved = localStorage.getItem('currency');
+            return SUPPORTED.indexOf(saved) > -1 ? saved : null;
+          } catch (error) {
+            // localStorage throws in some private-browsing modes.
+            return null;
+          }
+        }
+
+        function detected() {
+          try {
+            var zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+            if (CA.test(zone)) return 'CAD';
+            if (US.test(zone)) return 'USD';
+          } catch (error) {
+            /* fall through to the language region */
+          }
+          try {
+            var region = new Intl.Locale(navigator.language).region;
+            if (region === 'CA') return 'CAD';
+            if (region === 'US') return 'USD';
+          } catch (error) {
+            /* fall through to the currency of record */
+          }
+          return 'EUR';
+        }
+
+        window.__tbtCurrency = chosen() || detected();
+        document.documentElement.setAttribute(
+          'data-currency',
+          window.__tbtCurrency
+        );
+
+        // ClientRouter swaps in a document built with the euro default, so the
+        // choice is re-applied to the incoming <html> before it paints.
+        document.addEventListener('astro:before-swap', function (event) {
+          event.newDocument.documentElement.setAttribute(
+            'data-currency',
+            window.__tbtCurrency
+          );
+        });
+      })();
     </script>
     <CommonMeta />
 

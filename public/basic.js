@@ -5,6 +5,8 @@
 
   window.basic_script = true;
 
+  const CURRENCIES = ['EUR', 'USD', 'CAD'];
+
   function attachEvent(selector, event, fn) {
     const matches =
       typeof selector === 'string'
@@ -83,6 +85,28 @@
           }
         }
       });
+
+    // Currency switcher (TOP-79). The visible figure is chosen by CSS from
+    // `html[data-currency]`, so switching is one attribute write — no
+    // re-render, no re-format, no request. `aria-pressed` is synced here
+    // because CSS cannot set it.
+    syncCurrencyPressedState();
+
+    attachEvent('[data-currency-switch]', 'click', function (_, elem) {
+      const currency = elem.getAttribute('data-currency-switch');
+      if (!CURRENCIES.includes(currency)) {
+        return;
+      }
+      window.__tbtCurrency = currency;
+      document.documentElement.setAttribute('data-currency', currency);
+      try {
+        localStorage.setItem('currency', currency);
+      } catch (_e) {
+        // localStorage may be unavailable (e.g. private browsing); the choice
+        // still applies to this page view.
+      }
+      syncCurrencyPressedState();
+    });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
       const network = elem.getAttribute('data-aw-social-share');
@@ -190,6 +214,30 @@
     document.querySelector('#header nav')?.classList.add('hidden');
   };
 
+  const syncCurrencyPressedState = function () {
+    const active =
+      document.documentElement.getAttribute('data-currency') || 'EUR';
+    document.querySelectorAll('[data-currency-switch]').forEach((button) => {
+      button.setAttribute(
+        'aria-pressed',
+        button.getAttribute('data-currency-switch') === active
+          ? 'true'
+          : 'false'
+      );
+    });
+  };
+
+  // `astro:before-swap` in Layout.astro already sets the attribute on the
+  // incoming document; this is the safety net for a swap that bypasses it
+  // (e.g. a back/forward restore from the bfcache).
+  const reapplyCurrency = function () {
+    const currency = window.__tbtCurrency;
+    if (CURRENCIES.includes(currency)) {
+      document.documentElement.setAttribute('data-currency', currency);
+    }
+    syncCurrencyPressedState();
+  };
+
   // Re-apply theme from localStorage after page swap
   const reapplyTheme = function () {
     const getTheme = () => {
@@ -225,6 +273,7 @@
 
   document.addEventListener('astro:after-swap', () => {
     reapplyTheme();
+    reapplyCurrency();
     onLoad();
     onPageShow();
   });
@@ -232,5 +281,6 @@
   // Also handle astro:page-load to ensure theme persists
   document.addEventListener('astro:page-load', () => {
     reapplyTheme();
+    reapplyCurrency();
   });
 })();
