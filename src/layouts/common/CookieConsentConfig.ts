@@ -1,5 +1,6 @@
 import type { CookieConsentConfig } from 'vanilla-cookieconsent';
 import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+import { isTagManagerHost } from './tagManagerHost';
 
 export const CAT_NECESSARY = 'necessary';
 export const CAT_ANALYTICS = 'analytics';
@@ -27,6 +28,13 @@ declare global {
 }
 
 function loadGTM() {
+  // This is the consent-grant path, reached when a first-time visitor accepts
+  // analytics. It needs its own hostname check rather than relying on the one
+  // in CookieConsent.astro: that script sets `_gtmLoaded` only when it loads
+  // the container, so on a non-owning hostname the flag stays unset and this
+  // function would happily inject the container the inline script refused.
+  if (!isTagManagerHost()) return;
+
   // Only load GTM once
   if (window._gtmLoaded) return;
   window._gtmLoaded = true;
