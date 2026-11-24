@@ -31,6 +31,7 @@ const {
   content_blocks = [],
   content_blocks_after = [],
   frontmatter,
+  showPageTitle = false,
   hrefs = [],
   breadcrumbs = []
 } = Astro.props;
@@ -52,6 +53,11 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     ))}
   </slot>
 
+  {showPageTitle ? (
+    <Heading as="h1" class="px-6 text-4xl font-bold capitalize">
+      {frontmatter?.title}
+    </Heading>
+  ) : null}
   <PageHelper contentBlocks={content_blocks ?? []} />
   <ContactColumns class="container mx-auto" />
   <Stack
@@ -61,7 +67,10 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
     class="bg-slate-50 px-8 py-20 dark:bg-slate-800"
   >
     <Stack layout="vertical" spacing="small" class="items-center self-center">
-      <Heading as="h1" class="text-center font-bold">
+      {/* The form title is this layout's h1 only while no page title is
+          rendered above it. With `showPageTitle` on it drops to h2 so the
+          page keeps exactly one h1 either way. */}
+      <Heading as={showPageTitle ? 'h2' : 'h1'} class="text-center font-bold">
         {t('Contact.Form.Title', language)}
       </Heading>
       <Text intent="neutral" class="text-center">
