@@ -101,6 +101,7 @@ const frontmatter = {
   page_size: 6,
   seo: {
     page_title: tagSeoTitle,
+    page_title_exact: tagData.data.seo?.page_title_exact === true,
     page_description: tagSeoDescription,
     featured_image: tagData.data.seo?.featured_image,
     featured_image_alt: tagData.data.seo?.featured_image_alt ?? tagSeoTitle,

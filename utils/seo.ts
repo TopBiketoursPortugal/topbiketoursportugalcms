@@ -17,8 +17,10 @@ export async function getPageSeo(
   const siteData = SiteData[language];
   const siteName = siteData.site.name;
   const titleTemplate = siteData.metadata.title.template;
+  // `page_title_exact` opts a page out of the brand suffix — see the field's
+  // comment in src/schemas/seo.ts for the two cases that need it.
   const title = pageTitle
-    ? pageTitle.includes(siteName)
+    ? page.seo?.page_title_exact === true || pageTitle.includes(siteName)
       ? pageTitle
       : titleTemplate.replace('%s', pageTitle)
     : siteData.site_title;

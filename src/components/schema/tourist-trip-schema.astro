@@ -73,31 +73,24 @@ const trips = await Promise.all(
     const price = fromPrice(tour);
     const image = await resolveSchemaImage(tour.image?.src, Astro.site);
 
-    const additionalProperty = [
-      tour.distance
-        ? {
-            '@type': 'PropertyValue',
-            'name': 'Route distance',
-            'value': tour.distance,
-            'unitCode': 'KMT'
-          }
-        : null,
-      tour.elevationGain
-        ? {
+    // Only the climbing figure, deliberately — not `distance` and not
+    // `difficulty`. Both of those fields currently disagree with the pages
+    // that read them on several tours (the Douro full-day ride stores 75 km
+    // for a ride sold as 25, 50 or 77 km; three Porto day tours store a grade
+    // their own route contradicts). Publishing a wrong number in a form a
+    // machine will quote back at us is worse than not publishing it, and the
+    // visible page already carries both. Add them here once the data is
+    // corrected at source.
+    const additionalProperty = tour.elevationGain
+      ? [
+          {
             '@type': 'PropertyValue',
             'name': 'Elevation gain',
             'value': tour.elevationGain,
             'unitCode': 'MTR'
           }
-        : null,
-      tour.difficulty
-        ? {
-            '@type': 'PropertyValue',
-            'name': 'Difficulty',
-            'value': `${tour.difficulty}/5`
-          }
-        : null
-    ].filter(Boolean);
+        ]
+      : [];
 
     const trip: Record<string, any> = {
       '@type': 'TouristTrip',
