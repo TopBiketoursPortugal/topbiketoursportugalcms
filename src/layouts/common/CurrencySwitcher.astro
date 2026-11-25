@@ -1,0 +1,51 @@
+---
+/**
+ * EUR / USD / CAD switcher.
+ *
+ * EUR is the currency of record and the default; USD and CAD exist because the
+ * competitors holding the SERPs we are chasing localise their prices, and the
+ * first 90 days target the US and Canada. The initial selection is resolved
+ * from the visitor's own browser (see the inline script in Layout.astro) and
+ * their explicit choice is remembered from then on.
+ *
+ * The pressed state is driven by `html[data-currency]` in
+ * `src/styles/currency.css`, so it is correct before any script runs;
+ * `public/basic.js` only syncs `aria-pressed` for screen readers and handles
+ * the click.
+ */
+import { cn } from '@utils/cn';
+import type { LanguageCodes } from 'src/schemas/language';
+import { t } from 'utils/i18n';
+import {
+  CURRENCY_OF_RECORD,
+  SUPPORTED_CURRENCIES,
+  getApproximationNote
+} from 'utils/currency';
+
+type Props = { language: LanguageCodes; class?: string };
+
+const { language, class: className } = Astro.props;
+
+// Carries the rate's publication date, so a rate that has gone stale between
+// builds is visible to the visitor rather than hidden.
+const note = await getApproximationNote(language);
+---
+
+<div
+  class={cn('currency-switcher flex items-center gap-0.5', className)}
+  role="group"
+  aria-label={t('Currency.Label', language)}
+  title={note}
+>
+  {SUPPORTED_CURRENCIES.map((currency) => (
+    <button
+      type="button"
+      data-currency-switch={currency}
+      aria-pressed={currency === CURRENCY_OF_RECORD}
+      aria-label={t('Currency.Switch.Aria', language).replace('$1', currency)}
+      class="rounded px-1.5 py-0.5 text-xs tracking-wide"
+    >
+      {currency}
+    </button>
+  ))}
+</div>

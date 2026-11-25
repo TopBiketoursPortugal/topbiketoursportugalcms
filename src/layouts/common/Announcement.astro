@@ -1,6 +1,7 @@
 ---
 import SocialMenu from './SocialMenu.astro';
 import LanguageMenu from './LanguageMenu.astro';
+import CurrencySwitcher from './CurrencySwitcher.astro';
 import ToggleTheme from './ToggleTheme.astro';
 import Contact from 'src/../data/contact.json';
 import type { LanguageCodes } from 'src/schemas/language';
@@ -39,6 +40,8 @@ const { cellPhone, email } = Contact[language];
   </div>
   <div class="flex items-center gap-3">
     <SocialMenu class:list="flex" />
+    <span class="mx-1 h-4 w-px bg-gray-600" aria-hidden="true"></span>
+    <CurrencySwitcher language={language} />
     <span class="mx-1 h-4 w-px bg-gray-600" aria-hidden="true"></span>
     <LanguageMenu
       localizedUrls={hrefLangs?.map((l) => ({

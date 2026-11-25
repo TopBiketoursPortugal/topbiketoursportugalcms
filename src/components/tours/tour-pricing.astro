@@ -1,6 +1,5 @@
 ---
 import type { TourPackageSchema } from 'src/schemas/tours';
-import languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import PricingColumn from 'src/components/building-blocks/pricing-table/pricing-column.astro';
 import type { InferEntrySchema } from 'astro:content';
@@ -25,13 +24,13 @@ const {
 
 const showPrice = variant === 'pricing';
 
+// Amounts are handed to <PricingColumn> unformatted now: it renders them
+// through <Price>, which emits one figure per supported currency so the
+// EUR/USD/CAD switcher can reveal the right one. Side effect worth naming:
+// this table used to print €1,596.00 while the card and the sidebar printed
+// €1,596 — all three now agree on the shorter form.
 const currency =
   (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
-
-const priceFormat = new Intl.NumberFormat(languages[language].locale, {
-  style: 'currency',
-  currency
-});
 ---
 
 <div class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -39,8 +38,10 @@ const priceFormat = new Intl.NumberFormat(languages[language].locale, {
     ({ title, duration, popular, included = [], price = { price: 0 } }) => (
       <PricingColumn
         title={title}
-        price={showPrice ? priceFormat.format(price?.price ?? 0) : ''}
-        promo={showPrice && price?.promo ? priceFormat.format(price.promo) : ''}
+        price={showPrice ? (price?.price ?? 0) : 0}
+        promo={showPrice ? (price?.promo ?? 0) : 0}
+        currency={currency}
+        language={language}
         period={showPrice ? duration : ''}
         popular={popular}
         bestValue={price?.bestValue ?? false}

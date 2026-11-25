@@ -1,0 +1,60 @@
+/*
+ * Currency switching (TOP-79).
+ *
+ * `<Price>` renders the same euro amount once per supported currency and the
+ * rules below reveal the one matching `html[data-currency]`, which an inline
+ * script in Layout.astro sets before first paint. Nothing here is a Tailwind
+ * utility and the file is imported unlayered on purpose: these rules must win
+ * over whatever display utility a caller puts on the price element.
+ */
+
+/*
+ * Fail-safe base. If `html[data-currency]` is missing or holds something we do
+ * not recognise, the euro price of record is what shows — never nothing, and
+ * never two figures at once.
+ */
+.price-amount:not([data-currency='EUR']) {
+  display: none;
+}
+
+html[data-currency='USD'] .price-amount[data-currency='EUR'],
+html[data-currency='CAD'] .price-amount[data-currency='EUR'] {
+  display: none;
+}
+
+html[data-currency='USD'] .price-amount[data-currency='USD'],
+html[data-currency='CAD'] .price-amount[data-currency='CAD'] {
+  display: inline;
+}
+
+/*
+ * "Charged in euros, this figure is approximate" only needs saying while a
+ * converted figure is on screen, so the note is hidden in euros.
+ */
+html[data-currency='EUR'] .currency-note {
+  display: none;
+}
+
+/*
+ * The active button is derived from `html[data-currency]` rather than a class
+ * toggled by JavaScript, so it is already correct on the first paint and after
+ * a view-transition swap. `currentColor` keeps it legible both on the black
+ * announcement bar and on the white mobile menu panel.
+ */
+.currency-switcher button {
+  opacity: 0.6;
+  transition: opacity 150ms ease;
+}
+
+.currency-switcher button:hover,
+.currency-switcher button:focus-visible {
+  opacity: 1;
+}
+
+html[data-currency='EUR'] .currency-switcher [data-currency-switch='EUR'],
+html[data-currency='USD'] .currency-switcher [data-currency-switch='USD'],
+html[data-currency='CAD'] .currency-switcher [data-currency-switch='CAD'] {
+  opacity: 1;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px currentColor;
+}

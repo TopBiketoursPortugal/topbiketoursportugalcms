@@ -3,6 +3,7 @@ import ToggleMenu from './ToggleMenu.astro';
 import ToggleTheme from './ToggleTheme.astro';
 import Logo from './Logo.astro';
 import LanguageMenu from './LanguageMenu.astro';
+import CurrencySwitcher from './CurrencySwitcher.astro';
 import ToursMegaMenu from 'src/components/navigation/mega-menu/ToursMegaMenu.astro';
 import { getHomePermalink, trimSlash } from 'utils/permalinks';
 import type { HTMLAttributes } from 'astro/types';
@@ -156,6 +157,14 @@ const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
               path: l.href
             }))}
           />
+        </div>
+
+        {/* The desktop switcher lives in the announcement bar, which is
+            `hidden md:flex`. Without this copy a phone could not change
+            currency at all — same reason the language menu and theme toggle
+            are duplicated here. */}
+        <div class="md:hidden">
+          <CurrencySwitcher language={language} />
         </div>
 
         <div class="md:hidden">

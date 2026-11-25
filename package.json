@@ -24,6 +24,7 @@
     "mdx-clone": "node ./tools/mdx-clone.mjs",
     "deps": "pnpx npm-check-updates -i",
     "icons:update": "pwsh ./tools/update-icons.ps1",
+    "rates:update": "node tools/update-exchange-rates.mjs",
     "seo:urls": "node tools/seo/url-history.mjs",
     "seo:check": "node tools/seo/check-urls.mjs",
     "seo:audit": "node tools/seo/audit-dist.mjs"

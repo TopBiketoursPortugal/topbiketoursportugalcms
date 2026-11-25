@@ -1,8 +1,19 @@
 ---
+import Price from 'src/components/building-blocks/price/price.astro';
+import type { LanguageCodes } from 'src/schemas/language';
+
 type Props = {
   title: string;
-  price?: string;
-  promo?: string;
+  /**
+   * Amount in the currency of record (euros), not a formatted string: the
+   * column has to render every supported currency so the switcher can reveal
+   * one, which only <Price> can do. `0`/undefined means "no price here" —
+   * the seasons and add-ons tables pass nothing.
+   */
+  price?: number;
+  promo?: number;
+  currency?: string;
+  language?: LanguageCodes;
   period?: string;
   popular?: boolean;
   bestValue?: boolean;
@@ -11,8 +22,10 @@ type Props = {
 
 const {
   title,
-  price = '',
-  promo = '',
+  price = 0,
+  promo = 0,
+  currency = 'EUR',
+  language = 'en',
   period = '',
   popular = false,
   bestValue = false,
@@ -39,11 +52,19 @@ const {
     {showPrice && price ? (
       <div class="mt-2 flex items-baseline justify-center gap-2">
         {promo ? (
-          <span class="text-lg text-gray-400 line-through">{price}</span>
+          <Price
+            amount={price}
+            currency={currency}
+            language={language}
+            class="text-lg text-gray-400 line-through"
+          />
         ) : null}
-        <span class="text-2xl font-bold text-gray-900 dark:text-white">
-          {promo || price}
-        </span>
+        <Price
+          amount={promo || price}
+          currency={currency}
+          language={language}
+          class="text-2xl font-bold text-gray-900 dark:text-white"
+        />
       </div>
     ) : null}
     {period ? (

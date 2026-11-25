@@ -1,0 +1,12 @@
+{
+  "base": "EUR",
+  "source": "European Central Bank euro foreign exchange reference rates",
+  "sourceUrl": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml",
+  "date": "2026-11-24",
+  "fetchedAt": "2026-11-24T00:00:00.000Z",
+  "rates": {
+    "EUR": 1,
+    "USD": 1.0963,
+    "CAD": 1.5707
+  }
+}

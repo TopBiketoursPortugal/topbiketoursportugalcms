@@ -2,7 +2,6 @@
 /** @jsxImportSource astro */
 
 import TourPricing from 'src/components/tours/tour-pricing.astro';
-import Languages from 'src/../data/languages.json';
 import { getAggregatedReviews } from 'utils/reviews';
 import TabItem from 'src/components/building-blocks/tabs/TabItem.astro';
 import Tabs from 'src/components/building-blocks/tabs/Tabs.astro';
@@ -28,6 +27,8 @@ import ReviewItem from '@components/page-sections/collection/review-item.astro';
 import TourProductSchema from '@components/schema/tour-product-schema.astro';
 import { getTourPath } from 'utils/permalinks';
 import DifficultyScale from './difficulty-scale.astro';
+import Price from 'src/components/building-blocks/price/price.astro';
+import { getApproximationNote } from 'utils/currency';
 
 type Props = { tour: InferEntrySchema<'tours'> } & VisuallyEditable;
 
@@ -119,15 +120,14 @@ const minPromoPrice =
   pricedPackages.length > 0
     ? Math.max(...pricedPackages.map((p) => p.price?.promo ?? 0))
     : 0;
-const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
-  style: 'currency',
-  currency:
-    (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
-    'EUR',
-  // A holiday is €1,596, never €1,596.00 — and the two trailing zeros cost
-  // real width in the sidebar and the mobile bar.
-  maximumFractionDigits: 0
-});
+// Formatting and the EUR → USD/CAD conversion behind the switcher live in
+// <Price>. `priceCurrency` is also what <TourProductSchema> publishes, and it
+// is deliberately NOT switchable: the offer Google indexes has to be the
+// currency the booking is actually charged in.
+const priceCurrency =
+  (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
+  'EUR';
+const currencyNote = await getApproximationNote(language);
 const isPromotional = minPromoPrice > 0;
 
 /*
@@ -275,21 +275,25 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
           {t('Tour.Form.FromPrice', language)}
         </span>
         {minPrice > 0 ? (
-          <span
+          <Price
+            amount={minPrice}
+            currency={priceCurrency}
+            language={language}
             class={cn(
               'tabular-nums',
               isPromotional
                 ? 'text-lg text-gray-500 line-through dark:text-gray-400'
                 : 'text-2xl font-bold'
             )}
-          >
-            {priceFormat.format(minPrice)}
-          </span>
+          />
         ) : null}
         {isPromotional && minPromoPrice > 0 ? (
-          <span class="text-2xl font-bold tabular-nums">
-            {priceFormat.format(minPromoPrice)}
-          </span>
+          <Price
+            amount={minPromoPrice}
+            currency={priceCurrency}
+            language={language}
+            class="text-2xl font-bold tabular-nums"
+          />
         ) : null}
 
         <Tooltip class="align-top">
@@ -301,6 +305,17 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
           />
           <span slot="content">{t('Tour.Form.FromPrice.Info', language)}</span>
         </Tooltip>
+
+        {/*
+          The one place the euro-of-record promise has to be visible rather
+          than merely true: this is where the visitor decides to enquire. CSS
+          hides it while euros are selected (`currency-note` in
+          src/styles/currency.css), so it only speaks when a converted figure
+          is actually on screen.
+        */}
+        <p class="currency-note w-full text-xs text-gray-500 dark:text-gray-400">
+          {currencyNote}
+        </p>
       </div>
     ) : null}
 
@@ -590,9 +605,12 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
         <span class="text-xs text-gray-500 dark:text-gray-400">
           {t('Tour.Form.FromPrice', language)}
         </span>
-        <span class="text-lg font-bold tabular-nums">
-          {priceFormat.format(isPromotional ? minPromoPrice : minPrice)}
-        </span>
+        <Price
+          amount={isPromotional ? minPromoPrice : minPrice}
+          currency={priceCurrency}
+          language={language}
+          class="text-lg font-bold tabular-nums"
+        />
       </div>
     ) : (
       <span class="font-heading truncate text-sm font-semibold">
@@ -615,10 +633,7 @@ const slideWidthRaw = `(100% - ${(cards_per_row - 1) * 1.5}rem) / ${cards_per_ro
     url={getTourPath(tour, language)}
     price={minPrice}
     promoPrice={minPromoPrice}
-    currency={
-      (pricedPackages.length > 0 ? pricedPackages[0].price?.currency : null) ??
-      'EUR'
-    }
+    currency={priceCurrency}
     ratingAverage={average}
     ratingCount={count}
     language={language}

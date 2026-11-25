@@ -5,7 +5,6 @@ import CardContent, {
   type CardContentProps
 } from 'src/components/building-blocks/card/CardContent.astro';
 import Card from 'src/components/building-blocks/card/Card.astro';
-import Languages from 'src/../data/languages.json';
 import type { LanguageCodes } from 'src/schemas/language';
 import { getCollection, type InferEntrySchema } from 'astro:content';
 import { getMarkdownExcerpt } from 'utils/get-markdown-excerpt';
@@ -16,6 +15,7 @@ import { t } from 'utils/i18n';
 import { getAggregatedReviews } from 'utils/reviews';
 import { MapTestimonialToReview } from 'utils/map-testimonial-to-review';
 import WeTravelButton from 'src/components/page-sections/wetravel-button/wetravel-button.astro';
+import Price from 'src/components/building-blocks/price/price.astro';
 
 type Props = {
   tour: InferEntrySchema<'tours'>;
@@ -71,13 +71,11 @@ const minPromoPrice =
     ? Math.max(...packages.map((p) => p.price?.promo ?? 0))
     : 0;
 const displayPrice = minPromoPrice > 0 ? minPromoPrice : minPrice;
-const priceFormat = new Intl.NumberFormat(Languages[language].locale, {
-  style: 'currency',
-  currency: (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR',
-  // A holiday priced at €1,596 is never €1,596.00 to the person choosing it,
-  // and the trailing zeros cost two characters of the card's tightest row.
-  maximumFractionDigits: 0
-});
+// Formatting (and the EUR → USD/CAD conversion behind the switcher) lives in
+// <Price>; `data-sort-price` below stays in euros so the sort order is
+// identical in every currency.
+const priceCurrency =
+  (packages.length > 0 ? packages[0].price?.currency : null) ?? 'EUR';
 
 const tourTags = await getCollection(
   'tourTags',
@@ -280,13 +278,19 @@ const showBookNow =
             </span>
             <span class="flex items-baseline gap-2">
               {minPromoPrice > 0 && (
-                <span class="text-sm text-gray-500 line-through dark:text-gray-400">
-                  {priceFormat.format(minPrice)}
-                </span>
+                <Price
+                  amount={minPrice}
+                  currency={priceCurrency}
+                  language={language}
+                  class="text-sm text-gray-500 line-through dark:text-gray-400"
+                />
               )}
-              <span class="text-xl font-bold tabular-nums dark:text-emerald-300">
-                {priceFormat.format(displayPrice)}
-              </span>
+              <Price
+                amount={displayPrice}
+                currency={priceCurrency}
+                language={language}
+                class="text-xl font-bold tabular-nums dark:text-emerald-300"
+              />
             </span>
           </div>
         ) : (
