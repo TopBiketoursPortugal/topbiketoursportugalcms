@@ -1,7 +1,11 @@
 ---
 import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import 'src/styles/ccElegantBlack.css';
-import { GOOGLE_ANALYTICS_ID, GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+import {
+  GOOGLE_ANALYTICS_ID,
+  GOOGLE_TAG_MANAGER_HOST,
+  GOOGLE_TAG_MANAGER_ID
+} from 'astro:env/client';
 import {
   CAT_ADVERTISEMENT,
   CAT_ANALYTICS,
@@ -34,7 +38,13 @@ const vars = {
   SERVICE_SECURITY_STORAGE
 };
 
-const GTM_SCRIPT = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}')`;
+// Load the container only on the hostname that owns it, which this site is
+// not — see GOOGLE_TAG_MANAGER_HOST in astro.config.ts. The check runs in the
+// browser rather than at build time because a deploy preview and production
+// are the same build artefact: the hostname is the only thing that tells them
+// apart. `h` normalises for case, `www.`, a stray port and a trailing-dot FQDN
+// so that none of those spellings slips past the comparison.
+const GTM_SCRIPT = `(function(w,d,s,l,i,o){var h=function(v){return String(v||'').trim().toLowerCase().replace(/\\.$/,'').replace(/:\\d+$/,'').replace(/^www\\./,'')};if(!i||!o||h(w.location.hostname)!==h(o))return;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),'event':'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}','${GOOGLE_TAG_MANAGER_HOST}')`;
 ---
 
 <script is:inline defer async type="module">

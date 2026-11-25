@@ -1,21 +1,19 @@
 ---
-import { GOOGLE_TAG_MANAGER_ID } from 'astro:env/client';
+// The Google Tag Manager <noscript> iframe used to sit here. It was removed
+// because it is the one container reference that cannot be hostname-gated:
+// markup inside <noscript> runs precisely when the JavaScript that would check
+// the hostname does not, so it loaded the bike site's GTM-KRC3B4ZQ on this
+// site too. See GOOGLE_TAG_MANAGER_HOST in astro.config.ts for the gate it
+// evaded.
+//
+// Removing it loses no measurement. GTM-KRC3B4ZQ contains five Google tags,
+// four custom-HTML tags, and click and timer triggers — every one of which
+// needs JavaScript to fire. There are no image/pixel tags, the only kind the
+// <noscript> iframe can actually execute, so it has never recorded a hit.
 import SiteData from 'src/../data/site.json';
 
 const { ui: UI } = SiteData;
-
-const tagScriptSrc = `https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`;
 ---
-
-<!-- Google Tag Manager (noscript) -->
-<noscript
-  ><iframe
-    src={tagScriptSrc}
-    height="0"
-    width="0"
-    style="display:none;visibility:hidden"></iframe></noscript
->
-<!-- End Google Tag Manager (noscript) -->
 
 <script is:inline async defer define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {
