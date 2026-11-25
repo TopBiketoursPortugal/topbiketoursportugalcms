@@ -6,11 +6,16 @@ import type { Except } from 'type-fest';
 import type { HrefLang } from 'src/types/hreflang';
 import type { BreadcrumbItem } from 'utils/breadcrumbs';
 import LanguageData from 'src/../data/languages.json';
+import { getCollection } from 'astro:content';
+import type { LanguageCodes } from 'src/schemas/language';
+import TourListSchema from 'src/components/tours/tour-list-schema.astro';
+import TouristTripSchema from 'src/components/schema/tourist-trip-schema.astro';
 
 type Props = {
   frontmatter: {
     content_blocks?: any[];
     page_size?: number;
+    tours?: string[];
   } & Except<LayoutProps, 'class'>;
   class?: string;
   showPageTitle?: boolean;
@@ -35,6 +40,18 @@ if (!frontmatter) {
 const { content_blocks = [] } = frontmatter;
 const defaultLocale = LanguageData.en;
 const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
+
+// Tours named in frontmatter, in the authored order, so the `ItemList`
+// positions match the order the page's copy compares them in.
+const language = (Astro.currentLocale ?? 'en') as LanguageCodes;
+const tourIds = frontmatter.tours ?? [];
+const allTours =
+  tourIds.length > 0
+    ? await getCollection('tours', (t) => t.data.language === language)
+    : [];
+const pageTours = tourIds
+  .map((id) => allTours.find((t) => t.data.id === id))
+  .filter((t): t is NonNullable<typeof t> => Boolean(t));
 ---
 
 <Layout
@@ -55,6 +72,8 @@ const defaultHref = hrefs.filter((h) => h.hreflang === defaultLocale.code)[0];
         hreflang={LanguageData[hreflang].locale}
       />
     ))}
+    <TourListSchema items={pageTours} language={language} />
+    <TouristTripSchema items={pageTours} language={language} />
   </slot>
   {showPageTitle ? (
     <Heading as="h1" class="px-6 text-4xl font-bold capitalize">

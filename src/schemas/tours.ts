@@ -161,6 +161,21 @@ const tourSchema = z.object({
   bikeCategories: z.array(z.string().uuid()).optional().default([]),
   duration: z.coerce.string().optional().nullable(),
   distance: z.number().optional(),
+  // Cumulative ascent for the whole route, in metres. Seven tours already
+  // state this in their route-description prose; nothing read it, so no card,
+  // table or schema could use it and eight weeks of drafts recorded it as
+  // "not published anywhere on the site". It is the figure that actually
+  // separates these weeks — the Camino Central Way is 243 km with 3,561 m of
+  // climbing while the Silver Coast is 243 km and graded Easy — and no
+  // competitor on any of these SERPs publishes it.
+  //
+  // Leave it unset where the route does not publish one. A missing figure
+  // renders as "—" and is omitted from structured data; it is never inferred
+  // from distance or grade. Where a tour publishes a figure for a *reduced*
+  // option only (North of Portugal's 1,894 m describes its 152 km variant,
+  // not the full 238 km route) this stays unset until the full-route number
+  // exists.
+  elevationGain: z.number().optional(),
   difficulty: z.number().min(1).max(5).optional(),
   skill: z.number().min(1).max(5).optional(),
   length: z.number().optional(),

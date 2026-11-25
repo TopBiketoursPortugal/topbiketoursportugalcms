@@ -20,6 +20,7 @@ import { getImageByPath } from 'utils/get-image';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import PlaceSchema from 'src/components/schema/place-schema.astro';
+import TouristTripSchema from 'src/components/schema/tourist-trip-schema.astro';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
 
 export async function getStaticPaths() {
@@ -194,6 +195,9 @@ const breadcrumbs = [
       url={getTourRegionsPath(regionData, language)}
       language={language}
     />
+    {/* The tours this page actually renders, so the markup never describes a
+        trip the grid does not show. No ratings or reviews — see the component. */}
+    <TouristTripSchema items={visibleTours} language={language} />
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
     <Heading as="h1" class="px-6">

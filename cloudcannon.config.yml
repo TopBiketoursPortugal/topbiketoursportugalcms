@@ -218,6 +218,16 @@ collections_config:
           min_message: Distance must be at least 1 km
         comment: Tour distance in kilometers
         cascade: true
+      elevationGain:
+        type: number
+        options:
+          min: 0
+        comment: >-
+          Cumulative ascent for the full route, in metres. Leave empty if the
+          route has not been measured — an empty field renders as "—" and is
+          left out of structured data. Do not enter the figure for a reduced
+          or alternative version of the route.
+        cascade: true
       duration:
         type: number
         options:
