@@ -74,6 +74,15 @@ const dayTours =
 // Porto page showing 3.
 const visibleTours = [...packageTours, ...dayTours];
 
+// See `package_tours_heading` in src/schemas/tour-regions.ts for why a region
+// is allowed to name its own grid.
+const packageToursHeading =
+  regionData.data.package_tours_heading ??
+  t('Tours.Regions.PackageTour.Title', language).replace(
+    '$1',
+    regionData.data.name ?? ''
+  );
+
 const tourRegions = await getCollection(
   'tourRegions',
   (f) => f.data.language === language
@@ -231,10 +240,7 @@ const breadcrumbs = [
       {packageTours.length > 0 ? (
         <div data-tour-section>
           <Heading as="h2" class="px-6">
-            {t('Tours.Regions.PackageTour.Title', language).replace(
-              '$1',
-              regionData.data.name ?? ''
-            )}
+            {packageToursHeading}
           </Heading>
           <TourList items={packageTours} language={language} />
         </div>
