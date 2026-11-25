@@ -110,7 +110,13 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
         </nav>
       ))}
 
-      {/* Regions column — small card grid */}
+      {/* Regions column — small card grid.
+
+          `useKeywordAnchor={false}`: short nav label here, not the keyword
+          anchor. The homepage grid already links every region page with its
+          phrase, and this footer is site-wide — rendering the same
+          keyword-matched anchor a second time on every page of the site is the
+          part that looks engineered. See the prop on the card component. */}
       <div>
         <h3 class="mb-3 text-sm font-bold tracking-wider text-white uppercase">
           {t('Footer.TourRegionsTitle', language)}
@@ -122,6 +128,7 @@ const navColumns = links.filter(({ links: sub = [] }) => sub.length > 1);
               language={language}
               layout="overlay"
               imageWidths={[120]}
+              useKeywordAnchor={false}
             />
           ))}
         </div>

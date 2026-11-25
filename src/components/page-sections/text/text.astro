@@ -58,6 +58,22 @@ const { padding, align, container } = style;
 
 const md = markdownit({ html: true });
 md.use(markdownItExternalLinks, externalLinksConfig);
+
+/**
+ * Wrap every markdown table in a scroll container.
+ *
+ * The destination pages compare tours in tables up to nine columns wide — days,
+ * distance, longest day, climbing, climbing per km, grade, format, price. A
+ * bare `<table>` at that width either pushes the whole page sideways on a
+ * phone or crushes each column to two characters, and this audience researches
+ * on phones. The wrapper scrolls the table on its own instead of the document,
+ * and `tabindex` plus a role make it reachable by keyboard, which an
+ * overflowing region needs to be.
+ */
+md.renderer.rules.table_open = () =>
+  '<div class="prose-table-scroll" role="region" aria-label="Comparison table" tabindex="0"><table>';
+md.renderer.rules.table_close = () => '</table></div>';
+
 const textHTML = md.render(text ?? '');
 const { container: containerStyle, text: textStyle } = textVariants({
   padding,
@@ -69,3 +85,26 @@ const { container: containerStyle, text: textStyle } = textVariants({
 <div class={containerStyle()}>
   <Prose class={textStyle()} set:html={textHTML} />
 </div>
+
+<style is:global>
+  .prose-table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Tailwind Typography puts the table's vertical rhythm on the table
+       itself; the wrapper now owns the gap so the two do not stack. */
+    margin-block: 1.5em;
+  }
+
+  .prose-table-scroll > table {
+    margin-block: 0;
+    /* Never let a nine-column table squeeze below the width at which its
+       numbers are still readable — scroll instead. */
+    min-width: 36rem;
+  }
+
+  .prose-table-scroll:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+</style>

@@ -21,12 +21,33 @@ export type AccordionProps = {
 
 type Props = AccordionProps;
 
+/**
+ * Flatten an authored answer to the plain text that goes in the `FAQPage`
+ * JSON-LD. Google compares the marked-up answer against the rendered one, so
+ * this has to strip markdown *syntax* and leave every ordinary character
+ * alone.
+ *
+ * The previous version deleted the characters `* _ ~ \` > # -` wherever they
+ * appeared, which mangled real words on the way through: "self-guided" became
+ * "selfguided", "mid-to-high teens" became "midtohigh teens", "Easy to
+ * moderate (2/5)" survived but "e-bike" did not. Every hyphenated term on
+ * these pages — and there are a lot, starting with the target keyword
+ * "self-guided bike tours" — was being published to Google as a typo.
+ */
 function markdownToText(md: string) {
   return md
-    .replace(/!\[.*?\]\(.*?\)/g, '') // remove images
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // remove links but keep text
-    .replace(/[*_~`>#-]/g, '') // remove common markdown chars
-    .replace(/\n+/g, ' ') // collapse new lines
+    .replace(/!\[.*?\]\(.*?\)/g, '') // images
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // links, keeping the anchor text
+    .replace(/`([^`]*)`/g, '$1') // inline code
+    .replace(/(\*\*\*|___)(\S[\s\S]*?\S|\S)\1/g, '$2') // bold italic
+    .replace(/(\*\*|__)(\S[\s\S]*?\S|\S)\1/g, '$2') // bold
+    .replace(/(\*|_)(\S[\s\S]*?\S|\S)\1/g, '$2') // italic
+    .replace(/~~(\S[\s\S]*?\S|\S)~~/g, '$1') // strikethrough
+    .replace(/^\s{0,3}#{1,6}\s+/gm, '') // ATX headings
+    .replace(/^\s{0,3}>\s?/gm, '') // blockquote markers
+    .replace(/^\s{0,3}[-*+]\s+/gm, '') // bullet markers
+    .replace(/^\s{0,3}\d+\.\s+/gm, '') // ordered-list markers
+    .replace(/\s+/g, ' ') // collapse all whitespace, newlines included
     .trim();
 }
 
@@ -36,24 +57,34 @@ const {
   padding = 'none',
   type = ''
 } = Astro.props;
-const faqSchema =
+// A Question with an empty `name` or an empty answer is invalid, and one bad
+// entry invalidates the whole FAQPage — so pairs that are not complete are
+// dropped rather than emitted blank.
+const faqEntries =
   type === 'faq'
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        'mainEntity': items.map((i) => ({
-          '@type': 'Question',
-          'name': markdownToText(i.header?.text ?? ''),
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': markdownToText(i.content ?? '')
-          }
+    ? items
+        .map((i) => ({
+          question: markdownToText(i.header?.text ?? ''),
+          answer: markdownToText(i.content ?? '')
         }))
-      }
-    : '';
+        .filter((i) => i.question.length > 0 && i.answer.length > 0)
+    : [];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  'mainEntity': faqEntries.map((i) => ({
+    '@type': 'Question',
+    'name': i.question,
+    'acceptedAnswer': {
+      '@type': 'Answer',
+      'text': i.answer
+    }
+  }))
+};
 ---
 
-{type === 'faq' && (
+{faqEntries.length > 0 && (
   <script
     is:inline
     async

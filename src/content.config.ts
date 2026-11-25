@@ -50,7 +50,17 @@ const pageSchema = z.object({
   content_blocks: z.array(z.any()),
   content_blocks_after: z.array(z.any()).optional().nullable(),
   seo: seoSchema,
-  showPageTitle: z.boolean().optional().default(false)
+  showPageTitle: z.boolean().optional().default(false),
+  // Tours this page sells. A standalone page is not a taxonomy term, so
+  // nothing can infer its inventory the way the region and tag templates do
+  // from `region`/`tags` — but a commercial page that lists tours in prose
+  // still needs them in structured data and in an `ItemList`. Set this to the
+  // tours the page's own copy describes, in the order the copy describes them.
+  // `/bike-tours-porto-portugal/` is the case it exists for: its six day
+  // tours are compared in a table rather than rendered as a card grid, so
+  // without this the page would publish six prices to readers and none to a
+  // crawler.
+  tours: z.array(z.string().uuid()).optional().default([])
 });
 
 const featuredPostSchema = z.object({

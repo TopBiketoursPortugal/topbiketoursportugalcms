@@ -20,6 +20,7 @@ import { getImageByPath } from 'utils/get-image';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import PlaceSchema from 'src/components/schema/place-schema.astro';
+import TouristTripSchema from 'src/components/schema/tourist-trip-schema.astro';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
 
 export async function getStaticPaths() {
@@ -72,6 +73,15 @@ const dayTours =
 // Reading `tours` here would advertise 8 tours and 5 unreachable filters on a
 // Porto page showing 3.
 const visibleTours = [...packageTours, ...dayTours];
+
+// See `package_tours_heading` in src/schemas/tour-regions.ts for why a region
+// is allowed to name its own grid.
+const packageToursHeading =
+  regionData.data.package_tours_heading ??
+  t('Tours.Regions.PackageTour.Title', language).replace(
+    '$1',
+    regionData.data.name ?? ''
+  );
 
 const tourRegions = await getCollection(
   'tourRegions',
@@ -143,6 +153,7 @@ const frontmatter = {
   page_size: 6,
   seo: {
     page_title: regionSeoTitle,
+    page_title_exact: regionData.data.seo?.page_title_exact === true,
     page_description: regionSeoDescription,
     featured_image: regionData.data.seo?.featured_image,
     featured_image_alt:
@@ -194,6 +205,9 @@ const breadcrumbs = [
       url={getTourRegionsPath(regionData, language)}
       language={language}
     />
+    {/* The tours this page actually renders, so the markup never describes a
+        trip the grid does not show. No ratings or reviews — see the component. */}
+    <TouristTripSchema items={visibleTours} language={language} />
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
     <Heading as="h1" class="px-6">
@@ -226,10 +240,7 @@ const breadcrumbs = [
       {packageTours.length > 0 ? (
         <div data-tour-section>
           <Heading as="h2" class="px-6">
-            {t('Tours.Regions.PackageTour.Title', language).replace(
-              '$1',
-              regionData.data.name ?? ''
-            )}
+            {packageToursHeading}
           </Heading>
           <TourList items={packageTours} language={language} />
         </div>

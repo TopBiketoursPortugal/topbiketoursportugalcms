@@ -1,0 +1,138 @@
+---
+/**
+ * `TouristTrip` + `Offer` for the tours a destination page lists.
+ *
+ * Why this exists, and why it is not the Product graph we removed.
+ * ----------------------------------------------------------------
+ * `src/components/tours/tour-list-schema.astro` deliberately emits only an
+ * `ItemList` of links, because an earlier version published a full `Product`
+ * graph per tour on every listing page — price, `aggregateRating` and every
+ * review body — which put the tours' star ratings on ~30 category URLs and
+ * helped the categories outrank the tours they link to.
+ *
+ * This component does not reintroduce that. It emits **no `aggregateRating`
+ * and no `review`**, so there is no rich-result snippet for a listing page to
+ * collect, and `TouristTrip` has no Google rich result of its own. What it
+ * adds is the machine-readable price, duration, distance and climbing figure
+ * for each tour a destination page sells — the facts the page's own tables
+ * publish, in a form an answer engine can read without parsing a markdown
+ * table. The tour's own page keeps `Product` + `Offer` + ratings, where the
+ * tour is the subject.
+ *
+ * `elevationGain` is not a schema.org property on any type, so the published
+ * climbing figure is emitted as an `additionalProperty` / `PropertyValue` with
+ * `unitCode: "MTR"`, which is the valid equivalent and unambiguous to any
+ * consumer. Same for the route distance (`KMT`). Only tours that actually
+ * publish a climbing figure carry one; a missing figure is omitted, never
+ * guessed.
+ */
+import type { CollectionEntry } from 'astro:content';
+import SiteData from 'src/../data/site.json';
+import type { LanguageCodes } from 'src/schemas/language';
+import { getTourPath, sanitizeUrl } from 'utils/permalinks';
+import { resolveSchemaImage } from 'utils/schema-image';
+
+type Props = {
+  items: CollectionEntry<'tours'>[];
+  language: LanguageCodes;
+};
+
+const { items, language } = Astro.props;
+
+const site = SiteData[language];
+const baseUrl = Astro.site ?? site.site.url;
+
+/**
+ * The "from" price the page prints: the cheapest real package price, with a
+ * promo taken over its list price where one is set. Packages priced 0 are
+ * placeholders (seasonal panels, "ask us" rows) and are not offers.
+ */
+function fromPrice(tour: CollectionEntry<'tours'>['data']) {
+  const prices = [
+    ...(tour.packages ?? []),
+    ...(tour.packages2 ?? []),
+    ...(tour.packages3 ?? [])
+  ]
+    .map((pkg) => {
+      const promo = pkg?.price?.promo ?? 0;
+      const list = pkg?.price?.price ?? 0;
+      return {
+        amount: promo > 0 ? promo : list,
+        currency: pkg?.price?.currency ?? 'EUR'
+      };
+    })
+    .filter((p) => p.amount > 0);
+
+  if (prices.length === 0) return null;
+  return prices.reduce((a, b) => (b.amount < a.amount ? b : a));
+}
+
+const trips = await Promise.all(
+  items.map(async ({ data: tour }) => {
+    const url = sanitizeUrl(`${baseUrl}${getTourPath(tour, language)}`);
+    const price = fromPrice(tour);
+    const image = await resolveSchemaImage(tour.image?.src, Astro.site);
+
+    // Only the climbing figure, deliberately — not `distance` and not
+    // `difficulty`. Both of those fields currently disagree with the pages
+    // that read them on several tours (the Douro full-day ride stores 75 km
+    // for a ride sold as 25, 50 or 77 km; three Porto day tours store a grade
+    // their own route contradicts). Publishing a wrong number in a form a
+    // machine will quote back at us is worse than not publishing it, and the
+    // visible page already carries both. Add them here once the data is
+    // corrected at source.
+    const additionalProperty = tour.elevationGain
+      ? [
+          {
+            '@type': 'PropertyValue',
+            'name': 'Elevation gain',
+            'value': tour.elevationGain,
+            'unitCode': 'MTR'
+          }
+        ]
+      : [];
+
+    const trip: Record<string, any> = {
+      '@type': 'TouristTrip',
+      'name': tour.title,
+      'url': url,
+      'provider': {
+        '@type': 'Organization',
+        'name': site.site.name,
+        'url': sanitizeUrl(`${baseUrl}`)
+      }
+    };
+
+    const description = tour.cardSummary ?? tour.seo?.page_description;
+    if (description) trip.description = description;
+    if (image) trip.image = image;
+    if (additionalProperty.length > 0) {
+      trip.additionalProperty = additionalProperty;
+    }
+    if (price) {
+      trip.offers = {
+        '@type': 'Offer',
+        'price': price.amount,
+        'priceCurrency': price.currency,
+        'availability': 'https://schema.org/InStock',
+        'url': url
+      };
+    }
+
+    return trip;
+  })
+);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': trips
+};
+---
+
+{trips.length > 0 && (
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+  />
+)}

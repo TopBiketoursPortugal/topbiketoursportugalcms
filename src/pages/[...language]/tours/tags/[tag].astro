@@ -19,6 +19,7 @@ import LanguageData from 'src/../data/languages.json';
 import { t } from 'utils/i18n';
 import { getHomeCrumb, getToursCrumb } from 'utils/breadcrumbs';
 import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
+import TouristTripSchema from 'src/components/schema/tourist-trip-schema.astro';
 
 export async function getStaticPaths({ paginate: _ }: { paginate: Function }) {
   const tours = await getCollection('tours');
@@ -100,6 +101,7 @@ const frontmatter = {
   page_size: 6,
   seo: {
     page_title: tagSeoTitle,
+    page_title_exact: tagData.data.seo?.page_title_exact === true,
     page_description: tagSeoDescription,
     featured_image: tagData.data.seo?.featured_image,
     featured_image_alt: tagData.data.seo?.featured_image_alt ?? tagSeoTitle,
@@ -165,6 +167,10 @@ const breadcrumbs = [
         hreflang={LanguageData[hreflang].locale}
       />
     ))}
+    {/* `TouristTrip` + `Offer` per tour listed. No ratings or reviews, so a
+        facet page still cannot collect the stars that belong to the tours —
+        see the component for the history there. */}
+    <TouristTripSchema items={tours} language={language} />
   </slot>
   <Stack spacing="large" layout="vertical" class="pt-6">
     <Heading as="h1" class="px-6">

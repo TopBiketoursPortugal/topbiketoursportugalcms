@@ -19,8 +19,31 @@ const tourRegionSchema = z.object({
    * phrase. Falls back to `name` wherever this is unset.
    */
   link_text: z.string().optional(),
+  /**
+   * One line under the region's grid card on the homepage, where the cards are
+   * otherwise a photograph with a single word on it. Not rendered in the
+   * footer, where the same card component runs at 120px.
+   *
+   * Say something only we would know — the climbing starts at the water, the
+   * Algarve is the one part of the country that rides in January. A line that
+   * restates the region name does not earn the space.
+   */
+  card_teaser: z.string().optional(),
   content_blocks: z.array(z.any()).optional().default([]),
   content_blocks_after: z.array(z.any()).optional().default([]),
+  /**
+   * Heading for the multi-day tour grid, overriding the template's
+   * "Multi-day bike tours in $1".
+   *
+   * The default is right for every region that wants to rank for its own
+   * "bike tours <place>" phrase. It is wrong for `/tours/regions/porto/`,
+   * which is the designated loser for that phrase: its day-tour page
+   * `/bike-tours-porto-portugal/` is the page meant to win "bike tours
+   * porto", and a template label on the parent page repeating the bigram puts
+   * the two back in competition — the thing TOP-12 and this page's rewrite
+   * exist to stop. Falls back to the translated default wherever unset.
+   */
+  package_tours_heading: z.string().optional(),
   // Suppress the region page's day-tour section when those day tours already
   // have a page of their own. `/tours/regions/porto/` and
   // `/bike-tours-porto-portugal/` shared 5 of their 6 day-tour cards, so the two
