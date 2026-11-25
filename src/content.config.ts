@@ -50,7 +50,22 @@ const pageSchema = z.object({
   content_blocks: z.array(z.any()),
   content_blocks_after: z.array(z.any()).optional().nullable(),
   seo: seoSchema,
-  showPageTitle: z.boolean().optional().default(false)
+  showPageTitle: z.boolean().optional().default(false),
+  // Breadcrumb ancestors between Home and this page. Every generic page was
+  // rendered as `Home → <title>`, which asserts that each one is a depth-1
+  // leaf with no parent — including destination pages that are really
+  // children of a region hub, and whose tours already breadcrumb up to that
+  // hub. The `'tours'` shorthand resolves through `getToursCrumb` so the
+  // translated label and the tours URL stay defined in one place.
+  breadcrumb_parents: z
+    .array(
+      z.union([
+        z.literal('tours'),
+        z.object({ name: z.string(), url: z.string() })
+      ])
+    )
+    .optional()
+    .default([])
 });
 
 const featuredPostSchema = z.object({

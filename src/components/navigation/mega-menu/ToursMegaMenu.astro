@@ -195,7 +195,14 @@ const regionDisplays: RegionDisplay[] = allRegions
                   />
                 ))}
               </div>
-              {rd.count > MAX_CARDS && (
+              {/* Always linked, not only when the panel overflows. No region
+                  has more than four package tours, so `count > MAX_CARDS` was
+                  never true and the header reached no region page at all —
+                  the sidebar entries above are <button>s, not anchors. The
+                  link is useful to readers too: this panel lists package
+                  tours only, while the region page also carries that
+                  region's day tours and its own copy. */}
+              {rd.viewAllHref && (
                 <a
                   href={rd.viewAllHref}
                   class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
