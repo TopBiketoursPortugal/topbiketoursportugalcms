@@ -9,6 +9,20 @@ export type TourRegionCardProps = {
   language: LanguageCodes;
   layout?: 'overlay' | 'hstack';
   imageWidths?: number[];
+  /**
+   * Use the entry's keyword anchor (`link_text`) rather than its short nav
+   * label (`name`).
+   *
+   * Every region page is linked twice from the homepage — once from this grid
+   * and once from the site-wide footer — and both links render through this
+   * component, so both were carrying the same keyword-matched phrase. Two
+   * links to a page is ordinary architecture; two *identical, keyword-matched*
+   * anchors is the part that looks engineered. The grid is the body-copy link
+   * and keeps the phrase; the footer is navigation and takes the label.
+   */
+  useKeywordAnchor?: boolean;
+  /** Render the entry's one-line teaser under the card. Off in the footer. */
+  showTeaser?: boolean;
 };
 
 type Props = TourRegionCardProps;
@@ -20,13 +34,15 @@ const {
   // The overlay grid runs 2 / 3 / 4 columns, so a card is ~300px wide at the
   // widest breakpoint — 600px once a retina screen is in play. The old
   // 200–300px ceiling meant these were always upscaled.
-  imageWidths = [300, 600, 900]
+  imageWidths = [300, 600, 900],
+  useKeywordAnchor = true,
+  showTeaser = false
 } = Astro.props;
 
 // Matches the collection's 2 / 3 / 4 column grid.
 const overlaySizes = '(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw';
 const { data } = region;
-const { title, name, link_text, seo } = data;
+const { title, name, link_text, card_teaser, seo } = data;
 const regionPath = getTourRegionsPath(region, language);
 
 /**
@@ -37,10 +53,43 @@ const regionPath = getTourRegionsPath(region, language);
  * phrase where an entry sets it; `name` stays the fallback, which leaves every
  * non-English locale exactly as it is.
  */
-const anchorText = link_text ?? name;
+const anchorText = useKeywordAnchor ? (link_text ?? name) : (name ?? title);
+const teaser = showTeaser ? card_teaser : undefined;
 ---
 
-{layout === 'overlay' ? (
+{layout === 'overlay' && teaser ? (
+  /* Same image-and-title frame as the plain overlay card below, with the
+     teaser in a caption beneath it. A 300px-wide card cannot carry a line of
+     body copy legibly on top of a photograph, so the teaser gets its own
+     surface. The frame keeps the markup of the unteased variant exactly, so
+     the footer and the five non-English homepages render unchanged. */
+  <a
+    href={regionPath}
+    class="group block overflow-hidden rounded-xl bg-white shadow-md shadow-slate-900/10 dark:bg-neutral-900"
+  >
+    <span class="zoom-frame relative block">
+      {seo?.featured_image ? (
+        <ResponsiveImage
+          src={seo?.featured_image}
+          alt={seo?.featured_image_alt ?? title}
+          widths={imageWidths}
+          sizes={overlaySizes}
+          paralax={false}
+        />
+      ) : null}
+      <span
+        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"
+        aria-hidden="true"
+      />
+      <h3 class="font-heading absolute inset-x-0 bottom-0 p-3 text-center text-lg font-bold text-white capitalize drop-shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+        {anchorText}
+      </h3>
+    </span>
+    <span class="block p-3 text-sm leading-snug text-gray-700 dark:text-gray-300">
+      {teaser}
+    </span>
+  </a>
+) : layout === 'overlay' ? (
   <a
     href={regionPath}
     class="group zoom-frame relative block rounded-xl shadow-md shadow-slate-900/10"

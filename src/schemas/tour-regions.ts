@@ -19,6 +19,16 @@ const tourRegionSchema = z.object({
    * phrase. Falls back to `name` wherever this is unset.
    */
   link_text: z.string().optional(),
+  /**
+   * One line under the region's grid card on the homepage, where the cards are
+   * otherwise a photograph with a single word on it. Not rendered in the
+   * footer, where the same card component runs at 120px.
+   *
+   * Say something only we would know — the climbing starts at the water, the
+   * Algarve is the one part of the country that rides in January. A line that
+   * restates the region name does not earn the space.
+   */
+  card_teaser: z.string().optional(),
   content_blocks: z.array(z.any()).optional().default([]),
   content_blocks_after: z.array(z.any()).optional().default([]),
   /**
