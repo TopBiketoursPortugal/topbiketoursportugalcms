@@ -7,8 +7,6 @@ import TourFilterBar from 'src/components/tours/tour-filter-bar.astro';
 import Prose from 'src/components/building-blocks/typography/prose.astro';
 import type { TourSchema } from 'src/schemas/tours';
 import { t } from 'utils/i18n';
-import { getTourPath } from 'utils/permalinks';
-import SiteData from 'src/../data/site.json';
 
 export type TourCollectionProps = {
   type: 'tours' | 'reviews' | 'team' | 'bikes' | 'posts';
@@ -70,20 +68,6 @@ const relevantBikeCategories = allBikeCategories.filter((c) =>
   tourBikeCategoryIds.has(c.data.id)
 );
 
-const site = SiteData[language];
-const baseUrl = Astro.site ?? site.site.url;
-
-const itemListSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  'numberOfItems': items.length,
-  'itemListElement': items.map(({ data }, index) => ({
-    '@type': 'ListItem',
-    'position': index + 1,
-    'name': data.title,
-    'url': `${baseUrl}${getTourPath(data, language).replace(/^\//, '')}`
-  }))
-};
 ---
 
 <section aria-label={t('Tours.Collection.Label', language)}>
@@ -165,9 +149,9 @@ const itemListSchema = {
     )}
   </div>
 </section>
+{/* One ItemList per page. This component also built its own inline copy of
+    the same list, so every collection page shipped two near-identical
+    ItemList blocks describing the same tours. The shared component is the
+    one to keep: it runs URLs through `sanitizeUrl`, which the inline copy
+    skipped. */}
 <TourListSchema items={items} language={language} />
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(itemListSchema)}
-/>

@@ -5,6 +5,14 @@ title: Days tours
 language: en
 showPageTitle: false
 path: bike-tours-porto-portugal
+# This page is a day-tours child of the Porto hub, not a root-level leaf.
+# Every Porto tour already breadcrumbs up to /tours/regions/porto/, so that
+# page is the one Google is shown as the Porto parent; this page sat in a
+# separate branch as the parent of nothing.
+breadcrumb_parents:
+  - tours
+  - name: Porto/North
+    url: /tours/regions/porto/
 seo:
   page_title: Porto Bike Tour 1 Day | Sightseeing Day Rides — Top Bike Tours Portugal
   page_description: >-
